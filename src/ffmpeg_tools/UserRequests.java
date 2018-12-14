@@ -3,7 +3,7 @@ package ffmpeg_tools;
 import java.io.File;
 import java.util.Map;
 
-public class UserRequests {
+public class UserRequests extends FFmpegRuntime {
 
 	/**
 	 * TODO

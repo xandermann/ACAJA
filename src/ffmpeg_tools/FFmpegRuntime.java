@@ -19,5 +19,4 @@ public abstract class FFmpegRuntime {
 		if(PATH_FFMPEG==null) this.install();
 		RUN.exec(PATH_FFMPEG+ffmpegRequest);
 	}
-		
 }

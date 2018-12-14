@@ -2,7 +2,7 @@ package ffmpeg_tools;
 
 import java.io.File;
 
-public class SystemRequests {
+public class SystemRequests extends FFmpegRuntime{
 
 	/**
 	 * TODO
@@ -94,23 +94,12 @@ public class SystemRequests {
 	 * TODO
 	 * 
 	 * @param file
-	 * @param l
 	 * @return
 	 */
-	public long getDuration(File file, long l) {
-		return l;
-	}
-
-	/**
-	 * TODO
-	 * @param file
-	 * @param s
-	 * @return
-	 */
-	public long getDuration(File file, String s) {
+	public long getDuration(File file) {
 		return 0;
 	}
-
+	
 	/**
 	 * TODO
 	 * @param file

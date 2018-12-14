@@ -7,7 +7,7 @@ public abstract class FFmpegRuntime {
 	protected static String PATH_FFMPEG;
 	protected final static Runtime RUN = Runtime.getRuntime();
 	
-	private void install() throws IOException {
+	private static void install() throws IOException {
 		if(System.getProperty("os.name").contains("Linux")) {
 			RUN.exec("chmod u+x ../../scripts/intall_ffmpeg_linux.sh && ../../scripts/intall_ffmpeg_linux.sh");
 			PATH_FFMPEG = "ffmpeg";
@@ -15,8 +15,8 @@ public abstract class FFmpegRuntime {
 			PATH_FFMPEG = "../../ffmpeg/bin/ffmpeg.exe";
 	}
 	
-	public void execute(String ffmpegRequest) throws IOException {
-		if(PATH_FFMPEG==null) this.install();
+	public static void execute(String ffmpegRequest) throws IOException {
+		if(PATH_FFMPEG==null) install();
 		RUN.exec(PATH_FFMPEG+ffmpegRequest);
 	}
 }

@@ -4,11 +4,6 @@ import java.io.File;
 import java.util.HashMap;
 
 public class SettingsFile {
-
-	/**
-	 * Determine si c'est une video ou non
-	 */
-	private boolean isVideo;
 	
 	/**
 	 * Les anciennes options du fichier
@@ -25,9 +20,9 @@ public class SettingsFile {
 	 * @param file Fichier
 	 * @param isVideo Si le fichier est une video
 	 */
-	public SettingsFile(File file, boolean isVideo) {
+	public SettingsFile(File file) {
+		// TODO
 		// this.file
-		this.isVideo = isVideo;
 	}
 
 	/**
@@ -37,14 +32,6 @@ public class SettingsFile {
 	 */
 	public void modifySettings(String key, Object value) {
 		this.settings.put(key, value);
-	}
-
-	/**
-	 * Test si le fichier est une video
-	 * @return si est une video
-	 */
-	public boolean isVideo() {
-		return this.isVideo;
 	}
 
 	/**

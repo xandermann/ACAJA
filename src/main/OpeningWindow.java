@@ -1,4 +1,4 @@
-package Accueil;
+package main;
 
 
 import java.awt.*;

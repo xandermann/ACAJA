@@ -4,12 +4,12 @@ import java.io.File;
 import java.util.HashMap;
 
 public class SettingsFile {
-	
+
 	/**
 	 * Les anciennes options du fichier
 	 */
 	private HashMap<String, Object> oldSettings;
-	
+
 	/**
 	 * Les options courantes du fichier
 	 */
@@ -17,7 +17,8 @@ public class SettingsFile {
 
 	/**
 	 * Constructeur
-	 * @param file Fichier
+	 * 
+	 * @param file    Fichier
 	 * @param isVideo Si le fichier est une video
 	 */
 	public SettingsFile(File file) {
@@ -27,6 +28,7 @@ public class SettingsFile {
 
 	/**
 	 * Modifie les parametres
+	 * 
 	 * @param s
 	 * @param o
 	 */
@@ -36,6 +38,7 @@ public class SettingsFile {
 
 	/**
 	 * Test si le fichier a ete modifie
+	 * 
 	 * @return si le fichier a ete modifie
 	 */
 	public boolean isModified() {
@@ -44,6 +47,7 @@ public class SettingsFile {
 
 	/**
 	 * Recupere les options courantes
+	 * 
 	 * @return Les options courantes
 	 */
 	public HashMap<String, Object> getSettings() {

@@ -12,7 +12,7 @@ public class ConversionModel {
 	/** Constructeur ConversionModel
 	 * 
 	 */
-	public ConversionModel() { }
+	public ConversionModel() {	}
 	
 	/*Les profils seront enregistres dans le dossier du programme
 	 *et seront tous charges au demarrage. L'utilisateur pourra gerer les profils

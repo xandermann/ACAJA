@@ -22,7 +22,7 @@ public class ProcessingFile {
 	 */
 	public ProcessingFile(File file) {
 		// TODO
-		// this.performedProcessings.put(key, value)
+		// Methode qui trouve la duree du fichier (methode dans le package ffmtools)
 	}
 
 	/**
@@ -32,14 +32,6 @@ public class ProcessingFile {
 	 */
 	public void performProcess(String string, Object object) {
 		// TODO
-	}
-
-	/**
-	 * Recupere le processus courant
-	 * @return le processus
-	 */
-	public HashMap<String, Object> getProcessings() {
-		return performedProcessings;
 	}
 
 	/**

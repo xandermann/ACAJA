@@ -114,7 +114,7 @@ public class SystemRequests extends FFmpegRuntime{
 	 */
 	public Object[] getSettings(File file, int fileType) {
 		Object[] fileSettings = new Object[10];		
-		if(fileType==SelectableFile.TYPE_FILE_AUDIO || fileType==SelectableFile.TYPE_FILE_AUDIO)
+		if(fileType==SelectableFile.FILE_TYPE_AUDIO || fileType==SelectableFile.FILE_TYPE_AUDIO)
 		{
 			return fileSettings;
 		}

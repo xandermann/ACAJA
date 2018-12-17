@@ -6,13 +6,13 @@ import java.awt.*;
 import javax.swing.*;
 
 public class OpeningWindow {
-	private int x = 750;
-	private int y = 500;
+	private static int x = 750;
+	private static int y = 500;
 	public OpeningWindow() {
 		
 	}
 	
-	private JFrame generateLoardingWindow() {
+	private static JFrame generateLoardingWindow() {
 		JFrame frame = new JFrame("Chargement");
 		frame.setLocation(100, 100);
 		frame.setSize(new Dimension(x,y));
@@ -27,7 +27,7 @@ public class OpeningWindow {
 		return frame;
 	}
 	
-	private JFrame generateChoiceModeWindow() {
+	private static JFrame generateChoiceModeWindow() {
 		JFrame frame = new JFrame("Chargement");
 		frame.setLocation(100, 100);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -47,8 +47,8 @@ public class OpeningWindow {
 		return frame;
 	}
 	
-	public void generateOpeningWindow() {
-		this.generateLoardingWindow();
-		this.generateChoiceModeWindow();
+	public static void generateOpeningWindow() {
+		generateLoardingWindow();
+		generateChoiceModeWindow();
 	}
 }

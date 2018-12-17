@@ -3,7 +3,9 @@ package gui_conversion;
 import java.util.Observable;
 import java.util.Observer;
 
-public class TabsView implements Observer{
+import javax.swing.JTabbedPane;
+
+public class TabsView extends JTabbedPane implements Observer{
 	
 	public ConversionModel model;
 	

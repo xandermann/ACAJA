@@ -19,6 +19,9 @@ public class SelectableFile {
 	 */
 	public final static int TYPE_FILE_IMAGE = 2;
 
+	/**
+	 * Type du fichier
+	 */
 	protected int typeFile;
 
 	/**
@@ -90,4 +93,12 @@ public class SelectableFile {
 		this.isSelected = isSelected;
 	}
 
+	/**
+	 * Recupere le type du fichier
+	 * @return le type du fichier
+	 */
+	public int getTypeFile() {
+		return this.typeFile;
+		
+	}
 }

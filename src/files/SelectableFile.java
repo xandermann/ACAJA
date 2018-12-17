@@ -7,17 +7,17 @@ public class SelectableFile {
 	/**
 	 * Fichier VIDEO
 	 */
-	public final static int TYPE_FILE_VIDEO = 0;
+	public final static int FILE_TYPE_VIDEO = 0;
 
 	/**
 	 * Fichier AUDIO
 	 */
-	public final static int TYPE_FILE_AUDIO = 1;
+	public final static int FILE_TYPE_AUDIO = 1;
 
 	/**
 	 * FICHIER IMAGE
 	 */
-	public final static int TYPE_FILE_IMAGE = 2;
+	public final static int FILE_TYPE_IMAGE = 2;
 
 	/**
 	 * Type du fichier
@@ -52,19 +52,19 @@ public class SelectableFile {
 
 		case "mp4":
 		case "avi":
-			this.typeFile = TYPE_FILE_VIDEO;
+			this.typeFile = FILE_TYPE_VIDEO;
 			break;
 
 		case "png":
 		case "jpg":
 		case "jpeg":
-			this.typeFile = TYPE_FILE_IMAGE;
+			this.typeFile = FILE_TYPE_IMAGE;
 			break;
 
 		case "mp3":
 		case "wav":
 		case "ogg":
-			this.typeFile = TYPE_FILE_AUDIO;
+			this.typeFile = FILE_TYPE_AUDIO;
 			break;
 
 		/*

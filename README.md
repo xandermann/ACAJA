@@ -1,8 +1,8 @@
-# Repository de **CODE**
-
 # Interface graphique pour ffmpeg
 
-Repository de **CODE** pour les **projets tutorés** 2018-2019.
+Repository pour les **projets tutorés** 2018-2019.
+
+Repository pour les **projets tutorés** 2018-2019.
 Groupe S3B.
 
 ------------------------------------------------------------

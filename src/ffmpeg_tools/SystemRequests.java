@@ -1,14 +1,33 @@
 package ffmpeg_tools;
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import files.SelectableFile;
 
 /**
+ * [ CLASSE CONCRETE POUR L'INTERFACAGE JAVA-FFMPEG ---- DEGRE 2. ]
  * 
+ * Cette classe a pour but de realiser les requetes FFMPEG
+ * necessaires au fonctionnement interne de notre logiciel ( d'ou le 
+ * de la classe : SystemRequests. ). 
+ * 
+ * Pour synthetiser, cette classe implemente :
+ * 
+ *  - des fonctionnalites pour le fonctionnement interne de la 
+ *  fenetre de conversion :
+ *  	- renseigner les caracteristiques d'une video ou d'un son
+ * 	     ( bitrate, format, FPS, resolution, etc ).
+ * 
+ *  - des fonctionnalites pour le fonctionnement interne de la 
+ *  fenetre de traitement :
+ *  	- extraire une image d'une video a temps donne ; 
+ *  	- renseigner la duree d'une video ;
+ *  	- redimmensionner une image ;
+ *  	- creer une miniature d'une video 
+ *  	  ( pour les miniatures dans la chronologie, ou les miniatures
+ *  		dans les bibliotheques ) ;
+ *  	- creer une frame pour l'apercu de lecture de video. 
+ *
+ * Ceci est une classe concrete "sterile", c-a-d qu'aucune classe ne peut 
+ * en heriter ( d'ou la presence du final devant class).
  * 
  * Auteurs du projet : 
  * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
@@ -18,31 +37,69 @@ public final class SystemRequests extends FFmpegRuntime{
 	//=======================================================================================================================
 	
 	
+	/**
+	 * [ CONSTANTES DE CLASSES A USAGE INTERNE. ]
+	 * 
+	 * Voici des constantes qui nous seront bien pratiques. 
+	 * Pour la majorite, ce sont des contantes representant des types de resolutions 
+	 * ( par exemple : resolution d'une frame de l'apercu de lecture de video du logiciel ).
+	 * 
+	 * Ces constantes ne seront destines a etre utilises que pour le fonctionnement
+	 * interne de la fenetre de traitement.  
+	 * 
+	 * Elles sont destinees a un usage uniquement interne ( d'ou l presence des private ). 
+	 */
 
 	/**
-	 * TODO Concerne la fenetre de traitement et donc ne concerne pas l'iteration 1. 
+	 * [ CHEMIN VERS LE REPERTOIRE DES FICHIERS TEMPORAIRES. ]
+	 * 
+	 * TODO iteration 1 pas concernee. 
+	 * 
+	 * Ceci est le chemin vers le repertoire des fichiers temporaires. 
+	 * Ces fameux ficheirs temporaires seront en fait les miniatures de video, 
+	 * et les frames de d'apercu de lecture de video, etc.
 	 */
-	public final String PATH_TEMPORARY_FILES = "";
+	private final static String PATH_TEMPORARY_FILES = System.getProperty("user.dir")+"\\temporary_files\\";
 
 	/**
-	 * TODO Concerne la fenetre de traitement et donc ne concerne pas l'iteration 1. 
+	 * [ RESOLUTION DES MINIATURES DANS LES BIBLIOTHEQUES. ]
+	 * 
+	 * TODO iteration 1 pas concernee. 
+	 * 
+	 * Ceci est le tableau representant la resolution des miniatutres des videos, 
+	 * des sons, et des images qui seront importes par l'utilisateur dans le logiciel. 
 	 */
-	public final int[] LIBRARY_THUMBAIL_RESOLUTION = new int[] {};
+	private final static int[] LIBRARY_THUMBAIL_RESOLUTION = new int[] {};
 
 	/**
-	 * TODO Concerne la fenetre de traitement et donc ne concerne pas l'iteration 1. 
+	 * [ RESOLUTION DES MINIATURES DES VIDEO DANS LA CHRONOLOGIE VIDEO. ]
+	 * 
+	 * TODO iteration 1 pas concernee. 
+	 * 
+	 * Ceci est le tableau representant la resolution des miniatutres des videos,
+	 * dans la chronologie video. 
 	 */
-	public final int[] VIDEO_TIMELINE_THUMBAIL_RESOLUTION = new int[] {};
+	private final static int[] VIDEO_TIMELINE_THUMBAIL_RESOLUTION = new int[] {};
 
 	/**
-	 * TODO Concerne la fenetre de traitement et donc ne concerne pas l'iteration 1. 
+	 * [ RESOLUTION DES MINIATURES DES SONS DANS LES CHRONOLOGIES DES SONS. ]
+	 * 
+	 * TODO iteration 1 pas concernee. 
+	 * 
+	 * Ceci est le tableau representant la resolution des miniatutres des sons,
+	 * dans les chronologies des sons. 
 	 */
-	public final int[] SOUND_TIMELINE_THUMBAIL_RESOLUTION = new int[] {};
+	private final static int[] SOUND_TIMELINE_THUMBAIL_RESOLUTION = new int[] {};
 
 	/**
-	 * TODO  Concerne la fenetre de traitement et donc ne concerne pas l'iteration 1. 
+	 * [ RESOLUTION DES FRAMES DANS L'APERCU DE LECTURE DE VIDEO. ]
+	 * 
+	 * TODO iteration 1 pas concernee. 
+	 * 
+	 * Ceci est le tableau representant la resolution frames dans l'apercu
+	 * de lecture de video de la fenetre de traitement. 
 	 */
-	public final int[] VIDEO_RESOLUTION = new int[] {};
+	private final static int[] VIDEO_RESOLUTION = new int[] {};
 
 	
 	
@@ -52,74 +109,75 @@ public final class SystemRequests extends FFmpegRuntime{
 	
 	
 	/**
-	 * TODO  Concerne la fenetre de traitement et donc ne concerne pas l'iteration 1. 
+	 * TODO iteration 1 pas concernee. 
 	 * 
 	 * @param file
-	 * @param l
+	 * @param time
 	 * @return
 	 */
-	public File createVideoFrame(File file, long l) {
+	public static File createVideoFrame(File file, long time) {
 		return file;
 	}
 
 	/**
-	 * TODO  Concerne la fenetre de traitement et donc ne concerne pas l'iteration 1. 
+	 * TODO iteration 1 pas concernee. 
 	 * 
 	 * @param file
 	 * @param tab
 	 * @return
 	 */
-	public File createThumbail(File file, int[] tab) {
+	public static File createThumbail(File file, int[] resolution) {
 		return file;
 	}
 
 	/**
-	 * TODO  Concerne la fenetre de traitement et donc ne concerne pas l'iteration 1. 
+	 * TODO iteration 1 pas concernee. 
 	 * 
 	 * @param file
-	 * @param l
+	 * @param time
 	 * @return
 	 */
-	private File extractImage(File file, long l) {
+	public static File extractImage(File file, long time) {
 		return file;
 	}
 
 	/**
-	 * TODO  Concerne la fenetre de traitement et donc ne concerne pas l'iteration 1. 
+	 * TODO iteration 1 pas concernee. 
 	 * 
 	 * @param file
-	 * @param tab
+	 * @param resolution
 	 * @return
 	 */
-	private int[] resizeImage(File file, int[] tab) {
-		return tab;
+	private static File resizeImage(File file, int[] resolution) {
+		return file;
 	}
-	
-	
-	
-	//=======================================================================================================================
-	//=======================================================================================================================
-	
-
 	
 	/**
 	 * TODO  Concerne la fenetre de traitement et donc ne concerne pas l'iteration 1. 
 	 * 
 	 * @param file
-	 * @param tab
+	 * @param resolution
 	 * @return
 	 */
-	private int[] findGoodResolution(File file, int[] tab) {
-		return tab;
+	private static int[] findGoodResolution(File file, int[] resolution) {
+		return resolution;
 	}
 
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
+	
 	/**
+	 * [ METHODE DE CLASSE POUR LE RENSEIGNEMENT DE LA DUREE D'UNE VIDEO OU D'UN SON. ]
+	 * 
 	 * TODO  Concerne la fenetre de traitement et donc ne concerne pas l'iteration 1. 
 	 * 
 	 * @param file
 	 * @return
 	 */
-	public long getDuration(File file) {
+	public static long getDuration(File file) {
 		return 0;
 	}
 	
@@ -131,6 +189,8 @@ public final class SystemRequests extends FFmpegRuntime{
 	
 	
 	/**
+	 * [ METHODE DE CLASSE POUR LE RENSEIGNEMENT DES CARACTERISTIQUES D'UNE VIDEO OU D'UN SON. ]
+	 * 
 	 * Cette methode retourne les parametres du fichier. 
 	 * 
 	 * Les valeurs des parametres du fichier sont recuperes par l'intrermediaire de requetes FFmpeg. 
@@ -149,7 +209,7 @@ public final class SystemRequests extends FFmpegRuntime{
 	 * 
 	 * @return Le tableau des parametres du fichier. 
 	 */
-	public Object[] getSettings(File file, int fileType) {
+	public static Object[] getSettings(File file, int fileType) {
 		Object[] fileSettings = new Object[10];		
 		if(fileType==SelectableFile.FILE_TYPE_AUDIO || fileType==SelectableFile.FILE_TYPE_AUDIO){
 			return fileSettings;
@@ -164,6 +224,7 @@ public final class SystemRequests extends FFmpegRuntime{
 	
 	
 	
+	//POUR TESTER FAITES PAS GAFFE MDR 
 	public static void main(String[] args) throws IOException {
 		Process p = FFmpegRuntime.execute("--help");
 		

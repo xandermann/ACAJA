@@ -34,12 +34,9 @@ public abstract class FFmpegRuntime {
 	 * [ CONSTANTE DE CLASSE - EXECUTEUR DE LIGNES DE COMMANDES. ]
 	 * 
 	 * Ceci est la constante de classe permettant d'executer des
-	 * lignes de commandes en JAVA. Cette constante est declaree
-	 * en protected pour que les sous-classes realisant 
-	 * l'interfacage de degre 2 puissent acceder aux resultats des 
-	 * requetes FFMPEG en appliquant un objet Process dessus.
+	 * lignes de commandes en JAVA. 
 	 */
-	protected final static Runtime RUN = Runtime.getRuntime();
+	private final static Runtime RUN = Runtime.getRuntime();
 	
 	
 	//=======================================================================================================================
@@ -77,10 +74,14 @@ public abstract class FFmpegRuntime {
 	 * est soumise ne doit contenir que la partie "arguments" d'une requete FFMPEG
 	 * classique. 
 	 * 
+	 * On retourne l'objet Process issu de l'execution, pour que les sous-classes 
+	 * realisant l'interfacage de degre 2 puissent acceder aux resultats des requetes 
+	 * FFMPEG qu'elles soumettent.
+	 * 
 	 * @param ffmpegRequest			Une requete FFMPEG : c-a-d une requete realisee en "code" FFMPEG
 	 * 								et a faire executer 
 	 * 
-	 * @return 						Un objet de type Process contenant la reponse de FFMPEG a 
+	 * @return Process				Un objet de type Process contenant la reponse de FFMPEG a 
 	 * 								la requete qui lui est soumise par l'executeur de lignes de 
 	 * 								commande RUN de type Runtime. 
 	 * 

@@ -1,6 +1,4 @@
 package main;
-
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,20 +7,35 @@ import java.io.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 /**
+ * [ CLASSE POUR LE LANCEMENT DES FENETRES D'OUVERTURE DU LOGICIEL. ]
  * 
- * @author alex_DaSilva
- *
- */
-
-
-/**
- *class permettant l'affichage de l'acceuil
+ * TODO comentaire a faire. 
+ * 
+ * Auteurs du projet : 
+ * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
  */
 public class OpeningWindow {
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	/**
+	 *[ CONSTANTES DE CLASSE. ]
+	 *
+	 *TODO comentaire a faire. 
+	 */
 	private final static int WIDTH = 750;
 	private final static int HEIGHT = 500;
 	private static JProgressBar bar;
 	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	/**
+	 * [ METHODE INTERNE DE CLASSE - FENETRE DE PRESENTATION DU LOGICIEL. ]
+	 * 
+	 * TODO comentaire a faire. 
+	 */
 	private static void generateLoardingWindow() {
 		JFrame frame = new JFrame("Chargement d'Acaja");
 		try {
@@ -52,6 +65,16 @@ public class OpeningWindow {
 	    frame.dispose(); 
 	}
 	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
+	/**
+	 * [ METHODE INTERNE DE CLASSE  - FENETRE CHOIX DU MODE D'UTILISATION DU LOGICIEL. ]
+	 * 
+	 * TODO comentaire a faire. 
+	 */
 	private static void generateChoiceModeWindow() {
 		JButton convertbutton = new JButton("Conversion");
 		convertbutton.setPreferredSize(new Dimension(100, 50));
@@ -112,8 +135,22 @@ public class OpeningWindow {
 		
 	}
 	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
+	/**
+	 * [ METHODE DE CLASSE. ]
+	 * 
+	 * TODO comentaire a faire. 
+	 */
 	public static void generateOpeningWindow() {
 		generateLoardingWindow();
 		generateChoiceModeWindow();
 	}
+	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
 }

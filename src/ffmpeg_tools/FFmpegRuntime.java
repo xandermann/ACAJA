@@ -1,7 +1,7 @@
 package ffmpeg_tools;
 import java.io.IOException;
 /**
- * [ SUPERCLASSE ABSTRAITE POUR L'INTERFACAGE JAVA - FFMPEG. ]
+ * [ SUPERCLASSE ABSTRAITE POUR L'INTERFACAGE JAVA - FFMPEG ---- DEGRE 1. ]
  * 
  * Cette classe realise l'interfacage de degre 1 de FFMPEG en JAVA. 
  * 

@@ -1,15 +1,23 @@
 package ffmpeg_tools;
-
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-
 import files.SelectableFile;
 
-public class SystemRequests extends FFmpegRuntime{
+/**
+ * 
+ * 
+ * Auteurs du projet : 
+ * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
+ */
+public final class SystemRequests extends FFmpegRuntime{
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
 
 	/**
 	 * TODO Concerne la fenetre de traitement et donc ne concerne pas l'iteration 1. 
@@ -36,6 +44,13 @@ public class SystemRequests extends FFmpegRuntime{
 	 */
 	public final int[] VIDEO_RESOLUTION = new int[] {};
 
+	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
+	
 	/**
 	 * TODO  Concerne la fenetre de traitement et donc ne concerne pas l'iteration 1. 
 	 * 
@@ -79,7 +94,14 @@ public class SystemRequests extends FFmpegRuntime{
 	private int[] resizeImage(File file, int[] tab) {
 		return tab;
 	}
+	
+	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
 
+	
 	/**
 	 * TODO  Concerne la fenetre de traitement et donc ne concerne pas l'iteration 1. 
 	 * 
@@ -101,6 +123,13 @@ public class SystemRequests extends FFmpegRuntime{
 		return 0;
 	}
 	
+	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
+	
 	/**
 	 * Cette methode retourne les parametres du fichier. 
 	 * 
@@ -109,8 +138,11 @@ public class SystemRequests extends FFmpegRuntime{
 	 * Un fichier video posssede des parametres video ET audio alors qu'un fichier audio 
 	 * ne possede que des parametres audio. 
 	 * 
-	 * Parametres video : le codec video, le bitrate video, la resolution, les nombre d'images par secondes (FPS). 
-	 * Paramteres audio : le codec audio, le bitrate audio, le volume en sortie, taux d'echantillonnage, nombre de canaux audio en sortie. 
+	 * Parametres video : le codec video, le bitrate video, la resolution, les nombre d'images par 
+	 * secondes (FPS). 
+	 * 
+	 * Paramteres audio : le codec audio, le bitrate audio, le volume en sortie, taux d'echantillonnage,
+	 * nombre de canaux audio en sortie. 
 	 * 
 	 * @param file		Le fichier dont on souhaite connaitre les parametres. 
 	 * @param fileType  L'indice correspondant au type du fichier audio ou video. 
@@ -120,11 +152,16 @@ public class SystemRequests extends FFmpegRuntime{
 	public Object[] getSettings(File file, int fileType) {
 		Object[] fileSettings = new Object[10];		
 		if(fileType==SelectableFile.FILE_TYPE_AUDIO || fileType==SelectableFile.FILE_TYPE_AUDIO){
-			
 			return fileSettings;
 		}
 		return null;
 	}
+	
+	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
 	
 	
 	public static void main(String[] args) throws IOException {
@@ -140,4 +177,9 @@ public class SystemRequests extends FFmpegRuntime{
 			for(int i=0; i<n; i++)  System.out.print((char)b[i]); 
 		} 
 	}
+	
+	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
 }

@@ -1,9 +1,12 @@
 package ffmpeg_tools;
-
 import java.io.File;
 import java.util.Map;
-
-public class UserRequests extends FFmpegRuntime {
+/**
+ * 
+ * Auteurs du projet : 
+ * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
+ */
+public final class UserRequests extends FFmpegRuntime {
 
 	/**
 	 * TODO

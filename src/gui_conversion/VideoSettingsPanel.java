@@ -35,7 +35,4 @@ public class VideoSettingsPanel extends JPanel{
 		p.add(new JLabel("Fichiers sous-titres : "));
 		p.add(new JFileChooser("Parcourir"));
 	}
-	
-	
-
 }

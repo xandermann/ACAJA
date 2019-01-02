@@ -6,11 +6,13 @@ import java.io.IOException;
  * Cette classe realise l'interfacage de degre 1 de FFMPEG en JAVA. 
  * 
  * Le degre 1 consiste a permettre l'execution de requetes FFMPEG
- * directement en JAVA. 
+ * directement en JAVA. De ce fait les methode de la classe ont 
+ * des roles primitifs, le niveaub'exige pas de fonctionnalites 
+ * complexes.
  *
  * Cette classe se charge de connaitre le chemin vers le fichier executable 
- * de FFMPEG. Elle se charge aussi comme il a ete dis avant d'executer
- * des requetes FFMPEG en interne a partir de JAVA, sans avoir
+ * de FFMPEG. Elle se charge, aussi comme il a ete dis avant, d'executer
+ * des requetes FFMPEG en interne par l'intermediaire de JAVA, sans avoir
  * a utiiser de SHELL ( = interpreteur de lignes de commandes ).
  * 
  * Auteurs du projet : 
@@ -33,9 +35,9 @@ public abstract class FFmpegRuntime {
 	 * 
 	 * Ceci est la constante de classe permettant d'executer des
 	 * lignes de commandes en JAVA. Cette constante est declaree
-	 * en protected pour que les classes sous-classes realisant 
+	 * en protected pour que les sous-classes realisant 
 	 * l'interfacage de degre 2 puissent acceder aux resultats des 
-	 * requetes FFMPEG en appliquant un objet PROCESS dessus.
+	 * requetes FFMPEG en appliquant un objet Process dessus.
 	 */
 	protected final static Runtime RUN = Runtime.getRuntime();
 	
@@ -53,7 +55,7 @@ public abstract class FFmpegRuntime {
 	 * 
 	 * TODO il faudra recuperer depuis l'interface graphique le chemin,
 	 * en le demandant a l'utilisateur ( cf. respect des droits de 
-	 * l'utilisateur vu avec M. OUNI.)
+	 * l'utilisateur vu avec M. OUNI. ).
 	 */
 	private static void install(){
 		//TODO chemin provisoire. 
@@ -71,7 +73,7 @@ public abstract class FFmpegRuntime {
 	 * 
 	 * Methode pour executer une requete realisee en "code" FFMPEG, en interne 
 	 * par l'intermediaire de JAVA. Le chemin vers le fichier executable est 
-	 * deja pris en compte en interne dans la methode, ce pourquoi la requte qui
+	 * deja pris en compte en interne dans la methode, ce pourquoi la requete qui
 	 * est soumise ne doit contenir que la partie "arguments" d'une requete FFMPEG
 	 * classique. 
 	 * 

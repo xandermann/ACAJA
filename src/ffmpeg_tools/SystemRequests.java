@@ -1,6 +1,11 @@
 package ffmpeg_tools;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 import files.SelectableFile;
 
@@ -115,9 +120,24 @@ public class SystemRequests extends FFmpegRuntime{
 	public Object[] getSettings(File file, int fileType) {
 		Object[] fileSettings = new Object[10];		
 		if(fileType==SelectableFile.FILE_TYPE_AUDIO || fileType==SelectableFile.FILE_TYPE_AUDIO){
+			
 			return fileSettings;
 		}
 		return null;
 	}
-
+	
+	
+	public static void main(String[] args) throws IOException {
+		Process p = FFmpegRuntime.execute("--help");
+		
+		BufferedReader bf_reader = new BufferedReader(new InputStreamReader(p.getInputStream())); 
+		InputStream out = new BufferedInputStream(p.getInputStream());  
+		 
+		String s = null; 
+		while ((s = bf_reader.readLine()) != null) { 
+			byte[] b = new byte[1024];  
+			int n = out.read(b); 
+			for(int i=0; i<n; i++)  System.out.print((char)b[i]); 
+		} 
+	}
 }

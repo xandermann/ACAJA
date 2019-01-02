@@ -56,7 +56,9 @@ public abstract class FFmpegRuntime {
 	 * l'utilisateur vu avec M. OUNI.)
 	 */
 	private static void install(){
-		FFMPEG_PATH = System.getProperty("user.dir")+"\\ffmpeg\\bin\\ffmpeg.exe";
+		//TODO chemin provisoire. 
+		FFMPEG_PATH = "C:\\Users\\Jean-christophe\\Documents\\PROFESSIONNEL\\2A\\projetTutore"
+				    + "\\ffmpeg-20181031-4a97620-win64-static\\bin\\ffmpeg.exe";
 	}
 	
 	

@@ -223,9 +223,9 @@ public final class SystemRequests extends FFmpegRuntime{
 	 * @throws IOException 
 	 * @throws InterruptedException 
 	*/
-	public static HashMap<String, Object> getSettings(SelectableFile file) throws IOException, InterruptedException {
+	public static HashMap<String, String> getSettings(SelectableFile file) throws IOException, InterruptedException {
 		if(SelectableFile.isGoodFile(file)){	
-			HashMap<String, Object> fileSettings = new HashMap<String, Object>();
+			HashMap<String, String> fileSettings = new HashMap<String, String>();
 			
 			/**
 			 * Requete pour acceder aux parametres d'un fichier. 
@@ -255,12 +255,21 @@ public final class SystemRequests extends FFmpegRuntime{
 			String informations = br.readLine();
 			br.close();
 			
+			//Parametres a extraire uniquement pour les fichiers video. 
 			if(SelectableFile.isVideo(file)) {
-				fileSettings.put("codec", extractString(informations, "Video: ", ' '));
-			}else{	
-				fileSettings.put("codec",  extractString(informations, "Audio: ", ' '));
-				fileSettings.put("taux d'echantillonage",  extractString(informations, "Audio: ", ',', 'H'));
+				fileSettings.put("codec video", extractString(informations, "Video: ", ' '));			
+				fileSettings.put("resolution", extractString(informations, "bitrate: ", ' '));
+				fileSettings.put("bitrate video", extractString(informations, "bitrate: ", ' '));
+				fileSettings.put("fps", extractString(informations, "bitrate: ", ' '));
 			}
+			
+			//Parametres a extraire pour les fichiers audio et video. 
+			fileSettings.put("codec audio",  extractString(informations, "Audio: ", ' '));
+			fileSettings.put("taux d'echantillonage",  extractString(informations, "Audio: ", ',', 'H'));
+			fileSettings.put("bitrate audio", extractString(informations, "bitrate: ", ' '));
+			fileSettings.put("nombre de canaux audio", extractString(informations, "bitrate: ", ' '));
+			fileSettings.put("volume en sortie", extractString(informations, "bitrate: ", ' '));
+			
 			return fileSettings;
 		}
 		return null;
@@ -291,6 +300,17 @@ public final class SystemRequests extends FFmpegRuntime{
 				informations.lastIndexOf(end, informations.indexOf(origin)+origin.length())
 				);
 	}
+	
+	/**
+	 * [ METHODE INTERNE DE CLASSE. ]
+	 */
+	private static String extractString(String informations, String origin, int indexStart, char end) {
+		return informations.substring(
+				informations.indexOf(origin)+origin.length(), 
+				informations.lastIndexOf(' ', informations.lastIndexOf(end, informations.indexOf(origin)+origin.length()))
+				);
+	}
+	
 	//=======================================================================================================================
 	//=======================================================================================================================
 	

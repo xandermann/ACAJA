@@ -260,7 +260,6 @@ public final class SystemRequests extends FFmpegRuntime{
 			}else{	
 				fileSettings.put("codec",  extractString(informations, "Audio: ", ' '));
 				fileSettings.put("taux d'echantillonage",  extractString(informations, "Audio: ", ',', 'H'));
-				
 			}
 			return fileSettings;
 		}

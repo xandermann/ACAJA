@@ -14,21 +14,22 @@ public class SoundSettingsPanel extends JPanel {
 	
 	public SoundSettingsPanel(ConversionModel m) {
 		this.model = m;
+		//this.reevaluatePanel();
 	}
 	
-	private void reevaluatePanel() {
-		this.removeAll();
-		JPanel p = new JPanel();
-		p.setLayout(new GridLayout(5, 2));
-		p.add(new JLabel("Codec utilisé : "));
-		p.add(new JComboBox<>());
-		p.add(new JLabel("Volume en sortie (en %): "));
-		p.add(new JTextField());
-		p.add(new JLabel("Bitrate (kb/s) : "));
-		p.add(new JTextField());
-		p.add(new JLabel("Taux d'échantillonnage (Hz) : "));
-		p.add(new JTextField());
-		p.add(new JLabel("Nombre de canaux audio en sortie : "));
-		p.add(new JTextField());
+	public void reevaluatePanel() {
+		this.setLayout(new GridLayout(5, 2));
+		this.add(new JLabel("Codec utilisé : "));
+		this.add(new JComboBox<>());
+		this.add(new JLabel("Volume en sortie (en %): "));
+		this.add(new JTextField());
+		this.add(new JLabel("Bitrate (kb/s) : "));
+		this.add(new JTextField());
+		this.add(new JLabel("Taux d'échantillonnage (Hz) : "));
+		this.add(new JTextField());
+		this.add(new JLabel("Nombre de canaux audio en sortie : "));
+		this.add(new JTextField());
+		
+		//this.repaint();
 	}
 }

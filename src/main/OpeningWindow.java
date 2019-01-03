@@ -39,7 +39,7 @@ public class OpeningWindow {
 	private static void generateLoardingWindow() {
 		JFrame frame = new JFrame("Chargement d'Acaja");
 		try {
-			frame.setIconImage(ImageIO.read(new File("src/img/LogoAcaja.png")));
+			frame.setIconImage(ImageIO.read(new File("img/LogoAcaja.png")));
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}

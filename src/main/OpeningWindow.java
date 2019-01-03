@@ -83,7 +83,7 @@ public class OpeningWindow {
 		
 		JFrame frame = new JFrame("Acaja");
 		try {
-			frame.setIconImage(ImageIO.read(new File("src/img/LogoAcaja.png")));
+			frame.setIconImage(ImageIO.read(new File("img/LogoAcaja.png")));
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

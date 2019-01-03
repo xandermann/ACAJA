@@ -1,5 +1,7 @@
 package ffmpeg_tools;
 import java.io.*;
+import java.util.HashMap;
+
 import files.SelectableFile;
 
 /**
@@ -109,6 +111,8 @@ public final class SystemRequests extends FFmpegRuntime{
 	
 	
 	/**
+	 * [ METHODE DE CLASSE. ]
+	 * 
 	 * TODO iteration 1 pas concernee. 
 	 * 
 	 * @param file
@@ -120,6 +124,8 @@ public final class SystemRequests extends FFmpegRuntime{
 	}
 
 	/**
+	 * [ METHODE DE CLASSE. ]
+	 * 
 	 * TODO iteration 1 pas concernee. 
 	 * 
 	 * @param file
@@ -131,6 +137,8 @@ public final class SystemRequests extends FFmpegRuntime{
 	}
 
 	/**
+	 * [ METHODE DE CLASSE. ]
+	 * 
 	 * TODO iteration 1 pas concernee. 
 	 * 
 	 * @param file
@@ -142,6 +150,8 @@ public final class SystemRequests extends FFmpegRuntime{
 	}
 
 	/**
+	 * [ METHODE DE CLASSE. ]
+	 * 
 	 * TODO iteration 1 pas concernee. 
 	 * 
 	 * @param file
@@ -153,6 +163,8 @@ public final class SystemRequests extends FFmpegRuntime{
 	}
 	
 	/**
+	 * [ METHODE DE CLASSE. ]
+	 * 
 	 * TODO  Concerne la fenetre de traitement et donc ne concerne pas l'iteration 1. 
 	 * 
 	 * @param file
@@ -191,7 +203,7 @@ public final class SystemRequests extends FFmpegRuntime{
 	/**
 	 * [ METHODE DE CLASSE POUR LE RENSEIGNEMENT DES CARACTERISTIQUES D'UNE VIDEO OU D'UN SON. ]
 	 * 
-	 * Cette methode retourne les parametres du fichier. 
+	 * Cette methode retourne les parametres ( = caracteristiques ) du fichier. 
 	 * 
 	 * Les valeurs des parametres du fichier sont recuperes par l'intrermediaire de requetes FFmpeg. 
 	 * 
@@ -204,14 +216,51 @@ public final class SystemRequests extends FFmpegRuntime{
 	 * Paramteres audio : le codec audio, le bitrate audio, le volume en sortie, taux d'echantillonnage,
 	 * nombre de canaux audio en sortie. 
 	 * 
-	 * @param file		Le fichier dont on souhaite connaitre les parametres. 
-	 * @param fileType  L'indice correspondant au type du fichier audio ou video. 
+	 * @param file					Le fichier dont on souhaite connaitre les parametres. 
+	 * @param fileType  			L'indice correspondant au type du fichier audio ou video. 
 	 * 
-	 * @return Le tableau des parametres du fichier. 
-	 */
-	public static Object[] getSettings(File file, int fileType) {
-		Object[] fileSettings = new Object[10];		
-		if(fileType==SelectableFile.FILE_TYPE_AUDIO || fileType==SelectableFile.FILE_TYPE_AUDIO){
+	 * @return 						Les parametres du fichier. 
+	 * @throws IOException 
+	 * @throws InterruptedException 
+	*/
+	public static HashMap<String, Object> getSettings(SelectableFile file) throws IOException, InterruptedException {
+		if(SelectableFile.isGoodFile(file)){	
+			HashMap<String, Object> fileSettings = new HashMap<String, Object>();
+			
+			/**
+			 * Requete pour acceder aux parametres d'un fichier. 
+			 */
+			Process p = FFmpegRuntime.execute(" -i"+file.getSourceFile().getName());
+			
+			/**
+			 * "Il est temps de vous racontez une petite histoire" :
+			 * Les pogrammeurs de FFMPEG savent que les temps de traitement des requetes
+			 * sur FFMPEG peuvent prendre un temps assez long. Et il faut savoir que 
+			 * le traitement d'une requete renvoie son resultat par le biais des flux de sortie 
+			 * appeles STDOUT. Les pogrammeurs de FFMPEG ont decide que les messages 
+			 * (de reussite comme d'echec d'une requete passeraient par les flux 
+			 * d'erreurs STDERR. Mais pourquoi ce choix n'est-ce-pas ? Pour la bonne 
+			 * raison qu'envoyer tous les messages par STDERR permet d'eviter que 
+			 * les traitements des requetes qui passent par STDOUT ne soit freiner par les 
+			 * messages. 
+			 * 
+			 * C'est ainsi qu'on se retrouve en 2019 a devoir extraire les messages ne correpondant 
+			 * pas a des cas d'erreur a partir STDERR et pas a partir de STDOUT ( comme ca l'est  
+			 * habituellement" ). 
+			 * 
+			 * Aisni on ne s'interesse ici qu'au flux d'erreurs qui du coup n'en est pas un avec FFMPEG,
+			 * mais plutot un flux des messages tous confondus. 
+			 */
+			BufferedReader br = new BufferedReader(new InputStreamReader(p.getErrorStream())); 
+			String informations = br.readLine();
+			br.close();
+			
+			if(SelectableFile.isVideo(file)) {
+				//fileSettings.add()
+			}else{	
+				//utiliser indexOf() et substring()
+			}
+			
 			return fileSettings;
 		}
 		return null;
@@ -222,21 +271,31 @@ public final class SystemRequests extends FFmpegRuntime{
 	//=======================================================================================================================
 	//=======================================================================================================================
 	
+
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
 	
 	
 	//POUR TESTER FAITES PAS GAFFE MDR 
-	public static void main(String[] args) throws IOException {
-		Process p = FFmpegRuntime.execute("--help");
-		
-		BufferedReader bf_reader = new BufferedReader(new InputStreamReader(p.getInputStream())); 
-		InputStream out = new BufferedInputStream(p.getInputStream());  
-		 
-		String s = null; 
-		while ((s = bf_reader.readLine()) != null) { 
-			byte[] b = new byte[1024];  
-			int n = out.read(b); 
-			for(int i=0; i<n; i++)  System.out.print((char)b[i]); 
-		} 
+	public static void main(String[] args) throws IOException, InterruptedException {
+		String s1 ="-i C:\\Users\\Jean-christophe\\Documents\\PROFESSIONNEL\\2A\\projetTutore\\test\\1.avi";
+		Process p = execute(s1);
+
+		BufferedReader br = new BufferedReader(new InputStreamReader(p.getErrorStream())); 
+		PrintWriter pw = new PrintWriter(new FileWriter("lol.txt"));
+
+				try {
+					String s3 = null;
+					while ((s3 = br.readLine()) != null) { 
+						pw.println(s3); 
+						System.out.println("ERROR"+s3);
+					}
+					pw.flush();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} 
 	}
 	
 	

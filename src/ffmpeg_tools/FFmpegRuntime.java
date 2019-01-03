@@ -55,8 +55,7 @@ public abstract class FFmpegRuntime {
 	 * l'utilisateur vu avec M. OUNI. ).
 	 */
 	private static void install(){
-		//TODO chemin provisoire. 
-		FFMPEG_PATH = System.getProperty("user.dir")+"\\ffmpeg\\bin\\ffmpeg.exe";
+		//TODO
 	}
 	
 	
@@ -87,10 +86,12 @@ public abstract class FFmpegRuntime {
 	 * 
 	 * @throws IOException			Exception lancee si la methode ne trouve pas ce que l'on lui 
 	 * 								soumet a executer. 
+	 * @throws InterruptedException 
 	 */
-	public static Process execute(String ffmpegRequest) throws IOException {
+	protected static Process execute(String ffmpegRequest) throws IOException, InterruptedException {
 		if(FFMPEG_PATH==null) install();
-		return RUN.exec(FFMPEG_PATH+" "+ffmpegRequest);
+		//Provisoirement j'utilise le ffmpge de la variable path.
+		return RUN.exec("ffmpeg "+ffmpegRequest);
 	}
 	
 	

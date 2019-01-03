@@ -3,6 +3,9 @@ package files;
 import java.io.File;
 
 public class SelectableFile {
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
 
 	/**
 	 * Fichier VIDEO
@@ -34,59 +37,92 @@ public class SelectableFile {
 	 */
 	private boolean isSelected;
 
+
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
+	
 	/**
 	 * Definition a partir du fichier source
 	 * 
 	 * @param file Fichier source
 	 */
-	public void SelectionFile(File file) {
-
+	public SelectableFile(File file) {
+		if(file == null)
+			throw new NullPointerException("Erreur : fichier fourni en parametre null !");
 		this.isSelected = false;
 		this.sourceFile = file;
-		this.typeFile = this.getExtensionCurrentFile();
-
+		this.getFileType();
 	}
+	
+	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
+	
+	/**
+	 * [ METHODE DE CLASSE. ]
+	 * 
+	 * @param file
+	 * @return
+	 */
+	public static boolean isGoodFile(SelectableFile file) {
+		return ( isVideo(file) || isSound(file) );
+	}
+	
+	/**
+	 * [ METHODE DE CLASSE. ]
+	 * 
+	 * @param file
+	 * @return
+	 */
+	public static boolean isVideo(SelectableFile file) {
+		return file.getTypeFile()==SelectableFile.FILE_TYPE_VIDEO;
+	}
+	
+	/**
+	 * [ METHODE DE CLASSE. ]
+	 * 
+	 * @param file
+	 * @return
+	 */
+	public static boolean isSound(SelectableFile file) {
+		return file.getTypeFile()==SelectableFile.FILE_TYPE_AUDIO;
+	}
+	
+	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
 	
 	/**
 	 * Retourne l'extension du fichier courant (a partir des constantes de la classe)
 	 * @return L'extension du fichier (0,1 ou 2) selon les constantes
 	 */
-	private int getExtensionCurrentFile() {
-
-		String extension = "";
+	private void getFileType() {
 		String fileName = this.sourceFile.getName();
-		if (fileName.lastIndexOf(".") != -1 && fileName.lastIndexOf(".") != 0)
-			extension = fileName.substring(fileName.lastIndexOf(".") + 1);
 
-		// L'extension du fichier (via les constantes)
-		int ret = 0;
-
-		switch (extension) {
-
-		case "mp4":
-		case "avi":
-			ret = FILE_TYPE_VIDEO;
-			break;
-
-		case "png":
-		case "jpg":
-		case "jpeg":
-			ret = FILE_TYPE_IMAGE;
-			break;
-
-		case "mp3":
-		case "wav":
-		case "ogg":
-			ret = FILE_TYPE_AUDIO;
-			break;
-
-		/*
-		 * default: // Si inconnu ne fait rien break;
-		 */
-		}
-		return ret;
+		if(fileName.endsWith("mp4") || fileName.endsWith("avi")) 
+			this.typeFile = FILE_TYPE_VIDEO;
+		else if(fileName.endsWith("png") || fileName.endsWith("jpg") || fileName.endsWith("jpeg")) 
+				this.typeFile = FILE_TYPE_IMAGE;
+			else if(fileName.endsWith("mp3") || fileName.endsWith("wav") || fileName.endsWith("ogg"))
+					this.typeFile = FILE_TYPE_AUDIO;
 	}
 
+	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
+	
 	/**
 	 * Test si le fichier est selectionne
 	 * 
@@ -112,6 +148,18 @@ public class SelectableFile {
 	 */
 	public int getTypeFile() {
 		return this.typeFile;
-
 	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public File getSourceFile() {
+		return sourceFile;
+	}
+	
+	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
 }

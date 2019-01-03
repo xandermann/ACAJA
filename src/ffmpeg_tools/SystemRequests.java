@@ -163,7 +163,7 @@ public final class SystemRequests extends FFmpegRuntime{
 	}
 	
 	/**
-	 * [ METHODE DE CLASSE. ]
+	 * [ METHODE INTERNE DE CLASSE. ]
 	 * 
 	 * TODO  Concerne la fenetre de traitement et donc ne concerne pas l'iteration 1. 
 	 * 
@@ -216,10 +216,10 @@ public final class SystemRequests extends FFmpegRuntime{
 	 * Paramteres audio : le codec audio, le bitrate audio, le volume en sortie, taux d'echantillonnage,
 	 * nombre de canaux audio en sortie. 
 	 * 
-	 * @param file					Le fichier dont on souhaite connaitre les parametres. 
-	 * @param fileType  			L'indice correspondant au type du fichier audio ou video. 
+	 * @param file							Le fichier dont on souhaite connaitre les parametres. 
+	 * @param fileType  					L'indice correspondant au type du fichier audio ou video. 
 	 * 
-	 * @return 						Les parametres du fichier. 
+	 * @return HashMap<String, Object>		Les parametres du fichier. 
 	 * @throws IOException 
 	 * @throws InterruptedException 
 	*/
@@ -230,7 +230,7 @@ public final class SystemRequests extends FFmpegRuntime{
 			/**
 			 * Requete pour acceder aux parametres d'un fichier. 
 			 */
-			Process p = FFmpegRuntime.execute(" -i"+file.getSourceFile().getName());
+			Process p = FFmpegRuntime.execute(file.getSourceFile().getName());
 			
 			/**
 			 * "Il est temps de vous racontez une petite histoire" :
@@ -256,11 +256,12 @@ public final class SystemRequests extends FFmpegRuntime{
 			br.close();
 			
 			if(SelectableFile.isVideo(file)) {
-				//fileSettings.add()
+				fileSettings.put("codec", extractString(informations, "Video: ", ' '));
 			}else{	
-				//utiliser indexOf() et substring()
+				fileSettings.put("codec",  extractString(informations, "Audio: ", ' '));
+				fileSettings.put("taux d'echantillonage",  extractString(informations, "Audio: ", ',', 'H'));
+				
 			}
-			
 			return fileSettings;
 		}
 		return null;
@@ -271,7 +272,26 @@ public final class SystemRequests extends FFmpegRuntime{
 	//=======================================================================================================================
 	//=======================================================================================================================
 	
+	
+	/**
+	 * [ METHODE INTERNE DE CLASSE. ]
+	 */
+	private static String extractString(String informations, String origin, char end) {
+		return informations.substring(
+				informations.indexOf(origin)+origin.length(), 
+				informations.lastIndexOf(end, informations.indexOf(origin)+origin.length())
+				);
+	}
 
+	/**
+	 * [ METHODE INTERNE DE CLASSE. ]
+	 */
+	private static String extractString(String informations, String origin, char start, char end) {
+		return informations.substring(
+				informations.indexOf(start, informations.indexOf(origin)+origin.length()), 
+				informations.lastIndexOf(end, informations.indexOf(origin)+origin.length())
+				);
+	}
 	//=======================================================================================================================
 	//=======================================================================================================================
 	
@@ -279,7 +299,7 @@ public final class SystemRequests extends FFmpegRuntime{
 	
 	//POUR TESTER FAITES PAS GAFFE MDR 
 	public static void main(String[] args) throws IOException, InterruptedException {
-		String s1 ="-i C:\\Users\\Jean-christophe\\Documents\\PROFESSIONNEL\\2A\\projetTutore\\test\\1.avi";
+		String s1 ="C:\\Users\\Jean-christophe\\Documents\\PROFESSIONNEL\\2A\\projetTutore\\test\\1.avi";
 		Process p = execute(s1);
 
 		BufferedReader br = new BufferedReader(new InputStreamReader(p.getErrorStream())); 

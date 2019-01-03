@@ -9,7 +9,7 @@ import javax.swing.*;
 /**
  * [ CLASSE POUR LE LANCEMENT DES FENETRES D'OUVERTURE DU LOGICIEL. ]
  * 
- * TODO comentaire a faire. 
+ * TODO commentaire a faire. 
  * 
  * Auteurs du projet : 
  * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
@@ -21,7 +21,7 @@ public class OpeningWindow {
 	/**
 	 *[ CONSTANTES DE CLASSE. ]
 	 *
-	 *TODO comentaire a faire. 
+	 *TODO commentaire a faire. 
 	 */
 	private final static int WIDTH = 750;
 	private final static int HEIGHT = 500;
@@ -34,7 +34,7 @@ public class OpeningWindow {
 	/**
 	 * [ METHODE INTERNE DE CLASSE - FENETRE DE PRESENTATION DU LOGICIEL. ]
 	 * 
-	 * TODO comentaire a faire. 
+	 * TODO commentaire a faire. 
 	 */
 	private static void generateLoardingWindow() {
 		JFrame frame = new JFrame("Chargement d'Acaja");
@@ -73,7 +73,7 @@ public class OpeningWindow {
 	/**
 	 * [ METHODE INTERNE DE CLASSE  - FENETRE CHOIX DU MODE D'UTILISATION DU LOGICIEL. ]
 	 * 
-	 * TODO comentaire a faire. 
+	 * TODO commentaire a faire. 
 	 */
 	private static void generateChoiceModeWindow() {
 		JButton convertbutton = new JButton("Conversion");
@@ -132,7 +132,6 @@ public class OpeningWindow {
 		});
 		
 		frame.setVisible(true);
-		
 	}
 	
 	
@@ -143,7 +142,7 @@ public class OpeningWindow {
 	/**
 	 * [ METHODE DE CLASSE. ]
 	 * 
-	 * TODO comentaire a faire. 
+	 * TODO commentaire a faire. 
 	 */
 	public static void generateOpeningWindow() {
 		generateLoardingWindow();

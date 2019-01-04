@@ -1,7 +1,11 @@
 package files;
-
 import java.io.File;
-
+/**
+ * TODO comentaire a faire. 
+ * 
+ * Auteurs du projet : 
+ * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
+ */
 public abstract class SelectableFile {
 	//=======================================================================================================================
 	//=======================================================================================================================

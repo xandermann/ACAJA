@@ -1,10 +1,13 @@
 package files;
-
 import java.io.File;
 import java.util.HashMap;
-
 import ffmpeg_tools.SystemRequests;
-
+/**
+ * TODO comentaire a faire. 
+ * 
+ * Auteurs du projet : 
+ * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
+ */
 public class ProcessingFile extends SelectableFile{
 	//=======================================================================================================================
 	//=======================================================================================================================
@@ -89,8 +92,11 @@ public class ProcessingFile extends SelectableFile{
 	
 	
 	/**
-	 * Recupere le processus acheve
-	 * @return le processus
+	 * [ METHODE ACCESSEUR - GETTER. ]
+	 * 
+	 * Methode pour recuperer les traitements en attente. 
+	 * 
+	 * @return HashMap<String, Object>		Les traitements en attente.
 	 */
 	public HashMap<String, Object> getPerformedProcessings() {
 		return performedProcessings;

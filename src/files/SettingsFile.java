@@ -3,7 +3,12 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import ffmpeg_tools.SystemRequests;
-
+/**
+ * TODO comentaire a faire. 
+ * 
+ * Auteurs du projet : 
+ * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
+ */
 public class SettingsFile extends SelectableFile {
 	//=======================================================================================================================
 	//=======================================================================================================================

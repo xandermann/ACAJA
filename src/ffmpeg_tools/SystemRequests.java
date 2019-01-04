@@ -362,6 +362,7 @@ public final class SystemRequests extends FFmpegRuntime{
 			 */
 			Process p = FFmpegRuntime.execute(file.getSourceFile().getPath());
 			
+			
 			/**
 			 * QUELQUES FAITS A CONNAITRE POUR COMPRENDRE LA LIGNE DE CODE CI-DESSOUS.
 			 * 
@@ -384,6 +385,7 @@ public final class SystemRequests extends FFmpegRuntime{
 			 * mais plutot un flux des messages tous confondus. 
 			 */
 			BufferedReader br = new BufferedReader(new InputStreamReader(p.getErrorStream())); 
+			
 			
 			/**
 			 *  EXTRACTION DES CARACTERISTIQUES.
@@ -416,7 +418,7 @@ public final class SystemRequests extends FFmpegRuntime{
 				fileSettings.put("resolution", extractAVideoSetting(informations, 3));
 				fileSettings.put("bitrate video",extractAVideoSetting(informations, 4));
 				fileSettings.put("fps", extractAVideoSetting(informations, 5));
-				fileSettings.put("codec audio",  extractAAudioSetting(informations, 0));
+				fileSettings.put("codec audio", extractAAudioSetting(informations, 0));
 			}else{
 				String codec = file.getSourceFile().getName().split(".")[file.getSourceFile().getName().split(".").length-1];
 				fileSettings.put("codec audio", codec);

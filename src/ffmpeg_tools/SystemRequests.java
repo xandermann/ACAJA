@@ -133,7 +133,7 @@ public final class SystemRequests extends FFmpegRuntime{
 	/**
 	 * [ METHODE INTERNE DE CLASSE. ]
 	 * 
-	 * Methode de classe pour redimmensionner une image 
+	 * Methode de classe pour redimensionner une image 
 	 * extraite. 
 	 * 
 	 * TODO iteration 1 pas concernee. 
@@ -202,7 +202,7 @@ public final class SystemRequests extends FFmpegRuntime{
 	 * TODO iteration 1 pas concernee. 
 	 * 
 	 * @param file		La video dont on doit extraire la frame,
-	 * 					et par la suite la redimmensionner. 
+	 * 					et par la suite la redimensionner. 
 	 * 
 	 * @param time		Le temps auquel on doit extraire la frame
 	 * 					de la vide od'origine.

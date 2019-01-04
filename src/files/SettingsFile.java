@@ -33,10 +33,10 @@ public class SettingsFile extends SelectableFile {
 	/**
 	 * [ CONSTRUCTEUR. ]
 	 * 
-	 * @param file    Fichier
-	 * @param isVideo Si le fichier est une video
-	 * @throws InterruptedException 
+	 * @param file   	 				Le fichier source. 
+	 *
 	 * @throws IOException 
+	 * @throws InterruptedException 	
 	 */
 	public SettingsFile(File file) throws IOException, InterruptedException {
 		/**
@@ -45,7 +45,7 @@ public class SettingsFile extends SelectableFile {
 		super(file);
 		
 		/**
-		 * SI TYPE DE FICHIER PAS ACCCPETE EXCPETION.
+		 * SI TYPE DE FICHIER PAS ACCCPTE EXCPETION.
 		 */
 		if(isGoodFile())
 			throw new IllegalArgumentException("Seuls les fichiers audio et video sont toleres."); 
@@ -58,8 +58,7 @@ public class SettingsFile extends SelectableFile {
 		settings = new HashMap<String, String>();
 		
 		//On determine le codec de la video ou de l'audio. 
-		String key;
-		key = isVideo() ? "codec_video" : "codec_audio";
+		String key = isVideo() ? "codec_video" : "codec_audio";
 		String codec = sourceFile.getName().split(".")[sourceFile.getName().split(".").length-1];
 		settings.put(key, codec);
 		
@@ -93,7 +92,7 @@ public class SettingsFile extends SelectableFile {
 	
 	
 	/**
-	 * [ METHODE ACCESSEUR - GETTER. ]
+	 * [ METHODE POUR SAVOIR SI DES PARAMETRES ONT ETE MODIFIES. ]
 	 * 
 	 * Methode pour tester si les parametres du fichier ont ete modifies.
 	 * 

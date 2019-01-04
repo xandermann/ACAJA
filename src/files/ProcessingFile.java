@@ -3,48 +3,100 @@ package files;
 import java.io.File;
 import java.util.HashMap;
 
-public class ProcessingFile extends SelectableFile{
+import ffmpeg_tools.SystemRequests;
 
+public class ProcessingFile extends SelectableFile{
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
 	/**
-	 * Duree totale
+	 * [ ATTRIBUTS D'INSTANCE. ]
+	 */
+	
+	/**
+	 * La duree du fichier source ( elle prendra -1 a l'initialisation,
+	 * si le fichier source est une image ).
 	 */
 	private long duration;
 
 	/**
-	 * Les processus acheves
+	 * Les traitements en attente sur this. 
 	 */
 	private HashMap<String, Object> performedProcessings;
 
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
 	/**
-	 * Constructeur
+	 * [ CONSTRUCTEUR. ]
 	 * 
-	 * @param file
+	 * @param file		Le fichier source.
 	 */
 	public ProcessingFile(File file) {
 		/**
 		 * INITIALISATION DES ATTRIBUTS HETITES DE LA CLASSE SELECTABLEFILE.
 		 */
 		super(file);
-		super(file);
-		// TODO
-		// Methode qui trouve la duree du fichier (methode dans le package ffmtools)
+		
+		/**
+		 * INITIALISATION DE TABLE DES TRAITEMENTS EN ATTENTE SUR THIS. 
+		 */
+		performedProcessings = new HashMap<String, Object>();
+		
+		/**
+		 * INITIALISATION DE LA DUREE DU SON OU DE LA VIDEO. 
+		 * 
+		 * Si le fichier source est une image alors la duree prend -1, 
+		 * car une image n'a pas de duree. 
+		 */
+		duration = isGoodFile() ? SystemRequests.getDuration(sourceFile) : -1;			
 	}
 
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
 	/**
-	 * Recupere les processus OK
-	 * @param string
-	 * @param object
+	 * [ METHODE POUR AJOUTER UN TRAITEMENT EN ATTENTE A THIS. ]
+	 * 
+	 * @param string		Le type de taritement a ajouter ne attente. 
+	 * @param object		Les arguments necessaires a connaitre pour executer 
+	 * 						les traitements. 
 	 */
-	public void performProcess(String string, Object object) {
-		// TODO
+	public void performProcess(String typeProcess, Object process) {
+		//TODO provisoire a ameliorer. 
+		performedProcessings.put(typeProcess, process);
 	}
 
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
+	/**
+	 * [ METHODE POUR SAVOIR SI DES TRAIEMENTS SONT EN ATTENTE SUR CE FICHIER. ]
+	 */
+	public boolean isModified() {
+		return  !performedProcessings.equals(new HashMap<String, Object>());
+	}
+	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
 	/**
 	 * Recupere le processus acheve
 	 * @return le processus
 	 */
 	public HashMap<String, Object> getPerformedProcessings() {
-		return this.performedProcessings;
+		return performedProcessings;
 	}
 
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
 }

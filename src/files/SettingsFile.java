@@ -62,11 +62,6 @@ public class SettingsFile extends SelectableFile {
 		oldSettings = new HashMap<String, String>();
 		settings = new HashMap<String, String>();
 		
-		//On determine le codec de la video ou de l'audio. 
-		String key = isVideo() ? "codec_video" : "codec_audio";
-		String codec = sourceFile.getName().split(".")[sourceFile.getName().split(".").length-1];
-		settings.put(key, codec);
-		
 		//Initialisation des autres parametres. 
 		SystemRequests.getSettings(this);
 	}

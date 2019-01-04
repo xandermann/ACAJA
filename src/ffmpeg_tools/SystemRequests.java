@@ -264,38 +264,46 @@ public final class SystemRequests extends FFmpegRuntime{
 	//=======================================================================================================================
 	
 	
+	/**
+	 * [ METHODE INTERNE DE CLASSE. ]
+	 * 
+	 * Cette methode permet de connaitre l'index du caractere situe apres
+	 * une donnee a extraire. Plus simplement cette methode determine la 
+	 * l'index du caractere qui delime la fin de chaine a extraire.
+	 */
+	public static int findEndIndexSetting(String informations, int fromIndex) {
+		int indexSpace = informations.indexOf(' ', fromIndex);
+		int indexComa = informations.indexOf(',', fromIndex);
+		return indexSpace<indexComa || indexComa==-1 ?  indexSpace : indexComa;	
+	}
+	
 	
 	/**
 	 * [ METHODE INTERNE DE CLASSE. ]
+	 * 
+	 * Cette methode permet d'extraire une des caracteristiques d'un fichier video ou audio
+	 * dont FFMPEG nous a fourni une longue plage d'informations. 
 	 */
 	private static String extractASetting(String informations, String start, int indexSetting) {
 		int indexStart = informations.indexOf(start) + start.length();
-		
-		if(indexSetting-- == 0) {
+		if(indexSetting != 0) {
 			int indexEvolve = indexStart;
-			for(int i=0; i<=indexSetting; i++)
-				indexEvolve = informations.lastIndexOf(",", indexEvolve)+1;
 			
-
-			return  informations.substring(
-						indexEvolve, 
-					 
-					);
-		}else{
-			if(indexSetting == 4) {
+			for(int i=0; i<indexSetting; i++) 
+				indexEvolve = informations.indexOf(',', indexEvolve)+1;
 			
+			indexEvolve++;
 			
-			}else{
-					return  informations.substring(
-					 indexStart, 
-					 
-					);
-			}
-		}
+			return  informations.substring(indexEvolve,findEndIndexSetting(informations, indexEvolve));
+		}else
+			return  informations.substring(indexStart,findEndIndexSetting(informations, indexStart));
 	}
 	
 	/**
 	 * [ METHODE INTERNE DE CLASSE. ]
+	 * 
+	 * Methode pour extraire la carcateristique d'un fichier video dans la plage d'informations
+	 * fournie par FFMPEG a partir d'in index. 
 	 */
 	private static String extractAVideoSetting(String informations, int indexSetting) {
 		return extractASetting(informations, "Video: ", indexSetting);
@@ -303,6 +311,9 @@ public final class SystemRequests extends FFmpegRuntime{
 
 	/**
 	 * [ METHODE INTERNE DE CLASSE. ]
+	 * 
+	 * Methode pour extraire la carcateristique d'un fichier audio dans la plage d'informations
+	 * fournie par FFMPEG a partir d'in index. 
 	 */
 	private static String extractAAudioSetting(String informations, int indexSetting) {
 		return extractASetting(informations, "Audio: ", indexSetting);
@@ -343,77 +354,79 @@ public final class SystemRequests extends FFmpegRuntime{
 	*/
 	public static void getSettings(SettingsFile file) throws IOException, InterruptedException {
 		if(file.isGoodFile()){	
-			HashMap<String, String> fileSettings = file.getSettings();
-			
 			/**
-			 * Requete pour acceder aux parametres d'un fichier. 
+			 * REQUETE A SOUMETRE A FFMPEG.
+			 * 
+			 * LA requete ffmpeg -i inputFile permet de connaitre les caracteristiques
+			 * d'un fichier fourni en fliux d'entree ( = inputFile ). 
 			 */
-			Process p = FFmpegRuntime.execute(file.getSourceFile().getName());
+			Process p = FFmpegRuntime.execute(file.getSourceFile().getPath());
 			
 			/**
+			 * QUELQUES FAITS A CONNAITRE POUR COMPRENDRE LA LIGNE DE CODE CI-DESSOUS.
+			 * 
 			 * "Il est temps de vous racontez une petite histoire" :
 			 * Les pogrammeurs de FFMPEG savent que les temps de traitement des requetes
 			 * sur FFMPEG peuvent prendre un temps assez long. Et il faut savoir que 
 			 * le traitement d'une requete renvoie son resultat par le biais des flux de sortie 
-			 * appeles STDOUT. Les pogrammeurs de FFMPEG ont decide que les messages 
-			 * (de reussite comme d'echec d'une requete passeraient par les flux 
-			 * d'erreurs STDERR. Mais pourquoi ce choix n'est-ce-pas ? Pour la bonne 
+			 * ( = STDOUT ). De ce fait les pogrammeurs de FFMPEG ont decide que les messages 
+			 * de reussite comme d'echec d'une requete passeraient par les flux 
+			 * d'erreurs ( =  STDERR ). Mais pourquoi ce choix n'est-ce-pas ? Pour la bonne 
 			 * raison qu'envoyer tous les messages par STDERR permet d'eviter que 
 			 * les traitements des requetes qui passent par STDOUT ne soit freiner par les 
-			 * messages. 
+			 * messages de reussites de requetes si ils passaient pas STDOUT. 
 			 * 
 			 * C'est ainsi qu'on se retrouve en 2019 a devoir extraire les messages ne correpondant 
-			 * pas a des cas d'erreur a partir STDERR et pas a partir de STDOUT ( comme ca l'est  
-			 * habituellement" ). 
+			 * pas a des cas d'erreur, a partir de STDERR et pas a partir de STDOUT, comme ca l'est  
+			 * pourtant habituellement par convention. 
 			 * 
-			 * Aisni on ne s'interesse ici qu'au flux d'erreurs qui du coup n'en est pas un avec FFMPEG,
+			 * Ainsi on ne s'interesse ici qu'au flux d'erreurs qui du coup n'en est pas un avec FFMPEG,
 			 * mais plutot un flux des messages tous confondus. 
 			 */
 			BufferedReader br = new BufferedReader(new InputStreamReader(p.getErrorStream())); 
-			String informations = br.readLine();
+			
+			/**
+			 *  EXTRACTION DES CARACTERISTIQUES.
+			 */
+			
+			//On ne recupere que les donnees qui nous interesse
+			//d'ou la presence du booleen keepInformations. 
+			boolean keepInformations = false; 
+			String informations = "", information = null;
+			
+			while( (information = br.readLine()) != null ) {
+				if( keepInformations == false && information.contains("Input") ) 
+					keepInformations = true;
+				if( keepInformations == true ) 
+					informations += information + " ";
+			}
+			//On ferme le flux. 
 			br.close();
+			
+			
+			/**
+			 * INITIALISATION DES CARACTERISTIQUES DE LA VIDEO OU DU SON.
+			 */
+			HashMap<String, String> fileSettings = file.getSettings();
 			
 			//Parametres a extraire uniquement pour les fichiers video. 
 			if(file.isVideo()) {
-				fileSettings.put("resolution", extractString(informations, "bitrate: ", ' '));
-				fileSettings.put("bitrate video", extractString(informations, "bitrate: ", ' '));
-				fileSettings.put("fps", extractString(informations, "bitrate: ", ' '));
-				fileSettings.put("codec audio",  extractString(informations, "Audio: ", ' '));
+				String codec = file.getSourceFile().getName().split(".")[file.getSourceFile().getName().split(".").length-1];
+				fileSettings.put("codec video", codec);
+				fileSettings.put("resolution", extractAVideoSetting(informations, 3));
+				fileSettings.put("bitrate video",extractAVideoSetting(informations, 4));
+				fileSettings.put("fps", extractAVideoSetting(informations, 5));
+				fileSettings.put("codec audio",  extractAAudioSetting(informations, 0));
+			}else{
+				String codec = file.getSourceFile().getName().split(".")[file.getSourceFile().getName().split(".").length-1];
+				fileSettings.put("codec audio", codec);
 			}
 			
-			fileSettings.put("taux d'echantillonage",  extractString(informations, "Audio: ", ',', 'H'));
-			fileSettings.put("bitrate audio", extractString(informations, "bitrate: ", ' '));
-			fileSettings.put("nombre de canaux audio", extractString(informations, "bitrate: ", ' '));
-			fileSettings.put("volume en sortie", extractString(informations, "bitrate: ", ' '));
+			fileSettings.put("taux d'echantillonage",  extractAAudioSetting(informations, 1));
+			fileSettings.put("nombre de canaux audio",extractAAudioSetting(informations, 2));
+			fileSettings.put("bitrate audio", extractAAudioSetting(informations, 4));
+			//fileSettings.put("volume en sortie",extractAAudioSetting(informations, 5));
 		}
-	}
-	
-	
-	
-	//=======================================================================================================================
-	//=======================================================================================================================
-	
-	
-	
-	//POUR TESTER FAITES PAS GAFFE MDR 
-	public static void main(String[] args) throws IOException, InterruptedException {
-		String s1 ="C:\\Users\\Jean-christophe\\Documents\\PROFESSIONNEL\\2A\\projetTutore\\test\\1.mp4";
-		Process p = execute(s1);
-
-		BufferedReader br = new BufferedReader(new InputStreamReader(p.getErrorStream())); 
-		PrintWriter pw = new PrintWriter(new FileWriter("lol.txt"));
-
-				try {
-					String s3 = null;
-					while ((s3 = br.readLine()) != null) { 
-						pw.println(s3); 
-						System.out.println("ERROR"+s3);
-					}
-					pw.flush();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} 
 	}
 	
 	

@@ -3,7 +3,7 @@ package files;
 import java.io.File;
 import java.util.HashMap;
 
-public class ProcessingFile {
+public class ProcessingFile extends SelectableFile{
 
 	/**
 	 * Duree totale
@@ -21,6 +21,11 @@ public class ProcessingFile {
 	 * @param file
 	 */
 	public ProcessingFile(File file) {
+		/**
+		 * INITIALISATION DES ATTRIBUTS HETITES DE LA CLASSE SELECTABLEFILE.
+		 */
+		super(file);
+		super(file);
 		// TODO
 		// Methode qui trouve la duree du fichier (methode dans le package ffmtools)
 	}

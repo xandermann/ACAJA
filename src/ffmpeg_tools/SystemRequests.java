@@ -3,6 +3,7 @@ import java.io.*;
 import java.util.HashMap;
 
 import files.SelectableFile;
+import files.SettingsFile;
 
 /**
  * [ CLASSE CONCRETE POUR L'INTERFACAGE JAVA-FFMPEG ---- DEGRE 2. ]
@@ -107,56 +108,43 @@ public final class SystemRequests extends FFmpegRuntime{
 	
 	//=======================================================================================================================
 	//=======================================================================================================================
-	
+
 	
 	
 	/**
-	 * [ METHODE DE CLASSE. ]
+	 * [ METHODE INTERNE DE CLASSE. ]
+	 * 
+	 * Methode pour simplement extraire une image 
+	 * d'une video sans redimensionnement. 
 	 * 
 	 * TODO iteration 1 pas concernee. 
 	 * 
-	 * @param file
-	 * @param time
-	 * @return
+	 * @param file		La video dont on doit extraire 
+	 * 					l'image. 
+	 * 
+	 * @param time		Le temps auquel on doit extraire l'image.
+	 * 
+	 * @return file		L'image extraite.
 	 */
-	public static File createVideoFrame(File file, long time) {
+	private static File extractImage(File file, long time) {
 		return file;
 	}
 
 	/**
-	 * [ METHODE DE CLASSE. ]
+	 * [ METHODE INTERNE DE CLASSE. ]
+	 * 
+	 * Methode de classe pour redimmensionner une image 
+	 * extraite. 
 	 * 
 	 * TODO iteration 1 pas concernee. 
 	 * 
-	 * @param file
-	 * @param tab
-	 * @return
-	 */
-	public static File createThumbail(File file, int[] resolution) {
-		return file;
-	}
-
-	/**
-	 * [ METHODE DE CLASSE. ]
+	 * @param file			L'image extraite a redimensionner. 
 	 * 
-	 * TODO iteration 1 pas concernee. 
+	 * @param resolution	La constante de classe 
+	 * 						representrant les dimensions
+	 * 						attendues pour la miniature. 
 	 * 
-	 * @param file
-	 * @param time
-	 * @return
-	 */
-	public static File extractImage(File file, long time) {
-		return file;
-	}
-
-	/**
-	 * [ METHODE DE CLASSE. ]
-	 * 
-	 * TODO iteration 1 pas concernee. 
-	 * 
-	 * @param file
-	 * @param resolution
-	 * @return
+	 * @return file			L'image extraite redimmensionnee. 
 	 */
 	private static File resizeImage(File file, int[] resolution) {
 		return file;
@@ -165,16 +153,90 @@ public final class SystemRequests extends FFmpegRuntime{
 	/**
 	 * [ METHODE INTERNE DE CLASSE. ]
 	 * 
-	 * TODO  Concerne la fenetre de traitement et donc ne concerne pas l'iteration 1. 
+	 * Methode de classe pour determiner une resolution proche 
+	 * d'une resolution referencee ( constante de classes )
+	 * qui puisse etre adaptee a une image, sans la deformer. 
 	 * 
-	 * @param file
-	 * @param resolution
-	 * @return
+	 * TODO  iteration 1 pas concernee. 
+	 * 
+	 * @param file			L'image pour laquelle on cherche une resolution plus adaptee. 
+	 * 
+	 * @param resolution	La resolution referencee demandee a adapter pour l'image. 
+	 * 
+	 * @return int[]		La nouvelle resolution trouvee plus adaptee a l'image. 
 	 */
 	private static int[] findGoodResolution(File file, int[] resolution) {
 		return resolution;
 	}
+	
+	/**
+	 * [ METHODE INTERNE DE CLASSE. ]
+	 * 
+	 * Methode pour verifier qu'une resolution donnee
+	 * est une resolution refrencee ( constante de 
+	 * classe ). 
+	 * 
+	 * TODO  iteration 1 pas concernee. 
+	 * 
+	 * @param resolution		La resolution a verifier. 
+	 * 
+	 * @return boolean			Vaut true si la resolution fournie
+	 * 							en parametre est referencee. 
+	 */
+	private static boolean resolutionExisting(int[] resolution) {
+		return false;
+	}
+	
+	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
+	
+	/**
+	 * [ METHODE DE CLASSE. ]
+	 * 
+	 * Methode pour creer une frame de l'apercu de lecture de la video. 
+	 * 
+	 * TODO iteration 1 pas concernee. 
+	 * 
+	 * @param file		La video dont on doit extraire la frame,
+	 * 					et par la suite la redimmensionner. 
+	 * 
+	 * @param time		Le temps auquel on doit extraire la frame
+	 * 					de la vide od'origine.
+	 * 
+	 * @return file		La frame creee. 
+	 */
+	public static File createVideoFrame(File file, long time) {
+		return file;
+	}
 
+	/**
+	 * [ METHODE DE CLASSE. ]
+	 * 
+	 * Methode creer une miniature pour une video. 
+	 * Cette miniature peut etre aussi destiner 
+	 * a un usage dans les bibliotheques que 
+	 * dans les chronologies. 
+	 * 
+	 * TODO iteration 1 pas concernee. 
+	 * 
+	 * @param file			La video pour laquelle on doit 
+	 * 						extraire une miniature.
+	 * 
+	 * @param resolution	La constante de classe 
+	 * 						representrant les dimensions
+	 * 						attendues pour la miniature. 
+	 * 
+	 * @return file			La miniature cree. 		
+	 */
+	public static File createThumbail(File file, int[] resolution) {
+		return file;
+	}
+	
+	
 	
 	//=======================================================================================================================
 	//=======================================================================================================================
@@ -184,16 +246,69 @@ public final class SystemRequests extends FFmpegRuntime{
 	/**
 	 * [ METHODE DE CLASSE POUR LE RENSEIGNEMENT DE LA DUREE D'UNE VIDEO OU D'UN SON. ]
 	 * 
-	 * TODO  Concerne la fenetre de traitement et donc ne concerne pas l'iteration 1. 
+	 * Methode pour connaitre la duree en secondes d'une video ou d'un son. 
 	 * 
-	 * @param file
-	 * @return
+	 * TODO  iteration 1 pas concernee. 
+	 * 
+	 * @param file		La video ou le son dont on souhaite connaitre la duree. 
+	 * 
+	 * @return long 	La duree en secondes du ou de la video. 
 	 */
 	public static long getDuration(File file) {
 		return 0;
 	}
 	
 	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
+	
+	/**
+	 * [ METHODE INTERNE DE CLASSE. ]
+	 */
+	private static String extractASetting(String informations, String start, int indexSetting) {
+		int indexStart = informations.indexOf(start) + start.length();
+		
+		if(indexSetting-- == 0) {
+			int indexEvolve = indexStart;
+			for(int i=0; i<=indexSetting; i++)
+				indexEvolve = informations.lastIndexOf(",", indexEvolve)+1;
+			
+
+			return  informations.substring(
+						indexEvolve, 
+					 
+					);
+		}else{
+			if(indexSetting == 4) {
+			
+			
+			}else{
+					return  informations.substring(
+					 indexStart, 
+					 
+					);
+			}
+		}
+	}
+	
+	/**
+	 * [ METHODE INTERNE DE CLASSE. ]
+	 */
+	private static String extractAVideoSetting(String informations, int indexSetting) {
+		return extractASetting(informations, "Video: ", indexSetting);
+	}
+
+	/**
+	 * [ METHODE INTERNE DE CLASSE. ]
+	 */
+	private static String extractAAudioSetting(String informations, int indexSetting) {
+		return extractASetting(informations, "Audio: ", indexSetting);
+	}
+
+
 	
 	//=======================================================================================================================
 	//=======================================================================================================================
@@ -217,15 +332,18 @@ public final class SystemRequests extends FFmpegRuntime{
 	 * nombre de canaux audio en sortie. 
 	 * 
 	 * @param file							Le fichier dont on souhaite connaitre les parametres. 
+	 * 
 	 * @param fileType  					L'indice correspondant au type du fichier audio ou video. 
 	 * 
-	 * @return HashMap<String, Object>		Les parametres du fichier. 
-	 * @throws IOException 
-	 * @throws InterruptedException 
+	 * @throws IOException 					Exception lancee si un fichier est introuvable. 					
+	 * 
+	 * @throws InterruptedException 		Exception lancee si l'execution de FFMPEG
+	 * 										est trop longue, et a du etre interrompu 
+	 * 									    par son processus parent (JAVA). 
 	*/
-	public static HashMap<String, String> getSettings(SelectableFile file) throws IOException, InterruptedException {
-		if(SelectableFile.isGoodFile(file)){	
-			HashMap<String, String> fileSettings = new HashMap<String, String>();
+	public static void getSettings(SettingsFile file) throws IOException, InterruptedException {
+		if(file.isGoodFile()){	
+			HashMap<String, String> fileSettings = file.getSettings();
 			
 			/**
 			 * Requete pour acceder aux parametres d'un fichier. 
@@ -256,60 +374,21 @@ public final class SystemRequests extends FFmpegRuntime{
 			br.close();
 			
 			//Parametres a extraire uniquement pour les fichiers video. 
-			if(SelectableFile.isVideo(file)) {
-				fileSettings.put("codec video", extractString(informations, "Video: ", ' '));			
+			if(file.isVideo()) {
 				fileSettings.put("resolution", extractString(informations, "bitrate: ", ' '));
 				fileSettings.put("bitrate video", extractString(informations, "bitrate: ", ' '));
 				fileSettings.put("fps", extractString(informations, "bitrate: ", ' '));
+				fileSettings.put("codec audio",  extractString(informations, "Audio: ", ' '));
 			}
 			
-			//Parametres a extraire pour les fichiers audio et video. 
-			fileSettings.put("codec audio",  extractString(informations, "Audio: ", ' '));
 			fileSettings.put("taux d'echantillonage",  extractString(informations, "Audio: ", ',', 'H'));
 			fileSettings.put("bitrate audio", extractString(informations, "bitrate: ", ' '));
 			fileSettings.put("nombre de canaux audio", extractString(informations, "bitrate: ", ' '));
 			fileSettings.put("volume en sortie", extractString(informations, "bitrate: ", ' '));
-			
-			return fileSettings;
 		}
-		return null;
 	}
 	
 	
-	
-	//=======================================================================================================================
-	//=======================================================================================================================
-	
-	
-	/**
-	 * [ METHODE INTERNE DE CLASSE. ]
-	 */
-	private static String extractString(String informations, String origin, char end) {
-		return informations.substring(
-				informations.indexOf(origin)+origin.length(), 
-				informations.lastIndexOf(end, informations.indexOf(origin)+origin.length())
-				);
-	}
-
-	/**
-	 * [ METHODE INTERNE DE CLASSE. ]
-	 */
-	private static String extractString(String informations, String origin, char start, char end) {
-		return informations.substring(
-				informations.indexOf(start, informations.indexOf(origin)+origin.length()), 
-				informations.lastIndexOf(end, informations.indexOf(origin)+origin.length())
-				);
-	}
-	
-	/**
-	 * [ METHODE INTERNE DE CLASSE. ]
-	 */
-	private static String extractString(String informations, String origin, int indexStart, char end) {
-		return informations.substring(
-				informations.indexOf(origin)+origin.length(), 
-				informations.lastIndexOf(' ', informations.lastIndexOf(end, informations.indexOf(origin)+origin.length()))
-				);
-	}
 	
 	//=======================================================================================================================
 	//=======================================================================================================================
@@ -318,7 +397,7 @@ public final class SystemRequests extends FFmpegRuntime{
 	
 	//POUR TESTER FAITES PAS GAFFE MDR 
 	public static void main(String[] args) throws IOException, InterruptedException {
-		String s1 ="C:\\Users\\Jean-christophe\\Documents\\PROFESSIONNEL\\2A\\projetTutore\\test\\1.avi";
+		String s1 ="C:\\Users\\Jean-christophe\\Documents\\PROFESSIONNEL\\2A\\projetTutore\\test\\1.mp4";
 		Process p = execute(s1);
 
 		BufferedReader br = new BufferedReader(new InputStreamReader(p.getErrorStream())); 

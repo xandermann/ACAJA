@@ -6,34 +6,48 @@ public class SelectableFile {
 	//=======================================================================================================================
 	//=======================================================================================================================
 	
-
 	/**
-	 * Fichier VIDEO
+	 * [ CONSTANTES DE CLASSE. ]
+	 * 
+	 * Ces constantes permettent d'indiquer le type du
+	 * fichier source d'une instance de la classe. 
+	 */
+	
+	/**
+	 * Constante indiquant que le fichier est un fichier video. 
 	 */
 	public final static int FILE_TYPE_VIDEO = 0;
 
 	/**
-	 * Fichier AUDIO
+	 * Constante indiquant que le fichier est un fichier audio.  
 	 */
 	public final static int FILE_TYPE_AUDIO = 1;
 
 	/**
-	 * FICHIER IMAGE
+	 * Constante indiquant que le fichier est un fichier image. 
 	 */
 	public final static int FILE_TYPE_IMAGE = 2;
 
+	
 	/**
-	 * Type du fichier
+	 * [ ATTRIBUT D'INSTANCE. ] 
+	 */
+	
+	/**
+	 * Type du fichier source. Il ne peut prendre que 3 valeurs : 
+	 * - FILE_TYPE_VIDEO ( = 0) ;
+	 * - FILE_TYPE_AUDIO ( = 1) ; 
+	 * - FILE_TYPE_IMAGE ( = 2).
 	 */
 	protected int typeFile;
 
 	/**
-	 * Fichier source
+	 * Le fihier source.
 	 */
 	protected File sourceFile;
 
 	/**
-	 * Vrai s'il est selectionne
+	 * Cet attribut permet d'indiquer si this est selectionne. 
 	 */
 	private boolean isSelected;
 
@@ -42,19 +56,19 @@ public class SelectableFile {
 	//=======================================================================================================================
 	//=======================================================================================================================
 	
-	
+
 	
 	/**
-	 * Definition a partir du fichier source
+	 * [ CONSTRUCTEUR. ]
 	 * 
-	 * @param file Fichier source
+	 * @param file 		Le fichier source. 
 	 */
 	public SelectableFile(File file) {
 		if(file == null)
 			throw new NullPointerException("Erreur : fichier fourni en parametre null !");
 		this.isSelected = false;
 		this.sourceFile = file;
-		this.getFileType();
+		this.whoAmI();
 	}
 	
 	
@@ -65,33 +79,44 @@ public class SelectableFile {
 	
 	
 	/**
-	 * [ METHODE DE CLASSE. ]
+	 * [ METHODE - ROLE PRIMITIF. ]
 	 * 
-	 * @param file
-	 * @return
+	 * Cette methode a un role primitif, elle permet
+	 * de verifier si le fichier source est une video. 
+	 * 
+	 * @return booleen		Vaut true si le fichier source 
+	 * 						est une video. 
 	 */
-	public static boolean isGoodFile(SelectableFile file) {
-		return ( isVideo(file) || isSound(file) );
+	public boolean isVideo() {
+		return typeFile==SelectableFile.FILE_TYPE_VIDEO;
 	}
 	
 	/**
-	 * [ METHODE DE CLASSE. ]
-	 * 
-	 * @param file
-	 * @return
+	 *  [ METHODE - ROLE PRIMITIF. ]
+	 *  
+	 *  Cette methode a un role primitif, elle permet 
+	 *  de verifier si le fichier source est un son.
+	 *  
+	 * @return booleen		Vaut true si le fichier source 
+	 * 						est un son. 
 	 */
-	public static boolean isVideo(SelectableFile file) {
-		return file.getTypeFile()==SelectableFile.FILE_TYPE_VIDEO;
+	public boolean isSound() {
+		return typeFile==SelectableFile.FILE_TYPE_AUDIO;
 	}
 	
+	
+	
 	/**
-	 * [ METHODE DE CLASSE. ]
-	 * 
-	 * @param file
-	 * @return
+	 *  [ METHODE - ROLE PRIMITIF. ]
+	 *  
+	 *  Cette methode a un role primitif, elle permet
+	 *  se verifier si le fichier source est un son. 
+	 *  
+	 * @return booleen 		Vaut true si le fichier source 
+	 * 						est une video ou un son. 
 	 */
-	public static boolean isSound(SelectableFile file) {
-		return file.getTypeFile()==SelectableFile.FILE_TYPE_AUDIO;
+	public boolean isGoodFile() {
+		return ( isVideo() || isSound() );
 	}
 	
 	
@@ -101,19 +126,30 @@ public class SelectableFile {
 	
 	
 	
-	/**
-	 * Retourne l'extension du fichier courant (a partir des constantes de la classe)
-	 * @return L'extension du fichier (0,1 ou 2) selon les constantes
+	/** 
+	 * [ METHODE POUR RENSEIGNER LE TYPE DE FICHIER. ]
+	 * 
+	 * Cette methode permet de savoir si le fichier 
+	 * source est une video, ou un son, ou meme une image.
+	 * 
+	 * 3 valeurs possiblement accordable a typeFile : 
+	 * - FILE_TYPE_VIDEO ( = 0 ) ;
+	 * - FILE_TYPE_AUDIO ( = 1 ) ;
+	 * - FILE_TYPE_IMAGE ( = 2 ).
 	 */
-	private void getFileType() {
+	private void whoAmI() {
 		String fileName = this.sourceFile.getName();
 
+		/**
+		 * TODO ajouter des extensions de video possibles. 
+		 */
+		
 		if(fileName.endsWith("mp4") || fileName.endsWith("avi")) 
-			this.typeFile = FILE_TYPE_VIDEO;
-		else if(fileName.endsWith("png") || fileName.endsWith("jpg") || fileName.endsWith("jpeg")) 
-				this.typeFile = FILE_TYPE_IMAGE;
-			else if(fileName.endsWith("mp3") || fileName.endsWith("wav") || fileName.endsWith("ogg"))
-					this.typeFile = FILE_TYPE_AUDIO;
+			typeFile = FILE_TYPE_VIDEO;
+		else if(fileName.endsWith("mp3") || fileName.endsWith("wav") || fileName.endsWith("ogg"))
+				typeFile = FILE_TYPE_AUDIO;
+			 else if(fileName.endsWith("png") || fileName.endsWith("jpg") || fileName.endsWith("jpeg")) 
+				 	typeFile = FILE_TYPE_IMAGE;
 	}
 
 	
@@ -124,35 +160,51 @@ public class SelectableFile {
 	
 	
 	/**
-	 * Test si le fichier est selectionne
+	 * [ METHODE ACCESSEUR - GETTER. ]
 	 * 
-	 * @return Vrai s'il est selectionne
+	 * Methode pour tester si this est selectionne. 
+	 * 
+	 * @return booleen		True si this est selectionne. 
 	 */
 	public boolean isSelected() {
 		return isSelected;
 	}
 
 	/**
-	 * Test si le fichier est selectionne
+	 * [ METHODE ACCESSEUR - SELECTIONNER THIS - SETTER. ]
 	 * 
-	 * @param isSelected
+	 * Methode pour selectionner this. 
 	 */
-	public void setSelected(boolean isSelected) {
-		this.isSelected = isSelected;
+	public void select() {
+		isSelected = true;
 	}
 
 	/**
-	 * Recupere le type du fichier
+	 * [ METHODE ACCESSEUR - DESELECTIONNER THIS - SETTER. ]
 	 * 
-	 * @return le type du fichier
+	 * Methode pour deselectionner this. 
+	 */
+	public void deselect() {
+		isSelected = false;
+	}
+
+	/**
+	 * [ METHODE ACCESSEUR - GETTER. ]
+	 * 
+	 * Methode pour recuperer le type du fichier. 
+	 * 
+	 * @return int			Le type du fichier. 
 	 */
 	public int getTypeFile() {
 		return this.typeFile;
 	}
 	
 	/**
+	 * [ METHODE ACCESSEUR - GETTER. ]
 	 * 
-	 * @return
+	 * Methode pour recuperer le fichier source. 
+	 * 
+	 * @return File		Le fichier source.
 	 */
 	public File getSourceFile() {
 		return sourceFile;

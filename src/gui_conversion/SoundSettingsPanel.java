@@ -20,13 +20,13 @@ public class SoundSettingsPanel extends JPanel {
 		this.removeAll();
 		JPanel p = new JPanel();
 		p.setLayout(new GridLayout(5, 2));
-		p.add(new JLabel("Codec utilisé : "));
+		p.add(new JLabel("Codec utilise : "));
 		p.add(new JComboBox<>());
 		p.add(new JLabel("Volume en sortie (en %): "));
 		p.add(new JTextField());
 		p.add(new JLabel("Bitrate (kb/s) : "));
 		p.add(new JTextField());
-		p.add(new JLabel("Taux d'échantillonnage (Hz) : "));
+		p.add(new JLabel("Taux d'echantillonnage (Hz) : "));
 		p.add(new JTextField());
 		p.add(new JLabel("Nombre de canaux audio en sortie : "));
 		p.add(new JTextField());

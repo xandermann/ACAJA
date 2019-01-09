@@ -1,20 +1,15 @@
 package gui_conversion;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
+import java.awt.*;
 import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.util.Observable;
-import java.util.Observer;
 
+import java.io.File;
+
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -31,45 +26,64 @@ public class VideoSettingsPanel extends JPanel{
 	private void reevaluatePanel() {
 		this.setSize(new Dimension(400, 400));
 		
-		this.setLayout(new GridLayout(5,1));
+		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
 		JPanel Codec = new JPanel();
-		Codec.setLayout(new BorderLayout());
-		Codec.add(new JLabel("Codec utilise : "),BorderLayout.NORTH);
-		Codec.add(new JComboBox<>(),BorderLayout.CENTER);
+		Codec.setLayout(new FlowLayout());
+		
+		/*
+		 * NOTE : pour la premiere iteration nous avons choisi d'implementer simplement
+		 * un FORMAT de sortie, par la suite, l'utilisateur choisira les codecs audio/videos voulu
+		 * et le conteneur(format) sera determine automatiquement par le logiciel pour creer un fichier
+		 * optimal et lisible
+		 */
+		Codec.add(new JLabel("Format sortie : "),BorderLayout.WEST);
+		String[] format = {"avi", "mp4", "flv"};
+		JComboBox box_format = new JComboBox(format);
+		
+		Codec.add(box_format,BorderLayout.EAST);
 		
 		JPanel reso = new JPanel();
-		reso.setLayout(new BorderLayout());
-		reso.add(new JLabel("Resolution : "),BorderLayout.NORTH);
-		reso.add(new JTextField(),BorderLayout.CENTER);
+		reso.setLayout(new FlowLayout());
+		reso.add(new JLabel("Resolution : "),BorderLayout.WEST);
+		JTextField resolution_Text = new JTextField();
+		resolution_Text.setPreferredSize(new Dimension(300,20));
+		resolution_Text.setEnabled(false);
+		reso.add(resolution_Text,BorderLayout.EAST);
 		
 		JPanel br = new JPanel();
-		br.setLayout(new BorderLayout());
-		br.add(new JLabel("Bitrate (kb/s : "),BorderLayout.NORTH);
-		br.add(new JTextField(),BorderLayout.CENTER);
+		br.setLayout(new FlowLayout());
+		br.add(new JLabel("Bitrate (kb/s) : "),BorderLayout.WEST);
+		JTextField bitrate_Text = new JTextField();
+		bitrate_Text.setPreferredSize(new Dimension(300,20));
+		bitrate_Text.setEnabled(false);
+		br.add(bitrate_Text,BorderLayout.EAST);
 		
 		JPanel panef = new JPanel();
-		panef.setLayout(new BorderLayout());
-		panef.add(new JLabel("Images par seconde (FPS) : "),BorderLayout.NORTH);
-		panef.add(new JTextField(),BorderLayout.CENTER);
+		panef.setLayout(new FlowLayout());
+		panef.add(new JLabel("Images par seconde (FPS) : "),BorderLayout.WEST);
+		JTextField fps_Text = new JTextField();
+		fps_Text.setPreferredSize(new Dimension(300,20));
+		fps_Text.setEnabled(false);
+		panef.add(fps_Text,BorderLayout.EAST);
 		
 		JPanel panest = new JPanel();
-		panest.setLayout(new BorderLayout());
-		panest.add(new JLabel("Fichiers sous-titres : "),BorderLayout.NORTH);
-		//panest.add(new JFileChooser("Parcourir"),BorderLayout.CENTER);
+		panest.setLayout(new FlowLayout());
+		panest.add(new JLabel("Fichiers sous-titres : "),BorderLayout.WEST);
+		
 		
 		JButton parcourir = new JButton("Parcourir");
+		parcourir.setEnabled(false);
+		parcourir.setPreferredSize(new Dimension(100,20));
 		parcourir.addActionListener(new ActionListener(){
-			
-
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
+				// ATTENTION
 				File f = FileChoose.FileChoose();
+				// Ce fichier sera le fichier des sous-titres, pas un SettingsFile !
 			}
 		});
-		panest.add(parcourir,BorderLayout.CENTER);
-		//////////////////////////////////TO DO     FileChoose.jfc.getSelectedFile();
+		panest.add(parcourir,BorderLayout.EAST);
 		
 		
 		

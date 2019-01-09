@@ -5,7 +5,7 @@ import java.util.*;
 import files.*;
 import javax.swing.*;
 
-public class ConversionModel {
+public class ConversionModel extends Observable{
 
 	private SettingsFile currentFile;
 	private ArrayList<SettingsFile> files;
@@ -98,6 +98,8 @@ public class ConversionModel {
 		if(file.exists()) {
 			try {
 				this.files.add(new SettingsFile(file));
+				this.setChanged();
+				this.notifyObservers();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -108,6 +110,25 @@ public class ConversionModel {
 		} else {
 			JOptionPane.showMessageDialog(null, "Le fichier selectionne n'existe pas");
 		}
+	}
+	
+	
+	
+	/**
+	 * Methode qui recupere les noms des fichiers et les retourne sous la forme 
+	 * d'une liste de modeles afin de l'afficher dans la liste du ConversionPanel
+	 * 
+	 * Par la suite, cette methode recuperera egalement les types des fichiers pour afficher
+	 * leur icone
+	 * 
+	 * @return DefaultListModel liste des noms des fichiers
+	 */
+	public DefaultListModel getFilenames() {
+		DefaultListModel filenameList = new DefaultListModel();
+		for(SettingsFile f : this.getFiles()) {
+			filenameList.addElement(new ListEntry(f.getSourceFilename()));
+	 }	
+	return filenameList;
 	}
 	
 	/**
@@ -139,6 +160,8 @@ public class ConversionModel {
 	 */
 	public void clear() { 
 		this.files.clear();
+		this.setChanged();
+		this.notifyObservers();
 	}
 	
 	/**

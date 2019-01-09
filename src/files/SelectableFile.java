@@ -145,7 +145,6 @@ public abstract class SelectableFile {
 	 */
 	private void whoAmI() {
 		String fileName = this.sourceFile.getName();
-
 		/**
 		 * TODO ajouter des extensions de video possibles. 
 		 */

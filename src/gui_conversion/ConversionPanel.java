@@ -20,15 +20,23 @@ import javax.swing.JScrollPane;
 import files.SettingsFile;
 
 public class ConversionPanel extends JFrame{
-	 //private JFrame window;
+	
+	
 	 private ConversionModel model;
 	 
+	 /** Constructeur de la fenetre ConversionPanel
+	  * 
+	  * @param m Modele associe a la fenetre
+	  */
 	 public ConversionPanel(ConversionModel m) {
 		this.model = m;
 	 }
 	 
 	 
-	 
+	 /** Methode privee qui cree le contenu du menu fichier
+	  * 
+	  * @return JMenu menu des fichiers et ses items
+	  */
 	 private JMenu drawFileMenu() {
 		JMenu itemsFiles = new JMenu("Fichier");
 		
@@ -36,14 +44,32 @@ public class ConversionPanel extends JFrame{
 		importFile.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				FileChoose.FileChoose();
+				File f = FileChoose.FileChoose();
+				if(f != null) {
+					System.out.println(f.getName() + "\n" + f.getAbsolutePath());
+					model.add(f);
+				}
+			
 			}
 		});
 		
 		JMenuItem importFolder = new JMenuItem("Importer un dossier");
-		JMenuItem clearLibrary = new JMenuItem("Vider la bibliothèque");
+		JMenuItem clearLibrary = new JMenuItem("Vider la bibliotheque");
+		clearLibrary.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				model.clear();
+			}
+		});
 		JMenuItem quit = new JMenuItem("Quitter");
-		
+		quit.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+				
+			} 
+			
+		});
 		
 		itemsFiles.add(importFile);
 		itemsFiles.add(importFolder);
@@ -53,6 +79,11 @@ public class ConversionPanel extends JFrame{
 		return itemsFiles;	 
 	 }
 	 
+	 
+	 /** Methode privee qui cree le contenu du menu profils
+	  * 
+	  * @return JMenu menu des profils et ses items
+	  */
 	 private JMenu drawProfilesMenu() {
 			JMenu menuProfiles = new JMenu("Profils");
 			
@@ -67,7 +98,12 @@ public class ConversionPanel extends JFrame{
 		
 			return menuProfiles;	  
 		 }
-		 
+	 
+	 
+	 /** Methode privee qui cree le contenu du menu options
+	  * 	 
+	  * @return JMenu menu des options et ses items
+	  */
 	 private JMenu drawOptionsMenu() {
 			JMenu menuOptions = new JMenu("Options");
 			
@@ -79,14 +115,20 @@ public class ConversionPanel extends JFrame{
 
 			return menuOptions;	 
 		 }
-		 
+	
+	 /** Methode privee qui cree le contenu du menu conversion
+	  * 
+	  * @return JMenu menu de conversion et ses items
+	  */
 	 private JMenu drawConvertMenu() {
 			JMenu convert = new JMenu("Convertir");
 			return convert;	 
 	 }
 		 
 	 
-	 
+	 /** Methode pour generer la fenetre de conversion et l'afficher
+	  * 
+	  */
 	 public void generateConversionWindow() {
 		 this.setVisible(true);
 		 this.setTitle("Acaja Conversion");
@@ -100,10 +142,7 @@ public class ConversionPanel extends JFrame{
 		 this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		 
 		 SummaryView sv = new SummaryView(this.model);
-		 DefaultListModel list_content = new DefaultListModel();
-		 for(SettingsFile f : this.model.getFiles()) {
-				list_content.addElement(new ListEntry(f.getSourceFilename()));
-		 }	
+		 DefaultListModel list_content = this.model.getFilenames();
 		 LibraryView lv = new LibraryView(this.model, list_content);
 		 TabsView tv = new TabsView(this.model);
 		 JPanel p = new JPanel();
@@ -114,7 +153,7 @@ public class ConversionPanel extends JFrame{
 		 menu.add(this.drawProfilesMenu());
 		 menu.add(this.drawConvertMenu());
 		 this.setJMenuBar(menu);
-		 
+		 this.model.addObserver(lv);
 		 p.add(sv,BorderLayout.NORTH);
 		 p.add(tv,BorderLayout.CENTER);
 		 

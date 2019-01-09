@@ -53,8 +53,8 @@ public class SettingsFile extends SelectableFile {
 		 * SI TYPE DE FICHIER PAS ACCCPTE EXCPETION.
 		 */
 		if(isGoodFile())
-			throw new IllegalArgumentException("Seuls les fichiers audio et video sont toleres."); 
-		
+		//	throw new IllegalArgumentException("Seuls les fichiers audio et video sont toleres."); 
+		// ligne qui pose probleme, meme avec un fichier mp4, erreur 
 		/**
 		 * INITIALISATION DES PARAMETRES DE LA VIDEO. 
 		 */
@@ -63,7 +63,7 @@ public class SettingsFile extends SelectableFile {
 		settings = new HashMap<String, String>();
 		
 		//Initialisation des autres parametres. 
-		SystemRequests.getSettings(this);
+	//	SystemRequests.getSettings(this);
 	}
 
 	

@@ -16,7 +16,6 @@ public class ConversionPanel extends JFrame{
 	 
 	 public ConversionPanel(ConversionModel m) {
 		this.model = m;
-		//this.generateConversionWindow();
 	 }
 	 
 	 public void generateConversionWindow() {

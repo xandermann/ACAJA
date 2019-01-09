@@ -11,12 +11,12 @@ public class SummaryView extends JPanel implements Observer{
 	
 	public SummaryView (ConversionModel p_model) {
 		this.model = p_model;
-		this.setSize(new Dimension(550, 300));
-		this.setBackground(Color.BLUE);
+		
 	}
 	
 	public void paintComponent(Graphics g) {
-		
+		this.setSize(new Dimension(550, 300));
+		this.setBackground(Color.BLUE);
 	}
 	@Override
 	public void update(Observable o, Object arg) {

@@ -10,11 +10,16 @@ public class LibraryView extends JList implements Observer {
 		
 		public LibraryView(ConversionModel p_model) {
 			this.model = p_model;
-			this.setSize(new Dimension(350, 600));
-			this.setBackground(Color.red);
+			this.reevaluatePanel();
+			
 		}
 		
-		private void reevaluatePanel() { }
+		private void reevaluatePanel() { 
+			this.setSize(new Dimension(350, 600));
+			this.setBackground(Color.red);
+			JButton j = new JButton("j'apparait");
+			this.add(j);
+		}
 		
 		// Methode redefinissant le setPreferredSize pour gere l'ascenceur
 		@Override

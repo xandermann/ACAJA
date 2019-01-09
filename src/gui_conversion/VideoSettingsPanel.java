@@ -5,11 +5,16 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -25,8 +30,8 @@ public class VideoSettingsPanel extends JPanel{
 	
 	private void reevaluatePanel() {
 		this.setSize(new Dimension(400, 400));
-		JPanel princ = new JPanel();
-		princ.setLayout(new GridLayout(2, 2,100,20));
+		
+		this.setLayout(new GridLayout(5,1));
 		
 		JPanel Codec = new JPanel();
 		Codec.setLayout(new BorderLayout());
@@ -51,16 +56,20 @@ public class VideoSettingsPanel extends JPanel{
 		JPanel panest = new JPanel();
 		panest.setLayout(new BorderLayout());
 		panest.add(new JLabel("Fichiers sous-titres : "),BorderLayout.NORTH);
-		panest.add(new JFileChooser("Parcourir"),BorderLayout.CENTER);
+		//panest.add(new JFileChooser("Parcourir"),BorderLayout.CENTER);
 		
-		princ.add(Codec);
-		princ.add(reso);
-		princ.add(br);
-		princ.add(panef);
+		JButton parcourir = FileChoose.FileChoose();
+		panest.add(parcourir,BorderLayout.CENTER);
+		//////////////////////////////////TO DO     FileChoose.jfc.getSelectedFile();
 		
-		this.setLayout(new BorderLayout());
-		this.add(princ,BorderLayout.NORTH);
-		this.add(panest,BorderLayout.CENTER);
+		
+		
+		this.add(Codec);
+		this.add(reso);
+		this.add(br);
+		this.add(panef);
+		this.add(panest);
 		//this.repaint();
 	}
+	
 }

@@ -9,6 +9,9 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
@@ -21,6 +24,38 @@ public class ConversionPanel extends JFrame{
 	 public ConversionPanel(ConversionModel m) {
 		this.model = m;
 	 }
+	 
+	 
+	 
+	 private JMenu drawFileMenu() {
+		JMenu itemsFiles = new JMenu("Fichier");
+		
+		JMenuItem importFile = new JMenuItem("Importer un fichier");
+		JMenuItem importFolder = new JMenuItem("Importer un dossier");
+		JMenuItem clearLibrary = new JMenuItem("Vider la bibliothèque");
+		JMenuItem quit = new JMenuItem("Quitter");
+		
+		itemsFiles.add(importFile);
+		itemsFiles.add(importFolder);
+		itemsFiles.add(clearLibrary);
+		itemsFiles.add(quit);
+	
+		return itemsFiles;	 
+	 }
+	 
+	 private JMenu drawProfilesMenu() {
+			return null; 
+		 }
+		 
+	 private JMenu drawOptionsMenu() {
+			return null;	 
+		 }
+		 
+	 private JMenu drawConvertMenu() {
+			return null; 
+		 }
+		 
+	 
 	 
 	 public void generateConversionWindow() {
 		 this.setVisible(true);
@@ -43,6 +78,9 @@ public class ConversionPanel extends JFrame{
 		 TabsView tv = new TabsView(this.model);
 		 JPanel p = new JPanel();
 		 p.setLayout(new BorderLayout());
+		 JMenuBar menu = new JMenuBar();
+		 menu.add(this.drawFileMenu());
+		 this.setJMenuBar(menu);
 		 p.add(sv,BorderLayout.NORTH);
 		 p.add(tv,BorderLayout.CENTER);
 		 

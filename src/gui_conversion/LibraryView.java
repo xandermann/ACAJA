@@ -22,9 +22,6 @@ public class LibraryView extends JList implements Observer {
 			this.setFixedCellWidth(400);
 		}
 		
-		// Methode redefinissant le setPreferredSize pour gere l'ascenceur
-		@Override
-		public void setPreferredSize(Dimension d) { }
 
 		@Override
 		public void update(Observable o, Object arg) { }

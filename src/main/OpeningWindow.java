@@ -149,7 +149,7 @@ public class OpeningWindow {
 	 * TODO commentaire a faire. 
 	 */
 	public static void generateOpeningWindow() {
-		generateLoardingWindow();
+		//generateLoardingWindow();
 		generateChoiceModeWindow();
 	}
 	

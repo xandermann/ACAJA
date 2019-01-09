@@ -7,8 +7,12 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+
+import files.SettingsFile;
 
 public class ConversionPanel extends JFrame{
 	 //private JFrame window;
@@ -31,9 +35,12 @@ public class ConversionPanel extends JFrame{
 		 this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		 
 		 SummaryView sv = new SummaryView(this.model);
-		 LibraryView lv = new LibraryView(this.model);
+		 DefaultListModel list_content = new DefaultListModel();
+		 for(SettingsFile f : this.model.getFiles()) {
+				list_content.addElement(new ListEntry(f.getSourceFilename()));
+		 }	
+		 LibraryView lv = new LibraryView(this.model, list_content);
 		 TabsView tv = new TabsView(this.model);
-		 
 		 JPanel p = new JPanel();
 		 p.setLayout(new BorderLayout());
 		 p.add(sv,BorderLayout.NORTH);

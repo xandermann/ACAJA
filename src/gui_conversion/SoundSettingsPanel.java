@@ -14,10 +14,10 @@ public class SoundSettingsPanel extends JPanel {
 	
 	public SoundSettingsPanel(ConversionModel m) {
 		this.model = m;
-		//this.reevaluatePanel();
+		this.reevaluatePanel();
 	}
 	
-	public void reevaluatePanel() {
+	private void reevaluatePanel() {
 		this.setLayout(new GridLayout(5, 2));
 		this.add(new JLabel("Codec utilisé : "));
 		this.add(new JComboBox<>());

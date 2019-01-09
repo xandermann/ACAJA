@@ -11,14 +11,12 @@ public class TabsView extends JTabbedPane implements Observer{
 	
 	public TabsView(ConversionModel m) {
 		this.model = m;
-		//this.reevaluateTabbedPanel();
+		this.reevaluateTabbedPanel();
 	}
 	
-	public void reevaluateTabbedPanel() {
+	private void reevaluateTabbedPanel() {
 		VideoSettingsPanel vsp = new VideoSettingsPanel(this.model);
 		SoundSettingsPanel ssp = new SoundSettingsPanel(this.model);
-		vsp.reevaluatePanel();
-		ssp.reevaluatePanel();
 		this.add("Vidéo",vsp);
 		this.add("Son",ssp);
 		//this.repaint();

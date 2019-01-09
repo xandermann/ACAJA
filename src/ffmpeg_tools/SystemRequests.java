@@ -3,6 +3,7 @@ import java.io.*;
 import java.util.HashMap;
 
 import files.SelectableFile;
+import files.SettingsFile;
 
 /**
  * [ CLASSE CONCRETE POUR L'INTERFACAGE JAVA-FFMPEG ---- DEGRE 2. ]
@@ -107,56 +108,43 @@ public final class SystemRequests extends FFmpegRuntime{
 	
 	//=======================================================================================================================
 	//=======================================================================================================================
-	
+
 	
 	
 	/**
-	 * [ METHODE DE CLASSE. ]
+	 * [ METHODE INTERNE DE CLASSE. ]
+	 * 
+	 * Methode pour simplement extraire une image 
+	 * d'une video sans redimensionnement. 
 	 * 
 	 * TODO iteration 1 pas concernee. 
 	 * 
-	 * @param file
-	 * @param time
-	 * @return
+	 * @param file		La video dont on doit extraire 
+	 * 					l'image. 
+	 * 
+	 * @param time		Le temps auquel on doit extraire l'image.
+	 * 
+	 * @return file		L'image extraite.
 	 */
-	public static File createVideoFrame(File file, long time) {
+	private static File extractImage(File file, long time) {
 		return file;
 	}
 
 	/**
-	 * [ METHODE DE CLASSE. ]
+	 * [ METHODE INTERNE DE CLASSE. ]
+	 * 
+	 * Methode de classe pour redimensionner une image 
+	 * extraite. 
 	 * 
 	 * TODO iteration 1 pas concernee. 
 	 * 
-	 * @param file
-	 * @param tab
-	 * @return
-	 */
-	public static File createThumbail(File file, int[] resolution) {
-		return file;
-	}
-
-	/**
-	 * [ METHODE DE CLASSE. ]
+	 * @param file			L'image extraite a redimensionner. 
 	 * 
-	 * TODO iteration 1 pas concernee. 
+	 * @param resolution	La constante de classe 
+	 * 						representrant les dimensions
+	 * 						attendues pour la miniature. 
 	 * 
-	 * @param file
-	 * @param time
-	 * @return
-	 */
-	public static File extractImage(File file, long time) {
-		return file;
-	}
-
-	/**
-	 * [ METHODE DE CLASSE. ]
-	 * 
-	 * TODO iteration 1 pas concernee. 
-	 * 
-	 * @param file
-	 * @param resolution
-	 * @return
+	 * @return file			L'image extraite redimmensionnee. 
 	 */
 	private static File resizeImage(File file, int[] resolution) {
 		return file;
@@ -165,16 +153,90 @@ public final class SystemRequests extends FFmpegRuntime{
 	/**
 	 * [ METHODE INTERNE DE CLASSE. ]
 	 * 
-	 * TODO  Concerne la fenetre de traitement et donc ne concerne pas l'iteration 1. 
+	 * Methode de classe pour determiner une resolution proche 
+	 * d'une resolution referencee ( constante de classes )
+	 * qui puisse etre adaptee a une image, sans la deformer. 
 	 * 
-	 * @param file
-	 * @param resolution
-	 * @return
+	 * TODO  iteration 1 pas concernee. 
+	 * 
+	 * @param file			L'image pour laquelle on cherche une resolution plus adaptee. 
+	 * 
+	 * @param resolution	La resolution referencee demandee a adapter pour l'image. 
+	 * 
+	 * @return int[]		La nouvelle resolution trouvee plus adaptee a l'image. 
 	 */
 	private static int[] findGoodResolution(File file, int[] resolution) {
 		return resolution;
 	}
+	
+	/**
+	 * [ METHODE INTERNE DE CLASSE. ]
+	 * 
+	 * Methode pour verifier qu'une resolution donnee
+	 * est une resolution refrencee ( constante de 
+	 * classe ). 
+	 * 
+	 * TODO  iteration 1 pas concernee. 
+	 * 
+	 * @param resolution		La resolution a verifier. 
+	 * 
+	 * @return boolean			Vaut true si la resolution fournie
+	 * 							en parametre est referencee. 
+	 */
+	private static boolean resolutionExisting(int[] resolution) {
+		return false;
+	}
+	
+	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
+	
+	/**
+	 * [ METHODE DE CLASSE. ]
+	 * 
+	 * Methode pour creer une frame de l'apercu de lecture de la video. 
+	 * 
+	 * TODO iteration 1 pas concernee. 
+	 * 
+	 * @param file		La video dont on doit extraire la frame,
+	 * 					et par la suite la redimensionner. 
+	 * 
+	 * @param time		Le temps auquel on doit extraire la frame
+	 * 					de la vide od'origine.
+	 * 
+	 * @return file		La frame creee. 
+	 */
+	public static File createVideoFrame(File file, long time) {
+		return file;
+	}
 
+	/**
+	 * [ METHODE DE CLASSE. ]
+	 * 
+	 * Methode creer une miniature pour une video. 
+	 * Cette miniature peut etre aussi destiner 
+	 * a un usage dans les bibliotheques que 
+	 * dans les chronologies. 
+	 * 
+	 * TODO iteration 1 pas concernee. 
+	 * 
+	 * @param file			La video pour laquelle on doit 
+	 * 						extraire une miniature.
+	 * 
+	 * @param resolution	La constante de classe 
+	 * 						representrant les dimensions
+	 * 						attendues pour la miniature. 
+	 * 
+	 * @return file			La miniature cree. 		
+	 */
+	public static File createThumbail(File file, int[] resolution) {
+		return file;
+	}
+	
+	
 	
 	//=======================================================================================================================
 	//=======================================================================================================================
@@ -184,16 +246,80 @@ public final class SystemRequests extends FFmpegRuntime{
 	/**
 	 * [ METHODE DE CLASSE POUR LE RENSEIGNEMENT DE LA DUREE D'UNE VIDEO OU D'UN SON. ]
 	 * 
-	 * TODO  Concerne la fenetre de traitement et donc ne concerne pas l'iteration 1. 
+	 * Methode pour connaitre la duree en secondes d'une video ou d'un son. 
 	 * 
-	 * @param file
-	 * @return
+	 * TODO  iteration 1 pas concernee. 
+	 * 
+	 * @param file		La video ou le son dont on souhaite connaitre la duree. 
+	 * 
+	 * @return long 	La duree en secondes du ou de la video. 
 	 */
 	public static long getDuration(File file) {
 		return 0;
 	}
 	
 	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
+	/**
+	 * [ METHODE INTERNE DE CLASSE. ]
+	 * 
+	 * Cette methode permet de connaitre l'index du caractere situe apres
+	 * une donnee a extraire. Plus simplement cette methode determine la 
+	 * l'index du caractere qui delime la fin de chaine a extraire.
+	 */
+	public static int findEndIndexSetting(String informations, int fromIndex) {
+		int indexSpace = informations.indexOf(' ', fromIndex);
+		int indexComa = informations.indexOf(',', fromIndex);
+		return indexSpace<indexComa || indexComa==-1 ?  indexSpace : indexComa;	
+	}
+	
+	
+	/**
+	 * [ METHODE INTERNE DE CLASSE. ]
+	 * 
+	 * Cette methode permet d'extraire une des caracteristiques d'un fichier video ou audio
+	 * dont FFMPEG nous a fourni une longue plage d'informations. 
+	 */
+	private static String extractASetting(String informations, String start, int indexSetting) {
+		int indexStart = informations.indexOf(start) + start.length();
+		if(indexSetting != 0) {
+			int indexEvolve = indexStart;
+			
+			for(int i=0; i<indexSetting; i++) 
+				indexEvolve = informations.indexOf(',', indexEvolve)+1;
+			
+			indexEvolve++;
+			
+			return  informations.substring(indexEvolve,findEndIndexSetting(informations, indexEvolve));
+		}else
+			return  informations.substring(indexStart,findEndIndexSetting(informations, indexStart));
+	}
+	
+	/**
+	 * [ METHODE INTERNE DE CLASSE. ]
+	 * 
+	 * Methode pour extraire la carcateristique d'un fichier video dans la plage d'informations
+	 * fournie par FFMPEG a partir d'in index. 
+	 */
+	private static String extractAVideoSetting(String informations, int indexSetting) {
+		return extractASetting(informations, "Video: ", indexSetting);
+	}
+
+	/**
+	 * [ METHODE INTERNE DE CLASSE. ]
+	 * 
+	 * Methode pour extraire la carcateristique d'un fichier audio dans la plage d'informations
+	 * fournie par FFMPEG a partir d'in index. 
+	 */
+	private static String extractAAudioSetting(String informations, int indexSetting) {
+		return extractASetting(informations, "Audio: ", indexSetting);
+	}
+
+
 	
 	//=======================================================================================================================
 	//=======================================================================================================================
@@ -217,124 +343,92 @@ public final class SystemRequests extends FFmpegRuntime{
 	 * nombre de canaux audio en sortie. 
 	 * 
 	 * @param file							Le fichier dont on souhaite connaitre les parametres. 
+	 * 
 	 * @param fileType  					L'indice correspondant au type du fichier audio ou video. 
 	 * 
-	 * @return HashMap<String, Object>		Les parametres du fichier. 
-	 * @throws IOException 
-	 * @throws InterruptedException 
+	 * @throws IOException 					Exception lancee si un fichier est introuvable. 					
+	 * 
+	 * @throws InterruptedException 		Exception lancee si l'execution de FFMPEG
+	 * 										est trop longue, et a du etre interrompu 
+	 * 									    par son processus parent (JAVA). 
 	*/
-	public static HashMap<String, String> getSettings(SelectableFile file) throws IOException, InterruptedException {
-		if(SelectableFile.isGoodFile(file)){	
-			HashMap<String, String> fileSettings = new HashMap<String, String>();
-			
+	public static void getSettings(SettingsFile file) throws IOException, InterruptedException {
+		if(file.isGoodFile()){	
 			/**
-			 * Requete pour acceder aux parametres d'un fichier. 
+			 * REQUETE A SOUMETRE A FFMPEG.
+			 * 
+			 * LA requete ffmpeg -i inputFile permet de connaitre les caracteristiques
+			 * d'un fichier fourni en fliux d'entree ( = inputFile ). 
 			 */
-			Process p = FFmpegRuntime.execute(file.getSourceFile().getName());
+			Process p = FFmpegRuntime.execute(file.getSourceFile().getPath());
+			
 			
 			/**
+			 * QUELQUES FAITS A CONNAITRE POUR COMPRENDRE LA LIGNE DE CODE CI-DESSOUS.
+			 * 
 			 * "Il est temps de vous racontez une petite histoire" :
 			 * Les pogrammeurs de FFMPEG savent que les temps de traitement des requetes
 			 * sur FFMPEG peuvent prendre un temps assez long. Et il faut savoir que 
 			 * le traitement d'une requete renvoie son resultat par le biais des flux de sortie 
-			 * appeles STDOUT. Les pogrammeurs de FFMPEG ont decide que les messages 
-			 * (de reussite comme d'echec d'une requete passeraient par les flux 
-			 * d'erreurs STDERR. Mais pourquoi ce choix n'est-ce-pas ? Pour la bonne 
+			 * ( = STDOUT ). De ce fait les pogrammeurs de FFMPEG ont decide que les messages 
+			 * de reussite comme d'echec d'une requete passeraient par les flux 
+			 * d'erreurs ( =  STDERR ). Mais pourquoi ce choix n'est-ce-pas ? Pour la bonne 
 			 * raison qu'envoyer tous les messages par STDERR permet d'eviter que 
 			 * les traitements des requetes qui passent par STDOUT ne soit freiner par les 
-			 * messages. 
+			 * messages de reussites de requetes si ils passaient pas STDOUT. 
 			 * 
 			 * C'est ainsi qu'on se retrouve en 2019 a devoir extraire les messages ne correpondant 
-			 * pas a des cas d'erreur a partir STDERR et pas a partir de STDOUT ( comme ca l'est  
-			 * habituellement" ). 
+			 * pas a des cas d'erreur, a partir de STDERR et pas a partir de STDOUT, comme ca l'est  
+			 * pourtant habituellement par convention. 
 			 * 
-			 * Aisni on ne s'interesse ici qu'au flux d'erreurs qui du coup n'en est pas un avec FFMPEG,
+			 * Ainsi on ne s'interesse ici qu'au flux d'erreurs qui du coup n'en est pas un avec FFMPEG,
 			 * mais plutot un flux des messages tous confondus. 
 			 */
 			BufferedReader br = new BufferedReader(new InputStreamReader(p.getErrorStream())); 
-			String informations = br.readLine();
+			
+			
+			/**
+			 *  EXTRACTION DES CARACTERISTIQUES.
+			 */
+			
+			//On ne recupere que les donnees qui nous interesse
+			//d'ou la presence du booleen keepInformations. 
+			boolean keepInformations = false; 
+			String informations = "", information = null;
+			
+			while( (information = br.readLine()) != null ) {
+				if( keepInformations == false && information.contains("Input") ) 
+					keepInformations = true;
+				if( keepInformations == true ) 
+					informations += information + " ";
+			}
+			//On ferme le flux. 
 			br.close();
 			
+			
+			/**
+			 * INITIALISATION DES CARACTERISTIQUES DE LA VIDEO OU DU SON.
+			 */
+			HashMap<String, String> fileSettings = file.getSettings();
+			
 			//Parametres a extraire uniquement pour les fichiers video. 
-			if(SelectableFile.isVideo(file)) {
-				fileSettings.put("codec video", extractString(informations, "Video: ", ' '));			
-				fileSettings.put("resolution", extractString(informations, "bitrate: ", ' '));
-				fileSettings.put("bitrate video", extractString(informations, "bitrate: ", ' '));
-				fileSettings.put("fps", extractString(informations, "bitrate: ", ' '));
+			if(file.isVideo()) {
+				String codec = file.getSourceFile().getName().split(".")[file.getSourceFile().getName().split(".").length-1];
+				fileSettings.put("codec video", codec);
+				fileSettings.put("resolution", extractAVideoSetting(informations, 3));
+				fileSettings.put("bitrate video",extractAVideoSetting(informations, 4));
+				fileSettings.put("fps", extractAVideoSetting(informations, 5));
+				fileSettings.put("codec audio", extractAAudioSetting(informations, 0));
+			}else{
+				String codec = file.getSourceFile().getName().split(".")[file.getSourceFile().getName().split(".").length-1];
+				fileSettings.put("codec audio", codec);
 			}
 			
-			//Parametres a extraire pour les fichiers audio et video. 
-			fileSettings.put("codec audio",  extractString(informations, "Audio: ", ' '));
-			fileSettings.put("taux d'echantillonage",  extractString(informations, "Audio: ", ',', 'H'));
-			fileSettings.put("bitrate audio", extractString(informations, "bitrate: ", ' '));
-			fileSettings.put("nombre de canaux audio", extractString(informations, "bitrate: ", ' '));
-			fileSettings.put("volume en sortie", extractString(informations, "bitrate: ", ' '));
-			
-			return fileSettings;
+			fileSettings.put("taux d'echantillonage",  extractAAudioSetting(informations, 1));
+			fileSettings.put("nombre de canaux audio",extractAAudioSetting(informations, 2));
+			fileSettings.put("bitrate audio", extractAAudioSetting(informations, 4));
+			//fileSettings.put("volume en sortie",extractAAudioSetting(informations, 5));
 		}
-		return null;
-	}
-	
-	
-	
-	//=======================================================================================================================
-	//=======================================================================================================================
-	
-	
-	/**
-	 * [ METHODE INTERNE DE CLASSE. ]
-	 */
-	private static String extractString(String informations, String origin, char end) {
-		return informations.substring(
-				informations.indexOf(origin)+origin.length(), 
-				informations.lastIndexOf(end, informations.indexOf(origin)+origin.length())
-				);
-	}
-
-	/**
-	 * [ METHODE INTERNE DE CLASSE. ]
-	 */
-	private static String extractString(String informations, String origin, char start, char end) {
-		return informations.substring(
-				informations.indexOf(start, informations.indexOf(origin)+origin.length()), 
-				informations.lastIndexOf(end, informations.indexOf(origin)+origin.length())
-				);
-	}
-	
-	/**
-	 * [ METHODE INTERNE DE CLASSE. ]
-	 */
-	private static String extractString(String informations, String origin, int indexStart, char end) {
-		return informations.substring(
-				informations.indexOf(origin)+origin.length(), 
-				informations.lastIndexOf(' ', informations.lastIndexOf(end, informations.indexOf(origin)+origin.length()))
-				);
-	}
-	
-	//=======================================================================================================================
-	//=======================================================================================================================
-	
-	
-	
-	//POUR TESTER FAITES PAS GAFFE MDR 
-	public static void main(String[] args) throws IOException, InterruptedException {
-		String s1 ="C:\\Users\\Jean-christophe\\Documents\\PROFESSIONNEL\\2A\\projetTutore\\test\\1.avi";
-		Process p = execute(s1);
-
-		BufferedReader br = new BufferedReader(new InputStreamReader(p.getErrorStream())); 
-		PrintWriter pw = new PrintWriter(new FileWriter("lol.txt"));
-
-				try {
-					String s3 = null;
-					while ((s3 = br.readLine()) != null) { 
-						pw.println(s3); 
-						System.out.println("ERROR"+s3);
-					}
-					pw.flush();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} 
 	}
 	
 	

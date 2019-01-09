@@ -31,10 +31,9 @@ public class ConversionPanel extends JFrame{
 		 this.setLocation(100, 100);
 		 this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		 
-		 LibraryView lv = new LibraryView(this.model);
 		 SummaryView sv = new SummaryView(this.model);
+		 LibraryView lv = new LibraryView(this.model);
 		 TabsView tv = new TabsView(this.model);
-		 tv.reevaluateTabbedPanel();
 		 
 		 JPanel p = new JPanel();
 		 p.setLayout(new BorderLayout());

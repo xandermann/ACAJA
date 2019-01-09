@@ -20,10 +20,10 @@ public class VideoSettingsPanel extends JPanel{
 	
 	public VideoSettingsPanel(ConversionModel m) {
 		this.model = m;
-		//this.reevaluatePanel();
+		this.reevaluatePanel();
 	}
 	
-	public void reevaluatePanel() {
+	private void reevaluatePanel() {
 		this.setSize(new Dimension(400, 400));
 		JPanel princ = new JPanel();
 		princ.setLayout(new GridLayout(2, 2,100,20));

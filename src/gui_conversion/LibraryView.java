@@ -10,7 +10,7 @@ public class LibraryView extends JList implements Observer {
 		
 		public LibraryView(ConversionModel p_model) {
 			this.model = p_model;
-			this.setSize(new Dimension(400, 600));
+			this.setSize(new Dimension(350, 600));
 			this.setBackground(Color.red);
 		}
 		

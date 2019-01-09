@@ -96,7 +96,15 @@ public class ConversionModel {
 	 */
 	public void add(File file) {
 		if(file.exists()) {
-			this.files.add(new SettingsFile(file));
+			try {
+				this.files.add(new SettingsFile(file));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} else {
 			JOptionPane.showMessageDialog(null, "Le fichier selectionne n'existe pas");
 		}
@@ -136,7 +144,7 @@ public class ConversionModel {
 	/**
 	 * Methode qui permet de modifier un reglage du fichier actuellement selectionne
 	 */
-	public void modify(String settings, Object value) { 
+	public void modify(String settings, String value) { 
 		this.currentFile.modifySettings(settings, value);
 	}
 

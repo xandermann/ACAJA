@@ -6,6 +6,9 @@ import java.io.*;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+
+import gui_conversion.ConversionModel;
+import gui_conversion.ConversionPanel;
 /**
  * [ CLASSE POUR LE LANCEMENT DES FENETRES D'OUVERTURE DU LOGICIEL. ]
  * 
@@ -121,17 +124,18 @@ public class OpeningWindow {
 		p5.setBackground(Color.gray);
 		frame.setBackground(Color.gray);
 		
+		frame.setVisible(true);
 		convertbutton.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-				System.out.println("Prout sa marche pas encore");
-				/////////////////////////////////////////////////////////////////////A Rajouter méthode pour afficher
+				ConversionModel c = new ConversionModel();
+				ConversionPanel p = new ConversionPanel(c);
+				p.generateConversionWindow();
+				frame.dispose();
 			}
 		});
 		
-		frame.setVisible(true);
 	}
 	
 	

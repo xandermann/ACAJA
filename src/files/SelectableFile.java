@@ -240,6 +240,12 @@ public abstract class SelectableFile {
 		return sourceFile;
 	}
 	
+	/** Methode pour recuperer le nom du fichier
+	 * @return String Le nom du fichier source
+	 */
+	public String getSourceFilename() {
+		return sourceFile.getName();
+	}
 	
 	
 	//=======================================================================================================================

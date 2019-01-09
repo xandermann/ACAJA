@@ -4,21 +4,22 @@ import java.awt.*;
 import java.util.*;
 import javax.swing.*;
 
+import files.SettingsFile;
+
 public class LibraryView extends JList implements Observer {
 
 		private ConversionModel model;
+	
 		
-		public LibraryView(ConversionModel p_model) {
+		public LibraryView(ConversionModel p_model, DefaultListModel p_listmodel) {
+			super(p_listmodel);
 			this.model = p_model;
 			this.reevaluatePanel();
-			
+			this.setVisible(true);
 		}
 		
 		private void reevaluatePanel() { 
-			this.setSize(new Dimension(350, 600));
-			this.setBackground(Color.red);
-			JButton j = new JButton("j'apparait");
-			this.add(j);
+			this.setFixedCellWidth(400);
 		}
 		
 		// Methode redefinissant le setPreferredSize pour gere l'ascenceur

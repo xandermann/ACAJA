@@ -58,7 +58,16 @@ public class VideoSettingsPanel extends JPanel{
 		panest.add(new JLabel("Fichiers sous-titres : "),BorderLayout.NORTH);
 		//panest.add(new JFileChooser("Parcourir"),BorderLayout.CENTER);
 		
-		JButton parcourir = FileChoose.FileChoose();
+		JButton parcourir = new JButton("Parcourir");
+		parcourir.addActionListener(new ActionListener(){
+			
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				File f = FileChoose.FileChoose();
+			}
+		});
 		panest.add(parcourir,BorderLayout.CENTER);
 		//////////////////////////////////TO DO     FileChoose.jfc.getSelectedFile();
 		

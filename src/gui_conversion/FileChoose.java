@@ -11,13 +11,14 @@ import javax.swing.JFrame;
 
 public class FileChoose {
 	
-	public static JFileChooser jfc;
+	private static JFileChooser jfc;
 	
-	public static JButton FileChoose() {
+	public static File FileChoose() {
 		
 		jfc = new JFileChooser("Parcourir");
-	
-		JButton parcourir = new JButton("Parcourir");
+		jfc.showOpenDialog(null);
+/*
+ * 		JButton parcourir = new JButton("Parcourir");
 		
 		parcourir.addActionListener(new ActionListener() {
 
@@ -25,9 +26,11 @@ public class FileChoose {
 			public void actionPerformed(ActionEvent arg0) {
 				jfc.showOpenDialog(parcourir);
 			}});
+ */
 
 		
-		return parcourir;
+		return jfc.getSelectedFile();
 		
 	}
+	
 }

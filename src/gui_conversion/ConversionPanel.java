@@ -3,6 +3,8 @@ package gui_conversion;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Panel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
@@ -31,9 +33,17 @@ public class ConversionPanel extends JFrame{
 		JMenu itemsFiles = new JMenu("Fichier");
 		
 		JMenuItem importFile = new JMenuItem("Importer un fichier");
+		importFile.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				FileChoose.FileChoose();
+			}
+		});
+		
 		JMenuItem importFolder = new JMenuItem("Importer un dossier");
 		JMenuItem clearLibrary = new JMenuItem("Vider la bibliothèque");
 		JMenuItem quit = new JMenuItem("Quitter");
+		
 		
 		itemsFiles.add(importFile);
 		itemsFiles.add(importFolder);

@@ -48,10 +48,5 @@ public class ConversionPanel extends JFrame{
 		 this.repaint();
 	 }
 	 
-	 public static void main(String[] args) {
-		 ConversionModel c = new ConversionModel();
-		 ConversionPanel p = new ConversionPanel(c);
-		 p.generateConversionWindow();
-	 }
 	 
 }

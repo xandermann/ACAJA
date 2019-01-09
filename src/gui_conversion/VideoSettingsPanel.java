@@ -35,12 +35,12 @@ public class VideoSettingsPanel extends JPanel{
 		
 		JPanel Codec = new JPanel();
 		Codec.setLayout(new BorderLayout());
-		Codec.add(new JLabel("Codec utilisé : "),BorderLayout.NORTH);
+		Codec.add(new JLabel("Codec utilise : "),BorderLayout.NORTH);
 		Codec.add(new JComboBox<>(),BorderLayout.CENTER);
 		
 		JPanel reso = new JPanel();
 		reso.setLayout(new BorderLayout());
-		reso.add(new JLabel("Résolution : "),BorderLayout.NORTH);
+		reso.add(new JLabel("Resolution : "),BorderLayout.NORTH);
 		reso.add(new JTextField(),BorderLayout.CENTER);
 		
 		JPanel br = new JPanel();

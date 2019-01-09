@@ -54,16 +54,36 @@ public class ConversionPanel extends JFrame{
 	 }
 	 
 	 private JMenu drawProfilesMenu() {
-			return null; 
+			JMenu menuProfiles = new JMenu("Profils");
+			
+			JMenuItem newProfile = new JMenuItem("Creer un profil");
+			JMenuItem loadProfile = new JMenuItem("Charger un profil");
+			JMenuItem deleteProfile = new JMenuItem("Supprimer un profil");
+			
+			menuProfiles.add(newProfile);
+			menuProfiles.add(loadProfile);
+			menuProfiles.add(deleteProfile);
+		
+		
+			return menuProfiles;	  
 		 }
 		 
 	 private JMenu drawOptionsMenu() {
-			return null;	 
+			JMenu menuOptions = new JMenu("Options");
+			
+			JMenuItem outputFolder = new JMenuItem("Changer le repertoire de sortie");
+			JMenuItem switchMode = new JMenuItem("Passer en mode traitement");
+			
+			menuOptions.add(outputFolder);
+			menuOptions.add(switchMode);
+
+			return menuOptions;	 
 		 }
 		 
 	 private JMenu drawConvertMenu() {
-			return null; 
-		 }
+			JMenu convert = new JMenu("Convertir");
+			return convert;	 
+	 }
 		 
 	 
 	 
@@ -90,7 +110,11 @@ public class ConversionPanel extends JFrame{
 		 p.setLayout(new BorderLayout());
 		 JMenuBar menu = new JMenuBar();
 		 menu.add(this.drawFileMenu());
+		 menu.add(this.drawOptionsMenu());
+		 menu.add(this.drawProfilesMenu());
+		 menu.add(this.drawConvertMenu());
 		 this.setJMenuBar(menu);
+		 
 		 p.add(sv,BorderLayout.NORTH);
 		 p.add(tv,BorderLayout.CENTER);
 		 

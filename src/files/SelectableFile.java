@@ -63,8 +63,6 @@ public class SelectableFile {
 	 * @param file Le fichier source.
 	 */
 	public SelectableFile(File file) {
-		if (file == null)
-			throw new NullPointerException("Erreur : fichier fourni en parametre null !");
 		this.isSelected = false;
 		this.sourceFile = file;
 		this.whoAmI();

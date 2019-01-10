@@ -12,12 +12,36 @@ import files.SelectableFile;
 public class SelectaleFileTest {
 
 	/**
-	 * Test containsAudio()
+	 * Tests constructeur
 	 */
 
 	/**
-	 * isGoodFile sans erreur
+	 * Ne renvoie pas d'exception
 	 * 
+	 * Les 3 fichiers sont crées correctement
+	 */
+	@Test
+	public void constructeurOkTest() {
+		SelectableFile file = new SelectableFile(new File("Test.mp4"));
+		SelectableFile file2 = new SelectableFile(new File("Test.mp3"));
+		SelectableFile file3 = new SelectableFile(new File("Test.jpeg"));
+	}
+
+	/**
+	 * Renvoie une erreur car l'extension est invalide
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void constructeurErreurTest() {
+		SelectableFile file = new SelectableFile(new File("Test.superExtension"));
+	}
+
+	// =======================================================================================================================
+
+	/**
+	 * Tests containsAudio()
+	 */
+
+	/**
 	 * Test avec video et audio
 	 */
 	@Test
@@ -30,8 +54,6 @@ public class SelectaleFileTest {
 	}
 
 	/**
-	 * isGoodFile avec erreur
-	 * 
 	 * Test avec image Nous ne pouvons pas tester les autres formats car ils sont
 	 * rejetés dans le constructeur
 	 */

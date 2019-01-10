@@ -17,18 +17,131 @@ import ffmpeg_tools.SystemRequests;
 public class SettingsFile extends SelectableFile {
 
 	
-	public final static String CODEC_VIDEO= "codec video";
+	/**
+	 * Clé de la HashMap Codec video
+	 */
+	private static final int VIDEO_CODEC = 1;
+
+	/**
+	 * Clé de la HashMap Bitrate video
+	 */
+	private static final int VIDEO_BITRATE = 2;
+
+	/**
+	 * Clé de la HashMap FPS
+	 */
+	private static final int FPS = 3;
+
+	/**
+	 * Clé de la HashMap Codec Audio
+	 */
+	private static final int AUDIO_CODEC = 4;
+
+	/**
+	 * Clé de la HashMap Taux d'échantillonnage
+	 */
+	private static final int SAMPLING_RATE = 5;
+
+	/**
+	 * Clé de la HashMap Nombre de canaux audios
+	 */
+	private static final int NUMBER_AUDIO_CHANNEL = 6;
+
+	/**
+	 * Clé de la HashMap Bitrate Audio
+	 */
+	private static final int AUDIO_BITRATE = 7;
+
+	/**
+	 * [ RESOLUTION DES FRAMES DANS L'APERCU DE LECTURE DE VIDEO. ]
+	 * 
+	 * TODO iteration 1 pas concernee.
+	 * 
+	 * Ceci est le tableau representant la resolution frames dans l'apercu de
+	 * lecture de video de la fenetre de traitement.
+	 */
+	private final static Integer VIDEO_RESOLUTION = 8;
+	
+	/**
+	 * [ RESOLUTION DES FRAMES DANS L'APERCU DE LECTURE DE VIDEO. ]
+	 * 
+	 * TODO iteration 1 pas concernee.
+	 * 
+	 * Ceci est le tableau representant la resolution frames dans l'apercu de
+	 * lecture de video de la fenetre de traitement.
+	 */
+	private final static Integer FORMAT_VIDEO = 9;
+	
+	/*============================================================*/
+
+	/**
+	 * [ CONSTANTES DE CLASSES A USAGE INTERNE. ]
+	 * 
+	 * Voici des constantes qui nous seront bien pratiques. Pour la majorite, ce
+	 * sont des contantes representant des types de resolutions ( par exemple :
+	 * resolution d'une frame de l'apercu de lecture de video du logiciel ).
+	 * 
+	 * Ces constantes ne seront destines a etre utilises que pour le fonctionnement
+	 * interne de la fenetre de traitement.
+	 * 
+	 * Elles sont destinees a un usage uniquement interne ( d'ou l presence des
+	 * private ).
+	 */
+
+	/**
+	 * [ CHEMIN VERS LE REPERTOIRE DES FICHIERS TEMPORAIRES. ]
+	 * 
+	 * TODO iteration 1 pas concernee.
+	 * 
+	 * Ceci est le chemin vers le repertoire des fichiers temporaires. Ces fameux
+	 * ficheirs temporaires seront en fait les miniatures de video, et les frames de
+	 * d'apercu de lecture de video, etc.
+	 */
+	private final static String PATH_TEMPORARY_FILES = System.getProperty("user.dir") + "\\temporary_files\\";
+
+	/**
+	 * [ RESOLUTION DES MINIATURES DANS LES BIBLIOTHEQUES. ]
+	 * 
+	 * TODO iteration 1 pas concernee.
+	 * 
+	 * Ceci est le tableau representant la resolution des miniatutres des videos,
+	 * des sons, et des images qui seront importes par l'utilisateur dans le
+	 * logiciel.
+	 */
+	private final static int[] LIBRARY_THUMBAIL_RESOLUTION = new int[] {};
+
+	/**
+	 * [ RESOLUTION DES MINIATURES DES VIDEO DANS LA CHRONOLOGIE VIDEO. ]
+	 * 
+	 * TODO iteration 1 pas concernee.
+	 * 
+	 * Ceci est le tableau representant la resolution des miniatutres des videos,
+	 * dans la chronologie video.
+	 */
+	private final static int[] VIDEO_TIMELINE_THUMBAIL_RESOLUTION = new int[] {};
+
+	/**
+	 * [ RESOLUTION DES MINIATURES DES SONS DANS LES CHRONOLOGIES DES SONS. ]
+	 * 
+	 * TODO iteration 1 pas concernee.
+	 * 
+	 * Ceci est le tableau representant la resolution des miniatutres des sons, dans
+	 * les chronologies des sons.
+	 */
+	private final static int[] SOUND_TIMELINE_THUMBAIL_RESOLUTION = new int[] {};
+
+	/*============================================================*/
 	
 
 	/**
 	 * Les anciens parametres du fichier
 	 */
-	private HashMap<String, Object> oldSettings;
+	private HashMap<Integer, Object> oldSettings;
 
 	/**
 	 * Les parametres courants du fichier
 	 */
-	private HashMap<String, Object> settings;
+	private HashMap<Integer, Object> settings;
 
 	/**
 	 * Constructeur
@@ -53,8 +166,8 @@ public class SettingsFile extends SelectableFile {
 		 * INITIALISATION DES PARAMETRES DE LA VIDEO.
 		 */
 		// Intiliasation des tables.
-		oldSettings = new HashMap<String, Object>();
-		settings = new HashMap<String, Object>();
+		oldSettings = new HashMap<Integer, Object>();
+		settings = new HashMap<Integer, Object>();
 
 		//Initialisation des autres parametres. 
 	    SystemRequests.getSettings(this);
@@ -66,18 +179,9 @@ public class SettingsFile extends SelectableFile {
 	 * @param setting  Le parametre a modifier.
 	 * @param newValue La nouvelle valeur du parametre.
 	 */
-	public void modifySettings(String setting, String newValue) {
-		if(setting.equals("codec video")) {
-			String oldExtension =  
-					sourceFile.getName().split("[.]")
-					[sourceFile.getName().split("[.]").length-1];
-			String fileName = sourceFile.getName();
-			newValue = fileName.substring(0, fileName.lastIndexOf(oldExtension)-1)+newValue;
-		}
-		oldSettings.put(setting, settings.get(setting));
-		settings.put(setting, newValue);
-		
-		this.oldSettings.put(setting, this.settings.get(setting));
+
+	public void modifySettings(Integer setting, String newValue) {
+		this.oldSettings.put(setting, settings.get(setting));
 		this.settings.put(setting, newValue);
 	}
 
@@ -99,7 +203,7 @@ public class SettingsFile extends SelectableFile {
 	 * 
 	 * @return HashMap<String, String> Les parametres du fichier.
 	 */
-	public HashMap<String, Object> getSettings() {
+	public HashMap<Integer, Object> getSettings() {
 		return settings;
 	}
 
@@ -111,7 +215,7 @@ public class SettingsFile extends SelectableFile {
 	 * 
 	 * @return HashMap<String, String>			Les parametres du fichier. 
 	 */
-	public HashMap<String, Object> getOldSettings() {
+	public HashMap<Integer, Object> getOldSettings() {
 		return oldSettings;
 	}
 	

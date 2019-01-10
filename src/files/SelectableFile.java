@@ -6,7 +6,7 @@ import java.io.File;
  * Auteurs du projet : 
  * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
  */
-public abstract class SelectableFile {
+public class SelectableFile {
 	//=======================================================================================================================
 	//=======================================================================================================================
 	
@@ -122,6 +122,9 @@ public abstract class SelectableFile {
 	 * 						est une video ou un son. 
 	 */
 	public boolean isGoodFile() {
+		System.out.println(isVideo());
+		System.out.println(isSound());
+		System.out.println(isVideo() || isSound() );
 		return ( isVideo() || isSound() );
 	}
 	
@@ -144,13 +147,15 @@ public abstract class SelectableFile {
 	 * - FILE_TYPE_IMAGE ( = 2 ).
 	 */
 	private void whoAmI() {
-		String fileName = this.sourceFile.getName();
+		
+		String fileName = this.sourceFile.getName().toLowerCase();
+		System.out.println(fileName);
 		/**
 		 * TODO ajouter des extensions de video possibles. 
 		 */
 		
 		if(fileName.endsWith("mp4") || fileName.endsWith("avi")) 
-			typeFile = FILE_TYPE_VIDEO;
+			typeFile = FILE_TYPE_VIDEO; 
 		else if(fileName.endsWith("mp3") || fileName.endsWith("wav") || fileName.endsWith("ogg"))
 				typeFile = FILE_TYPE_AUDIO;
 			 else if(fileName.endsWith("png") || fileName.endsWith("jpg") || fileName.endsWith("jpeg")) 
@@ -179,8 +184,9 @@ public abstract class SelectableFile {
 	 * lors de la generation du fichier de sortie. 
 	 * 
 	 * @return booleen		Vaut true si this a ete modifie. 
+	 * public abstract boolean isModified();
 	 */
-	public abstract boolean isModified();
+	
 	
 	
 	

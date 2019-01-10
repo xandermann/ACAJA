@@ -43,7 +43,7 @@ public class SettingsFile extends SelectableFile {
 	 * @throws IOException 
 	 * @throws InterruptedException 	
 	 */
-	public SettingsFile(File file) throws IOException, InterruptedException {
+	public SettingsFile(File file){
 		/**
 		 * INITIALISATION DES ATTRIBUTS HETITES DE LA CLASSE SELECTABLEFILE.
 		 */
@@ -52,7 +52,7 @@ public class SettingsFile extends SelectableFile {
 		/**
 		 * SI TYPE DE FICHIER PAS ACCCPTE EXCPETION.
 		 */
-		if(isGoodFile())
+		if(!isGoodFile())
 			throw new IllegalArgumentException("Seuls les fichiers audio et video sont toleres."); 
 
 		/**

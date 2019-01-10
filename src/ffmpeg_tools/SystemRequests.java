@@ -352,7 +352,7 @@ public final class SystemRequests extends FFmpegRuntime{
 	 * 										est trop longue, et a du etre interrompu 
 	 * 									    par son processus parent (JAVA). 
 	*/
-	public static void getSettings(SettingsFile file) throws IOException, InterruptedException {
+	public static void getSettings(SettingsFile file){
 		if(file.isGoodFile()){	
 			/**
 			 * REQUETE A SOUMETRE A FFMPEG.
@@ -390,20 +390,28 @@ public final class SystemRequests extends FFmpegRuntime{
 			/**
 			 *  EXTRACTION DES CARACTERISTIQUES.
 			 */
-			
-			//On ne recupere que les donnees qui nous interesse
-			//d'ou la presence du booleen keepInformations. 
-			boolean keepInformations = false; 
-			String informations = "", information = null;
-			
-			while( (information = br.readLine()) != null ) {
-				if( keepInformations == false && information.contains("Input") ) 
-					keepInformations = true;
-				if( keepInformations == true ) 
-					informations += information + " ";
+			String informations = "";	
+			try {
+				String information = null;	
+				
+				//On ne recupere que les donnees qui nous interesse
+				//d'ou la presence du booleen keepInformations. 
+				boolean keepInformations = false; 	
+				
+				while( (information = br.readLine()) != null ) {
+					if( keepInformations == false && information.contains("Input") ) 
+						keepInformations = true;
+					if( keepInformations == true ) 
+						informations += information + " ";
+				}
+				//On ferme le flux. 
+				br.close();
+				
+			} catch (IOException e){
+				return;
 			}
-			//On ferme le flux. 
-			br.close();
+			
+			
 			
 			
 			/**
@@ -438,8 +446,11 @@ public final class SystemRequests extends FFmpegRuntime{
 	
 	
 	
-	public static void main(String[] args) {
-		
+	public static void main(String[] args){
+		SettingsFile file = new SettingsFile(new File("C:\\Users\\Jean-christophe\\Documents\\PROFESSIONNEL\\2A\\projetTutore\\test\\1.avi"));
+		getSettings(file);	
+		for(String str : file.getSettings().keySet())
+			System.out.println(file.getSettings().get(str));
 	}
 	//=======================================================================================================================
 	//=======================================================================================================================

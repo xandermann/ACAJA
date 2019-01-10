@@ -15,12 +15,6 @@ public class ProcessingFile extends SelectableFile{
 	/**
 	 * [ ATTRIBUTS D'INSTANCE. ]
 	 */
-	
-	/**
-	 * La duree du fichier source ( elle prendra -1 a l'initialisation,
-	 * si le fichier source est une image ).
-	 */
-	private long duration;
 
 	/**
 	 * Les traitements en attente sur this. 

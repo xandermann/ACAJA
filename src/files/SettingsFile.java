@@ -15,81 +15,9 @@ import ffmpeg_tools.SystemRequests;
  *         CHEVRIER Jean-christophe.
  */
 public class SettingsFile extends SelectableFile {
+
 	
-	/*============================================================*/
-
-	/**
-	 * [ CONSTANTES DE CLASSES A USAGE INTERNE. ]
-	 * 
-	 * Voici des constantes qui nous seront bien pratiques. Pour la majorite, ce
-	 * sont des contantes representant des types de resolutions ( par exemple :
-	 * resolution d'une frame de l'apercu de lecture de video du logiciel ).
-	 * 
-	 * Ces constantes ne seront destines a etre utilises que pour le fonctionnement
-	 * interne de la fenetre de traitement.
-	 * 
-	 * Elles sont destinees a un usage uniquement interne ( d'ou l presence des
-	 * private ).
-	 */
-
-	/**
-	 * [ CHEMIN VERS LE REPERTOIRE DES FICHIERS TEMPORAIRES. ]
-	 * 
-	 * TODO iteration 1 pas concernee.
-	 * 
-	 * Ceci est le chemin vers le repertoire des fichiers temporaires. Ces fameux
-	 * ficheirs temporaires seront en fait les miniatures de video, et les frames de
-	 * d'apercu de lecture de video, etc.
-	 */
-	private final static String PATH_TEMPORARY_FILES = System.getProperty("user.dir") + "\\temporary_files\\";
-
-	/**
-	 * [ RESOLUTION DES MINIATURES DANS LES BIBLIOTHEQUES. ]
-	 * 
-	 * TODO iteration 1 pas concernee.
-	 * 
-	 * Ceci est le tableau representant la resolution des miniatutres des videos,
-	 * des sons, et des images qui seront importes par l'utilisateur dans le
-	 * logiciel.
-	 */
-	private final static int[] LIBRARY_THUMBAIL_RESOLUTION = new int[] {};
-
-	/**
-	 * [ RESOLUTION DES MINIATURES DES VIDEO DANS LA CHRONOLOGIE VIDEO. ]
-	 * 
-	 * TODO iteration 1 pas concernee.
-	 * 
-	 * Ceci est le tableau representant la resolution des miniatutres des videos,
-	 * dans la chronologie video.
-	 */
-	private final static int[] VIDEO_TIMELINE_THUMBAIL_RESOLUTION = new int[] {};
-
-	/**
-	 * [ RESOLUTION DES MINIATURES DES SONS DANS LES CHRONOLOGIES DES SONS. ]
-	 * 
-	 * TODO iteration 1 pas concernee.
-	 * 
-	 * Ceci est le tableau representant la resolution des miniatutres des sons, dans
-	 * les chronologies des sons.
-	 */
-	private final static int[] SOUND_TIMELINE_THUMBAIL_RESOLUTION = new int[] {};
-
-	/**
-	 * [ RESOLUTION DES FRAMES DANS L'APERCU DE LECTURE DE VIDEO. ]
-	 * 
-	 * TODO iteration 1 pas concernee.
-	 * 
-	 * Ceci est le tableau representant la resolution frames dans l'apercu de
-	 * lecture de video de la fenetre de traitement.
-	 */
-	private final static int[] VIDEO_RESOLUTION = new int[] {};
-
-	/*============================================================*/
-	
-	/**
-	 * Constante ajoutée: clé de la hashmap
-	 */
-	public final static String KEY_FORMAT = "FORMAT";
+	public final static String CODEC_VIDEO= "codec video";
 	
 
 	/**
@@ -128,9 +56,8 @@ public class SettingsFile extends SelectableFile {
 		oldSettings = new HashMap<String, Object>();
 		settings = new HashMap<String, Object>();
 
-		// Initialisation des autres parametres.
-		// SystemRequests.getSettings(this);
-
+		//Initialisation des autres parametres. 
+	    SystemRequests.getSettings(this);
 	}
 
 	/**
@@ -140,6 +67,16 @@ public class SettingsFile extends SelectableFile {
 	 * @param newValue La nouvelle valeur du parametre.
 	 */
 	public void modifySettings(String setting, String newValue) {
+		if(setting.equals("codec video")) {
+			String oldExtension =  
+					sourceFile.getName().split("[.]")
+					[sourceFile.getName().split("[.]").length-1];
+			String fileName = sourceFile.getName();
+			newValue = fileName.substring(0, fileName.lastIndexOf(oldExtension)-1)+newValue;
+		}
+		oldSettings.put(setting, settings.get(setting));
+		settings.put(setting, newValue);
+		
 		this.oldSettings.put(setting, this.settings.get(setting));
 		this.settings.put(setting, newValue);
 	}
@@ -166,4 +103,18 @@ public class SettingsFile extends SelectableFile {
 		return settings;
 	}
 
+
+	/**
+	 * [ METHODE ACCESSEUR - GETTER. ]
+	 * 
+	 * Recupere les anciens parametres du fichiers.
+	 * 
+	 * @return HashMap<String, String>			Les parametres du fichier. 
+	 */
+	public HashMap<String, Object> getOldSettings() {
+		return oldSettings;
+	}
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
 }

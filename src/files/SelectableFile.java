@@ -11,7 +11,10 @@ import java.io.File;
  *         CHEVRIER Jean-christophe.
  */
 public class SelectableFile {
-
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
 	/**
 	 * 
 	 * Ces constantes permettent d'indiquer le type du fichier source d'une instance
@@ -34,9 +37,13 @@ public class SelectableFile {
 	public final static int FILE_TYPE_IMAGE = 2;
 
 
+	/**
+	 * La duree de la video. 
+	 */
+	protected long duration;
 
 	/**
-	 * Est modifié et prend la valeur des constantes
+	 * Le type de fichier. 
 	 */
 	protected int typeFile;
 
@@ -50,6 +57,11 @@ public class SelectableFile {
 	 */
 	private boolean isSelected;
 
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
 	/**
 	 * [ CONSTRUCTEUR. ]
 	 * 
@@ -64,6 +76,11 @@ public class SelectableFile {
 		this.sourceFile = file;
 		this.whoAmI();
 	}
+	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
 	
 	/**
 	 * [ METHODE - ROLE PRIMITIF. ]
@@ -100,6 +117,11 @@ public class SelectableFile {
 	public boolean isSound() {
 		return typeFile == SelectableFile.FILE_TYPE_AUDIO;
 	}
+	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
 
 	/**
 	 * [ METHODE - ROLE PRIMITIF. ]
@@ -119,24 +141,29 @@ public class SelectableFile {
 	 * Cette methode permet de savoir si le fichier source est une video, ou un son,
 	 * ou meme une image.
 	 * 
-	 * 3 valeurs possiblement accordable a typeFile : - FILE_TYPE_VIDEO ( = 0 ) ; -
-	 * FILE_TYPE_AUDIO ( = 1 ) ; - FILE_TYPE_IMAGE ( = 2 ).
+	 * 3 valeurs possiblement accordable a typeFile : 
+	 * - FILE_TYPE_VIDEO ( = 0 ) ; 
+	 * - FILE_TYPE_AUDIO ( = 1 ) ; 
+	 * - FILE_TYPE_IMAGE ( = 2 ).
 	 */
 	private void whoAmI() {
-
 		String fileName = this.sourceFile.getName().toLowerCase();
 
 		if (fileName.endsWith("mp4") || fileName.endsWith("avi") || fileName.endsWith("flv"))
-			typeFile = FILE_TYPE_VIDEO;
-		else if (fileName.endsWith("mp3") || fileName.endsWith("wav") || fileName.endsWith("ogg"))
-			typeFile = FILE_TYPE_AUDIO;
-		else if (fileName.endsWith("png") || fileName.endsWith("jpg") || fileName.endsWith("jpeg"))
-			typeFile = FILE_TYPE_IMAGE;
-		else
-			throw new IllegalArgumentException("Type de fichier non conforme !");
-
+				typeFile = FILE_TYPE_VIDEO;
+			else if (fileName.endsWith("mp3") || fileName.endsWith("wav") || fileName.endsWith("ogg"))
+					typeFile = FILE_TYPE_AUDIO;
+				else if (fileName.endsWith("png") || fileName.endsWith("jpg") || fileName.endsWith("jpeg"))
+						typeFile = FILE_TYPE_IMAGE;
+					else
+						throw new IllegalArgumentException("Type de fichier non conforme !");
 	}
 
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
 	/**
 	 * [ METHODE POUR SAVOIR SI THIS A ETE MODIFIE. ]
 	 * 
@@ -184,6 +211,11 @@ public class SelectableFile {
 		isSelected = false;
 	}
 
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
 	/**
 	 * [ METHODE ACCESSEUR - GETTER. ]
 	 * 
@@ -214,5 +246,8 @@ public class SelectableFile {
 	public String getSourceFilename() {
 		return sourceFile.getName();
 	}
-
+	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
 }

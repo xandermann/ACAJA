@@ -64,6 +64,18 @@ public class SelectableFile {
 		this.sourceFile = file;
 		this.whoAmI();
 	}
+	
+	/**
+	 * [ METHODE - ROLE PRIMITIF. ]
+	 * 
+	 * Cette methode a un role primitif, elle permet de verifier si le fichier
+	 * source est une image.
+	 * 
+	 * @return booleen Vaut true si le fichier source est une image.
+	 */
+	public boolean isImage() {
+		return typeFile == SelectableFile.FILE_TYPE_IMAGE;
+	}
 
 	/**
 	 * [ METHODE - ROLE PRIMITIF. ]

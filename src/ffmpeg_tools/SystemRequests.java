@@ -447,7 +447,7 @@ public final class SystemRequests extends FFmpegRuntime{
 	
 	
 	public static void main(String[] args){
-		SettingsFile file = new SettingsFile(new File("C:\\Users\\Jean-christophe\\Documents\\PROFESSIONNEL\\2A\\projetTutore\\test\\1.avi"));
+		SettingsFile file = new SettingsFile(new File("C:\\Users\\Jean-christophe\\Documents\\PROFESSIONNEL\\2A\\projetTutore\\test\\videos_a_concatener.txt"));
 		getSettings(file);	
 		for(String str : file.getSettings().keySet())
 			System.out.println(file.getSettings().get(str));

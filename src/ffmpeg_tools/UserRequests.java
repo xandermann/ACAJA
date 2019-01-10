@@ -1,6 +1,6 @@
 package ffmpeg_tools;
 import java.io.File;
-import java.util.Map;
+import java.util.*;
 /**
  * 
  * 
@@ -22,7 +22,14 @@ public final class UserRequests extends FFmpegRuntime {
 	 * TODO
 	 * @param exec
 	 */
-	public void execute(Map<String, Object> exec) {
+	public void execute(HashMap<String, Object> ffmpegRequests) {
+		for(String requestKey : ffmpegRequests.keySet()) {
+			if(ffmpegRequests.get(requestKey) instanceof String) {
+				if(ffmpegRequests.get(requestKey).equals("codec_video")) {
+					
+				}
+			}
+		}
 	}
 
 	/**

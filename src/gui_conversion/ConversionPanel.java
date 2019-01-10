@@ -14,6 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
@@ -44,11 +45,14 @@ public class ConversionPanel extends JFrame{
 		importFile.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				File f = FileChoose.FileChoose();
-				if(f != null) {
-					System.out.println(f.getName() + "\n" + f.getAbsolutePath());
+				try {
+					File f = DataChoose.FileChoose();
 					model.add(f);
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(null, e.getMessage());
 				}
+				
+				
 			
 			}
 		});

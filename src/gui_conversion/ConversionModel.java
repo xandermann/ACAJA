@@ -101,13 +101,7 @@ public class ConversionModel extends Observable {
 
 	/**
 	 * Methode qui modifie le fichier actuellement selectionne par l'utilisateur
-<<<<<<< HEAD
 	 * @param currentFile String : nom du fichier maintenant selectionne par l'utilisateur
-=======
-	 * 
-	 * @param currentFile SettingsFile : fichier maintenant selectionne pour la
-	 *                    modification par l'utilisateur
->>>>>>> b333678195450991d5345821356150f84aa28279
 	 */
 	public void setCurrentFile(String fileName) {
 		for(SettingsFile f : this.getFiles()) {

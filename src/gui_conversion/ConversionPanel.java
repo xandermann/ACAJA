@@ -86,6 +86,7 @@ public class ConversionPanel extends JFrame{
 				model.clear();
 			}
 		});
+		
 		JMenuItem quit = new JMenuItem("Quitter");
 		quit.addActionListener(new ActionListener() {
 			@Override

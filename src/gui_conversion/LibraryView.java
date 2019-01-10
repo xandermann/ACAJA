@@ -2,6 +2,8 @@ package gui_conversion;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Observable;
@@ -10,7 +12,7 @@ import java.util.Observer;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 
-public class LibraryView extends JList implements Observer, MouseListener {
+public class LibraryView extends JList implements Observer, MouseListener, KeyListener {
 
 	/**
 	 * Model conversion
@@ -76,5 +78,25 @@ public class LibraryView extends JList implements Observer, MouseListener {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		 if(e.getKeyCode()==KeyEvent.VK_DELETE){
+			 this.model.remove(this.model.getCurrentFile());
+		 }
+	}
+
+	@Override
+	public void keyReleased(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }

@@ -25,6 +25,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import files.SettingsFile;
+import main.OpeningWindow;
 
 public class ConversionPanel extends JFrame{
 	
@@ -160,6 +161,7 @@ public class ConversionPanel extends JFrame{
 				public void actionPerformed(ActionEvent e) {
 					//ici ouvrir la fenetre de chargement 
 					JFrame chargement = new JFrame("Convertion de votre fichier");
+					OpeningWindow.afficherLogo(chargement);
 					chargement.setLayout(new FlowLayout());
 					chargement.setSize(400, 150);
 					chargement.setVisible(true);
@@ -195,11 +197,7 @@ public class ConversionPanel extends JFrame{
 		 this.setResizable(false);
 		 this.setTitle("Acaja Conversion");
 		 this.setSize(new Dimension(1000,600));
-		 try {
-			 this.setIconImage(ImageIO.read(new File("img/LogoAcaja.png")));
-		 } catch (IOException e1) {
-			 e1.printStackTrace();
-			}
+		 OpeningWindow.afficherLogo(this);
 		//recuperation des dimensions de l'ecran
 		Dimension ecran = Toolkit.getDefaultToolkit().getScreenSize();
 		//on positionne la fenetre au centre de l'ecran

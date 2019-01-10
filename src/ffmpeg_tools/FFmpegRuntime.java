@@ -88,10 +88,14 @@ public abstract class FFmpegRuntime {
 	 * 								soumet a executer. 
 	 * @throws InterruptedException 
 	 */
-	protected static Process execute(String ffmpegRequest) throws IOException, InterruptedException {
+	protected static Process execute(String ffmpegRequest){
 		if(FFMPEG_PATH==null) install();
 		//Provisoirement j'utilise le ffmpeg de la variable path.
-		return RUN.exec("ffmpeg -i "+ffmpegRequest);
+		try{
+			return RUN.exec("ffmpeg -i "+ffmpegRequest);
+		}catch (IOException e){
+			return null;
+		}
 	}
 	
 	

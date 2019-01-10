@@ -353,7 +353,7 @@ public final class SystemRequests extends FFmpegRuntime{
 	 * 									    par son processus parent (JAVA). 
 	*/
 	public static void getSettings(SettingsFile file){
-		if(file.isGoodFile()){	
+		if(file.containsAudio()){	
 			/**
 			 * REQUETE A SOUMETRE A FFMPEG.
 			 * 

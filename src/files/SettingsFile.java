@@ -73,7 +73,7 @@ public class SettingsFile extends SelectableFile {
 		/**
 		 * SI TYPE DE FICHIER PAS ACCCPTE EXCPETION.
 		 */
-		if (!isGoodFile())
+		if (!containsAudio())
 			throw new IllegalArgumentException("Seuls les fichiers audio et video sont toleres.");
 
 		/**

@@ -87,11 +87,10 @@ public class ConversionModel extends Observable {
 	// a modifier public void removeProfile(Profile profile) {}
 	// anciennement public void removeProfile(File profileFile) { }
 	public void removeProfile(Profile profile) {
-		if (this.profiles.contains(profile)) {
+		if (this.profiles.contains(profile)) 
 			this.profiles.remove(profile);
-		} else {
+		else 
 			JOptionPane.showMessageDialog(null, "Le profil a supprimer n'existe pas");
-		}
 	}
 
 	
@@ -182,9 +181,8 @@ public class ConversionModel extends Observable {
 	 */
 	public DefaultListModel getFilenames() {
 		DefaultListModel filenameList = new DefaultListModel();
-		for (SettingsFile f : this.getFiles()) {
+		for (SettingsFile f : this.getFiles()) 
 			filenameList.addElement(new ListEntry(f.getSourceFilename()));
-		}
 		return filenameList;
 	}
 

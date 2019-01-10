@@ -15,32 +15,55 @@ import ffmpeg_tools.SystemRequests;
  *         CHEVRIER Jean-christophe.
  */
 public class SettingsFile extends SelectableFile {
-	//=======================================================================================================================
-	//=======================================================================================================================
-	
+	// =======================================================================================================================
+	// =======================================================================================================================
+
 	/**
 	 * [ CONSTANTES DE CLASSE. ]
 	 */
+
+	/**
+	 * Constante qui défini le codec video dans la HashMap
+	 */
 	public static final int VIDEO_CODEC = 1;
 
+	/**
+	 * Constante qui défini le bitrate video dans la HashMap
+	 */
 	public static final int VIDEO_BITRATE = 2;
 
+	/**
+	 * Constante qui défini les FPS de la video dans la HashMap
+	 */
 	public static final int FPS = 3;
 
+	/**
+	 * Constante qui défini le codec audio dans la HashMap
+	 */
 	public static final int AUDIO_CODEC = 4;
 
+	/**
+	 * Constante qui défini le sampling rate dans la HashMap
+	 */
 	public static final int SAMPLING_RATE = 5;
 
+	/**
+	 * Constante qui défini le nombre de pistes audios dans la HashMap
+	 */
 	public static final int NUMBER_AUDIO_CHANNELS = 6;
 
+	/**
+	 * Constante qui défini le bitrate audio dans la HashMap
+	 */
 	public static final int AUDIO_BITRATE = 7;
 
+	/**
+	 * Constante qui défini la résolution de la video dans la HashMap
+	 */
 	public final static int VIDEO_RESOLUTION = 8;
-	
 
-	//=======================================================================================================================
-	//=======================================================================================================================
-	
+	// =======================================================================================================================
+	// =======================================================================================================================
 
 	/**
 	 * Les requetes soumises par l'utilisateur.
@@ -51,11 +74,9 @@ public class SettingsFile extends SelectableFile {
 	 * Les parametres courants du fichier
 	 */
 	private HashMap<Integer, Object> settings;
-	
-	
-	//=======================================================================================================================
-	//=======================================================================================================================
-	
+
+	// =======================================================================================================================
+	// =======================================================================================================================
 
 	/**
 	 * [ CONSTRUCTEUR. ]
@@ -73,25 +94,23 @@ public class SettingsFile extends SelectableFile {
 		/**
 		 * SI TYPE DE FICHIER PAS ACCCPTE EXCPETION.
 		 */
-		if (!isGoodFile())
-			throw new IllegalArgumentException("Seuls les fichiers audio et video sont toleres.");
+		if (!this.containsAudio())
+			throw new IllegalArgumentException("Seuls les fichiers audio et video sont acceptes.");
 
 		/**
 		 * INITIALISATION DES PARAMETRES DE LA VIDEO.
 		 */
 		// Intiliasation des tables.
-		requests = new HashMap<Integer, Object>();
-		settings = new HashMap<Integer, Object>();
+		this.requests = new HashMap<Integer, Object>();
+		this.settings = new HashMap<Integer, Object>();
 
-		//Initialisation des autres parametres. 
-	    SystemRequests.getSettings(this);
+		// Initialisation des autres parametres.
+		SystemRequests.getSettings(this);
 	}
 
-	
-	//=======================================================================================================================
-	//=======================================================================================================================
-	
-	
+	// =======================================================================================================================
+	// =======================================================================================================================
+
 	/**
 	 * Methode pour modifier les parametres de la video.
 	 * 
@@ -99,14 +118,12 @@ public class SettingsFile extends SelectableFile {
 	 * @param newValue La nouvelle valeur du parametre.
 	 */
 	public void modifySetting(Integer setting, Object request) {
-		requests.put(setting, request);
+		this.requests.put(setting, request);
 	}
 
-	
-	//=======================================================================================================================
-	//=======================================================================================================================
-	
-	
+	// =======================================================================================================================
+	// =======================================================================================================================
+
 	/**
 	 * [ METHODE POUR SAVOIR SI DES PARAMETRES ONT ETE MODIFIES. ]
 	 * 
@@ -115,7 +132,7 @@ public class SettingsFile extends SelectableFile {
 	 * @return booleen True si le fichier a ete modifie.
 	 */
 	public boolean isModified() {
-		return !requests.equals(new HashMap<Integer, Object>());
+		return !this.requests.equals(new HashMap<Integer, Object>());
 	}
 
 	/**
@@ -126,21 +143,20 @@ public class SettingsFile extends SelectableFile {
 	 * @return HashMap<String, String> Les parametres du fichier.
 	 */
 	public HashMap<Integer, Object> getSettings() {
-		return settings;
+		return this.settings;
 	}
-
 
 	/**
 	 * [ METHODE ACCESSEUR - GETTER. ]
 	 * 
 	 * Cette methode pemet de recuperer les requetes.
 	 * 
-	 * @return HashMap<String, String>			Les requetes. 
+	 * @return HashMap<String, String> Les requetes.
 	 */
 	public HashMap<Integer, Object> getRequests() {
-		return requests;
+		return this.requests;
 	}
-	
-	//=======================================================================================================================
-	//=======================================================================================================================
+
+	// =======================================================================================================================
+	// =======================================================================================================================
 }

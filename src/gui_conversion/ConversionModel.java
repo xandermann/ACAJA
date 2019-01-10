@@ -40,6 +40,7 @@ public class ConversionModel extends Observable {
 	// a modifier public void loadProfiles() {}
 	// public void loadProfile(File profileFile) { }
 	public void loadProfiles() {
+		// TODO
 		// Charger les fichiers profils dans le dossier des profils
 		// Creer des objets de type profils en lisant les fichiers*
 		// Ajouter les fichiers dans la liste
@@ -87,6 +88,7 @@ public class ConversionModel extends Observable {
 	 * @return liste des fichiers recemments ouverts
 	 */
 	public ArrayList<File> loadOldImports() {
+		// TODO
 		return null;
 	}
 
@@ -97,19 +99,21 @@ public class ConversionModel extends Observable {
 	 *         modification par l'utilisateur
 	 */
 	public SettingsFile getCurrentFile() {
-		return currentFile;
+		return this.currentFile;
 	}
 
 	/**
 	 * Methode qui modifie le fichier actuellement selectionne par l'utilisateur
-	 * @param currentFile String : nom du fichier maintenant selectionne par l'utilisateur
+	 * 
+	 * @param currentFile String : nom du fichier maintenant selectionne par
+	 *                    l'utilisateur
 	 */
 	public void setCurrentFile(String fileName) {
 
-		for(SettingsFile f : this.getFiles()) {
-			if(f.getSourceFilename().contentEquals(fileName)) {
+		for (SettingsFile f : this.getFiles()) {
+			if (f.getSourceFilename().contentEquals(fileName)) {
 				this.currentFile = f;
-				System.out.println("Set current file : " +fileName);
+				System.out.println("Set current file : " + fileName);
 			}
 		}
 		this.setChanged();
@@ -123,10 +127,10 @@ public class ConversionModel extends Observable {
 	 */
 	public void add(File file) {
 
-		if(file.exists()) {
-				this.files.add(new SettingsFile(file));
-				this.setChanged();
-				this.notifyObservers();
+		if (file.exists()) {
+			this.files.add(new SettingsFile(file));
+			this.setChanged();
+			this.notifyObservers();
 
 		} else {
 			JOptionPane.showMessageDialog(null, "Le fichier selectionne n'existe pas");
@@ -167,8 +171,8 @@ public class ConversionModel extends Observable {
 	 * Methode qui demarre la conversion des SettingsFile modifies
 	 */
 	public void convert() {
-		for(SettingsFile sf : this.files) {
-			if(sf.isModified()) {
+		for (SettingsFile sf : this.files) {
+			if (sf.isModified()) {
 				UserRequests.execute(sf);
 			}
 		}

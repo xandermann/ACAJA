@@ -79,7 +79,7 @@ public class VideoSettingsPanel extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// ATTENTION
-				File f = FileChoose.FileChoose();
+				File f = DataChoose.FileChoose();
 				// Ce fichier sera le fichier des sous-titres, pas un SettingsFile !
 			}
 		});

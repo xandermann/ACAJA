@@ -3,6 +3,7 @@ package files;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+
 import ffmpeg_tools.SystemRequests;
 
 /**
@@ -63,8 +64,9 @@ public class SettingsFile extends SelectableFile {
 	 * @param newValue La nouvelle valeur du parametre.
 	 */
 	public void modifySettings(String setting, String newValue) {
-		oldSettings.put(setting, settings.get(setting));
-		settings.put(setting, newValue);
+		this.oldSettings.put(setting, this.settings.get(setting));
+		this.settings.put(setting, newValue);
+
 	}
 
 	/**

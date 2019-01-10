@@ -13,7 +13,6 @@ import java.io.File;
 public class SelectableFile {
 
 	/**
-	 * [ CONSTANTES DE CLASSE. ]
 	 * 
 	 * Ces constantes permettent d'indiquer le type du fichier source d'une instance
 	 * de la classe.
@@ -34,13 +33,10 @@ public class SelectableFile {
 	 */
 	public final static int FILE_TYPE_IMAGE = 2;
 
-	/**
-	 * [ ATTRIBUT D'INSTANCE. ]
-	 */
+
 
 	/**
-	 * Type du fichier source. Il ne peut prendre que 3 valeurs : - FILE_TYPE_VIDEO
-	 * ( = 0) ; - FILE_TYPE_AUDIO ( = 1) ; - FILE_TYPE_IMAGE ( = 2).
+	 * Est modifié et prend la valeur des constantes
 	 */
 	protected int typeFile;
 

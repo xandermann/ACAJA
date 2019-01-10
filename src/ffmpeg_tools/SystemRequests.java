@@ -409,30 +409,38 @@ public final class SystemRequests extends FFmpegRuntime{
 			/**
 			 * INITIALISATION DES CARACTERISTIQUES DE LA VIDEO OU DU SON.
 			 */
-			HashMap<String, String> fileSettings = file.getSettings();
+			HashMap<String, Object> fileSettings = file.getSettings();
 			
 			//Parametres a extraire uniquement pour les fichiers video. 
+			String codec = file.getSourceFile().getName().split(".")[file.getSourceFile().getName().split(".").length-1];
 			if(file.isVideo()) {
-				String codec = file.getSourceFile().getName().split(".")[file.getSourceFile().getName().split(".").length-1];
 				fileSettings.put("codec video", codec);
-				fileSettings.put("resolution", extractAVideoSetting(informations, 3));
-				fileSettings.put("bitrate video",extractAVideoSetting(informations, 4));
-				fileSettings.put("fps", extractAVideoSetting(informations, 5));
+				
+				String[] resolutionStr = extractAVideoSetting(informations, 3).split("x");
+				Integer[] resolutionInt = new Integer[2]; 
+				resolutionInt[0] = Integer.parseInt(resolutionStr[0]);
+				resolutionInt[1] = Integer.parseInt(resolutionStr[1]);			
+				fileSettings.put("resolution", resolutionInt);
+				
+				fileSettings.put("bitrate video", Integer.parseInt(extractAVideoSetting(informations, 4)));
+				fileSettings.put("fps", Integer.parseInt(extractAVideoSetting(informations, 5)));
 				fileSettings.put("codec audio", extractAAudioSetting(informations, 0));
-			}else{
-				String codec = file.getSourceFile().getName().split(".")[file.getSourceFile().getName().split(".").length-1];
+			}else
 				fileSettings.put("codec audio", codec);
-			}
 			
-			fileSettings.put("taux d'echantillonage",  extractAAudioSetting(informations, 1));
-			fileSettings.put("nombre de canaux audio",extractAAudioSetting(informations, 2));
-			fileSettings.put("bitrate audio", extractAAudioSetting(informations, 4));
+			
+			fileSettings.put("taux d'echantillonage",  Integer.parseInt(extractAAudioSetting(informations, 1)));
+			fileSettings.put("nombre de canaux audio", Integer.parseInt(extractAAudioSetting(informations, 2)));
+			fileSettings.put("bitrate audio", Integer.parseInt(extractAAudioSetting(informations, 4)));
 			//fileSettings.put("volume en sortie",extractAAudioSetting(informations, 5));
 		}
 	}
 	
 	
 	
+	public static void main(String[] args) {
+		
+	}
 	//=======================================================================================================================
 	//=======================================================================================================================
 }

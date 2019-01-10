@@ -19,14 +19,14 @@ public class SettingsFile extends SelectableFile {
 	 * [ ATTRIBUTS. ]
 	 */
 	/**
-	 * Les anciennes options du fichier
+	 * Les anciens parametres du fichier
 	 */
-	private HashMap<String, String> oldSettings;
+	private HashMap<String, Object> oldSettings;
 
 	/**
-	 * Les options courantes du fichier
+	 * Les parametres courants du fichier
 	 */
-	private HashMap<String, String> settings;
+	private HashMap<String, Object> settings;
 
 	
 	
@@ -59,8 +59,8 @@ public class SettingsFile extends SelectableFile {
 		 * INITIALISATION DES PARAMETRES DE LA VIDEO. 
 		 */
 		//Intiliasation des tables. 
-		oldSettings = new HashMap<String, String>();
-		settings = new HashMap<String, String>();
+		oldSettings = new HashMap<String, Object>();
+		settings = new HashMap<String, Object>();
 		
 		//Initialisation des autres parametres. 
 		SystemRequests.getSettings(this);
@@ -99,7 +99,7 @@ public class SettingsFile extends SelectableFile {
 	 * @return booleen		True si le fichier a ete modifie. 
 	 */
 	public boolean isModified() {
-		return !oldSettings.equals(new HashMap<String, String>());
+		return !oldSettings.equals(new HashMap<String, Object>());
 	}
 
 	/**
@@ -109,7 +109,7 @@ public class SettingsFile extends SelectableFile {
 	 * 
 	 * @return HashMap<String, String>			Les parametres du fichier. 
 	 */
-	public HashMap<String, String> getSettings() {
+	public HashMap<String, Object> getSettings() {
 		return settings;
 	}
 

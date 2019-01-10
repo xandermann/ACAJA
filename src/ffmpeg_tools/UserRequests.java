@@ -1,6 +1,9 @@
 package ffmpeg_tools;
 import java.io.File;
 import java.util.*;
+
+import files.SelectableFile;
+import files.SettingsFile;
 /**
  * 
  * 
@@ -22,14 +25,21 @@ public final class UserRequests extends FFmpegRuntime {
 	 * TODO
 	 * @param exec
 	 */
-	public void execute(HashMap<String, Object> ffmpegRequests) {
-		for(String requestKey : ffmpegRequests.keySet()) {
-			if(ffmpegRequests.get(requestKey) instanceof String) {
-				if(ffmpegRequests.get(requestKey).equals("codec_video")) {
-					
+	public void execute(SelectableFile file) {
+		if(file instanceof SettingsFile) {
+			HashMap<String, Object> ffmpegRequests = ((SettingsFile) file).getOldSettings();
+			HashMap<String, Object> newSettings = ((SettingsFile) file).getOldSettings();
+			for(String requestKey : ffmpegRequests.keySet()) {
+				if(ffmpegRequests.get(requestKey) instanceof String) {
+					if(ffmpegRequests.get(requestKey).equals("codec video")) {
+						super.execute(file.getSourceFile().getName()+" "+newSettings.get("codec video"));
+					}
 				}
 			}
 		}
+		
+		
+
 	}
 
 	/**

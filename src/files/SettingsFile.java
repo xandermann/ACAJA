@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 
+import ffmpeg_tools.SystemRequests;
+
 /**
  * TODO comentaire a faire.
  * 
@@ -13,6 +15,7 @@ import java.util.HashMap;
  *         CHEVRIER Jean-christophe.
  */
 public class SettingsFile extends SelectableFile {
+
 	
 	/**
 	 * Clé de la HashMap Codec video
@@ -129,11 +132,6 @@ public class SettingsFile extends SelectableFile {
 
 	/*============================================================*/
 	
-	/**
-	 * Constante ajoutée: clé de la hashmap
-	 */
-	public final static String KEY_FORMAT = "FORMAT";
-	
 
 	/**
 	 * Les anciens parametres du fichier
@@ -171,9 +169,8 @@ public class SettingsFile extends SelectableFile {
 		oldSettings = new HashMap<Integer, Object>();
 		settings = new HashMap<Integer, Object>();
 
-		// Initialisation des autres parametres.
-		// SystemRequests.getSettings(this);
-
+		//Initialisation des autres parametres. 
+	    SystemRequests.getSettings(this);
 	}
 
 	/**
@@ -182,8 +179,9 @@ public class SettingsFile extends SelectableFile {
 	 * @param setting  Le parametre a modifier.
 	 * @param newValue La nouvelle valeur du parametre.
 	 */
+
 	public void modifySettings(Integer setting, String newValue) {
-		this.oldSettings.put(setting, this.settings.get(setting));
+		this.oldSettings.put(setting, settings.get(setting));
 		this.settings.put(setting, newValue);
 	}
 
@@ -209,4 +207,18 @@ public class SettingsFile extends SelectableFile {
 		return settings;
 	}
 
+
+	/**
+	 * [ METHODE ACCESSEUR - GETTER. ]
+	 * 
+	 * Recupere les anciens parametres du fichiers.
+	 * 
+	 * @return HashMap<String, String>			Les parametres du fichier. 
+	 */
+	public HashMap<Integer, Object> getOldSettings() {
+		return oldSettings;
+	}
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
 }

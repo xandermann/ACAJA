@@ -4,8 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 
-import ffmpeg_tools.SystemRequests;
-
 /**
  * TODO comentaire a faire.
  * 
@@ -15,6 +13,61 @@ import ffmpeg_tools.SystemRequests;
  *         CHEVRIER Jean-christophe.
  */
 public class SettingsFile extends SelectableFile {
+	
+	/**
+	 * Clé de la HashMap Codec video
+	 */
+	private static final int VIDEO_CODEC = 1;
+
+	/**
+	 * Clé de la HashMap Bitrate video
+	 */
+	private static final int VIDEO_BITRATE = 2;
+
+	/**
+	 * Clé de la HashMap FPS
+	 */
+	private static final int FPS = 3;
+
+	/**
+	 * Clé de la HashMap Codec Audio
+	 */
+	private static final int AUDIO_CODEC = 4;
+
+	/**
+	 * Clé de la HashMap Taux d'échantillonnage
+	 */
+	private static final int SAMPLING_RATE = 5;
+
+	/**
+	 * Clé de la HashMap Nombre de canaux audios
+	 */
+	private static final int NUMBER_AUDIO_CHANNEL = 6;
+
+	/**
+	 * Clé de la HashMap Bitrate Audio
+	 */
+	private static final int AUDIO_BITRATE = 7;
+
+	/**
+	 * [ RESOLUTION DES FRAMES DANS L'APERCU DE LECTURE DE VIDEO. ]
+	 * 
+	 * TODO iteration 1 pas concernee.
+	 * 
+	 * Ceci est le tableau representant la resolution frames dans l'apercu de
+	 * lecture de video de la fenetre de traitement.
+	 */
+	private final static Integer VIDEO_RESOLUTION = 8;
+	
+	/**
+	 * [ RESOLUTION DES FRAMES DANS L'APERCU DE LECTURE DE VIDEO. ]
+	 * 
+	 * TODO iteration 1 pas concernee.
+	 * 
+	 * Ceci est le tableau representant la resolution frames dans l'apercu de
+	 * lecture de video de la fenetre de traitement.
+	 */
+	private final static Integer FORMAT_VIDEO = 9;
 	
 	/*============================================================*/
 
@@ -74,16 +127,6 @@ public class SettingsFile extends SelectableFile {
 	 */
 	private final static int[] SOUND_TIMELINE_THUMBAIL_RESOLUTION = new int[] {};
 
-	/**
-	 * [ RESOLUTION DES FRAMES DANS L'APERCU DE LECTURE DE VIDEO. ]
-	 * 
-	 * TODO iteration 1 pas concernee.
-	 * 
-	 * Ceci est le tableau representant la resolution frames dans l'apercu de
-	 * lecture de video de la fenetre de traitement.
-	 */
-	private final static int[] VIDEO_RESOLUTION = new int[] {};
-
 	/*============================================================*/
 	
 	/**
@@ -95,12 +138,12 @@ public class SettingsFile extends SelectableFile {
 	/**
 	 * Les anciens parametres du fichier
 	 */
-	private HashMap<String, Object> oldSettings;
+	private HashMap<Integer, Object> oldSettings;
 
 	/**
 	 * Les parametres courants du fichier
 	 */
-	private HashMap<String, Object> settings;
+	private HashMap<Integer, Object> settings;
 
 	/**
 	 * Constructeur
@@ -125,8 +168,8 @@ public class SettingsFile extends SelectableFile {
 		 * INITIALISATION DES PARAMETRES DE LA VIDEO.
 		 */
 		// Intiliasation des tables.
-		oldSettings = new HashMap<String, Object>();
-		settings = new HashMap<String, Object>();
+		oldSettings = new HashMap<Integer, Object>();
+		settings = new HashMap<Integer, Object>();
 
 		// Initialisation des autres parametres.
 		// SystemRequests.getSettings(this);
@@ -139,7 +182,7 @@ public class SettingsFile extends SelectableFile {
 	 * @param setting  Le parametre a modifier.
 	 * @param newValue La nouvelle valeur du parametre.
 	 */
-	public void modifySettings(String setting, String newValue) {
+	public void modifySettings(Integer setting, String newValue) {
 		this.oldSettings.put(setting, this.settings.get(setting));
 		this.settings.put(setting, newValue);
 	}
@@ -162,7 +205,7 @@ public class SettingsFile extends SelectableFile {
 	 * 
 	 * @return HashMap<String, String> Les parametres du fichier.
 	 */
-	public HashMap<String, Object> getSettings() {
+	public HashMap<Integer, Object> getSettings() {
 		return settings;
 	}
 

@@ -47,7 +47,7 @@ public class VideoSettingsPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(model.getCurrentFile() != null) {
-					model.getCurrentFile().modifySettings(model.getCurrentFile().KEY_FORMAT, ((JComboBox)e.getSource()).getSelectedItem().toString());
+					model.getCurrentFile().modifySettings(model.getCurrentFile().FILE_TYPE_VIDEO, ((JComboBox)e.getSource()).getSelectedItem().toString());
 				}
 			}
 		});

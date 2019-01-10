@@ -104,11 +104,15 @@ public class ConversionModel extends Observable {
 	 * @param currentFile String : nom du fichier maintenant selectionne par l'utilisateur
 	 */
 	public void setCurrentFile(String fileName) {
+
 		for(SettingsFile f : this.getFiles()) {
 			if(f.getSourceFilename().contentEquals(fileName)) {
 				this.currentFile = f;
+				System.out.println("Set current file : " +fileName);
 			}
 		}
+		this.setChanged();
+		this.notifyObservers();
 	}
 
 	/**

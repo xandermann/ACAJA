@@ -11,6 +11,7 @@ public class SummaryView extends JPanel implements Observer{
 
 	private ConversionModel model;
 	private JPanel j,j1,j2,j3;
+	private JLabel nomvar,videovar,sonvar,dureevar;
 	
 	public SummaryView (ConversionModel p_model) {
 		this.model = p_model;
@@ -37,6 +38,14 @@ public class SummaryView extends JPanel implements Observer{
 		j3 = new JPanel();
 		j3.setLayout(new FlowLayout());
 		j3.add(duree,BorderLayout.EAST);
+		nomvar = new JLabel("NA");
+		j.add(nomvar,BorderLayout.WEST);
+		videovar = new JLabel("NA");
+		j1.add(videovar,BorderLayout.WEST);
+		sonvar = new JLabel("NA");
+		j2.add(sonvar,BorderLayout.WEST);
+		//dureevar = new JLabel("NA");
+		//j2.add(dureevar,BorderLayout.WEST);
 		
 		this.add(j);
 		this.add(j1);
@@ -46,16 +55,17 @@ public class SummaryView extends JPanel implements Observer{
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		if(this.model.getCurrentFile()!=null) {
-			JLabel nomvar = new JLabel(this.model.getCurrentFile().getSourceFilename());
-			j.add(nomvar,BorderLayout.WEST);
-			//JLabel videovar = new JLabel(this.model.getCurrentFile().getSettings().get);
-			
-		}
 		
 	}
 	@Override
 	public void update(Observable o, Object arg) {
+		System.out.println("passe");
+		if(this.model.getCurrentFile() != null) {
+			nomvar.setText(this.model.getCurrentFile().getSourceFilename());
+			videovar.setText((String) this.model.getCurrentFile().getSettings().get("codec video"));
+			sonvar.setText((String) this.model.getCurrentFile().getSettings().get("codec audio"));
+			// dureevar.setText((String) this.model.getCurrentFile().getSettings().get("duree"));
+		}
 		this.repaint();
 	}
 

@@ -47,14 +47,15 @@ public class LibraryView extends JList implements Observer, MouseListener {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		this.model.setCurrentFile(this.getSelectedValue().toString());
+	
 		
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub
+		this.model.setCurrentFile(this.getSelectedValue().toString());
 		
 	}
 

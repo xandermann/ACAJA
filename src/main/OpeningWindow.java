@@ -41,11 +41,7 @@ public class OpeningWindow {
 	 */
 	private static void generateLoardingWindow() {
 		JFrame frame = new JFrame("Chargement d'Acaja");
-		try {
-			frame.setIconImage(ImageIO.read(new File("img/LogoAcaja.png")));
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
+		OpeningWindow.afficherLogo(frame);
 		
 		frame.setLocation(200, 200);
 		
@@ -87,13 +83,8 @@ public class OpeningWindow {
 		
 		JFrame frame = new JFrame("Acaja");
 		frame.setResizable(false);
-		try {
-			frame.setIconImage(ImageIO.read(new File("img/LogoAcaja.png")));
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
 		
+		OpeningWindow.afficherLogo(frame);
 		frame.setLayout(new BorderLayout());
 		
 		//recuperation des dimensions de l'ecran
@@ -155,6 +146,14 @@ public class OpeningWindow {
 	public static void generateOpeningWindow() {
 		//generateLoardingWindow();
 		generateChoiceModeWindow();
+	}
+	
+	public static void afficherLogo(JFrame f) {
+		try {
+			f.setIconImage(ImageIO.read(new File("img/LogoAcaja.png")));
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 	}
 	
 	

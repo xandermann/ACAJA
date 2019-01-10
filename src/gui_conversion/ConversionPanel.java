@@ -48,6 +48,7 @@ public class ConversionPanel extends JFrame{
 				try {
 					File f = DataChoose.FileChoose();
 					model.add(f);
+					model.setCurrentFile(f.getName());
 				} catch (Exception e) {
 					JOptionPane.showMessageDialog(null, e.getMessage());
 				}
@@ -149,6 +150,7 @@ public class ConversionPanel extends JFrame{
 		 DefaultListModel list_content = this.model.getFilenames();
 		 LibraryView lv = new LibraryView(this.model, list_content);
 		 TabsView tv = new TabsView(this.model);
+		 
 		 JPanel p = new JPanel();
 		 p.setLayout(new BorderLayout());
 		 JMenuBar menu = new JMenuBar();
@@ -158,6 +160,7 @@ public class ConversionPanel extends JFrame{
 		 menu.add(this.drawConvertMenu());
 		 this.setJMenuBar(menu);
 		 this.model.addObserver(lv);
+		 this.model.addObserver(sv);
 		 p.add(sv,BorderLayout.NORTH);
 		 p.add(tv,BorderLayout.CENTER);
 		 

@@ -408,39 +408,43 @@ public final class SystemRequests extends FFmpegRuntime{
 				br.close();
 				
 			} catch (IOException e){
+				//On force l'execution a se terminer ici.
 				return;
 			}
 			
 			
 			
-			
+			System.out.println(informations);
 			/**
 			 * INITIALISATION DES CARACTERISTIQUES DE LA VIDEO OU DU SON.
 			 */
 			HashMap<String, Object> fileSettings = file.getSettings();
+		
 			
 			//Parametres a extraire uniquement pour les fichiers video. 
-			String codec = file.getSourceFile().getName().split(".")[file.getSourceFile().getName().split(".").length-1];
+			String codec = "." + file.getSourceFile().getName().split("[.]")[file.getSourceFile().getName().split("[.]").length-1];
 			if(file.isVideo()) {
 				fileSettings.put("codec video", codec);
 				
-				String[] resolutionStr = extractAVideoSetting(informations, 3).split("x");
+				String[] resolutionStr = extractAVideoSetting(informations, 2).split("x");
 				Integer[] resolutionInt = new Integer[2]; 
 				resolutionInt[0] = Integer.parseInt(resolutionStr[0]);
 				resolutionInt[1] = Integer.parseInt(resolutionStr[1]);			
 				fileSettings.put("resolution", resolutionInt);
 				
-				fileSettings.put("bitrate video", Integer.parseInt(extractAVideoSetting(informations, 4)));
-				fileSettings.put("fps", Integer.parseInt(extractAVideoSetting(informations, 5)));
+				fileSettings.put("bitrate video", Integer.parseInt(extractAVideoSetting(informations, 3)));
+				fileSettings.put("fps", Double.parseDouble(extractAVideoSetting(informations, 4)));
 				fileSettings.put("codec audio", extractAAudioSetting(informations, 0));
 			}else
 				fileSettings.put("codec audio", codec);
 			
-			
 			fileSettings.put("taux d'echantillonage",  Integer.parseInt(extractAAudioSetting(informations, 1)));
-			fileSettings.put("nombre de canaux audio", Integer.parseInt(extractAAudioSetting(informations, 2)));
+			if(extractAAudioSetting(informations, 2).contains("mono"))
+				fileSettings.put("nombre de canaux audio", 1);
+			else
+				fileSettings.put("nombre de canaux audio", 2);
+						
 			fileSettings.put("bitrate audio", Integer.parseInt(extractAAudioSetting(informations, 4)));
-			//fileSettings.put("volume en sortie",extractAAudioSetting(informations, 5));
 		}
 	}
 	
@@ -448,17 +452,8 @@ public final class SystemRequests extends FFmpegRuntime{
 	
 	public static void main(String[] args){
 		File file = new File("C:\\Users\\Jean-christophe\\Documents\\PROFESSIONNEL\\2A\\projetTutore\\test\\1.avi");
+		SettingsFile file2 = new SettingsFile(file);
 		
-		
-		String oldExtension =  
-				file.getName().split("[.]")
-				[file.getName().split("[.]").length-1];
-		
-
-		String fileName = file.getName();
-		
-		String newFileName = fileName.substring(0, fileName.lastIndexOf(oldExtension)-1);
-		System.out.println(newFileName);	
 	}
 	//=======================================================================================================================
 	//=======================================================================================================================

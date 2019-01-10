@@ -216,6 +216,15 @@ public class SelectableFile {
 	//=======================================================================================================================
 	
 	
+	public long getDuration() {
+		return duration;
+	}
+
+
+	public void setDuration(long duration) {
+		this.duration = duration;
+	}
+	
 	/**
 	 * [ METHODE ACCESSEUR - GETTER. ]
 	 * 

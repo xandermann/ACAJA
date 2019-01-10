@@ -60,25 +60,15 @@ public class SettingsFile extends SelectableFile {
 	    SystemRequests.getSettings(this);
 	}
 
-	/**
+	/**s
 	 * Methode pour modifier les parametres de la video.
 	 * 
 	 * @param setting  Le parametre a modifier.
 	 * @param newValue La nouvelle valeur du parametre.
 	 */
 	public void modifySettings(String setting, String newValue) {
-		if(setting.equals("codec video")) {
-			String oldExtension =  
-					sourceFile.getName().split("[.]")
-					[sourceFile.getName().split("[.]").length-1];
-			String fileName = sourceFile.getName();
-			newValue = fileName.substring(0, fileName.lastIndexOf(oldExtension)-1)+newValue;
-		}
 		oldSettings.put(setting, settings.get(setting));
 		settings.put(setting, newValue);
-		
-		this.oldSettings.put(setting, this.settings.get(setting));
-		this.settings.put(setting, newValue);
 	}
 
 	/**

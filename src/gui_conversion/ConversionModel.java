@@ -8,6 +8,7 @@ import java.util.Observable;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
+import ffmpeg_tools.UserRequests;
 import files.SettingsFile;
 
 public class ConversionModel extends Observable {
@@ -165,12 +166,13 @@ public class ConversionModel extends Observable {
 	/**
 	 * Methode qui demarre la conversion des SettingsFile modifies
 	 */
-	public void convert() {
-		for (SettingsFile sf : this.files) {
-			if (sf.isModified()) {
-				// Convertir les fichiers ICI
+	public boolean convert() {
+		for(SettingsFile sf : this.files) {
+			if(sf.isModified()) {
+				UserRequests.execute(sf);
 			}
 		}
+		return true;
 	}
 
 	/**
@@ -185,8 +187,8 @@ public class ConversionModel extends Observable {
 	/**
 	 * Methode qui permet de modifier un reglage du fichier actuellement selectionne
 	 */
-	public void modify(Integer settings, String value) {
-		this.currentFile.modifySettings(settings, value);
+	public void modify(Integer setting, Object value) {
+		this.currentFile.modifySetting(setting, value);
 	}
 
 	/**

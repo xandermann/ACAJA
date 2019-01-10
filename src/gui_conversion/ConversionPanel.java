@@ -10,6 +10,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -125,8 +126,18 @@ public class ConversionPanel extends JFrame{
 	  * 
 	  * @return JMenu menu de conversion et ses items
 	  */
-	 private JMenu drawConvertMenu() {
-			JMenu convert = new JMenu("Convertir");
+	 private JMenu drawConvertButton() {
+		 	JMenu convert = new JMenu("Convertir"); 	
+		 	JMenuItem convert2 = new JMenuItem("Convertir les fichiers");
+		 	convert.add(convert2);
+			convert2.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					System.out.println("ffssf");
+					if(model.convert())
+						System.out.println("ffvsgsgssdggssf");
+				} 		
+			});
 			return convert;	 
 	 }
 		 
@@ -157,7 +168,7 @@ public class ConversionPanel extends JFrame{
 		 menu.add(this.drawFileMenu());
 		 menu.add(this.drawOptionsMenu());
 		 menu.add(this.drawProfilesMenu());
-		 menu.add(this.drawConvertMenu());
+		 menu.add(this.drawConvertButton());
 		 this.setJMenuBar(menu);
 		 this.model.addObserver(lv);
 		 this.model.addObserver(sv);
@@ -171,6 +182,4 @@ public class ConversionPanel extends JFrame{
 		 
 		 this.repaint();
 	 }
-	 
-	 
 }

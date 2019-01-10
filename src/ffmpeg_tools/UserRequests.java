@@ -1,5 +1,8 @@
 package ffmpeg_tools;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.*;
 
 import files.SelectableFile;
@@ -21,26 +24,33 @@ public final class UserRequests extends FFmpegRuntime {
 	 * 
 	 * @param file 		La fichier sur lequel il faut realiser les modifications. 
 	 */
-	public void execute(SelectableFile file) {
+	public static boolean execute(SelectableFile file) {
 		if(file instanceof SettingsFile) {
 			HashMap<Integer, Object> ffmpegRequests = ((SettingsFile) file).getOldSettings();
 			HashMap<Integer, Object> newSettings = ((SettingsFile) file).getOldSettings();
 			for(Integer requestKey : ffmpegRequests.keySet()) {
-				if(ffmpegRequests.get(requestKey) instanceof String) {
-					if(ffmpegRequests.get(requestKey).equals("codec video")) {
+					if(requestKey == SettingsFile.VIDEO_CODEC) {
 						String oldExtension =  
-								file.getSourceFile().getName().split("[.]")
-								[file.getSourceFile().getName().split("[.]").length-1];
-						String fileName = file.getSourceFile().getName();
-						String newFileName = fileName.substring(0, fileName.lastIndexOf(oldExtension)-1)+newSettings.get("codec video");
-						super.execute(fileName+" "+newFileName);
+								file.getSourceFile().getPath().split("[.]")
+								[file.getSourceFile().getPath().split("[.]").length-1];
+						String fileName = file.getSourceFile().getPath();
+						String newFileName = fileName.substring(0, fileName.lastIndexOf(oldExtension)-1)+newSettings.get(SettingsFile.VIDEO_CODEC);
+						Process conversion = execute(fileName+" "+newFileName);
+						try {			 
+							String information = null;	
+							try {
+								BufferedReader br = new BufferedReader(new InputStreamReader(conversion .getErrorStream()));
+								while( (information = br.readLine()) != null ) ;
+								br.close();	
+							} catch (IOException e) {}
+							conversion.waitFor();
+						} catch (InterruptedException e) {
+							return false;
+						}
 					}
-				}
 			}
 		}
-		
-		
-
+		return true;
 	}
 	
 	
@@ -51,7 +61,7 @@ public final class UserRequests extends FFmpegRuntime {
 	 * @param l
 	 * @return
 	 */
-	public File extractImage(File file, long l) {
+	public static File extractImage(File file, long l) {
 		return file; // TODO
 	}
 

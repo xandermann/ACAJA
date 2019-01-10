@@ -18,7 +18,6 @@ public class SettingsFile extends SelectableFile {
 	//=======================================================================================================================
 	//=======================================================================================================================
 	
-	
 
 	public static final int VIDEO_CODEC = 1;
 
@@ -78,7 +77,7 @@ public class SettingsFile extends SelectableFile {
 		settings = new HashMap<Integer, Object>();
 
 		//Initialisation des autres parametres. 
-	 //   SystemRequests.getSettings(this);
+	    SystemRequests.getSettings(this);
 	}
 
 	
@@ -92,7 +91,7 @@ public class SettingsFile extends SelectableFile {
 	 * @param setting  Le parametre a modifier.
 	 * @param newValue La nouvelle valeur du parametre.
 	 */
-	public void modifySettings(Integer setting, String newValue) {
+	public void modifySetting(Integer setting, Object newValue) {
 		oldSettings.put(setting, settings.get(setting));
 		settings.put(setting, newValue);
 	}

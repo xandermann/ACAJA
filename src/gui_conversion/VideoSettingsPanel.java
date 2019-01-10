@@ -15,6 +15,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import files.SettingsFile;
+
 public class VideoSettingsPanel extends JPanel {
 
 	private ConversionModel model;
@@ -39,7 +41,7 @@ public class VideoSettingsPanel extends JPanel {
 		 * le logiciel pour creer un fichier optimal et lisible
 		 */
 		Codec.add(new JLabel("Format sortie : "), BorderLayout.WEST);
-		String[] format = { "avi", "mp4", "flv" };
+		String[] format = { ".avi", ".mp4", ".flv" };
 		JComboBox box_format = new JComboBox(format);
 		
 		box_format.addActionListener(new ActionListener() {
@@ -47,7 +49,10 @@ public class VideoSettingsPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(model.getCurrentFile() != null) {
-					model.getCurrentFile().modifySettings(model.getCurrentFile().FILE_TYPE_VIDEO, ((JComboBox)e.getSource()).getSelectedItem().toString());
+					model.getCurrentFile().modifySetting(
+							SettingsFile.VIDEO_CODEC, 
+							((JComboBox)e.getSource()).getSelectedItem().toString()
+							);
 				}
 			}
 		});

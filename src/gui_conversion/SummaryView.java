@@ -1,6 +1,8 @@
 package gui_conversion;
 import javax.swing.*;
 
+import files.SettingsFile;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -62,8 +64,8 @@ public class SummaryView extends JPanel implements Observer{
 		System.out.println("passe");
 		if(this.model.getCurrentFile() != null) {
 			nomvar.setText(this.model.getCurrentFile().getSourceFilename());
-			videovar.setText((String) this.model.getCurrentFile().getSettings().get("codec video"));
-			sonvar.setText((String) this.model.getCurrentFile().getSettings().get("codec audio"));
+			videovar.setText((String) this.model.getCurrentFile().getSettings().get(SettingsFile.VIDEO_CODEC));
+			sonvar.setText((String) this.model.getCurrentFile().getSettings().get(SettingsFile.AUDIO_CODEC));
 			// dureevar.setText((String) this.model.getCurrentFile().getSettings().get("duree"));
 		}
 		this.repaint();

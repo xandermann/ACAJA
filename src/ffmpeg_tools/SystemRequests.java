@@ -421,7 +421,7 @@ public final class SystemRequests extends FFmpegRuntime{
 		
 			
 			//Parametres a extraire uniquement pour les fichiers video. 
-			String codec = "." + file.getSourceFile().getName().split("[.]")[file.getSourceFile().getName().split("[.]").length-1];
+			String codec = file.getSourceFile().getName().split("[.]")[file.getSourceFile().getName().split("[.]").length-1];
 			if(file.isVideo()) {
 				fileSettings.put(SettingsFile.VIDEO_CODEC, codec);
 				

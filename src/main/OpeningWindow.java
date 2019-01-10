@@ -48,6 +48,7 @@ public class OpeningWindow {
 		}
 		
 		frame.setLocation(200, 200);
+		
 		frame.setSize(new Dimension(WIDTH/3,HEIGHT/4));
 		frame.setVisible(true); 
 		
@@ -94,7 +95,12 @@ public class OpeningWindow {
 		}
 		
 		frame.setLayout(new BorderLayout());
-		frame.setLocation(100, 100);
+		
+		//recuperation des dimensions de l'ecran
+		Dimension ecran = Toolkit.getDefaultToolkit().getScreenSize();
+		//on positionne la fenetre au centre de l'ecran
+		frame.setLocation(((int)ecran.getWidth()-750)/2, ((int)ecran.getHeight()-500)/2);
+				
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(new Dimension(WIDTH,HEIGHT));
 		

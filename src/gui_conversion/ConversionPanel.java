@@ -2,7 +2,10 @@ package gui_conversion;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Frame;
 import java.awt.Panel;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -13,6 +16,7 @@ import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -155,8 +159,19 @@ public class ConversionPanel extends JFrame{
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					//ici ouvrir la fenetre de chargement 
+					JFrame chargement = new JFrame("Convertion de votre fichier");
+					chargement.setLayout(new FlowLayout());
+					chargement.setSize(400, 150);
+					chargement.setVisible(true);
+					JLabel c = new JLabel("Convertion de votre fichier ...");
+					chargement.add(c,BorderLayout.CENTER);
+					//recuperation des dimensions de l'ecran
+					Dimension ecran = Toolkit.getDefaultToolkit().getScreenSize();
+					//on positionne la fenetre au centre de l'ecran
+					chargement.setLocation(((int)ecran.getWidth()-400)/2, ((int)ecran.getHeight()-150)/2);
+					
 					model.convert();
-				    //ici fermer la fenetre de chargement
+				    chargement.dispose();
 				} 		
 			});
 			return convert;	 
@@ -176,7 +191,11 @@ public class ConversionPanel extends JFrame{
 		 } catch (IOException e1) {
 			 e1.printStackTrace();
 			}
-		 this.setLocation(100, 100);
+		//recuperation des dimensions de l'ecran
+		Dimension ecran = Toolkit.getDefaultToolkit().getScreenSize();
+		//on positionne la fenetre au centre de l'ecran
+		this.setLocation(((int)ecran.getWidth()-1000)/2, ((int)ecran.getHeight()-600)/2);
+				
 		 this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		 
 		 SummaryView sv = new SummaryView(this.model);

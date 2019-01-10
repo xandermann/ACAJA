@@ -21,10 +21,22 @@ import javax.swing.JTextField;
 import files.SettingsFile;
 
 public class VideoSettingsPanel extends JPanel implements Observer{
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
+	
 	private ConversionModel model;
 	private JTextField includeResolution;
 	private JTextField includeBitrate;
 	private JTextField includeFps;
+	
+	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
 	
 	public VideoSettingsPanel(ConversionModel m) {
 		this.model = m;
@@ -117,6 +129,11 @@ public class VideoSettingsPanel extends JPanel implements Observer{
 	
 	
 	
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
+	
 	@Override
 	public void update(Observable o, Object arg) { 
 		if(model.getCurrentFile() != null) {
@@ -132,6 +149,18 @@ public class VideoSettingsPanel extends JPanel implements Observer{
 			includeFps.setText( "" +
 					(Double) settings.get(SettingsFile.FPS));
 			includeFps.setEnabled(true);
+		}else{
+			includeResolution.setText("");
+			includeResolution.setEnabled(false);
+			includeBitrate.setText("");
+			includeBitrate.setEnabled(false);
+			includeFps.setText("");
+			includeFps.setEnabled(false);
 		}
 	}
+	
+	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
 }

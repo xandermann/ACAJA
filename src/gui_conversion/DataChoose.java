@@ -12,8 +12,16 @@ import javax.swing.JFrame;
 import javax.swing.filechooser.FileFilter;
 
 public class DataChoose {
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
 	
 	private static JFileChooser jfc;
+	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
 	
 	public static File FileChoose() throws Exception {
 		
@@ -27,6 +35,11 @@ public class DataChoose {
 		return importFile;
 	}
 	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
 	public static ArrayList<File> DirectoryChoose() throws Exception {
 		ArrayList<File> files = new ArrayList<File>();
 		
@@ -36,14 +49,16 @@ public class DataChoose {
 		jdc.setAcceptAllFileFilterUsed(true);
 
 		File importDirectory = jdc.getCurrentDirectory();
-		if(!importDirectory.isDirectory() || importDirectory == null) {
+		if(!importDirectory.isDirectory() || importDirectory == null)
 			throw new Exception("Merci de selectionner un dossier");
-		} else {
-			for(File f : importDirectory.listFiles()) {
+		else{
+			for(File f : importDirectory.listFiles()) 
 				files.add(f);
-			}
 		}
-		
 		return files;
 	}
+
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
 }

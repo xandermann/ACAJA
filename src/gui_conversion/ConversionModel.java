@@ -12,12 +12,23 @@ import ffmpeg_tools.UserRequests;
 import files.SettingsFile;
 
 public class ConversionModel extends Observable {
-
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
+	
 	private SettingsFile currentFile;
 	private ArrayList<SettingsFile> files;
-	// nouvel attribut rajoute pour les profils charges
+	//nouvel attribut rajoute pour les profils charges
 	private ArrayList<Profile> profiles;
+	
+	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
 
+	
+	
 	/**
 	 * Constructeur ConversionModel
 	 * 
@@ -27,6 +38,13 @@ public class ConversionModel extends Observable {
 		this.profiles = new ArrayList<Profile>();
 	}
 
+	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
+	
 	/*
 	 * Les profils seront enregistres dans le dossier du programme et seront tous
 	 * charges au demarrage. L'utilisateur pourra gerer les profils presents et en
@@ -69,13 +87,19 @@ public class ConversionModel extends Observable {
 	// a modifier public void removeProfile(Profile profile) {}
 	// anciennement public void removeProfile(File profileFile) { }
 	public void removeProfile(Profile profile) {
-		if (this.profiles.contains(profile)) {
+		if (this.profiles.contains(profile)) 
 			this.profiles.remove(profile);
-		} else {
+		else 
 			JOptionPane.showMessageDialog(null, "Le profil a supprimer n'existe pas");
-		}
 	}
 
+	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
+	
 	/**
 	 * Methode qui sauvegarde les fichiers recemments ouverts a la fermeture
 	 */
@@ -92,6 +116,13 @@ public class ConversionModel extends Observable {
 		return null;
 	}
 
+	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
+	
 	/**
 	 * Methode qui retourne le fichier actuellement selectionne par l'utilisateur
 	 * 
@@ -109,12 +140,9 @@ public class ConversionModel extends Observable {
 	 *                    l'utilisateur
 	 */
 	public void setCurrentFile(String fileName) {
-
 		for (SettingsFile f : this.getFiles()) {
-			if (f.getSourceFilename().contentEquals(fileName)) {
+			if (f.getSourceFilename().contentEquals(fileName)) 
 				this.currentFile = f;
-				System.out.println("Set current file : " + fileName);
-			}
 		}
 		this.setChanged();
 		this.notifyObservers();
@@ -126,16 +154,21 @@ public class ConversionModel extends Observable {
 	 * @param file SettingsFile : fichier a ajouter a la bibliotheque
 	 */
 	public void add(File file) {
-
-		if (file.exists()) {
+		if(file.exists()) {
 			this.files.add(new SettingsFile(file));
 			this.setChanged();
 			this.notifyObservers();
-
-		} else {
+		}else 
 			JOptionPane.showMessageDialog(null, "Le fichier selectionne n'existe pas");
-		}
+		
 	}
+	
+	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
 
 	/**
 	 * Methode qui recupere les noms des fichiers et les retourne sous la forme
@@ -148,9 +181,8 @@ public class ConversionModel extends Observable {
 	 */
 	public DefaultListModel getFilenames() {
 		DefaultListModel filenameList = new DefaultListModel();
-		for (SettingsFile f : this.getFiles()) {
+		for (SettingsFile f : this.getFiles()) 
 			filenameList.addElement(new ListEntry(f.getSourceFilename()));
-		}
 		return filenameList;
 	}
 
@@ -160,24 +192,15 @@ public class ConversionModel extends Observable {
 	 * @param file SettingsFile ! fichier a supprimer de la bibliotheque
 	 */
 	public void remove(SettingsFile file) {
-		if (this.files.contains(file)) {
+		if(this.files.contains(file)) {
 			this.files.remove(file);
-		} else {
+			this.currentFile = null;
+			this.setChanged();
+			this.notifyObservers();
+		}else
 			JOptionPane.showMessageDialog(null, "Le fichier a supprimer n'est pas present dans la bibliotheque");
-		}
 	}
-
-	/**
-	 * Methode qui demarre la conversion des SettingsFile modifies
-	 */
-	public void convert() {
-		for (SettingsFile sf : this.files) {
-			if (sf.isModified()) {
-				UserRequests.execute(sf);
-			}
-		}
-	}
-
+	
 	/**
 	 * Methode qui vide la bibliotheque
 	 */
@@ -187,12 +210,35 @@ public class ConversionModel extends Observable {
 		this.notifyObservers();
 	}
 
+	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
+	
 	/**
 	 * Methode qui permet de modifier un reglage du fichier actuellement selectionne
 	 */
 	public void modify(Integer setting, Object value) {
 		this.currentFile.modifySetting(setting, value);
 	}
+	
+	/**
+	 * Methode qui demarre la conversion des SettingsFile modifies
+	 */
+	public void convert() {
+		for(SettingsFile sf : this.files) {
+			if (sf.isModified()) 
+				UserRequests.execute(sf);		
+		}
+	}
+
+	
+
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
 
 	/**
 	 * Methode qui retourne la liste des fichiers actuellement dans la bibliotheque
@@ -201,4 +247,7 @@ public class ConversionModel extends Observable {
 		return files;
 	}
 
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
 }

@@ -124,12 +124,9 @@ public class OpeningWindow {
 		
 		frame.setVisible(true);
 		convertbutton.addActionListener(new ActionListener() {
-			
 			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				ConversionModel c = new ConversionModel();
-				ConversionPanel p = new ConversionPanel(c);
-				p.generateConversionWindow();
+			public void actionPerformed(ActionEvent arg0) {		
+				ConversionPanel.generateConversionWindow();
 				frame.dispose();
 			}
 		});

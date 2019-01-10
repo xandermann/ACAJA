@@ -1,5 +1,3 @@
 package gui_conversion;
 
-public class Profile {
-
-}
+public class Profile {}

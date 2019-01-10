@@ -2,7 +2,6 @@ package tests.files;
 
 import java.io.File;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import files.SelectableFile;
@@ -10,7 +9,7 @@ import files.SelectableFile;
 public class SelectaleFileTest {
 
 	/**
-	 * Test
+	 * Test si le programme detecte bien les fichiers vidéos
 	 * 
 	 * @throws Exception
 	 */
@@ -27,7 +26,7 @@ public class SelectaleFileTest {
 	}
 	
 	/**
-	 * Test
+	 * Test si le programme detecte bien les fichiers audios
 	 * 
 	 * @throws Exception
 	 */
@@ -44,7 +43,7 @@ public class SelectaleFileTest {
 	}
 	
 	/**
-	 * Test
+	 * Test si le programme detecte bien les fichiers images
 	 * 
 	 * @throws Exception
 	 */
@@ -58,6 +57,19 @@ public class SelectaleFileTest {
 		} else {
 			throw new Exception("Erreur fonction whoIAm()");
 		}
+	}
+	
+	/**
+	 * Test si le programme detecte bien les fichiers invalide
+	 * 
+	 * @throws Exception
+	 */
+	@Test(expected=IllegalArgumentException.class)
+	public void fichierInvalideTest() throws Exception {
+		File file = new File("Test.superextension");
+		SelectableFile selectableFile = new SelectableFile(file);
+
+		
 	}
 
 }

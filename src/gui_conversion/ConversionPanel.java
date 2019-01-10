@@ -154,9 +154,9 @@ public class ConversionPanel extends JFrame{
 			convert2.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					System.out.println("ffssf");
-					if(model.convert())
-						System.out.println("ffvsgsgssdggssf");
+					//ici ouvrir la fenetre de chargement 
+					model.convert();
+				    //ici fermer la fenetre de chargement
 				} 		
 			});
 			return convert;	 

@@ -24,7 +24,7 @@ public final class UserRequests extends FFmpegRuntime {
 	 * 
 	 * @param file 		La fichier sur lequel il faut realiser les modifications. 
 	 */
-	public static boolean execute(SelectableFile file) {
+	public static void execute(SelectableFile file) {
 		if(file instanceof SettingsFile) {
 			HashMap<Integer, Object> ffmpegRequests = ((SettingsFile) file).getOldSettings();
 			HashMap<Integer, Object> newSettings = ((SettingsFile) file).getOldSettings();
@@ -34,23 +34,36 @@ public final class UserRequests extends FFmpegRuntime {
 								file.getSourceFile().getPath().split("[.]")
 								[file.getSourceFile().getPath().split("[.]").length-1];
 						String fileName = file.getSourceFile().getPath();
-						String newFileName = fileName.substring(0, fileName.lastIndexOf(oldExtension)-1)+newSettings.get(SettingsFile.VIDEO_CODEC);
+						String newFileName = fileName.substring(0, fileName.lastIndexOf(oldExtension)-1)+
+								newSettings.get(SettingsFile.VIDEO_CODEC);
+						
+						/**
+						 * REQUETE DE CONVERSION SOUMISE A FFMPEG.
+						 */
 						Process conversion = execute(fileName+" "+newFileName);
+						
 						try {			 
 							String information = null;	
+							
+							/**
+							 * CONSOMMATION DU FLUX.
+							 */
 							try {
+								//On "consomme les flux des messages, pour ne pas bloquer le waiFGor().
 								BufferedReader br = new BufferedReader(new InputStreamReader(conversion .getErrorStream()));
 								while( (information = br.readLine()) != null ) ;
 								br.close();	
 							} catch (IOException e) {}
+							
+							/**
+							 * ATTENTE DE FIN DE LA CONVERSION.
+							 */
+							//On obige JAVA a attendre la de l'execution de la requete par FFMPEG. 
 							conversion.waitFor();
-						} catch (InterruptedException e) {
-							return false;
-						}
+						} catch (InterruptedException e) {}
 					}
 			}
 		}
-		return true;
 	}
 	
 	

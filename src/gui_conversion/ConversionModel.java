@@ -166,13 +166,12 @@ public class ConversionModel extends Observable {
 	/**
 	 * Methode qui demarre la conversion des SettingsFile modifies
 	 */
-	public boolean convert() {
+	public void convert() {
 		for(SettingsFile sf : this.files) {
 			if(sf.isModified()) {
 				UserRequests.execute(sf);
 			}
 		}
-		return true;
 	}
 
 	/**

@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
@@ -60,6 +61,25 @@ public class ConversionPanel extends JFrame{
 		});
 		
 		JMenuItem importFolder = new JMenuItem("Importer un dossier");
+		importFolder.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					ArrayList<File> files = DataChoose.DirectoryChoose();
+					for(File f : files) {
+						model.add(f);
+						model.setCurrentFile(f.getName());
+					}
+					
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+					//JOptionPane.showMessageDialog(null, e.getMessage());
+				}
+				
+				
+			
+			}
+		});
 		JMenuItem clearLibrary = new JMenuItem("Vider la bibliotheque");
 		clearLibrary.addActionListener(new ActionListener() {
 			@Override
@@ -67,6 +87,7 @@ public class ConversionPanel extends JFrame{
 				model.clear();
 			}
 		});
+		
 		JMenuItem quit = new JMenuItem("Quitter");
 		quit.addActionListener(new ActionListener() {
 			@Override
@@ -147,6 +168,7 @@ public class ConversionPanel extends JFrame{
 	  */
 	 public void generateConversionWindow() {
 		 this.setVisible(true);
+		 this.setResizable(false);
 		 this.setTitle("Acaja Conversion");
 		 this.setSize(new Dimension(1000,600));
 		 try {

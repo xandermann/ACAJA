@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.filechooser.FileFilter;
 
 public class DataChoose {
 	
@@ -26,9 +27,23 @@ public class DataChoose {
 		return importFile;
 	}
 	
-	public static ArrayList<File> DirectoryChoose() {
+	public static ArrayList<File> DirectoryChoose() throws Exception {
+		ArrayList<File> files = new ArrayList<File>();
 		
-		//Todo
-		return null;
+		JFileChooser jdc = new JFileChooser("Parcourir");
+		jdc.showOpenDialog(null);
+		jdc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+		jdc.setAcceptAllFileFilterUsed(true);
+
+		File importDirectory = jdc.getCurrentDirectory();
+		if(!importDirectory.isDirectory() || importDirectory == null) {
+			throw new Exception("Merci de selectionner un dossier");
+		} else {
+			for(File f : importDirectory.listFiles()) {
+				files.add(f);
+			}
+		}
+		
+		return files;
 	}
 }

@@ -85,6 +85,7 @@ public class OpeningWindow {
 		j2.setPreferredSize(new Dimension(100, 50));
 		
 		JFrame frame = new JFrame("Acaja");
+		frame.setResizable(false);
 		try {
 			frame.setIconImage(ImageIO.read(new File("img/LogoAcaja.png")));
 		} catch (IOException e1) {

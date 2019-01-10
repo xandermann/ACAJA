@@ -24,7 +24,7 @@ public class SelectaleFileTest {
 			throw new Exception("Erreur fonction whoIAm()");
 		}
 	}
-	
+
 	/**
 	 * Test si le programme detecte bien les fichiers audios
 	 * 
@@ -41,7 +41,7 @@ public class SelectaleFileTest {
 			throw new Exception("Erreur fonction whoIAm()");
 		}
 	}
-	
+
 	/**
 	 * Test si le programme detecte bien les fichiers images
 	 * 
@@ -58,18 +58,17 @@ public class SelectaleFileTest {
 			throw new Exception("Erreur fonction whoIAm()");
 		}
 	}
-	
+
 	/**
 	 * Test si le programme detecte bien les fichiers invalide
 	 * 
 	 * @throws Exception
 	 */
-	@Test(expected=IllegalArgumentException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void fichierInvalideTest() throws Exception {
 		File file = new File("Test.superextension");
 		SelectableFile selectableFile = new SelectableFile(file);
 
-		
 	}
 
 }

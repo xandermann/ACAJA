@@ -58,7 +58,7 @@ public final class UserRequests extends FFmpegRuntime {
 							/**
 							 * ATTENTE DE FIN DE LA CONVERSION.
 							 */
-							//On obige JAVA a attendre la de l'execution de la requete par FFMPEG. 
+							//On oblige JAVA a attendre la fin de l'execution de la requete par FFMPEG. 
 							conversion.waitFor();
 						} catch (InterruptedException e) {}
 					}

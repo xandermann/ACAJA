@@ -6,6 +6,9 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.HashMap;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -17,18 +20,20 @@ import javax.swing.JTextField;
 
 import files.SettingsFile;
 
-public class VideoSettingsPanel extends JPanel {
-
+public class VideoSettingsPanel extends JPanel implements Observer{
 	private ConversionModel model;
-
+	private JTextField includeResolution;
+	private JTextField includeBitrate;
+	private JTextField includeFps;
+	
 	public VideoSettingsPanel(ConversionModel m) {
 		this.model = m;
-		this.reevaluatePanel();
-	}
-
-	private void reevaluatePanel() {
+		
+		includeResolution = new JTextField();
+		includeBitrate = new JTextField();
+		includeFps = new JTextField();
+		
 		this.setSize(new Dimension(400, 400));
-
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
 		JPanel Codec = new JPanel();
@@ -58,30 +63,28 @@ public class VideoSettingsPanel extends JPanel {
 		});
 
 		Codec.add(box_format, BorderLayout.EAST);
-
+		
 		JPanel reso = new JPanel();
 		reso.setLayout(new FlowLayout());
+		
 		reso.add(new JLabel("Resolution : "), BorderLayout.WEST);
-		JTextField resolution_Text = new JTextField();
-		resolution_Text.setPreferredSize(new Dimension(300, 20));
-		resolution_Text.setEnabled(false);
-		reso.add(resolution_Text, BorderLayout.EAST);
+		includeResolution.setPreferredSize(new Dimension(300, 20));
+		includeResolution.setEnabled(false);
+		reso.add(includeResolution, BorderLayout.EAST);
 
 		JPanel br = new JPanel();
 		br.setLayout(new FlowLayout());
 		br.add(new JLabel("Bitrate (kb/s) : "), BorderLayout.WEST);
-		JTextField bitrate_Text = new JTextField();
-		bitrate_Text.setPreferredSize(new Dimension(300, 20));
-		bitrate_Text.setEnabled(false);
-		br.add(bitrate_Text, BorderLayout.EAST);
+		includeBitrate.setPreferredSize(new Dimension(300, 20));
+		includeBitrate.setEnabled(false);
+		br.add(includeBitrate, BorderLayout.EAST);
 
 		JPanel panef = new JPanel();
 		panef.setLayout(new FlowLayout());
 		panef.add(new JLabel("Images par seconde (FPS) : "), BorderLayout.WEST);
-		JTextField fps_Text = new JTextField();
-		fps_Text.setPreferredSize(new Dimension(300, 20));
-		fps_Text.setEnabled(false);
-		panef.add(fps_Text, BorderLayout.EAST);
+		includeFps.setPreferredSize(new Dimension(300, 20));
+		includeFps.setEnabled(false);
+		panef.add(includeFps, BorderLayout.EAST);
 
 		JPanel panest = new JPanel();
 		panest.setLayout(new FlowLayout());
@@ -110,7 +113,25 @@ public class VideoSettingsPanel extends JPanel {
 		this.add(br);
 		this.add(panef);
 		this.add(panest);
-		// this.repaint();
 	}
-
+	
+	
+	
+	@Override
+	public void update(Observable o, Object arg) { 
+		if(model.getCurrentFile() != null) {
+			HashMap<Integer, Object> settings = model.getCurrentFile().getSettings();
+			includeResolution.setText( "" +
+					( (Integer[]) settings.get(SettingsFile.VIDEO_RESOLUTION) )[0]
+					+"x"
+					+ ( (Integer[]) settings.get(SettingsFile.VIDEO_RESOLUTION) )[1]);	
+			includeResolution.setEnabled(true);
+			includeBitrate.setText( "" +
+					(Integer) settings.get(SettingsFile.VIDEO_BITRATE));
+			includeBitrate.setEnabled(true);
+			includeFps.setText( "" +
+					(Double) settings.get(SettingsFile.FPS));
+			includeFps.setEnabled(true);
+		}
+	}
 }

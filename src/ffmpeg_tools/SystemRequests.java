@@ -448,12 +448,6 @@ public final class SystemRequests extends FFmpegRuntime{
 	}
 	
 	
-	
-	public static void main(String[] args){
-		File file = new File("C:\\Users\\Jean-christophe\\Documents\\PROFESSIONNEL\\2A\\projetTutore\\test\\1.avi");
-		SettingsFile file2 = new SettingsFile(file);
-		
-	}
 	//=======================================================================================================================
 	//=======================================================================================================================
 }

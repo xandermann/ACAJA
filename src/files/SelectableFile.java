@@ -11,7 +11,11 @@ import java.io.File;
  *         CHEVRIER Jean-christophe.
  */
 public class SelectableFile {
-
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
+	
 	/**
 	 * 
 	 * Ces constantes permettent d'indiquer le type du fichier source d'une instance
@@ -53,8 +57,13 @@ public class SelectableFile {
 	 */
 	private boolean isSelected;
 
-	// =======================================================================================================================
-
+	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
+	
 	/**
 	 * [ CONSTRUCTEUR. ]
 	 * 
@@ -68,8 +77,13 @@ public class SelectableFile {
 		this.whoAmI();
 	}
 
-	// =======================================================================================================================
+	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
 
+	
+	
 	/**
 	 * [ METHODE - ROLE PRIMITIF. ]
 	 * 
@@ -105,14 +119,19 @@ public class SelectableFile {
 	public boolean isSound() {
 		return typeFile == SelectableFile.FILE_TYPE_AUDIO;
 	}
+	
+	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
 
-	// =======================================================================================================================
-
+	
+	
 	/**
 	 * [ METHODE - ROLE PRIMITIF. ]
 	 * 
 	 * Cette methode a un role primitif, elle permet se verifier si le fichier
-	 * source est un son.
+	 * source est un son ou une video.
 	 * 
 	 * @return booleen Vaut true si le fichier source est une video ou un son.
 	 */
@@ -134,16 +153,21 @@ public class SelectableFile {
 
 		if (fileName.endsWith("mp4") || fileName.endsWith("avi") || fileName.endsWith("flv"))
 			typeFile = FILE_TYPE_VIDEO;
-		else if (fileName.endsWith("mp3") || fileName.endsWith("wav") || fileName.endsWith("ogg"))
-			typeFile = FILE_TYPE_AUDIO;
-		else if (fileName.endsWith("png") || fileName.endsWith("jpg") || fileName.endsWith("jpeg"))
-			typeFile = FILE_TYPE_IMAGE;
-		else
-			throw new IllegalArgumentException("Extension du fichier non conforme !");
+			else if (fileName.endsWith("mp3") || fileName.endsWith("wav") || fileName.endsWith("ogg"))
+					typeFile = FILE_TYPE_AUDIO;
+				else if (fileName.endsWith("png") || fileName.endsWith("jpg") || fileName.endsWith("jpeg"))
+						typeFile = FILE_TYPE_IMAGE;
+					else
+						throw new IllegalArgumentException("Extension du fichier non conforme !");
 	}
 
-	// =======================================================================================================================
+	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
 
+	
+	
 	/**
 	 * [ METHODE POUR SAVOIR SI THIS A ETE MODIFIE. ]
 	 * 
@@ -191,8 +215,13 @@ public class SelectableFile {
 		isSelected = false;
 	}
 
-	// =======================================================================================================================
+	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
 
+	
+	
 	public long getDuration() {
 		return duration;
 	}
@@ -232,4 +261,8 @@ public class SelectableFile {
 		return sourceFile.getName();
 	}
 
+	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
 }

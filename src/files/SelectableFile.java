@@ -102,9 +102,6 @@ public class SelectableFile {
 	 * @return booleen Vaut true si le fichier source est une video ou un son.
 	 */
 	public boolean isGoodFile() {
-		System.out.println(isVideo());
-		System.out.println(isSound());
-		System.out.println(isVideo() || isSound());
 		return (isVideo() || isSound());
 	}
 
@@ -120,17 +117,16 @@ public class SelectableFile {
 	private void whoAmI() {
 
 		String fileName = this.sourceFile.getName().toLowerCase();
-		System.out.println(fileName);
-		/**
-		 * TODO ajouter des extensions de video possibles.
-		 */
 
-		if (fileName.endsWith("mp4") || fileName.endsWith("avi"))
+		if (fileName.endsWith("mp4") || fileName.endsWith("avi") || fileName.endsWith("flv"))
 			typeFile = FILE_TYPE_VIDEO;
 		else if (fileName.endsWith("mp3") || fileName.endsWith("wav") || fileName.endsWith("ogg"))
 			typeFile = FILE_TYPE_AUDIO;
 		else if (fileName.endsWith("png") || fileName.endsWith("jpg") || fileName.endsWith("jpeg"))
 			typeFile = FILE_TYPE_IMAGE;
+		else
+			throw new IllegalArgumentException("Type de fichier non conforme !");
+
 	}
 
 	/**

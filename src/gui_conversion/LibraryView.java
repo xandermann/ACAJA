@@ -2,13 +2,15 @@ package gui_conversion;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 
-public class LibraryView extends JList implements Observer, ActionListener {
+public class LibraryView extends JList implements Observer, MouseListener {
 
 	/**
 	 * Model conversion
@@ -25,6 +27,7 @@ public class LibraryView extends JList implements Observer, ActionListener {
 		this.model = p_model;
 		this.reevaluatePanel();
 		this.setVisible(true);
+		this.addMouseListener(this);
 	}
 
 	/**
@@ -40,10 +43,37 @@ public class LibraryView extends JList implements Observer, ActionListener {
 		this.repaint();
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		this.setModel(this.model.getFilenames());
+	
 
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		this.model.setCurrentFile(this.getSelectedValue().toString());
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

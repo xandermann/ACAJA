@@ -53,6 +53,7 @@ public class SettingsFile extends SelectableFile {
 
 		// Initialisation des autres parametres.
 		SystemRequests.getSettings(this);
+
 	}
 
 	/**

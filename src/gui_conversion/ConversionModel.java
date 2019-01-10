@@ -101,12 +101,20 @@ public class ConversionModel extends Observable {
 
 	/**
 	 * Methode qui modifie le fichier actuellement selectionne par l'utilisateur
+<<<<<<< HEAD
+	 * @param currentFile String : nom du fichier maintenant selectionne par l'utilisateur
+=======
 	 * 
 	 * @param currentFile SettingsFile : fichier maintenant selectionne pour la
 	 *                    modification par l'utilisateur
+>>>>>>> b333678195450991d5345821356150f84aa28279
 	 */
-	public void setCurrentFile(SettingsFile currentFile) {
-		this.currentFile = currentFile;
+	public void setCurrentFile(String fileName) {
+		for(SettingsFile f : this.getFiles()) {
+			if(f.getSourceFilename().contentEquals(fileName)) {
+				this.currentFile = f;
+			}
+		}
 	}
 
 	/**
@@ -115,16 +123,12 @@ public class ConversionModel extends Observable {
 	 * @param file SettingsFile : fichier a ajouter a la bibliotheque
 	 */
 	public void add(File file) {
-		if (file.exists()) {
-			try {
+
+		if(file.exists()) {
 				this.files.add(new SettingsFile(file));
 				this.setChanged();
 				this.notifyObservers();
-			} catch (IOException e) {
-				e.printStackTrace();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+
 		} else {
 			JOptionPane.showMessageDialog(null, "Le fichier selectionne n'existe pas");
 		}

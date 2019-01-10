@@ -38,6 +38,7 @@ public class LibraryView extends JList implements Observer, MouseListener, KeyLi
 		this.setFixedCellWidth(400);
 		this.setVisible(true);
 		this.addMouseListener(this);
+		this.addKeyListener(this);
 	}
 
 	
@@ -75,7 +76,7 @@ public class LibraryView extends JList implements Observer, MouseListener, KeyLi
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		 if(e.getKeyCode()==KeyEvent.VK_DELETE)
+		 if(e.getKeyCode()==KeyEvent.VK_DELETE) 
 			 this.model.remove(this.model.getCurrentFile());	 
 	}
 

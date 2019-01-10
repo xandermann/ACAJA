@@ -96,6 +96,13 @@ public class SoundSettingsPanel extends JPanel implements Observer{
 			includeChannels.setText( "" +
 					(Integer) settings.get(SettingsFile.NUMBER_AUDIO_CHANNELS));
 			includeChannels.setEnabled(true);
+		}else{
+			includeBitrate.setText("");
+			includeBitrate.setEnabled(false);
+			includeSamplingRate.setText("");
+			includeSamplingRate.setEnabled(false);
+			includeChannels.setText("");
+			includeChannels.setEnabled(false);
 		}
 	}
 	

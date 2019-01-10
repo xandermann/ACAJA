@@ -149,6 +149,13 @@ public class VideoSettingsPanel extends JPanel implements Observer{
 			includeFps.setText( "" +
 					(Double) settings.get(SettingsFile.FPS));
 			includeFps.setEnabled(true);
+		}else{
+			includeResolution.setText("");
+			includeResolution.setEnabled(false);
+			includeBitrate.setText("");
+			includeBitrate.setEnabled(false);
+			includeFps.setText("");
+			includeFps.setEnabled(false);
 		}
 	}
 	

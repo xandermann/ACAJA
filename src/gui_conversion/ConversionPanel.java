@@ -214,7 +214,7 @@ public class ConversionPanel extends JFrame{
 		cp.setLocation(((int)ecran.getWidth()-1000)/2, ((int)ecran.getHeight()-600)/2);
 				
 		cp.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		 
+		
 		 SummaryView sv = new SummaryView(cp.model);
 		 DefaultListModel list_content = cp.model.getFilenames();
 		 LibraryView lv = new LibraryView(cp.model, list_content);
@@ -232,7 +232,7 @@ public class ConversionPanel extends JFrame{
 		 cp.model.addObserver(sv);
 		 p.add(sv,BorderLayout.NORTH);
 		 p.add(tv,BorderLayout.CENTER);
-		 
+		
 		 cp.setLayout(new BorderLayout());
 		 cp.add(lv,BorderLayout.WEST);
 		 cp.add(p,BorderLayout.EAST);

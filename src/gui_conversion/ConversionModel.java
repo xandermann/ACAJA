@@ -194,9 +194,12 @@ public class ConversionModel extends Observable {
 	 * @param file SettingsFile ! fichier a supprimer de la bibliotheque
 	 */
 	public void remove(SettingsFile file) {
-		if(this.files.contains(file))
+		if(this.files.contains(file)) {
 			this.files.remove(file);
-		else
+			this.currentFile = null;
+			this.setChanged();
+			this.notifyObservers();
+		}else
 			JOptionPane.showMessageDialog(null, "Le fichier a supprimer n'est pas present dans la bibliotheque");
 	}
 	

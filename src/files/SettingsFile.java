@@ -63,7 +63,7 @@ public class SettingsFile extends SelectableFile {
 		settings = new HashMap<String, Object>();
 		
 		//Initialisation des autres parametres. 
-	//	SystemRequests.getSettings(this);
+	    SystemRequests.getSettings(this);
 	}
 
 	
@@ -80,6 +80,13 @@ public class SettingsFile extends SelectableFile {
 	 * @param newValue		La nouvelle valeur du parametre. 
 	 */
 	public void modifySettings(String setting, String newValue) {
+		if(setting.equals("codec video")) {
+			String oldExtension =  
+					sourceFile.getName().split("[.]")
+					[sourceFile.getName().split("[.]").length-1];
+			String fileName = sourceFile.getName();
+			newValue = fileName.substring(0, fileName.lastIndexOf(oldExtension)-1)+newValue;
+		}
 		oldSettings.put(setting, settings.get(setting));
 		settings.put(setting, newValue);
 	}
@@ -113,7 +120,16 @@ public class SettingsFile extends SelectableFile {
 		return settings;
 	}
 
-	
+	/**
+	 * [ METHODE ACCESSEUR - GETTER. ]
+	 * 
+	 * Recupere les anciens parametres du fichiers.
+	 * 
+	 * @return HashMap<String, String>			Les parametres du fichier. 
+	 */
+	public HashMap<String, Object> getOldSettings() {
+		return oldSettings;
+	}
 	
 	//=======================================================================================================================
 	//=======================================================================================================================

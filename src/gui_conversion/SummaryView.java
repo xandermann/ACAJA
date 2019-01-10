@@ -10,10 +10,18 @@ import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.util.*;
 public class SummaryView extends JPanel implements Observer{
-
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
 	private ConversionModel model;
 	private JPanel j,j1,j2,j3;
 	private JLabel nomvar,videovar,sonvar,dureevar;
+	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
 	
 	public SummaryView (ConversionModel p_model) {
 		this.model = p_model;
@@ -55,20 +63,23 @@ public class SummaryView extends JPanel implements Observer{
 		this.add(j3);
 	}
 	
-	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		
-	}
+
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
 	@Override
 	public void update(Observable o, Object arg) {
-		System.out.println("passe");
 		if(this.model.getCurrentFile() != null) {
 			nomvar.setText(this.model.getCurrentFile().getSourceFilename());
 			videovar.setText((String) this.model.getCurrentFile().getSettings().get(SettingsFile.VIDEO_CODEC));
 			sonvar.setText((String) this.model.getCurrentFile().getSettings().get(SettingsFile.AUDIO_CODEC));
-			// dureevar.setText((String) this.model.getCurrentFile().getSettings().get("duree"));
+			//dureevar.setText((String) this.model.getCurrentFile().getSettings().get("duree"));
 		}
 		this.repaint();
 	}
-
+	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
 }

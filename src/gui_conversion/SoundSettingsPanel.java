@@ -18,11 +18,19 @@ import javax.swing.JTextField;
 import files.SettingsFile;
 
 public class SoundSettingsPanel extends JPanel implements Observer{
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
 	private ConversionModel model;
 	private JTextField includeBitrate;
 	private JTextField includeSamplingRate;
 	private JTextField includeChannels;
 	private JTextField includeVolume;
+	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
 	
 	
 	public SoundSettingsPanel(ConversionModel m) {
@@ -71,6 +79,9 @@ public class SoundSettingsPanel extends JPanel implements Observer{
 	}
 
 	
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
 	
 	@Override
 	public void update(Observable o, Object arg) {
@@ -87,4 +98,8 @@ public class SoundSettingsPanel extends JPanel implements Observer{
 			includeChannels.setEnabled(true);
 		}
 	}
+	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
 }

@@ -41,13 +41,10 @@ public class OpeningWindow {
 	 */
 	private static void generateLoardingWindow() {
 		JFrame frame = new JFrame("Chargement d'Acaja");
-		try {
-			frame.setIconImage(ImageIO.read(new File("img/LogoAcaja.png")));
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
+		OpeningWindow.afficherLogo(frame);
 		
 		frame.setLocation(200, 200);
+		
 		frame.setSize(new Dimension(WIDTH/3,HEIGHT/4));
 		frame.setVisible(true); 
 		
@@ -86,15 +83,15 @@ public class OpeningWindow {
 		
 		JFrame frame = new JFrame("Acaja");
 		frame.setResizable(false);
-		try {
-			frame.setIconImage(ImageIO.read(new File("img/LogoAcaja.png")));
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
 		
+		OpeningWindow.afficherLogo(frame);
 		frame.setLayout(new BorderLayout());
-		frame.setLocation(100, 100);
+		
+		//recuperation des dimensions de l'ecran
+		Dimension ecran = Toolkit.getDefaultToolkit().getScreenSize();
+		//on positionne la fenetre au centre de l'ecran
+		frame.setLocation(((int)ecran.getWidth()-750)/2, ((int)ecran.getHeight()-500)/2);
+				
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(new Dimension(WIDTH,HEIGHT));
 		
@@ -127,12 +124,9 @@ public class OpeningWindow {
 		
 		frame.setVisible(true);
 		convertbutton.addActionListener(new ActionListener() {
-			
 			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				ConversionModel c = new ConversionModel();
-				ConversionPanel p = new ConversionPanel(c);
-				p.generateConversionWindow();
+			public void actionPerformed(ActionEvent arg0) {		
+				ConversionPanel.generateConversionWindow();
 				frame.dispose();
 			}
 		});
@@ -152,6 +146,14 @@ public class OpeningWindow {
 	public static void generateOpeningWindow() {
 		//generateLoardingWindow();
 		generateChoiceModeWindow();
+	}
+	
+	public static void afficherLogo(JFrame f) {
+		try {
+			f.setIconImage(ImageIO.read(new File("img/LogoAcaja.png")));
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 	}
 	
 	

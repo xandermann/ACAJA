@@ -2,6 +2,8 @@ package gui_conversion;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -11,24 +13,29 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import main.OpeningWindow;
+
 public class ConversionPanel extends JFrame{
-	
-	
 	 private ConversionModel model;
+	 
+	 
+	 
 	 
 	 /** Constructeur de la fenetre ConversionPanel
 	  * 
-	  * @param m Modele associe a la fenetre
 	  */
-	 public ConversionPanel(ConversionModel m) {
-		this.model = m;
+	 private ConversionPanel() {
+		this.model = new ConversionModel();
 	 }
+	 
+	 
 	 
 	 
 	 /** Methode privee qui cree le contenu du menu fichier
@@ -49,9 +56,6 @@ public class ConversionPanel extends JFrame{
 				} catch (Exception e) {
 					JOptionPane.showMessageDialog(null, e.getMessage());
 				}
-				
-				
-			
 			}
 		});
 		
@@ -64,15 +68,11 @@ public class ConversionPanel extends JFrame{
 					for(File f : files) {
 						model.add(f);
 						model.setCurrentFile(f.getName());
-					}
-					
+					}					
 				} catch (Exception e) {
 					System.out.println(e.getMessage());
 					//JOptionPane.showMessageDialog(null, e.getMessage());
 				}
-				
-				
-			
 			}
 		});
 		JMenuItem clearLibrary = new JMenuItem("Vider la bibliotheque");
@@ -88,9 +88,7 @@ public class ConversionPanel extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
-				
-			} 
-			
+			} 		
 		});
 		
 		itemsFiles.add(importFile);
@@ -100,6 +98,9 @@ public class ConversionPanel extends JFrame{
 	
 		return itemsFiles;	 
 	 }
+	 
+	 
+	 
 	 
 	 
 	 /** Methode privee qui cree le contenu du menu profils
@@ -122,6 +123,9 @@ public class ConversionPanel extends JFrame{
 		 }
 	 
 	 
+	 
+	 
+	 
 	 /** Methode privee qui cree le contenu du menu options
 	  * 	 
 	  * @return JMenu menu des options et ses items
@@ -136,13 +140,17 @@ public class ConversionPanel extends JFrame{
 			menuOptions.add(switchMode);
 
 			return menuOptions;	 
-		 }
+	}
 	
+	 
+	 
+	 
+	 
 	 /** Methode privee qui cree le contenu du menu conversion
 	  * 
 	  * @return JMenu menu de conversion et ses items
 	  */
-	 private JMenu drawConvertButton() {
+	 private JMenu drawConvertMenu() {
 		 	JMenu convert = new JMenu("Convertir"); 	
 		 	JMenuItem convert2 = new JMenuItem("Convertir les fichiers");
 		 	convert.add(convert2);
@@ -150,53 +158,85 @@ public class ConversionPanel extends JFrame{
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					//ici ouvrir la fenetre de chargement 
+
+					JFrame chargement = new JFrame("Convertion de votre fichier");
+					OpeningWindow.afficherLogo(chargement);
+
+					chargement.setLayout(new FlowLayout());
+					chargement.setSize(400, 150);
+					JLabel c = new JLabel("Conversion de votre fichier ...");
+					chargement.add(c,BorderLayout.CENTER);
+					//recuperation des dimensions de l'ecran
+					Dimension ecran = Toolkit.getDefaultToolkit().getScreenSize();
+					//on positionne la fenetre au centre de l'ecran
+					chargement.setLocation(((int)ecran.getWidth()-400)/2, ((int)ecran.getHeight()-150)/2);
+					chargement.setVisible(true);					
+					
+					/*Thread t = new Thread();
+					while(model.convert()) {
+						c.setText("Convertion de votre fichier .");
+						t.sleep(20);
+						c.setText("Convertion de votre fichier ..");
+						t.sleep(20);
+						c.setText("Convertion de votre fichier ...");
+						t.sleep(20);
+					}*/
 					model.convert();
-				    //ici fermer la fenetre de chargement
+					
+				    chargement.dispose();
 				} 		
 			});
 			return convert;	 
 	 }
 		 
 	 
+	 
+	 
 	 /** Methode pour generer la fenetre de conversion et l'afficher
 	  * 
 	  */
-	 public void generateConversionWindow() {
-		 this.setVisible(true);
-		 this.setResizable(false);
-		 this.setTitle("Acaja Conversion");
-		 this.setSize(new Dimension(1000,600));
+
+	 public static void generateConversionWindow() {
+		 ConversionPanel cp = new ConversionPanel();
+		 
+		 cp.setVisible(true);
+		 cp.setResizable(false);
+		 cp.setTitle("Acaja Conversion");
+		 cp.setSize(new Dimension(1000,600));
+		 OpeningWindow.afficherLogo(cp);
 		 try {
-			 this.setIconImage(ImageIO.read(new File("img/LogoAcaja.png")));
+			 cp.setIconImage(ImageIO.read(new File("img/LogoAcaja.png")));
 		 } catch (IOException e1) {
 			 e1.printStackTrace();
 			}
-		 this.setLocation(100, 100);
-		 this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		 
-		 SummaryView sv = new SummaryView(this.model);
-		 DefaultListModel list_content = this.model.getFilenames();
-		 LibraryView lv = new LibraryView(this.model, list_content);
-		 TabsView tv = new TabsView(this.model);
+
+		//recuperation des dimensions de l'ecran
+		Dimension ecran = Toolkit.getDefaultToolkit().getScreenSize();
+		//on positionne la fenetre au centre de l'ecran
+		cp.setLocation(((int)ecran.getWidth()-1000)/2, ((int)ecran.getHeight()-600)/2);
+				
+		cp.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		 SummaryView sv = new SummaryView(cp.model);
+		 DefaultListModel list_content = cp.model.getFilenames();
+		 LibraryView lv = new LibraryView(cp.model, list_content);
+		 TabsView tv = new TabsView(cp.model);
 		 
 		 JPanel p = new JPanel();
 		 p.setLayout(new BorderLayout());
 		 JMenuBar menu = new JMenuBar();
-		 menu.add(this.drawFileMenu());
-		 menu.add(this.drawOptionsMenu());
-		 menu.add(this.drawProfilesMenu());
-		 menu.add(this.drawConvertButton());
-		 this.setJMenuBar(menu);
-		 this.model.addObserver(lv);
-		 this.model.addObserver(sv);
+		 menu.add(cp.drawFileMenu());
+		 menu.add(cp.drawOptionsMenu());
+		 menu.add(cp.drawProfilesMenu());
+		 menu.add(cp.drawConvertMenu());
+		 cp.setJMenuBar(menu);
+		 cp.model.addObserver(lv);
+		 cp.model.addObserver(sv);
 		 p.add(sv,BorderLayout.NORTH);
 		 p.add(tv,BorderLayout.CENTER);
-		 
-		 this.setLayout(new BorderLayout());
-		 this.add(lv,BorderLayout.WEST);
-		 this.add(p,BorderLayout.EAST);
-		 
-		 
-		 this.repaint();
+		
+		 cp.setLayout(new BorderLayout());
+		 cp.add(lv,BorderLayout.WEST);
+		 cp.add(p,BorderLayout.EAST);
 	 }
 }

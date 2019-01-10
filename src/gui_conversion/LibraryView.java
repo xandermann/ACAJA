@@ -11,12 +11,20 @@ import javax.swing.DefaultListModel;
 import javax.swing.JList;
 
 public class LibraryView extends JList implements Observer, MouseListener, KeyListener {
-
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
 	/**
 	 * Model conversion
 	 */
 	private ConversionModel model;
 
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
 	/**
 	 * Constructeur
 	 * @param p_model Model conversion
@@ -25,76 +33,58 @@ public class LibraryView extends JList implements Observer, MouseListener, KeyLi
 	public LibraryView(ConversionModel p_model, DefaultListModel p_listmodel) {
 		super(p_listmodel);
 		this.model = p_model;
-		this.reevaluatePanel();
+		this.setFixedCellWidth(400);
 		this.setVisible(true);
 		this.addMouseListener(this);
+		this.addKeyListener(this);
 	}
 
-	/**
-	 * Réévalue le Panel
-	 */
-	private void reevaluatePanel() {
-		this.setFixedCellWidth(400);
-	}
-
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
 	@Override
 	public void update(Observable o, Object arg) {
 		this.setModel(this.model.getFilenames());
 		this.repaint();
 	}
-
 	
-
-	@Override
-	public void mouseClicked(MouseEvent e) {
 	
-		
-	}
-
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		// TODO Auto-generated method stub
 		this.model.setCurrentFile(this.getSelectedValue().toString());
-		
 	}
+	
+	@Override
+	public void mouseClicked(MouseEvent e) {}
 
 	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void mouseReleased(MouseEvent e) {}
 
 	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void mouseEntered(MouseEvent e) {}
 
 	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void mouseExited(MouseEvent e) {}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		 if(e.getKeyCode()==KeyEvent.VK_DELETE){
-			 this.model.remove(this.model.getCurrentFile());
-		 }
+		 if(e.getKeyCode()==KeyEvent.VK_DELETE) 
+			 this.model.remove(this.model.getCurrentFile());	 
 	}
 
 	@Override
-	public void keyReleased(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void keyReleased(KeyEvent arg0) {}
 
 	@Override
-	public void keyTyped(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void keyTyped(KeyEvent arg0) {}
 
-
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
 }

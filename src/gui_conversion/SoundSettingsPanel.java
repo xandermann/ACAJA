@@ -3,6 +3,9 @@ package gui_conversion;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.util.HashMap;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.BoxLayout;
 import javax.swing.JComboBox;
@@ -10,16 +13,27 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class SoundSettingsPanel extends JPanel {
+import files.SettingsFile;
 
+public class SoundSettingsPanel extends JPanel implements Observer{
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
 	private ConversionModel model;
+	private JTextField includeBitrate;
+	private JTextField includeSamplingRate;
+	private JTextField includeChannels;
+	private JTextField includeVolume;
+	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
 	
 	public SoundSettingsPanel(ConversionModel m) {
 		this.model = m;
-		this.reevaluatePanel();
-	}
-	
-	private void reevaluatePanel() {
+		
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
 		JPanel pan_codec = new JPanel(new FlowLayout());
@@ -31,36 +45,66 @@ public class SoundSettingsPanel extends JPanel {
 		
 		JPanel pan_vol = new JPanel(new FlowLayout());
 		pan_vol.add(new JLabel("Volume en sortie (en %): "),BorderLayout.WEST);
-		JTextField volume_Text = new JTextField();
-		volume_Text.setPreferredSize(new Dimension(300,20));
-		pan_vol.add(volume_Text,BorderLayout.EAST);
-		volume_Text.setEnabled(false);
+		includeVolume = new JTextField();
+		includeVolume.setPreferredSize(new Dimension(300,20));
+		pan_vol.add(includeVolume,BorderLayout.EAST);
+		includeVolume.setEnabled(false);
 		this.add(pan_vol);
 		
 		JPanel pan_bitrate = new JPanel(new FlowLayout());
 		pan_bitrate.add(new JLabel("Bitrate (kb/s) : "),BorderLayout.WEST);
-		JTextField bitrate_Text = new JTextField();
-		bitrate_Text.setPreferredSize(new Dimension(300,20));
-		pan_bitrate.add(bitrate_Text,BorderLayout.EAST);
-		bitrate_Text.setEnabled(false);
+		includeBitrate = new JTextField();
+		includeBitrate.setPreferredSize(new Dimension(300,20));
+		pan_bitrate.add(includeBitrate,BorderLayout.EAST);
+		includeBitrate.setEnabled(false);
 		this.add(pan_bitrate);
 		
 		JPanel pan_echant = new JPanel(new FlowLayout());
 		pan_echant.add(new JLabel("Taux d'echantillonnage (Hz) : "),BorderLayout.WEST);
-		JTextField enchant_Text = new JTextField();
-		enchant_Text.setPreferredSize(new Dimension(300,20));
-		pan_echant.add(enchant_Text,BorderLayout.EAST);
-		enchant_Text.setEnabled(false);
+		includeSamplingRate = new JTextField();
+		includeSamplingRate.setPreferredSize(new Dimension(300,20));
+		pan_echant.add(includeSamplingRate,BorderLayout.EAST);
+		includeSamplingRate.setEnabled(false);
 		this.add(pan_echant);
 		
 		JPanel pan_canaux = new JPanel(new FlowLayout());
 		pan_canaux.add(new JLabel("Nombre de canaux audio en sortie : "),BorderLayout.WEST);
-		JTextField canaux_Text = new JTextField();
-		canaux_Text.setPreferredSize(new Dimension(300,20));
-		pan_canaux.add(canaux_Text,BorderLayout.EAST);
-		canaux_Text.setEnabled(false);
+		includeChannels = new JTextField();
+		includeChannels.setPreferredSize(new Dimension(300,20));
+		pan_canaux.add(includeChannels,BorderLayout.EAST);
+		includeChannels.setEnabled(false);
 		this.add(pan_canaux);
-		
-		//this.repaint();
 	}
+
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
+	@Override
+	public void update(Observable o, Object arg) {
+		if(model.getCurrentFile() != null) {
+			HashMap<Integer, Object> settings = model.getCurrentFile().getSettings();
+			includeBitrate.setText( "" +
+					(Integer) settings.get(SettingsFile.AUDIO_BITRATE));
+			includeBitrate.setEnabled(true);
+			includeSamplingRate.setText( "" +
+					(Integer) settings.get(SettingsFile.SAMPLING_RATE));
+			includeSamplingRate.setEnabled(true);
+			includeChannels.setText( "" +
+					(Integer) settings.get(SettingsFile.NUMBER_AUDIO_CHANNELS));
+			includeChannels.setEnabled(true);
+		}else{
+			includeBitrate.setText("");
+			includeBitrate.setEnabled(false);
+			includeSamplingRate.setText("");
+			includeSamplingRate.setEnabled(false);
+			includeChannels.setText("");
+			includeChannels.setEnabled(false);
+		}
+	}
+	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
 }

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.filechooser.FileFilter;
 
 public class DataChoose {
 	
@@ -31,6 +32,9 @@ public class DataChoose {
 		
 		JFileChooser jdc = new JFileChooser("Parcourir");
 		jdc.showOpenDialog(null);
+		jdc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+		jdc.setAcceptAllFileFilterUsed(true);
+
 		File importDirectory = jdc.getCurrentDirectory();
 		if(!importDirectory.isDirectory() || importDirectory == null) {
 			throw new Exception("Merci de selectionner un dossier");

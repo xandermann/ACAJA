@@ -11,6 +11,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -79,7 +80,12 @@ public class VideoSettingsPanel extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// ATTENTION
-				File f = DataChoose.FileChoose();
+				try {
+					File f = DataChoose.FileChoose();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					JOptionPane.showMessageDialog(null, e.getMessage());
+				}
 				// Ce fichier sera le fichier des sous-titres, pas un SettingsFile !
 			}
 		});

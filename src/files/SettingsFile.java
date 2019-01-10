@@ -54,7 +54,7 @@ public class SettingsFile extends SelectableFile {
 		 */
 		if(isGoodFile())
 			throw new IllegalArgumentException("Seuls les fichiers audio et video sont toleres."); 
-		
+
 		/**
 		 * INITIALISATION DES PARAMETRES DE LA VIDEO. 
 		 */

@@ -145,6 +145,7 @@ public class ConversionPanel extends JFrame{
 		 DefaultListModel list_content = this.model.getFilenames();
 		 LibraryView lv = new LibraryView(this.model, list_content);
 		 TabsView tv = new TabsView(this.model);
+		 
 		 JPanel p = new JPanel();
 		 p.setLayout(new BorderLayout());
 		 JMenuBar menu = new JMenuBar();

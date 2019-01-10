@@ -18,7 +18,9 @@ public class SettingsFile extends SelectableFile {
 	//=======================================================================================================================
 	//=======================================================================================================================
 	
-
+	/**
+	 * [ CONSTANTES DE CLASSE. ]
+	 */
 	public static final int VIDEO_CODEC = 1;
 
 	public static final int VIDEO_BITRATE = 2;
@@ -41,17 +43,22 @@ public class SettingsFile extends SelectableFile {
 	
 
 	/**
-	 * Les anciens parametres du fichier
+	 * Les requetes soumises par l'utilisateur.
 	 */
-	private HashMap<Integer, Object> oldSettings;
+	private HashMap<Integer, Object> requests;
 
 	/**
 	 * Les parametres courants du fichier
 	 */
 	private HashMap<Integer, Object> settings;
+	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
 
 	/**
-	 * Constructeur
+	 * [ CONSTRUCTEUR. ]
 	 * 
 	 * @param file Le fichier source.
 	 * @throws IOException
@@ -73,7 +80,7 @@ public class SettingsFile extends SelectableFile {
 		 * INITIALISATION DES PARAMETRES DE LA VIDEO.
 		 */
 		// Intiliasation des tables.
-		oldSettings = new HashMap<Integer, Object>();
+		requests = new HashMap<Integer, Object>();
 		settings = new HashMap<Integer, Object>();
 
 		//Initialisation des autres parametres. 
@@ -91,9 +98,8 @@ public class SettingsFile extends SelectableFile {
 	 * @param setting  Le parametre a modifier.
 	 * @param newValue La nouvelle valeur du parametre.
 	 */
-	public void modifySetting(Integer setting, Object newValue) {
-		oldSettings.put(setting, settings.get(setting));
-		settings.put(setting, newValue);
+	public void modifySetting(Integer setting, Object request) {
+		requests.put(setting, request);
 	}
 
 	
@@ -109,13 +115,13 @@ public class SettingsFile extends SelectableFile {
 	 * @return booleen True si le fichier a ete modifie.
 	 */
 	public boolean isModified() {
-		return !oldSettings.equals(new HashMap<Integer, Object>());
+		return !requests.equals(new HashMap<Integer, Object>());
 	}
 
 	/**
 	 * [ METHODE ACCESSEUR - GETTER. ]
 	 * 
-	 * Recupere les parametres du fichiers.
+	 * Methode pour recuperer les parametres du fichier.
 	 * 
 	 * @return HashMap<String, String> Les parametres du fichier.
 	 */
@@ -127,12 +133,12 @@ public class SettingsFile extends SelectableFile {
 	/**
 	 * [ METHODE ACCESSEUR - GETTER. ]
 	 * 
-	 * Recupere les anciens parametres du fichiers.
+	 * Cette methode pemet de recuperer les requetes.
 	 * 
-	 * @return HashMap<String, String>			Les parametres du fichier. 
+	 * @return HashMap<String, String>			Les requetes. 
 	 */
-	public HashMap<Integer, Object> getOldSettings() {
-		return oldSettings;
+	public HashMap<Integer, Object> getRequests() {
+		return requests;
 	}
 	
 	//=======================================================================================================================

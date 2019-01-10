@@ -26,8 +26,8 @@ public final class UserRequests extends FFmpegRuntime {
 	 */
 	public static void execute(SelectableFile file) {
 		if(file instanceof SettingsFile) {
-			HashMap<Integer, Object> ffmpegRequests = ((SettingsFile) file).getOldSettings();
-			HashMap<Integer, Object> newSettings = ((SettingsFile) file).getOldSettings();
+			HashMap<Integer, Object> ffmpegRequests = ((SettingsFile) file).getSettings();
+			HashMap<Integer, Object> newSettings = ((SettingsFile) file).getRequests();
 			for(Integer requestKey : ffmpegRequests.keySet()) {
 					if(requestKey == SettingsFile.VIDEO_CODEC) {
 						String oldExtension =  
@@ -49,7 +49,7 @@ public final class UserRequests extends FFmpegRuntime {
 							 * CONSOMMATION DU FLUX.
 							 */
 							try {
-								//On "consomme les flux des messages, pour ne pas bloquer le waiFGor().
+								//On "consomme" le flux des messages, pour ne pas bloquer le waitFor().
 								BufferedReader br = new BufferedReader(new InputStreamReader(conversion .getErrorStream()));
 								while( (information = br.readLine()) != null ) ;
 								br.close();	

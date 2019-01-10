@@ -23,9 +23,9 @@ public final class UserRequests extends FFmpegRuntime {
 	 */
 	public void execute(SelectableFile file) {
 		if(file instanceof SettingsFile) {
-			HashMap<String, Object> ffmpegRequests = ((SettingsFile) file).getOldSettings();
-			HashMap<String, Object> newSettings = ((SettingsFile) file).getOldSettings();
-			for(String requestKey : ffmpegRequests.keySet()) {
+			HashMap<Integer, Object> ffmpegRequests = ((SettingsFile) file).getOldSettings();
+			HashMap<Integer, Object> newSettings = ((SettingsFile) file).getOldSettings();
+			for(Integer requestKey : ffmpegRequests.keySet()) {
 				if(ffmpegRequests.get(requestKey) instanceof String) {
 					if(ffmpegRequests.get(requestKey).equals("codec video")) {
 						String oldExtension =  

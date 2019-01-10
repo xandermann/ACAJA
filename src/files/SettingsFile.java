@@ -15,20 +15,41 @@ import ffmpeg_tools.SystemRequests;
  *         CHEVRIER Jean-christophe.
  */
 public class SettingsFile extends SelectableFile {
-
+	//=======================================================================================================================
+	//=======================================================================================================================
 	
-	public final static String CODEC_VIDEO= "codec video";
+	
+
+	public static final int VIDEO_CODEC = 1;
+
+	public static final int VIDEO_BITRATE = 2;
+
+	public static final int FPS = 3;
+
+	public static final int AUDIO_CODEC = 4;
+
+	public static final int SAMPLING_RATE = 5;
+
+	public static final int NUMBER_AUDIO_CHANNELS = 6;
+
+	public static final int AUDIO_BITRATE = 7;
+
+	public final static int VIDEO_RESOLUTION = 8;
+	
+
+	//=======================================================================================================================
+	//=======================================================================================================================
 	
 
 	/**
 	 * Les anciens parametres du fichier
 	 */
-	private HashMap<String, Object> oldSettings;
+	private HashMap<Integer, Object> oldSettings;
 
 	/**
 	 * Les parametres courants du fichier
 	 */
-	private HashMap<String, Object> settings;
+	private HashMap<Integer, Object> settings;
 
 	/**
 	 * Constructeur
@@ -53,24 +74,34 @@ public class SettingsFile extends SelectableFile {
 		 * INITIALISATION DES PARAMETRES DE LA VIDEO.
 		 */
 		// Intiliasation des tables.
-		oldSettings = new HashMap<String, Object>();
-		settings = new HashMap<String, Object>();
+		oldSettings = new HashMap<Integer, Object>();
+		settings = new HashMap<Integer, Object>();
 
 		//Initialisation des autres parametres. 
 	    SystemRequests.getSettings(this);
 	}
 
-	/**s
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
+	/**
 	 * Methode pour modifier les parametres de la video.
 	 * 
 	 * @param setting  Le parametre a modifier.
 	 * @param newValue La nouvelle valeur du parametre.
 	 */
-	public void modifySettings(String setting, String newValue) {
+	public void modifySettings(Integer setting, String newValue) {
 		oldSettings.put(setting, settings.get(setting));
 		settings.put(setting, newValue);
 	}
 
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
 	/**
 	 * [ METHODE POUR SAVOIR SI DES PARAMETRES ONT ETE MODIFIES. ]
 	 * 
@@ -79,7 +110,7 @@ public class SettingsFile extends SelectableFile {
 	 * @return booleen True si le fichier a ete modifie.
 	 */
 	public boolean isModified() {
-		return !oldSettings.equals(new HashMap<String, Object>());
+		return !oldSettings.equals(new HashMap<Integer, Object>());
 	}
 
 	/**
@@ -89,7 +120,7 @@ public class SettingsFile extends SelectableFile {
 	 * 
 	 * @return HashMap<String, String> Les parametres du fichier.
 	 */
-	public HashMap<String, Object> getSettings() {
+	public HashMap<Integer, Object> getSettings() {
 		return settings;
 	}
 
@@ -101,7 +132,7 @@ public class SettingsFile extends SelectableFile {
 	 * 
 	 * @return HashMap<String, String>			Les parametres du fichier. 
 	 */
-	public HashMap<String, Object> getOldSettings() {
+	public HashMap<Integer, Object> getOldSettings() {
 		return oldSettings;
 	}
 	

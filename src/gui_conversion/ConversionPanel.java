@@ -167,7 +167,7 @@ public class ConversionPanel extends JFrame{
 					JFrame chargement = new JFrame("Convertion de votre fichier");
 					OpeningWindow.afficherLogo(chargement);
 
-					chargement.setLayout(new FlowLayout());
+					chargement.setLayout(new BorderLayout());
 					chargement.setSize(400, 150);
 					JLabel c = new JLabel("Conversion de votre fichier ...");
 					chargement.add(c,BorderLayout.CENTER);
@@ -177,15 +177,6 @@ public class ConversionPanel extends JFrame{
 					chargement.setLocation(((int)ecran.getWidth()-400)/2, ((int)ecran.getHeight()-150)/2);
 					chargement.setVisible(true);					
 					
-					/*Thread t = new Thread();
-					while(model.convert()) {
-						c.setText("Convertion de votre fichier .");
-						t.sleep(20);
-						c.setText("Convertion de votre fichier ..");
-						t.sleep(20);
-						c.setText("Convertion de votre fichier ...");
-						t.sleep(20);
-					}*/
 					model.convert();
 					
 				    chargement.dispose();

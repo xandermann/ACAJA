@@ -4,7 +4,7 @@
   <class id="1" language="java" name="files.SelectableFile" project="s3b_s22_chevrier_dasilvacarmo_hublau_palmieri" 
     file="/s3b_s22_chevrier_dasilvacarmo_hublau_palmieri/src/files/SelectableFile.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="495" y="153"/>    
+    <position height="-1" width="-1" x="505" y="155"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -14,7 +14,7 @@
   <class id="2" language="java" name="files.SettingsFile" project="s3b_s22_chevrier_dasilvacarmo_hublau_palmieri" 
     file="/s3b_s22_chevrier_dasilvacarmo_hublau_palmieri/src/files/SettingsFile.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="371" y="650"/>    
+    <position height="-1" width="-1" x="372" y="577"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -24,7 +24,7 @@
   <class id="3" language="java" name="files.ProcessingFile" project="s3b_s22_chevrier_dasilvacarmo_hublau_palmieri" 
     file="/s3b_s22_chevrier_dasilvacarmo_hublau_palmieri/src/files/ProcessingFile.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="632" y="557"/>    
+    <position height="-1" width="-1" x="641" y="489"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -32,11 +32,13 @@
     </display>  
   </class>  
   <generalization id="4">    
-    <end type="SOURCE" refId="3"/>    
+    <bendpoint x="451" y="387"/>    
+    <end type="SOURCE" refId="2"/>    
     <end type="TARGET" refId="1"/>  
   </generalization>  
   <generalization id="5">    
-    <end type="SOURCE" refId="2"/>    
+    <bendpoint x="563" y="382"/>    
+    <end type="SOURCE" refId="3"/>    
     <end type="TARGET" refId="1"/>  
   </generalization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 

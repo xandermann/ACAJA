@@ -1,120 +1,157 @@
 package files;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+
 import ffmpeg_tools.SystemRequests;
+
 /**
- * TODO comentaire a faire. 
+ * TODO comentaire a faire.
  * 
- * Auteurs du projet : 
- * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
+ * Auteurs du projet :
+ * 
+ * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et
+ *         CHEVRIER Jean-christophe.
  */
 public class SettingsFile extends SelectableFile {
-	//=======================================================================================================================
-	//=======================================================================================================================
-	
-	
-	
-	/**
-	 * [ ATTRIBUTS. ]
-	 */
-	/**
-	 * Les anciennes options du fichier
-	 */
-	private HashMap<String, String> oldSettings;
 
 	/**
-	 * Les options courantes du fichier
+	 * [ CONSTANTES DE CLASSE. ]
 	 */
-	private HashMap<String, String> settings;
+	/**
+	 * Constante qui definit le codec video dans la HashMap
+	 */
+	public static final int VIDEO_CODEC = 1;
 
-	
-	
-	//=======================================================================================================================
-	//=======================================================================================================================
-	
-	
-	
+	/**
+	 * Constante qui definit le bitrate video dans la HashMap
+	 */
+	public static final int VIDEO_BITRATE = 2;
+
+	/**
+	 * Constante qui definit les FPS de la video dans la HashMap
+	 */
+	public static final int FPS = 3;
+
+	/**
+	 * Constante qui definit le codec audio dans la HashMap
+	 */
+	public static final int AUDIO_CODEC = 4;
+
+	/**
+	 * Constante qui definit le sampling rate dans la HashMap
+	 */
+	public static final int SAMPLING_RATE = 5;
+
+	/**
+	 * Constante qui definit le nombre de pistes audios dans la HashMap
+	 */
+	public static final int NUMBER_AUDIO_CHANNELS = 6;
+
+	/**
+	 * Constante qui definit le bitrate audio dans la HashMap
+	 */
+	public static final int AUDIO_BITRATE = 7;
+
+	/**
+	 * Constante qui definit la résolution de la video dans la HashMap
+	 */
+	public final static int VIDEO_RESOLUTION = 8;
+
+	// =======================================================================================================================
+	// =======================================================================================================================
+
+	/**
+	 * Les requetes soumises par l'utilisateur.
+	 */
+	private HashMap<Integer, Object> requests;
+
+	/**
+	 * Les parametres courants du fichier
+	 */
+	private HashMap<Integer, Object> settings;
+
+	// =======================================================================================================================
+	// =======================================================================================================================
+
 	/**
 	 * [ CONSTRUCTEUR. ]
 	 * 
-	 * @param file   	 				Le fichier source. 
-	 *
-	 * @throws IOException 
-	 * @throws InterruptedException 	
+	 * @param file Le fichier source.
+	 * @throws IOException
+	 * @throws InterruptedException
 	 */
-	public SettingsFile(File file) throws IOException, InterruptedException {
+	public SettingsFile(File file) {
 		/**
 		 * INITIALISATION DES ATTRIBUTS HETITES DE LA CLASSE SELECTABLEFILE.
 		 */
 		super(file);
-		
+
 		/**
-		 * SI TYPE DE FICHIER PAS ACCCPTE EXCPETION.
+		 * Si le type de fichier n'est pas accepté, alors on renvoie une exception.
 		 */
-		if(isGoodFile())
-			throw new IllegalArgumentException("Seuls les fichiers audio et video sont toleres."); 
-		
+		if (!this.containsAudio())
+			throw new IllegalArgumentException("Seuls les fichiers audio et video sont acceptes.");
+
 		/**
-		 * INITIALISATION DES PARAMETRES DE LA VIDEO. 
+		 * INITIALISATION DES PARAMETRES DE LA VIDEO.
 		 */
-		//Intiliasation des tables. 
-		oldSettings = new HashMap<String, String>();
-		settings = new HashMap<String, String>();
-		
-		//Initialisation des autres parametres. 
+		// Intiliasation des tables.
+		this.requests = new HashMap<Integer, Object>();
+		this.settings = new HashMap<Integer, Object>();
+
+		// Initialisation des autres parametres.
 		SystemRequests.getSettings(this);
 	}
 
-	
-	
-	//=======================================================================================================================
-	//=======================================================================================================================
-	
-	
-	
+	// =======================================================================================================================
+	// =======================================================================================================================
+
 	/**
-	 * Methode pour modifier les parametres de la video. 
+	 * Methode pour modifier les parametres de la video.
 	 * 
-	 * @param setting 		Le parametre a modifier.
-	 * @param newValue		La nouvelle valeur du parametre. 
+	 * @param setting  Le parametre a modifier.
+	 * @param newValue La nouvelle valeur du parametre.
 	 */
-	public void modifySettings(String setting, String newValue) {
-		oldSettings.put(setting, settings.get(setting));
-		settings.put(setting, newValue);
+	public void modifySetting(Integer setting, Object request) {
+		this.requests.put(setting, request);
 	}
 
-	
-	
-	//=======================================================================================================================
-	//=======================================================================================================================
-	
-	
-	
+	// =======================================================================================================================
+	// =======================================================================================================================
+
 	/**
 	 * [ METHODE POUR SAVOIR SI DES PARAMETRES ONT ETE MODIFIES. ]
 	 * 
 	 * Methode pour tester si les parametres du fichier ont ete modifies.
 	 * 
-	 * @return booleen		True si le fichier a ete modifie. 
+	 * @return booleen True si le fichier a ete modifie.
 	 */
 	public boolean isModified() {
-		return !oldSettings.equals(new HashMap<String, String>());
+		return !this.requests.equals(new HashMap<Integer, Object>());
 	}
 
 	/**
 	 * [ METHODE ACCESSEUR - GETTER. ]
 	 * 
-	 * Recupere les parametres du fichiers.
+	 * Methode pour recuperer les parametres du fichier.
 	 * 
-	 * @return HashMap<String, String>			Les parametres du fichier. 
+	 * @return HashMap<String, String> Les parametres du fichier.
 	 */
-	public HashMap<String, String> getSettings() {
-		return settings;
+	public HashMap<Integer, Object> getSettings() {
+		return this.settings;
 	}
 
-	
-	
-	//=======================================================================================================================
-	//=======================================================================================================================
+	/**
+	 * [ METHODE ACCESSEUR - GETTER. ]
+	 * 
+	 * Cette methode pemet de recuperer les requetes.
+	 * 
+	 * @return HashMap<String, String> Les requetes.
+	 */
+	public HashMap<Integer, Object> getRequests() {
+		return this.requests;
+	}
+
 }

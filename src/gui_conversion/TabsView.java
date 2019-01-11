@@ -5,23 +5,16 @@ import java.util.Observer;
 
 import javax.swing.JTabbedPane;
 
-public class TabsView extends JTabbedPane implements Observer{
-	
-	public ConversionModel model;
+public class TabsView extends JTabbedPane{
+	private ConversionModel model;
 	
 	public TabsView(ConversionModel m) {
 		this.model = m;
 		VideoSettingsPanel vsp = new VideoSettingsPanel(this.model);
 		SoundSettingsPanel ssp = new SoundSettingsPanel(this.model);
-		this.add(vsp);
-		this.add(ssp);
-	}
-	
-	private void reevaluateTabbedPanel() {
-	}
-
-	@Override
-	public void update(Observable arg0, Object arg1) {
-		
+		this.add("Video",vsp);
+		this.add("Son",ssp);
+		model.addObserver(vsp);
+		model.addObserver(ssp);
 	}
 }

@@ -6,6 +6,9 @@ import java.io.*;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+
+import gui_conversion.ConversionModel;
+import gui_conversion.ConversionPanel;
 /**
  * [ CLASSE POUR LE LANCEMENT DES FENETRES D'OUVERTURE DU LOGICIEL. ]
  * 
@@ -38,13 +41,10 @@ public class OpeningWindow {
 	 */
 	private static void generateLoardingWindow() {
 		JFrame frame = new JFrame("Chargement d'Acaja");
-		try {
-			frame.setIconImage(ImageIO.read(new File("src/img/LogoAcaja.png")));
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
+		OpeningWindow.afficherLogo(frame);
 		
 		frame.setLocation(200, 200);
+		
 		frame.setSize(new Dimension(WIDTH/3,HEIGHT/4));
 		frame.setVisible(true); 
 		
@@ -82,15 +82,16 @@ public class OpeningWindow {
 		j2.setPreferredSize(new Dimension(100, 50));
 		
 		JFrame frame = new JFrame("Acaja");
-		try {
-			frame.setIconImage(ImageIO.read(new File("img/LogoAcaja.png")));
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		frame.setResizable(false);
 		
+		OpeningWindow.afficherLogo(frame);
 		frame.setLayout(new BorderLayout());
-		frame.setLocation(100, 100);
+		
+		//recuperation des dimensions de l'ecran
+		Dimension ecran = Toolkit.getDefaultToolkit().getScreenSize();
+		//on positionne la fenetre au centre de l'ecran
+		frame.setLocation(((int)ecran.getWidth()-750)/2, ((int)ecran.getHeight()-500)/2);
+				
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(new Dimension(WIDTH,HEIGHT));
 		
@@ -121,17 +122,15 @@ public class OpeningWindow {
 		p5.setBackground(Color.gray);
 		frame.setBackground(Color.gray);
 		
+		frame.setVisible(true);
 		convertbutton.addActionListener(new ActionListener() {
-			
 			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-				System.out.println("Prout sa marche pas encore");
-				/////////////////////////////////////////////////////////////////////A Rajouter méthode pour afficher
+			public void actionPerformed(ActionEvent arg0) {		
+				ConversionPanel.generateConversionWindow();
+				frame.dispose();
 			}
 		});
 		
-		frame.setVisible(true);
 	}
 	
 	
@@ -145,8 +144,21 @@ public class OpeningWindow {
 	 * TODO commentaire a faire. 
 	 */
 	public static void generateOpeningWindow() {
-		generateLoardingWindow();
+		//generateLoardingWindow();
 		generateChoiceModeWindow();
+	}
+	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
+	public static void afficherLogo(JFrame f) {
+		try {
+			f.setIconImage(ImageIO.read(new File("img/LogoAcaja.png")));
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 	}
 	
 	

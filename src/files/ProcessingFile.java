@@ -15,12 +15,6 @@ public class ProcessingFile extends SelectableFile{
 	/**
 	 * [ ATTRIBUTS D'INSTANCE. ]
 	 */
-	
-	/**
-	 * La duree du fichier source ( elle prendra -1 a l'initialisation,
-	 * si le fichier source est une image ).
-	 */
-	private long duration;
 
 	/**
 	 * Les traitements en attente sur this. 
@@ -46,7 +40,7 @@ public class ProcessingFile extends SelectableFile{
 		/**
 		 * INITIALISATION DE TABLE DES TRAITEMENTS EN ATTENTE SUR THIS. 
 		 */
-		performedProcessings = new HashMap<String, Object>();
+		this.performedProcessings = new HashMap<String, Object>();
 		
 		/**
 		 * INITIALISATION DE LA DUREE DU SON OU DE LA VIDEO. 
@@ -54,7 +48,7 @@ public class ProcessingFile extends SelectableFile{
 		 * Si le fichier source est une image alors la duree prend -1, 
 		 * car une image n'a pas de duree. 
 		 */
-		duration = isGoodFile() ? SystemRequests.getDuration(sourceFile) : -1;			
+		this.duration = containsAudio() ? SystemRequests.getDuration(this.sourceFile) : -1;			
 	}
 
 	
@@ -71,7 +65,7 @@ public class ProcessingFile extends SelectableFile{
 	 */
 	public void performProcess(String typeProcess, Object process) {
 		//TODO provisoire a ameliorer. 
-		performedProcessings.put(typeProcess, process);
+		this.performedProcessings.put(typeProcess, process);
 	}
 
 	
@@ -83,7 +77,7 @@ public class ProcessingFile extends SelectableFile{
 	 * [ METHODE POUR SAVOIR SI DES TRAIEMENTS SONT EN ATTENTE SUR CE FICHIER. ]
 	 */
 	public boolean isModified() {
-		return  !performedProcessings.equals(new HashMap<String, Object>());
+		return  !this.performedProcessings.equals(new HashMap<String, Object>());
 	}
 	
 	
@@ -99,7 +93,7 @@ public class ProcessingFile extends SelectableFile{
 	 * @return HashMap<String, Object>		Les traitements en attente.
 	 */
 	public HashMap<String, Object> getPerformedProcessings() {
-		return performedProcessings;
+		return this.performedProcessings;
 	}
 
 	

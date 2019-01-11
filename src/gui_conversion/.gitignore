@@ -1,8 +1,1 @@
-/ConversionModel.class
-/LibraryView.class
-/SummaryView.class
-/TabsView.class
-/SoundSettingsPanel.class
-/VideoSettingsPanel.class
-/Profile.class
-/ConversionPanel.class
+*.class

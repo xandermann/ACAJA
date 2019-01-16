@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
+import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -20,11 +21,12 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import exceptions.ImportationException;
 import main.OpeningWindow;
 
 public class ConversionPanel extends JFrame{
 	 private ConversionModel model;
-	 
+	 private JLabel start;
 	 
 	 
 	 
@@ -52,8 +54,24 @@ public class ConversionPanel extends JFrame{
 				try {
 					File f = DataChoose.FileChoose();
 					model.add(f);
+					if(model.getCurrentFile() == null) {
+						JPanel dataView = new JPanel();
+						dataView.setLayout(new BoxLayout(dataView, BoxLayout.Y_AXIS));
+						SummaryView sv = new SummaryView(model);
+						TabsView tv = new TabsView(model);
+						dataView.add(sv);
+						dataView.add(tv);
+						add(dataView,BorderLayout.EAST);
+						model.addObserver(sv);
+						//remove(5);
+						start.setVisible(false);
+						repaint();
+						
+					}
 					model.setCurrentFile(f.getName());
-				} catch (Exception e) {
+				} catch (ImportationException e) {
+					JOptionPane.showMessageDialog(null, e.getMessage());
+				} catch (Exception e){
 					JOptionPane.showMessageDialog(null, e.getMessage());
 				}
 			}
@@ -208,10 +226,10 @@ public class ConversionPanel extends JFrame{
 				
 		cp.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		 SummaryView sv = new SummaryView(cp.model);
+		// SummaryView sv = new SummaryView(cp.model);
 		 DefaultListModel list_content = cp.model.getFilenames();
 		 LibraryView lv = new LibraryView(cp.model, list_content);
-		 TabsView tv = new TabsView(cp.model);
+		// TabsView tv = new TabsView(cp.model);
 		 
 		 JPanel p = new JPanel();
 		 p.setLayout(new BorderLayout());
@@ -222,12 +240,14 @@ public class ConversionPanel extends JFrame{
 		 menu.add(cp.drawConvertMenu());
 		 cp.setJMenuBar(menu);
 		 cp.model.addObserver(lv);
-		 cp.model.addObserver(sv);
+	/*	 cp.model.addObserver(sv);
 		 p.add(sv,BorderLayout.NORTH);
-		 p.add(tv,BorderLayout.CENTER);
-		
+		 p.add(tv,BorderLayout.CENTER); */
+		 cp.start = new JLabel("Pour commencer, ajoutez un fichier via le menu");
+		 cp.start.setHorizontalAlignment(JLabel.CENTER);
+		 p.add(cp.start);
 		 cp.setLayout(new BorderLayout());
 		 cp.add(lv,BorderLayout.WEST);
-		 cp.add(p,BorderLayout.EAST);
+		 cp.add(p,BorderLayout.CENTER);
 	 }
 }

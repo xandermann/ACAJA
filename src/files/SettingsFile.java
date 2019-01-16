@@ -102,7 +102,7 @@ public class SettingsFile extends SelectableFile {
 		this.settings = new HashMap<Integer, Object>();
 
 		// Initialisation des autres parametres.
-		SystemRequests.getSettings(this);
+		// SystemRequests.getSettings(this);
 	}
 
 	// =======================================================================================================================

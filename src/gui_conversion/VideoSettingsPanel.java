@@ -138,7 +138,7 @@ public class VideoSettingsPanel extends JPanel implements Observer{
 	public void update(Observable o, Object arg) { 
 		if(model.getCurrentFile() != null) {
 			HashMap<Integer, Object> settings = model.getCurrentFile().getSettings();
-			includeResolution.setText( "" +
+			/*includeResolution.setText( "" +
 					( (Integer[]) settings.get(SettingsFile.VIDEO_RESOLUTION) )[0]
 					+"x"
 					+ ( (Integer[]) settings.get(SettingsFile.VIDEO_RESOLUTION) )[1]);	
@@ -148,7 +148,7 @@ public class VideoSettingsPanel extends JPanel implements Observer{
 			includeBitrate.setEnabled(true);
 			includeFps.setText( "" +
 					(Double) settings.get(SettingsFile.FPS));
-			includeFps.setEnabled(true);
+			includeFps.setEnabled(true);*/
 		}else{
 			includeResolution.setText("");
 			includeResolution.setEnabled(false);

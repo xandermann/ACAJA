@@ -1,6 +1,7 @@
 package gui_conversion;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.util.Observable;
@@ -27,7 +28,6 @@ public class SummaryView extends JPanel implements Observer{
 	
 	public SummaryView (ConversionModel p_model) {
 		this.model = p_model;
-		this.setBackground(Color.BLUE);
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
 		JLabel nom = new JLabel("Fichier selectionne : ");
@@ -63,6 +63,7 @@ public class SummaryView extends JPanel implements Observer{
 		this.add(j1);
 		this.add(j2);
 		this.add(j3);
+		this.setSize(new Dimension(400,100));
 	}
 	
 

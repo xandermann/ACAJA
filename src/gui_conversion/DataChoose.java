@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 import javax.swing.JFileChooser;
-
+import exceptions.ImportationException;
 public class DataChoose {
 	//=======================================================================================================================
 	//=======================================================================================================================
@@ -17,13 +17,14 @@ public class DataChoose {
 	//=======================================================================================================================
 	
 	
-	public static File FileChoose() throws Exception {
+	public static File FileChoose() throws ImportationException {
 		
 		jfc = new JFileChooser("Parcourir");
-		jfc.showOpenDialog(null);
+		int chooserStatus = jfc.showOpenDialog(null);
+		
 		File importFile = jfc.getSelectedFile();
-		if(!importFile.isFile() || importFile == null) {
-			throw new Exception("Merci de selectionner un fichier");
+		if(importFile == null || chooserStatus != JFileChooser.APPROVE_OPTION) {
+			throw new ImportationException("Merci de selectionner un fichier");
 		} 
 		
 		return importFile;

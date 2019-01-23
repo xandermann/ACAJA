@@ -148,6 +148,11 @@ public class OpeningWindow {
 		generateChoiceModeWindow();
 	}
 	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
 	public static void afficherLogo(JFrame f) {
 		try {
 			f.setIconImage(ImageIO.read(new File("img/LogoAcaja.png")));

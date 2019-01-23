@@ -92,7 +92,7 @@ public abstract class FFmpegRuntime {
 		if(FFMPEG_PATH==null) install();
 		//Provisoirement j'utilise le ffmpeg de la variable path.
 		try{
-			return RUN.exec("ffmpeg -i "+ffmpegRequest);
+			return RUN.exec("/bin/bash ffmpeg -i "+ffmpegRequest);
 		}catch (IOException e){
 			return null;
 		}

@@ -1,16 +1,10 @@
 package gui_conversion;
 
-import java.awt.Button;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
 
-import javax.swing.JButton;
 import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.filechooser.FileFilter;
-
+import exceptions.ImportationException;
 public class DataChoose {
 	//=======================================================================================================================
 	//=======================================================================================================================
@@ -23,13 +17,14 @@ public class DataChoose {
 	//=======================================================================================================================
 	
 	
-	public static File FileChoose() throws Exception {
+	public static File FileChoose() throws ImportationException {
 		
 		jfc = new JFileChooser("Parcourir");
-		jfc.showOpenDialog(null);
+		int chooserStatus = jfc.showOpenDialog(null);
+		
 		File importFile = jfc.getSelectedFile();
-		if(!importFile.isFile() || importFile == null) {
-			throw new Exception("Merci de selectionner un fichier");
+		if(importFile == null || chooserStatus != JFileChooser.APPROVE_OPTION) {
+			throw new ImportationException("Merci de selectionner un fichier");
 		} 
 		
 		return importFile;

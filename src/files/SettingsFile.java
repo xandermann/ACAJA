@@ -15,11 +15,7 @@ import ffmpeg_tools.SystemRequests;
  *         CHEVRIER Jean-christophe.
  */
 public class SettingsFile extends SelectableFile {
-	// =======================================================================================================================
-	// =======================================================================================================================
 
-	
-	
 	/**
 	 * [ CONSTANTES DE CLASSE. ]
 	 */
@@ -63,13 +59,9 @@ public class SettingsFile extends SelectableFile {
 	 */
 	public final static int VIDEO_RESOLUTION = 8;
 
-	
-	
-	//=======================================================================================================================
-	//=======================================================================================================================
-	
-	
-	
+	// =======================================================================================================================
+	// =======================================================================================================================
+
 	/**
 	 * Les requetes soumises par l'utilisateur.
 	 */
@@ -80,13 +72,9 @@ public class SettingsFile extends SelectableFile {
 	 */
 	private HashMap<Integer, Object> settings;
 
-	
-	
-	//=======================================================================================================================
-	//=======================================================================================================================
+	// =======================================================================================================================
+	// =======================================================================================================================
 
-	
-	
 	/**
 	 * [ CONSTRUCTEUR. ]
 	 * 
@@ -101,7 +89,7 @@ public class SettingsFile extends SelectableFile {
 		super(file);
 
 		/**
-		 * SI LE TYPE DE FICHIER PAS ACCCPTE EXCPETION.
+		 * Si le type de fichier n'est pas accepté, alors on renvoie une exception.
 		 */
 		if (!this.containsAudio())
 			throw new IllegalArgumentException("Seuls les fichiers audio et video sont acceptes.");
@@ -113,17 +101,13 @@ public class SettingsFile extends SelectableFile {
 		this.requests = new HashMap<Integer, Object>();
 		this.settings = new HashMap<Integer, Object>();
 
-		//Initialisation des autres parametres.
-		SystemRequests.getSettings(this);
+		// Initialisation des autres parametres.
+		// SystemRequests.getSettings(this);
 	}
-	
-	
 
 	// =======================================================================================================================
 	// =======================================================================================================================
 
-	
-	
 	/**
 	 * Methode pour modifier les parametres de la video.
 	 * 
@@ -133,14 +117,10 @@ public class SettingsFile extends SelectableFile {
 	public void modifySetting(Integer setting, Object request) {
 		this.requests.put(setting, request);
 	}
-	
-	
 
-	//=======================================================================================================================
-	//=======================================================================================================================
-	
-	
-	
+	// =======================================================================================================================
+	// =======================================================================================================================
+
 	/**
 	 * [ METHODE POUR SAVOIR SI DES PARAMETRES ONT ETE MODIFIES. ]
 	 * 
@@ -174,8 +154,4 @@ public class SettingsFile extends SelectableFile {
 		return this.requests;
 	}
 
-	
-	
-	//=======================================================================================================================
-	//=======================================================================================================================
 }

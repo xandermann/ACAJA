@@ -22,7 +22,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import exceptions.ImportationException;
-import main.OpeningWindow;
+import mainpack.OpeningWindow;
 
 public class ConversionPanel extends JFrame{
 	 private ConversionModel model;

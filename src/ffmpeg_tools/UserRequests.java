@@ -8,8 +8,6 @@ import java.util.*;
 import files.SelectableFile;
 import files.SettingsFile;
 /**
- * 
- * 
  * Ceci est une classe concrete "sterile", c-a-d qu'aucune classe ne peut 
  * en heriter ( d'ou la presence du final devant class).
  * 

@@ -391,7 +391,7 @@ public final class SystemRequests extends FFmpegRuntime{
 			 *  EXTRACTION DES CARACTERISTIQUES.
 			 */
 			String informations = "";	
-			try {
+			try{
 				String information = null;	
 				
 				//On ne recupere que les donnees qui nous interesse
@@ -405,8 +405,7 @@ public final class SystemRequests extends FFmpegRuntime{
 						informations += information + " ";
 				}
 				//On ferme le flux. 
-				br.close();
-				
+				br.close();		
 			} catch (IOException e){
 				//On force l'execution a se terminer ici.
 				return;

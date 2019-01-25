@@ -13,7 +13,7 @@ public final class ProcessingFile extends SelectableFile implements State{
 	//=======================================================================================================================
 	
 	/**
-	 * [ ATTRIBUTS D'INSTANCE. ]
+	 * [ ATTRIBUT D'INSTANCE DE LA CLASSE. ]
 	 */
 
 	/**
@@ -29,13 +29,13 @@ public final class ProcessingFile extends SelectableFile implements State{
 	/**
 	 * [ CONSTRUCTEUR. ]
 	 * 
-	 * @param file		Le fichier source.
+	 * @param sourceFile		Le fichier source.
 	 */
-	public ProcessingFile(File file) {
+	public ProcessingFile(File sourceFile) {
 		/**
 		 * INITIALISATION DES ATTRIBUTS HETITES DE LA CLASSE SELECTABLEFILE.
 		 */
-		super(file);
+		super(sourceFile);
 		
 		/**
 		 * INITIALISATION DE TABLE DES TRAITEMENTS EN ATTENTE SUR THIS. 

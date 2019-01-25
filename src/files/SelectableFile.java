@@ -41,6 +41,9 @@ public class SelectableFile{
 	//=======================================================================================================================
 	//=======================================================================================================================
 	
+	/**
+	 * [ ATTRIBUTS D'INSTANCE DE LA CLASSE. ]
+	 */
 	
 	/**
 	 * La duree de la video.
@@ -72,12 +75,12 @@ public class SelectableFile{
 	 * 
 	 * Ce constructeur intialise les attributs.
 	 * 
-	 * @param file Le fichier source.
+	 * @param sourceFile	Le fichier source.
 	 */
-	public SelectableFile(File file) {
-		this.isSelected = false;
-		this.sourceFile = file;
-		this.whoAmI();
+	public SelectableFile(File sourceFile) {
+		isSelected = false;
+		this.sourceFile = sourceFile;
+		whoAmI();
 	}
 
 	
@@ -223,7 +226,7 @@ public class SelectableFile{
 	 * @return int Le type du fichier.
 	 */
 	public int getTypeFile() {
-		return this.typeFile;
+		return typeFile;
 	}
 
 	/**

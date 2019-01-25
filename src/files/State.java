@@ -11,7 +11,7 @@ public interface State{
 	 * justifie la declaration l'existence de cette interface.
 	 * 
 	 * @param type_change 		Le type de changement.
-	 * @param change			Les valeurs pour le calcul changement. 
+	 * @param change			Les valeurs pour le calcul du changement. 
 	 */
 	public void modify(Integer type_change, Object change);
 	

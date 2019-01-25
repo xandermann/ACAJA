@@ -11,8 +11,12 @@ import java.io.File;
  *         CHEVRIER Jean-christophe.
  */
 public class SelectableFile{
-
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
 	/**
+	 * [ CONSTANTES DE CLASSE. ]
 	 * 
 	 * Ces constantes permettent d'indiquer le type du fichier source d'une instance
 	 * de la classe.
@@ -33,6 +37,11 @@ public class SelectableFile{
 	 */
 	public final static int FILE_TYPE_IMAGE = 2;
 
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
 	/**
 	 * La duree de la video.
 	 */
@@ -53,6 +62,11 @@ public class SelectableFile{
 	 */
 	private boolean isSelected;
 
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
 	/**
 	 * [ CONSTRUCTEUR. ]
 	 * 
@@ -66,6 +80,11 @@ public class SelectableFile{
 		this.whoAmI();
 	}
 
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
 	/**
 	 * [ METHODE - ROLE PRIMITIF. ]
 	 * 
@@ -113,7 +132,12 @@ public class SelectableFile{
 	public boolean containsAudio() {
 		return (isVideo() || isSound());
 	}
+	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
 
+	
 	/**
 	 * [ METHODE POUR RENSEIGNER LE TYPE DE FICHIER. ]
 	 * 
@@ -125,17 +149,21 @@ public class SelectableFile{
 	 */
 	private void whoAmI() {
 		String fileName = this.sourceFile.getName().toLowerCase();
-
 		if (fileName.endsWith("mp4") || fileName.endsWith("avi") || fileName.endsWith("flv"))
 			typeFile = FILE_TYPE_VIDEO;
 		else if (fileName.endsWith("mp3") || fileName.endsWith("wav") || fileName.endsWith("ogg"))
-			typeFile = FILE_TYPE_AUDIO;
-		else if (fileName.endsWith("png") || fileName.endsWith("jpg") || fileName.endsWith("jpeg"))
-			typeFile = FILE_TYPE_IMAGE;
-		else
-			throw new IllegalArgumentException("Extension du fichier non conforme !");
+				typeFile = FILE_TYPE_AUDIO;
+			else if (fileName.endsWith("png") || fileName.endsWith("jpg") || fileName.endsWith("jpeg"))
+					typeFile = FILE_TYPE_IMAGE;
+				else
+					throw new IllegalArgumentException("Extension du fichier non conforme !");
 	}
 
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
 	/**
 	 * [ METHODE ACCESSEUR - GETTER. ]
 	 * 
@@ -165,10 +193,24 @@ public class SelectableFile{
 		isSelected = false;
 	}
 
+	/**
+	 * [ METHODE ACCESSEUR - GETTER. ]
+	 * 
+	 * Methode pour recuperer la duree d'une video.
+	 * 
+	 * @return int Le type du fichier.
+	 */
 	public long getDuration() {
 		return duration;
 	}
 
+	/**
+	 * [ METHODE ACCESSEUR - SETTER. ]
+	 * 
+	 * Methode pour modifier la duree d'une video.
+	 * 
+	 * @return int Le type du fichier.
+	 */
 	public void setDuration(long duration) {
 		this.duration = duration;
 	}
@@ -196,6 +238,8 @@ public class SelectableFile{
 	}
 
 	/**
+	 * [ METHODE ACCESSEUR - GETTER. ]
+	 * 
 	 * Methode pour recuperer le nom du fichier
 	 * 
 	 * @return String Le nom du fichier source
@@ -203,4 +247,8 @@ public class SelectableFile{
 	public String getSourceFilename() {
 		return sourceFile.getName();
 	}
+	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
 }

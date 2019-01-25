@@ -2,13 +2,28 @@ package files;
 
 public interface State{
 	/**
+	 * [ METHODE POUR MODIFIER THIS. ]
+	 * 
+	 * 	 * Methode dont le comportement en interne change selon si on est dans
+	 * la classe SettingsFile ou dans la classe ProcessingFile.
+	 * 
+	 * En effet selon la classe, modifier a un sens different. Cela
+	 * justifie la declaration l'existence de cette interface.
+	 * 
+	 * @param type_change 		Le type de changement.
+	 * @param change			Les valeurs pour le calcul changement. 
+	 */
+	public void modify(Integer type_change, Object change);
+	
+	
+	/**
 	 * [ METHODE POUR SAVOIR SI THIS A ETE MODIFIE. ]
 	 * 
 	 * Methode dont le comportement en interne change selon si on est dans
 	 * la classe SettingsFile ou dans la classe ProcessingFile.
 	 * 
 	 * En effet selon la classe, etre modifiee a un sens different. Cela
-	 * justifie la declaration l'exsitence de cette interface.
+	 * justifie la declaration l'existence de cette interface.
 	 * 
 	 * Cette methode sera tres utile au moment ou l'utilisateur du logiciel voudra
 	 * generer le fichier de sortie, elle permettra des lors de savoir si this a

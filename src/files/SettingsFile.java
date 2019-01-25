@@ -120,8 +120,8 @@ public class SettingsFile extends SelectableFile implements State{
 	 * @param setting  Le parametre a modifier.
 	 * @param newValue La nouvelle valeur du parametre.
 	 */
-	public void modifySetting(Integer setting, Object request) {
-		this.requests.put(setting, request);
+	public void modify(Integer typeSetting, Object setting) {
+		this.requests.put(typeSetting, setting);
 	}
 
 	

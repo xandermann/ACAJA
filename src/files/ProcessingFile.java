@@ -19,7 +19,7 @@ public class ProcessingFile extends SelectableFile implements State{
 	/**
 	 * Les traitements en attente sur this. 
 	 */
-	private HashMap<String, Object> performedProcessings;
+	private HashMap<Integer, Object> performedProcessings;
 
 	
 	//=======================================================================================================================
@@ -40,7 +40,7 @@ public class ProcessingFile extends SelectableFile implements State{
 		/**
 		 * INITIALISATION DE TABLE DES TRAITEMENTS EN ATTENTE SUR THIS. 
 		 */
-		this.performedProcessings = new HashMap<String, Object>();
+		this.performedProcessings = new HashMap<Integer, Object>();
 		
 		/**
 		 * INITIALISATION DE LA DUREE DU SON OU DE LA VIDEO. 
@@ -63,7 +63,7 @@ public class ProcessingFile extends SelectableFile implements State{
 	 * @param object		Les arguments necessaires a connaitre pour executer 
 	 * 						les traitements. 
 	 */
-	public void performProcess(String typeProcess, Object process) { 
+	public void modify(Integer typeProcess, Object process) { 
 		performedProcessings.put(typeProcess, process);
 	}
 
@@ -76,7 +76,7 @@ public class ProcessingFile extends SelectableFile implements State{
 	 * [ METHODE POUR SAVOIR SI DES TRAIEMENTS SONT EN ATTENTE SUR CE FICHIER. ]
 	 */
 	public boolean isModified() {
-		return  !performedProcessings.equals(new HashMap<String, Object>());
+		return  !performedProcessings.equals(new HashMap<Integer, Object>());
 	}
 	
 	
@@ -91,7 +91,7 @@ public class ProcessingFile extends SelectableFile implements State{
 	 * 
 	 * @return HashMap<String, Object>		Les traitements en attente.
 	 */
-	public HashMap<String, Object> getPerformedProcessings() {
+	public HashMap<Integer, Object> getPerformedProcessings() {
 		return performedProcessings;
 	}
 

@@ -1,4 +1,4 @@
-package mainpack;
+package main_pack;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -34,12 +34,13 @@ public class OpeningWindow {
 	//=======================================================================================================================
 	//=======================================================================================================================
 	
+	
 	/**
 	 * [ METHODE INTERNE DE CLASSE - FENETRE DE PRESENTATION DU LOGICIEL. ]
 	 * 
 	 * TODO commentaire a faire. 
 	 */
-	private static void generateLoardingWindow() {
+	private static void generateLoadingWindow() {
 		JFrame frame = new JFrame("Chargement d'Acaja");
 		OpeningWindow.afficherLogo(frame);
 		
@@ -144,7 +145,7 @@ public class OpeningWindow {
 	 * TODO commentaire a faire. 
 	 */
 	public static void generateOpeningWindow() {
-		//generateLoardingWindow();
+		//generateLoadingWindow();
 		generateChoiceModeWindow();
 	}
 	

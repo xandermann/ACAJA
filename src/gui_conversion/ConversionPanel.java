@@ -22,7 +22,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import exceptions.ImportationException;
-import mainpack.OpeningWindow;
+import main_pack.OpeningWindow;
 
 public class ConversionPanel extends JFrame{
 	 private ConversionModel model;
@@ -135,10 +135,9 @@ public class ConversionPanel extends JFrame{
 			menuProfiles.add(newProfile);
 			menuProfiles.add(loadProfile);
 			menuProfiles.add(deleteProfile);
-		
-		
+				
 			return menuProfiles;	  
-		 }
+	 }
 	 
 	 
 	 
@@ -176,7 +175,6 @@ public class ConversionPanel extends JFrame{
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					//ici ouvrir la fenetre de chargement 
-
 					JFrame chargement = new JFrame("Convertion de votre fichier");
 					OpeningWindow.afficherLogo(chargement);
 
@@ -215,10 +213,9 @@ public class ConversionPanel extends JFrame{
 		 OpeningWindow.afficherLogo(cp);
 		 try {
 			 cp.setIconImage(ImageIO.read(new File("img/LogoAcaja.png")));
-		 } catch (IOException e1) {
-			 e1.printStackTrace();
-			}
+		 } catch (IOException e1) {}
 
+		 
 		//recuperation des dimensions de l'ecran
 		Dimension ecran = Toolkit.getDefaultToolkit().getScreenSize();
 		//on positionne la fenetre au centre de l'ecran
@@ -238,6 +235,7 @@ public class ConversionPanel extends JFrame{
 		 menu.add(cp.drawOptionsMenu());
 		 menu.add(cp.drawProfilesMenu());
 		 menu.add(cp.drawConvertMenu());
+		 
 		 cp.setJMenuBar(menu);
 		 cp.model.addObserver(lv);
 	/*	 cp.model.addObserver(sv);

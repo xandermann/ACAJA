@@ -15,6 +15,8 @@ import files.SettingsFile;
  * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
  */
 public final class UserRequests extends FFmpegRuntime {	
+	
+	
 	/**
 	 * [ METHODE DE CLASSE. ]
 	 * 

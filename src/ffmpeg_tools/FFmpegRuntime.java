@@ -56,7 +56,7 @@ public abstract class FFmpegRuntime {
 	 */
 	private static void install(){
 		//Provisoirement j'utilise le ffmpeg de la variable path.
-		FFMPEG_PATH = System.getProperty("os").contains("Linux") ? "/bin/bash ffmpeg " : "ffmpeg ";
+		FFMPEG_PATH = System.getProperty("os.name").contains("Linux") ? "/bin/bash ffmpeg " : "ffmpeg ";
 	}
 	
 	

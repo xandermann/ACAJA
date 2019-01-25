@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import files.SettingsFile;
 
-public class SettingsFileTest {
+public final class SettingsFileTest {
 
 	/**
 	 * Test le constructeur

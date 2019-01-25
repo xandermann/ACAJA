@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import files.SelectableFile;
 
-public class SelectaleFileTest {
+public final class SelectaleFileTest {
 
 	/**
 	 * Tests constructeur

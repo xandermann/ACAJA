@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import gui_conversion.ConversionModel;
 
-public class TestConversionModel {
+public final class TestConversionModel {
 
 	/**
 	 * Constructeur OK

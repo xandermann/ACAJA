@@ -34,7 +34,8 @@ public final class UserRequests extends FFmpegRuntime {
 								file.getSourceFile().getPath().split("[.]")
 								[file.getSourceFile().getPath().split("[.]").length-1];
 						String fileName = file.getSourceFile().getPath();
-						String newFileName = fileName.substring(0, fileName.lastIndexOf(oldExtension)-1)+
+						String newFileName = 
+								fileName.substring(0, fileName.lastIndexOf(oldExtension)-1) +
 								newSettings.get(SettingsFile.VIDEO_CODEC);
 						
 						/**

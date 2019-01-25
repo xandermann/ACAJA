@@ -55,7 +55,8 @@ public abstract class FFmpegRuntime {
 	 * l'utilisateur vu avec M. OUNI. ).
 	 */
 	private static void install(){
-		//TODO
+		//Provisoirement j'utilise le ffmpeg de la variable path.
+		FFMPEG_PATH = System.getProperty("os").contains("Linux") ? "/bin/bash ffmpeg " : "ffmpeg ";
 	}
 	
 	
@@ -90,9 +91,8 @@ public abstract class FFmpegRuntime {
 	 */
 	protected static Process execute(String ffmpegRequest){
 		if(FFMPEG_PATH==null) install();
-		//Provisoirement j'utilise le ffmpeg de la variable path.
 		try{
-			return RUN.exec("/bin/bash ffmpeg -i "+ffmpegRequest);
+			return RUN.exec(FFMPEG_PATH+"-i "+ffmpegRequest);
 		}catch (IOException e){
 			return null;
 		}

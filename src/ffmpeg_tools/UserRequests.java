@@ -24,8 +24,7 @@ public final class UserRequests extends FFmpegRuntime {
 	 */
 	public static void execute(SelectableFile file) {
 		if(file instanceof SettingsFile) {
-			HashMap<Integer, Object> ffmpegRequests = ((SettingsFile) file).getSettings();
-			HashMap<Integer, Object> newSettings = ((SettingsFile) file).getRequests();
+			HashMap<Integer, Object> ffmpegRequests = ((SettingsFile) file).getRequests();
 			for(Integer requestKey : ffmpegRequests.keySet()) {
 					if(requestKey == SettingsFile.VIDEO_CODEC) {
 						String oldExtension =  
@@ -34,7 +33,7 @@ public final class UserRequests extends FFmpegRuntime {
 						String fileName = file.getSourceFile().getPath();
 						String newFileName = 
 								fileName.substring(0, fileName.lastIndexOf(oldExtension)-1) +
-								newSettings.get(SettingsFile.VIDEO_CODEC);
+								ffmpegRequests.get(SettingsFile.VIDEO_CODEC);
 						
 						/**
 						 * REQUETE DE CONVERSION SOUMISE A FFMPEG.

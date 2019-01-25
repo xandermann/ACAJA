@@ -21,10 +21,10 @@ public final class SoundSettingsPanel extends JPanel implements Observer{
 	
 	
 	private ConversionModel model;
-	private JTextField includeBitrate;
-	private JTextField includeSamplingRate;
-	private JTextField includeChannels;
-	private JTextField includeVolume;
+	private JTextField bitrate;
+	private JTextField samplingRate;
+	private JTextField channels;
+	private JTextField sound;
 	
 	
 	//=======================================================================================================================
@@ -45,34 +45,34 @@ public final class SoundSettingsPanel extends JPanel implements Observer{
 		
 		JPanel pan_vol = new JPanel(new FlowLayout());
 		pan_vol.add(new JLabel("Volume en sortie (en %): "),BorderLayout.WEST);
-		includeVolume = new JTextField();
-		includeVolume.setPreferredSize(new Dimension(300,20));
-		pan_vol.add(includeVolume,BorderLayout.EAST);
-		includeVolume.setEnabled(false);
+		sound = new JTextField();
+		sound.setPreferredSize(new Dimension(300,20));
+		pan_vol.add(sound,BorderLayout.EAST);
+		sound.setEnabled(false);
 		this.add(pan_vol);
 		
 		JPanel pan_bitrate = new JPanel(new FlowLayout());
 		pan_bitrate.add(new JLabel("Bitrate (kb/s) : "),BorderLayout.WEST);
-		includeBitrate = new JTextField();
-		includeBitrate.setPreferredSize(new Dimension(300,20));
-		pan_bitrate.add(includeBitrate,BorderLayout.EAST);
-		includeBitrate.setEnabled(false);
+		bitrate = new JTextField();
+		bitrate.setPreferredSize(new Dimension(300,20));
+		pan_bitrate.add(bitrate,BorderLayout.EAST);
+		bitrate.setEnabled(false);
 		this.add(pan_bitrate);
 		
 		JPanel pan_echant = new JPanel(new FlowLayout());
 		pan_echant.add(new JLabel("Taux d'echantillonnage (Hz) : "),BorderLayout.WEST);
-		includeSamplingRate = new JTextField();
-		includeSamplingRate.setPreferredSize(new Dimension(300,20));
-		pan_echant.add(includeSamplingRate,BorderLayout.EAST);
-		includeSamplingRate.setEnabled(false);
+		samplingRate = new JTextField();
+		samplingRate.setPreferredSize(new Dimension(300,20));
+		pan_echant.add(samplingRate,BorderLayout.EAST);
+		samplingRate.setEnabled(false);
 		this.add(pan_echant);
 		
 		JPanel pan_canaux = new JPanel(new FlowLayout());
 		pan_canaux.add(new JLabel("Nombre de canaux audio en sortie : "),BorderLayout.WEST);
-		includeChannels = new JTextField();
-		includeChannels.setPreferredSize(new Dimension(300,20));
-		pan_canaux.add(includeChannels,BorderLayout.EAST);
-		includeChannels.setEnabled(false);
+		channels = new JTextField();
+		channels.setPreferredSize(new Dimension(300,20));
+		pan_canaux.add(channels,BorderLayout.EAST);
+		channels.setEnabled(false);
 		this.add(pan_canaux);
 	}
 
@@ -85,22 +85,22 @@ public final class SoundSettingsPanel extends JPanel implements Observer{
 	public void update(Observable o, Object arg) {
 		if(model.getCurrentFile() != null) {
 			HashMap<Integer, Object> settings = model.getCurrentFile().getSettings();
-			includeBitrate.setText( "" +
+			bitrate.setText( "" +
 					(Integer) settings.get(SettingsFile.AUDIO_BITRATE));
-			includeBitrate.setEnabled(true);
-			includeSamplingRate.setText( "" +
+			bitrate.setEnabled(true);
+			samplingRate.setText( "" +
 					(Integer) settings.get(SettingsFile.SAMPLING_RATE));
-			includeSamplingRate.setEnabled(true);
-			includeChannels.setText( "" +
+			samplingRate.setEnabled(true);
+			channels.setText( "" +
 					(Integer) settings.get(SettingsFile.NUMBER_AUDIO_CHANNELS));
-			includeChannels.setEnabled(true);
+			channels.setEnabled(true);
 		}else{
-			includeBitrate.setText("");
-			includeBitrate.setEnabled(false);
-			includeSamplingRate.setText("");
-			includeSamplingRate.setEnabled(false);
-			includeChannels.setText("");
-			includeChannels.setEnabled(false);
+			bitrate.setText("");
+			bitrate.setEnabled(false);
+			samplingRate.setText("");
+			samplingRate.setEnabled(false);
+			channels.setText("");
+			channels.setEnabled(false);
 		}
 	}
 	

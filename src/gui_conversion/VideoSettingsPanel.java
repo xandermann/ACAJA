@@ -27,9 +27,9 @@ public final class VideoSettingsPanel extends JPanel implements Observer{
 	
 	
 	private ConversionModel model;
-	private JTextField includeResolution;
-	private JTextField includeBitrate;
-	private JTextField includeFps;
+	private JTextField resolution;
+	private JTextField bitrate;
+	private JTextField fps;
 	
 	
 	
@@ -41,9 +41,9 @@ public final class VideoSettingsPanel extends JPanel implements Observer{
 	public VideoSettingsPanel(ConversionModel m) {
 		this.model = m;
 		
-		includeResolution = new JTextField();
-		includeBitrate = new JTextField();
-		includeFps = new JTextField();
+		resolution = new JTextField();
+		bitrate = new JTextField();
+		fps = new JTextField();
 		
 		this.setSize(new Dimension(400, 400));
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -55,14 +55,13 @@ public final class VideoSettingsPanel extends JPanel implements Observer{
 		 * NOTE : pour la premiere iteration nous avons choisi d'implementer simplement
 		 * un FORMAT de sortie, par la suite, l'utilisateur choisira les codecs
 		 * audio/videos voulu et le conteneur(format) sera determine automatiquement par
-		 * le logiciel pour creer un fichier optimal et lisible
+		 * le logiciel pour creer un fichier optimal et lisible;
 		 */
 		Codec.add(new JLabel("Format sortie : "), BorderLayout.WEST);
 		String[] format = { ".avi", ".mp4", ".flv" };
 		JComboBox box_format = new JComboBox(format);
 		
 		box_format.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(model.getCurrentFile() != null) {
@@ -81,23 +80,23 @@ public final class VideoSettingsPanel extends JPanel implements Observer{
 		reso.setLayout(new FlowLayout());
 		
 		reso.add(new JLabel("Resolution : "), BorderLayout.WEST);
-		includeResolution.setPreferredSize(new Dimension(300, 20));
-		includeResolution.setEnabled(false);
-		reso.add(includeResolution, BorderLayout.EAST);
+		resolution.setPreferredSize(new Dimension(300, 20));
+		resolution.setEnabled(false);
+		reso.add(resolution, BorderLayout.EAST);
 
 		JPanel br = new JPanel();
 		br.setLayout(new FlowLayout());
 		br.add(new JLabel("Bitrate (kb/s) : "), BorderLayout.WEST);
-		includeBitrate.setPreferredSize(new Dimension(300, 20));
-		includeBitrate.setEnabled(false);
-		br.add(includeBitrate, BorderLayout.EAST);
+		bitrate.setPreferredSize(new Dimension(300, 20));
+		bitrate.setEnabled(false);
+		br.add(bitrate, BorderLayout.EAST);
 
 		JPanel panef = new JPanel();
 		panef.setLayout(new FlowLayout());
 		panef.add(new JLabel("Images par seconde (FPS) : "), BorderLayout.WEST);
-		includeFps.setPreferredSize(new Dimension(300, 20));
-		includeFps.setEnabled(false);
-		panef.add(includeFps, BorderLayout.EAST);
+		fps.setPreferredSize(new Dimension(300, 20));
+		fps.setEnabled(false);
+		panef.add(fps, BorderLayout.EAST);
 
 		JPanel panest = new JPanel();
 		panest.setLayout(new FlowLayout());
@@ -139,24 +138,24 @@ public final class VideoSettingsPanel extends JPanel implements Observer{
 	public void update(Observable o, Object arg) { 
 		if(model.getCurrentFile() != null) {
 			HashMap<Integer, Object> settings = model.getCurrentFile().getSettings();
-			/*includeResolution.setText( "" +
+			/*resolution.setText( "" +
 					( (Integer[]) settings.get(SettingsFile.VIDEO_RESOLUTION) )[0]
 					+"x"
 					+ ( (Integer[]) settings.get(SettingsFile.VIDEO_RESOLUTION) )[1]);	
-			includeResolution.setEnabled(true);
-			includeBitrate.setText( "" +
+			resolution.setEnabled(true);
+			bitrate.setText( "" +
 					(Integer) settings.get(SettingsFile.VIDEO_BITRATE));
-			includeBitrate.setEnabled(true);
-			includeFps.setText( "" +
+			bitrate.setEnabled(true);
+			fps.setText( "" +
 					(Double) settings.get(SettingsFile.FPS));
-			includeFps.setEnabled(true);*/
+			fps.setEnabled(true);*/
 		}else{
-			includeResolution.setText("");
-			includeResolution.setEnabled(false);
-			includeBitrate.setText("");
-			includeBitrate.setEnabled(false);
-			includeFps.setText("");
-			includeFps.setEnabled(false);
+			resolution.setText("");
+			resolution.setEnabled(false);
+			bitrate.setText("");
+			bitrate.setEnabled(false);
+			fps.setText("");
+			fps.setEnabled(false);
 		}
 	}
 	

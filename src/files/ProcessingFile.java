@@ -8,7 +8,7 @@ import ffmpeg_tools.SystemRequests;
  * Auteurs du projet : 
  * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
  */
-public class ProcessingFile extends SelectableFile implements State{
+public final class ProcessingFile extends SelectableFile implements State{
 	//=======================================================================================================================
 	//=======================================================================================================================
 	

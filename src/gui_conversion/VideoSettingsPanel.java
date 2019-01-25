@@ -20,7 +20,7 @@ import javax.swing.JTextField;
 
 import files.SettingsFile;
 
-public class VideoSettingsPanel extends JPanel implements Observer{
+public final class VideoSettingsPanel extends JPanel implements Observer{
 	//=======================================================================================================================
 	//=======================================================================================================================
 	

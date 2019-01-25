@@ -24,7 +24,7 @@ import javax.swing.JPanel;
 import exceptions.ImportationException;
 import main_pack.OpeningWindow;
 
-public class ConversionPanel extends JFrame{
+public final class ConversionPanel extends JFrame{
 	 private ConversionModel model;
 	 private JLabel start;
 	 

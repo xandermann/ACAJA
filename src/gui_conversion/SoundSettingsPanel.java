@@ -15,7 +15,7 @@ import javax.swing.JTextField;
 
 import files.SettingsFile;
 
-public class SoundSettingsPanel extends JPanel implements Observer{
+public final class SoundSettingsPanel extends JPanel implements Observer{
 	//=======================================================================================================================
 	//=======================================================================================================================
 	

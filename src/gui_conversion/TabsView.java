@@ -5,7 +5,7 @@ import java.util.Observer;
 
 import javax.swing.JTabbedPane;
 
-public class TabsView extends JTabbedPane{
+public final class TabsView extends JTabbedPane{
 	private ConversionModel model;
 	
 	public TabsView(ConversionModel m) {

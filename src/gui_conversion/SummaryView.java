@@ -12,7 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import files.SettingsFile;
-public class SummaryView extends JPanel implements Observer{
+public final class SummaryView extends JPanel implements Observer{
 	//=======================================================================================================================
 	//=======================================================================================================================
 	

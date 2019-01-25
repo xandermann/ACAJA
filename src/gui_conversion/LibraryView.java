@@ -10,7 +10,7 @@ import java.util.Observer;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 
-public class LibraryView extends JList implements Observer, MouseListener, KeyListener {
+public final class LibraryView extends JList implements Observer, MouseListener, KeyListener {
 	//=======================================================================================================================
 	//=======================================================================================================================
 	
@@ -74,8 +74,7 @@ public class LibraryView extends JList implements Observer, MouseListener, KeyLi
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		 if(e.getKeyCode()==KeyEvent.VK_DELETE) 
-			 this.model.remove(this.model.getCurrentFile());	 
+		 if(e.getKeyCode()==KeyEvent.VK_DELETE) this.model.remove(this.model.getCurrentFile());	 
 	}
 
 	@Override

@@ -5,21 +5,14 @@ import java.util.ArrayList;
 
 import javax.swing.JFileChooser;
 import exceptions.ImportationException;
-public class DataChoose {
+public final class DataChoose {
 	//=======================================================================================================================
 	//=======================================================================================================================
-	
-	
-	private static JFileChooser jfc;
-	
-	
-	//=======================================================================================================================
-	//=======================================================================================================================
-	
+
 	
 	public static File FileChoose() throws ImportationException {
 		
-		jfc = new JFileChooser("Parcourir");
+		JFileChooser jfc = new JFileChooser("Parcourir");
 		int chooserStatus = jfc.showOpenDialog(null);
 		
 		File importFile = jfc.getSelectedFile();

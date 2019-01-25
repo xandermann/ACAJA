@@ -14,7 +14,7 @@ import ffmpeg_tools.SystemRequests;
  * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et
  *         CHEVRIER Jean-christophe.
  */
-public class SettingsFile extends SelectableFile implements State{
+public final class SettingsFile extends SelectableFile implements State{
 
 	/**
 	 * [ CONSTANTES DE CLASSE. ]

@@ -1,3 +1,3 @@
 package gui_conversion;
 
-public class Profile {}
+public final class Profile {}

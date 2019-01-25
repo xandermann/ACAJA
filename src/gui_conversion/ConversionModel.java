@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 import ffmpeg_tools.UserRequests;
 import files.SettingsFile;
 
-public class ConversionModel extends Observable {
+public final class ConversionModel extends Observable {
 	//=======================================================================================================================
 	//=======================================================================================================================
 	

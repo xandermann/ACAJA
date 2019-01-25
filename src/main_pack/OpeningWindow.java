@@ -17,7 +17,7 @@ import gui_conversion.ConversionPanel;
  * Auteurs du projet : 
  * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
  */
-public class OpeningWindow {
+public final class OpeningWindow {
 	//=======================================================================================================================
 	//=======================================================================================================================
 	
@@ -28,7 +28,6 @@ public class OpeningWindow {
 	 */
 	private final static int WIDTH = 750;
 	private final static int HEIGHT = 500;
-	private static JProgressBar bar;
 	
 	
 	//=======================================================================================================================
@@ -44,12 +43,11 @@ public class OpeningWindow {
 		JFrame frame = new JFrame("Chargement d'Acaja");
 		OpeningWindow.afficherLogo(frame);
 		
-		frame.setLocation(200, 200);
-		
+		frame.setLocation(200, 200);	
 		frame.setSize(new Dimension(WIDTH/3,HEIGHT/4));
 		frame.setVisible(true); 
 		
-		bar  = new JProgressBar();
+		JProgressBar bar  = new JProgressBar();
 		bar.setMaximum(100);
 		bar.setMinimum(0);
 		bar.setStringPainted(true);
@@ -59,9 +57,7 @@ public class OpeningWindow {
 	    	bar.setValue(val);
 	    	try {
 	    		Thread.sleep(10);
-	    	} catch (InterruptedException e) {
-	    		e.printStackTrace();
-	    	}
+	    	} catch (InterruptedException e) {}
 	    }
 	    frame.dispose(); 
 	}

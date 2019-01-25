@@ -26,7 +26,7 @@
     project="s3b_s22_chevrier_dasilvacarmo_hublau_palmieri" 
     file="/s3b_s22_chevrier_dasilvacarmo_hublau_palmieri/src/ffmpeg_tools/SystemRequests.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="387" width="273" x="341" y="383"/>    
+    <position height="-1" width="-1" x="476" y="577"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      

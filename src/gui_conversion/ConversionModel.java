@@ -219,8 +219,8 @@ public class ConversionModel extends Observable {
 	/**
 	 * Methode qui permet de modifier un reglage du fichier actuellement selectionne
 	 */
-	public void modify(Integer setting, Object value) {
-		this.currentFile.modifySetting(setting, value);
+	public void modify(Integer typeSetting, Object setting) {
+		this.currentFile.modify(typeSetting, setting);
 	}
 	
 	/**

@@ -66,10 +66,11 @@ public class VideoSettingsPanel extends JPanel implements Observer{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(model.getCurrentFile() != null) {
-					model.getCurrentFile().modifySetting(
-							SettingsFile.VIDEO_CODEC, 
-							((JComboBox)e.getSource()).getSelectedItem().toString()
-							);
+					model.modify
+					(
+						SettingsFile.VIDEO_CODEC, 
+						((JComboBox)e.getSource()).getSelectedItem().toString()
+					);
 				}
 			}
 		});

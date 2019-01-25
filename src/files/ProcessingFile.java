@@ -8,7 +8,7 @@ import ffmpeg_tools.SystemRequests;
  * Auteurs du projet : 
  * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
  */
-public class ProcessingFile extends SelectableFile{
+public class ProcessingFile extends SelectableFile implements State{
 	//=======================================================================================================================
 	//=======================================================================================================================
 	
@@ -63,9 +63,8 @@ public class ProcessingFile extends SelectableFile{
 	 * @param object		Les arguments necessaires a connaitre pour executer 
 	 * 						les traitements. 
 	 */
-	public void performProcess(String typeProcess, Object process) {
-		//TODO provisoire a ameliorer. 
-		this.performedProcessings.put(typeProcess, process);
+	public void performProcess(String typeProcess, Object process) { 
+		performedProcessings.put(typeProcess, process);
 	}
 
 	
@@ -77,7 +76,7 @@ public class ProcessingFile extends SelectableFile{
 	 * [ METHODE POUR SAVOIR SI DES TRAIEMENTS SONT EN ATTENTE SUR CE FICHIER. ]
 	 */
 	public boolean isModified() {
-		return  !this.performedProcessings.equals(new HashMap<String, Object>());
+		return  !performedProcessings.equals(new HashMap<String, Object>());
 	}
 	
 	
@@ -93,7 +92,7 @@ public class ProcessingFile extends SelectableFile{
 	 * @return HashMap<String, Object>		Les traitements en attente.
 	 */
 	public HashMap<String, Object> getPerformedProcessings() {
-		return this.performedProcessings;
+		return performedProcessings;
 	}
 
 	

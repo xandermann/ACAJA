@@ -4,7 +4,7 @@
   <class id="1" language="java" name="files.SelectableFile" project="s3b_s22_chevrier_dasilvacarmo_hublau_palmieri" 
     file="/s3b_s22_chevrier_dasilvacarmo_hublau_palmieri/src/files/SelectableFile.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="505" y="155"/>    
+    <position height="-1" width="-1" x="512" y="-10"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -31,16 +31,31 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <generalization id="4">    
-    <bendpoint x="451" y="387"/>    
+  <interface id="4" language="java" name="files.State" project="s3b_s22_chevrier_dasilvacarmo_hublau_palmieri" 
+    file="/s3b_s22_chevrier_dasilvacarmo_hublau_palmieri/src/files/State.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="516" y="312"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <generalization id="5">    
     <end type="SOURCE" refId="2"/>    
     <end type="TARGET" refId="1"/>  
   </generalization>  
-  <generalization id="5">    
-    <bendpoint x="563" y="382"/>    
+  <generalization id="6">    
     <end type="SOURCE" refId="3"/>    
     <end type="TARGET" refId="1"/>  
   </generalization>  
+  <realization id="7">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="4"/>  
+  </realization>  
+  <realization id="8">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="4"/>  
+  </realization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    

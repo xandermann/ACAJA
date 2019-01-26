@@ -7,6 +7,7 @@ import java.util.Observable;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
+import exceptions.IncorrectFileException;
 import ffmpeg_tools.UserRequests;
 import files.SettingsFile;
 
@@ -151,8 +152,10 @@ public final class ConversionModel extends Observable {
 	 * Methode qui ajoute un fichier a la bibliotheque
 	 * 
 	 * @param file SettingsFile : fichier a ajouter a la bibliotheque
+	 * 
+	 * @throws IncorrectFileException 
 	 */
-	public void add(File file) {
+	public void add(File file) throws IncorrectFileException {
 		if(file.exists()) {
 			this.files.add(new SettingsFile(file));
 			this.setChanged();
@@ -228,8 +231,7 @@ public final class ConversionModel extends Observable {
 	 */
 	public void convert() {
 		for(SettingsFile sf : this.files) {
-			if (sf.isModified()) 
-				UserRequests.execute(sf);		
+			if(sf.isModified()) UserRequests.execute(sf);		
 		}
 	}
 

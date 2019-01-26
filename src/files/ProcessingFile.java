@@ -1,6 +1,8 @@
 package files;
 import java.io.File;
 import java.util.HashMap;
+
+import exceptions.IncorrectFileException;
 import ffmpeg_tools.SystemRequests;
 /**
  * TODO comentaire a faire. 
@@ -30,8 +32,10 @@ public final class ProcessingFile extends SelectableFile implements State{
 	 * [ CONSTRUCTEUR. ]
 	 * 
 	 * @param sourceFile		Le fichier source.
+	 * 
+	 * @throws IncorrectFileException 
 	 */
-	public ProcessingFile(File sourceFile) {
+	public ProcessingFile(File sourceFile) throws IncorrectFileException {
 		/**
 		 * INITIALISATION DES ATTRIBUTS HETITES DE LA CLASSE SELECTABLEFILE.
 		 */

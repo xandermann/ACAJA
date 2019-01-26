@@ -17,7 +17,7 @@ public final class DataChoose {
 		
 		File importFile = jfc.getSelectedFile();
 		if(importFile == null || chooserStatus != JFileChooser.APPROVE_OPTION) {
-			throw new ImportationException("Merci de selectionner un fichier");
+			throw new ImportationException(ImportationException.ABSENT_FILE);
 		} 
 		
 		return importFile;
@@ -28,7 +28,7 @@ public final class DataChoose {
 	//=======================================================================================================================
 	
 	
-	public static ArrayList<File> DirectoryChoose() throws Exception {
+	public static ArrayList<File> DirectoryChoose() throws ImportationException {
 		ArrayList<File> files = new ArrayList<File>();
 		
 		JFileChooser jdc = new JFileChooser("Parcourir");
@@ -38,7 +38,7 @@ public final class DataChoose {
 
 		File importDirectory = jdc.getCurrentDirectory();
 		if(!importDirectory.isDirectory() || importDirectory == null)
-			throw new Exception("Merci de selectionner un dossier");
+			throw new ImportationException(ImportationException.ABSENT_DIRECTORY);
 		else{
 			for(File f : importDirectory.listFiles()) 
 				files.add(f);

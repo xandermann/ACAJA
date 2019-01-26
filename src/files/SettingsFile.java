@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 
+import exceptions.IncorrectFileException;
 import ffmpeg_tools.SystemRequests;
 
 /**
@@ -87,10 +88,11 @@ public final class SettingsFile extends SelectableFile implements State{
 	 * [ CONSTRUCTEUR. ]
 	 * 
 	 * @param file Le fichier source.
+	 * @throws IncorrectFileException 
 	 * @throws IOException
 	 * @throws InterruptedException
 	 */
-	public SettingsFile(File file) {
+	public SettingsFile(File file) throws IncorrectFileException {
 		/**
 		 * INITIALISATION DES ATTRIBUTS HETITES DE LA CLASSE SELECTABLEFILE.
 		 */
@@ -100,7 +102,7 @@ public final class SettingsFile extends SelectableFile implements State{
 		 * Si le type de fichier n'est pas accepté, alors on renvoie une exception.
 		 */
 		if (!this.containsAudio())
-			throw new IllegalArgumentException("Seuls les fichiers audio et video sont acceptes.");
+			throw new IncorrectFileException(IncorrectFileException.BAD_TYPE_FILE);
 
 		/**
 		 * INITIALISATION DES PARAMETRES DE LA VIDEO.

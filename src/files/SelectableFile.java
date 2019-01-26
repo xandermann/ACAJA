@@ -2,6 +2,8 @@ package files;
 
 import java.io.File;
 
+import exceptions.IncorrectFileException;
+
 /**
  * TODO comentaire a faire.
  * 
@@ -77,8 +79,10 @@ public class SelectableFile{
 	 * Ce constructeur intialise les attributs.
 	 * 
 	 * @param sourceFile	Le fichier source.
+	 * 
+	 * @throws IncorrectFileException 
 	 */
-	public SelectableFile(File sourceFile) {
+	public SelectableFile(File sourceFile) throws IncorrectFileException {
 		isSelected = false;
 		this.sourceFile = sourceFile;
 		whoAmI();
@@ -150,8 +154,10 @@ public class SelectableFile{
 	 * 
 	 * 3 valeurs possiblement accordable a typeFile : - FILE_TYPE_VIDEO ( = 0 ) ; -
 	 * FILE_TYPE_AUDIO ( = 1 ) ; - FILE_TYPE_IMAGE ( = 2 ).
+	 * 
+	 * @throws IncorrectFileException 
 	 */
-	private void whoAmI() {
+	private void whoAmI() throws IncorrectFileException {
 		String fileName = this.sourceFile.getName().toLowerCase();
 		if (fileName.endsWith("mp4") || fileName.endsWith("avi") || fileName.endsWith("flv"))
 			typeFile = FILE_TYPE_VIDEO;
@@ -160,7 +166,7 @@ public class SelectableFile{
 			else if (fileName.endsWith("png") || fileName.endsWith("jpg") || fileName.endsWith("jpeg"))
 					typeFile = FILE_TYPE_IMAGE;
 				else
-					throw new IllegalArgumentException("Extension du fichier non conforme !");
+					throw new IncorrectFileException(IncorrectFileException.FORBIDDEN_FILE);
 	}
 
 	

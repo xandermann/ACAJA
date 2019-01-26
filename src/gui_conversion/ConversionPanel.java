@@ -22,6 +22,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import exceptions.ImportationException;
+import exceptions.IncorrectFileException;
 import main_pack.OpeningWindow;
 
 public final class ConversionPanel extends JFrame{
@@ -34,7 +35,9 @@ public final class ConversionPanel extends JFrame{
 	  * 
 	  */
 	 private ConversionPanel() {
-		this.model = new ConversionModel();
+		 model = new ConversionModel();
+		 start = new JLabel("Pour commencer, ajoutez un fichier via le menu");
+		 start.setHorizontalAlignment(JLabel.CENTER);
 	 }
 	 
 	 
@@ -63,14 +66,9 @@ public final class ConversionPanel extends JFrame{
 						dataView.add(tv);
 						add(dataView,BorderLayout.EAST);
 						model.addObserver(sv);
-						//remove(5);
 						start.setVisible(false);
-						repaint();
-						
 					}
 					model.setCurrentFile(f.getName());
-				} catch (ImportationException e) {
-					JOptionPane.showMessageDialog(null, e.getMessage());
 				} catch (Exception e){
 					JOptionPane.showMessageDialog(null, e.getMessage());
 				}
@@ -88,11 +86,12 @@ public final class ConversionPanel extends JFrame{
 						model.setCurrentFile(f.getName());
 					}					
 				} catch (Exception e) {
-					System.out.println(e.getMessage());
-					//JOptionPane.showMessageDialog(null, e.getMessage());
+					JOptionPane.showMessageDialog(null, e.getMessage());
 				}
 			}
 		});
+		
+		
 		JMenuItem clearLibrary = new JMenuItem("Vider la bibliotheque");
 		clearLibrary.addActionListener(new ActionListener() {
 			@Override
@@ -101,6 +100,7 @@ public final class ConversionPanel extends JFrame{
 			}
 		});
 		
+		
 		JMenuItem quit = new JMenuItem("Quitter");
 		quit.addActionListener(new ActionListener() {
 			@Override
@@ -108,6 +108,7 @@ public final class ConversionPanel extends JFrame{
 				System.exit(0);
 			} 		
 		});
+		
 		
 		itemsFiles.add(importFile);
 		itemsFiles.add(importFolder);
@@ -223,10 +224,10 @@ public final class ConversionPanel extends JFrame{
 				
 		cp.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		// SummaryView sv = new SummaryView(cp.model);
+		 SummaryView sv = new SummaryView(cp.model);
 		 DefaultListModel list_content = cp.model.getFilenames();
 		 LibraryView lv = new LibraryView(cp.model, list_content);
-		// TabsView tv = new TabsView(cp.model);
+		 TabsView tv = new TabsView(cp.model);
 		 
 		 JPanel p = new JPanel();
 		 p.setLayout(new BorderLayout());
@@ -238,11 +239,9 @@ public final class ConversionPanel extends JFrame{
 		 
 		 cp.setJMenuBar(menu);
 		 cp.model.addObserver(lv);
-	/*	 cp.model.addObserver(sv);
+		 cp.model.addObserver(sv);
 		 p.add(sv,BorderLayout.NORTH);
-		 p.add(tv,BorderLayout.CENTER); */
-		 cp.start = new JLabel("Pour commencer, ajoutez un fichier via le menu");
-		 cp.start.setHorizontalAlignment(JLabel.CENTER);
+		 p.add(tv,BorderLayout.CENTER); 
 		 p.add(cp.start);
 		 cp.setLayout(new BorderLayout());
 		 cp.add(lv,BorderLayout.WEST);

@@ -40,7 +40,7 @@ public final class ProcessingFile extends SelectableFile implements State{
 		/**
 		 * INITIALISATION DE TABLE DES TRAITEMENTS EN ATTENTE SUR THIS. 
 		 */
-		this.performedProcessings = new HashMap<Integer, Object>();
+		performedProcessings = new HashMap<Integer, Object>();
 		
 		/**
 		 * INITIALISATION DE LA DUREE DU SON OU DE LA VIDEO. 
@@ -48,7 +48,7 @@ public final class ProcessingFile extends SelectableFile implements State{
 		 * Si le fichier source est une image alors la duree prend -1, 
 		 * car une image n'a pas de duree. 
 		 */
-		this.duration = containsAudio() ? SystemRequests.getDuration(this.sourceFile) : -1;			
+		duration = containsAudio() ? SystemRequests.getDuration(sourceFile) : -1;			
 	}
 
 	

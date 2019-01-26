@@ -15,10 +15,14 @@ import ffmpeg_tools.SystemRequests;
  *         CHEVRIER Jean-christophe.
  */
 public final class SettingsFile extends SelectableFile implements State{
-
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
 	/**
 	 * [ CONSTANTES DE CLASSE. ]
 	 */
+	
 	/**
 	 * Constante qui definit le codec video dans la HashMap
 	 */
@@ -102,11 +106,11 @@ public final class SettingsFile extends SelectableFile implements State{
 		 * INITIALISATION DES PARAMETRES DE LA VIDEO.
 		 */
 		// Intiliasation des tables.
-		this.requests = new HashMap<Integer, Object>();
-		this.settings = new HashMap<Integer, Object>();
+		requests = new HashMap<Integer, Object>();
+		settings = new HashMap<Integer, Object>();
 
-		// Initialisation des autres parametres.
-		// SystemRequests.getSettings(this);
+		//Initialisation des autres parametres.
+		SystemRequests.getSettings(this);
 	}
 
 	
@@ -121,7 +125,7 @@ public final class SettingsFile extends SelectableFile implements State{
 	 * @param newValue La nouvelle valeur du parametre.
 	 */
 	public void modify(Integer typeSetting, Object setting) {
-		this.requests.put(typeSetting, setting);
+		requests.put(typeSetting, setting);
 	}
 
 	
@@ -137,7 +141,7 @@ public final class SettingsFile extends SelectableFile implements State{
 	 * @return booleen True si le fichier a ete modifie.
 	 */
 	public boolean isModified() {
-		return !this.requests.equals(new HashMap<Integer, Object>());
+		return !requests.equals(new HashMap<Integer, Object>());
 	}
 
 	/**
@@ -148,7 +152,7 @@ public final class SettingsFile extends SelectableFile implements State{
 	 * @return HashMap<String, String> Les parametres du fichier.
 	 */
 	public HashMap<Integer, Object> getSettings() {
-		return this.settings;
+		return settings;
 	}
 
 	/**
@@ -159,7 +163,7 @@ public final class SettingsFile extends SelectableFile implements State{
 	 * @return HashMap<String, String> Les requetes.
 	 */
 	public HashMap<Integer, Object> getRequests() {
-		return this.requests;
+		return requests;
 	}
 
 	

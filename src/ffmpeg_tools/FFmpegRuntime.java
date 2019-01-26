@@ -6,8 +6,8 @@ import java.io.IOException;
  * Cette classe realise l'interfacage de degre 1 de FFMPEG en JAVA. 
  * 
  * Le degre 1 consiste a permettre l'execution de requetes FFMPEG
- * directement en JAVA. De ce fait les methode de la classe ont 
- * des roles primitifs, le niveaub'exige pas de fonctionnalites 
+ * directement en JAVA. De ce fait les methodes de la classe ont 
+ * des roles primitifs, le niveau 1 n''exige pas de fonctionnalites 
  * complexes.
  *
  * Cette classe se charge de connaitre le chemin vers le fichier executable 
@@ -84,10 +84,6 @@ public abstract class FFmpegRuntime {
 	 * @return Process				Un objet de type Process contenant la reponse de FFMPEG a 
 	 * 								la requete qui lui est soumise par l'executeur de lignes de 
 	 * 								commande RUN de type Runtime. 
-	 * 
-	 * @throws IOException			Exception lancee si la methode ne trouve pas ce que l'on lui 
-	 * 								soumet a executer. 
-	 * @throws InterruptedException 
 	 */
 	protected static Process execute(String ffmpegRequest){
 		if(FFMPEG_PATH==null) install();

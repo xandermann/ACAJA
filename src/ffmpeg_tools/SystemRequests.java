@@ -274,7 +274,7 @@ public final class SystemRequests extends FFmpegRuntime{
 	public static int findEndIndexSetting(String informations, int fromIndex) {
 		int indexSpace = informations.indexOf(' ', fromIndex);
 		int indexComa = informations.indexOf(',', fromIndex);
-		return indexSpace<indexComa || indexComa==-1 ?  indexSpace : indexComa;	
+		return indexSpace<indexComa || indexComa==-1 ? indexSpace : indexComa;	
 	}
 	
 	
@@ -406,7 +406,7 @@ public final class SystemRequests extends FFmpegRuntime{
 				}
 				//On ferme le flux. 
 				br.close();		
-			} catch (IOException e){
+			} catch (IOException e) {
 				//On force l'execution a se terminer ici.
 				return;
 			}

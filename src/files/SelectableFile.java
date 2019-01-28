@@ -152,13 +152,15 @@ public class SelectableFile{
 	 * Cette methode permet de savoir si le fichier source est une video, ou un son,
 	 * ou meme une image.
 	 * 
-	 * 3 valeurs possiblement accordable a typeFile : - FILE_TYPE_VIDEO ( = 0 ) ; -
-	 * FILE_TYPE_AUDIO ( = 1 ) ; - FILE_TYPE_IMAGE ( = 2 ).
+	 * 3 valeurs possiblement accordable a typeFile : 
+	 * - FILE_TYPE_VIDEO ( = 0 ) ; 
+	 * - FILE_TYPE_AUDIO ( = 1 ) ; 
+	 * - FILE_TYPE_IMAGE ( = 2 ).
 	 * 
 	 * @throws IncorrectFileException 
 	 */
 	private void whoAmI() throws IncorrectFileException {
-		String fileName = this.sourceFile.getName().toLowerCase();
+		String fileName = sourceFile.getName().toLowerCase();
 		if (fileName.endsWith("mp4") || fileName.endsWith("avi") || fileName.endsWith("flv"))
 			typeFile = FILE_TYPE_VIDEO;
 		else if (fileName.endsWith("mp3") || fileName.endsWith("wav") || fileName.endsWith("ogg"))

@@ -1,4 +1,4 @@
-package gui_conversion;
+package conversion;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;

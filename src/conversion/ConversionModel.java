@@ -1,4 +1,4 @@
-package gui_conversion;
+package conversion;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -8,7 +8,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
 import exceptions.IncorrectFileException;
-import ffmpeg_tools.UserRequests;
+import ffmpeg.UserRequests;
 import files.SettingsFile;
 
 public final class ConversionModel extends Observable {

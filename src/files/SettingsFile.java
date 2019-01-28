@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.HashMap;
 
 import exceptions.IncorrectFileException;
-import ffmpeg_tools.SystemRequests;
+import ffmpeg.SystemRequests;
 
 /**
  * TODO comentaire a faire.
@@ -15,7 +15,7 @@ import ffmpeg_tools.SystemRequests;
  * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et
  *         CHEVRIER Jean-christophe.
  */
-public final class SettingsFile extends SelectableFile implements State{
+public final class SettingsFile extends SelectableFile implements Modifiable{
 	//=======================================================================================================================
 	//=======================================================================================================================
 	

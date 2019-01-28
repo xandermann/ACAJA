@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.2.2" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
   realizations="true" associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
-  <class id="1" language="java" name="gui_conversion.VideoSettingsPanel" 
+  <class id="1" language="java" name="conversion.VideoSettingsPanel" 
     project="s3b_s22_chevrier_dasilvacarmo_hublau_palmieri" 
-    file="/s3b_s22_chevrier_dasilvacarmo_hublau_palmieri/src/gui_conversion/VideoSettingsPanel.java" binary="false" 
+    file="/s3b_s22_chevrier_dasilvacarmo_hublau_palmieri/src/conversion/VideoSettingsPanel.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="826" y="-377"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -12,8 +12,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="2" language="java" name="gui_conversion.DataChoose" project="s3b_s22_chevrier_dasilvacarmo_hublau_palmieri" 
-    file="/s3b_s22_chevrier_dasilvacarmo_hublau_palmieri/src/gui_conversion/DataChoose.java" binary="false" 
+  <class id="2" language="java" name="conversion.DataChoose" project="s3b_s22_chevrier_dasilvacarmo_hublau_palmieri" 
+    file="/s3b_s22_chevrier_dasilvacarmo_hublau_palmieri/src/conversion/DataChoose.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="883" y="-28"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -22,8 +22,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="3" language="java" name="gui_conversion.TabsView" project="s3b_s22_chevrier_dasilvacarmo_hublau_palmieri" 
-    file="/s3b_s22_chevrier_dasilvacarmo_hublau_palmieri/src/gui_conversion/TabsView.java" binary="false" 
+  <class id="3" language="java" name="conversion.TabsView" project="s3b_s22_chevrier_dasilvacarmo_hublau_palmieri" 
+    file="/s3b_s22_chevrier_dasilvacarmo_hublau_palmieri/src/conversion/TabsView.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="881" y="-515"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -32,9 +32,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="4" language="java" name="gui_conversion.SummaryView" 
-    project="s3b_s22_chevrier_dasilvacarmo_hublau_palmieri" 
-    file="/s3b_s22_chevrier_dasilvacarmo_hublau_palmieri/src/gui_conversion/SummaryView.java" binary="false" 
+  <class id="4" language="java" name="conversion.SummaryView" project="s3b_s22_chevrier_dasilvacarmo_hublau_palmieri" 
+    file="/s3b_s22_chevrier_dasilvacarmo_hublau_palmieri/src/conversion/SummaryView.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1348" y="-195"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -43,8 +42,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="5" language="java" name="gui_conversion.Profile" project="s3b_s22_chevrier_dasilvacarmo_hublau_palmieri" 
-    file="/s3b_s22_chevrier_dasilvacarmo_hublau_palmieri/src/gui_conversion/Profile.java" binary="false" 
+  <class id="5" language="java" name="conversion.Profile" project="s3b_s22_chevrier_dasilvacarmo_hublau_palmieri" 
+    file="/s3b_s22_chevrier_dasilvacarmo_hublau_palmieri/src/conversion/Profile.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1257" y="-6"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -53,9 +52,9 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="6" language="java" name="gui_conversion.SoundSettingsPanel" 
+  <class id="6" language="java" name="conversion.SoundSettingsPanel" 
     project="s3b_s22_chevrier_dasilvacarmo_hublau_palmieri" 
-    file="/s3b_s22_chevrier_dasilvacarmo_hublau_palmieri/src/gui_conversion/SoundSettingsPanel.java" binary="false" 
+    file="/s3b_s22_chevrier_dasilvacarmo_hublau_palmieri/src/conversion/SoundSettingsPanel.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="836" y="-204"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -64,9 +63,9 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="7" language="java" name="gui_conversion.ConversionPanel" 
+  <class id="7" language="java" name="conversion.ConversionPanel" 
     project="s3b_s22_chevrier_dasilvacarmo_hublau_palmieri" 
-    file="/s3b_s22_chevrier_dasilvacarmo_hublau_palmieri/src/gui_conversion/ConversionPanel.java" binary="false" 
+    file="/s3b_s22_chevrier_dasilvacarmo_hublau_palmieri/src/conversion/ConversionPanel.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1087" y="-573"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -75,9 +74,9 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="8" language="java" name="gui_conversion.ConversionModel" 
+  <class id="8" language="java" name="conversion.ConversionModel" 
     project="s3b_s22_chevrier_dasilvacarmo_hublau_palmieri" 
-    file="/s3b_s22_chevrier_dasilvacarmo_hublau_palmieri/src/gui_conversion/ConversionModel.java" binary="false" 
+    file="/s3b_s22_chevrier_dasilvacarmo_hublau_palmieri/src/conversion/ConversionModel.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1097" y="-268"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -86,8 +85,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="9" language="java" name="gui_conversion.ListEntry" project="s3b_s22_chevrier_dasilvacarmo_hublau_palmieri" 
-    file="/s3b_s22_chevrier_dasilvacarmo_hublau_palmieri/src/gui_conversion/ListEntry.java" binary="false" 
+  <class id="9" language="java" name="conversion.ListEntry" project="s3b_s22_chevrier_dasilvacarmo_hublau_palmieri" 
+    file="/s3b_s22_chevrier_dasilvacarmo_hublau_palmieri/src/conversion/ListEntry.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1094" y="36"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -96,9 +95,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="10" language="java" name="gui_conversion.LibraryView" 
-    project="s3b_s22_chevrier_dasilvacarmo_hublau_palmieri" 
-    file="/s3b_s22_chevrier_dasilvacarmo_hublau_palmieri/src/gui_conversion/LibraryView.java" binary="false" 
+  <class id="10" language="java" name="conversion.LibraryView" project="s3b_s22_chevrier_dasilvacarmo_hublau_palmieri" 
+    file="/s3b_s22_chevrier_dasilvacarmo_hublau_palmieri/src/conversion/LibraryView.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1383" y="-446"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -108,7 +106,7 @@
     </display>  
   </class>  
   <association id="11">    
-    <end type="SOURCE" refId="1" navigable="false">      
+    <end type="SOURCE" refId="10" navigable="false">      
       <attribute id="12" name="model">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
@@ -132,19 +130,19 @@
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="17">    
-    <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="18" name="profiles">        
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="18" name="model">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="19" minimum="0" maximum="2147483647">        
+      <multiplicity id="19" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="5" navigable="true"/>    
+    <end type="TARGET" refId="8" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="20">    
-    <end type="SOURCE" refId="3" navigable="false">      
+    <end type="SOURCE" refId="1" navigable="false">      
       <attribute id="21" name="model">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
@@ -156,7 +154,7 @@
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="23">    
-    <end type="SOURCE" refId="7" navigable="false">      
+    <end type="SOURCE" refId="3" navigable="false">      
       <attribute id="24" name="model">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
@@ -168,19 +166,19 @@
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="26">    
-    <end type="SOURCE" refId="10" navigable="false">      
-      <attribute id="27" name="model">        
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="27" name="profiles">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="28" minimum="0" maximum="1">        
+      <multiplicity id="28" minimum="0" maximum="2147483647">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="8" navigable="true"/>    
+    <end type="TARGET" refId="5" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="29">    
-    <end type="SOURCE" refId="6" navigable="false">      
+    <end type="SOURCE" refId="7" navigable="false">      
       <attribute id="30" name="model">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      

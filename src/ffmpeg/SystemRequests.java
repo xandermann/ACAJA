@@ -1,4 +1,4 @@
-package ffmpeg_tools;
+package ffmpeg;
 import java.io.*;
 import java.util.HashMap;
 

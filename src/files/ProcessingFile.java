@@ -3,14 +3,14 @@ import java.io.File;
 import java.util.HashMap;
 
 import exceptions.IncorrectFileException;
-import ffmpeg_tools.SystemRequests;
+import ffmpeg.SystemRequests;
 /**
  * TODO comentaire a faire. 
  * 
  * Auteurs du projet : 
  * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
  */
-public final class ProcessingFile extends SelectableFile implements State{
+public final class ProcessingFile extends SelectableFile implements Modifiable{
 	//=======================================================================================================================
 	//=======================================================================================================================
 	

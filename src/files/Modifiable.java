@@ -1,6 +1,6 @@
 package files;
 
-public interface State {
+public interface Modifiable {
 	/**
 	 * [ METHODE POUR MODIFIER THIS. ]
 	 * 

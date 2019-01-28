@@ -1,4 +1,4 @@
-package ffmpeg_tools;
+package ffmpeg;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;

@@ -1,8 +1,8 @@
-package tests.gui_conversion;
+package tests.conversion;
 
 import org.junit.Test;
 
-import gui_conversion.ConversionModel;
+import conversion.ConversionModel;
 
 public final class TestConversionModel {
 

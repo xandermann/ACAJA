@@ -1,4 +1,4 @@
-package gui_conversion;
+package conversion;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -24,6 +24,7 @@ import javax.swing.JPanel;
 import exceptions.ImportationException;
 import exceptions.IncorrectFileException;
 import main_pack.OpeningWindow;
+import tools.Tools;
 
 public final class ConversionPanel extends JFrame{
 	 private ConversionModel model;
@@ -177,7 +178,7 @@ public final class ConversionPanel extends JFrame{
 				public void actionPerformed(ActionEvent e) {
 					//ici ouvrir la fenetre de chargement 
 					JFrame chargement = new JFrame("Convertion de votre fichier");
-					OpeningWindow.afficherLogo(chargement);
+					Tools.showLogo(chargement);
 
 					chargement.setLayout(new BorderLayout());
 					chargement.setSize(400, 150);
@@ -211,7 +212,7 @@ public final class ConversionPanel extends JFrame{
 		 cp.setResizable(false);
 		 cp.setTitle("Acaja Conversion");
 		 cp.setSize(new Dimension(1000,600));
-		 OpeningWindow.afficherLogo(cp);
+		 Tools.showLogo(cp);
 		 try {
 			 cp.setIconImage(ImageIO.read(new File("img/LogoAcaja.png")));
 		 } catch (IOException e1) {}

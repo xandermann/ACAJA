@@ -1,4 +1,4 @@
-package gui_conversion;
+package conversion;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;

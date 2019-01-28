@@ -14,10 +14,8 @@ public final class Tools {
 	
 	public static void showLogo(JFrame f) {
 		try {
-			f.setIconImage(ImageIO.read(new File(ResourcesPaths.ACAJA_LOGO_PATH)));
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
+			f.setIconImage(ImageIO.read(ResourcesPaths.ACAJA_LOGO));
+		} catch (IOException ioe) {}
 	}
 	
 	

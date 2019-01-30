@@ -24,7 +24,7 @@ import javax.swing.JPanel;
 import exceptions.ImportationException;
 import exceptions.IncorrectFileException;
 import main_pack.OpeningWindow;
-import tools.Tools;
+import tools.WindowTools;
 
 public final class ConversionPanel extends JFrame{
 	 private ConversionModel model;
@@ -178,7 +178,7 @@ public final class ConversionPanel extends JFrame{
 				public void actionPerformed(ActionEvent e) {
 					//ici ouvrir la fenetre de chargement 
 					JFrame chargement = new JFrame("Convertion de votre fichier");
-					Tools.showLogo(chargement);
+					WindowTools.showLogo(chargement);
 
 					chargement.setLayout(new BorderLayout());
 					chargement.setSize(400, 150);
@@ -212,18 +212,10 @@ public final class ConversionPanel extends JFrame{
 		 cp.setResizable(false);
 		 cp.setTitle("Acaja Conversion");
 		 cp.setSize(new Dimension(1000,600));
-		 Tools.showLogo(cp);
-		 try {
-			 cp.setIconImage(ImageIO.read(new File("img/LogoAcaja.png")));
-		 } catch (IOException e1) {}
-
+		 cp.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		 
-		//recuperation des dimensions de l'ecran
-		Dimension ecran = Toolkit.getDefaultToolkit().getScreenSize();
-		//on positionne la fenetre au centre de l'ecran
-		cp.setLocation(((int)ecran.getWidth()-1000)/2, ((int)ecran.getHeight()-600)/2);
-				
-		cp.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		 WindowTools.showLogo(cp);
+		 WindowTools.focusWindow(cp);
 		
 		 SummaryView sv = new SummaryView(cp.model);
 		 DefaultListModel list_content = cp.model.getFilenames();

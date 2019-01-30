@@ -7,14 +7,14 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
-public final class Tools {
+public final class WindowTools {
 	//=======================================================================================================================
 	//=======================================================================================================================
 	
 	
 	public static void showLogo(JFrame f) {
 		try {
-			f.setIconImage(ImageIO.read(ResourcesPaths.ACAJA_LOGO));
+			f.setIconImage(ImageIO.read(WindowResources.ACAJA_LOGO));
 		} catch (IOException ioe) {}
 	}
 	

@@ -10,8 +10,8 @@ import javax.swing.*;
 
 import conversion.ConversionModel;
 import conversion.ConversionPanel;
-import tools.ResourcesPaths;
-import tools.Tools;
+import tools.WindowResources;
+import tools.WindowTools;
 /**
  * [ CLASSE POUR LE LANCEMENT DES FENETRES D'OUVERTURE DU LOGICIEL. ]
  * 
@@ -50,13 +50,13 @@ public final class OpeningWindow {
 		frame.setContentPane(new JPanel() {
 		    public void paintComponent(Graphics g) {
 		        try {
-					g.drawImage(ImageIO.read(ResourcesPaths.ACAJA_LOGO),80,60,null);
+					g.drawImage(ImageIO.read(WindowResources.ACAJA_LOGO),80,60,null);
 				} catch (IOException ioe) {}
 		      }
 		});
 
-		Tools.showLogo(frame);
-		Tools.focusWindow(frame);
+		WindowTools.showLogo(frame);
+		WindowTools.focusWindow(frame);
 		
 		frame.setBackground(Color.gray);
 		frame.setVisible(true); 
@@ -100,8 +100,8 @@ public final class OpeningWindow {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(new Dimension(WIDTH, HEIGHT));
 		
-		Tools.showLogo(frame);
-		Tools.focusWindow(frame);
+		WindowTools.showLogo(frame);
+		WindowTools.focusWindow(frame);
 		
 		JPanel centerPanel = new JPanel(new GridLayout(2, 1, 0, 50));
 		centerPanel.add(convertbutton);

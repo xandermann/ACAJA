@@ -1,25 +1,27 @@
 package files;
 import java.io.File;
 import java.util.HashMap;
-import ffmpeg_tools.SystemRequests;
+
+import exceptions.IncorrectFileException;
+import ffmpeg.SystemRequests;
 /**
  * TODO comentaire a faire. 
  * 
  * Auteurs du projet : 
  * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
  */
-public class ProcessingFile extends SelectableFile{
+public final class ProcessingFile extends SelectableFile implements Modifiable{
 	//=======================================================================================================================
 	//=======================================================================================================================
 	
 	/**
-	 * [ ATTRIBUTS D'INSTANCE. ]
+	 * [ ATTRIBUT D'INSTANCE DE LA CLASSE. ]
 	 */
 
 	/**
 	 * Les traitements en attente sur this. 
 	 */
-	private HashMap<String, Object> performedProcessings;
+	private HashMap<Integer, Object> performedProcessings;
 
 	
 	//=======================================================================================================================
@@ -29,18 +31,20 @@ public class ProcessingFile extends SelectableFile{
 	/**
 	 * [ CONSTRUCTEUR. ]
 	 * 
-	 * @param file		Le fichier source.
+	 * @param sourceFile		Le fichier source.
+	 * 
+	 * @throws IncorrectFileException 
 	 */
-	public ProcessingFile(File file) {
+	public ProcessingFile(File sourceFile) throws IncorrectFileException {
 		/**
 		 * INITIALISATION DES ATTRIBUTS HETITES DE LA CLASSE SELECTABLEFILE.
 		 */
-		super(file);
+		super(sourceFile);
 		
 		/**
 		 * INITIALISATION DE TABLE DES TRAITEMENTS EN ATTENTE SUR THIS. 
 		 */
-		this.performedProcessings = new HashMap<String, Object>();
+		performedProcessings = new HashMap<Integer, Object>();
 		
 		/**
 		 * INITIALISATION DE LA DUREE DU SON OU DE LA VIDEO. 
@@ -48,7 +52,7 @@ public class ProcessingFile extends SelectableFile{
 		 * Si le fichier source est une image alors la duree prend -1, 
 		 * car une image n'a pas de duree. 
 		 */
-		this.duration = containsAudio() ? SystemRequests.getDuration(this.sourceFile) : -1;			
+		duration = containsAudio() ? SystemRequests.getDuration(sourceFile) : -1;			
 	}
 
 	
@@ -63,9 +67,8 @@ public class ProcessingFile extends SelectableFile{
 	 * @param object		Les arguments necessaires a connaitre pour executer 
 	 * 						les traitements. 
 	 */
-	public void performProcess(String typeProcess, Object process) {
-		//TODO provisoire a ameliorer. 
-		this.performedProcessings.put(typeProcess, process);
+	public void modify(Integer typeProcess, Object process) { 
+		performedProcessings.put(typeProcess, process);
 	}
 
 	
@@ -77,7 +80,7 @@ public class ProcessingFile extends SelectableFile{
 	 * [ METHODE POUR SAVOIR SI DES TRAIEMENTS SONT EN ATTENTE SUR CE FICHIER. ]
 	 */
 	public boolean isModified() {
-		return  !this.performedProcessings.equals(new HashMap<String, Object>());
+		return  !performedProcessings.equals(new HashMap<Integer, Object>());
 	}
 	
 	
@@ -92,8 +95,8 @@ public class ProcessingFile extends SelectableFile{
 	 * 
 	 * @return HashMap<String, Object>		Les traitements en attente.
 	 */
-	public HashMap<String, Object> getPerformedProcessings() {
-		return this.performedProcessings;
+	public HashMap<Integer, Object> getPerformedProcessings() {
+		return performedProcessings;
 	}
 
 	

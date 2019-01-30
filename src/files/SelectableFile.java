@@ -2,6 +2,8 @@ package files;
 
 import java.io.File;
 
+import exceptions.IncorrectFileException;
+
 /**
  * TODO comentaire a faire.
  * 
@@ -10,9 +12,13 @@ import java.io.File;
  * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et
  *         CHEVRIER Jean-christophe.
  */
-public class SelectableFile {
-
+public class SelectableFile{
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
 	/**
+	 * [ CONSTANTES DE CLASSE. ]
 	 * 
 	 * Ces constantes permettent d'indiquer le type du fichier source d'une instance
 	 * de la classe.
@@ -33,6 +39,15 @@ public class SelectableFile {
 	 */
 	public final static int FILE_TYPE_IMAGE = 2;
 
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
+	/**
+	 * [ ATTRIBUTS D'INSTANCE DE LA CLASSE. ]
+	 */
+	
 	/**
 	 * La duree de la video.
 	 */
@@ -53,19 +68,31 @@ public class SelectableFile {
 	 */
 	private boolean isSelected;
 
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
 	/**
 	 * [ CONSTRUCTEUR. ]
 	 * 
 	 * Ce constructeur intialise les attributs.
 	 * 
-	 * @param file Le fichier source.
+	 * @param sourceFile	Le fichier source.
+	 * 
+	 * @throws IncorrectFileException 
 	 */
-	public SelectableFile(File file) {
-		this.isSelected = false;
-		this.sourceFile = file;
-		this.whoAmI();
+	public SelectableFile(File sourceFile) throws IncorrectFileException {
+		isSelected = false;
+		this.sourceFile = sourceFile;
+		whoAmI();
 	}
 
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
 	/**
 	 * [ METHODE - ROLE PRIMITIF. ]
 	 * 
@@ -113,47 +140,42 @@ public class SelectableFile {
 	public boolean containsAudio() {
 		return (isVideo() || isSound());
 	}
+	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
 
+	
 	/**
 	 * [ METHODE POUR RENSEIGNER LE TYPE DE FICHIER. ]
 	 * 
 	 * Cette methode permet de savoir si le fichier source est une video, ou un son,
 	 * ou meme une image.
 	 * 
-	 * 3 valeurs possiblement accordable a typeFile : - FILE_TYPE_VIDEO ( = 0 ) ; -
-	 * FILE_TYPE_AUDIO ( = 1 ) ; - FILE_TYPE_IMAGE ( = 2 ).
+	 * 3 valeurs possiblement accordable a typeFile : 
+	 * - FILE_TYPE_VIDEO ( = 0 ) ; 
+	 * - FILE_TYPE_AUDIO ( = 1 ) ; 
+	 * - FILE_TYPE_IMAGE ( = 2 ).
+	 * 
+	 * @throws IncorrectFileException 
 	 */
-	private void whoAmI() {
-		String fileName = this.sourceFile.getName().toLowerCase();
-
+	private void whoAmI() throws IncorrectFileException {
+		String fileName = sourceFile.getName().toLowerCase();
 		if (fileName.endsWith("mp4") || fileName.endsWith("avi") || fileName.endsWith("flv"))
 			typeFile = FILE_TYPE_VIDEO;
 		else if (fileName.endsWith("mp3") || fileName.endsWith("wav") || fileName.endsWith("ogg"))
-			typeFile = FILE_TYPE_AUDIO;
-		else if (fileName.endsWith("png") || fileName.endsWith("jpg") || fileName.endsWith("jpeg"))
-			typeFile = FILE_TYPE_IMAGE;
-		else
-			throw new IllegalArgumentException("Extension du fichier non conforme !");
+				typeFile = FILE_TYPE_AUDIO;
+			else if (fileName.endsWith("png") || fileName.endsWith("jpg") || fileName.endsWith("jpeg"))
+					typeFile = FILE_TYPE_IMAGE;
+				else
+					throw new IncorrectFileException(IncorrectFileException.FORBIDDEN_FILE);
 	}
 
-	/**
-	 * [ METHODE POUR SAVOIR SI THIS A ETE MODIFIE. ]
-	 * 
-	 * Methode abstraite dont le comportement en interne change selon si on est dans
-	 * la classe fille SettingsFile ou dans la classe fille ProcessingFile.
-	 * 
-	 * En effet on dans quelle fille, etre modifiee a un sens different. Cela
-	 * justifie la declaration en abstract de la methode.
-	 * 
-	 * Cette methode sera tres utile au moment ou l'utilisateur du logiciel voudra
-	 * generer le fichier de sortie, elle permettra des lors de savoir si this a
-	 * bien ete modifie et est bien a prendre en compte lors de la generation du
-	 * fichier de sortie.
-	 * 
-	 * @return booleen Vaut true si this a ete modifie. public abstract boolean
-	 *         isModified();
-	 */
-
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
 	/**
 	 * [ METHODE ACCESSEUR - GETTER. ]
 	 * 
@@ -183,10 +205,24 @@ public class SelectableFile {
 		isSelected = false;
 	}
 
+	/**
+	 * [ METHODE ACCESSEUR - GETTER. ]
+	 * 
+	 * Methode pour recuperer la duree d'une video.
+	 * 
+	 * @return int Le type du fichier.
+	 */
 	public long getDuration() {
 		return duration;
 	}
 
+	/**
+	 * [ METHODE ACCESSEUR - SETTER. ]
+	 * 
+	 * Methode pour modifier la duree d'une video.
+	 * 
+	 * @return int Le type du fichier.
+	 */
 	public void setDuration(long duration) {
 		this.duration = duration;
 	}
@@ -199,7 +235,7 @@ public class SelectableFile {
 	 * @return int Le type du fichier.
 	 */
 	public int getTypeFile() {
-		return this.typeFile;
+		return typeFile;
 	}
 
 	/**
@@ -214,6 +250,8 @@ public class SelectableFile {
 	}
 
 	/**
+	 * [ METHODE ACCESSEUR - GETTER. ]
+	 * 
 	 * Methode pour recuperer le nom du fichier
 	 * 
 	 * @return String Le nom du fichier source
@@ -221,4 +259,8 @@ public class SelectableFile {
 	public String getSourceFilename() {
 		return sourceFile.getName();
 	}
+	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
 }

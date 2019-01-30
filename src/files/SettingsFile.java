@@ -4,7 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 
-import ffmpeg_tools.SystemRequests;
+import exceptions.IncorrectFileException;
+import ffmpeg.SystemRequests;
 
 /**
  * TODO comentaire a faire.
@@ -14,11 +15,15 @@ import ffmpeg_tools.SystemRequests;
  * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et
  *         CHEVRIER Jean-christophe.
  */
-public class SettingsFile extends SelectableFile {
-
+public final class SettingsFile extends SelectableFile implements Modifiable{
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
 	/**
 	 * [ CONSTANTES DE CLASSE. ]
 	 */
+	
 	/**
 	 * Constante qui definit le codec video dans la HashMap
 	 */
@@ -59,9 +64,11 @@ public class SettingsFile extends SelectableFile {
 	 */
 	public final static int VIDEO_RESOLUTION = 8;
 
-	// =======================================================================================================================
-	// =======================================================================================================================
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
 
+	
 	/**
 	 * Les requetes soumises par l'utilisateur.
 	 */
@@ -72,17 +79,20 @@ public class SettingsFile extends SelectableFile {
 	 */
 	private HashMap<Integer, Object> settings;
 
-	// =======================================================================================================================
-	// =======================================================================================================================
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
 
+	
 	/**
 	 * [ CONSTRUCTEUR. ]
 	 * 
 	 * @param file Le fichier source.
+	 * @throws IncorrectFileException 
 	 * @throws IOException
 	 * @throws InterruptedException
 	 */
-	public SettingsFile(File file) {
+	public SettingsFile(File file) throws IncorrectFileException {
 		/**
 		 * INITIALISATION DES ATTRIBUTS HETITES DE LA CLASSE SELECTABLEFILE.
 		 */
@@ -92,35 +102,39 @@ public class SettingsFile extends SelectableFile {
 		 * Si le type de fichier n'est pas accepté, alors on renvoie une exception.
 		 */
 		if (!this.containsAudio())
-			throw new IllegalArgumentException("Seuls les fichiers audio et video sont acceptes.");
+			throw new IncorrectFileException(IncorrectFileException.BAD_TYPE_FILE);
 
 		/**
 		 * INITIALISATION DES PARAMETRES DE LA VIDEO.
 		 */
 		// Intiliasation des tables.
-		this.requests = new HashMap<Integer, Object>();
-		this.settings = new HashMap<Integer, Object>();
+		requests = new HashMap<Integer, Object>();
+		settings = new HashMap<Integer, Object>();
 
-		// Initialisation des autres parametres.
+		//Initialisation des autres parametres.
 		SystemRequests.getSettings(this);
 	}
 
-	// =======================================================================================================================
-	// =======================================================================================================================
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
 
+	
 	/**
 	 * Methode pour modifier les parametres de la video.
 	 * 
 	 * @param setting  Le parametre a modifier.
 	 * @param newValue La nouvelle valeur du parametre.
 	 */
-	public void modifySetting(Integer setting, Object request) {
-		this.requests.put(setting, request);
+	public void modify(Integer typeSetting, Object setting) {
+		requests.put(typeSetting, setting);
 	}
 
-	// =======================================================================================================================
-	// =======================================================================================================================
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
 
+	
 	/**
 	 * [ METHODE POUR SAVOIR SI DES PARAMETRES ONT ETE MODIFIES. ]
 	 * 
@@ -129,7 +143,7 @@ public class SettingsFile extends SelectableFile {
 	 * @return booleen True si le fichier a ete modifie.
 	 */
 	public boolean isModified() {
-		return !this.requests.equals(new HashMap<Integer, Object>());
+		return !requests.equals(new HashMap<Integer, Object>());
 	}
 
 	/**
@@ -140,7 +154,7 @@ public class SettingsFile extends SelectableFile {
 	 * @return HashMap<String, String> Les parametres du fichier.
 	 */
 	public HashMap<Integer, Object> getSettings() {
-		return this.settings;
+		return settings;
 	}
 
 	/**
@@ -151,7 +165,10 @@ public class SettingsFile extends SelectableFile {
 	 * @return HashMap<String, String> Les requetes.
 	 */
 	public HashMap<Integer, Object> getRequests() {
-		return this.requests;
+		return requests;
 	}
 
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
 }

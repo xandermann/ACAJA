@@ -2,7 +2,7 @@ package tests.files;
 
 import org.junit.Test;
 
-public class ProcessingFileTest {
+public final class ProcessingFileTest {
 
 	@Test
 	public void test() {

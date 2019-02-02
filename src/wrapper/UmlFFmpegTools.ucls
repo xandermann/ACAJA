@@ -1,43 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.2.2" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
   realizations="true" associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
-  <class id="1" language="java" name="ffmpeg.FFmpegRuntime" project="s3b_s22_chevrier_dasilvacarmo_hublau_palmieri" 
-    file="/s3b_s22_chevrier_dasilvacarmo_hublau_palmieri/src/ffmpeg/FFmpegRuntime.java" binary="false" 
+  <class id="1" language="java" name="wrapper.StreamsConsumer" project="s3b_s22_chevrier_dasilvacarmo_hublau_palmieri" 
+    file="/s3b_s22_chevrier_dasilvacarmo_hublau_palmieri/src/wrapper/StreamsConsumer.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="298" y="255"/>    
+    <position height="-1" width="-1" x="882" y="365"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="2" language="java" name="ffmpeg.UserRequests" project="s3b_s22_chevrier_dasilvacarmo_hublau_palmieri" 
-    file="/s3b_s22_chevrier_dasilvacarmo_hublau_palmieri/src/ffmpeg/UserRequests.java" binary="false" 
+  <class id="2" language="java" name="wrapper.FFmpegRuntime" project="s3b_s22_chevrier_dasilvacarmo_hublau_palmieri" 
+    file="/s3b_s22_chevrier_dasilvacarmo_hublau_palmieri/src/wrapper/FFmpegRuntime.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="117" width="190" x="111" y="383"/>    
+    <position height="153" width="144" x="365" y="131"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="3" language="java" name="ffmpeg.SystemRequests" project="s3b_s22_chevrier_dasilvacarmo_hublau_palmieri" 
-    file="/s3b_s22_chevrier_dasilvacarmo_hublau_palmieri/src/ffmpeg/SystemRequests.java" binary="false" 
+  <class id="3" language="java" name="wrapper.UserRequests" project="s3b_s22_chevrier_dasilvacarmo_hublau_palmieri" 
+    file="/s3b_s22_chevrier_dasilvacarmo_hublau_palmieri/src/wrapper/UserRequests.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="476" y="577"/>    
+    <position height="207" width="181" x="251" y="324"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <generalization id="4">    
+  <class id="4" language="java" name="wrapper.MetaFFmpeg" project="s3b_s22_chevrier_dasilvacarmo_hublau_palmieri" 
+    file="/s3b_s22_chevrier_dasilvacarmo_hublau_palmieri/src/wrapper/MetaFFmpeg.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="880" y="215"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="wrapper.SystemRequests" project="s3b_s22_chevrier_dasilvacarmo_hublau_palmieri" 
+    file="/s3b_s22_chevrier_dasilvacarmo_hublau_palmieri/src/wrapper/SystemRequests.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="387" width="261" x="472" y="324"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <generalization id="6">    
     <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="1"/>  
+    <end type="TARGET" refId="2"/>  
   </generalization>  
-  <generalization id="5">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="1"/>  
+  <generalization id="7">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="2"/>  
   </generalization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    

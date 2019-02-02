@@ -1,13 +1,11 @@
 package wrapper;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
+
 import java.util.*;
 
-import files.SelectableFile;
-import files.SettingsFile;
+import files.*;
+
 /**
  * Ceci est une classe concrete "sterile", c-a-d qu'aucune classe ne peut 
  * en heriter ( d'ou la presence du final devant class).
@@ -42,9 +40,25 @@ public final class UserRequests extends FFmpegRuntime {
 	
 	
 	
-	 //=======================================================================================================================
-	 //=======================================================================================================================	
+   //=======================================================================================================================
+   //=======================================================================================================================	
 	
+	
+	
+	public static void consumeStreams(Process processtoBeConsume) {
+		new Thread() {
+			public void run() {
+				startToWork();
+				StreamsConsumer.consumeStreams(processtoBeConsume);
+				workIsOver();
+			}
+		}.start();
+	}
+	
+	
+	
+   //=======================================================================================================================
+   //=======================================================================================================================
 	
 	
 	/**
@@ -75,31 +89,7 @@ public final class UserRequests extends FFmpegRuntime {
 						/**
 						 * CONSOMMATION DES FLUX DE SORTIE.
 						 */
-						new Thread() {
-							public void run() {
-								try {
-									BufferedReader consumer = new BufferedReader(new InputStreamReader(conversionProcess.getErrorStream()));
-									String line = "";
-									try {
-										while((line = consumer.readLine()) != null);
-									} finally {
-										consumer.close();
-									}
-									
-									consumer = new BufferedReader(new InputStreamReader(conversionProcess.getInputStream()));
-									try {
-										while((line = consumer.readLine()) != null);
-									} finally {
-										consumer.close();
-									}
-								} catch(IOException ioe) {}
-								
-								 try {
-									conversionProcess.waitFor();
-								} catch (InterruptedException e) {}
-								 workIsOver();
-							}
-						}.start();
+						consumeStreams(conversionProcess);
 					}
 			}
 		}

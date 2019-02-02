@@ -199,21 +199,36 @@ public final class ConversionWindow extends JFrame{
 					waitWindow.setLayout(new BorderLayout());
 					waitWindow.setSize(400, 150);
 					waitWindow.setLocationRelativeTo(null);
-					waitWindow.add(new JLabel("Conversion de votre fichier ..."),BorderLayout.CENTER);
+					waitWindow.add(new JLabel("<html> "
+											+ "<body> "
+											+ "		Conversion du ou des fichier(s)."
+											+ "		<br>   "
+											+ "		Veuillez patientez... "
+											+ "</body> "
+											+ "</html>", JLabel.CENTER), BorderLayout.CENTER);
 					
 					WindowTools.showLogo(waitWindow);			
 					
-					UserRequests.startToWork();
+					/**
+					 * DEBUT DE LA CONVERSION.  
+					 */
+					model.startSave();
 					
+					/**
+					 * LANCEMENT DE LA CONVERSION DANS 
+					 * UN UTRE PROCESSUS. 
+					 */
 					new Thread() {
-					    @Override
 					    public void run() {
-					    	model.convert();
+					    	model.save();
 					    }
 					}.start();
 					
+					/**
+					 * LANCEMENT ET GESTION DE LA FENETRE D'ATTENTE 
+					 * DANS UN AUTRE PROCESSUS. 
+					 */
 					new Thread() {
-					    @Override
 					    public void run() {
 					    	WindowTools.executeWindow(waitWindow);
 							while(UserRequests.workIsOnGoing());

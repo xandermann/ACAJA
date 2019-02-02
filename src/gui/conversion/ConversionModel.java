@@ -232,13 +232,19 @@ public final class ConversionModel extends Model {
 		currentFile.modify(typeSetting, setting);
 	}
 	
+
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
 	
 	/**
-	 * [ CONVERTIR LES FICHEIRS MODIFIES. ]
+	 * [ CONVERTIR LES FICHIERS MODIFIES. ]
 	 * 
-	 * Methode qui demarre la conversion des SettingsFile modifies. 
+	 * Methode pour demarrer la conversion des SettingsFile modifies. 
 	 */
-	public void convert() {
+	public void save() {
 		for(SettingsFile sf : files) {
 			if(sf.isModified()) UserRequests.execute(sf);		
 		}

@@ -1,25 +1,29 @@
 package conversion;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Observable;
+import java.io.*;
+import java.util.*;
 
-import javax.swing.DefaultListModel;
-import javax.swing.JOptionPane;
+import javax.swing.*;
 
 import exceptions.IncorrectFileException;
 import files.SettingsFile;
+import tools.*;
 import wrapper.UserRequests;
 
-public final class ConversionModel extends Observable {
+public final class ConversionModel extends Model {
 	//=======================================================================================================================
 	//=======================================================================================================================
 	
 	
 	
+	/**
+	 * [ ATTRIBUTS D'INSTANCE. ]
+	 */
+	//Fichier courant. 
 	private SettingsFile currentFile;
+	//Liste des fichiers siur lesquels on travaille. 
 	private ArrayList<SettingsFile> files;
-	//nouvel attribut rajoute pour les profils charges
+	//Liste des profils.
 	private ArrayList<Profile> profiles;
 	
 	
@@ -30,65 +34,60 @@ public final class ConversionModel extends Observable {
 	
 	
 	/**
-	 * Constructeur ConversionModel
-	 * 
+	 * [ CONSTRUCTEUR. ]
 	 */
 	public ConversionModel() {
-		this.files = new ArrayList<SettingsFile>();
-		this.profiles = new ArrayList<Profile>();
+		files = new ArrayList<SettingsFile>();
+		profiles = new ArrayList<Profile>();
 	}
 
 	
-	
+
 	//=======================================================================================================================
 	//=======================================================================================================================
 	
 	
 	
-	/*
-	 * Les profils seront enregistres dans le dossier du programme et seront tous
+	/**
+	 * [ CHARGER LES PROFILS. ]
+	 * 
+	 * Les profils sont enregistres dans un dossier interne du programme et sont tous
 	 * charges au demarrage. L'utilisateur pourra gerer les profils presents et en
 	 * enregistrer de nouveaux. Creer une classe profile qui prendra tous les
 	 * parametres a enregistrer
+	 * TODO
 	 */
-	/**
-	 * Methode qui charge les profils precedemment enregistres
-	 * 
-	 */
-	// a modifier public void loadProfiles() {}
-	// public void loadProfile(File profileFile) { }
 	public void loadProfiles() {
-		// TODO
 		// Charger les fichiers profils dans le dossier des profils
-		// Creer des objets de type profils en lisant les fichiers*
+		// Creer des objets de type profils en lisant les fichiers
 		// Ajouter les fichiers dans la liste
-
 	}
 
+	
 	/**
-	 * Methode qui enregistre un nouveau profil parmi les profils
+	 * [ AJOUTER UN PROFIL. ] 
 	 * 
-	 * @param profile Profile : nouveau profil a enregistrer
+	 * Methode pour ajouter un nouveau profil. 
+	 * TODO
+	 * @param profile Profile		Le nouveau profil a ajouter.
 	 */
-	// a modifier public void saveProfile(Profile profile) {}
-	// anciennement public void saveProfile(String profile) { }
-	public void saveProfile(Profile profile) {
+	public void addProfile(Profile profile) {
 		// Creer un nouveau fichier contenant les parametres du profils
 		// Enregistrer le fichier dans le dossier des profils
-
-		this.profiles.add(profile);
+		profiles.add(profile);
 	}
 
+	
 	/**
-	 * Methode qui supprime un des profils existants
+	 * [ SUPPRIMER UN PROFIL. ]
 	 * 
-	 * @param profile Profile : profil a supprimer
+	 * Methode pour supprimer un profil. 
+	 * TODO
+	 * @param profile Profile 	Le profil a supprimer. 
 	 */
-	// a modifier public void removeProfile(Profile profile) {}
-	// anciennement public void removeProfile(File profileFile) { }
 	public void removeProfile(Profile profile) {
-		if (this.profiles.contains(profile)) 
-			this.profiles.remove(profile);
+		if(profiles.contains(profile)) 
+			profiles.remove(profile);
 		else 
 			JOptionPane.showMessageDialog(null, "Le profil a supprimer n'existe pas");
 	}
@@ -101,19 +100,38 @@ public final class ConversionModel extends Observable {
 	
 	
 	/**
+	 * [ SAUVER LES FICHIERS IMPORTEES. ]
+	 * 
 	 * Methode qui sauvegarde les fichiers recemments ouverts a la fermeture
+	 * de la fenetre. 
 	 */
 	public void saveImports() {
+		ArrayList<File> oldFiles = new ArrayList<File>();
+		for(SettingsFile sf : files) oldFiles.add(sf.getSourceFile());
+		
+		try {
+			ObjectOutputStream saver = new ObjectOutputStream(new FileOutputStream(Resources.CONVERSION_OLD_IMPORTS));
+			saver.writeObject(oldFiles);
+			saver.close();
+		} catch (IOException e) {}
 	}
+	
 
 	/**
-	 * Methode qui recupere les fichiers recemments ouverts a l'ouverture
+	 * [ CHARGER LES FICHIERS PRECEDEMMENT IMPORTES. ]
 	 * 
-	 * @return liste des fichiers recemments ouverts
+	 * Methode qui recupere les fichiers recemments ouverts a l'ouverture. 
+	 * 
+	 * @return ArrayList<File> 		La liste des fichiers recement ouverts. 
 	 */
 	public ArrayList<File> loadOldImports() {
-		// TODO
-		return null;
+		ArrayList<File> oldFiles = null;
+		try {
+			ObjectInputStream loader = new ObjectInputStream(new FileInputStream(Resources.CONVERSION_OLD_IMPORTS));
+			oldFiles = (ArrayList<File>) loader.readObject();
+			loader.close();
+	    } catch (ClassNotFoundException e) {} catch (IOException e) {}
+		return oldFiles;
 	}
 
 	
@@ -122,94 +140,78 @@ public final class ConversionModel extends Observable {
 	//=======================================================================================================================
 	
 	
+
+	/**
+	 * [ METHODE POUR AFFICHER LES FILES. ]
+	 * 
+	 * Methode pour recuperer les noms des fichiers sous la forme
+	 * d'une DefaultListModel afin de l'afficher dans la liste du ConversionPanel. 
+	 * 
+	 * TODO
+	 * Par la suite, cette methode recuperera egalement les types des fichiers pour
+	 * afficher leur icone. 
+	 * 
+	 * @return DefaultListModel<ListEntry>		La liste des noms des fichiers. 
+	 */
+	public DefaultListModel<ListEntry> getFilenames() {
+		DefaultListModel<ListEntry> filenameList = new DefaultListModel<ListEntry>();
+		for (SettingsFile f : files) filenameList.addElement(new ListEntry(f.getSourceFilename()));
+		return filenameList;
+	}
+
+	
+	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
+	
 	
 	/**
-	 * Methode qui retourne le fichier actuellement selectionne par l'utilisateur
+	 * [ AJOUTER UN FICHIER. ]
 	 * 
-	 * @return currentFile SettingsFile : fichier actuellement selectionne pour la
-	 *         modification par l'utilisateur
-	 */
-	public SettingsFile getCurrentFile() {
-		return this.currentFile;
-	}
-
-	/**
-	 * Methode qui modifie le fichier actuellement selectionne par l'utilisateur
-	 * 
-	 * @param currentFile String : nom du fichier maintenant selectionne par
-	 *                    l'utilisateur
-	 */
-	public void setCurrentFile(String fileName) {
-		for (SettingsFile f : this.getFiles()) {
-			if (f.getSourceFilename().contentEquals(fileName)) 
-				this.currentFile = f;
-		}
-		this.setChanged();
-		this.notifyObservers();
-	}
-
-	/**
 	 * Methode qui ajoute un fichier a la bibliotheque
 	 * 
-	 * @param file SettingsFile : fichier a ajouter a la bibliotheque
+	 * @param file SettingsFile 		Le fichier a ajouter a la bibliotheque
 	 * 
-	 * @throws IncorrectFileException 
+	 * @throws IncorrectFileException 	Exception levee pour les fichers incorrects. 
 	 */
 	public void add(File file) throws IncorrectFileException {
 		if(file.exists()) {
-			this.files.add(new SettingsFile(file));
-			this.setChanged();
-			this.notifyObservers();
+			files.add(new SettingsFile(file));
+			sendChanges();
 		}else 
 			JOptionPane.showMessageDialog(null, "Le fichier selectionne n'existe pas");
 		
 	}
 	
 	
-	
-	//=======================================================================================================================
-	//=======================================================================================================================
-	
-	
-
 	/**
-	 * Methode qui recupere les noms des fichiers et les retourne sous la forme
-	 * d'une liste de modeles afin de l'afficher dans la liste du ConversionPanel
+	 * [ SUPPRIMER UN FICHIER. ]
 	 * 
-	 * Par la suite, cette methode recuperera egalement les types des fichiers pour
-	 * afficher leur icone
+	 * Methode pour supprimer un fichier de la bibliotheque. 
 	 * 
-	 * @return DefaultListModel liste des noms des fichiers
-	 */
-	public DefaultListModel getFilenames() {
-		DefaultListModel filenameList = new DefaultListModel();
-		for (SettingsFile f : this.getFiles()) 
-			filenameList.addElement(new ListEntry(f.getSourceFilename()));
-		return filenameList;
-	}
-
-	/**
-	 * Methode qui supprime un fichier de la bibliotheque
-	 * 
-	 * @param file SettingsFile ! fichier a supprimer de la bibliotheque
+	 * @param file SettingsFile Le fichier a supprimer de la bibliotheque.
 	 */
 	public void remove(SettingsFile file) {
 		if(this.files.contains(file)) {
-			this.files.remove(file);
-			this.currentFile = null;
-			this.setChanged();
-			this.notifyObservers();
+			files.remove(file);
+			currentFile = null;
+			sendChanges();
 		}else
 			JOptionPane.showMessageDialog(null, "Le fichier a supprimer n'est pas present dans la bibliotheque");
 	}
 	
+	
 	/**
-	 * Methode qui vide la bibliotheque
+	 * [ VIDER LA BIBLIOTHEQUE. ]
+	 * 
+	 * Methode qui vide la bibliotheque. 
 	 */
 	public void clear() {
-		this.files.clear();
-		this.setChanged();
-		this.notifyObservers();
+		files.clear();
+		sendChanges();
 	}
 
 	
@@ -220,17 +222,23 @@ public final class ConversionModel extends Observable {
 	
 	
 	/**
-	 * Methode qui permet de modifier un reglage du fichier actuellement selectionne
+	 * [ MODIFIER  UN FICHIER. ]
+	 * 
+	 * Methode qui permet de modifier un parametre du fichier
+	 * actuellement selectionne
 	 */
 	public void modify(Integer typeSetting, Object setting) {
-		this.currentFile.modify(typeSetting, setting);
+		currentFile.modify(typeSetting, setting);
 	}
 	
+	
 	/**
-	 * Methode qui demarre la conversion des SettingsFile modifies
+	 * [ CONVERTIR LES FICHEIRS MODIFIES. ]
+	 * 
+	 * Methode qui demarre la conversion des SettingsFile modifies. 
 	 */
 	public void convert() {
-		for(SettingsFile sf : this.files) {
+		for(SettingsFile sf : files) {
 			if(sf.isModified()) UserRequests.execute(sf);		
 		}
 	}
@@ -241,12 +249,46 @@ public final class ConversionModel extends Observable {
 	//=======================================================================================================================
 	
 
+	
 	/**
+	 * [ GETTER - OBTENIR LE FICHEIR COURANT. ]
+	 * 
+	 * Methode qui retourne le fichier actuellement selectionne par l'utilisateur
+	 * 
+	 * @return currentFile SettingsFile : fichier actuellement selectionne pour la
+	 *         modification par l'utilisateur
+	 */
+	public SettingsFile getCurrentFile() {
+		return currentFile;
+	}
+
+	
+	/**
+	 * [ SETTER - CHANGER DE FICHIER COURANT. ]
+	 * 
+	 * Methode pour modifier le fichier actuellement 
+	 * selectionne par l'utilisateur
+	 * 
+	 * @param currentFile 		Le nom du fichier maintenant selectionne par l'utilisateur
+	 */
+	public void setCurrentFile(String fileName) {
+		for (SettingsFile f : this.getFiles()) {
+			if (f.getSourceFilename().equals(fileName)) 
+				currentFile = f;
+		}
+		sendChanges();
+	}
+	
+	
+	/**
+	 * [ GETTER - OBTENIR LA LISTE DES FICHIERS. ]
+	 * 
 	 * Methode qui retourne la liste des fichiers actuellement dans la bibliotheque
 	 */
 	public ArrayList<SettingsFile> getFiles() {
 		return files;
 	}
+	
 
 	
 	//=======================================================================================================================

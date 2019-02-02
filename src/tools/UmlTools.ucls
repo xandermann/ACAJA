@@ -11,9 +11,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="2" language="java" name="tools.WindowResources" project="s3b_s22_chevrier_dasilvacarmo_hublau_palmieri" 
-    file="/s3b_s22_chevrier_dasilvacarmo_hublau_palmieri/src/tools/WindowResources.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
+  <class id="2" language="java" name="tools.Resources" project="s3b_s22_chevrier_dasilvacarmo_hublau_palmieri" 
+    file="/s3b_s22_chevrier_dasilvacarmo_hublau_palmieri/src/tools/Resources.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="117" width="163" x="547" y="65"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      

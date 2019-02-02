@@ -11,14 +11,12 @@ public final class DataChoose {
 
 	
 	public static File FileChoose() throws ImportationException {
-		
 		JFileChooser jfc = new JFileChooser("Parcourir");
 		int chooserStatus = jfc.showOpenDialog(null);
 		
 		File importFile = jfc.getSelectedFile();
-		if(importFile == null || chooserStatus != JFileChooser.APPROVE_OPTION) {
+		if(importFile == null || chooserStatus != JFileChooser.APPROVE_OPTION) 
 			throw new ImportationException(ImportationException.ABSENT_FILE);
-		} 
 		
 		return importFile;
 	}

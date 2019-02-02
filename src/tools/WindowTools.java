@@ -14,7 +14,7 @@ public final class WindowTools {
 	
 	public static void showLogo(JFrame f) {
 		try {
-			f.setIconImage(ImageIO.read(WindowResources.ACAJA_LOGO));
+			f.setIconImage(ImageIO.read(Resources.ACAJA_LOGO));
 		} catch (IOException ioe) {}
 	}
 	

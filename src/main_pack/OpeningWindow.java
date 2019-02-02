@@ -10,7 +10,7 @@ import javax.swing.*;
 
 import conversion.ConversionModel;
 import conversion.ConversionPanel;
-import tools.WindowResources;
+import tools.Resources;
 import tools.WindowTools;
 /**
  * [ CLASSE POUR LE LANCEMENT DES FENETRES D'OUVERTURE DU LOGICIEL. ]
@@ -50,7 +50,7 @@ public final class OpeningWindow {
 		frame.setContentPane(new JPanel() {
 		    public void paintComponent(Graphics g) {
 		        try {
-					g.drawImage(ImageIO.read(WindowResources.ACAJA_LOGO),80,60,null);
+					g.drawImage(ImageIO.read(Resources.ACAJA_LOGO),80,60,null);
 				} catch (IOException ioe) {}
 		      }
 		});

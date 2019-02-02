@@ -162,15 +162,15 @@ public final class ConversionWindow extends JFrame{
 			convert2.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					JFrame loading = new JFrame("Convertion de votre fichier");
+					JFrame waitWindow = new JFrame("Convertion de votre fichier");
 
-					loading.setLayout(new BorderLayout());
-					loading.setSize(400, 150);
-					loading.add(new JLabel("Conversion de votre fichier ..."),BorderLayout.CENTER);
+					waitWindow.setLayout(new BorderLayout());
+					waitWindow.setSize(400, 150);
+					waitWindow.setLocationRelativeTo(null);
+					waitWindow.add(new JLabel("Conversion de votre fichier ..."),BorderLayout.CENTER);
 					
-					WindowTools.showLogo(loading);
-				    WindowTools.focusWindow(loading);
-					WindowTools.executeWindow(loading);			
+					WindowTools.showLogo(waitWindow);
+					WindowTools.executeWindow(waitWindow);			
 					
 					model.convert();				
 				} 		
@@ -191,11 +191,11 @@ public final class ConversionWindow extends JFrame{
 		 cw.setResizable(false);
 		 cw.setTitle("Acaja Conversion");
 		 cw.setSize(new Dimension(1000,600));
+		 cw.setLocationRelativeTo(null);
 		 cw.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		 cw.addWindowListener(new ConversionWindowController(cw.model));
 		 
 		 WindowTools.showLogo(cw);
-		 WindowTools.focusWindow(cw);
 		
 		 SummaryView sv = new SummaryView(cw.model);
 		 LibraryViewController lv = new LibraryViewController(cw.model, cw.model.getFilenames());

@@ -41,12 +41,13 @@ public final class OpeningWindow {
 	 * TODO commentaire a faire. 
 	 */
 	private static void generateLoadingWindow() {
-		JFrame frame = new JFrame("Acaja - un logiciel à la portée de tous.");
+		JFrame loadingWindow = new JFrame("Acaja - un logiciel à la portée de tous.");
 		
-		frame.setSize(new Dimension(WIDTH, HEIGHT));
-		frame.setResizable(false);
+		loadingWindow.setSize(new Dimension(WIDTH, HEIGHT));
+		loadingWindow.setResizable(false);
+		loadingWindow.setLocationRelativeTo(null);
 		
-		frame.setContentPane(new JPanel() {
+		loadingWindow.setContentPane(new JPanel() {
 		    public void paintComponent(Graphics g) {
 		        try {
 					g.drawImage(ImageIO.read(Resources.ACAJA_LOGO),80,60,null);
@@ -54,17 +55,16 @@ public final class OpeningWindow {
 		      }
 		});
 
-		WindowTools.showLogo(frame);
-		WindowTools.focusWindow(frame);
+		WindowTools.showLogo(loadingWindow);
 		
-		frame.setBackground(Color.gray);
-		WindowTools.executeWindow(frame);
+		loadingWindow.setBackground(Color.gray);
+		WindowTools.executeWindow(loadingWindow);
 		
 	    try {
 	    	Thread.sleep(3000);
 	    } catch (InterruptedException ie) {}
 
-	    frame.dispose(); 
+	    loadingWindow.dispose(); 
 	}
 	
 	
@@ -78,7 +78,7 @@ public final class OpeningWindow {
 	 * TODO commentaire a faire. 
 	 */
 	private static void generateChoiceModeWindow() {
-		JFrame frame = new JFrame("Acaja");
+		JFrame openingWindow = new JFrame("Acaja");
 		
 		JButton convertbutton = new JButton("Conversion");
 		convertbutton.setPreferredSize(new Dimension(100, 40));
@@ -86,7 +86,7 @@ public final class OpeningWindow {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {		
 				ConversionWindow.generateConversionWindow();
-				frame.dispose();
+				openingWindow.dispose();
 			}
 		});
 		
@@ -94,14 +94,14 @@ public final class OpeningWindow {
 		JButton processingButton = new JButton("Traitement");
 		processingButton.setPreferredSize(new Dimension(100, 40));
 		
-		frame.setResizable(false);
-		frame.setLayout(new BorderLayout());
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(new Dimension(WIDTH, HEIGHT));
+		openingWindow.setResizable(false);
+		openingWindow.setLayout(new BorderLayout());
+		openingWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		openingWindow.setSize(new Dimension(WIDTH, HEIGHT));
+		openingWindow.setLocationRelativeTo(null);
 		
-		WindowTools.showLogo(frame);
-		WindowTools.focusWindow(frame);
-		
+		WindowTools.showLogo(openingWindow);
+
 		JPanel centerPanel = new JPanel(new GridLayout(2, 1, 0, 50));
 		centerPanel.add(convertbutton);
 		centerPanel.add(processingButton);
@@ -115,11 +115,11 @@ public final class OpeningWindow {
 		JPanel westPanel = new JPanel();
 		westPanel.setPreferredSize(new Dimension(100, HEIGHT));
 		
-		frame.add(centerPanel,BorderLayout.CENTER);
-		frame.add(northPanel,BorderLayout.NORTH);
-		frame.add(southPanel,BorderLayout.SOUTH);
-		frame.add(eastPanel,BorderLayout.EAST);
-		frame.add(westPanel,BorderLayout.WEST);
+		openingWindow.add(centerPanel,BorderLayout.CENTER);
+		openingWindow.add(northPanel,BorderLayout.NORTH);
+		openingWindow.add(southPanel,BorderLayout.SOUTH);
+		openingWindow.add(eastPanel,BorderLayout.EAST);
+		openingWindow.add(westPanel,BorderLayout.WEST);
 		
 		centerPanel.setBackground(Color.gray);
 		northPanel.setBackground(Color.gray);
@@ -127,7 +127,7 @@ public final class OpeningWindow {
 		eastPanel.setBackground(Color.gray);
 		westPanel.setBackground(Color.gray);
 		
-		WindowTools.executeWindow(frame);
+		WindowTools.executeWindow(openingWindow);
 	}
 	
 	

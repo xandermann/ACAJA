@@ -21,20 +21,6 @@ public final class WindowTools {
 	//=======================================================================================================================
 	
 	
-	public static void focusWindow(JFrame window) {
-		//recuperation des dimensions de l'ecran.
-		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-		//on positionne la fenetre au centre de l'ecran.
-		window.setLocation(
-				(int)(screen.getWidth()-window.getWidth())/2, 
-				(int)(screen.getHeight()-window.getHeight())/2);
-	}
-	
-	
-	//=======================================================================================================================
-	//=======================================================================================================================
-	
-	
 	public static void executeWindow(JFrame window) {
 		SwingUtilities.invokeLater(new Runnable() {
 		    @Override

@@ -4,7 +4,7 @@
   <class id="1" language="java" name="tools.WindowTools" project="s3b_s22_chevrier_dasilvacarmo_hublau_palmieri" 
     file="/s3b_s22_chevrier_dasilvacarmo_hublau_palmieri/src/tools/WindowTools.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="117" width="160" x="347" y="65"/>    
+    <position height="-1" width="-1" x="428" y="117"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      

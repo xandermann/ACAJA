@@ -1,17 +1,15 @@
 package main_pack;
+
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.image.RenderedImage;
+import java.awt.event.*;
 import java.io.*;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-import gui.conversion.ConversionModel;
-import gui.conversion.ConversionPanel;
-import tools.Resources;
-import tools.WindowTools;
+import gui.conversion.*;
+import tools.*;
+
 /**
  * [ CLASSE POUR LE LANCEMENT DES FENETRES D'OUVERTURE DU LOGICIEL. ]
  * 
@@ -60,7 +58,7 @@ public final class OpeningWindow {
 		WindowTools.focusWindow(frame);
 		
 		frame.setBackground(Color.gray);
-		WindowTools.showWindow(frame);
+		WindowTools.executeWindow(frame);
 		
 	    try {
 	    	Thread.sleep(3000);
@@ -87,7 +85,7 @@ public final class OpeningWindow {
 		convertbutton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {		
-				ConversionPanel.generateConversionWindow();
+				ConversionWindow.generateConversionWindow();
 				frame.dispose();
 			}
 		});
@@ -129,7 +127,7 @@ public final class OpeningWindow {
 		eastPanel.setBackground(Color.gray);
 		westPanel.setBackground(Color.gray);
 		
-		WindowTools.showWindow(frame);
+		WindowTools.executeWindow(frame);
 	}
 	
 	

@@ -10,14 +10,11 @@ import java.util.Observer;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 
-public final class LibraryView extends JList implements Observer, MouseListener, KeyListener {
+public final class LibraryViewController extends JList implements Observer, MouseListener, KeyListener {
 	//=======================================================================================================================
 	//=======================================================================================================================
 	
 	
-	/**
-	 * Model conversion
-	 */
 	private ConversionModel model;
 
 	
@@ -25,18 +22,13 @@ public final class LibraryView extends JList implements Observer, MouseListener,
 	//=======================================================================================================================
 	
 	
-	/**
-	 * Constructeur
-	 * @param p_model Model conversion
-	 * @param p_listmodel Liste par defaut
-	 */
-	public LibraryView(ConversionModel p_model, DefaultListModel p_listmodel) {
-		super(p_listmodel);
-		this.model = p_model;
-		this.setFixedCellWidth(400);
-		this.setVisible(true);
-		this.addMouseListener(this);
-		this.addKeyListener(this);
+	public LibraryViewController(ConversionModel model, DefaultListModel listModel) {
+		super(listModel);
+		this.model = model;
+		setFixedCellWidth(400);
+		setVisible(true);
+		addMouseListener(this);
+		addKeyListener(this);
 	}
 
 	
@@ -46,8 +38,7 @@ public final class LibraryView extends JList implements Observer, MouseListener,
 	
 	@Override
 	public void update(Observable o, Object arg) {
-		this.setModel(this.model.getFilenames());
-		this.repaint();
+		setModel(model.getFilenames());
 	}
 	
 	
@@ -55,9 +46,10 @@ public final class LibraryView extends JList implements Observer, MouseListener,
 	//=======================================================================================================================
 	
 	
+	
 	@Override
 	public void mousePressed(MouseEvent e) {
-		this.model.setCurrentFile(this.getSelectedValue().toString());
+		model.setCurrentFile(getSelectedValue().toString());
 	}
 	
 	@Override
@@ -71,19 +63,27 @@ public final class LibraryView extends JList implements Observer, MouseListener,
 
 	@Override
 	public void mouseExited(MouseEvent e) {}
-
+	
+	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
+	
 	@Override
 	public void keyPressed(KeyEvent e) {
-		 if(e.getKeyCode()==KeyEvent.VK_DELETE) this.model.remove(this.model.getCurrentFile());	 
+		 if(e.getKeyCode()==KeyEvent.VK_DELETE) model.remove(model.getCurrentFile());	 
 	}
 
 	@Override
-	public void keyReleased(KeyEvent arg0) {}
+	public void keyReleased(KeyEvent e) {}
 
 	@Override
-	public void keyTyped(KeyEvent arg0) {}
-
+	public void keyTyped(KeyEvent e) {}
 	
+	
+
 	//=======================================================================================================================
 	//=======================================================================================================================
 }

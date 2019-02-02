@@ -35,7 +35,7 @@ public final class WindowTools {
 	//=======================================================================================================================
 	
 	
-	public static void showWindow(JFrame window) {
+	public static void executeWindow(JFrame window) {
 		SwingUtilities.invokeLater(new Runnable() {
 		    @Override
 		    public void run() {

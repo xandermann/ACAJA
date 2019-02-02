@@ -13,13 +13,26 @@ import main_pack.OpeningWindow;
 import tools.WindowTools;
 
 public final class ConversionWindow extends JFrame{
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
+	
+	/**
+	 * [ ATTRRIBUTS D'INSTANCE. ]
+	 */
 	 private ConversionModel model;
 	 private JLabel start;
 	 
 	 
 	 
-	 /** Constructeur de la fenetre ConversionPanel
-	  * 
+	 //=======================================================================================================================
+	 //=======================================================================================================================	 
+	 
+	 
+	 
+	 /**
+	  * [ CONSTRUCTEUR INTERNE. ]
 	  */
 	 private ConversionWindow() {
 		 model = new ConversionModel();
@@ -29,13 +42,18 @@ public final class ConversionWindow extends JFrame{
 	 
 	 
 	 
+	 //=======================================================================================================================
+	 //=======================================================================================================================	 
 	 
-	 /** Methode privee qui cree le contenu du menu fichier
+	 
+	 
+	 /** 
+	  *  [ METHODE INTERNE POUR LA CONSTRUCTION DU MENU DES FICHIERS. ]
 	  * 
-	  * @return JMenu menu des fichiers et ses items
+	  * @return JMenu 		Le menu des fichiers. 
 	  */
 	 private JMenu drawFileMenu() {
-		JMenu itemsFiles = new JMenu("Fichier");
+		JMenu filesMenu = new JMenu("Fichier");
 		
 		JMenuItem importFile = new JMenuItem("Importer un fichier");
 		importFile.addActionListener(new ActionListener() {
@@ -97,63 +115,75 @@ public final class ConversionWindow extends JFrame{
 		});
 		
 		
-		itemsFiles.add(importFile);
-		itemsFiles.add(importFolder);
-		itemsFiles.add(clearLibrary);
-		itemsFiles.add(quit);
+		filesMenu.add(importFile);
+		filesMenu.add(importFolder);
+		filesMenu.add(clearLibrary);
+		filesMenu.add(quit);
 	
-		return itemsFiles;	 
+		return filesMenu;	 
 	 }
 	 
 	 
 	 
+	 //=======================================================================================================================
+	 //=======================================================================================================================	 
 	 
 	 
-	 /** Methode privee qui cree le contenu du menu profils
+	 
+	 /** 
+	  * [ METHODE INTERNE POUR LA CONSTRUCTION DU MENU DES PROFILS. ]
 	  * 
-	  * @return JMenu menu des profils et ses items
+	  * @return JMenu		Le menu des profils. 
 	  */
 	 private JMenu drawProfilesMenu() {
-			JMenu menuProfiles = new JMenu("Profils");
+			JMenu profilesMenu = new JMenu("Profils");
 			
 			JMenuItem newProfile = new JMenuItem("Creer un profil");
 			JMenuItem loadProfile = new JMenuItem("Charger un profil");
 			JMenuItem deleteProfile = new JMenuItem("Supprimer un profil");
 			
-			menuProfiles.add(newProfile);
-			menuProfiles.add(loadProfile);
-			menuProfiles.add(deleteProfile);
+			profilesMenu.add(newProfile);
+			profilesMenu.add(loadProfile);
+			profilesMenu.add(deleteProfile);
 				
-			return menuProfiles;	  
+			return profilesMenu;	  
 	 }
 	 
 	 
 	 
+	 //=======================================================================================================================
+	 //=======================================================================================================================	 
 	 
 	 
-	 /** Methode privee qui cree le contenu du menu options
+	 
+	 /** 
+	  * [ METHODE INTERNE POUR LA CONSTRUCTION DU MENU DES OPTIONS. ]
 	  * 	 
-	  * @return JMenu menu des options et ses items
+	  * @return JMenu 		Le menu des options. 
 	  */
 	 private JMenu drawOptionsMenu() {
-			JMenu menuOptions = new JMenu("Options");
+			JMenu optionsMenu = new JMenu("Options");
 			
 			JMenuItem outputFolder = new JMenuItem("Changer le repertoire de sortie");
 			JMenuItem switchMode = new JMenuItem("Passer en mode traitement");
 			
-			menuOptions.add(outputFolder);
-			menuOptions.add(switchMode);
+			optionsMenu.add(outputFolder);
+			optionsMenu.add(switchMode);
 
-			return menuOptions;	 
+			return optionsMenu;	 
 	}
+	 
 	
 	 
+	 //=======================================================================================================================
+	 //=======================================================================================================================	 
 	 
 	 
 	 
-	 /** Methode privee qui cree le contenu du menu conversion
+	 /** 
+	  * [ METHODE INTERNE POUR LA CONSTRUCTION DU MENU DE CONVERTION. ]
 	  * 
-	  * @return JMenu menu de conversion et ses items
+	  * @return JMenu 		Le menu de la conversion.
 	  */
 	 private JMenu drawConvertMenu() {
 		 	JMenu convert = new JMenu("Convertir"); 	
@@ -180,11 +210,14 @@ public final class ConversionWindow extends JFrame{
 		 
 	 
 	 
+	 //=======================================================================================================================
+	 //=======================================================================================================================	 
 	 
-	 /** Methode pour generer la fenetre de conversion et l'afficher
-	  * 
+	 
+	 
+	 /**
+	  * [ METHODE DE CLASSE DE CONSTRUCTION ET DE GENERATION DE LA FENETRE DE CONVERSION. ]
 	  */
-
 	 public static void generateConversionWindow() {
 		 ConversionWindow cw = new ConversionWindow();
 		 
@@ -221,4 +254,9 @@ public final class ConversionWindow extends JFrame{
 		 
 		 WindowTools.executeWindow(cw);
 	 }
+	 
+	 
+	 
+	 //=======================================================================================================================
+	 //=======================================================================================================================	 
 }

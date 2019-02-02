@@ -1,4 +1,4 @@
-package ffmpeg;
+package wrapper;
 
 public final class MetaFFmpeg {
 	public final static String[] FLAG_CONVERSION = {"-i"};

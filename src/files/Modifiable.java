@@ -13,7 +13,7 @@ public interface Modifiable {
 	 * @param type_change 		Le type de changement.
 	 * @param change			Les valeurs pour le calcul du changement. 
 	 */
-	public void modify(Integer type_change, Object change);
+	public void modify(Integer typeChange, Object change);
 	
 	
 	/**

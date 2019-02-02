@@ -1,4 +1,4 @@
-package ffmpeg;
+package wrapper;
 import java.io.IOException;
 /**
  * [ SUPERCLASSE ABSTRAITE POUR L'INTERFACAGE JAVA - FFMPEG ---- DEGRE 1. ]

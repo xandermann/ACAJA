@@ -8,8 +8,8 @@ import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
 import exceptions.IncorrectFileException;
-import ffmpeg.UserRequests;
 import files.SettingsFile;
+import wrapper.UserRequests;
 
 public final class ConversionModel extends Observable {
 	//=======================================================================================================================

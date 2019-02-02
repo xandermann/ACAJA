@@ -1,4 +1,4 @@
-package tools;
+package gui;
 
 import java.util.Observable;
 

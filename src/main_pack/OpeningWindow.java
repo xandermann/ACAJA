@@ -8,8 +8,8 @@ import java.io.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-import conversion.ConversionModel;
-import conversion.ConversionPanel;
+import gui.conversion.ConversionModel;
+import gui.conversion.ConversionPanel;
 import tools.Resources;
 import tools.WindowTools;
 /**

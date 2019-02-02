@@ -1,4 +1,4 @@
-package conversion;
+package gui.conversion;
 
 import java.io.*;
 import java.util.*;
@@ -7,6 +7,7 @@ import javax.swing.*;
 
 import exceptions.IncorrectFileException;
 import files.SettingsFile;
+import gui.Model;
 import tools.*;
 import wrapper.UserRequests;
 

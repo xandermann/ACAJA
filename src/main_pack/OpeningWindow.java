@@ -46,6 +46,7 @@ public final class OpeningWindow {
 		JFrame frame = new JFrame("Acaja - un logiciel à la portée de tous.");
 		
 		frame.setSize(new Dimension(WIDTH, HEIGHT));
+		frame.setResizable(false);
 		
 		frame.setContentPane(new JPanel() {
 		    public void paintComponent(Graphics g) {
@@ -59,7 +60,7 @@ public final class OpeningWindow {
 		WindowTools.focusWindow(frame);
 		
 		frame.setBackground(Color.gray);
-		frame.setVisible(true); 
+		WindowTools.showWindow(frame);
 		
 	    try {
 	    	Thread.sleep(3000);
@@ -128,7 +129,7 @@ public final class OpeningWindow {
 		eastPanel.setBackground(Color.gray);
 		westPanel.setBackground(Color.gray);
 		
-		frame.setVisible(true);
+		WindowTools.showWindow(frame);
 	}
 	
 	

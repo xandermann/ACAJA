@@ -1,11 +1,9 @@
 package tools;
 
-import java.awt.Dimension;
-import java.awt.Toolkit;
-import java.io.File;
-import java.io.IOException;
+import java.awt.*;
+import java.io.*;
 import javax.imageio.ImageIO;
-import javax.swing.JFrame;
+import javax.swing.*;
 
 public final class WindowTools {
 	//=======================================================================================================================
@@ -30,6 +28,20 @@ public final class WindowTools {
 		window.setLocation(
 				(int)(screen.getWidth()-window.getWidth())/2, 
 				(int)(screen.getHeight()-window.getHeight())/2);
+	}
+	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
+	public static void showWindow(JFrame window) {
+		SwingUtilities.invokeLater(new Runnable() {
+		    @Override
+		    public void run() {
+		        window.setVisible(true);
+		    }
+		});
 	}
 	
 	

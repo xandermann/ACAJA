@@ -176,23 +176,17 @@ public final class ConversionPanel extends JFrame{
 			convert2.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					//ici ouvrir la fenetre de chargement 
-					JFrame chargement = new JFrame("Convertion de votre fichier");
-					WindowTools.showLogo(chargement);
+					JFrame loading = new JFrame("Convertion de votre fichier");
 
-					chargement.setLayout(new BorderLayout());
-					chargement.setSize(400, 150);
-					JLabel c = new JLabel("Conversion de votre fichier ...");
-					chargement.add(c,BorderLayout.CENTER);
-					//recuperation des dimensions de l'ecran
-					Dimension ecran = Toolkit.getDefaultToolkit().getScreenSize();
-					//on positionne la fenetre au centre de l'ecran
-					chargement.setLocation(((int)ecran.getWidth()-400)/2, ((int)ecran.getHeight()-150)/2);
-					chargement.setVisible(true);					
+					loading.setLayout(new BorderLayout());
+					loading.setSize(400, 150);
+					loading.add(new JLabel("Conversion de votre fichier ..."),BorderLayout.CENTER);
 					
-					model.convert();
+					WindowTools.showLogo(loading);
+				    WindowTools.focusWindow(loading);
+					WindowTools.showWindow(loading);			
 					
-				    chargement.dispose();
+					model.convert();				
 				} 		
 			});
 			return convert;	 
@@ -208,7 +202,6 @@ public final class ConversionPanel extends JFrame{
 	 public static void generateConversionWindow() {
 		 ConversionPanel cp = new ConversionPanel();
 		 
-		 cp.setVisible(true);
 		 cp.setResizable(false);
 		 cp.setTitle("Acaja Conversion");
 		 cp.setSize(new Dimension(1000,600));
@@ -239,5 +232,7 @@ public final class ConversionPanel extends JFrame{
 		 cp.setLayout(new BorderLayout());
 		 cp.add(lv,BorderLayout.WEST);
 		 cp.add(p,BorderLayout.CENTER);
+		 
+		 WindowTools.showWindow(cp);
 	 }
 }

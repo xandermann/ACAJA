@@ -201,10 +201,9 @@ public final class ConversionWindow extends JFrame{
 					waitWindow.setLocationRelativeTo(null);
 					waitWindow.add(new JLabel("Conversion de votre fichier ..."),BorderLayout.CENTER);
 					
-					WindowTools.showLogo(waitWindow);
-					WindowTools.executeWindow(waitWindow);			
+					WindowTools.showLogo(waitWindow);			
 					
-					UserRequests.workIsInOnGoing = true;
+					UserRequests.startToWork();
 					
 					new Thread() {
 					    @Override
@@ -213,14 +212,14 @@ public final class ConversionWindow extends JFrame{
 					    }
 					}.start();
 					
-					SwingUtilities.invokeLater(new Runnable() {
+					new Thread() {
 					    @Override
 					    public void run() {
-					    	waitWindow.setVisible(true);
-							while(UserRequests.workIsInOnGoing);
+					    	WindowTools.executeWindow(waitWindow);
+							while(UserRequests.workIsOnGoing());
 							waitWindow.dispose();
 					    }
-					});
+					}.start();
 				} 		
 			});
 			return convert;	 
@@ -270,7 +269,7 @@ public final class ConversionWindow extends JFrame{
 		 cw.add(lv,BorderLayout.WEST);
 		 cw.add(p,BorderLayout.CENTER);
 		 
-		 WindowTools.executeWindow(cw);
+		 cw.setVisible(true);
 	 }
 	 
 	 

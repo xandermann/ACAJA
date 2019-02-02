@@ -16,7 +16,36 @@ import files.SettingsFile;
  * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
  */
 public final class UserRequests extends FFmpegRuntime {	
-	public static volatile boolean workIsInOnGoing = true;
+	//=======================================================================================================================
+	//=======================================================================================================================	
+	
+	
+	private static volatile boolean workIsOnGoing = false;
+	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================	
+	
+	
+	
+	public static void startToWork() {
+		workIsOnGoing = true;
+	}
+	
+	private static void workIsOver() {
+		workIsOnGoing = false;
+	}
+	
+	public static boolean workIsOnGoing() {
+		return workIsOnGoing;
+	}
+	
+	
+	
+	 //=======================================================================================================================
+	 //=======================================================================================================================	
+	
+	
 	
 	/**
 	 * [ METHODE DE CLASSE. ]
@@ -26,8 +55,6 @@ public final class UserRequests extends FFmpegRuntime {
 	 * @param file 		La fichier sur lequel il faut realiser les modifications. 
 	 */
 	public static void execute(SelectableFile file) {
-		workIsInOnGoing = true;
-		
 		if(file instanceof SettingsFile) {
 			HashMap<Integer, Object> ffmpegRequests = ((SettingsFile) file).getRequests();
 			for(Integer requestKey : ffmpegRequests.keySet()) {
@@ -66,7 +93,11 @@ public final class UserRequests extends FFmpegRuntime {
 										consumer.close();
 									}
 								} catch(IOException ioe) {}
-								 workIsInOnGoing = false;
+								
+								 try {
+									conversionProcess.waitFor();
+								} catch (InterruptedException e) {}
+								 workIsOver();
 							}
 						}.start();
 					}
@@ -76,6 +107,12 @@ public final class UserRequests extends FFmpegRuntime {
 	
 	
 
+
+	//=======================================================================================================================
+	//=======================================================================================================================	
+	
+	
+	
 	/**
 	 * TODO
 	 * @param file
@@ -85,4 +122,9 @@ public final class UserRequests extends FFmpegRuntime {
 	public static File extractImage(File file, long l) {
 		return file; // TODO
 	}
+	
+	
+	
+	 //=======================================================================================================================
+	 //=======================================================================================================================	
 }

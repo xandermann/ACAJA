@@ -1,4 +1,5 @@
 package wrapper;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -15,7 +16,7 @@ import files.SettingsFile;
  * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
  */
 public final class UserRequests extends FFmpegRuntime {	
-	
+	public static volatile boolean workIsInOnGoing = true;
 	
 	/**
 	 * [ METHODE DE CLASSE. ]
@@ -25,6 +26,8 @@ public final class UserRequests extends FFmpegRuntime {
 	 * @param file 		La fichier sur lequel il faut realiser les modifications. 
 	 */
 	public static void execute(SelectableFile file) {
+		workIsInOnGoing = true;
+		
 		if(file instanceof SettingsFile) {
 			HashMap<Integer, Object> ffmpegRequests = ((SettingsFile) file).getRequests();
 			for(Integer requestKey : ffmpegRequests.keySet()) {
@@ -40,27 +43,32 @@ public final class UserRequests extends FFmpegRuntime {
 						/**
 						 * REQUETE DE CONVERSION SOUMISE A FFMPEG.
 						 */
-						Process conversion = execute(fileName+" "+newFileName);
-						
-						try {			 
-							String information = null;	
+						final Process conversionProcess = execute(fileName+" "+newFileName);
 							
-							/**
-							 * CONSOMMATION DU FLUX.
-							 */
-							try {
-								//On "consomme" le flux des messages, pour ne pas bloquer le waitFor().
-								BufferedReader br = new BufferedReader(new InputStreamReader(conversion .getErrorStream()));
-								while( (information = br.readLine()) != null ) ;
-								br.close();	
-							} catch (IOException e) {}
-							
-							/**
-							 * ATTENTE DE FIN DE LA CONVERSION.
-							 */
-							//On oblige JAVA a attendre la fin de l'execution de la requete par FFMPEG. 
-							conversion.waitFor();
-						} catch (InterruptedException e) {}
+						/**
+						 * CONSOMMATION DES FLUX DE SORTIE.
+						 */
+						new Thread() {
+							public void run() {
+								try {
+									BufferedReader consumer = new BufferedReader(new InputStreamReader(conversionProcess.getErrorStream()));
+									String line = "";
+									try {
+										while((line = consumer.readLine()) != null);
+									} finally {
+										consumer.close();
+									}
+									
+									consumer = new BufferedReader(new InputStreamReader(conversionProcess.getInputStream()));
+									try {
+										while((line = consumer.readLine()) != null);
+									} finally {
+										consumer.close();
+									}
+								} catch(IOException ioe) {}
+								 workIsInOnGoing = false;
+							}
+						}.start();
 					}
 			}
 		}
@@ -77,5 +85,4 @@ public final class UserRequests extends FFmpegRuntime {
 	public static File extractImage(File file, long l) {
 		return file; // TODO
 	}
-
 }

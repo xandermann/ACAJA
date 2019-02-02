@@ -11,6 +11,7 @@ import javax.swing.*;
 import exceptions.*;
 import main_pack.OpeningWindow;
 import tools.WindowTools;
+import wrapper.UserRequests;
 
 public final class ConversionWindow extends JFrame{
 	//=======================================================================================================================
@@ -187,12 +188,13 @@ public final class ConversionWindow extends JFrame{
 	  */
 	 private JMenu drawConvertMenu() {
 		 	JMenu convert = new JMenu("Convertir"); 	
-		 	JMenuItem convert2 = new JMenuItem("Convertir les fichiers");
-		 	convert.add(convert2);
-			convert2.addActionListener(new ActionListener() {
+		 	JMenuItem convertItem = new JMenuItem("Convertir les fichiers");
+		 	convert.add(convertItem);
+		 	
+		 	convertItem.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					JFrame waitWindow = new JFrame("Convertion de votre fichier");
+					JFrame waitWindow = new JFrame("Conversion de votre fichier");
 
 					waitWindow.setLayout(new BorderLayout());
 					waitWindow.setSize(400, 150);
@@ -202,7 +204,23 @@ public final class ConversionWindow extends JFrame{
 					WindowTools.showLogo(waitWindow);
 					WindowTools.executeWindow(waitWindow);			
 					
-					model.convert();				
+					UserRequests.workIsInOnGoing = true;
+					
+					new Thread() {
+					    @Override
+					    public void run() {
+					    	model.convert();
+					    }
+					}.start();
+					
+					SwingUtilities.invokeLater(new Runnable() {
+					    @Override
+					    public void run() {
+					    	waitWindow.setVisible(true);
+							while(UserRequests.workIsInOnGoing);
+							waitWindow.dispose();
+					    }
+					});
 				} 		
 			});
 			return convert;	 

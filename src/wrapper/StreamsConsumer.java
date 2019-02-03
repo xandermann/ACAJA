@@ -40,7 +40,7 @@ public final class StreamsConsumer{
 			/**
 			 * CONSOMMATION DU FLUX D'ERREURS DE FFMPEG. 
 			 * 
-			 * InputStream representant ici le flux d'erreur de l'application externe
+			 * InputStream represente ici le flux d'erreur de l'application externe
 			 * ( STDERR de l'application externe : FFMPEG. ).
 			 */ 
 			BufferedReader consumer = new BufferedReader(new InputStreamReader(processToBeConsume.getErrorStream()));
@@ -55,7 +55,7 @@ public final class StreamsConsumer{
 			/**
 			 * CONSOMMATION DU FLUX DE SORTIE DE FFMPEG.
 			 *  
-			 * InputStream representant le flux de sortie de l'application externe 
+			 * InputStream represente le flux de sortie de l'application externe 
 			 * ( STDOUT de l'application externe : FFMPEG. ).
 			 */
 			consumer = new BufferedReader(new InputStreamReader(processToBeConsume.getInputStream()));
@@ -64,7 +64,9 @@ public final class StreamsConsumer{
 			} finally {
 				consumer.close();
 			}
-		} catch(IOException ioe) {}
+		} catch(IOException ioe) {
+			JOptionPane.showMessageDialog(null, MessageConstants.FALIURE_UNFINDABLE_STREAMS);
+		}
 		
 		
 		 try {

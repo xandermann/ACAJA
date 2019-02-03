@@ -9,7 +9,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import exceptions.*;
-import main_pack.OpeningWindow;
+import gui.OpeningWindow;
 import tools.WindowTools;
 import wrapper.UserRequests;
 

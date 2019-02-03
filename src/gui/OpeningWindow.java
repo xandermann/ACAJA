@@ -1,4 +1,4 @@
-package main_pack;
+package gui;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -23,9 +23,9 @@ public final class OpeningWindow {
 	//=======================================================================================================================
 	
 	/**
-	 *[ CONSTANTES DE CLASSE. ]
+	 * [ CONSTANTES DE CLASSE INTERNES. ]
 	 *
-	 *TODO commentaire a faire. 
+	 * Dimensions des fenetres de demarrage. 
 	 */
 	private final static int WIDTH = 400;
 	private final static int HEIGHT = 400;
@@ -38,7 +38,8 @@ public final class OpeningWindow {
 	/**
 	 * [ METHODE INTERNE DE CLASSE - FENETRE DE PRESENTATION DU LOGICIEL. ]
 	 * 
-	 * TODO commentaire a faire. 
+	 *  Cette methode permet de generer la fenetre de 
+	 *  presentation du logiciel. 
 	 */
 	private static void generateLoadingWindow() {
 		JFrame loadingWindow = new JFrame("Acaja - un logiciel à la portée de tous.");
@@ -75,7 +76,8 @@ public final class OpeningWindow {
 	/**
 	 * [ METHODE INTERNE DE CLASSE  - FENETRE CHOIX DU MODE D'UTILISATION DU LOGICIEL. ]
 	 * 
-	 * TODO commentaire a faire. 
+	 * Cette methode permet de generer la fenetre du choix de 
+	 * mode d'utilisation du logiciel : conversion ou traitement. 
 	 */
 	private static void generateChoiceModeWindow() {
 		JFrame openingWindow = new JFrame("Acaja");
@@ -138,7 +140,8 @@ public final class OpeningWindow {
 	/**
 	 * [ METHODE DE CLASSE. ]
 	 * 
-	 * TODO commentaire a faire. 
+	 * Methode pour lancer les fenetres
+	 * de demarrage du logiciel ACAJA. 
 	 */
 	public static void generateOpeningWindow() {
 		generateLoadingWindow();

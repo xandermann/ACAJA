@@ -1,4 +1,7 @@
 package main_pack;
+
+import gui.OpeningWindow;
+
 /**
  * [ PROGRAMME EXECUTEUR. ]
  */

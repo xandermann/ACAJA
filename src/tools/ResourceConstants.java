@@ -1,10 +1,14 @@
 package tools;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
 
-import javax.imageio.ImageIO;
-public final class Resources {
+import java.io.*;
+
+/**
+ * [ CLASSE POUR LE STOCKAGE DES RESSOURCES DU LOGICIEL. ]
+ * 
+ * Auteurs du projet : 
+ * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
+ */
+public final class ResourceConstants {
 	/**
 	 * LOGO DU LOGICIEL. 
 	 */

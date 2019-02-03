@@ -50,7 +50,7 @@ public final class OpeningWindow {
 		loadingWindow.setContentPane(new JPanel() {
 		    public void paintComponent(Graphics g) {
 		        try {
-					g.drawImage(ImageIO.read(Resources.ACAJA_LOGO),80,60,null);
+					g.drawImage(ImageIO.read(ResourceConstants.ACAJA_LOGO),80,60,null);
 				} catch (IOException ioe) {}
 		      }
 		});

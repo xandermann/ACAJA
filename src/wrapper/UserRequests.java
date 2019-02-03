@@ -17,7 +17,18 @@ public final class UserRequests extends FFmpegRuntime {
 	//=======================================================================================================================
 	//=======================================================================================================================	
 	
-	
+	/**
+	 * [ ATTRIBUT DE CLASSE VOLATILE. ]
+	 * 
+	 * ( workIsOnGoing => en anglais " travail est en cours ". )
+	 * 
+	 * Ce booleen volatilepermet de savoir quand un processus fils 
+	 * executant FFMPEG est en cours ou non. 
+	 * 
+	 * Ce booleen est vloatile car il est modifie par plusieurs 
+	 * processus ( Thread / Runnable ), et le mot-cle "volatile"
+	 * permet de le faire savoir au compilateur JAVAC. 
+	 */
 	private static volatile boolean workIsOnGoing = false;
 	
 	
@@ -25,15 +36,34 @@ public final class UserRequests extends FFmpegRuntime {
 	//=======================================================================================================================	
 	
 	
-	
+	/**
+	 * [ METHODE DE CLASSE POUR DECLARER LE LANCEMENT DE FFMPEG. ]
+	 * 
+	 * Cette methode permet de declarer que FFMPEG vient d'etre lancee ou 
+	 * va bientot etre lancee en processus fils par JAVA. 
+	 */
 	public static void startToWork() {
 		workIsOnGoing = true;
 	}
 	
+	/**
+	 * [ METHODE DE CLASSE POUR DECLARER LA FIN D'EXCEUTION DE FFMPEG. ]
+	 * 
+	 * Cette methode permet declarer que le processus fils dans lequel 
+	 * s'executait FFMPEG vient de mourir ou va bientot mourir. 
+	 */
 	private static void workIsOver() {
 		workIsOnGoing = false;
 	}
 	
+	/**
+	 * [ GETTER - METHODE DE CLASSE ACCESSEUR POUR ACCEDER A WORKISONGOING. ]
+	 * 
+	 * Cette methode est un accesseur a la valeur du booleen workIsOnGoing,
+	 * Celui-ci permet de connaitre l'evolution de la " besogne " de FFMPEG.
+	 * 
+	 * @return boolean 		La valeur de workIsOnGoing. 
+	 */
 	public static boolean workIsOnGoing() {
 		return workIsOnGoing;
 	}
@@ -44,12 +74,22 @@ public final class UserRequests extends FFmpegRuntime {
    //=======================================================================================================================	
 	
 	
-	
-	public static void consumeStreams(Process processtoBeConsume) {
+	/**
+	 * [ METHODE DE CLASSE POUR LA CONSOMMATION DES FLUX DE REPONSES DE FFMPEG. ]
+	 * 
+	 * Cette methode permet la consommation des flux de reponses ( = de sorties ) de 
+	 * FFMPEG dans un fil d'execution separe du processus courant qui le lance. 
+	 * 
+	 * On utilise entre autre ici un Thread pour lancer la consommation des
+	 * flux de sortie de FFMPEG dans un nouveau fil d'execution. 
+	 * 
+	 * @param processToBeConsume		Process a consommer dans un nouveau processus. 
+	 */
+	public static void consumeStreams(Process processToBeConsume) {
 		new Thread() {
 			public void run() {
 				startToWork();
-				StreamsConsumer.consumeStreams(processtoBeConsume);
+					StreamsConsumer.consumeStreams(processToBeConsume);
 				workIsOver();
 			}
 		}.start();
@@ -84,7 +124,7 @@ public final class UserRequests extends FFmpegRuntime {
 						/**
 						 * REQUETE DE CONVERSION SOUMISE A FFMPEG.
 						 */
-						final Process conversionProcess = execute(fileName+" "+newFileName);
+						Process conversionProcess = execute(fileName+" "+newFileName);
 							
 						/**
 						 * CONSOMMATION DES FLUX DE SORTIE.

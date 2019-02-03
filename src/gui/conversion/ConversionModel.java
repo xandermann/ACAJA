@@ -111,7 +111,7 @@ public final class ConversionModel extends Model {
 		for(SettingsFile sf : files) oldFiles.add(sf.getSourceFile());
 		
 		try {
-			ObjectOutputStream saver = new ObjectOutputStream(new FileOutputStream(Resources.CONVERSION_OLD_IMPORTS));
+			ObjectOutputStream saver = new ObjectOutputStream(new FileOutputStream(ResourceConstants.CONVERSION_OLD_IMPORTS));
 			saver.writeObject(oldFiles);
 			saver.close();
 		} catch (IOException e) {}
@@ -128,7 +128,7 @@ public final class ConversionModel extends Model {
 	public ArrayList<File> loadOldImports() {
 		ArrayList<File> oldFiles = null;
 		try {
-			ObjectInputStream loader = new ObjectInputStream(new FileInputStream(Resources.CONVERSION_OLD_IMPORTS));
+			ObjectInputStream loader = new ObjectInputStream(new FileInputStream(ResourceConstants.CONVERSION_OLD_IMPORTS));
 			oldFiles = (ArrayList<File>) loader.readObject();
 			loader.close();
 	    } catch (ClassNotFoundException e) {} catch (IOException e) {}

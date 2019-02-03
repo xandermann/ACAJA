@@ -59,7 +59,7 @@ public final class ConversionWindow extends JFrame{
 		JMenuItem importFile = new JMenuItem("Importer un fichier");
 		importFile.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent ae) {
 				try {
 					File f = DataChoose.FileChoose();
 					model.add(f);
@@ -84,7 +84,7 @@ public final class ConversionWindow extends JFrame{
 		JMenuItem importFolder = new JMenuItem("Importer un dossier");
 		importFolder.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent ae) {
 				try {
 					ArrayList<File> files = DataChoose.DirectoryChoose();
 					for(File f : files) {
@@ -101,7 +101,7 @@ public final class ConversionWindow extends JFrame{
 		JMenuItem clearLibrary = new JMenuItem("Vider la bibliotheque");
 		clearLibrary.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent ae) {
 				model.clear();
 			}
 		});
@@ -110,7 +110,7 @@ public final class ConversionWindow extends JFrame{
 		JMenuItem quit = new JMenuItem("Quitter");
 		quit.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent ae) {
 				dispose();
 			} 		
 		});
@@ -216,7 +216,7 @@ public final class ConversionWindow extends JFrame{
 					
 					/**
 					 * LANCEMENT DE LA CONVERSION DANS 
-					 * UN UTRE PROCESSUS. 
+					 * UN AUTRE PROCESSUS. 
 					 */
 					new Thread() {
 					    public void run() {
@@ -251,40 +251,40 @@ public final class ConversionWindow extends JFrame{
 	  * [ METHODE DE CLASSE DE CONSTRUCTION ET DE GENERATION DE LA FENETRE DE CONVERSION. ]
 	  */
 	 public static void generateConversionWindow() {
-		 ConversionWindow cw = new ConversionWindow();
+		 ConversionWindow conversionWindow = new ConversionWindow();
 		 
-		 cw.setResizable(false);
-		 cw.setTitle("Acaja Conversion");
-		 cw.setSize(new Dimension(1000,600));
-		 cw.setLocationRelativeTo(null);
-		 cw.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		 cw.addWindowListener(new ConversionWindowController(cw.model));
+		 conversionWindow.setResizable(false);
+		 conversionWindow.setTitle("Acaja Conversion");
+		 conversionWindow.setSize(new Dimension(1000,600));
+		 conversionWindow.setLocationRelativeTo(null);
+		 conversionWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		 conversionWindow.addWindowListener(new ConversionWindowController(conversionWindow.model));
 		 
-		 WindowTools.showLogo(cw);
+		 WindowTools.showLogo(conversionWindow);
 		
-		 SummaryView sv = new SummaryView(cw.model);
-		 LibraryViewController lv = new LibraryViewController(cw.model, cw.model.getFilenames());
-		 TabsView tv = new TabsView(cw.model);
+		 SummaryView sv = new SummaryView(conversionWindow.model);
+		 LibraryViewController lv = new LibraryViewController(conversionWindow.model, conversionWindow.model.getFilenames());
+		 TabsView tv = new TabsView(conversionWindow.model);
 		 
 		 JPanel p = new JPanel();
 		 p.setLayout(new BorderLayout());
 		 JMenuBar menu = new JMenuBar();
-		 menu.add(cw.drawFileMenu());
-		 menu.add(cw.drawOptionsMenu());
-		 menu.add(cw.drawProfilesMenu());
-		 menu.add(cw.drawConvertMenu());
+		 menu.add(conversionWindow.drawFileMenu());
+		 menu.add(conversionWindow.drawOptionsMenu());
+		 menu.add(conversionWindow.drawProfilesMenu());
+		 menu.add(conversionWindow.drawConvertMenu());
 		 
-		 cw.setJMenuBar(menu);
-		 cw.model.addObserver(lv);
-		 cw.model.addObserver(sv);
+		 conversionWindow.setJMenuBar(menu);
+		 conversionWindow.model.addObserver(lv);
+		 conversionWindow.model.addObserver(sv);
 		 p.add(sv,BorderLayout.NORTH);
 		 p.add(tv,BorderLayout.CENTER); 
-		 p.add(cw.start);
-		 cw.setLayout(new BorderLayout());
-		 cw.add(lv,BorderLayout.WEST);
-		 cw.add(p,BorderLayout.CENTER);
+		 p.add(conversionWindow.start);
+		 conversionWindow.setLayout(new BorderLayout());
+		 conversionWindow.add(lv,BorderLayout.WEST);
+		 conversionWindow.add(p,BorderLayout.CENTER);
 		 
-		 cw.setVisible(true);
+		 WindowTools.executeWindow(conversionWindow);
 	 }
 	 
 	 

@@ -14,7 +14,7 @@
   <class id="2" language="java" name="wrapper.FFmpegRuntime" project="s3b_s22_chevrier_dasilvacarmo_hublau_palmieri" 
     file="/s3b_s22_chevrier_dasilvacarmo_hublau_palmieri/src/wrapper/FFmpegRuntime.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="153" width="144" x="365" y="131"/>    
+    <position height="-1" width="-1" x="439" y="206"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -31,8 +31,9 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="4" language="java" name="wrapper.MetaFFmpeg" project="s3b_s22_chevrier_dasilvacarmo_hublau_palmieri" 
-    file="/s3b_s22_chevrier_dasilvacarmo_hublau_palmieri/src/wrapper/MetaFFmpeg.java" binary="false" 
+  <class id="4" language="java" name="wrapper.ConversionFlagConstants" 
+    project="s3b_s22_chevrier_dasilvacarmo_hublau_palmieri" 
+    file="/s3b_s22_chevrier_dasilvacarmo_hublau_palmieri/src/wrapper/ConversionFlagConstants.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="880" y="215"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 

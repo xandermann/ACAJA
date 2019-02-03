@@ -1,18 +1,35 @@
 package tools;
 
-import java.awt.*;
 import java.io.*;
+
 import javax.imageio.ImageIO;
+
 import javax.swing.*;
 
+/**
+ * [ CLASSE OUTILS POUR LES FENETRES DU LOGICIEL. ]
+ * 
+ * Cette classe implemente des methodes communes aux fenetres.
+ * 
+ * Auteurs du projet : 
+ * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
+ */
 public final class WindowTools {
 	//=======================================================================================================================
 	//=======================================================================================================================
 	
 	
-	public static void showLogo(JFrame f) {
+	/**
+	 * [ METHODE DE CLASSE POUR MONTRER LE LOGO DU LOGICIEL. ]
+	 * 
+	 * Cette methode permet de montrer le logo du logiciel en tant qu'icone 
+	 * de la fenetre en parametre de la methode.
+	 * 
+	 * @param window 		La fenetre a laquelle ajouter le logo en icone.
+	 */
+	public static void showLogo(JFrame window) {
 		try {
-			f.setIconImage(ImageIO.read(Resources.ACAJA_LOGO));
+			window.setIconImage(ImageIO.read(ResourceConstants.ACAJA_LOGO));
 		} catch (IOException ioe) {}
 	}
 	
@@ -21,6 +38,14 @@ public final class WindowTools {
 	//=======================================================================================================================
 
 	
+	/**
+	 * [ METHODE DE CLASSE POUR LANCER UNE FENETRE. ]
+	 * 
+	 * Cette methode permet de lancer/demarrer une fenetre dans un
+	 * nouveau processus ( = Thread / Runnable ). 
+	 * 
+	 * @param window		La fenetre a lancer.
+	 */
 	public static void executeWindow(JFrame window) {
 		SwingUtilities.invokeLater(new Runnable() {
 		    @Override

@@ -20,31 +20,25 @@ import javax.swing.JTextField;
 
 import files.SettingsFile;
 
-public final class VideoSettingsPanel extends JPanel implements Observer{
-	//=======================================================================================================================
-	//=======================================================================================================================
-	
-	
-	
+public final class VideoSettingsPanel extends JPanel implements Observer {
+	// =======================================================================================================================
+	// =======================================================================================================================
+
 	private ConversionModel model;
 	private JTextField resolution;
 	private JTextField bitrate;
 	private JTextField fps;
-	
-	
-	
-	//=======================================================================================================================
-	//=======================================================================================================================
-	
-	
-	
+
+	// =======================================================================================================================
+	// =======================================================================================================================
+
 	public VideoSettingsPanel(ConversionModel m) {
 		this.model = m;
-		
+
 		resolution = new JTextField();
 		bitrate = new JTextField();
 		fps = new JTextField();
-		
+
 		this.setSize(new Dimension(400, 400));
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
@@ -60,25 +54,22 @@ public final class VideoSettingsPanel extends JPanel implements Observer{
 		Codec.add(new JLabel("Format sortie : "), BorderLayout.WEST);
 		String[] format = { ".avi", ".mp4", ".flv" };
 		JComboBox box_format = new JComboBox(format);
-		
+
 		box_format.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(model.getCurrentFile() != null) {
-					model.modify
-					(
-						SettingsFile.VIDEO_CODEC, 
-						((JComboBox)e.getSource()).getSelectedItem().toString()
-					);
+				if (model.getCurrentFile() != null) {
+					model.modify(SettingsFile.Settings.VIDEO_CODEC,
+							((JComboBox) e.getSource()).getSelectedItem().toString());
 				}
 			}
 		});
 
 		Codec.add(box_format, BorderLayout.EAST);
-		
+
 		JPanel reso = new JPanel();
 		reso.setLayout(new FlowLayout());
-		
+
 		reso.add(new JLabel("Resolution : "), BorderLayout.WEST);
 		resolution.setPreferredSize(new Dimension(300, 20));
 		resolution.setEnabled(false);
@@ -126,30 +117,24 @@ public final class VideoSettingsPanel extends JPanel implements Observer{
 		this.add(panef);
 		this.add(panest);
 	}
-	
-	
-	
-	//=======================================================================================================================
-	//=======================================================================================================================
-	
-	
-	
+
+	// =======================================================================================================================
+	// =======================================================================================================================
+
 	@Override
-	public void update(Observable o, Object arg) { 
-		if(model.getCurrentFile() != null) {
+	public void update(Observable o, Object arg) {
+		if (model.getCurrentFile() != null) {
 			HashMap<Integer, Object> settings = model.getCurrentFile().getSettings();
-			/*resolution.setText( "" +
-					( (Integer[]) settings.get(SettingsFile.VIDEO_RESOLUTION) )[0]
-					+"x"
-					+ ( (Integer[]) settings.get(SettingsFile.VIDEO_RESOLUTION) )[1]);	
-			resolution.setEnabled(true);
-			bitrate.setText( "" +
-					(Integer) settings.get(SettingsFile.VIDEO_BITRATE));
-			bitrate.setEnabled(true);
-			fps.setText( "" +
-					(Double) settings.get(SettingsFile.FPS));
-			fps.setEnabled(true);*/
-		}else{
+			/*
+			 * resolution.setText( "" + ( (Integer[])
+			 * settings.get(SettingsFile.VIDEO_RESOLUTION) )[0] +"x" + ( (Integer[])
+			 * settings.get(SettingsFile.VIDEO_RESOLUTION) )[1]);
+			 * resolution.setEnabled(true); bitrate.setText( "" + (Integer)
+			 * settings.get(SettingsFile.VIDEO_BITRATE)); bitrate.setEnabled(true);
+			 * fps.setText( "" + (Double) settings.get(SettingsFile.FPS));
+			 * fps.setEnabled(true);
+			 */
+		} else {
 			resolution.setText("");
 			resolution.setEnabled(false);
 			bitrate.setText("");
@@ -158,9 +143,7 @@ public final class VideoSettingsPanel extends JPanel implements Observer{
 			fps.setEnabled(false);
 		}
 	}
-	
-	
-	
-	//=======================================================================================================================
-	//=======================================================================================================================
+
+	// =======================================================================================================================
+	// =======================================================================================================================
 }

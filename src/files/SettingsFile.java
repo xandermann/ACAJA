@@ -15,60 +15,57 @@ import wrapper.SystemRequests;
  * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et
  *         CHEVRIER Jean-christophe.
  */
-public final class SettingsFile extends SelectableFile implements Modifiable{
-	//=======================================================================================================================
-	//=======================================================================================================================
-	
-	
-	/**
-	 * [ CONSTANTES DE CLASSE. ]
-	 */
-	
-	/**
-	 * Constante qui definit le codec video dans la HashMap
-	 */
-	public static final int VIDEO_CODEC = 1;
+public final class SettingsFile extends SelectableFile implements Modifiable {
+	// =======================================================================================================================
+	// =======================================================================================================================
 
-	/**
-	 * Constante qui definit le bitrate video dans la HashMap
-	 */
-	public static final int VIDEO_BITRATE = 2;
+	public enum Settings {
+		/**
+		 * Constante qui definit le codec video dans la HashMap
+		 */
+		VIDEO_CODEC,
 
-	/**
-	 * Constante qui definit les FPS de la video dans la HashMap
-	 */
-	public static final int FPS = 3;
+		/**
+		 * Constante qui definit le bitrate video dans la HashMap
+		 */
+		VIDEO_BITRATE,
 
-	/**
-	 * Constante qui definit le codec audio dans la HashMap
-	 */
-	public static final int AUDIO_CODEC = 4;
+		/**
+		 * Constante qui definit les FPS de la video dans la HashMap
+		 */
+		FPS,
 
-	/**
-	 * Constante qui definit le sampling rate dans la HashMap
-	 */
-	public static final int SAMPLING_RATE = 5;
+		/**
+		 * Constante qui definit le codec audio dans la HashMap
+		 */
+		AUDIO_CODEC,
+		
+		/**
+		 * Constante qui definit le sampling rate dans la HashMap
+		 */
+		SAMPLING_RATE,
+		
+		/**
+		 * Constante qui definit le nombre de pistes audios dans la HashMap
+		 */
+		NUMBER_AUDIO_CHANNELS,
 
-	/**
-	 * Constante qui definit le nombre de pistes audios dans la HashMap
-	 */
-	public static final int NUMBER_AUDIO_CHANNELS = 6;
+		/**
+		 * Constante qui definit le bitrate audio dans la HashMap
+		 */
+		AUDIO_BITRATE,
 
-	/**
-	 * Constante qui definit le bitrate audio dans la HashMap
-	 */
-	public static final int AUDIO_BITRATE = 7;
+		/**
+		 * Constante qui definit la résolution de la video dans la HashMap
+		 */
+		VIDEO_RESOLUTION,
+	}
 
-	/**
-	 * Constante qui definit la résolution de la video dans la HashMap
-	 */
-	public final static int VIDEO_RESOLUTION = 8;
 
-	
-	//=======================================================================================================================
-	//=======================================================================================================================
 
-	
+	// =======================================================================================================================
+	// =======================================================================================================================
+
 	/**
 	 * Les requetes soumises par l'utilisateur.
 	 */
@@ -79,16 +76,14 @@ public final class SettingsFile extends SelectableFile implements Modifiable{
 	 */
 	private HashMap<Integer, Object> settings;
 
-	
-	//=======================================================================================================================
-	//=======================================================================================================================
+	// =======================================================================================================================
+	// =======================================================================================================================
 
-	
 	/**
 	 * [ CONSTRUCTEUR. ]
 	 * 
 	 * @param file Le fichier source.
-	 * @throws IncorrectFileException 
+	 * @throws IncorrectFileException
 	 * @throws IOException
 	 * @throws InterruptedException
 	 */
@@ -111,15 +106,13 @@ public final class SettingsFile extends SelectableFile implements Modifiable{
 		requests = new HashMap<Integer, Object>();
 		settings = new HashMap<Integer, Object>();
 
-		//Initialisation des autres parametres.
+		// Initialisation des autres parametres.
 		SystemRequests.getSettings(this);
 	}
 
-	
-	//=======================================================================================================================
-	//=======================================================================================================================
+	// =======================================================================================================================
+	// =======================================================================================================================
 
-	
 	/**
 	 * Methode pour modifier les parametres de la video.
 	 * 
@@ -130,11 +123,9 @@ public final class SettingsFile extends SelectableFile implements Modifiable{
 		requests.put(typeSetting, setting);
 	}
 
-	
-	//=======================================================================================================================
-	//=======================================================================================================================
+	// =======================================================================================================================
+	// =======================================================================================================================
 
-	
 	/**
 	 * [ METHODE POUR SAVOIR SI DES PARAMETRES ONT ETE MODIFIES. ]
 	 * 
@@ -168,7 +159,6 @@ public final class SettingsFile extends SelectableFile implements Modifiable{
 		return requests;
 	}
 
-	
-	//=======================================================================================================================
-	//=======================================================================================================================
+	// =======================================================================================================================
+	// =======================================================================================================================
 }

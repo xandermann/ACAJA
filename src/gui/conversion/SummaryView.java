@@ -13,7 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import files.SettingsFile;
-import files.Setting;
+import files.SettingType;
 
 public final class SummaryView extends JPanel implements Observer {
 	// =======================================================================================================================
@@ -74,9 +74,9 @@ public final class SummaryView extends JPanel implements Observer {
 		if (this.model.getCurrentFile() != null) {
 			name.setText(model.getCurrentFile().getSourceFilename());
 			videoSummary
-					.setText((String) model.getCurrentFile().getSettings().get(Setting.VIDEO_CODEC));
+					.setText((String) model.getCurrentFile().getSettings().get(SettingType.VIDEO_CODEC));
 			soundSummary
-					.setText((String) model.getCurrentFile().getSettings().get(Setting.AUDIO_CODEC));
+					.setText((String) model.getCurrentFile().getSettings().get(SettingType.AUDIO_CODEC));
 			// duration.setText((String)
 			// this.model.getCurrentFile().getSettings().get("duree"));
 		} else {

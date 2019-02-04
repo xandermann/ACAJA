@@ -1,6 +1,6 @@
 package files;
 
-public enum Setting {
+public enum SettingType implements OperationType {
 	/**
 	 * Constante qui definit le codec video dans la HashMap
 	 */

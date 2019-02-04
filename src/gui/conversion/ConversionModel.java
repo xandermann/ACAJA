@@ -6,9 +6,7 @@ import java.util.*;
 import javax.swing.*;
 
 import exceptions.IncorrectFileException;
-import files.SettingsFile;
-import files.SettingsFile.Settings;
-import files.Setting;
+import files.*;
 import gui.Model;
 import tools.*;
 import wrapper.UserRequests;
@@ -230,7 +228,7 @@ public final class ConversionModel extends Model {
 	 * Methode qui permet de modifier un parametre du fichier
 	 * actuellement selectionne
 	 */
-	public void modify(Setting typeSeyting, Object setting) {
+	public void modify(SettingType typeSeyting, Object setting) {
 		currentFile.modify(typeSeyting, setting);
 	}
 	

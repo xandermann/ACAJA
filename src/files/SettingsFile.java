@@ -16,23 +16,26 @@ import wrapper.SystemRequests;
  *         CHEVRIER Jean-christophe.
  */
 public final class SettingsFile extends SelectableFile implements Modifiable {
-	// =======================================================================================================================
-	// =======================================================================================================================
+	//=======================================================================================================================
+	//=======================================================================================================================
 	
 
 	/**
 	 * Les requetes soumises par l'utilisateur.
 	 */
-	private HashMap<Setting, Object> requests;
+	private HashMap<SettingType, Object> requests;
 
 	/**
 	 * Les parametres courants du fichier
 	 */
-	private HashMap<Setting, Object> settings;
+	private HashMap<SettingType, Object> settings;
 
-	// =======================================================================================================================
-	// =======================================================================================================================
+	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
 
+	
 	/**
 	 * [ CONSTRUCTEUR. ]
 	 * 
@@ -57,29 +60,37 @@ public final class SettingsFile extends SelectableFile implements Modifiable {
 		 * INITIALISATION DES PARAMETRES DE LA VIDEO.
 		 */
 		// Intiliasation des tables.
-		requests = new HashMap<Setting, Object>();
-		settings = new HashMap<Setting, Object>();
+		requests = new HashMap<SettingType, Object>();
+		settings = new HashMap<SettingType, Object>();
 
 		// Initialisation des autres parametres.
 		SystemRequests.getSettings(this);
 	}
 
-	// =======================================================================================================================
-	// =======================================================================================================================
+	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
 
+	
+	
 	/**
 	 * Methode pour modifier les parametres de la video.
 	 * 
 	 * @param setting  Le parametre a modifier.
 	 * @param newValue La nouvelle valeur du parametre.
 	 */
-	public void modify(Settings videoCodec, Object setting) {
-		requests.put(videoCodec, setting);
+	public void modify(OperationType typeSetting, Object setting) {
+		requests.put((SettingType) typeSetting, setting);
 	}
 
-	// =======================================================================================================================
-	// =======================================================================================================================
+	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
 
+	
+	
 	/**
 	 * [ METHODE POUR SAVOIR SI DES PARAMETRES ONT ETE MODIFIES. ]
 	 * 
@@ -98,7 +109,7 @@ public final class SettingsFile extends SelectableFile implements Modifiable {
 	 * 
 	 * @return HashMap<String, String> Les parametres du fichier.
 	 */
-	public HashMap<Setting, Object> getSettings() {
+	public HashMap<SettingType, Object> getSettings() {
 		return settings;
 	}
 
@@ -109,15 +120,12 @@ public final class SettingsFile extends SelectableFile implements Modifiable {
 	 * 
 	 * @return HashMap<String, String> Les requetes.
 	 */
-	public HashMap<Setting, Object> getRequests() {
+	public HashMap<SettingType, Object> getRequests() {
 		return requests;
 	}
 
-	@Override
-	public void modify(Integer typeChange, Object change) {
-		// TODO Auto-generated method stub
-	}
 
-	// =======================================================================================================================
-	// =======================================================================================================================
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
 }

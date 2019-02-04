@@ -303,33 +303,33 @@ public final class SystemRequests extends FFmpegRuntime{
 			/**
 			 * INITIALISATION DES PARAMETRES DE LA VIDEO OU DU SON.
 			 */
-			HashMap<Setting, Object> fileSettings = file.getSettings();
+			HashMap<SettingType, Object> fileSettings = file.getSettings();
 		
 			
 			//Parametres a extraire uniquement pour les fichiers video. 
 			String codec = file.getSourceFile().getName().split("[.]")[file.getSourceFile().getName().split("[.]").length-1];
 			if(file.isVideo()) {
-				fileSettings.put(Setting.VIDEO_CODEC, codec);
+				fileSettings.put(SettingType.VIDEO_CODEC, codec);
 				
 				String[] resolutionStr = StreamsFilter.findVideoSetting(informations, 2).split("x");
 				Integer[] resolutionInt = new Integer[2]; 
 				resolutionInt[0] = Integer.parseInt(resolutionStr[0]);
 				resolutionInt[1] = Integer.parseInt(resolutionStr[1]);			
-				fileSettings.put(Setting.VIDEO_RESOLUTION, resolutionInt);
+				fileSettings.put(SettingType.VIDEO_RESOLUTION, resolutionInt);
 				
-				fileSettings.put(Setting.VIDEO_BITRATE, Integer.parseInt(StreamsFilter.findVideoSetting(informations, 3)));
-				fileSettings.put(Setting.FPS, Double.parseDouble(StreamsFilter.findVideoSetting(informations, 4)));
-				fileSettings.put(Setting.AUDIO_CODEC, StreamsFilter.findAudioSetting(informations, 0));
+				fileSettings.put(SettingType.VIDEO_BITRATE, Integer.parseInt(StreamsFilter.findVideoSetting(informations, 3)));
+				fileSettings.put(SettingType.FPS, Double.parseDouble(StreamsFilter.findVideoSetting(informations, 4)));
+				fileSettings.put(SettingType.AUDIO_CODEC, StreamsFilter.findAudioSetting(informations, 0));
 			}else
-				fileSettings.put(Setting.AUDIO_CODEC, codec);
+				fileSettings.put(SettingType.AUDIO_CODEC, codec);
 			
-			fileSettings.put(Setting.SAMPLING_RATE,  Integer.parseInt(StreamsFilter.findAudioSetting(informations, 1)));
+			fileSettings.put(SettingType.SAMPLING_RATE,  Integer.parseInt(StreamsFilter.findAudioSetting(informations, 1)));
 			if(StreamsFilter.findAudioSetting(informations, 2).contains("mono"))
-				fileSettings.put(Setting.NUMBER_AUDIO_CHANNELS, 1);
+				fileSettings.put(SettingType.NUMBER_AUDIO_CHANNELS, 1);
 			else
-				fileSettings.put(Setting.NUMBER_AUDIO_CHANNELS, 2);
+				fileSettings.put(SettingType.NUMBER_AUDIO_CHANNELS, 2);
 			
-			fileSettings.put(Setting.AUDIO_BITRATE, Integer.parseInt(StreamsFilter.findAudioSetting(informations, 4)));
+			fileSettings.put(SettingType.AUDIO_BITRATE, Integer.parseInt(StreamsFilter.findAudioSetting(informations, 4)));
 		}
 	}
 	

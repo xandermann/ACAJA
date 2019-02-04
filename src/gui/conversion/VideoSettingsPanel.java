@@ -19,6 +19,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import files.SettingsFile;
+import files.SettingsFile.Settings;
 
 public final class VideoSettingsPanel extends JPanel implements Observer {
 	// =======================================================================================================================
@@ -124,7 +125,7 @@ public final class VideoSettingsPanel extends JPanel implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		if (model.getCurrentFile() != null) {
-			HashMap<Integer, Object> settings = model.getCurrentFile().getSettings();
+			HashMap<Settings, Object> settings = model.getCurrentFile().getSettings();
 			/*
 			 * resolution.setText( "" + ( (Integer[])
 			 * settings.get(SettingsFile.VIDEO_RESOLUTION) )[0] +"x" + ( (Integer[])

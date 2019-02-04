@@ -5,6 +5,7 @@ import java.io.*;
 import java.util.*;
 
 import files.*;
+import files.SettingsFile.Settings;
 
 /**
  * Ceci est une classe concrete "sterile", c-a-d qu'aucune classe ne peut 
@@ -110,16 +111,16 @@ public final class UserRequests extends FFmpegRuntime {
 	 */
 	public static void execute(SelectableFile file) {
 		if(file instanceof SettingsFile) {
-			HashMap<Integer, Object> ffmpegRequests = ((SettingsFile) file).getRequests();
-			for(Integer requestKey : ffmpegRequests.keySet()) {
-					if(requestKey == SettingsFile.VIDEO_CODEC) {
+			HashMap<Settings, Object> ffmpegRequests = ((SettingsFile) file).getRequests();
+			for(Settings requestKey : ffmpegRequests.keySet()) {
+					if(requestKey == SettingsFile.Settings.VIDEO_CODEC) {
 						String oldExtension =  
 								file.getSourceFile().getPath().split("[.]")
 								[file.getSourceFile().getPath().split("[.]").length-1];
 						String fileName = file.getSourceFile().getPath();
 						String newFileName = 
 								fileName.substring(0, fileName.lastIndexOf(oldExtension)-1) +
-								ffmpegRequests.get(SettingsFile.VIDEO_CODEC);
+								ffmpegRequests.get(SettingsFile.Settings.VIDEO_CODEC);
 						
 						/**
 						 * REQUETE DE CONVERSION SOUMISE A FFMPEG.

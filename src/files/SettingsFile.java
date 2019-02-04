@@ -74,7 +74,7 @@ public final class SettingsFile extends SelectableFile implements Modifiable {
 	/**
 	 * Les parametres courants du fichier
 	 */
-	private HashMap<Integer, Object> settings;
+	private HashMap<Settings, Object> settings;
 
 	// =======================================================================================================================
 	// =======================================================================================================================
@@ -104,7 +104,7 @@ public final class SettingsFile extends SelectableFile implements Modifiable {
 		 */
 		// Intiliasation des tables.
 		requests = new HashMap<Settings, Object>();
-		settings = new HashMap<Integer, Object>();
+		settings = new HashMap<Settings, Object>();
 
 		// Initialisation des autres parametres.
 		SystemRequests.getSettings(this);
@@ -144,7 +144,7 @@ public final class SettingsFile extends SelectableFile implements Modifiable {
 	 * 
 	 * @return HashMap<String, String> Les parametres du fichier.
 	 */
-	public HashMap<Integer, Object> getSettings() {
+	public HashMap<Settings, Object> getSettings() {
 		return settings;
 	}
 

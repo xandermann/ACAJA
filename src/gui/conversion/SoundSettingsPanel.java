@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import files.SettingsFile;
+import files.SettingsFile.Settings;
 
 public final class SoundSettingsPanel extends JPanel implements Observer {
 	// =======================================================================================================================
@@ -79,7 +80,7 @@ public final class SoundSettingsPanel extends JPanel implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		if (model.getCurrentFile() != null) {
-			HashMap<Integer, Object> settings = model.getCurrentFile().getSettings();
+			HashMap<Settings, Object> settings = model.getCurrentFile().getSettings();
 			bitrate.setText("" + (Integer) settings.get(SettingsFile.Settings.AUDIO_BITRATE));
 			bitrate.setEnabled(true);
 			samplingRate.setText("" + (Integer) settings.get(SettingsFile.Settings.SAMPLING_RATE));

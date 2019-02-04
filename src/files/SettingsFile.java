@@ -18,63 +18,17 @@ import wrapper.SystemRequests;
 public final class SettingsFile extends SelectableFile implements Modifiable {
 	// =======================================================================================================================
 	// =======================================================================================================================
-
-	public enum Settings {
-		/**
-		 * Constante qui definit le codec video dans la HashMap
-		 */
-		VIDEO_CODEC,
-
-		/**
-		 * Constante qui definit le bitrate video dans la HashMap
-		 */
-		VIDEO_BITRATE,
-
-		/**
-		 * Constante qui definit les FPS de la video dans la HashMap
-		 */
-		FPS,
-
-		/**
-		 * Constante qui definit le codec audio dans la HashMap
-		 */
-		AUDIO_CODEC,
-		
-		/**
-		 * Constante qui definit le sampling rate dans la HashMap
-		 */
-		SAMPLING_RATE,
-		
-		/**
-		 * Constante qui definit le nombre de pistes audios dans la HashMap
-		 */
-		NUMBER_AUDIO_CHANNELS,
-
-		/**
-		 * Constante qui definit le bitrate audio dans la HashMap
-		 */
-		AUDIO_BITRATE,
-
-		/**
-		 * Constante qui definit la résolution de la video dans la HashMap
-		 */
-		VIDEO_RESOLUTION,
-	}
-
-
-
-	// =======================================================================================================================
-	// =======================================================================================================================
+	
 
 	/**
 	 * Les requetes soumises par l'utilisateur.
 	 */
-	private HashMap<Settings, Object> requests;
+	private HashMap<Setting, Object> requests;
 
 	/**
 	 * Les parametres courants du fichier
 	 */
-	private HashMap<Settings, Object> settings;
+	private HashMap<Setting, Object> settings;
 
 	// =======================================================================================================================
 	// =======================================================================================================================
@@ -103,8 +57,8 @@ public final class SettingsFile extends SelectableFile implements Modifiable {
 		 * INITIALISATION DES PARAMETRES DE LA VIDEO.
 		 */
 		// Intiliasation des tables.
-		requests = new HashMap<Settings, Object>();
-		settings = new HashMap<Settings, Object>();
+		requests = new HashMap<Setting, Object>();
+		settings = new HashMap<Setting, Object>();
 
 		// Initialisation des autres parametres.
 		SystemRequests.getSettings(this);
@@ -144,7 +98,7 @@ public final class SettingsFile extends SelectableFile implements Modifiable {
 	 * 
 	 * @return HashMap<String, String> Les parametres du fichier.
 	 */
-	public HashMap<Settings, Object> getSettings() {
+	public HashMap<Setting, Object> getSettings() {
 		return settings;
 	}
 
@@ -155,14 +109,13 @@ public final class SettingsFile extends SelectableFile implements Modifiable {
 	 * 
 	 * @return HashMap<String, String> Les requetes.
 	 */
-	public HashMap<Settings, Object> getRequests() {
+	public HashMap<Setting, Object> getRequests() {
 		return requests;
 	}
 
 	@Override
 	public void modify(Integer typeChange, Object change) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	// =======================================================================================================================

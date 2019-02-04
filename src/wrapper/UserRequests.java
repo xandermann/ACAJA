@@ -5,7 +5,7 @@ import java.io.*;
 import java.util.*;
 
 import files.*;
-import files.SettingsFile.Settings;
+
 
 /**
  * Ceci est une classe concrete "sterile", c-a-d qu'aucune classe ne peut 
@@ -84,13 +84,15 @@ public final class UserRequests extends FFmpegRuntime {
 	 * On utilise entre autre ici un Thread pour lancer la consommation des
 	 * flux de sortie de FFMPEG dans un nouveau fil d'execution. 
 	 * 
-	 * @param processToBeConsume		Process a consommer dans un nouveau processus. 
+	 * @param processToBeConsume		ProcessManager, un outil pour gerer 
+	 * 									le Process contenat les flux a consommer 
+	 * 									dans un nouveau processus. 
 	 */
-	public static void consumeStreams(Process processToBeConsume) {
+	public static void consumeStreams(ProcessManager processToBeConsume) {
 		new Thread() {
 			public void run() {
 				startToWork();
-					StreamsConsumer.consumeStreams(processToBeConsume);
+				StreamsConsumer.consumeStreams(processToBeConsume);
 				workIsOver();
 			}
 		}.start();
@@ -111,21 +113,21 @@ public final class UserRequests extends FFmpegRuntime {
 	 */
 	public static void execute(SelectableFile file) {
 		if(file instanceof SettingsFile) {
-			HashMap<Settings, Object> ffmpegRequests = ((SettingsFile) file).getRequests();
-			for(Settings requestKey : ffmpegRequests.keySet()) {
-					if(requestKey == SettingsFile.Settings.VIDEO_CODEC) {
+			HashMap<Setting, Object> ffmpegRequests = ((SettingsFile) file).getRequests();
+			for(Setting requestKey : ffmpegRequests.keySet()) {
+					if(requestKey == Setting.VIDEO_CODEC) {
 						String oldExtension =  
 								file.getSourceFile().getPath().split("[.]")
 								[file.getSourceFile().getPath().split("[.]").length-1];
 						String fileName = file.getSourceFile().getPath();
 						String newFileName = 
 								fileName.substring(0, fileName.lastIndexOf(oldExtension)-1) +
-								ffmpegRequests.get(SettingsFile.Settings.VIDEO_CODEC);
+								ffmpegRequests.get(Setting.VIDEO_CODEC);
 						
 						/**
 						 * REQUETE DE CONVERSION SOUMISE A FFMPEG.
 						 */
-						Process conversionProcess = execute(fileName+" "+newFileName);
+						ProcessManager conversionProcess = execute(fileName+" "+newFileName);
 							
 						/**
 						 * CONSOMMATION DES FLUX DE SORTIE.

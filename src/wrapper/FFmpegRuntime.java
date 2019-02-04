@@ -81,14 +81,14 @@ public abstract class FFmpegRuntime {
 	 * @param ffmpegRequest			Une requete FFMPEG : c-a-d une requete realisee en "code" FFMPEG
 	 * 								et a faire executer 
 	 * 
-	 * @return Process				Un objet de type Process contenant la reponse de FFMPEG a 
+	 * @return ProcessManager		Un objet de type ProcessManager gerant la reponse de FFMPEG a 
 	 * 								la requete qui lui est soumise par l'executeur de lignes de 
 	 * 								commande RUN de type Runtime. 
 	 */
-	public static Process execute(String ffmpegRequest){
+	public static ProcessManager execute(String ffmpegRequest){
 		if(FFMPEG_PATH==null) install();
 		try {
-			return RUN.exec(FFMPEG_PATH+"-i "+ffmpegRequest);
+			return new ProcessManager(RUN.exec(FFMPEG_PATH+"-i "+ffmpegRequest));
 		} catch (IOException e) {
 			return null;
 		}

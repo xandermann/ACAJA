@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import files.SettingsFile;
+import files.Setting;
 
 public final class SummaryView extends JPanel implements Observer {
 	// =======================================================================================================================
@@ -58,11 +59,11 @@ public final class SummaryView extends JPanel implements Observer {
 		// duration = new JLabel("NA");
 		// j2.add(duration,BorderLayout.WEST);
 
-		this.add(j);
-		this.add(j1);
-		this.add(j2);
-		this.add(j3);
-		this.setSize(new Dimension(400, 100));
+		add(j);
+		add(j1);
+		add(j2);
+		add(j3);
+		setSize(new Dimension(400, 100));
 	}
 
 	// =======================================================================================================================
@@ -71,11 +72,11 @@ public final class SummaryView extends JPanel implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		if (this.model.getCurrentFile() != null) {
-			name.setText(this.model.getCurrentFile().getSourceFilename());
+			name.setText(model.getCurrentFile().getSourceFilename());
 			videoSummary
-					.setText((String) this.model.getCurrentFile().getSettings().get(SettingsFile.Settings.VIDEO_CODEC));
+					.setText((String) model.getCurrentFile().getSettings().get(Setting.VIDEO_CODEC));
 			soundSummary
-					.setText((String) this.model.getCurrentFile().getSettings().get(SettingsFile.Settings.AUDIO_CODEC));
+					.setText((String) model.getCurrentFile().getSettings().get(Setting.AUDIO_CODEC));
 			// duration.setText((String)
 			// this.model.getCurrentFile().getSettings().get("duree"));
 		} else {

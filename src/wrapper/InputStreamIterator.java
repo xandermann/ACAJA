@@ -1,9 +1,18 @@
 package wrapper;
 
-import java.util.Iterator;
-
+/**
+ * [ CLASSE POUR LE PARCOURS DE STDOUT PAR UN ITERATEUR. ]
+ * 
+ * Auteurs du projet : 
+ * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
+ */
 public final class InputStreamIterator extends StreamIterator{
-	public InputStreamIterator(Process processToBeConsume) {
-		super(processToBeConsume.getInputStream());
+	/**
+	 * [ CONSTRUCTEUR. ]
+	 * 
+	 * @param processToStudy	Process a etudier.
+	 */
+	public InputStreamIterator(Process processToStudy) {
+		super(processToStudy.getInputStream());
 	}
 }

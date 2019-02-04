@@ -1,13 +1,48 @@
 package wrapper;
 
 import java.io.*;
+
 import java.util.Iterator;
+
 import javax.swing.JOptionPane;
 
+
+/**
+ * [ SUPERCLASSE ABSTRAITE DES ITERATEURS SUR LES FLUX. ]
+ * 
+ * Auteurs du projet : 
+ * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
+ */
 public abstract class StreamIterator implements Iterator<String>{
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
+	/**
+	 *  [ ATTRIBUTS D'INSTANCE. ]
+	 */
+	/**
+	 * FLUX A LIRE.
+	 */
 	private BufferedReader streamToRead;
+	/**
+	 * DERNIERE LIGNE LUE.
+	 */
 	private String lastLineRead;
 	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
+	/**
+	 * [ METHODE INTERNE POUR LIRE UNE LIGNE DANS LE FLUX. ]
+	 * 
+	 * Cette methode permet de lire une nouvelle ligne dans le flux.
+	 * Si il n y a plus de ligne a lire, le flux est ferme.
+	 * Si le flux n'est pas trouve a la premiere ligne lue,
+	 * une boite de dialogue affiche un message d'erreur.
+	 */
 	private void readNextLine() {
 		try {
 			/**
@@ -17,8 +52,7 @@ public abstract class StreamIterator implements Iterator<String>{
 			 * si il n'y a pas de ligne suivante.
 			 */
 			if((lastLineRead = streamToRead.readLine()) == null) streamToRead.close();
-		} catch (IOException e) {
-			
+		} catch (IOException e) {			
 			/**
 			 * EXCEPTIONS, PAS DE FLUX TROUVES. 
 			 */
@@ -26,20 +60,66 @@ public abstract class StreamIterator implements Iterator<String>{
 		}
 	}
 	
-	public StreamIterator(InputStream stream) {
-		streamToRead = new BufferedReader(new InputStreamReader(stream));
+
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
+	/**
+	 * [ CONSTRUCTEUR. ]
+	 * 
+	 * @param stream		Le flux (STDOUT ou STDERR) a gerer. 
+	 */
+	public StreamIterator(InputStream streamToRead) {
+		this.streamToRead = new BufferedReader(new InputStreamReader(streamToRead));
 		readNextLine();
 	}
 	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+
 	@Override
 	public boolean hasNext() {
 		return lastLineRead != null;
 	}
 
+	
+	
+	
 	@Override
 	public String next() {
 		String oldLineRead = lastLineRead;
+		/**
+		 * CHARGEMENT PREVISIONNEL DE LA PROCHAINE LIGNE A RETOURNER.
+		 */
 		readNextLine();
 		return oldLineRead;
 	}
+	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
+	/**
+	 * [ METHODE POUR ARRETER A L'EXTERIEUR DE LA CLASSE LA LECTURE DU FLUX. ]
+	 */
+	public void endReading() {
+		/**
+		 * ARRET DE LA LECTRURE ET CONSOMMATION DU RESTE DU FLUX. 
+		 * 
+		 * On consomme le reste du flux 
+		 * pour eviter un interblocage.
+		 * 
+		 * Au dernier appel de next le flux est close dans : 
+		 * next() => readNextLine().
+		 */
+		while(hasNext()) next();
+	}
+	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
 }

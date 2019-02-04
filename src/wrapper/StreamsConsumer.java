@@ -33,16 +33,16 @@ public final class StreamsConsumer implements StreamsManager{
 	 * d'instructions en java qui ralentiraient la machine realisant les taches de FFMPEG et 
 	 * de JAVA parallelement.
 	 * 
-	 * @param processToBeConsume				Process a consommer.
+	 * @param processToBeConsume			ProcessManager contenant les flux a consommer.
 	 */
-	public static void consumeStreams(Process processToBeConsume) {
+	public static void consumeStreams(ProcessManager processToBeConsume) {
 		/**
 		 * CONSOMMATION DU FLUX D'ERREURS DE FFMPEG. 
 		 * 
 		 * InputStream represente ici le flux d'erreur de l'application externe
 		 * ( STDERR de l'application externe : FFMPEG. ).
 		 */ 
-		StreamIterator consumer = new ErrorStreamIterator(processToBeConsume);
+		StreamIterator consumer = processToBeConsume.errorStreamIterator();
 		while(consumer.hasNext()) consumer.next();
 		
 		
@@ -52,7 +52,7 @@ public final class StreamsConsumer implements StreamsManager{
 		 * InputStream represente le flux de sortie de l'application externe 
 		 * ( STDOUT de l'application externe : FFMPEG. ).
 		 */
-		consumer = new InputStreamIterator(processToBeConsume);
+		consumer = processToBeConsume.inputStreamIterator();
 		while(consumer.hasNext()) consumer.next();
 		
 		
@@ -61,7 +61,7 @@ public final class StreamsConsumer implements StreamsManager{
 			  * PAR SIMPLE DEONTOLOGIE ON OBLIGE JAVA 
 			  * A ATTENDRE LA MORT DU PROCESSUS FILS : FFMPEG.
 			  */
-			 processToBeConsume.waitFor();
+			 processToBeConsume.getManagedProcess().waitFor();
 		} catch (InterruptedException e) {
 			 JOptionPane.showMessageDialog(null, MessageConstants.FALIURE_ACTIVE_WAIT_FOR);
 		}

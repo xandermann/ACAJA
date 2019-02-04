@@ -1,10 +1,10 @@
 package wrapper;
+
 import java.io.*;
+
 import java.util.HashMap;
 
-import files.SelectableFile;
-import files.SettingsFile;
-import files.SettingsFile.Settings;
+import files.*;
 
 /**
  * [ CLASSE CONCRETE POUR L'INTERFACAGE JAVA-FFMPEG ---- DEGRE 2. ]
@@ -259,67 +259,6 @@ public final class SystemRequests extends FFmpegRuntime{
 		return 0;
 	}
 	
-	
-	
-	//=======================================================================================================================
-	//=======================================================================================================================
-	
-	
-	/**
-	 * [ METHODE INTERNE DE CLASSE. ]
-	 * 
-	 * Cette methode permet de connaitre l'index du caractere situe apres
-	 * une donnee a extraire. Plus simplement cette methode determine la 
-	 * l'index du caractere qui delime la fin de chaine a extraire.
-	 */
-	public static int findEndIndexSetting(String informations, int fromIndex) {
-		int indexSpace = informations.indexOf(' ', fromIndex);
-		int indexComa = informations.indexOf(',', fromIndex);
-		return indexSpace<indexComa || indexComa==-1 ? indexSpace : indexComa;	
-	}
-	
-	
-	/**
-	 * [ METHODE INTERNE DE CLASSE. ]
-	 * 
-	 * Cette methode permet d'extraire une des caracteristiques d'un fichier video ou audio
-	 * dont FFMPEG nous a fourni une longue plage d'informations. 
-	 */
-	private static String extractASetting(String informations, String start, int indexSetting) {
-		int indexStart = informations.indexOf(start) + start.length();
-		if(indexSetting != 0) {
-			int indexEvolve = indexStart;
-			
-			for(int i=0; i<indexSetting; i++) 
-				indexEvolve = informations.indexOf(',', indexEvolve)+1;
-			
-			indexEvolve++;
-			
-			return  informations.substring(indexEvolve,findEndIndexSetting(informations, indexEvolve));
-		}else
-			return  informations.substring(indexStart,findEndIndexSetting(informations, indexStart));
-	}
-	
-	/**
-	 * [ METHODE INTERNE DE CLASSE. ]
-	 * 
-	 * Methode pour extraire la carcateristique d'un fichier video dans la plage d'informations
-	 * fournie par FFMPEG a partir d'in index. 
-	 */
-	private static String extractAVideoSetting(String informations, int indexSetting) {
-		return extractASetting(informations, "Video: ", indexSetting);
-	}
-
-	/**
-	 * [ METHODE INTERNE DE CLASSE. ]
-	 * 
-	 * Methode pour extraire la carcateristique d'un fichier audio dans la plage d'informations
-	 * fournie par FFMPEG a partir d'in index. 
-	 */
-	private static String extractAAudioSetting(String informations, int indexSetting) {
-		return extractASetting(informations, "Audio: ", indexSetting);
-	}
-
 
 	
 	//=======================================================================================================================
@@ -328,7 +267,7 @@ public final class SystemRequests extends FFmpegRuntime{
 	
 	
 	/**
-	 * [ METHODE DE CLASSE POUR LE RENSEIGNEMENT DES CARACTERISTIQUES D'UNE VIDEO OU D'UN SON. ]
+	 * [ METHODE DE CLASSE POUR LE RENSEIGNEMENT DES PARAMETRES D'UNE VIDEO OU D'UN SON. ]
 	 * 
 	 * Cette methode retourne les parametres ( = caracteristiques ) du fichier. 
 	 * 
@@ -344,14 +283,6 @@ public final class SystemRequests extends FFmpegRuntime{
 	 * nombre de canaux audio en sortie. 
 	 * 
 	 * @param file							Le fichier dont on souhaite connaitre les parametres. 
-	 * 
-	 * @param fileType  					L'indice correspondant au type du fichier audio ou video. 
-	 * 
-	 * @throws IOException 					Exception lancee si un fichier est introuvable. 					
-	 * 
-	 * @throws InterruptedException 		Exception lancee si l'execution de FFMPEG
-	 * 										est trop longue, et a du etre interrompu 
-	 * 									    par son processus parent (JAVA). 
 	*/
 	public static void getSettings(SettingsFile file){
 		if(file.containsAudio()){	
@@ -361,89 +292,44 @@ public final class SystemRequests extends FFmpegRuntime{
 			 * LA requete ffmpeg -i inputFile permet de connaitre les caracteristiques
 			 * d'un fichier fourni en fliux d'entree ( = inputFile ). 
 			 */
-			Process p = FFmpegRuntime.execute(file.getSourceFile().getPath());
+			ProcessManager processManager = FFmpegRuntime.execute(file.getSourceFile().getPath());
+			
+			/**
+			 * EXTRACTION DES DONNEES.
+			 */
+			String informations = StreamsFilter.findInformationsOfMediaFile(processManager);
 			
 			
 			/**
-			 * QUELQUES FAITS A CONNAITRE POUR COMPRENDRE LA LIGNE DE CODE CI-DESSOUS.
-			 * 
-			 * "Il est temps de vous racontez une petite histoire" :
-			 * Les pogrammeurs de FFMPEG savent que les temps de traitement des requetes
-			 * sur FFMPEG peuvent prendre un temps assez long. Et il faut savoir que 
-			 * le traitement d'une requete renvoie son resultat par le biais des flux de sortie 
-			 * ( = STDOUT ). De ce fait les pogrammeurs de FFMPEG ont decide que les messages 
-			 * de reussite comme d'echec d'une requete passeraient par les flux 
-			 * d'erreurs ( =  STDERR ). Mais pourquoi ce choix n'est-ce-pas ? Pour la bonne 
-			 * raison qu'envoyer tous les messages par STDERR permet d'eviter que 
-			 * les traitements des requetes qui passent par STDOUT ne soit freiner par les 
-			 * messages de reussites de requetes si ils passaient pas STDOUT. 
-			 * 
-			 * C'est ainsi qu'on se retrouve en 2019 a devoir extraire les messages ne correpondant 
-			 * pas a des cas d'erreur, a partir de STDERR et pas a partir de STDOUT, comme ca l'est  
-			 * pourtant habituellement par convention. 
-			 * 
-			 * Ainsi on ne s'interesse ici qu'au flux d'erreurs qui du coup n'en est pas un avec FFMPEG,
-			 * mais plutot un flux des messages tous confondus. 
+			 * INITIALISATION DES PARAMETRES DE LA VIDEO OU DU SON.
 			 */
-			BufferedReader br = new BufferedReader(new InputStreamReader(p.getErrorStream())); 
-			
-			
-			/**
-			 *  EXTRACTION DES CARACTERISTIQUES.
-			 */
-			String informations = "";	
-			try{
-				String information = null;	
-				
-				//On ne recupere que les donnees qui nous interesse
-				//d'ou la presence du booleen keepInformations. 
-				boolean keepInformations = false; 	
-				
-				while( (information = br.readLine()) != null ) {
-					if( keepInformations == false && information.contains("Input") ) 
-						keepInformations = true;
-					if( keepInformations == true ) 
-						informations += information + " ";
-				}
-				//On ferme le flux. 
-				br.close();		
-			} catch (IOException e) {
-				//On force l'execution a se terminer ici.
-				return;
-			}
-			
-			
-			
-			/**
-			 * INITIALISATION DES CARACTERISTIQUES DE LA VIDEO OU DU SON.
-			 */
-			HashMap<Settings, Object> fileSettings = file.getSettings();
+			HashMap<Setting, Object> fileSettings = file.getSettings();
 		
 			
 			//Parametres a extraire uniquement pour les fichiers video. 
 			String codec = file.getSourceFile().getName().split("[.]")[file.getSourceFile().getName().split("[.]").length-1];
 			if(file.isVideo()) {
-				fileSettings.put(SettingsFile.Settings.VIDEO_CODEC, codec);
+				fileSettings.put(Setting.VIDEO_CODEC, codec);
 				
-				String[] resolutionStr = extractAVideoSetting(informations, 2).split("x");
+				String[] resolutionStr = StreamsFilter.findVideoSetting(informations, 2).split("x");
 				Integer[] resolutionInt = new Integer[2]; 
 				resolutionInt[0] = Integer.parseInt(resolutionStr[0]);
 				resolutionInt[1] = Integer.parseInt(resolutionStr[1]);			
-				fileSettings.put(SettingsFile.Settings.VIDEO_RESOLUTION, resolutionInt);
+				fileSettings.put(Setting.VIDEO_RESOLUTION, resolutionInt);
 				
-				fileSettings.put(SettingsFile.Settings.VIDEO_BITRATE, Integer.parseInt(extractAVideoSetting(informations, 3)));
-				fileSettings.put(SettingsFile.Settings.FPS, Double.parseDouble(extractAVideoSetting(informations, 4)));
-				fileSettings.put(SettingsFile.Settings.AUDIO_CODEC, extractAAudioSetting(informations, 0));
+				fileSettings.put(Setting.VIDEO_BITRATE, Integer.parseInt(StreamsFilter.findVideoSetting(informations, 3)));
+				fileSettings.put(Setting.FPS, Double.parseDouble(StreamsFilter.findVideoSetting(informations, 4)));
+				fileSettings.put(Setting.AUDIO_CODEC, StreamsFilter.findAudioSetting(informations, 0));
 			}else
-				fileSettings.put(SettingsFile.Settings.AUDIO_CODEC, codec);
+				fileSettings.put(Setting.AUDIO_CODEC, codec);
 			
-			fileSettings.put(SettingsFile.Settings.SAMPLING_RATE,  Integer.parseInt(extractAAudioSetting(informations, 1)));
-			if(extractAAudioSetting(informations, 2).contains("mono"))
-				fileSettings.put(SettingsFile.Settings.NUMBER_AUDIO_CHANNELS, 1);
+			fileSettings.put(Setting.SAMPLING_RATE,  Integer.parseInt(StreamsFilter.findAudioSetting(informations, 1)));
+			if(StreamsFilter.findAudioSetting(informations, 2).contains("mono"))
+				fileSettings.put(Setting.NUMBER_AUDIO_CHANNELS, 1);
 			else
-				fileSettings.put(SettingsFile.Settings.NUMBER_AUDIO_CHANNELS, 2);
-						
-			fileSettings.put(SettingsFile.Settings.AUDIO_BITRATE, Integer.parseInt(extractAAudioSetting(informations, 4)));
+				fileSettings.put(Setting.NUMBER_AUDIO_CHANNELS, 2);
+			
+			fileSettings.put(Setting.AUDIO_BITRATE, Integer.parseInt(StreamsFilter.findAudioSetting(informations, 4)));
 		}
 	}
 	

@@ -85,7 +85,7 @@ public abstract class FFmpegRuntime {
 	 * 								la requete qui lui est soumise par l'executeur de lignes de 
 	 * 								commande RUN de type Runtime. 
 	 */
-	protected static Process execute(String ffmpegRequest){
+	public static Process execute(String ffmpegRequest){
 		if(FFMPEG_PATH==null) install();
 		try {
 			return RUN.exec(FFMPEG_PATH+"-i "+ffmpegRequest);

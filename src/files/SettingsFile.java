@@ -69,7 +69,7 @@ public final class SettingsFile extends SelectableFile implements Modifiable {
 	/**
 	 * Les requetes soumises par l'utilisateur.
 	 */
-	private HashMap<Integer, Object> requests;
+	private HashMap<Settings, Object> requests;
 
 	/**
 	 * Les parametres courants du fichier
@@ -103,7 +103,7 @@ public final class SettingsFile extends SelectableFile implements Modifiable {
 		 * INITIALISATION DES PARAMETRES DE LA VIDEO.
 		 */
 		// Intiliasation des tables.
-		requests = new HashMap<Integer, Object>();
+		requests = new HashMap<Settings, Object>();
 		settings = new HashMap<Integer, Object>();
 
 		// Initialisation des autres parametres.
@@ -119,8 +119,8 @@ public final class SettingsFile extends SelectableFile implements Modifiable {
 	 * @param setting  Le parametre a modifier.
 	 * @param newValue La nouvelle valeur du parametre.
 	 */
-	public void modify(Integer typeSetting, Object setting) {
-		requests.put(typeSetting, setting);
+	public void modify(Settings videoCodec, Object setting) {
+		requests.put(videoCodec, setting);
 	}
 
 	// =======================================================================================================================
@@ -155,8 +155,14 @@ public final class SettingsFile extends SelectableFile implements Modifiable {
 	 * 
 	 * @return HashMap<String, String> Les requetes.
 	 */
-	public HashMap<Integer, Object> getRequests() {
+	public HashMap<Settings, Object> getRequests() {
 		return requests;
+	}
+
+	@Override
+	public void modify(Integer typeChange, Object change) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	// =======================================================================================================================

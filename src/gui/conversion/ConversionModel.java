@@ -7,6 +7,7 @@ import javax.swing.*;
 
 import exceptions.IncorrectFileException;
 import files.SettingsFile;
+import files.SettingsFile.Settings;
 import gui.Model;
 import tools.*;
 import wrapper.UserRequests;
@@ -228,8 +229,8 @@ public final class ConversionModel extends Model {
 	 * Methode qui permet de modifier un parametre du fichier
 	 * actuellement selectionne
 	 */
-	public void modify(Integer typeSetting, Object setting) {
-		currentFile.modify(typeSetting, setting);
+	public void modify(Settings videoCodec, Object setting) {
+		currentFile.modify(videoCodec, setting);
 	}
 	
 
@@ -294,6 +295,13 @@ public final class ConversionModel extends Model {
 	 */
 	public ArrayList<SettingsFile> getFiles() {
 		return files;
+	}
+
+
+
+	public void modify(Settings videoCodec, String string) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 

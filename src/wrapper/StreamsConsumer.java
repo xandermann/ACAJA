@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
  * Auteurs du projet : 
  * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
  */
-public final class StreamsConsumer{
+public final class StreamsConsumer implements StreamsManager{
 	//=======================================================================================================================
 	//=======================================================================================================================	
 	
@@ -36,37 +36,24 @@ public final class StreamsConsumer{
 	 * @param processToBeConsume				Process a consommer.
 	 */
 	public static void consumeStreams(Process processToBeConsume) {
-		try {
-			/**
-			 * CONSOMMATION DU FLUX D'ERREURS DE FFMPEG. 
-			 * 
-			 * InputStream represente ici le flux d'erreur de l'application externe
-			 * ( STDERR de l'application externe : FFMPEG. ).
-			 */ 
-			BufferedReader consumer = new BufferedReader(new InputStreamReader(processToBeConsume.getErrorStream()));
-			String line = "";
-			try {
-				while((line = consumer.readLine()) != null);
-			} finally {
-				consumer.close();
-			}
-			
-			
-			/**
-			 * CONSOMMATION DU FLUX DE SORTIE DE FFMPEG.
-			 *  
-			 * InputStream represente le flux de sortie de l'application externe 
-			 * ( STDOUT de l'application externe : FFMPEG. ).
-			 */
-			consumer = new BufferedReader(new InputStreamReader(processToBeConsume.getInputStream()));
-			try {
-				while((line = consumer.readLine()) != null);
-			} finally {
-				consumer.close();
-			}
-		} catch(IOException ioe) {
-			JOptionPane.showMessageDialog(null, MessageConstants.FALIURE_UNFINDABLE_STREAMS);
-		}
+		/**
+		 * CONSOMMATION DU FLUX D'ERREURS DE FFMPEG. 
+		 * 
+		 * InputStream represente ici le flux d'erreur de l'application externe
+		 * ( STDERR de l'application externe : FFMPEG. ).
+		 */ 
+		StreamIterator consumer = new ErrorStreamIterator(processToBeConsume);
+		while(consumer.hasNext());
+		
+		
+		/**
+		 * CONSOMMATION DU FLUX DE SORTIE DE FFMPEG.
+		 *  
+		 * InputStream represente le flux de sortie de l'application externe 
+		 * ( STDOUT de l'application externe : FFMPEG. ).
+		 */
+		consumer = new InputStreamIterator(processToBeConsume);
+		while(consumer.hasNext());
 		
 		
 		 try {
@@ -79,6 +66,7 @@ public final class StreamsConsumer{
 			 JOptionPane.showMessageDialog(null, MessageConstants.FALIURE_ACTIVE_WAIT_FOR);
 		}
 	}
+	
 	
 	
 	

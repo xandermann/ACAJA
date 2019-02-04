@@ -15,34 +15,7 @@ import exceptions.IncorrectFileException;
 public class SelectableFile{
 	//=======================================================================================================================
 	//=======================================================================================================================
-	
-	
-	/**
-	 * [ CONSTANTES DE CLASSE. ]
-	 * 
-	 * Ces constantes permettent d'indiquer le type du fichier source d'une instance
-	 * de la classe.
-	 */
 
-	/**
-	 * Constante indiquant que le fichier est un fichier video.
-	 */
-	public final static int FILE_TYPE_VIDEO = 0;
-
-	/**
-	 * Constante indiquant que le fichier est un fichier audio.
-	 */
-	public final static int FILE_TYPE_AUDIO = 1;
-
-	/**
-	 * Constante indiquant que le fichier est un fichier image.
-	 */
-	public final static int FILE_TYPE_IMAGE = 2;
-
-	
-	//=======================================================================================================================
-	//=======================================================================================================================
-	
 	
 	/**
 	 * [ ATTRIBUTS D'INSTANCE DE LA CLASSE. ]
@@ -56,7 +29,7 @@ public class SelectableFile{
 	/**
 	 * Le type de fichier.
 	 */
-	protected int typeFile;
+	protected MediaFileType typeFile;
 
 	/**
 	 * Le fihier source.
@@ -102,7 +75,7 @@ public class SelectableFile{
 	 * @return booleen Vaut true si le fichier source est une image.
 	 */
 	public boolean isImage() {
-		return typeFile == SelectableFile.FILE_TYPE_IMAGE;
+		return typeFile == MediaFileType.MEDIA_FILE_IMAGE;
 	}
 
 	/**
@@ -114,7 +87,7 @@ public class SelectableFile{
 	 * @return booleen Vaut true si le fichier source est une video.
 	 */
 	public boolean isVideo() {
-		return typeFile == SelectableFile.FILE_TYPE_VIDEO;
+		return typeFile == MediaFileType.MEDIA_FILE_VIDEO;
 	}
 
 	/**
@@ -126,7 +99,7 @@ public class SelectableFile{
 	 * @return booleen Vaut true si le fichier source est un son.
 	 */
 	public boolean isSound() {
-		return typeFile == SelectableFile.FILE_TYPE_AUDIO;
+		return typeFile == MediaFileType.MEDIA_FILE_AUDIO;
 	}
 
 	/**
@@ -153,20 +126,20 @@ public class SelectableFile{
 	 * ou meme une image.
 	 * 
 	 * 3 valeurs possiblement accordable a typeFile : 
-	 * - FILE_TYPE_VIDEO ( = 0 ) ; 
-	 * - FILE_TYPE_AUDIO ( = 1 ) ; 
-	 * - FILE_TYPE_IMAGE ( = 2 ).
+	 * - MEDIA_FILE_VIDEO ( = 0 ) ; 
+	 * - MEDIA_FILE_AUDIO ( = 1 ) ; 
+	 * - MEDIA_FILE_IMAGE ( = 2 ).
 	 * 
 	 * @throws IncorrectFileException 
 	 */
 	private void whoAmI() throws IncorrectFileException {
 		String fileName = sourceFile.getName().toLowerCase();
 		if (fileName.endsWith("mp4") || fileName.endsWith("avi") || fileName.endsWith("flv"))
-			typeFile = FILE_TYPE_VIDEO;
+			typeFile = MediaFileType.MEDIA_FILE_VIDEO;
 		else if (fileName.endsWith("mp3") || fileName.endsWith("wav") || fileName.endsWith("ogg"))
-				typeFile = FILE_TYPE_AUDIO;
+				typeFile = MediaFileType.MEDIA_FILE_AUDIO;
 			else if (fileName.endsWith("png") || fileName.endsWith("jpg") || fileName.endsWith("jpeg"))
-					typeFile = FILE_TYPE_IMAGE;
+					typeFile = MediaFileType.MEDIA_FILE_IMAGE;
 				else
 					throw new IncorrectFileException(IncorrectFileException.FORBIDDEN_FILE);
 	}
@@ -232,9 +205,9 @@ public class SelectableFile{
 	 * 
 	 * Methode pour recuperer le type du fichier.
 	 * 
-	 * @return int Le type du fichier.
+	 * @return MediaFileType	 Le type du fichier.
 	 */
-	public int getTypeFile() {
+	public MediaFileType getTypeFile() {
 		return typeFile;
 	}
 

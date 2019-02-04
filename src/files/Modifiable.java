@@ -1,10 +1,21 @@
 package files;
-
+/**
+ * [ INTERFACE POUR LES FICHIERS MODIFIABLES. ]
+ * 
+ * Ces methodes ont un comportement en interne different selon si on est dans
+ * la classe SettingsFile ou dans la classe ProcessingFile.
+ * 
+ * En effet selon la classe, modifier a un sens different. Cela
+ * justifie la declaration l'existence de cette interface.
+ * 
+ * Auteurs du projet : 
+ * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
+ */
 public interface Modifiable {
 	/**
 	 * [ METHODE POUR MODIFIER THIS. ]
 	 * 
-	 * 	 * Methode dont le comportement en interne change selon si on est dans
+	 * Methode dont le comportement en interne change selon si on est dans
 	 * la classe SettingsFile ou dans la classe ProcessingFile.
 	 * 
 	 * En effet selon la classe, modifier a un sens different. Cela
@@ -13,7 +24,7 @@ public interface Modifiable {
 	 * @param type_change 		Le type de changement.
 	 * @param change			Les valeurs pour le calcul du changement. 
 	 */
-	public void modify(Integer type_change, Object change);
+	public void modify(Integer typeChange, Object change);
 	
 	
 	/**

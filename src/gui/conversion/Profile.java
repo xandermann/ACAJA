@@ -1,3 +1,3 @@
-package conversion;
+package gui.conversion;
 
 public final class Profile {}

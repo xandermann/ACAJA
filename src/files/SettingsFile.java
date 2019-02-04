@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.HashMap;
 
 import exceptions.IncorrectFileException;
-import ffmpeg.SystemRequests;
+import wrapper.SystemRequests;
 
 /**
  * TODO comentaire a faire.
@@ -15,80 +15,75 @@ import ffmpeg.SystemRequests;
  * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et
  *         CHEVRIER Jean-christophe.
  */
-public final class SettingsFile extends SelectableFile implements Modifiable{
-	//=======================================================================================================================
-	//=======================================================================================================================
-	
-	
-	/**
-	 * [ CONSTANTES DE CLASSE. ]
-	 */
-	
-	/**
-	 * Constante qui definit le codec video dans la HashMap
-	 */
-	public static final int VIDEO_CODEC = 1;
+public final class SettingsFile extends SelectableFile implements Modifiable {
+	// =======================================================================================================================
+	// =======================================================================================================================
 
-	/**
-	 * Constante qui definit le bitrate video dans la HashMap
-	 */
-	public static final int VIDEO_BITRATE = 2;
+	public enum Settings {
+		/**
+		 * Constante qui definit le codec video dans la HashMap
+		 */
+		VIDEO_CODEC,
 
-	/**
-	 * Constante qui definit les FPS de la video dans la HashMap
-	 */
-	public static final int FPS = 3;
+		/**
+		 * Constante qui definit le bitrate video dans la HashMap
+		 */
+		VIDEO_BITRATE,
 
-	/**
-	 * Constante qui definit le codec audio dans la HashMap
-	 */
-	public static final int AUDIO_CODEC = 4;
+		/**
+		 * Constante qui definit les FPS de la video dans la HashMap
+		 */
+		FPS,
 
-	/**
-	 * Constante qui definit le sampling rate dans la HashMap
-	 */
-	public static final int SAMPLING_RATE = 5;
+		/**
+		 * Constante qui definit le codec audio dans la HashMap
+		 */
+		AUDIO_CODEC,
+		
+		/**
+		 * Constante qui definit le sampling rate dans la HashMap
+		 */
+		SAMPLING_RATE,
+		
+		/**
+		 * Constante qui definit le nombre de pistes audios dans la HashMap
+		 */
+		NUMBER_AUDIO_CHANNELS,
 
-	/**
-	 * Constante qui definit le nombre de pistes audios dans la HashMap
-	 */
-	public static final int NUMBER_AUDIO_CHANNELS = 6;
+		/**
+		 * Constante qui definit le bitrate audio dans la HashMap
+		 */
+		AUDIO_BITRATE,
 
-	/**
-	 * Constante qui definit le bitrate audio dans la HashMap
-	 */
-	public static final int AUDIO_BITRATE = 7;
+		/**
+		 * Constante qui definit la résolution de la video dans la HashMap
+		 */
+		VIDEO_RESOLUTION,
+	}
 
-	/**
-	 * Constante qui definit la résolution de la video dans la HashMap
-	 */
-	public final static int VIDEO_RESOLUTION = 8;
 
-	
-	//=======================================================================================================================
-	//=======================================================================================================================
 
-	
+	// =======================================================================================================================
+	// =======================================================================================================================
+
 	/**
 	 * Les requetes soumises par l'utilisateur.
 	 */
-	private HashMap<Integer, Object> requests;
+	private HashMap<Settings, Object> requests;
 
 	/**
 	 * Les parametres courants du fichier
 	 */
-	private HashMap<Integer, Object> settings;
+	private HashMap<Settings, Object> settings;
 
-	
-	//=======================================================================================================================
-	//=======================================================================================================================
+	// =======================================================================================================================
+	// =======================================================================================================================
 
-	
 	/**
 	 * [ CONSTRUCTEUR. ]
 	 * 
 	 * @param file Le fichier source.
-	 * @throws IncorrectFileException 
+	 * @throws IncorrectFileException
 	 * @throws IOException
 	 * @throws InterruptedException
 	 */
@@ -108,33 +103,29 @@ public final class SettingsFile extends SelectableFile implements Modifiable{
 		 * INITIALISATION DES PARAMETRES DE LA VIDEO.
 		 */
 		// Intiliasation des tables.
-		requests = new HashMap<Integer, Object>();
-		settings = new HashMap<Integer, Object>();
+		requests = new HashMap<Settings, Object>();
+		settings = new HashMap<Settings, Object>();
 
-		//Initialisation des autres parametres.
+		// Initialisation des autres parametres.
 		SystemRequests.getSettings(this);
 	}
 
-	
-	//=======================================================================================================================
-	//=======================================================================================================================
+	// =======================================================================================================================
+	// =======================================================================================================================
 
-	
 	/**
 	 * Methode pour modifier les parametres de la video.
 	 * 
 	 * @param setting  Le parametre a modifier.
 	 * @param newValue La nouvelle valeur du parametre.
 	 */
-	public void modify(Integer typeSetting, Object setting) {
-		requests.put(typeSetting, setting);
+	public void modify(Settings videoCodec, Object setting) {
+		requests.put(videoCodec, setting);
 	}
 
-	
-	//=======================================================================================================================
-	//=======================================================================================================================
+	// =======================================================================================================================
+	// =======================================================================================================================
 
-	
 	/**
 	 * [ METHODE POUR SAVOIR SI DES PARAMETRES ONT ETE MODIFIES. ]
 	 * 
@@ -153,7 +144,7 @@ public final class SettingsFile extends SelectableFile implements Modifiable{
 	 * 
 	 * @return HashMap<String, String> Les parametres du fichier.
 	 */
-	public HashMap<Integer, Object> getSettings() {
+	public HashMap<Settings, Object> getSettings() {
 		return settings;
 	}
 
@@ -164,11 +155,16 @@ public final class SettingsFile extends SelectableFile implements Modifiable{
 	 * 
 	 * @return HashMap<String, String> Les requetes.
 	 */
-	public HashMap<Integer, Object> getRequests() {
+	public HashMap<Settings, Object> getRequests() {
 		return requests;
 	}
 
-	
-	//=======================================================================================================================
-	//=======================================================================================================================
+	@Override
+	public void modify(Integer typeChange, Object change) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	// =======================================================================================================================
+	// =======================================================================================================================
 }

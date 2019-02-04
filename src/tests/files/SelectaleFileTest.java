@@ -8,6 +8,7 @@ import java.io.File;
 import org.junit.Test;
 
 import exceptions.IncorrectFileException;
+import files.MediaFileType;
 import files.SelectableFile;
 
 public final class SelectaleFileTest {
@@ -89,7 +90,7 @@ public final class SelectaleFileTest {
 		File file = new File("Test.mp4");
 		SelectableFile selectableFile = new SelectableFile(file);
 
-		if (selectableFile.getTypeFile() == SelectableFile.FILE_TYPE_VIDEO) {
+		if (selectableFile.getTypeFile() == MediaFileType.MEDIA_FILE_VIDEO) {
 			// OK
 		} else {
 			throw new Exception("Erreur fonction whoIAm()");
@@ -106,7 +107,7 @@ public final class SelectaleFileTest {
 		File file = new File("Test.mp3");
 		SelectableFile selectableFile = new SelectableFile(file);
 
-		if (selectableFile.getTypeFile() == SelectableFile.FILE_TYPE_AUDIO) {
+		if (selectableFile.getTypeFile() == MediaFileType.MEDIA_FILE_AUDIO) {
 			// OK
 		} else {
 			throw new Exception("Erreur fonction whoIAm()");
@@ -123,7 +124,7 @@ public final class SelectaleFileTest {
 		File file = new File("Test.png");
 		SelectableFile selectableFile = new SelectableFile(file);
 
-		if (selectableFile.getTypeFile() == SelectableFile.FILE_TYPE_IMAGE) {
+		if (selectableFile.getTypeFile() == MediaFileType.MEDIA_FILE_IMAGE) {
 			// OK
 		} else {
 			throw new Exception("Erreur fonction whoIAm()");

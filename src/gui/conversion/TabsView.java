@@ -1,4 +1,4 @@
-package conversion;
+package gui.conversion;
 
 import java.util.Observable;
 import java.util.Observer;

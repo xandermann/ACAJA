@@ -1,9 +1,10 @@
-package ffmpeg;
+package wrapper;
 import java.io.*;
 import java.util.HashMap;
 
 import files.SelectableFile;
 import files.SettingsFile;
+import files.SettingsFile.Settings;
 
 /**
  * [ CLASSE CONCRETE POUR L'INTERFACAGE JAVA-FFMPEG ---- DEGRE 2. ]
@@ -416,33 +417,33 @@ public final class SystemRequests extends FFmpegRuntime{
 			/**
 			 * INITIALISATION DES CARACTERISTIQUES DE LA VIDEO OU DU SON.
 			 */
-			HashMap<Integer, Object> fileSettings = file.getSettings();
+			HashMap<Settings, Object> fileSettings = file.getSettings();
 		
 			
 			//Parametres a extraire uniquement pour les fichiers video. 
 			String codec = file.getSourceFile().getName().split("[.]")[file.getSourceFile().getName().split("[.]").length-1];
 			if(file.isVideo()) {
-				fileSettings.put(SettingsFile.VIDEO_CODEC, codec);
+				fileSettings.put(SettingsFile.Settings.VIDEO_CODEC, codec);
 				
 				String[] resolutionStr = extractAVideoSetting(informations, 2).split("x");
 				Integer[] resolutionInt = new Integer[2]; 
 				resolutionInt[0] = Integer.parseInt(resolutionStr[0]);
 				resolutionInt[1] = Integer.parseInt(resolutionStr[1]);			
-				fileSettings.put(SettingsFile.VIDEO_RESOLUTION, resolutionInt);
+				fileSettings.put(SettingsFile.Settings.VIDEO_RESOLUTION, resolutionInt);
 				
-				fileSettings.put(SettingsFile.VIDEO_BITRATE, Integer.parseInt(extractAVideoSetting(informations, 3)));
-				fileSettings.put(SettingsFile.FPS, Double.parseDouble(extractAVideoSetting(informations, 4)));
-				fileSettings.put(SettingsFile.AUDIO_CODEC, extractAAudioSetting(informations, 0));
+				fileSettings.put(SettingsFile.Settings.VIDEO_BITRATE, Integer.parseInt(extractAVideoSetting(informations, 3)));
+				fileSettings.put(SettingsFile.Settings.FPS, Double.parseDouble(extractAVideoSetting(informations, 4)));
+				fileSettings.put(SettingsFile.Settings.AUDIO_CODEC, extractAAudioSetting(informations, 0));
 			}else
-				fileSettings.put(SettingsFile.AUDIO_CODEC, codec);
+				fileSettings.put(SettingsFile.Settings.AUDIO_CODEC, codec);
 			
-			fileSettings.put(SettingsFile.SAMPLING_RATE,  Integer.parseInt(extractAAudioSetting(informations, 1)));
+			fileSettings.put(SettingsFile.Settings.SAMPLING_RATE,  Integer.parseInt(extractAAudioSetting(informations, 1)));
 			if(extractAAudioSetting(informations, 2).contains("mono"))
-				fileSettings.put(SettingsFile.NUMBER_AUDIO_CHANNELS, 1);
+				fileSettings.put(SettingsFile.Settings.NUMBER_AUDIO_CHANNELS, 1);
 			else
-				fileSettings.put(SettingsFile.NUMBER_AUDIO_CHANNELS, 2);
+				fileSettings.put(SettingsFile.Settings.NUMBER_AUDIO_CHANNELS, 2);
 						
-			fileSettings.put(SettingsFile.AUDIO_BITRATE, Integer.parseInt(extractAAudioSetting(informations, 4)));
+			fileSettings.put(SettingsFile.Settings.AUDIO_BITRATE, Integer.parseInt(extractAAudioSetting(informations, 4)));
 		}
 	}
 	

@@ -43,7 +43,7 @@ public final class StreamsConsumer implements StreamsManager{
 		 * ( STDERR de l'application externe : FFMPEG. ).
 		 */ 
 		StreamIterator consumer = new ErrorStreamIterator(processToBeConsume);
-		while(consumer.hasNext());
+		while(consumer.hasNext()) consumer.next();
 		
 		
 		/**
@@ -53,7 +53,7 @@ public final class StreamsConsumer implements StreamsManager{
 		 * ( STDOUT de l'application externe : FFMPEG. ).
 		 */
 		consumer = new InputStreamIterator(processToBeConsume);
-		while(consumer.hasNext());
+		while(consumer.hasNext()) consumer.next();
 		
 		
 		 try {

@@ -29,10 +29,10 @@ public final class SummaryView extends JPanel implements Observer {
 		this.model = p_model;
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-		JLabel nom = new JLabel("Fichier selectionne : ");
+		JLabel nom = new JLabel("Fichier selectionné : ");
 		JLabel video = new JLabel("Codec video actuel : ");
 		JLabel son = new JLabel("Codec video actuel : ");
-		JLabel duree = new JLabel("Duree : ");
+		JLabel duree = new JLabel("Durée : ");
 
 		j = new JPanel();
 		j.setLayout(new FlowLayout());

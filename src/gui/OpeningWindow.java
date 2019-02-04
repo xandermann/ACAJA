@@ -42,7 +42,7 @@ public final class OpeningWindow {
 	 *  presentation du logiciel. 
 	 */
 	private static void generateLoadingWindow() {
-		JFrame loadingWindow = new JFrame("Acaja - un logiciel à la portée de tous.");
+		JFrame loadingWindow = new JFrame("Acaja - un logiciel Ã  la portee de tous.");
 		
 		loadingWindow.setSize(new Dimension(WIDTH, HEIGHT));
 		loadingWindow.setResizable(false);

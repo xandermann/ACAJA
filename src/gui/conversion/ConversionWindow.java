@@ -37,7 +37,7 @@ public final class ConversionWindow extends JFrame{
 	  */
 	 private ConversionWindow() {
 		 model = new ConversionModel();
-		 start = new JLabel("Pour commencer, ajoutez un fichier via le menu");
+		 start = new JLabel("Pour commencer, ajoutez un fichier audio ou vidéo via le menu");
 		 start.setHorizontalAlignment(JLabel.CENTER);
 	 }
 	 

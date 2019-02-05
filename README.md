@@ -11,7 +11,7 @@ Groupe S3B.
 | -----------------------------------------|---------------------------|
 | JeanchristopheChevrier                   | Chevrier Jean-Christophe  |
 | dasilvac9u                               | Da silva Carmo Alexandre  |
-| AlexandrEmma | xandermann                | Hublau Alexandre          |
+| AlexandrEmma / xandermann                | Hublau Alexandre          |
 | Akahiro54                                | Palmieri Adrien           |
 
 ------------------------------------------------------------------------

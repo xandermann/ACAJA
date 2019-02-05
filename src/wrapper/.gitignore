@@ -1,3 +1,13 @@
 /FFmpegRuntime.class
 /SystemRequests.class
 /UserRequests.class
+/ConversionFlagConstants.class
+/ErrorStreamIterator.class
+/InputStreamIterator.class
+/MessageConstants.class
+/ProcessManager.class
+/StreamIterator.class
+/StreamsConsumer.class
+/StreamsFilter.class
+/StreamsManager.class
+/UserRequests$1.class

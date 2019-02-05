@@ -4,14 +4,14 @@ Repository pour les **projets tutorés** 2018-2019.
 
 Groupe S3B.
 
-------------------------------------------------------------
-## Groupe:
+------------------------------------------------------------------------
+## Pseudos:
 
-| Pseudo Bitbucket             | Nom                       |
-| -----------------------------|---------------------------|
-| JeanchristopheChevrier       | Chevrier Jean-Christophe  |
-| dasilvac9u                   | Da silva Carmo Alexandre  |
-| AlexandrEmma                 | Hublau Alexandre          |
-| Akahiro54                    | Palmieri Adrien           |
+| Pseudo Bitbucket                         | Nom                       |
+| -----------------------------------------|---------------------------|
+| JeanchristopheChevrier                   | Chevrier Jean-Christophe  |
+| dasilvac9u                               | Da silva Carmo Alexandre  |
+| AlexandrEmma | xandermann                | Hublau Alexandre          |
+| Akahiro54                                | Palmieri Adrien           |
 
-------------------------------------------------------------
+------------------------------------------------------------------------

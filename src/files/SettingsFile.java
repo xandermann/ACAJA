@@ -99,7 +99,7 @@ public final class SettingsFile extends SelectableFile implements Modifiable {
 	 * @return booleen True si le fichier a ete modifie.
 	 */
 	public boolean isModified() {
-		return !requests.equals(new HashMap<Integer, Object>());
+		return !requests.equals(new HashMap<SettingType, Object>());
 	}
 
 	/**

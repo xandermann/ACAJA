@@ -21,7 +21,7 @@ public final class ProcessingFile extends SelectableFile implements Modifiable{
 	/**
 	 * Les traitements en attente sur this. 
 	 */
-	private HashMap<ProcessType, Object> performedProcessings;
+	private HashMap<ProcessingType, Object> performedProcessings;
 
 	
 	//=======================================================================================================================
@@ -44,7 +44,7 @@ public final class ProcessingFile extends SelectableFile implements Modifiable{
 		/**
 		 * INITIALISATION DE TABLE DES TRAITEMENTS EN ATTENTE SUR THIS. 
 		 */
-		performedProcessings = new HashMap<ProcessType, Object>();
+		performedProcessings = new HashMap<ProcessingType, Object>();
 		
 		/**
 		 * INITIALISATION DE LA DUREE DU SON OU DE LA VIDEO. 
@@ -68,7 +68,7 @@ public final class ProcessingFile extends SelectableFile implements Modifiable{
 	 * 						les traitements. 
 	 */
 	public void modify(OperationType typeProcess, Object process) { 
-		performedProcessings.put((ProcessType) typeProcess, process);
+		performedProcessings.put((ProcessingType) typeProcess, process);
 	}
 
 	
@@ -80,7 +80,7 @@ public final class ProcessingFile extends SelectableFile implements Modifiable{
 	 * [ METHODE POUR SAVOIR SI DES TRAIEMENTS SONT EN ATTENTE SUR CE FICHIER. ]
 	 */
 	public boolean isModified() {
-		return  !performedProcessings.equals(new HashMap<ProcessType, Object>());
+		return  !performedProcessings.equals(new HashMap<ProcessingType, Object>());
 	}
 	
 	
@@ -95,7 +95,7 @@ public final class ProcessingFile extends SelectableFile implements Modifiable{
 	 * 
 	 * @return HashMap<String, Object>		Les traitements en attente.
 	 */
-	public HashMap<ProcessType, Object> getPerformedProcessings() {
+	public HashMap<ProcessingType, Object> getPerformedProcessings() {
 		return performedProcessings;
 	}
 

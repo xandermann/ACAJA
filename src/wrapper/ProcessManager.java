@@ -32,7 +32,7 @@ public final class ProcessManager implements Iterable<String> {
 	 * 
 	 * Par defaut ffmpeg envoie l'ensemble de presque
 	 * tous ses messages par le flux d'erreur ( oui c'est 
-	 * plus etonnant a savoir. ).
+	 * assez etonnant a savoir. ).
 	 */
 	@Override
 	public Iterator<String> iterator() {

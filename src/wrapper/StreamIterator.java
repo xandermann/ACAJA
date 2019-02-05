@@ -104,7 +104,7 @@ public abstract class StreamIterator implements Iterator<String>{
 	
 	
 	/**
-	 * [ METHODE POUR ARRETER A L'EXTERIEUR DE LA CLASSE LA LECTURE DU FLUX. ]
+	 * [ METHODE POUR ARRETER MANUELLEMENT LA LECTURE DU FLUX. ]
 	 */
 	public void endReading() {
 		/**

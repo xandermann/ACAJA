@@ -3,25 +3,27 @@ package gui;
 import java.awt.Graphics;
 
 import javax.swing.JPanel;
-import javax.swing.JProgressBar;
+
+import style.Style;
 
 public class LoadingWindowPanel extends JPanel {
 
-	private JProgressBar bar;
-	private Graphics g;
-
-	public LoadingWindowPanel() {
-		this.bar = new JProgressBar();
-	}
-
+	private int percentCurrentProgress;
+	
 	public void paintComponent(Graphics g) {
-		this.bar.paint(g);
-		this.g = g;
+		
+	
+		g.setColor(Style.BACKGROUND_SECONDARY);
+		g.fillRect(20, 20, 200, 20);
+		
+		g.setColor(Style.BACKGROUND_LIGHT);
+		g.fillRect(20, 20, (this.percentCurrentProgress*200)/100, 20);
+		
 	}
 
 	public void setProgress(int progress) {
-		this.bar.setValue(progress);
-		this.bar.update(g);
+		this.percentCurrentProgress = progress;
+		this.repaint();
 	}
 
 }

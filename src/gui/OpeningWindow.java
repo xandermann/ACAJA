@@ -16,8 +16,8 @@ import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
 import gui.conversion.ConversionWindow;
+import style.JButton;
 import style.Style;
-import style.components.JButton;
 import tools.ResourceConstants;
 import tools.WindowTools;
 
@@ -57,7 +57,8 @@ public final class OpeningWindow {
 		loadingWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		loadingWindow.setBackground(Style.BACKGROUND_PRIMARY);
-		loadingWindow.dispose();
+		//loadingWindow.dispose();
+		loadingWindow.setVisible(true);
 
 		
 		
@@ -66,11 +67,31 @@ public final class OpeningWindow {
 		
 		
 		LoadingWindowPanel loadingWindowPanel = new LoadingWindowPanel();
-		loadingWindowPanel.setProgress(50);
 		loadingWindow.setContentPane(loadingWindowPanel);
 		
 		
+		loadingWindowPanel.setProgress(10);
 		
+		try {
+			Thread.sleep(500);
+		} catch (InterruptedException e) {
+		}
+		
+		loadingWindowPanel.setProgress(35);
+		
+		try {
+			Thread.sleep(500);
+		} catch (InterruptedException e) {
+		}
+		
+		loadingWindowPanel.setProgress(100);
+		
+		try {
+			Thread.sleep(500);
+		} catch (InterruptedException e) {
+		}
+		
+		/*
 		loadingWindow.add(new JPanel() {
 			public void paintComponent(Graphics g) {
 				try {
@@ -81,16 +102,13 @@ public final class OpeningWindow {
 		}, BorderLayout.SOUTH);
 		WindowTools.showLogo(loadingWindow);
 		WindowTools.executeWindow(loadingWindow);
-
+		*/
+	
+		loadingWindow.dispose();
 		
 		
 		
-		
-		
-		try {
-			Thread.sleep(000);
-		} catch (InterruptedException ie) {
-		}
+	
 
 		
 	}

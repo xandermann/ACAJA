@@ -87,7 +87,7 @@ public final class StreamsFilter implements StreamsManager {
 	/**
 	 * [ METHODE DE CLASSE POUR EXTRAIRE LES INFORMATIONS SUR UN FICHIER. ]
 	 * 
-	 * @param processToStudy		ProcessManager pour lequel
+	 * @param processToStudy		ProcessManager a etudier pour lequel
 	 * 								on doit filtrer les informations.
 	 * 
 	 * @return	String				Les donnees filtrees.
@@ -100,10 +100,10 @@ public final class StreamsFilter implements StreamsManager {
 		 * Les pogrammeurs de FFMPEG savent que les temps de traitement des requetes
 		 * sur FFMPEG peuvent prendre un temps assez long. Et il faut savoir que 
 		 * le traitement d'une requete renvoie son resultat par le biais des flux de sortie 
-		 * ( = STDOUT ). De ce fait les pogrammeurs de FFMPEG ont decide que certains messages 
+		 * ( = STDOUT ). De ce fait les pogrammeurs de FFMPEG ont decide que les messages 
 		 * de reussite comme d'echec d'une requete passeraient par les flux 
 		 * d'erreurs ( =  STDERR ). Mais pourquoi ce choix n'est-ce-pas ? Pour la bonne 
-		 * raison qu'envoyer certains messages par STDERR permet d'eviter que 
+		 * raison qu'envoyer tous les messages par STDERR permet d'eviter que 
 		 * les traitements des requetes qui passent par STDOUT ne soit freiner par les 
 		 * messages de reussites de requetes si ils passaient pas STDOUT. 
 		 * 

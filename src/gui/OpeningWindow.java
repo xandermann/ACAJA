@@ -41,8 +41,6 @@ public final class OpeningWindow {
 	private final static int WIDTH = 400;
 	private final static int HEIGHT = 400;
 
-	
-	
 	/**
 	 * [ METHODE INTERNE DE CLASSE - FENETRE DE PRESENTATION DU LOGICIEL. ]
 	 * 
@@ -55,62 +53,55 @@ public final class OpeningWindow {
 		loadingWindow.setResizable(false);
 		loadingWindow.setLocationRelativeTo(null);
 		loadingWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		loadingWindow.setBackground(Style.BACKGROUND_PRIMARY);
-		//loadingWindow.dispose();
 		loadingWindow.setVisible(true);
 
-		
-		
-		//loadingWindow.setLayout(new BorderLayout());
-		
-		
-		
+		// Panel de la fenetre
+		JPanel panel = new JPanel();
+		panel.setBackground(Style.BACKGROUND_PRIMARY);
+		panel.setLayout(new BorderLayout());
+
+		// Ajout barre de progression
 		LoadingWindowPanel loadingWindowPanel = new LoadingWindowPanel();
-		loadingWindow.setContentPane(loadingWindowPanel);
-		
-		
 		loadingWindowPanel.setProgress(10);
-		
-		try {
-			Thread.sleep(500);
-		} catch (InterruptedException e) {
-		}
-		
-		loadingWindowPanel.setProgress(35);
-		
-		try {
-			Thread.sleep(500);
-		} catch (InterruptedException e) {
-		}
-		
-		loadingWindowPanel.setProgress(100);
-		
-		try {
-			Thread.sleep(500);
-		} catch (InterruptedException e) {
-		}
-		
-		/*
-		loadingWindow.add(new JPanel() {
+		panel.add(loadingWindowPanel, BorderLayout.CENTER);
+
+		// Ajout image
+		panel.add(new JPanel() {
 			public void paintComponent(Graphics g) {
 				try {
 					g.drawImage(ImageIO.read(ResourceConstants.ACAJA_LOGO), 80, 60, null);
 				} catch (IOException ioe) {
 				}
 			}
-		}, BorderLayout.SOUTH);
+		}, BorderLayout.NORTH);
+
 		WindowTools.showLogo(loadingWindow);
 		WindowTools.executeWindow(loadingWindow);
-		*/
-	
-		loadingWindow.dispose();
-		
-		
-		
-	
 
-		
+		// Ajoute le panel a la fenetre
+		loadingWindow.setContentPane(panel);
+
+		try {
+			Thread.sleep(500);
+		} catch (InterruptedException e) {
+		}
+
+		loadingWindowPanel.setProgress(35);
+
+		try {
+			Thread.sleep(500);
+		} catch (InterruptedException e) {
+		}
+
+		loadingWindowPanel.setProgress(100);
+
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+		}
+
+		loadingWindow.dispose();
+
 	}
 
 	/**

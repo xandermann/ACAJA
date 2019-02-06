@@ -1,14 +1,22 @@
 package gui;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.io.*;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
-import gui.conversion.*;
-import tools.*;
+import gui.conversion.ConversionWindow;
+import style.Style;
+import style.components.JButton;
+import tools.ResourceConstants;
+import tools.WindowTools;
 
 /**
  * [ CLASSE POUR LE LANCEMENT DES FENETRES D'OUVERTURE DU LOGICIEL. ]
@@ -58,7 +66,7 @@ public final class OpeningWindow {
 
 		WindowTools.showLogo(loadingWindow);
 		
-		loadingWindow.setBackground(Color.gray);
+		loadingWindow.setBackground(Style.BACKGROUND_PRIMARY);
 		WindowTools.executeWindow(loadingWindow);
 		
 	    try {
@@ -123,11 +131,11 @@ public final class OpeningWindow {
 		openingWindow.add(eastPanel,BorderLayout.EAST);
 		openingWindow.add(westPanel,BorderLayout.WEST);
 		
-		centerPanel.setBackground(Color.gray);
-		northPanel.setBackground(Color.gray);
-		southPanel.setBackground(Color.gray);
-		eastPanel.setBackground(Color.gray);
-		westPanel.setBackground(Color.gray);
+		centerPanel.setBackground(Style.BACKGROUND_PRIMARY);
+		northPanel.setBackground(Style.BACKGROUND_PRIMARY);
+		southPanel.setBackground(Style.BACKGROUND_PRIMARY);
+		eastPanel.setBackground(Style.BACKGROUND_PRIMARY);
+		westPanel.setBackground(Style.BACKGROUND_PRIMARY);
 		
 		WindowTools.executeWindow(openingWindow);
 	}

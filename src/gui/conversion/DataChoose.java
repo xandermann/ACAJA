@@ -2,9 +2,9 @@ package gui.conversion;
 
 import java.io.File;
 import java.util.ArrayList;
-
 import javax.swing.JFileChooser;
 import exceptions.ImportationException;
+
 public final class DataChoose {
 	//=======================================================================================================================
 	//=======================================================================================================================
@@ -38,9 +38,9 @@ public final class DataChoose {
 		if(!importDirectory.isDirectory() || importDirectory == null)
 			throw new ImportationException(ImportationException.ABSENT_DIRECTORY);
 		else{
-			for(File f : importDirectory.listFiles()) 
-				files.add(f);
+			for(File f : importDirectory.listFiles()) files.add(f);
 		}
+		
 		return files;
 	}
 

@@ -1,19 +1,16 @@
 package gui.conversion;
 
-import java.util.Observable;
-import java.util.Observer;
-
 import javax.swing.JTabbedPane;
 
 public final class TabsView extends JTabbedPane{
 	private ConversionModel model;
 	
-	public TabsView(ConversionModel m) {
-		this.model = m;
-		VideoSettingsPanel vsp = new VideoSettingsPanel(this.model);
-		SoundSettingsPanel ssp = new SoundSettingsPanel(this.model);
-		this.add("Video",vsp);
-		this.add("Son",ssp);
+	public TabsView(ConversionModel model) {
+		this.model = model;
+		VideoSettingsPanel vsp = new VideoSettingsPanel(model);
+		SoundSettingsPanel ssp = new SoundSettingsPanel(model);
+		add("Video",vsp);
+		add("Son",ssp);
 		model.addObserver(vsp);
 		model.addObserver(ssp);
 	}

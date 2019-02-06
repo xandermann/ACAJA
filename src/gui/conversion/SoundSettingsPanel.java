@@ -17,29 +17,32 @@ import files.SettingsFile;
 import files.SettingType;
 
 public final class SoundSettingsPanel extends JPanel implements Observer {
-	// =======================================================================================================================
-	// =======================================================================================================================
+	//=======================================================================================================================
+	//=======================================================================================================================
 
+	
 	private ConversionModel model;
 	private JTextField bitrate;
 	private JTextField samplingRate;
 	private JTextField channels;
 	private JTextField sound;
 
-	// =======================================================================================================================
-	// =======================================================================================================================
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
 
-	public SoundSettingsPanel(ConversionModel m) {
-		this.model = m;
+	
+	public SoundSettingsPanel(ConversionModel model) {
+		this.model = model;
 
-		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
 		JPanel pan_codec = new JPanel(new FlowLayout());
 		pan_codec.add(new JLabel("Codec utilise : "), BorderLayout.WEST);
 		JComboBox box_codec = new JComboBox();
 		pan_codec.add(box_codec, BorderLayout.EAST);
 		box_codec.setEnabled(false);
-		this.add(pan_codec);
+		add(pan_codec);
 
 		JPanel pan_vol = new JPanel(new FlowLayout());
 		pan_vol.add(new JLabel("Volume en sortie (en %): "), BorderLayout.WEST);
@@ -47,7 +50,7 @@ public final class SoundSettingsPanel extends JPanel implements Observer {
 		sound.setPreferredSize(new Dimension(300, 20));
 		pan_vol.add(sound, BorderLayout.EAST);
 		sound.setEnabled(false);
-		this.add(pan_vol);
+		add(pan_vol);
 
 		JPanel pan_bitrate = new JPanel(new FlowLayout());
 		pan_bitrate.add(new JLabel("Bitrate (kb/s) : "), BorderLayout.WEST);
@@ -55,7 +58,7 @@ public final class SoundSettingsPanel extends JPanel implements Observer {
 		bitrate.setPreferredSize(new Dimension(300, 20));
 		pan_bitrate.add(bitrate, BorderLayout.EAST);
 		bitrate.setEnabled(false);
-		this.add(pan_bitrate);
+		add(pan_bitrate);
 
 		JPanel pan_echant = new JPanel(new FlowLayout());
 		pan_echant.add(new JLabel("Taux d'echantillonnage (Hz) : "), BorderLayout.WEST);
@@ -63,7 +66,7 @@ public final class SoundSettingsPanel extends JPanel implements Observer {
 		samplingRate.setPreferredSize(new Dimension(300, 20));
 		pan_echant.add(samplingRate, BorderLayout.EAST);
 		samplingRate.setEnabled(false);
-		this.add(pan_echant);
+		add(pan_echant);
 
 		JPanel pan_canaux = new JPanel(new FlowLayout());
 		pan_canaux.add(new JLabel("Nombre de canaux audio en sortie : "), BorderLayout.WEST);
@@ -71,21 +74,23 @@ public final class SoundSettingsPanel extends JPanel implements Observer {
 		channels.setPreferredSize(new Dimension(300, 20));
 		pan_canaux.add(channels, BorderLayout.EAST);
 		channels.setEnabled(false);
-		this.add(pan_canaux);
+		add(pan_canaux);
 	}
 
-	// =======================================================================================================================
-	// =======================================================================================================================
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
 
+	
 	@Override
 	public void update(Observable o, Object arg) {
 		if (model.getCurrentFile() != null) {
-			HashMap<SettingType, Object> settingTypes = model.getCurrentFile().getSettings();
-			bitrate.setText("" + (Integer) settingTypes.get(SettingType.AUDIO_BITRATE));
+			HashMap<SettingType, Object> settings = model.getCurrentFile().getSettings();
+			bitrate.setText("" + (Integer) settings.get(SettingType.AUDIO_BITRATE));
 			bitrate.setEnabled(true);
-			samplingRate.setText("" + (Integer) settingTypes.get(SettingType.SAMPLING_RATE));
+			samplingRate.setText("" + (Integer) settings.get(SettingType.SAMPLING_RATE));
 			samplingRate.setEnabled(true);
-			channels.setText("" + (Integer) settingTypes.get(SettingType.NUMBER_AUDIO_CHANNELS));
+			channels.setText("" + (Integer) settings.get(SettingType.NUMBER_AUDIO_CHANNELS));
 			channels.setEnabled(true);
 		} else {
 			bitrate.setText("");
@@ -96,7 +101,8 @@ public final class SoundSettingsPanel extends JPanel implements Observer {
 			channels.setEnabled(false);
 		}
 	}
+	
 
-	// =======================================================================================================================
-	// =======================================================================================================================
+	//=======================================================================================================================
+	//=======================================================================================================================
 }

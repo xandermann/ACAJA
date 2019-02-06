@@ -10,6 +10,8 @@ import javax.swing.*;
 
 import exceptions.*;
 import gui.OpeningWindow;
+import gui.ThreadForSave;
+import gui.ThreadForWaitWindow;
 import tools.WindowTools;
 import wrapper.UserRequests;
 
@@ -218,23 +220,13 @@ public final class ConversionWindow extends JFrame{
 					 * LANCEMENT DE LA CONVERSION DANS 
 					 * UN AUTRE PROCESSUS. 
 					 */
-					new Thread() {
-					    public void run() {
-					    	model.save();
-					    }
-					}.start();
+					ThreadForSave.saveInNewThread(model);
 					
 					/**
 					 * LANCEMENT ET GESTION DE LA FENETRE D'ATTENTE 
 					 * DANS UN AUTRE PROCESSUS. 
 					 */
-					new Thread() {
-					    public void run() {
-					    	WindowTools.executeWindow(waitWindow);
-							while(UserRequests.workIsOnGoing());
-							waitWindow.dispose();
-					    }
-					}.start();
+					ThreadForWaitWindow.waitInNewThread(waitWindow);
 				} 		
 			});
 			return convert;	 

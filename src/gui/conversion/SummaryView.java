@@ -1,39 +1,35 @@
 package gui.conversion;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Graphics;
-import java.util.Observable;
-import java.util.Observer;
+import java.awt.*;
 
-import javax.swing.BoxLayout;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import java.util.*;
 
-import files.SettingsFile;
-import files.SettingType;
+import javax.swing.*;
+
+import files.*;
 
 public final class SummaryView extends JPanel implements Observer {
-	// =======================================================================================================================
-	// =======================================================================================================================
+	//=======================================================================================================================
+	//=======================================================================================================================
 
+	
 	private ConversionModel model;
 	private JPanel j, j1, j2, j3;
 	private JLabel name, videoSummary, soundSummary, duration;
 
-	// =======================================================================================================================
-	// =======================================================================================================================
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
 
-	public SummaryView(ConversionModel p_model) {
-		this.model = p_model;
-		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+	
+	public SummaryView(ConversionModel model) {
+		this.model = model;
+		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-		JLabel nom = new JLabel("Fichier selectionnÃ© : ");
+		JLabel nom = new JLabel("Fichier selectionné : ");
 		JLabel video = new JLabel("Codec video actuel : ");
 		JLabel son = new JLabel("Codec video actuel : ");
-		JLabel duree = new JLabel("DurÃ©e : ");
+		JLabel duree = new JLabel("Durée : ");
 
 		j = new JPanel();
 		j.setLayout(new FlowLayout());
@@ -66,17 +62,17 @@ public final class SummaryView extends JPanel implements Observer {
 		setSize(new Dimension(400, 100));
 	}
 
-	// =======================================================================================================================
-	// =======================================================================================================================
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
 
+	
 	@Override
 	public void update(Observable o, Object arg) {
-		if (this.model.getCurrentFile() != null) {
+		if (model.getCurrentFile() != null) {
 			name.setText(model.getCurrentFile().getSourceFilename());
-			videoSummary
-					.setText((String) model.getCurrentFile().getSettings().get(SettingType.VIDEO_CODEC));
-			soundSummary
-					.setText((String) model.getCurrentFile().getSettings().get(SettingType.AUDIO_CODEC));
+			videoSummary.setText((String) model.getCurrentFile().getSettings().get(SettingType.VIDEO_CODEC));
+			soundSummary.setText((String) model.getCurrentFile().getSettings().get(SettingType.AUDIO_CODEC));
 			// duration.setText((String)
 			// this.model.getCurrentFile().getSettings().get("duree"));
 		} else {
@@ -86,6 +82,7 @@ public final class SummaryView extends JPanel implements Observer {
 		}
 	}
 
-	// =======================================================================================================================
-	// =======================================================================================================================
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
 }

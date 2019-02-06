@@ -1,7 +1,9 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -30,8 +32,6 @@ import tools.WindowTools;
  *         CHEVRIER Jean-christophe.
  */
 public final class OpeningWindow {
-	// =======================================================================================================================
-	// =======================================================================================================================
 
 	/**
 	 * [ CONSTANTES DE CLASSE INTERNES. ]
@@ -41,56 +41,59 @@ public final class OpeningWindow {
 	private final static int WIDTH = 400;
 	private final static int HEIGHT = 400;
 
-	// =======================================================================================================================
-	// =======================================================================================================================
-
+	
+	
 	/**
 	 * [ METHODE INTERNE DE CLASSE - FENETRE DE PRESENTATION DU LOGICIEL. ]
 	 * 
-	 *  Cette methode permet de generer la fenetre de 
-	 *  presentation du logiciel. 
+	 * Cette methode permet de generer la fenetre de presentation du logiciel.
 	 */
 	private static void generateLoadingWindow() {
 		JFrame loadingWindow = new JFrame("Acaja - un logiciel à la portee de tous.");
-		
-		// Progression de la fenetre (pour un retour a l'utilisateur)
-		int progress = 0;
-		JProgressBar bar = new JProgressBar(progress);
-		
+
 		loadingWindow.setSize(new Dimension(WIDTH, HEIGHT));
 		loadingWindow.setResizable(false);
 		loadingWindow.setLocationRelativeTo(null);
-		
-		// Desine le LOGO
-		loadingWindow.setContentPane(new JPanel() {
-		    public void paintComponent(Graphics g) {
-		        try {
-					g.drawImage(ImageIO.read(ResourceConstants.ACAJA_LOGO),80,60,null);
-				} catch (IOException ioe) {}
-		      }
-		});
-		
-		
-		loadingWindow.setContentPane(new JPanel() {
-			public void paintComponent(Graphics g) {
-				this.add(bar);
-			}
-		});
-
-		WindowTools.showLogo(loadingWindow);
+		loadingWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		loadingWindow.setBackground(Style.BACKGROUND_PRIMARY);
-		WindowTools.executeWindow(loadingWindow);
+		loadingWindow.dispose();
+
 		
-	    try {
-	    	Thread.sleep(3000);
-	    } catch (InterruptedException ie) {}
+		
+		//loadingWindow.setLayout(new BorderLayout());
+		
+		
+		
+		LoadingWindowPanel loadingWindowPanel = new LoadingWindowPanel();
+		loadingWindowPanel.setProgress(50);
+		loadingWindow.setContentPane(loadingWindowPanel);
+		
+		
+		
+		loadingWindow.add(new JPanel() {
+			public void paintComponent(Graphics g) {
+				try {
+					g.drawImage(ImageIO.read(ResourceConstants.ACAJA_LOGO), 80, 60, null);
+				} catch (IOException ioe) {
+				}
+			}
+		}, BorderLayout.SOUTH);
+		WindowTools.showLogo(loadingWindow);
+		WindowTools.executeWindow(loadingWindow);
 
-	    loadingWindow.dispose(); 
+		
+		
+		
+		
+		
+		try {
+			Thread.sleep(000);
+		} catch (InterruptedException ie) {
+		}
+
+		
 	}
-
-	// =======================================================================================================================
-	// =======================================================================================================================
 
 	/**
 	 * [ METHODE INTERNE DE CLASSE - FENETRE CHOIX DU MODE D'UTILISATION DU
@@ -151,9 +154,6 @@ public final class OpeningWindow {
 		WindowTools.executeWindow(openingWindow);
 	}
 
-	// =======================================================================================================================
-	// =======================================================================================================================
-
 	/**
 	 * [ METHODE DE CLASSE. ]
 	 * 
@@ -163,7 +163,4 @@ public final class OpeningWindow {
 		generateLoadingWindow();
 		generateChoiceModeWindow();
 	}
-
-	// =======================================================================================================================
-	// =======================================================================================================================
 }

@@ -173,4 +173,3 @@ public final class OpeningWindow {
 		generateChoiceModeWindow();
 	}
 }
->>>>>>> redesign

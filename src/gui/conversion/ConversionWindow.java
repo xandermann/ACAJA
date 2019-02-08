@@ -1,19 +1,24 @@
 package gui.conversion;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.io.*;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.ArrayList;
 
-import javax.imageio.ImageIO;
-import javax.swing.*;
+import javax.swing.BoxLayout;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
-import exceptions.*;
-import gui.OpeningWindow;
 import gui.ThreadForSave;
 import gui.ThreadForWaitWindow;
 import tools.WindowTools;
-import wrapper.UserRequests;
 
 public final class ConversionWindow extends JFrame{
 	//=======================================================================================================================

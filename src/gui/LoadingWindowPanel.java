@@ -25,7 +25,7 @@ public class LoadingWindowPanel extends JPanel {
 		g.setColor(Style.BACKGROUND_SECONDARY);
 		g.fillRect(20, 20, 200, 20);
 
-		g.setColor(Style.BACKGROUND_LIGHT);
+		g.setColor(Style.BACKGROUND_PRIMARY);
 		g.fillRect(20, 20, (this.percentCurrentProgress * 200) / 100, 20);
 
 	}

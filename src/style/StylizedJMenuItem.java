@@ -2,6 +2,10 @@ package style;
 
 import java.awt.Color;
 
+/**
+ * Classe qui permet de styliser le composant java swing correspondant pour
+ * designer l'application.
+ */
 public class StylizedJMenuItem extends javax.swing.JMenuItem implements StylizedComponent {
 
 	public StylizedJMenuItem(String title) {

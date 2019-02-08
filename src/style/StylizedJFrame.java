@@ -1,5 +1,9 @@
 package style;
 
+/**
+ * Classe qui permet de styliser le composant java swing correspondant pour
+ * designer l'application.
+ */
 public class StylizedJFrame extends javax.swing.JFrame implements StylizedComponent {
 
 	public StylizedJFrame() {

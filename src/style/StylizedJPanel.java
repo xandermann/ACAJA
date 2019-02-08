@@ -2,6 +2,10 @@ package style;
 
 import java.awt.LayoutManager;
 
+/**
+ * Classe qui permet de styliser le composant java swing correspondant pour
+ * designer l'application.
+ */
 public class StylizedJPanel extends javax.swing.JPanel implements StylizedComponent {
 
 	public StylizedJPanel() {

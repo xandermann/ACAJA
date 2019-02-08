@@ -2,6 +2,10 @@ package style;
 
 import javax.swing.border.LineBorder;
 
+/**
+ * Classe qui permet de styliser le composant java swing correspondant pour
+ * designer l'application.
+ */
 public class StylizedJMenuBar extends javax.swing.JMenuBar implements StylizedComponent {
 
 	public StylizedJMenuBar() {

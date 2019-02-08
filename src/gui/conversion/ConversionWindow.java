@@ -14,13 +14,13 @@ import javax.swing.JOptionPane;
 
 import gui.ThreadForSave;
 import gui.ThreadForWaitWindow;
-import style.JFrame;
-import style.JMenuBar;
-import style.JMenuItem;
-import style.JPanel;
+import style.StylizedJFrame;
+import style.StylizedJMenuBar;
+import style.StylizedJMenuItem;
+import style.StylizedJPanel;
 import tools.WindowTools;
 
-public final class ConversionWindow extends JFrame {
+public final class ConversionWindow extends StylizedJFrame {
 	// =======================================================================================================================
 	// =======================================================================================================================
 
@@ -55,7 +55,7 @@ public final class ConversionWindow extends JFrame {
 	private JMenu drawFileMenu() {
 		JMenu filesMenu = new JMenu("Fichier");
 
-		JMenuItem importFile = new JMenuItem("Importer un fichier");
+		StylizedJMenuItem importFile = new StylizedJMenuItem("Importer un fichier");
 		importFile.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
@@ -63,7 +63,7 @@ public final class ConversionWindow extends JFrame {
 					File f = DataChoose.FileChoose();
 					model.add(f);
 					if (model.getCurrentFile() == null) {
-						JPanel dataView = new JPanel();
+						StylizedJPanel dataView = new StylizedJPanel();
 						dataView.setLayout(new BoxLayout(dataView, BoxLayout.Y_AXIS));
 						SummaryView sv = new SummaryView(model);
 						TabsView tv = new TabsView(model);
@@ -80,7 +80,7 @@ public final class ConversionWindow extends JFrame {
 			}
 		});
 
-		JMenuItem importFolder = new JMenuItem("Importer un dossier");
+		StylizedJMenuItem importFolder = new StylizedJMenuItem("Importer un dossier");
 		importFolder.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
@@ -96,7 +96,7 @@ public final class ConversionWindow extends JFrame {
 			}
 		});
 
-		JMenuItem clearLibrary = new JMenuItem("Vider la bibliotheque");
+		StylizedJMenuItem clearLibrary = new StylizedJMenuItem("Vider la bibliotheque");
 		clearLibrary.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
@@ -104,7 +104,7 @@ public final class ConversionWindow extends JFrame {
 			}
 		});
 
-		JMenuItem quit = new JMenuItem("Quitter");
+		StylizedJMenuItem quit = new StylizedJMenuItem("Quitter");
 		quit.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
@@ -131,9 +131,9 @@ public final class ConversionWindow extends JFrame {
 	private JMenu drawProfilesMenu() {
 		JMenu profilesMenu = new JMenu("Profils");
 
-		JMenuItem newProfile = new JMenuItem("Creer un profil");
-		JMenuItem loadProfile = new JMenuItem("Charger un profil");
-		JMenuItem deleteProfile = new JMenuItem("Supprimer un profil");
+		StylizedJMenuItem newProfile = new StylizedJMenuItem("Creer un profil");
+		StylizedJMenuItem loadProfile = new StylizedJMenuItem("Charger un profil");
+		StylizedJMenuItem deleteProfile = new StylizedJMenuItem("Supprimer un profil");
 
 		profilesMenu.add(newProfile);
 		profilesMenu.add(loadProfile);
@@ -153,8 +153,8 @@ public final class ConversionWindow extends JFrame {
 	private JMenu drawOptionsMenu() {
 		JMenu optionsMenu = new JMenu("Options");
 
-		JMenuItem outputFolder = new JMenuItem("Changer le repertoire de sortie");
-		JMenuItem switchMode = new JMenuItem("Passer en mode traitement");
+		StylizedJMenuItem outputFolder = new StylizedJMenuItem("Changer le repertoire de sortie");
+		StylizedJMenuItem switchMode = new StylizedJMenuItem("Passer en mode traitement");
 
 		optionsMenu.add(outputFolder);
 		optionsMenu.add(switchMode);
@@ -172,13 +172,13 @@ public final class ConversionWindow extends JFrame {
 	 */
 	private JMenu drawConvertMenu() {
 		JMenu convert = new JMenu("Convertir");
-		JMenuItem convertItem = new JMenuItem("Convertir les fichiers");
+		StylizedJMenuItem convertItem = new StylizedJMenuItem("Convertir les fichiers");
 		convert.add(convertItem);
 
 		convertItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JFrame waitWindow = new JFrame("Conversion de votre fichier");
+				StylizedJFrame waitWindow = new StylizedJFrame("Conversion de votre fichier");
 
 				waitWindow.setLayout(new BorderLayout());
 				waitWindow.setSize(400, 150);
@@ -223,7 +223,7 @@ public final class ConversionWindow extends JFrame {
 		conversionWindow.setTitle("Acaja Conversion");
 		conversionWindow.setSize(new Dimension(1000, 600));
 		conversionWindow.setLocationRelativeTo(null);
-		conversionWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		conversionWindow.setDefaultCloseOperation(StylizedJFrame.EXIT_ON_CLOSE);
 		conversionWindow.addWindowListener(new ConversionWindowController(conversionWindow.model));
 
 		WindowTools.showLogo(conversionWindow);
@@ -233,9 +233,9 @@ public final class ConversionWindow extends JFrame {
 				conversionWindow.model.getFilenames());
 		TabsView tv = new TabsView(conversionWindow.model);
 
-		JPanel p = new JPanel();
+		StylizedJPanel p = new StylizedJPanel();
 		p.setLayout(new BorderLayout());
-		JMenuBar menu = new JMenuBar();
+		StylizedJMenuBar menu = new StylizedJMenuBar();
 		menu.add(conversionWindow.drawFileMenu());
 		menu.add(conversionWindow.drawOptionsMenu());
 		menu.add(conversionWindow.drawProfilesMenu());

@@ -1,0 +1,18 @@
+package style;
+
+import java.awt.Color;
+
+public class StylizedJMenuItem extends javax.swing.JMenuItem implements StylizedComponent {
+
+	public StylizedJMenuItem(String title) {
+		super(title);
+	}
+
+	@Override
+	public void stylize() {
+		this.setBackground(StyleConfigurator.BACKGROUND_COLOR);
+		this.setForeground(Color.BLACK);
+		// this.setBorderPainted(true);
+	}
+
+}

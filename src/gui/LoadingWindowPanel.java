@@ -3,14 +3,14 @@ package gui;
 import java.awt.Color;
 import java.awt.Graphics;
 
-import style.JPanel;
-import style.Style;
+import style.StylizedJPanel;
+import style.StyleConfigurator;
 
 /**
  * Classe qui genere le panel de chargement de l'application
  *
  */
-public class LoadingWindowPanel extends JPanel {
+public class LoadingWindowPanel extends StylizedJPanel {
 
 	/**
 	 * Pourcentage de la barre de chargement
@@ -25,7 +25,7 @@ public class LoadingWindowPanel extends JPanel {
 		g.setColor(Color.BLACK);
 		g.fillRect(20, 20, 200, 20);
 
-		g.setColor(Style.BACKGROUND_SECONDARY);
+		g.setColor(StyleConfigurator.BACKGROUND_COLOR_SECONDARY);
 		g.fillRect(20, 20, (this.percentCurrentProgress * 200) / 100, 20);
 
 	}

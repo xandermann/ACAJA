@@ -5,8 +5,8 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 
-import style.JMenuBar;
-import style.JMenuItem;
+import style.StylizedJMenuBar;
+import style.StylizedJMenuItem;
 
 public class JMenuTest {
 
@@ -21,12 +21,12 @@ public class JMenuTest {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		// Creation JMenu
-		JMenuBar barre = new JMenuBar();
+		StylizedJMenuBar barre = new StylizedJMenuBar();
 
 		JMenu profilesMenu = new JMenu("Profils");
-		profilesMenu.add(new JMenuItem("Creer un profil"));
-		profilesMenu.add(new JMenuItem("Creer un profil"));
-		profilesMenu.add(new JMenuItem("Creer un profil"));
+		profilesMenu.add(new StylizedJMenuItem("Creer un profil"));
+		profilesMenu.add(new StylizedJMenuItem("Creer un profil"));
+		profilesMenu.add(new StylizedJMenuItem("Creer un profil"));
 
 		barre.add(profilesMenu);
 		frame.setJMenuBar(barre);

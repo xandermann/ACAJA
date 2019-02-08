@@ -12,9 +12,9 @@ import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
 import gui.conversion.ConversionWindow;
-import style.JButton;
-import style.JPanel;
-import style.Style;
+import style.StylizedJButton;
+import style.StylizedJPanel;
+import style.StyleConfigurator;
 import tools.ResourceConstants;
 import tools.WindowTools;
 
@@ -53,7 +53,7 @@ public final class OpeningWindow {
 		loadingWindow.setVisible(true);
 
 		// Panel de la fenetre
-		JPanel panel = new JPanel();
+		StylizedJPanel panel = new StylizedJPanel();
 		panel.setLayout(new BorderLayout());
 
 		// Ajout barre de progression
@@ -62,7 +62,7 @@ public final class OpeningWindow {
 		panel.add(loadingWindowPanel, BorderLayout.CENTER);
 
 		// Ajout image
-		panel.add(new JPanel() {
+		panel.add(new StylizedJPanel() {
 			public void paintComponent(Graphics g) {
 				try {
 					g.drawImage(ImageIO.read(ResourceConstants.ACAJA_LOGO), 80, 60, null);
@@ -110,7 +110,7 @@ public final class OpeningWindow {
 	private static void generateChoiceModeWindow() {
 		JFrame openingWindow = new JFrame("Acaja");
 
-		JButton convertbutton = new JButton("Conversion");
+		StylizedJButton convertbutton = new StylizedJButton("Conversion");
 		convertbutton.setPreferredSize(new Dimension(100, 40));
 		convertbutton.addActionListener(new ActionListener() {
 			@Override
@@ -120,7 +120,7 @@ public final class OpeningWindow {
 			}
 		});
 
-		JButton processingButton = new JButton("Traitement");
+		StylizedJButton processingButton = new StylizedJButton("Traitement");
 		processingButton.setPreferredSize(new Dimension(100, 40));
 
 		openingWindow.setResizable(false);
@@ -131,17 +131,17 @@ public final class OpeningWindow {
 
 		WindowTools.showLogo(openingWindow);
 
-		JPanel centerPanel = new JPanel(new GridLayout(2, 1, 0, 50));
+		StylizedJPanel centerPanel = new StylizedJPanel(new GridLayout(2, 1, 0, 50));
 		centerPanel.add(convertbutton);
 		centerPanel.add(processingButton);
 
-		JPanel northPanel = new JPanel();
+		StylizedJPanel northPanel = new StylizedJPanel();
 		northPanel.setPreferredSize(new Dimension(WIDTH, 135));
-		JPanel southPanel = new JPanel();
+		StylizedJPanel southPanel = new StylizedJPanel();
 		southPanel.setPreferredSize(new Dimension(WIDTH, 135));
-		JPanel eastPanel = new JPanel();
+		StylizedJPanel eastPanel = new StylizedJPanel();
 		eastPanel.setPreferredSize(new Dimension(100, HEIGHT));
-		JPanel westPanel = new JPanel();
+		StylizedJPanel westPanel = new StylizedJPanel();
 		westPanel.setPreferredSize(new Dimension(100, HEIGHT));
 
 		openingWindow.add(centerPanel, BorderLayout.CENTER);
@@ -150,11 +150,11 @@ public final class OpeningWindow {
 		openingWindow.add(eastPanel, BorderLayout.EAST);
 		openingWindow.add(westPanel, BorderLayout.WEST);
 
-		centerPanel.setBackground(Style.BACKGROUND_PRIMARY);
-		northPanel.setBackground(Style.BACKGROUND_PRIMARY);
-		southPanel.setBackground(Style.BACKGROUND_PRIMARY);
-		eastPanel.setBackground(Style.BACKGROUND_PRIMARY);
-		westPanel.setBackground(Style.BACKGROUND_PRIMARY);
+		centerPanel.setBackground(StyleConfigurator.BACKGROUND_COLOR);
+		northPanel.setBackground(StyleConfigurator.BACKGROUND_COLOR);
+		southPanel.setBackground(StyleConfigurator.BACKGROUND_COLOR);
+		eastPanel.setBackground(StyleConfigurator.BACKGROUND_COLOR);
+		westPanel.setBackground(StyleConfigurator.BACKGROUND_COLOR);
 
 		WindowTools.executeWindow(openingWindow);
 	}

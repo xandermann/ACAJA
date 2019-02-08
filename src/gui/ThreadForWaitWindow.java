@@ -8,7 +8,8 @@ public class ThreadForWaitWindow extends Thread{
 	private JFrame waitWindow;
 	
 	private ThreadForWaitWindow(JFrame waitWindow) {
-		this.waitWindow = waitWindow;
+		if((this.waitWindow = waitWindow) == null)
+			throw new NullPointerException("Le fenetre d'attente recue en parametre est null !");
 	}
 	
     public void run() {

@@ -37,11 +37,11 @@ public abstract class Model extends Observable{
 	
 	
 	/**
-	 * [ PRECISER MANUELLEMENT QUE LA SAUVEGARDDE COMMENCE. ]
+	 * [ METHODE POUR PRECISER MANUELLEMENT QUE LA SAUVEGARDDE COMMENCE. ]
 	 * 
 	 * La sauvegarde correpond a la conversion des fichiers modifies 
-	 * (ConversionModel) ou a l'export des fichiers traites (ProcessingPanel) 
-	 * selon la selon la sous-classe.
+	 * (sous-classe ConversionModel) ou a l'export des fichiers traites
+	 * (sous-classe ProcessingPanel) selon la selon la sous-classe.
 	 * 
 	 * Cette methode a pour but d'eviter des imprecisions (du a
 	 * un Thread ayant commence en retard ou en avance son travail).
@@ -55,11 +55,11 @@ public abstract class Model extends Observable{
 	
 	
 	/**
-	 * [ "SAUVER" LES FICHIERS MODIFIES. ]
+	 * [ METHODE POUR "SAUVER" LES FICHIERS MODIFIES. ]
 	 * 
 	 * Methode pour demarrer la conversion des SettingsFile modifies
-	 * (ConversionModel) ou l'export des ProcessingFile traites (ProcessingPanel) 
-	 * selon la sous-classe. 
+	 * (sous-classe ConversionModel) ou l'export des ProcessingFile traites 
+	 * (sous-classe ProcessingPanel). 
 	 * 
 	 * Le code de la methode est diffreent selon la sous-classe, ce pourquoi
 	 * on declare la methode pour l'instant en abstract.

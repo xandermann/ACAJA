@@ -3,7 +3,8 @@ public class ThreadForSave extends Thread{
 	private Model model;
 	
 	private ThreadForSave(Model model) {
-		this.model = model;
+		if((this.model = model) == null)
+			throw new NullPointerException("Le modele recu en parametre est null !");
 	}
 	
     public void run() {

@@ -36,6 +36,9 @@ public final class StreamsConsumer implements StreamsManager{
 	 * @param processToBeConsume			ProcessManager contenant les flux a consommer.
 	 */
 	public static void consumeStreams(ProcessManager processToBeConsume) {
+		if(processToBeConsume == null)
+			throw new NullPointerException("Le flux recu en parametre est null !");
+		
 		/**
 		 * CONSOMMATION DU FLUX D'ERREURS DE FFMPEG. 
 		 * 

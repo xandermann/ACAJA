@@ -39,10 +39,8 @@ public final class SettingsFile extends SelectableFile implements Modifiable {
 	/**
 	 * [ CONSTRUCTEUR. ]
 	 * 
-	 * @param file Le fichier source.
-	 * @throws IncorrectFileException
-	 * @throws IOException
-	 * @throws InterruptedException
+	 * @param file 						Le fichier source.
+	 * @throws IncorrectFileException	L'exception sur les fichiers de type incorrect. 
 	 */
 	public SettingsFile(File file) throws IncorrectFileException {
 		/**

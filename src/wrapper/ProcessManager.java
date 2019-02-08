@@ -23,7 +23,8 @@ public final class ProcessManager implements Iterable<String> {
 	 * @param processToManage		Le process a gerer.
 	 */
 	public ProcessManager(Process processToManage) {
-		this.processToManage = processToManage;
+		if((this.processToManage = processToManage) == null)
+			throw new NullPointerException("Le Process recu en parametre est null !");
 	}
 	
 	

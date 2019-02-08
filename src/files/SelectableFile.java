@@ -56,8 +56,9 @@ public class SelectableFile{
 	 * @throws IncorrectFileException 
 	 */
 	public SelectableFile(File sourceFile) throws IncorrectFileException {
+		if((this.sourceFile = sourceFile) == null)
+			throw new NullPointerException("Le fichier source recu en parametre est null !");
 		isSelected = false;
-		this.sourceFile = sourceFile;
 		whoAmI();
 	}
 

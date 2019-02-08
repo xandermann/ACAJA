@@ -89,6 +89,9 @@ public final class UserRequests extends FFmpegRuntime {
 	 * 									dans un nouveau processus. 
 	 */
 	public static void consumeStreams(ProcessManager processToBeConsume) {
+		if(processToBeConsume == null)
+			throw new NullPointerException("Le ProcessManager recu en parametre est null !");
+		
 		new Thread() {
 			public void run() {
 				startToWork();

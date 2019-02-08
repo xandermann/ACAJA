@@ -93,6 +93,9 @@ public final class StreamsFilter implements StreamsManager {
 	 * @return	String				Les donnees filtrees.
 	 */
 	public static String findInformationsOfMediaFile(ProcessManager processToStudy) {
+		if(processToStudy == null)
+			throw new NullPointerException("Le ProcessManager recu en parametre est null !");
+		
 		/**
 		 * QUELQUES FAITS A CONNAITRE POUR COMPRENDRE LA LIGNE DE CODE CI-DESSOUS.
 		 * 

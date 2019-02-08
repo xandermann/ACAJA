@@ -31,9 +31,8 @@ public final class ProcessingFile extends SelectableFile implements Modifiable{
 	/**
 	 * [ CONSTRUCTEUR. ]
 	 * 
-	 * @param sourceFile		Le fichier source.
-	 * 
-	 * @throws IncorrectFileException 
+	 * @param sourceFile				Le fichier source.
+	 * @throws IncorrectFileException 	L'exception sur les fichiers de type incorrect.
 	 */
 	public ProcessingFile(File sourceFile) throws IncorrectFileException {
 		/**

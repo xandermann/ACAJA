@@ -71,6 +71,8 @@ public abstract class StreamIterator implements Iterator<String>{
 	 * @param stream		Le flux (STDOUT ou STDERR) a gerer. 
 	 */
 	public StreamIterator(InputStream streamToRead) {
+		if(streamToRead == null)
+			throw new NullPointerException("Le flux recu en parametre est null !");
 		this.streamToRead = new BufferedReader(new InputStreamReader(streamToRead));
 		readNextLine();
 	}
@@ -113,10 +115,9 @@ public abstract class StreamIterator implements Iterator<String>{
 		 * On consomme le reste du flux 
 		 * pour eviter un interblocage.
 		 * 
-		 * Au dernier appel de next le flux est close dans : 
-		 * next() => readNextLine().
+		 * Au dernier appel de readNextLine() le flux est close.
 		 */
-		while(hasNext()) next();
+		while(hasNext()) readNextLine();
 	}
 	
 	

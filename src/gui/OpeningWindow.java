@@ -92,7 +92,6 @@ public final class OpeningWindow {
 			}
 		});
 		
-		
 		JButton processingButton = new JButton("Traitement");
 		processingButton.setPreferredSize(new Dimension(100, 40));
 		

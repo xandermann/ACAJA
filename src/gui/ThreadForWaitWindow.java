@@ -7,6 +7,11 @@ import wrapper.UserRequests;
 public class ThreadForWaitWindow extends Thread{
 	private JFrame waitWindow;
 	
+	/**
+	 * [ CONSTRUCTEUR INTERNE - ENCAPSULE ]
+	 * 
+	 * @param waitWindow	La fenetre d'attente. 
+	 */
 	private ThreadForWaitWindow(JFrame waitWindow) {
 		if((this.waitWindow = waitWindow) == null)
 			throw new NullPointerException("Le fenetre d'attente recue en parametre est null !");

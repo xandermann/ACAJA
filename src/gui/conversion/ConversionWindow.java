@@ -35,7 +35,7 @@ public final class ConversionWindow extends JFrame{
 	 
 	 
 	 /**
-	  * [ CONSTRUCTEUR INTERNE. ]
+	  * [ CONSTRUCTEUR INTERNE - ENCAPSULE. ]
 	  */
 	 private ConversionWindow() {
 		 model = new ConversionModel();

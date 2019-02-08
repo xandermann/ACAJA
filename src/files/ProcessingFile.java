@@ -41,7 +41,7 @@ public final class ProcessingFile extends SelectableFile implements Modifiable{
 		super(sourceFile);
 		
 		/**
-		 * INITIALISATION DE TABLE DES TRAITEMENTS EN ATTENTE SUR THIS. 
+		 * INITIALISATION DE LA TABLE DES TRAITEMENTS EN ATTENTE SUR THIS. 
 		 */
 		performedProcessings = new HashMap<ProcessingType, Object>();
 		

@@ -1,43 +1,49 @@
 package files;
 
+/**
+ * [ ENUMERATION DES TYPES DE PARAMETRES. ]
+ * 
+ * Auteurs du projet : 
+ * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
+ */
 public enum SettingType implements OperationType {
 	/**
-	 * Constante qui definit le codec video dans la HashMap
+	 * Parametre de type codec video.
 	 */
 	VIDEO_CODEC,
 
 	/**
-	 * Constante qui definit le bitrate video dans la HashMap
+	 * Parametre de type bitrate video.
 	 */
 	VIDEO_BITRATE,
 
 	/**
-	 * Constante qui definit les FPS de la video dans la HashMap
+	 * Parametre de type FPS de la video.
 	 */
 	FPS,
 
 	/**
-	 * Constante qui definit le codec audio dans la HashMap
+	 * Parametre de type codec audio.
 	 */
 	AUDIO_CODEC,
 	
 	/**
-	 * Constante qui definit le sampling rate dans la HashMap
+	 * Parametre de type sampling rate.
 	 */
 	SAMPLING_RATE,
 	
 	/**
-	 * Constante qui definit le nombre de pistes audios dans la HashMap
+	 * Parametre de type nombre de canaux audio.
 	 */
 	NUMBER_AUDIO_CHANNELS,
 
 	/**
-	 * Constante qui definit le bitrate audio dans la HashMap
+	 * Parametre de type bitrate audio.
 	 */
 	AUDIO_BITRATE,
 
 	/**
-	 * Constante qui definit la résolution de la video dans la HashMap
+	 * Parametre de type resolution video.
 	 */
 	VIDEO_RESOLUTION
 }

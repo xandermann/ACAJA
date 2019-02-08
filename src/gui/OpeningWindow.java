@@ -10,10 +10,10 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 import gui.conversion.ConversionWindow;
 import style.JButton;
+import style.JPanel;
 import style.Style;
 import tools.ResourceConstants;
 import tools.WindowTools;
@@ -54,7 +54,6 @@ public final class OpeningWindow {
 
 		// Panel de la fenetre
 		JPanel panel = new JPanel();
-		panel.setBackground(Style.BACKGROUND_PRIMARY);
 		panel.setLayout(new BorderLayout());
 
 		// Ajout barre de progression

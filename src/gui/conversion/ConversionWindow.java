@@ -201,12 +201,12 @@ public final class ConversionWindow extends JFrame{
 					waitWindow.setLayout(new BorderLayout());
 					waitWindow.setSize(400, 150);
 					waitWindow.setLocationRelativeTo(null);
-					waitWindow.add(new JLabel("<html> "
-											+ "<body> "
+					waitWindow.add(new JLabel("<html>"
+											+ "<body>"
 											+ "		Conversion du ou des fichier(s)."
 											+ "		<br>   "
-											+ "		Veuillez patientez... "
-											+ "</body> "
+											+ "		Veuillez patientez..."
+											+ "</body>"
 											+ "</html>", JLabel.CENTER), BorderLayout.CENTER);
 					
 					WindowTools.showLogo(waitWindow);			

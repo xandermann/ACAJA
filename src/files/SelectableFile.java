@@ -127,11 +127,11 @@ public class SelectableFile{
 	 * ou meme une image.
 	 * 
 	 * 3 valeurs possiblement accordable a typeFile : 
-	 * - MEDIA_FILE_VIDEO ( = 0 ) ; 
-	 * - MEDIA_FILE_AUDIO ( = 1 ) ; 
-	 * - MEDIA_FILE_IMAGE ( = 2 ).
+	 * - MEDIA_FILE_VIDEO ; 
+	 * - MEDIA_FILE_AUDIO ; 
+	 * - MEDIA_FILE_IMAGE.
 	 * 
-	 * @throws IncorrectFileException 
+	 * @throws IncorrectFileException 	Exception sur les fichiers non conformes. 
 	 */
 	private void whoAmI() throws IncorrectFileException {
 		String fileName = sourceFile.getName().toLowerCase();

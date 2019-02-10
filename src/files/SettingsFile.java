@@ -83,12 +83,6 @@ public final class SettingsFile extends SelectableFile implements Modifiable {
 	}
 
 	
-	
-	//=======================================================================================================================
-	//=======================================================================================================================
-
-	
-	
 	/**
 	 * [ METHODE POUR SAVOIR SI DES PARAMETRES ONT ETE MODIFIES. ]
 	 * 
@@ -99,7 +93,14 @@ public final class SettingsFile extends SelectableFile implements Modifiable {
 	public boolean isModified() {
 		return !requests.equals(new HashMap<SettingType, Object>());
 	}
+	
+	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
 
+	
+	
 	/**
 	 * [ METHODE ACCESSEUR - GETTER. ]
 	 * 

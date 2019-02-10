@@ -14,8 +14,6 @@ import tools.*;
 /**
  * [ CLASSE POUR LE LANCEMENT DES FENETRES D'OUVERTURE DU LOGICIEL. ]
  * 
- * TODO commentaire a faire.
- * 
  * Auteurs du projet :
  * 
  * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et

@@ -79,26 +79,17 @@ public final class UserRequests extends FFmpegRuntime {
 	 * [ METHODE DE CLASSE POUR LA CONSOMMATION DES FLUX DE REPONSES DE FFMPEG. ]
 	 * 
 	 * Cette methode permet la consommation des flux de reponses ( = de sorties ) de 
-	 * FFMPEG dans un fil d'execution separe du processus courant qui le lance. 
-	 * 
-	 * On utilise entre autre ici un Thread pour lancer la consommation des
-	 * flux de sortie de FFMPEG dans un nouveau fil d'execution. 
+	 * FFMPEG  
 	 * 
 	 * @param processToBeConsume		ProcessManager, un outil pour gerer 
-	 * 									le Process contenat les flux a consommer 
-	 * 									dans un nouveau processus. 
+	 * 									le Process contenant les flux a consommer. 
 	 */
 	public static void consumeStreams(ProcessManager processToBeConsume) {
 		if(processToBeConsume == null)
 			throw new NullPointerException("Le ProcessManager recu en parametre est null !");
-		
-		new Thread() {
-			public void run() {
-				startToWork();
-				StreamsConsumer.consumeStreams(processToBeConsume);
-				workIsOver();
-			}
-		}.start();
+		startToWork();
+		StreamsConsumer.consumeStreams(processToBeConsume);
+		workIsOver();
 	}
 	
 	

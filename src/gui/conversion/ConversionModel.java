@@ -280,8 +280,7 @@ public final class ConversionModel extends Model {
 	 */
 	public void setCurrentFile(String fileName) {
 		for (SettingsFile f : this.getFiles()) {
-			if (f.getSourceFilename().equals(fileName)) 
-				currentFile = f;
+			if (f.getSourceFilename().equals(fileName)) currentFile = f;
 		}
 		sendChanges();
 	}

@@ -1,12 +1,9 @@
 package test.gui;
 
 import java.awt.Dimension;
+import javax.swing.*;
+import gui.style.*;
 
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-
-import style.StylizedJMenuBar;
-import style.StylizedJMenuItem;
 
 public class JMenuTest {
 

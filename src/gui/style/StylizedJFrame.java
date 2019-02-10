@@ -1,4 +1,4 @@
-package style;
+package gui.style;
 
 /**
  * Classe qui permet de styliser le composant java swing correspondant pour

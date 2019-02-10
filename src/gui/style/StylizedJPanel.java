@@ -1,4 +1,4 @@
-package style;
+package gui.style;
 
 import java.awt.LayoutManager;
 

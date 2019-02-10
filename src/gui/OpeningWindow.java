@@ -1,22 +1,15 @@
 package gui;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.*;
+import java.awt.event.*;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.swing.JFrame;
+import javax.swing.*;
 
 import gui.conversion.ConversionWindow;
-import style.StylizedJButton;
-import style.StylizedJPanel;
-import style.StyleConfigurator;
-import tools.ResourceConstants;
-import tools.WindowTools;
+import gui.style.*;
+import tools.*;
 
 /**
  * [ CLASSE POUR LE LANCEMENT DES FENETRES D'OUVERTURE DU LOGICIEL. ]
@@ -29,7 +22,10 @@ import tools.WindowTools;
  *         CHEVRIER Jean-christophe.
  */
 public final class OpeningWindow {
-
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
 	/**
 	 * [ CONSTANTES DE CLASSE INTERNES. ]
 	 *
@@ -38,73 +34,53 @@ public final class OpeningWindow {
 	private final static int WIDTH = 400;
 	private final static int HEIGHT = 400;
 
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
 	/**
 	 * [ METHODE INTERNE DE CLASSE - FENETRE DE PRESENTATION DU LOGICIEL. ]
 	 * 
 	 * Cette methode permet de generer la fenetre de presentation du logiciel.
 	 */
-	private static void generateLoadingWindow() {
-		JFrame loadingWindow = new JFrame("Acaja - un logiciel Ã  la portee de tous.");
+	private static void generatePresentationWindow() {
+		JFrame presentationWindow = new JFrame("Acaja - un logiciel à la portee de tous.");
 
-		loadingWindow.setSize(new Dimension(WIDTH, HEIGHT));
-		loadingWindow.setResizable(false);
-		loadingWindow.setLocationRelativeTo(null);
-		loadingWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		loadingWindow.setVisible(true);
+		presentationWindow.setSize(new Dimension(WIDTH, HEIGHT));
+		presentationWindow.setResizable(false);
+		presentationWindow.setLocationRelativeTo(null);
+		presentationWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		// Panel de la fenetre
-		StylizedJPanel panel = new StylizedJPanel();
-		panel.setLayout(new BorderLayout());
-
-		// Ajout barre de progression
-		LoadingWindowPanel loadingWindowPanel = new LoadingWindowPanel();
-		loadingWindowPanel.setProgress(10);
-		panel.add(loadingWindowPanel, BorderLayout.CENTER);
-
-		// Ajout image
-		panel.add(new StylizedJPanel() {
+		// Logo en image de fond.
+		presentationWindow.add(new JPanel(){
 			public void paintComponent(Graphics g) {
 				try {
 					g.drawImage(ImageIO.read(ResourceConstants.ACAJA_LOGO), 80, 60, null);
-				} catch (IOException ioe) {
-				}
+				} catch (IOException ioe) {}
 			}
-		}, BorderLayout.NORTH);
+		});
 
-		WindowTools.showLogo(loadingWindow);
-		WindowTools.executeWindow(loadingWindow);
-
-		// Ajoute le panel a la fenetre
-		loadingWindow.setContentPane(panel);
+		WindowTools.showLogo(presentationWindow);
+		WindowTools.executeWindow(presentationWindow);
 
 		try {
-			Thread.sleep(500);
-		} catch (InterruptedException e) {
-		}
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {}
 
-		loadingWindowPanel.setProgress(35);
-
-		try {
-			Thread.sleep(500);
-		} catch (InterruptedException e) {
-		}
-
-		loadingWindowPanel.setProgress(100);
-
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-		}
-
-		loadingWindow.dispose();
-
+		presentationWindow.dispose();
 	}
 
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
 	/**
-	 * [ METHODE INTERNE DE CLASSE - FENETRE CHOIX DU MODE D'UTILISATION DU
-	 * LOGICIEL. ]
+	 * [ METHODE INTERNE DE CLASSE - FENETRE CHOIX DU MODE D'UTILISATION DU LOGICIEL. ]
 	 * 
-	 * Cette methode permet de generer la fenetre du choix de mode d'utilisation du
+	 * Cette methode permet de generer la 
+	 * fenetre du choix de mode d'utilisation du
 	 * logiciel : conversion ou traitement.
 	 */
 	private static void generateChoiceModeWindow() {
@@ -159,13 +135,22 @@ public final class OpeningWindow {
 		WindowTools.executeWindow(openingWindow);
 	}
 
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
 	/**
 	 * [ METHODE DE CLASSE. ]
 	 * 
 	 * Methode pour lancer les fenetres de demarrage du logiciel ACAJA.
 	 */
 	public static void generateOpeningWindow() {
-		generateLoadingWindow();
+		generatePresentationWindow();
 		generateChoiceModeWindow();
 	}
+	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
 }

@@ -1,12 +1,8 @@
 package wrapper.wrapper;
 
-import java.io.*;
-
 import java.util.*;
-
 import files.*;
 import wrapper.streams.StreamsConsumer;
-
 
 /**
  * Ceci est une classe concrete "sterile", c-a-d qu'aucune classe ne peut 
@@ -114,10 +110,6 @@ public final class UserRequests extends FFmpegRuntime {
 						String oldExtension = file.getSourceFile().getPath().split("[.]")[file.getSourceFile().getPath().split("[.]").length-1];
 						String fileName = file.getSourceFile().getPath();
 						String newFileName = fileName.substring(0, fileName.lastIndexOf(oldExtension)-1) + ffmpegRequests.get(SettingType.VIDEO_CODEC);
-							
-						/**
-						 * REQUETE DE CONVERSION SOUMISE A FFMPEG ET CONSOMMATION DES FLUX DE SORTIE.
-						 */
 						consumeStreams(execute(fileName+" "+newFileName));
 					}
 			}

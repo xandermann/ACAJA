@@ -1,8 +1,11 @@
-package wrapper;
+package wrapper.streams;
 
 import java.io.*;
 
 import javax.swing.JOptionPane;
+
+import wrapper.wrapper.MessageConstants;
+import wrapper.wrapper.ProcessManager;
 
 /**
  * [ CLASSE POUR LA "CONSOMMATION" DES FLUX DE REPONSES DE FFMPEG. ]

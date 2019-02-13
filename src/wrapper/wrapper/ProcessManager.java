@@ -1,6 +1,8 @@
-package wrapper;
+package wrapper.wrapper;
 
 import java.util.Iterator;
+
+import wrapper.streams.*;
 
 /**
  * [ CLASSE POUR LA GESTION DU PROCESS. ]

@@ -1,4 +1,6 @@
-package wrapper;
+package wrapper.streams;
+
+import wrapper.wrapper.ProcessManager;
 
 /**
  * [ CLASSE POUR LE FILTRAGE DES DONNEES CONTENUES DANS UN PROCESS. ]

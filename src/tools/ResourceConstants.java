@@ -12,7 +12,7 @@ public final class ResourceConstants {
 	/**
 	 * LOGO DU LOGICIEL. 
 	 */
-	private final static String ACAJA_LOGO_PATH = "img/LogoAcaja.png";
+	public final static String ACAJA_LOGO_PATH = "img/LogoAcaja.png";
 	public final static File ACAJA_LOGO = new File(ACAJA_LOGO_PATH);
 	
 	/**

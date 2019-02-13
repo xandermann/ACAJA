@@ -2,7 +2,8 @@ package gui;
 
 import javax.swing.JFrame;
 import tools.WindowTools;
-import wrapper.UserRequests;
+import wrapper.wrapper.UserRequests;
+
 /**
  * [ CLASSE THREAD POUR GERER LA FENTRE D'ATTENTE. ]
  * 

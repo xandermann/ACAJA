@@ -1,8 +1,8 @@
 package gui;
 
 import java.util.Observable;
+import wrapper.wrapper.UserRequests;
 
-import wrapper.UserRequests;
 /**
  * [ SUPERCLASSE ABSTRAITE MODEL. ]
  * 

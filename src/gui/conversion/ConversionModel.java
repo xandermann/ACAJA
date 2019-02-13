@@ -2,14 +2,12 @@ package gui.conversion;
 
 import java.io.*;
 import java.util.*;
-
 import javax.swing.*;
-
 import exceptions.IncorrectFileException;
 import files.*;
 import gui.Model;
 import tools.*;
-import wrapper.UserRequests;
+import wrapper.wrapper.UserRequests;
 
 public final class ConversionModel extends Model {
 	//=======================================================================================================================

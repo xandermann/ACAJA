@@ -1,10 +1,11 @@
-package wrapper;
+package wrapper.wrapper;
 
 import java.io.*;
 
 import java.util.*;
 
 import files.*;
+import wrapper.streams.StreamsConsumer;
 
 
 /**

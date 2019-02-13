@@ -1,12 +1,8 @@
 package wrapper.wrapper;
 
-import java.io.*;
-
 import java.util.*;
-
 import files.*;
 import wrapper.streams.StreamsConsumer;
-
 
 /**
  * Ceci est une classe concrete "sterile", c-a-d qu'aucune classe ne peut 
@@ -16,8 +12,8 @@ import wrapper.streams.StreamsConsumer;
  * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
  */
 public final class UserRequests extends FFmpegRuntime {	
-	//=======================================================================================================================
-	//=======================================================================================================================	
+	//==================================================================================================================================================
+	
 	
 	/**
 	 * [ ATTRIBUT DE CLASSE VOLATILE. ]
@@ -34,8 +30,7 @@ public final class UserRequests extends FFmpegRuntime {
 	private static volatile boolean workIsOnGoing = false;
 	
 	
-	//=======================================================================================================================
-	//=======================================================================================================================	
+	//==================================================================================================================================================
 	
 	
 	/**
@@ -70,10 +65,8 @@ public final class UserRequests extends FFmpegRuntime {
 		return workIsOnGoing;
 	}
 	
-	
-	
-   //=======================================================================================================================
-   //=======================================================================================================================	
+
+    //==================================================================================================================================================
 	
 	
 	/**
@@ -94,9 +87,8 @@ public final class UserRequests extends FFmpegRuntime {
 	}
 	
 	
-	
-   //=======================================================================================================================
-   //=======================================================================================================================
+
+   //==================================================================================================================================================
 	
 	
 	/**
@@ -111,48 +103,15 @@ public final class UserRequests extends FFmpegRuntime {
 			HashMap<SettingType, Object> ffmpegRequests = ((SettingsFile) file).getRequests();
 			for(SettingType requestKey : ffmpegRequests.keySet()) {
 					if(requestKey == SettingType.VIDEO_CODEC) {
-						String oldExtension =  
-								file.getSourceFile().getPath().split("[.]")
-								[file.getSourceFile().getPath().split("[.]").length-1];
+						String oldExtension = file.getSourceFile().getPath().split("[.]")[file.getSourceFile().getPath().split("[.]").length-1];
 						String fileName = file.getSourceFile().getPath();
-						String newFileName = 
-								fileName.substring(0, fileName.lastIndexOf(oldExtension)-1) +
-								ffmpegRequests.get(SettingType.VIDEO_CODEC);
-						
-						/**
-						 * REQUETE DE CONVERSION SOUMISE A FFMPEG.
-						 */
-						ProcessManager conversionProcess = execute(fileName+" "+newFileName);
-							
-						/**
-						 * CONSOMMATION DES FLUX DE SORTIE.
-						 */
-						consumeStreams(conversionProcess);
+						String newFileName = fileName.substring(0, fileName.lastIndexOf(oldExtension)-1) + ffmpegRequests.get(SettingType.VIDEO_CODEC);
+						consumeStreams(execute(fileName+" "+newFileName));
 					}
 			}
 		}
 	}
 	
 	
-
-
-	//=======================================================================================================================
-	//=======================================================================================================================	
-	
-	
-	
-	/**
-	 * TODO
-	 * @param file
-	 * @param l
-	 * @return
-	 */
-	public static File extractImage(File file, long l) {
-		return file; // TODO
-	}
-	
-	
-	
-	 //=======================================================================================================================
-	 //=======================================================================================================================	
+	//==================================================================================================================================================
 }

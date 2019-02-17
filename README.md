@@ -1,4 +1,4 @@
-# Interface graphique pour ffmpeg
+# Interface graphique pour ffmpeg Dit ACAJA
 
 Repository pour les **projets tutorés** 2018-2019.
 

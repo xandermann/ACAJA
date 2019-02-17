@@ -22,8 +22,6 @@ public final class ConversionModel extends Model {
 	private SettingsFile currentFile;
 	//Liste des fichiers siur lesquels on travaille. 
 	private ArrayList<SettingsFile> files;
-	//Liste des profils.
-	private ArrayList<Profile> profiles;
 	
 	
 	
@@ -37,58 +35,6 @@ public final class ConversionModel extends Model {
 	 */
 	public ConversionModel() {
 		files = new ArrayList<SettingsFile>();
-		profiles = new ArrayList<Profile>();
-	}
-
-	
-
-	//=======================================================================================================================
-	//=======================================================================================================================
-	
-	
-	
-	/**
-	 * [ CHARGER LES PROFILS. ]
-	 * 
-	 * Les profils sont enregistres dans un dossier interne du programme et sont tous
-	 * charges au demarrage. L'utilisateur pourra gerer les profils presents et en
-	 * enregistrer de nouveaux. Creer une classe profile qui prendra tous les
-	 * parametres a enregistrer
-	 * TODO
-	 */
-	public void loadProfiles() {
-		// Charger les fichiers profils dans le dossier des profils
-		// Creer des objets de type profils en lisant les fichiers
-		// Ajouter les fichiers dans la liste
-	}
-
-	
-	/**
-	 * [ AJOUTER UN PROFIL. ] 
-	 * 
-	 * Methode pour ajouter un nouveau profil. 
-	 * TODO
-	 * @param profile Profile		Le nouveau profil a ajouter.
-	 */
-	public void addProfile(Profile profile) {
-		// Creer un nouveau fichier contenant les parametres du profils
-		// Enregistrer le fichier dans le dossier des profils
-		profiles.add(profile);
-	}
-
-	
-	/**
-	 * [ SUPPRIMER UN PROFIL. ]
-	 * 
-	 * Methode pour supprimer un profil. 
-	 * TODO
-	 * @param profile Profile 	Le profil a supprimer. 
-	 */
-	public void removeProfile(Profile profile) {
-		if(profiles.contains(profile)) 
-			profiles.remove(profile);
-		else 
-			JOptionPane.showMessageDialog(null, "Le profil a supprimer n'existe pas");
 	}
 
 	

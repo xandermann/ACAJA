@@ -32,9 +32,8 @@ public final class ConversionWindow extends StylizedJFrame {
 	 */
 	private ConversionWindow() {
 		super();
-		
 		model = new ConversionModel();
-		start = new JLabel("Pour commencer, ajoutez un fichier audio ou vidÃ©o via le menu");
+		start = new JLabel("Pour commencer, ajoutez un fichier audio ou vidéo via le menu");
 		start.setHorizontalAlignment(JLabel.CENTER);
 	}
 
@@ -114,30 +113,6 @@ public final class ConversionWindow extends StylizedJFrame {
 		filesMenu.add(quit);
 
 		return filesMenu;
-	}
-
-	
-	//=======================================================================================================================
-	//=======================================================================================================================
-
-	
-	/**
-	 * [ METHODE INTERNE POUR LA CONSTRUCTION DU MENU DES PROFILS. ]
-	 * 
-	 * @return JMenu Le menu des profils.
-	 */
-	private JMenu drawProfilesMenu() {
-		JMenu profilesMenu = new JMenu("Profils");
-
-		StylizedJMenuItem newProfile = new StylizedJMenuItem("Creer un profil");
-		StylizedJMenuItem loadProfile = new StylizedJMenuItem("Charger un profil");
-		StylizedJMenuItem deleteProfile = new StylizedJMenuItem("Supprimer un profil");
-
-		profilesMenu.add(newProfile);
-		profilesMenu.add(loadProfile);
-		profilesMenu.add(deleteProfile);
-
-		return profilesMenu;
 	}
 
 	
@@ -246,7 +221,6 @@ public final class ConversionWindow extends StylizedJFrame {
 		StylizedJMenuBar menu = new StylizedJMenuBar();
 		menu.add(conversionWindow.drawFileMenu());
 		menu.add(conversionWindow.drawOptionsMenu());
-		menu.add(conversionWindow.drawProfilesMenu());
 		menu.add(conversionWindow.drawConvertMenu());
 
 		conversionWindow.setJMenuBar(menu);

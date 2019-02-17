@@ -58,7 +58,7 @@ public final class StreamsConsumer implements StreamsManager{
 		 * InputStream represente le flux de sortie de l'application externe 
 		 * ( STDOUT de l'application externe : FFMPEG. ).
 		 */
-		consumer = processToBeConsume.inputStreamIterator();
+		consumer = processToBeConsume.outputStreamIterator();
 		while(consumer.hasNext()) consumer.next();
 		
 		

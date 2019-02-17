@@ -56,10 +56,10 @@ public final class ProcessManager implements Iterable<String> {
 	/**
 	 * [ ITERATEUR SUR LE FLUX STDOUT. ]
 	 * 
-	 * @return InputStreamIterator	L'iterateur.
+	 * @return OutputStreamIterator	L'iterateur.
 	 */
-	public InputStreamIterator inputStreamIterator() {
-		return new InputStreamIterator(processToManage);
+	public OutputStreamIterator outputStreamIterator() {
+		return new OutputStreamIterator(processToManage);
 	}
 	
 	

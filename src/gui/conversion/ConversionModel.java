@@ -172,7 +172,7 @@ public final class ConversionModel extends Model {
 	 * Methode qui permet de modifier un parametre du fichier
 	 * actuellement selectionne
 	 */
-	public void modify(SettingType typeSeyting, Object setting) {
+	public void modify(SettingType typeSeyting, String setting) {
 		currentFile.modify(typeSeyting, setting);
 	}
 	

@@ -100,7 +100,7 @@ public final class UserRequests extends FFmpegRuntime {
 	 */
 	public static void execute(SelectableFile file) {
 		if(file instanceof SettingsFile) {
-			HashMap<SettingType, Object> ffmpegRequests = ((SettingsFile) file).getRequests();
+			HashMap<SettingType, String> ffmpegRequests = ((SettingsFile) file).getRequests();
 			for(SettingType requestKey : ffmpegRequests.keySet()) {
 					if(requestKey == SettingType.VIDEO_CODEC) {
 						String oldExtension = file.getSourceFile().getPath().split("[.]")[file.getSourceFile().getPath().split("[.]").length-1];

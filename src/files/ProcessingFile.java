@@ -23,7 +23,7 @@ public final class ProcessingFile extends SelectableFile implements Modifiable{
 	/**
 	 * Les traitements en attente sur this. 
 	 */
-	private HashMap<ProcessingType, Object> performedProcessings;
+	private HashMap<ProcessingType, String> performedProcessings;
 
 	
 	
@@ -47,7 +47,7 @@ public final class ProcessingFile extends SelectableFile implements Modifiable{
 		/**
 		 * INITIALISATION DE LA TABLE DES TRAITEMENTS EN ATTENTE SUR THIS. 
 		 */
-		performedProcessings = new HashMap<ProcessingType, Object>();
+		performedProcessings = new HashMap<ProcessingType, String>();
 		
 		/**
 		 * INITIALISATION DE LA DUREE DU SON OU DE LA VIDEO. 
@@ -69,10 +69,10 @@ public final class ProcessingFile extends SelectableFile implements Modifiable{
 	 * [ METHODE POUR AJOUTER UN TRAITEMENT EN ATTENTE A THIS. ]
 	 * 
 	 * @param string		Le type de taritement a ajouter ne attente. 
-	 * @param object		Les arguments necessaires a connaitre pour executer 
+	 * @param String		Les arguments necessaires a connaitre pour executer 
 	 * 						les traitements. 
 	 */
-	public void modify(OperationType typeProcess, Object process) { 
+	public void modify(OperationType typeProcess, String process) { 
 		performedProcessings.put((ProcessingType) typeProcess, process);
 	}
 
@@ -81,7 +81,7 @@ public final class ProcessingFile extends SelectableFile implements Modifiable{
 	 * [ METHODE POUR SAVOIR SI DES TRAIEMENTS SONT EN ATTENTE SUR CE FICHIER. ]
 	 */
 	public boolean isModified() {
-		return  !performedProcessings.equals(new HashMap<ProcessingType, Object>());
+		return  !performedProcessings.equals(new HashMap<ProcessingType, String>());
 	}
 	
 	
@@ -96,9 +96,9 @@ public final class ProcessingFile extends SelectableFile implements Modifiable{
 	 * 
 	 * Methode pour recuperer les traitements en attente. 
 	 * 
-	 * @return HashMap<String, Object>		Les traitements en attente.
+	 * @return HashMap<String, String>		Les traitements en attente.
 	 */
-	public HashMap<ProcessingType, Object> getPerformedProcessings() {
+	public HashMap<ProcessingType, String> getPerformedProcessings() {
 		return performedProcessings;
 	}
 

@@ -48,13 +48,7 @@ public final class VideoSettingsPanel extends JPanel implements Observer {
 		JPanel codec = new JPanel();
 		codec.setLayout(new FlowLayout());
 
-		/**
-		 * NOTE : pour la premiere iteration nous avons choisi d'implementer simplement
-		 * un FORMAT de sortie, par la suite, l'utilisateur choisira les codecs
-		 * audio/videos voulu et le conteneur(format) sera determine automatiquement par
-		 * le logiciel pour creer un fichier optimal et lisible;
-		 */
-		codec.add(new JLabel("Format sortie : "), BorderLayout.WEST);
+		codec.add(new JLabel("Codec video : "), BorderLayout.WEST);
 		String[] format = { ".avi", ".mp4", ".flv" };
 		JComboBox box_format = new JComboBox(format);
 		box_format.addActionListener(new ActionListener() {
@@ -89,33 +83,10 @@ public final class VideoSettingsPanel extends JPanel implements Observer {
 		fps.setEnabled(false);
 		panef.add(fps, BorderLayout.EAST);
 
-		JPanel panest = new JPanel();
-		panest.setLayout(new FlowLayout());
-		panest.add(new JLabel("Fichiers sous-titres : "), BorderLayout.WEST);
-
-		JButton parcourir = new JButton("Parcourir");
-		parcourir.setEnabled(false);
-		parcourir.setPreferredSize(new Dimension(100, 20));
-		parcourir.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				// ATTENTION
-				try {
-					File f = DataChoose.FileChoose();
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					JOptionPane.showMessageDialog(null, e.getMessage());
-				}
-				// Ce fichier sera le fichier des sous-titres, pas un SettingsFile !
-			}
-		});
-		panest.add(parcourir, BorderLayout.EAST);
-
 		add(codec);
 		add(reso);
 		add(br);
 		add(panef);
-		add(panest);
 	}
 
 	
@@ -126,13 +97,12 @@ public final class VideoSettingsPanel extends JPanel implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		if(model.getCurrentFile() != null) {
-		     HashMap<SettingType, Object> settings = model.getCurrentFile().getSettings();
-			 resolution.setText( "" + ( (Integer[])
-			 settings.get(SettingType.VIDEO_RESOLUTION) )[0] +"x" + ( (Integer[])
-			 settings.get(SettingType.VIDEO_RESOLUTION) )[1]);
-			 resolution.setEnabled(true); bitrate.setText( "" + (Integer)
-			 settings.get(SettingType.VIDEO_BITRATE)); bitrate.setEnabled(true);
-			 fps.setText( "" + (Double) settings.get(SettingType.FPS));
+		     HashMap<SettingType, String> settings = model.getCurrentFile().getSettings();
+			 resolution.setText(settings.get(SettingType.VIDEO_RESOLUTION));
+			 resolution.setEnabled(true); 
+			 bitrate.setText(settings.get(SettingType.VIDEO_BITRATE)); 
+			 bitrate.setEnabled(true);
+			 fps.setText(settings.get(SettingType.FPS));
 			 fps.setEnabled(true);
 		} else {
 			resolution.setText("");

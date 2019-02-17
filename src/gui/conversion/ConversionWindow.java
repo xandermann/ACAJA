@@ -20,7 +20,7 @@ public final class ConversionWindow extends StylizedJFrame {
 	 * [ ATTRRIBUTS D'INSTANCE. ]
 	 */
 	private ConversionModel model;
-	private JLabel start;
+	private JLabel empty_workspace;
 
 	
 	//=======================================================================================================================
@@ -33,8 +33,8 @@ public final class ConversionWindow extends StylizedJFrame {
 	private ConversionWindow() {
 		super();
 		model = new ConversionModel();
-		start = new JLabel("Pour commencer, ajoutez un fichier audio ou vidéo via le menu");
-		start.setHorizontalAlignment(JLabel.CENTER);
+		empty_workspace = new JLabel("Pour commencer, ajoutez un fichier audio ou video via le menu.");
+		empty_workspace.setHorizontalAlignment(JLabel.CENTER);
 	}
 
 	
@@ -66,7 +66,7 @@ public final class ConversionWindow extends StylizedJFrame {
 						dataView.add(tv);
 						add(dataView, BorderLayout.EAST);
 						model.addObserver(sv);
-						start.setVisible(false);
+						empty_workspace.setVisible(false);
 					}
 					model.setCurrentFile(f.getName());
 				} catch (Exception e) {
@@ -211,9 +211,7 @@ public final class ConversionWindow extends StylizedJFrame {
 
 		WindowTools.showLogo(conversionWindow);
 
-		SummaryView sv = new SummaryView(conversionWindow.model);
-		LibraryViewController lv = new LibraryViewController(conversionWindow.model,
-				conversionWindow.model.getFilenames());
+		LibraryViewController lv = new LibraryViewController(conversionWindow.model, conversionWindow.model.getFilenames());
 		TabsView tv = new TabsView(conversionWindow.model);
 
 		StylizedJPanel p = new StylizedJPanel();
@@ -225,10 +223,8 @@ public final class ConversionWindow extends StylizedJFrame {
 
 		conversionWindow.setJMenuBar(menu);
 		conversionWindow.model.addObserver(lv);
-		conversionWindow.model.addObserver(sv);
-		p.add(sv, BorderLayout.NORTH);
 		p.add(tv, BorderLayout.CENTER);
-		p.add(conversionWindow.start);
+		p.add(conversionWindow.empty_workspace);
 		conversionWindow.setLayout(new BorderLayout());
 		conversionWindow.add(lv, BorderLayout.WEST);
 		conversionWindow.add(p, BorderLayout.CENTER);

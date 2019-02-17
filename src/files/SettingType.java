@@ -28,7 +28,7 @@ public enum SettingType implements OperationType {
 	AUDIO_CODEC,
 	
 	/**
-	 * Parametre de type sampling rate.
+	 * Parametre de type taux d'echantillonage.
 	 */
 	SAMPLING_RATE,
 	

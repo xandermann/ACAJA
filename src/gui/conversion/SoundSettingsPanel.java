@@ -44,14 +44,6 @@ public final class SoundSettingsPanel extends JPanel implements Observer {
 		box_codec.setEnabled(false);
 		add(pan_codec);
 
-		JPanel pan_vol = new JPanel(new FlowLayout());
-		pan_vol.add(new JLabel("Volume en sortie (en %): "), BorderLayout.WEST);
-		sound = new JTextField();
-		sound.setPreferredSize(new Dimension(300, 20));
-		pan_vol.add(sound, BorderLayout.EAST);
-		sound.setEnabled(false);
-		add(pan_vol);
-
 		JPanel pan_bitrate = new JPanel(new FlowLayout());
 		pan_bitrate.add(new JLabel("Bitrate (kb/s) : "), BorderLayout.WEST);
 		bitrate = new JTextField();

@@ -7,7 +7,7 @@ import exceptions.IncorrectFileException;
 import files.*;
 import gui.Model;
 import tools.*;
-import wrapper.wrapper.UserRequests;
+import wrapper.runtime.global.UserRequests;
 
 public final class ConversionModel extends Model {
 	//=======================================================================================================================

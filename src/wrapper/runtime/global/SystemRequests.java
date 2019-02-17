@@ -1,43 +1,23 @@
-package wrapper.wrapper;
+package wrapper.runtime.global;
 
 import java.io.*;
-
 import java.util.HashMap;
-
 import files.*;
+import wrapper.runtime.details.FFmpegRuntime;
 import wrapper.streams.StreamsFilter;
 
 /**
- * [ CLASSE CONCRETE POUR L'INTERFACAGE JAVA-FFMPEG ---- DEGRE 2. ]
- * 
  * Cette classe a pour but de realiser les requetes FFMPEG
  * necessaires au fonctionnement interne de notre logiciel ( d'ou le 
  * de la classe : SystemRequests. ). 
  * 
- * Pour synthetiser, cette classe implemente :
- * 
- *  - des fonctionnalites pour le fonctionnement interne de la 
- *  fenetre de conversion :
- *  	- renseigner les caracteristiques d'une video ou d'un son
- * 	     ( bitrate, format, FPS, resolution, etc ).
- * 
- *  - des fonctionnalites pour le fonctionnement interne de la 
- *  fenetre de traitement :
- *  	- extraire une image d'une video a temps donne ; 
- *  	- renseigner la duree d'une video ;
- *  	- redimmensionner une image ;
- *  	- creer une miniature d'une video 
- *  	  ( pour les miniatures dans la chronologie, ou les miniatures
- *  		dans les bibliotheques ) ;
- *  	- creer une frame pour l'apercu de lecture de video. 
- *
  * Ceci est une classe concrete "sterile", c-a-d qu'aucune classe ne peut 
  * en heriter ( d'ou la presence du final devant class).
  * 
  * Auteurs du projet : 
  * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
  */
-public final class SystemRequests extends FFmpegRuntime{
+public final class SystemRequests{
 	//=======================================================================================================================
 	//=======================================================================================================================
 	

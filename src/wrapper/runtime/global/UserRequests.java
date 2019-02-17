@@ -1,7 +1,8 @@
-package wrapper.wrapper;
+package wrapper.runtime.global;
 
 import java.util.*;
 import files.*;
+import wrapper.runtime.details.FFmpegRuntime;
 import wrapper.streams.StreamsConsumer;
 
 /**
@@ -11,7 +12,7 @@ import wrapper.streams.StreamsConsumer;
  * Auteurs du projet : 
  * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
  */
-public final class UserRequests extends FFmpegRuntime {	
+public final class UserRequests{	
 	//==================================================================================================================================================
 	
 	
@@ -70,7 +71,7 @@ public final class UserRequests extends FFmpegRuntime {
 	
 	
 	/**
-	 * [ METHODE DE CLASSE POUR LA CONSOMMATION DES FLUX DE REPONSES DE FFMPEG. ]
+	 * [ METHODE INTERNE DE CLASSE POUR LA CONSOMMATION DES FLUX DE REPONSES DE FFMPEG. ]
 	 * 
 	 * Cette methode permet la consommation des flux de reponses ( = de sorties ) de 
 	 * FFMPEG  
@@ -78,7 +79,7 @@ public final class UserRequests extends FFmpegRuntime {
 	 * @param processToBeConsume		ProcessManager, un outil pour gerer 
 	 * 									le Process contenant les flux a consommer. 
 	 */
-	public static void consumeStreams(ProcessManager processToBeConsume) {
+	private static void consumeStreams(ProcessManager processToBeConsume) {
 		if(processToBeConsume == null)
 			throw new NullPointerException("Le ProcessManager recu en parametre est null !");
 		startToWork();
@@ -106,7 +107,7 @@ public final class UserRequests extends FFmpegRuntime {
 						String oldExtension = file.getSourceFile().getPath().split("[.]")[file.getSourceFile().getPath().split("[.]").length-1];
 						String fileName = file.getSourceFile().getPath();
 						String newFileName = fileName.substring(0, fileName.lastIndexOf(oldExtension)-1) + ffmpegRequests.get(SettingType.VIDEO_CODEC);
-						consumeStreams(execute(fileName+" "+newFileName));
+						consumeStreams(FFmpegRuntime.execute(fileName+" "+newFileName));
 					}
 			}
 		}

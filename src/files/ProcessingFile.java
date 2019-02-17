@@ -1,9 +1,10 @@
 package files;
+
 import java.io.File;
 import java.util.HashMap;
-
 import exceptions.IncorrectFileException;
-import wrapper.wrapper.SystemRequests;
+import wrapper.runtime.global.SystemRequests;
+
 /**
  * TODO comentaire a faire. 
  * 

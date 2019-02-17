@@ -1,7 +1,6 @@
-package wrapper.wrapper;
+package wrapper.runtime.global;
 
 import java.util.Iterator;
-
 import wrapper.streams.*;
 
 /**

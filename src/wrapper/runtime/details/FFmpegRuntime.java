@@ -1,15 +1,8 @@
-package wrapper.wrapper;
+package wrapper.runtime.details;
 import java.io.IOException;
+
+import wrapper.runtime.global.ProcessManager;
 /**
- * [ SUPERCLASSE ABSTRAITE POUR L'INTERFACAGE JAVA - FFMPEG ---- DEGRE 1. ]
- * 
- * Cette classe realise l'interfacage de degre 1 de FFMPEG en JAVA. 
- * 
- * Le degre 1 consiste a permettre l'execution de requetes FFMPEG
- * directement en JAVA. De ce fait les methodes de la classe ont 
- * des roles primitifs, le niveau 1 n''exige pas de fonctionnalites 
- * complexes.
- *
  * Cette classe se charge de connaitre le chemin vers le fichier executable 
  * de FFMPEG. Elle se charge, aussi comme il a ete dis avant, d'executer
  * des requetes FFMPEG en interne par l'intermediaire de JAVA, sans avoir

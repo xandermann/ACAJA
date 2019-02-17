@@ -1,12 +1,9 @@
 package wrapper.streams;
 
 import java.io.*;
-
 import java.util.Iterator;
-
 import javax.swing.JOptionPane;
-
-import wrapper.wrapper.MessageConstants;
+import wrapper.runtime.global.MessageConstants;
 
 
 /**

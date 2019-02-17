@@ -9,7 +9,7 @@ import java.io.IOException;
  * Auteurs du projet : 
  * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
  */
-public abstract class FFmpegRuntime {
+public final class FFmpegRuntime {
 	//=======================================================================================================================
 	//=======================================================================================================================
 	

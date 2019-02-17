@@ -3,6 +3,7 @@ package wrapper.runtime.global;
 import java.util.*;
 import files.*;
 import wrapper.runtime.details.FFmpegRuntime;
+import wrapper.runtime.details.ProcessManager;
 import wrapper.streams.StreamsConsumer;
 
 /**

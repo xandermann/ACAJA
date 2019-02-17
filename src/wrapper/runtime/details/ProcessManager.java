@@ -1,4 +1,4 @@
-package wrapper.runtime.global;
+package wrapper.runtime.details;
 
 import java.util.Iterator;
 import wrapper.streams.*;

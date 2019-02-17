@@ -1,6 +1,6 @@
 package wrapper.streams;
 
-import wrapper.runtime.global.ProcessManager;
+import wrapper.runtime.details.ProcessManager;
 
 /**
  * [ CLASSE POUR LE FILTRAGE DES DONNEES CONTENUES DANS UN PROCESS. ]

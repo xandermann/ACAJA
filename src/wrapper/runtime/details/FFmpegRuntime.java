@@ -1,7 +1,5 @@
 package wrapper.runtime.details;
 import java.io.IOException;
-
-import wrapper.runtime.global.ProcessManager;
 /**
  * Cette classe se charge de connaitre le chemin vers le fichier executable 
  * de FFMPEG. Elle se charge, aussi comme il a ete dis avant, d'executer

@@ -28,7 +28,7 @@ public final class SummaryView extends JPanel implements Observer {
 
 		JLabel nom = new JLabel("Fichier selectionné : ");
 		JLabel video = new JLabel("Codec video actuel : ");
-		JLabel son = new JLabel("Codec video actuel : ");
+		JLabel son = new JLabel("Codec audio actuel : ");
 		JLabel duree = new JLabel("Durée : ");
 
 		j = new JPanel();

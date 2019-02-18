@@ -1,9 +1,6 @@
 package wrapper.runtime.details;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import wrapper.language.ConversionFlagConstants;
 import wrapper.streams.WatchedConsumer;
 
@@ -37,7 +34,6 @@ public class Request {
 	
 	
 	
-	
 	private void askSomethingElse(String[] somethingElse) {
 		if(somethingElse == null) 
 			throw new NullPointerException("Argument a ajouter dans la requete null !");		
@@ -47,26 +43,51 @@ public class Request {
 
 	
 	
-	public Request buildVideoCodec(String vcodec) {
-		askSomethingElse(new String[]{ConversionFlagConstants.FLAG_VIDEO_CODEC, vcodec});
+	public Request videoCodec(String videoCodec) {
+		askSomethingElse(new String[]{ConversionFlagConstants.FLAG_VIDEO_CODEC, videoCodec});
 		return this;
 	}
 	
-	public Request buildAudioCodec(String acodec) {
-		askSomethingElse(new String[]{ConversionFlagConstants.FLAG_VIDEO_CODEC, acodec});
+	public Request videoBitrate(String videoBitrate) {
+		askSomethingElse(new String[]{ConversionFlagConstants.FLAG_VIDEO_BITRATE, videoBitrate});
 		return this;
 	}
 
-	public Request buildResolution(String resolution) {
+	public Request resolution(String resolution) {
 		askSomethingElse(new String[]{ConversionFlagConstants.FLAG_RESOLUTION, resolution});
 		return this;
 	}
 	
-	public Request buildSamplingRate(String samplingRate) {
+	public Request fPS(String fps) {
+		askSomethingElse(new String[]{ConversionFlagConstants.FLAG_FPS, fps});
+		return this;
+	}
+	
+	
+	
+
+	public Request audioCodec(String audioCodec) {
+		askSomethingElse(new String[]{ConversionFlagConstants.FLAG_AUDIO_CODEC, audioCodec});
+		return this;
+	}
+	
+	public Request audioBitrate(String audioBitrate) {
+		askSomethingElse(new String[]{ConversionFlagConstants.FLAG_AUDIO_BITRATE, audioBitrate});
+		return this;
+	}
+	
+	public Request samplingRate(String samplingRate) {
 		askSomethingElse(new String[]{ConversionFlagConstants.FLAG_SAMPLING_RATE, samplingRate});
 		return this;
 	}
 
+	public Request numberAudioChannels(String numberAudioChannels) {
+		askSomethingElse(new String[]{ConversionFlagConstants.FLAG_NUMBER_AUDIO_CHANNELS, numberAudioChannels});
+		return this;
+	}
+
+	
+	
 	
 	
 	public ProcessManager result() {

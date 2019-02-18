@@ -51,6 +51,7 @@ public final class FFmpegRuntime {
 	private static void install(){
 		//Provisoirement j'utilise le ffmpeg de la variable path.
 		FFMPEG_PATH = System.getProperty("os.name").contains("Linux") || System.getProperty("os.name").contains("Mac") ? "/bin/bash ffmpeg " : "ffmpeg ";
+		System.out.println("Chemin d'execution FFMPEG = " + FFMPEG_PATH);
 	}
 	
 	
@@ -83,6 +84,11 @@ public final class FFmpegRuntime {
 		if(FFMPEG_PATH==null) install();
 		try {
 			ffmpegRequest.add(0, FFMPEG_PATH);
+			System.out.println("Verification array commande : ");
+			String[] array = ffmpegRequest.toArray(new String[ffmpegRequest.size()]);
+			for(String s : array) {
+				System.out.println(s);
+			}
 			return new ProcessManager(RUN.exec(ffmpegRequest.toArray(new String[ffmpegRequest.size()])));
 		} catch (IOException e) {
 			return null;

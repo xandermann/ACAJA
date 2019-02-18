@@ -55,6 +55,8 @@ public final class UserRequests{
 					break;
 			}
 		}
+		
+		request.make();
 	}
 	
 	
@@ -72,9 +74,10 @@ public final class UserRequests{
 		
 		for(ProcessingType requestKey : ffmpegRequests.keySet()) {
 			String newValue = ffmpegRequests.get(requestKey);
-			switch(requestKey) {
-			}
+			switch(requestKey) {}
 		}
+		
+		request.make();
 	}
 	
 	
@@ -95,6 +98,7 @@ public final class UserRequests{
 		else
 			executeProcessingFile((ProcessingFile) file);
 	}
+	
 	
 	//==================================================================================================================================================
 }

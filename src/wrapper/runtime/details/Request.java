@@ -19,8 +19,6 @@ public class Request {
 		request = new ArrayList<String>();
 		request.add("-i");
 		request.add(input);
-		System.out.println("Creation d'une request : ");
-		System.out.println("Input : " + input);
 	}
 	
 	public Request(String input, String output) {
@@ -93,7 +91,6 @@ public class Request {
 	
 	
 	public ProcessManager result() {
-		System.out.println("Tableau requete : " + request);
 		if(output!=null) askSomethingElse(new String[]{output});
 		return FFmpegRuntime.execute(request);
 	}

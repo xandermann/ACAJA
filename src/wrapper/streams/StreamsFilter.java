@@ -133,7 +133,7 @@ public final class StreamsFilter implements StreamsManager {
 		
 		while(extractor.hasNext()) {
 			information = extractor.next();
-			
+
 			if( keepInformations == false && information.contains("Input") ) 
 				keepInformations = true;
 			

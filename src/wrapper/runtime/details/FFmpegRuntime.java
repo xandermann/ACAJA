@@ -1,8 +1,8 @@
 package wrapper.runtime.details;
+
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+
 /**
  * Cette classe se charge de connaitre le chemin vers le fichier executable 
  * de FFMPEG. Elle se charge, aussi comme il a ete dis avant, d'executer
@@ -50,14 +50,12 @@ public final class FFmpegRuntime {
 	 */
 	private static void install(){
 		String os = System.getProperty("os.name");
-		if(os.contains("Linux") || os.contains("Mac")) {
+		if(os.contains("Linux") || os.contains("Mac")){
 			FFMPEG_PATH = new String[2];
 			FFMPEG_PATH[0] = "/bin/bash";
 			FFMPEG_PATH[1] = "ffmpeg";
-		} else 
+		}else 
 			FFMPEG_PATH = new String[]{"ffmpeg"};
-		
-		System.out.println("Chemin d'execution FFMPEG = " + FFMPEG_PATH);
 	}
 	
 	
@@ -89,14 +87,8 @@ public final class FFmpegRuntime {
 	public static ProcessManager execute(List<String> ffmpegRequest){
 		if(FFMPEG_PATH==null) install();
 		try {
-			for(int i = 0; i < FFMPEG_PATH.length; i++) ffmpegRequest.add(i, FFMPEG_PATH[i]);
-			
-			System.out.println("Verification array commande : ");
-			String[] array = ffmpegRequest.toArray(new String[ffmpegRequest.size()]);
-			for(String s : array) {
-				System.out.println(s);
-			}
-			
+			for(int i = 0; i < FFMPEG_PATH.length; i++) 
+				ffmpegRequest.add(i, FFMPEG_PATH[i]);
 			return new ProcessManager(RUN.exec(ffmpegRequest.toArray(new String[ffmpegRequest.size()])));
 		} catch (IOException e) {
 			return null;

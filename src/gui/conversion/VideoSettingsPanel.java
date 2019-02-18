@@ -98,7 +98,7 @@ public final class VideoSettingsPanel extends JPanel implements Observer {
 	public void update(Observable o, Object arg) {
 		if(model.getCurrentFile() != null) {
 		     HashMap<SettingType, String> settings = model.getCurrentFile().getSettings();
-			 resolution.setText(settings.get(SettingType.VIDEO_RESOLUTION));
+			 resolution.setText(settings.get(SettingType.RESOLUTION));
 			 resolution.setEnabled(true); 
 			 bitrate.setText(settings.get(SettingType.VIDEO_BITRATE)); 
 			 bitrate.setEnabled(true);

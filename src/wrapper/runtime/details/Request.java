@@ -58,7 +58,7 @@ public class Request {
 		return this;
 	}
 	
-	public Request fPS(String fps) {
+	public Request fps(String fps) {
 		askSomethingElse(new String[]{ConversionFlagConstants.FLAG_FPS, fps});
 		return this;
 	}
@@ -91,6 +91,7 @@ public class Request {
 	
 	
 	public ProcessManager result() {
+		if(output!=null) askSomethingElse(new String[]{output});
 		return FFmpegRuntime.execute(request);
 	}
 	

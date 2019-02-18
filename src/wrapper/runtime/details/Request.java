@@ -13,6 +13,7 @@ public class Request {
 	
 	
 	
+	
 	public Request(String sourceFileName) {
 		if((this.sourceFileName = sourceFileName) == null) 
 			throw new NullPointerException("SourceFileName null !");
@@ -20,6 +21,7 @@ public class Request {
 		request.add("-i");
 		request.add(sourceFileName);
 	}
+	
 	
 	
 	
@@ -31,6 +33,7 @@ public class Request {
 
 
 	
+	
 	public Request buildVideoCodec(String newCodec) {
 		askSomethingElse(new String[]{""});
 		return this;
@@ -41,6 +44,7 @@ public class Request {
 		return this;
 	}
 
+	
 	
 	
 	public ProcessManager result() {

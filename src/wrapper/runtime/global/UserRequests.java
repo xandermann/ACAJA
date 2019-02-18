@@ -13,7 +13,74 @@ import wrapper.streams.WatchedConsumer;
  * Auteurs du projet : 
  * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
  */
-public final class UserRequests{		
+public final class UserRequests{	
+	//=======================================================================================================================
+	
+	
+	/**
+	 * [ METHODE INTERNE DE CLASSE. ]
+	 * @param file
+	 */
+	private static void executeSettingsFile(SettingsFile file) {
+		Request request = new Request(file.getFullName(), file.getFullName());
+		
+		HashMap<SettingType, String> ffmpegRequests = file.getRequests();
+		
+		for(SettingType requestKey : ffmpegRequests.keySet()) {
+			String newValue = ffmpegRequests.get(requestKey);
+			switch(requestKey) {
+				case VIDEO_CODEC : 
+					request.videoCodec(newValue);
+					break;
+				case VIDEO_BITRATE : 
+					request.videoBitrate(newValue);
+					break;
+				case FPS :
+					request.fps(newValue);
+					break;
+				case RESOLUTION :
+					request.resolution(newValue);
+					break;
+				case AUDIO_CODEC : 
+					request.audioCodec(newValue);
+					break;
+				case AUDIO_BITRATE : 
+					request.audioBitrate(newValue);
+					break;
+				case SAMPLING_RATE : 
+					request.samplingRate(newValue);
+					break;
+				case NUMBER_AUDIO_CHANNELS : 
+					request.numberAudioChannels(newValue);
+					break;
+			}
+		}
+	}
+	
+	
+	//=======================================================================================================================
+	
+	
+	/**
+	 * [ METHODE INTERNE DE CLASSE. ]
+	 * @param file
+	 */
+	private static void executeProcessingFile(ProcessingFile file) {
+		Request request = new Request(file.getFullName(), file.getFullName());
+		
+		HashMap<ProcessingType, String> ffmpegRequests = file.getPerformedProcessings();
+		
+		for(ProcessingType requestKey : ffmpegRequests.keySet()) {
+			String newValue = ffmpegRequests.get(requestKey);
+			switch(requestKey) {
+			}
+		}
+	}
+	
+	
+	//=======================================================================================================================
+	
+	
 	/**
 	 * [ METHODE DE CLASSE. ]
 	 * 
@@ -22,20 +89,12 @@ public final class UserRequests{
 	 * @param file 		La fichier sur lequel il faut realiser les modifications. 
 	 */
 	public static void execute(SelectableFile file) {
-		Request request = new Request(file.getFullName());
-		if(file instanceof SettingsFile) {
-			HashMap<SettingType, String> ffmpegRequests = ((SettingsFile) file).getRequests();
-			for(SettingType requestKey : ffmpegRequests.keySet()) {
-					if(requestKey == SettingType.VIDEO_CODEC) {
-						String oldExtension = file.getSourceFile().getPath().split("[.]")[file.getSourceFile().getPath().split("[.]").length-1];
-						String fileName = file.getSourceFile().getPath();
-						String newFileName = fileName.substring(0, fileName.lastIndexOf(oldExtension)-1) + ffmpegRequests.get(SettingType.VIDEO_CODEC);
-						//WatchedConsumer.consumeStreams(FFmpegRuntime.execute(new String[]{"-i", fileName, newFileName}));
-					}
-			}
-		}
+		if(file == null) throw new NullPointerException("SelectableFile null!");
+		if(file instanceof SettingsFile) 
+			executeSettingsFile((SettingsFile) file);
+		else
+			executeProcessingFile((ProcessingFile) file);
 	}
-	
 	
 	//==================================================================================================================================================
 }

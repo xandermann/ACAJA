@@ -86,7 +86,7 @@ public final class SystemRequests{
 			//Parametres a extraire uniquement pour les fichiers video. 
 			if(file.isVideo()) {
 				fileSettings.put(SettingType.VIDEO_CODEC, StreamsFilter.findVideoSetting(informations, 0));
-				fileSettings.put(SettingType.VIDEO_RESOLUTION, StreamsFilter.findVideoSetting(informations, 2));	
+				fileSettings.put(SettingType.RESOLUTION, StreamsFilter.findVideoSetting(informations, 2));	
 				fileSettings.put(SettingType.VIDEO_BITRATE, StreamsFilter.findVideoSetting(informations, 3));
 				fileSettings.put(SettingType.FPS, StreamsFilter.findVideoSetting(informations, 4));
 			}	

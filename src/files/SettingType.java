@@ -45,5 +45,5 @@ public enum SettingType implements OperationType {
 	/**
 	 * Parametre de type resolution video.
 	 */
-	VIDEO_RESOLUTION
+	RESOLUTION
 }

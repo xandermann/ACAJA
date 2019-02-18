@@ -49,15 +49,14 @@ public final class FFmpegRuntime {
 	 * l'utilisateur vu avec M. OUNI. ).
 	 */
 	private static void install(){
-		//Provisoirement j'utilise le ffmpeg de la variable path.
-		if (System.getProperty("os.name").contains("Linux") || System.getProperty("os.name").contains("Mac")) {
+		String os = System.getProperty("os.name");
+		if(os.contains("Linux") || os.contains("Mac")) {
 			FFMPEG_PATH = new String[2];
 			FFMPEG_PATH[0] = "/bin/bash";
 			FFMPEG_PATH[1] = "ffmpeg";
-		} else {
-			FFMPEG_PATH = new String[1];
-			FFMPEG_PATH[0] = "ffmpeg";
-		}
+		} else 
+			FFMPEG_PATH = new String[]{"ffmpeg"};
+		
 		System.out.println("Chemin d'execution FFMPEG = " + FFMPEG_PATH);
 	}
 	
@@ -90,17 +89,17 @@ public final class FFmpegRuntime {
 	public static ProcessManager execute(List<String> ffmpegRequest){
 		if(FFMPEG_PATH==null) install();
 		try {
-			for(int i = 0 ; i < FFMPEG_PATH.length;i++) ffmpegRequest.add(i, FFMPEG_PATH[i]);
+			for(int i = 0; i < FFMPEG_PATH.length; i++) ffmpegRequest.add(i, FFMPEG_PATH[i]);
+			
 			System.out.println("Verification array commande : ");
 			String[] array = ffmpegRequest.toArray(new String[ffmpegRequest.size()]);
 			for(String s : array) {
 				System.out.println(s);
 			}
+			
 			return new ProcessManager(RUN.exec(ffmpegRequest.toArray(new String[ffmpegRequest.size()])));
 		} catch (IOException e) {
-			e.printStackTrace();
 			return null;
-			//return null;
 		}
 	}
 	

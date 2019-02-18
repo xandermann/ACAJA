@@ -26,28 +26,6 @@ public final class SystemRequests{
 	
 	
 	/**
-	 * [ METHODE DE CLASSE POUR LE RENSEIGNEMENT DE LA DUREE D'UNE VIDEO OU D'UN SON. ]
-	 * 
-	 * Methode pour connaitre la duree en secondes d'une video ou d'un son. 
-	 * 
-	 * TODO  iteration 1 pas concernee. 
-	 * 
-	 * @param file		La video ou le son dont on souhaite connaitre la duree. 
-	 * 
-	 * @return long 	La duree en secondes du ou de la video. 
-	 */
-	public static long getDuration(File file) {
-		return 0;
-	}
-	
-
-	
-	//=======================================================================================================================
-	//=======================================================================================================================
-	
-	
-	
-	/**
 	 * [ METHODE DE CLASSE POUR LE RENSEIGNEMENT DES PARAMETRES D'UNE VIDEO OU D'UN SON. ]
 	 * 
 	 * Cette methode retourne les parametres ( = caracteristiques ) du fichier. 
@@ -92,6 +70,8 @@ public final class SystemRequests{
 			String nbChannels = StreamsFilter.findAudioSetting(informations, 2).contains("mono") ? "1" : "2";
 			fileSettings.put(SettingType.NUMBER_AUDIO_CHANNELS, nbChannels);
 			fileSettings.put(SettingType.AUDIO_BITRATE, StreamsFilter.findAudioSetting(informations, 4));
+			
+			file.setDuration(StreamsFilter.findDuration(informations));
 		}
 	}
 	

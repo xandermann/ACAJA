@@ -24,7 +24,7 @@ public class SelectableFile{
 	/**
 	 * La duree de la video.
 	 */
-	protected long duration;
+	protected String duration;
 
 	/**
 	 * Le type de fichier.
@@ -184,9 +184,9 @@ public class SelectableFile{
 	 * 
 	 * Methode pour recuperer la duree d'une video.
 	 * 
-	 * @return int Le type du fichier.
+	 * @return  
 	 */
-	public long getDuration() {
+	public String getDuration() {
 		return duration;
 	}
 
@@ -195,9 +195,9 @@ public class SelectableFile{
 	 * 
 	 * Methode pour modifier la duree d'une video.
 	 * 
-	 * @return int Le type du fichier.
+	 * @return
 	 */
-	public void setDuration(long duration) {
+	public void setDuration(String duration) {
 		this.duration = duration;
 	}
 

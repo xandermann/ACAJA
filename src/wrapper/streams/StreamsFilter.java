@@ -53,13 +53,25 @@ public final class StreamsFilter implements StreamsManager {
 	//=======================================================================================================================
 	
 
+	/**
+	 * [ METHODE DE CLASSE. ]
+	 * 
+	 * Methode pour extraire la duree. 
+	 */
+	public static String findDuration(String informations) {
+		return informations.substring(
+					informations.indexOf("Duration: ") + "Duration: ".length(), 
+					informations.indexOf("Duration: ") + informations.substring(informations.indexOf("Duration: ")).indexOf(",")
+				);
+	}
+	
 	
 	/**
 	 * [ METHODE DE CLASSE. ]
 	 * 
 	 * Methode pour extraire un parametre d'un fichier 
 	 * video dans la plage d'informations fournie par FFMPEG 
-	 * a partir d'in index. 
+	 * a partir d'un index. 
 	 */
 	public static String findVideoSetting(String informations, int indexSetting) {
 		return findSetting(informations, "Video: ", indexSetting);

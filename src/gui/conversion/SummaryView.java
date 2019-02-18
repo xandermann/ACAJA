@@ -26,34 +26,29 @@ public final class SummaryView extends JPanel implements Observer {
 		this.model = model;
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-		JLabel nom = new JLabel("Fichier selectionné : ");
-		JLabel video = new JLabel("Codec video actuel : ");
-		JLabel son = new JLabel("Codec audio actuel : ");
-		JLabel duree = new JLabel("Durée : ");
-
 		j = new JPanel();
 		j.setLayout(new FlowLayout());
-		j.add(nom, BorderLayout.EAST);
-
-		j1 = new JPanel();
-		j1.setLayout(new FlowLayout());
-		j1.add(video, BorderLayout.EAST);
-
-		j2 = new JPanel();
-		j2.setLayout(new FlowLayout());
-		j2.add(son, BorderLayout.EAST);
-
-		j3 = new JPanel();
-		j3.setLayout(new FlowLayout());
-		j3.add(duree, BorderLayout.EAST);
+		j.add(new JLabel("Fichier selectionne : "), BorderLayout.EAST);
 		name = new JLabel("NA");
 		j.add(name, BorderLayout.WEST);
+		
+		j1 = new JPanel();
+		j1.setLayout(new FlowLayout());
+		j1.add(new JLabel("Codec video actuel : "), BorderLayout.EAST);
 		videoSummary = new JLabel("NA");
 		j1.add(videoSummary, BorderLayout.WEST);
+		
+		j2 = new JPanel();
+		j2.setLayout(new FlowLayout());
+		j2.add(new JLabel("Codec audio actuel : "), BorderLayout.EAST);
 		soundSummary = new JLabel("NA");
 		j2.add(soundSummary, BorderLayout.WEST);
-		// duration = new JLabel("NA");
-		// j2.add(duration,BorderLayout.WEST);
+		
+		j3 = new JPanel();
+		j3.setLayout(new FlowLayout());
+		j3.add(new JLabel("Duree : "), BorderLayout.EAST);
+		duration = new JLabel("NA");
+		j3.add(duration,BorderLayout.WEST);
 
 		add(j);
 		add(j1);
@@ -71,10 +66,9 @@ public final class SummaryView extends JPanel implements Observer {
 	public void update(Observable o, Object arg) {
 		if (model.getCurrentFile() != null) {
 			name.setText(model.getCurrentFile().getName());
-			videoSummary.setText((String) model.getCurrentFile().getSettings().get(SettingType.VIDEO_CODEC));
-			soundSummary.setText((String) model.getCurrentFile().getSettings().get(SettingType.AUDIO_CODEC));
-			// duration.setText((String)
-			// this.model.getCurrentFile().getSettings().get("duree"));
+			videoSummary.setText(model.getCurrentFile().getSettings().get(SettingType.VIDEO_CODEC));
+			soundSummary.setText(model.getCurrentFile().getSettings().get(SettingType.AUDIO_CODEC));
+			duration.setText(this.model.getCurrentFile().getDuration());
 		} else {
 			name.setText("NA");
 			videoSummary.setText("NA");

@@ -11,7 +11,7 @@ import wrapper.runtime.global.MessageConstants;
  * Auteurs du projet : 
  * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
  */
-public final class StreamsConsumer implements StreamsManager{
+public class StreamsConsumer implements StreamsManager{
 	//=======================================================================================================================
 	//=======================================================================================================================	
 	

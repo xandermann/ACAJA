@@ -100,7 +100,7 @@ public final class ConversionModel extends Model {
 	 */
 	public DefaultListModel<ListEntry> getFilenames() {
 		DefaultListModel<ListEntry> filenameList = new DefaultListModel<ListEntry>();
-		for (SettingsFile f : files) filenameList.addElement(new ListEntry(f.getSourceFilename()));
+		for (SettingsFile f : files) filenameList.addElement(new ListEntry(f.getName()));
 		return filenameList;
 	}
 
@@ -224,7 +224,7 @@ public final class ConversionModel extends Model {
 	 */
 	public void setCurrentFile(String fileName) {
 		for (SettingsFile f : this.getFiles()) {
-			if (f.getSourceFilename().equals(fileName)) currentFile = f;
+			if (f.getName().equals(fileName)) currentFile = f;
 		}
 		sendChanges();
 	}

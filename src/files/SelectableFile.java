@@ -226,12 +226,23 @@ public class SelectableFile{
 	/**
 	 * [ METHODE ACCESSEUR - GETTER. ]
 	 * 
-	 * Methode pour recuperer le nom du fichier
+	 * Methode pour recuperer le nom du fichier.
 	 * 
-	 * @return String Le nom du fichier source
+	 * @return String 	Le nom du fichier source.
 	 */
-	public String getSourceFilename() {
+	public String getName() {
 		return sourceFile.getName();
+	}
+	
+	/**
+	 * [ METHODE ACCESSEUR - GETTER. ]
+	 * 
+	 * Methode pour recuperer le nom complet du fichier.
+	 * 
+	 * @return String 	Le nom complet du fichier source.
+	 */
+	public String getFullName() {
+		return sourceFile.getPath();
 	}
 	
 	

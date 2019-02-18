@@ -5,6 +5,7 @@ import java.util.HashMap;
 import files.*;
 import wrapper.runtime.details.FFmpegRuntime;
 import wrapper.runtime.details.ProcessManager;
+import wrapper.runtime.details.Request;
 import wrapper.streams.StreamsFilter;
 
 /**
@@ -64,15 +65,12 @@ public final class SystemRequests{
 	 * 
 	 * @param file							Le fichier dont on souhaite connaitre les parametres. 
 	*/
-	public static void getSettings(SettingsFile file){
+	public static void askSettings(SettingsFile file){
 		if(file.containsAudio()){	
 			/**
 			 * REQUETE A SOUMETRE A FFMPEG.
-			 * 
-			 * LA requete ffmpeg -i inputFile permet de connaitre les caracteristiques
-			 * d'un fichier fourni en fliux d'entree ( = inputFile ). 
 			 */
-			ProcessManager processManager = FFmpegRuntime.execute(file.getSourceFile().getPath());
+			ProcessManager processManager = (new Request(file.getFullName())).result();
 			
 			/**
 			 * EXTRACTION DES DONNEES.
@@ -84,28 +82,18 @@ public final class SystemRequests{
 			 * INITIALISATION DES PARAMETRES DE LA VIDEO OU DU SON.
 			 */
 			HashMap<SettingType, String> fileSettings = file.getSettings();
-		
 			
 			//Parametres a extraire uniquement pour les fichiers video. 
-			String codec = file.getSourceFile().getName().split("[.]")[file.getSourceFile().getName().split("[.]").length-1];
 			if(file.isVideo()) {
-				fileSettings.put(SettingType.VIDEO_CODEC, codec);
-						
-				fileSettings.put(SettingType.VIDEO_RESOLUTION, StreamsFilter.findVideoSetting(informations, 2));
-				
+				fileSettings.put(SettingType.VIDEO_CODEC, StreamsFilter.findVideoSetting(informations, 0));
+				fileSettings.put(SettingType.VIDEO_RESOLUTION, StreamsFilter.findVideoSetting(informations, 2));	
 				fileSettings.put(SettingType.VIDEO_BITRATE, StreamsFilter.findVideoSetting(informations, 3));
 				fileSettings.put(SettingType.FPS, StreamsFilter.findVideoSetting(informations, 4));
-				fileSettings.put(SettingType.AUDIO_CODEC, StreamsFilter.findAudioSetting(informations, 0));
-			}else
-				fileSettings.put(SettingType.AUDIO_CODEC, codec);
-			
+			}	
+		    fileSettings.put(SettingType.AUDIO_CODEC, StreamsFilter.findAudioSetting(informations, 0));
 			fileSettings.put(SettingType.SAMPLING_RATE,  StreamsFilter.findAudioSetting(informations, 1));
-			
-			if(StreamsFilter.findAudioSetting(informations, 2).contains("mono"))
-				fileSettings.put(SettingType.NUMBER_AUDIO_CHANNELS, "1");
-			else
-				fileSettings.put(SettingType.NUMBER_AUDIO_CHANNELS, "2");
-			
+			String nbChannels = StreamsFilter.findAudioSetting(informations, 2).contains("mono") ? "1" : "2";
+			fileSettings.put(SettingType.NUMBER_AUDIO_CHANNELS, nbChannels);
 			fileSettings.put(SettingType.AUDIO_BITRATE, StreamsFilter.findAudioSetting(informations, 4));
 		}
 	}

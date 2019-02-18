@@ -1,5 +1,8 @@
 package wrapper.runtime.details;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 /**
  * Cette classe se charge de connaitre le chemin vers le fichier executable 
  * de FFMPEG. Elle se charge, aussi comme il a ete dis avant, d'executer
@@ -70,16 +73,17 @@ public final class FFmpegRuntime {
 	 * FFMPEG qu'elles soumettent.
 	 * 
 	 * @param ffmpegRequest			Une requete FFMPEG : c-a-d une requete realisee en "code" FFMPEG
-	 * 								et a faire executer 
+	 * 								et a faire executer.
 	 * 
 	 * @return ProcessManager		Un objet de type ProcessManager gerant la reponse de FFMPEG a 
 	 * 								la requete qui lui est soumise par l'executeur de lignes de 
 	 * 								commande RUN de type Runtime. 
 	 */
-	public static ProcessManager execute(String ffmpegRequest){
+	public static ProcessManager execute(List<String> ffmpegRequest){
 		if(FFMPEG_PATH==null) install();
 		try {
-			return new ProcessManager(RUN.exec(FFMPEG_PATH+"-i "+ffmpegRequest));
+			ffmpegRequest.add(0, FFMPEG_PATH);
+			return new ProcessManager(RUN.exec(ffmpegRequest.toArray(new String[ffmpegRequest.size()])));
 		} catch (IOException e) {
 			return null;
 		}

@@ -2,7 +2,7 @@ package gui;
 
 import javax.swing.JFrame;
 import tools.WindowTools;
-import wrapper.runtime.global.UserRequests;
+import wrapper.streams.WatchedConsumer;
 
 /**
  * [ CLASSE THREAD POUR GERER LA FENTRE D'ATTENTE. ]
@@ -33,7 +33,7 @@ public class ThreadForWaitWindow extends Thread{
 	 */
     public void run() {
     	WindowTools.executeWindow(waitWindow);
-		while(UserRequests.workIsOnGoing());
+		while(WatchedConsumer.workIsOnGoing());
 		waitWindow.dispose();
     }
     

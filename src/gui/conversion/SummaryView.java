@@ -70,7 +70,7 @@ public final class SummaryView extends JPanel implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		if (model.getCurrentFile() != null) {
-			name.setText(model.getCurrentFile().getSourceFilename());
+			name.setText(model.getCurrentFile().getName());
 			videoSummary.setText((String) model.getCurrentFile().getSettings().get(SettingType.VIDEO_CODEC));
 			soundSummary.setText((String) model.getCurrentFile().getSettings().get(SettingType.AUDIO_CODEC));
 			// duration.setText((String)

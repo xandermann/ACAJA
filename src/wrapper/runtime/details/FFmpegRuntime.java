@@ -23,7 +23,7 @@ public final class FFmpegRuntime {
 	 * Ceci est un attribut de classe a usage uniquement interne
 	 * ( d'ou le private ). 
 	 */
-	private static String FFMPEG_PATH;
+	private static String[] FFMPEG_PATH;
 	/**
 	 * [ CONSTANTE DE CLASSE - EXECUTEUR DE LIGNES DE COMMANDES. ]
 	 * 
@@ -50,7 +50,14 @@ public final class FFmpegRuntime {
 	 */
 	private static void install(){
 		//Provisoirement j'utilise le ffmpeg de la variable path.
-		FFMPEG_PATH = System.getProperty("os.name").contains("Linux") || System.getProperty("os.name").contains("Mac") ? "/bin/bash ffmpeg " : "ffmpeg ";
+		if (System.getProperty("os.name").contains("Linux") || System.getProperty("os.name").contains("Mac")) {
+			FFMPEG_PATH = new String[2];
+			FFMPEG_PATH[0] = "/bin/bash";
+			FFMPEG_PATH[1] = "ffmpeg";
+		} else {
+			FFMPEG_PATH = new String[1];
+			FFMPEG_PATH[0] = "ffmpeg";
+		}
 		System.out.println("Chemin d'execution FFMPEG = " + FFMPEG_PATH);
 	}
 	
@@ -83,7 +90,7 @@ public final class FFmpegRuntime {
 	public static ProcessManager execute(List<String> ffmpegRequest){
 		if(FFMPEG_PATH==null) install();
 		try {
-			ffmpegRequest.add(0, FFMPEG_PATH);
+			for(int i = 0 ; i < FFMPEG_PATH.length;i++) ffmpegRequest.add(i, FFMPEG_PATH[i]);
 			System.out.println("Verification array commande : ");
 			String[] array = ffmpegRequest.toArray(new String[ffmpegRequest.size()]);
 			for(String s : array) {
@@ -91,7 +98,9 @@ public final class FFmpegRuntime {
 			}
 			return new ProcessManager(RUN.exec(ffmpegRequest.toArray(new String[ffmpegRequest.size()])));
 		} catch (IOException e) {
+			e.printStackTrace();
 			return null;
+			//return null;
 		}
 	}
 	

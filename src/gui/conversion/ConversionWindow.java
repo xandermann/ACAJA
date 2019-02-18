@@ -23,7 +23,7 @@ public final class ConversionWindow extends StylizedJFrame {
 	 */
 	private ConversionModel model;
 	private JLabel empty_workspace;
-
+	private EntryHistory entries;
 	
 	//=======================================================================================================================
 	//=======================================================================================================================
@@ -66,6 +66,7 @@ public final class ConversionWindow extends StylizedJFrame {
 					}
 					try {
 						model.add(f);
+						entries.addMediaToHistory(new FileInformation(f.getName(),f.getAbsolutePath()));
 					} catch (IncorrectFileException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -103,7 +104,35 @@ public final class ConversionWindow extends StylizedJFrame {
 				}
 			}
 		});
-
+		
+		
+		JMenu recentFiles = new JMenu("Fichiers recemments importes");
+		FileInformation[] files = this.entries.getFiles();
+		System.out.println(files);
+	
+			for(FileInformation f : files) {
+				if(f != null) {
+					StylizedJMenuItem itemFile = new StylizedJMenuItem(f.getFileName());
+					recentFiles.add(itemFile);
+					itemFile.addActionListener(new ActionListener() {
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							try {
+								// Pourquoi pas de maj de la vue infos ici ? a verifier
+								File file = new File(f.getPath());
+								model.add(file);
+								model.setCurrentFile(file.getName());
+							} catch(Exception err) {
+								JOptionPane.showMessageDialog(null, err.getMessage());
+							}
+							
+						}
+					});
+				}	
+			}
+		
+		
+		
 		StylizedJMenuItem clearLibrary = new StylizedJMenuItem("Vider la bibliotheque");
 		clearLibrary.addActionListener(new ActionListener() {
 			@Override
@@ -116,12 +145,14 @@ public final class ConversionWindow extends StylizedJFrame {
 		quit.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
+				System.exit(0);
 				dispose();
 			}
 		});
 
 		filesMenu.add(importFile);
 		filesMenu.add(importFolder);
+		filesMenu.add(recentFiles);
 		filesMenu.add(clearLibrary);
 		filesMenu.add(quit);
 
@@ -230,6 +261,11 @@ public final class ConversionWindow extends StylizedJFrame {
 		StylizedJPanel p = new StylizedJPanel();
 		p.setLayout(new BorderLayout());
 		StylizedJMenuBar menu = new StylizedJMenuBar();
+		
+	
+		conversionWindow.entries = EntryHistory.createInstance();
+		
+		
 		menu.add(conversionWindow.drawFileMenu());
 		menu.add(conversionWindow.drawOptionsMenu());
 		menu.add(conversionWindow.drawConvertMenu());
@@ -242,6 +278,8 @@ public final class ConversionWindow extends StylizedJFrame {
 		conversionWindow.add(lv, BorderLayout.WEST);
 		conversionWindow.add(p, BorderLayout.CENTER);
 
+	
+		
 		WindowTools.executeWindow(conversionWindow);
 	}
 

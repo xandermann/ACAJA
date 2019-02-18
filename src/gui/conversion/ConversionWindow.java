@@ -56,21 +56,12 @@ public final class ConversionWindow extends StylizedJFrame {
 		importFile.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
-				//try {
+				 try {
 					File f = null;
-					try {
-						f = DataChoose.FileChoose();
-					} catch (ImportationException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-					try {
-						model.add(f);
-						entries.addMediaToHistory(new FileInformation(f.getName(),f.getAbsolutePath()));
-					} catch (IncorrectFileException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+					f = DataChoose.FileChoose();
+					model.add(f);
+					entries.addMediaToHistory(new FileInformation(f.getName(),f.getAbsolutePath()));
+					
 					if (model.getCurrentFile() == null) {
 						StylizedJPanel dataView = new StylizedJPanel();
 						dataView.setLayout(new BoxLayout(dataView, BoxLayout.Y_AXIS));
@@ -83,9 +74,9 @@ public final class ConversionWindow extends StylizedJFrame {
 						empty_workspace.setVisible(false);
 					}
 					model.setCurrentFile(f.getName());
-			///	} catch (Exception e) {
-				//	JOptionPane.showMessageDialog(null, e.getMessage());
-				//}
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(null, e.getMessage());
+				}
 			}
 		});
 

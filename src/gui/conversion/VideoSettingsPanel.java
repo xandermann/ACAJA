@@ -1,24 +1,12 @@
 package gui.conversion;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.util.HashMap;
-import java.util.Observable;
-import java.util.Observer;
-
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-
+import java.util.*;
+import javax.swing.*;
 import files.SettingType;
+import wrapper.language.ResolutionsConstants;
 
 public final class VideoSettingsPanel extends JPanel implements Observer {
 	//=======================================================================================================================
@@ -26,10 +14,10 @@ public final class VideoSettingsPanel extends JPanel implements Observer {
 
 	
 	private ConversionModel model;
-	private JTextField resolution;
-	private JTextField bitrate;
-	private JTextField fps;
-
+	private JTextField bitrateText;
+	private JTextField fpsText;
+	private JComboBox codecsComboBox, resolutionsComboBox;
+	
 	
 	//=======================================================================================================================
 	//=======================================================================================================================
@@ -38,55 +26,56 @@ public final class VideoSettingsPanel extends JPanel implements Observer {
 	public VideoSettingsPanel(ConversionModel model) {
 		this.model = model;
 
-		resolution = new JTextField();
-		bitrate = new JTextField();
-		fps = new JTextField();
+		bitrateText = new JTextField();
+		fpsText = new JTextField();
 
 		setSize(new Dimension(400, 400));
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-		JPanel codec = new JPanel();
-		codec.setLayout(new FlowLayout());
-
-		codec.add(new JLabel("Codec video : "), BorderLayout.WEST);
-		String[] format = { ".avi", ".mp4", ".flv" };
-		JComboBox box_format = new JComboBox(format);
-		box_format.addActionListener(new ActionListener() {
+		JPanel codecPanel = new JPanel();
+		codecPanel.setLayout(new FlowLayout());
+		codecsComboBox = new JComboBox<String>(new String[]{"mpeg4"});
+		codecsComboBox.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (model.getCurrentFile() != null) {
+				if (model.getCurrentFile() != null)
 					model.modify(SettingType.VIDEO_CODEC, ((JComboBox) e.getSource()).getSelectedItem().toString());
-				}
 			}
 		});
-		codec.add(box_format, BorderLayout.EAST);
+		codecPanel.add(new JLabel("Codec video : "), BorderLayout.WEST);
+		codecPanel.add(codecsComboBox, BorderLayout.EAST);
 
-		JPanel reso = new JPanel();
-		reso.setLayout(new FlowLayout());
+		ResolutionsConstants.getAllResolutions();
+		
+		JPanel resolutionPanel = new JPanel();
+		resolutionPanel.setLayout(new FlowLayout());
+		resolutionsComboBox = new JComboBox<String>(ResolutionsConstants.ALL_RESOLUTIONS);
+		resolutionsComboBox.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(model.getCurrentFile() != null) 				
+					model.modify(SettingType.RESOLUTION, ((JComboBox) e.getSource()).getSelectedItem().toString());
+			}
+		});
+		resolutionPanel.add(new JLabel("Resolution : "), BorderLayout.WEST);
+		resolutionPanel.add(resolutionsComboBox, BorderLayout.EAST);
 
-		reso.add(new JLabel("Resolution : "), BorderLayout.WEST);
-		resolution.setPreferredSize(new Dimension(300, 20));
-		resolution.setEnabled(false);
-		reso.add(resolution, BorderLayout.EAST);
+		JPanel bitrateTextPanel = new JPanel();
+		bitrateTextPanel.setLayout(new FlowLayout());
+		bitrateTextPanel.add(new JLabel("Bitrate (kb/s) : "), BorderLayout.WEST);
+		bitrateText.setPreferredSize(new Dimension(300, 20));
+		bitrateTextPanel.add(bitrateText, BorderLayout.EAST);
 
-		JPanel br = new JPanel();
-		br.setLayout(new FlowLayout());
-		br.add(new JLabel("Bitrate (kb/s) : "), BorderLayout.WEST);
-		bitrate.setPreferredSize(new Dimension(300, 20));
-		bitrate.setEnabled(false);
-		br.add(bitrate, BorderLayout.EAST);
+		JPanel fpsTextPanel= new JPanel();
+		fpsTextPanel.setLayout(new FlowLayout());
+		fpsTextPanel.add(new JLabel("Images par seconde (fps) : "), BorderLayout.WEST);
+		fpsText.setPreferredSize(new Dimension(300, 20));
+		fpsTextPanel.add(fpsText, BorderLayout.EAST);
 
-		JPanel panef = new JPanel();
-		panef.setLayout(new FlowLayout());
-		panef.add(new JLabel("Images par seconde (FPS) : "), BorderLayout.WEST);
-		fps.setPreferredSize(new Dimension(300, 20));
-		fps.setEnabled(false);
-		panef.add(fps, BorderLayout.EAST);
-
-		add(codec);
-		add(reso);
-		add(br);
-		add(panef);
+		add(codecPanel);
+		add(resolutionPanel);
+		add(bitrateTextPanel);
+		add(fpsTextPanel);
 	}
 
 	
@@ -98,19 +87,10 @@ public final class VideoSettingsPanel extends JPanel implements Observer {
 	public void update(Observable o, Object arg) {
 		if(model.getCurrentFile() != null) {
 		     HashMap<SettingType, String> settings = model.getCurrentFile().getSettings();
-			 resolution.setText(settings.get(SettingType.RESOLUTION));
-			 resolution.setEnabled(true); 
-			 bitrate.setText(settings.get(SettingType.VIDEO_BITRATE)); 
-			 bitrate.setEnabled(true);
-			 fps.setText(settings.get(SettingType.FPS));
-			 fps.setEnabled(true);
-		} else {
-			resolution.setText("");
-			resolution.setEnabled(false);
-			bitrate.setText("");
-			bitrate.setEnabled(false);
-			fps.setText("");
-			fps.setEnabled(false);
+		     codecsComboBox.setSelectedItem(settings.get(SettingType.VIDEO_CODEC));
+		     resolutionsComboBox.setSelectedItem(settings.get(SettingType.RESOLUTION));
+			 bitrateText.setText(settings.get(SettingType.VIDEO_BITRATE)); 
+			 fpsText.setText(settings.get(SettingType.FPS));
 		}
 	}
 

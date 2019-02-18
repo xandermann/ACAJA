@@ -3,7 +3,8 @@ package wrapper.streams;
 import java.io.*;
 import java.util.Iterator;
 import javax.swing.JOptionPane;
-import wrapper.runtime.global.MessageConstants;
+
+import wrapper.runtime.details.MessageConstants;
 
 
 /**

@@ -11,7 +11,7 @@ public class PanelLibrary extends JPanel{
 	public PanelLibrary() {
 		
 		this.setPreferredSize(new Dimension(250, 550));
-		this.add(new JLabel("Bibliothèque"));
+		this.add(new JLabel("Bibliotheque"));
 		
 	}
 	

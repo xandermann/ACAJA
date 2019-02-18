@@ -14,7 +14,7 @@ import tools.*;
 public class PanelImage extends JPanel{
 	public PanelImage() {
 		this.setPreferredSize(new Dimension(600, 550));
-		this.add(new JLabel("Vidéo à éditer"));
+		this.add(new JLabel("Video a editer"));
 	}
 	
 	@Override

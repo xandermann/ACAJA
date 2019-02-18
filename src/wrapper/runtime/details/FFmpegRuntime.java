@@ -56,10 +56,12 @@ public final class FFmpegRuntime {
 			FFMPEG_PATH = new String[2];
 			FFMPEG_PATH[0] = "/bin/bash";
 			FFMPEG_PATH[1] = "ffmpeg";
-		}else if(os.contains("Mac")) 
-			FFMPEG_PATH = new String[] {"/usr/local/bin/ffmpeg"};
-		 else
-			FFMPEG_PATH = new String[]{"ffmpeg"};
+		}else{
+			if(os.contains("Mac")) 
+				FFMPEG_PATH = new String[] {"/usr/local/bin/ffmpeg"};
+			 else
+				FFMPEG_PATH = new String[]{"ffmpeg"};
+		}
 	}
 	
 	

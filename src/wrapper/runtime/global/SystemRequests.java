@@ -75,8 +75,6 @@ public final class SystemRequests{
 			 * EXTRACTION DES DONNEES.
 			 */
 			String informations = StreamsFilter.findInformationsOfMediaFile(processManager);
-			System.out.println("infos =" + informations);
-			
 			/**
 			 * INITIALISATION DES PARAMETRES DE LA VIDEO OU DU SON.
 			 */

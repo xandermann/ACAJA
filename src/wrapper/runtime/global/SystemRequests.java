@@ -4,8 +4,8 @@ import java.io.*;
 import java.util.HashMap;
 import files.*;
 import wrapper.runtime.details.FFmpegRuntime;
-import wrapper.runtime.details.ProcessManager;
 import wrapper.runtime.details.Request;
+import wrapper.streams.ProcessManager;
 import wrapper.streams.StreamsFilter;
 
 /**

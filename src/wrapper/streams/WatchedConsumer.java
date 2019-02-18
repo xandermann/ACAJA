@@ -1,7 +1,5 @@
 package wrapper.streams;
 
-import wrapper.runtime.details.ProcessManager;
-
 public class WatchedConsumer extends StreamsConsumer {
 	//==================================================================================================================================================
 	

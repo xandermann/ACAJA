@@ -4,8 +4,6 @@ import java.io.*;
 import java.util.Iterator;
 import javax.swing.JOptionPane;
 
-import wrapper.runtime.details.MessageConstants;
-
 
 /**
  * [ SUPERCLASSE ABSTRAITE DES ITERATEURS SUR LES FLUX. ]

@@ -2,7 +2,6 @@ package wrapper.streams;
 
 import javax.swing.JOptionPane;
 
-import wrapper.runtime.details.MessageConstants;
 import wrapper.runtime.details.ProcessManager;
 
 /**

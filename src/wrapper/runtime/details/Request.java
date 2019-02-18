@@ -4,23 +4,36 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
+import wrapper.language.ConversionFlagConstants;
 import wrapper.streams.WatchedConsumer;
 
 public class Request {
 	private List<String> request;
-	private String sourceFileName;
+	private String input;
+	private String output;
 	
 	
 	
 	
-	public Request(String sourceFileName) {
-		if((this.sourceFileName = sourceFileName) == null) 
-			throw new NullPointerException("SourceFileName null !");
+	public Request(String input) {
+		if((this.input = input) == null) 
+			throw new NullPointerException("input null !");
+		output = null;
 		request = new ArrayList<String>();
 		request.add("-i");
-		request.add(sourceFileName);
+		request.add(input);
 	}
+	
+	public Request(String input, String output) {
+		if((this.input = input) == null) 
+			throw new NullPointerException("input null !");
+		if((this.output = output) == null) 
+			throw new NullPointerException("ouput null !");
+		request = new ArrayList<String>();
+		request.add("-i");
+		request.add(input);
+	}
+	
 	
 	
 	
@@ -34,17 +47,26 @@ public class Request {
 
 	
 	
-	public Request buildVideoCodec(String newCodec) {
-		askSomethingElse(new String[]{""});
+	public Request buildVideoCodec(String vcodec) {
+		askSomethingElse(new String[]{ConversionFlagConstants.FLAG_VIDEO_CODEC, vcodec});
 		return this;
 	}
 	
-	public Request buildAudioCodec() {
-		askSomethingElse(new String[]{""});
+	public Request buildAudioCodec(String acodec) {
+		askSomethingElse(new String[]{ConversionFlagConstants.FLAG_VIDEO_CODEC, acodec});
 		return this;
 	}
 
+	public Request buildResolution(String resolution) {
+		askSomethingElse(new String[]{ConversionFlagConstants.FLAG_RESOLUTION, resolution});
+		return this;
+	}
 	
+	public Request buildSamplingRate(String samplingRate) {
+		askSomethingElse(new String[]{ConversionFlagConstants.FLAG_SAMPLING_RATE, samplingRate});
+		return this;
+	}
+
 	
 	
 	public ProcessManager result() {

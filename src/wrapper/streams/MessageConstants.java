@@ -1,4 +1,4 @@
-package wrapper.runtime.details;
+package wrapper.streams;
 
 public final class MessageConstants {
 	private static final String FAILURE_SUFFIX = "ERREUR EN INTERNE !";

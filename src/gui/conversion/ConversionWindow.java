@@ -216,7 +216,7 @@ public final class ConversionWindow extends StylizedJFrame {
 		ConversionWindow conversionWindow = new ConversionWindow();
 
 		conversionWindow.setResizable(false);
-		conversionWindow.setTitle("Acaja Conversion");
+		conversionWindow.setTitle("Acaja - Mode Conversion");
 		conversionWindow.setSize(new Dimension(1000, 600));
 		conversionWindow.setLocationRelativeTo(null);
 		conversionWindow.setDefaultCloseOperation(StylizedJFrame.EXIT_ON_CLOSE);

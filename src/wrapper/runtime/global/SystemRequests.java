@@ -71,12 +71,11 @@ public final class SystemRequests{
 			 * REQUETE A SOUMETRE A FFMPEG.
 			 */
 			ProcessManager processManager = (new Request(file.getFullName())).result();
-			
 			/**
 			 * EXTRACTION DES DONNEES.
 			 */
 			String informations = StreamsFilter.findInformationsOfMediaFile(processManager);
-			
+			System.out.println("infos =" + informations);
 			
 			/**
 			 * INITIALISATION DES PARAMETRES DE LA VIDEO OU DU SON.

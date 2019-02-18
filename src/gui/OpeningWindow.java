@@ -43,7 +43,7 @@ public final class OpeningWindow {
 	 * Cette methode permet de generer la fenetre de presentation du logiciel.
 	 */
 	private static void generatePresentationWindow() {
-		JFrame presentationWindow = new JFrame("Acaja - un logiciel à la portee de tous.");
+		JFrame presentationWindow = new JFrame("Acaja - un logiciel a la portee de tous.");
 
 		presentationWindow.setSize(new Dimension(WIDTH, HEIGHT));
 		presentationWindow.setResizable(false);

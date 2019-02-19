@@ -1,4 +1,4 @@
-package gui.traitement;
+package gui.treatment;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -20,7 +20,7 @@ public class PanelImage extends JPanel{
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		ToolTraitement.drawDeco(g, this.size().height, this.size().width);
+		ToolTreatment.drawDeco(g, this.size().height, this.size().width);
 		ImageIcon m = new ImageIcon(resources.ResourceConstants.ACAJA_LOGO_PATH_Opacity);
         Image monImage = m.getImage();
         g.drawImage(monImage, this.size().height/2-130, this.size().width/2-150,this);

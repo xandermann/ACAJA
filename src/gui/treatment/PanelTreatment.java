@@ -1,4 +1,4 @@
-package gui.traitement;
+package gui.treatment;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -7,15 +7,15 @@ import java.awt.Graphics;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class PanelTraitement extends JPanel {
+public class PanelTreatment extends JPanel {
 	
 	
-	public PanelTraitement() {
+	public PanelTreatment() {
 		this.setBackground(Color.GRAY);
 		
 		PanelLibrary pb = new PanelLibrary();
 		PanelButton pm = new PanelButton();
-		PanelImage pi = new PanelImage();
+		PanelPicture pi = new PanelPicture();
 		this.add(pb);
 		this.add(pm);
 		this.add(pi);

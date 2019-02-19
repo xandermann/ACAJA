@@ -9,7 +9,8 @@ import javax.swing.*;
 
 import gui.conversion.ConversionWindow;
 import gui.style.*;
-import resources.*;
+import gui.treatment.FrameTreatment;
+import resources.ResourceConstants;
 
 /**
  * [ CLASSE POUR LE LANCEMENT DES FENETRES D'OUVERTURE DU LOGICIEL. ]
@@ -96,6 +97,13 @@ public final class OpeningWindow {
 
 		StylizedJButton processingButton = new StylizedJButton("Traitement");
 		processingButton.setPreferredSize(new Dimension(100, 40));
+		processingButton.addActionListener(new ActionListener() {	
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				FrameTreatment f = new FrameTreatment();	
+				openingWindow.dispose();
+			}
+		});
 
 		openingWindow.setResizable(false);
 		openingWindow.setLayout(new BorderLayout());

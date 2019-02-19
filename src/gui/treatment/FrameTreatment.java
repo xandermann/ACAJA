@@ -7,7 +7,7 @@ import javax.swing.JMenuBar;
 
 import gui.style.StylizedJMenuBar;
 import gui.style.StylizedJMenuItem;
-import tools.WindowTools;
+import gui.WindowTools;
 
 public class FrameTreatment extends JFrame{
 	

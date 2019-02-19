@@ -6,7 +6,7 @@ import javax.swing.*;
 import exceptions.IncorrectFileException;
 import files.*;
 import gui.Model;
-import tools.*;
+import resources.*;
 import wrapper.runtime.global.UserRequests;
 // TODO : gerer la presence des fichiers systemes .DS_store, etc dans la methode loadOldImports();
 // TODO : manage multiple filenames

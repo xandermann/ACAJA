@@ -11,7 +11,8 @@ import exceptions.ImportationException;
 import exceptions.IncorrectFileException;
 import gui.*;
 import gui.style.*;
-import tools.WindowTools;
+import threads.ThreadForSave;
+import threads.ThreadForWaitWindow;
 
 //TODO : CODE OPTIMISATION
 

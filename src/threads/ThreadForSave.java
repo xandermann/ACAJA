@@ -1,4 +1,7 @@
-package gui;
+package threads;
+
+import gui.Model;
+
 /**
  * [ CLASSE THREAD POUR LANCER LA SAUVEGARDE VIA FFMPEG. ]
  * 

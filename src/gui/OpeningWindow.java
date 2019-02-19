@@ -9,7 +9,7 @@ import javax.swing.*;
 
 import gui.conversion.ConversionWindow;
 import gui.style.*;
-import tools.*;
+import resources.*;
 
 /**
  * [ CLASSE POUR LE LANCEMENT DES FENETRES D'OUVERTURE DU LOGICIEL. ]

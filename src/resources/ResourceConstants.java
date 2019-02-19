@@ -1,4 +1,4 @@
-package tools;
+package resources;
 
 import java.io.*;
 

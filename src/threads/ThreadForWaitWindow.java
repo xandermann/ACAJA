@@ -1,7 +1,8 @@
-package gui;
+package threads;
 
 import javax.swing.JFrame;
-import tools.WindowTools;
+
+import gui.WindowTools;
 import wrapper.streams.WatchedConsumer;
 
 /**

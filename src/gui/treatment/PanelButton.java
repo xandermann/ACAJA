@@ -1,4 +1,4 @@
-package gui.traitement;
+package gui.treatment;
 
 import java.awt.Color;
 import java.awt.Dimension;

@@ -9,6 +9,7 @@ import javax.swing.*;
 
 import gui.conversion.ConversionWindow;
 import gui.style.*;
+import gui.treatment.FrameTreatment;
 import tools.*;
 
 /**
@@ -96,6 +97,14 @@ public final class OpeningWindow {
 
 		StylizedJButton processingButton = new StylizedJButton("Traitement");
 		processingButton.setPreferredSize(new Dimension(100, 40));
+		processingButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				FrameTreatment f = new FrameTreatment();
+				
+			}
+		});
 
 		openingWindow.setResizable(false);
 		openingWindow.setLayout(new BorderLayout());

@@ -1,4 +1,4 @@
-package gui.traitement;
+package gui.treatment;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -18,6 +18,6 @@ public class PanelLibrary extends JPanel{
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		ToolTraitement.drawDeco(g, this.size().height,this.size().width);
+		ToolTreatment.drawDeco(g, this.size().height,this.size().width);
 	}
 }

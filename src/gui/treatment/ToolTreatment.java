@@ -1,10 +1,10 @@
-package gui.traitement;
+package gui.treatment;
 
 import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
-public class ToolTraitement {
+public class ToolTreatment {
 	
 	public static void drawDeco(Graphics g,int h,int l) {
 		int d = 10;

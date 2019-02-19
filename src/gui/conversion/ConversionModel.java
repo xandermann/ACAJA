@@ -69,7 +69,8 @@ public final class ConversionModel extends Model {
 				}
 			}
 			} else {
-				System.out.println("Impossible de creer les dossiers de sauvegarde des imports");
+				//System.out.println("Impossible de creer les dossiers de sauvegarde des imports");
+				JOptionPane.showMessageDialog(null,"Impossible de creer les dossiers de sauvegarde des imports. Merci de verifier les permissions du repertoire d'installation d'Acara");
 			}
 			
 		} catch(SecurityException se) {
@@ -149,7 +150,7 @@ public final class ConversionModel extends Model {
 						System.out.println(f.getFileName());
 				} debug ; */
 			} else {
-				System.out.println("Impossible de creer les dossiers de sauvegarde des imports");
+				JOptionPane.showMessageDialog(null,"Impossible de creer les dossiers de sauvegarde des imports. Merci de verifier les permissions du repertoire d'installation d'Acara");
 			}
 			
 		

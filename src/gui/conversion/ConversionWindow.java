@@ -115,9 +115,20 @@ public final class ConversionWindow extends StylizedJFrame {
 						@Override
 						public void actionPerformed(ActionEvent e) {
 							try {
-								// Pourquoi pas de maj de la vue infos ici ? a verifier
+								
 								File file = new File(f.getPath());
 								model.add(file);
+								if (model.getCurrentFile() == null) {
+									StylizedJPanel dataView = new StylizedJPanel();
+									dataView.setLayout(new BoxLayout(dataView, BoxLayout.Y_AXIS));
+									SummaryView sv = new SummaryView(model);
+									TabsView tv = new TabsView(model);
+									dataView.add(sv);
+									dataView.add(tv);
+									add(dataView, BorderLayout.EAST);
+									model.addObserver(sv);
+									empty_workspace.setVisible(false);
+								}
 								model.setCurrentFile(file.getName());
 							} catch(Exception err) {
 								JOptionPane.showMessageDialog(null, err.getMessage());

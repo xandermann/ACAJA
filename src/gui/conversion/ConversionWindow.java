@@ -64,15 +64,7 @@ public final class ConversionWindow extends StylizedJFrame {
 						f = DataChoose.FileChoose();
 						model.add(f);
 						if (model.getCurrentFile() == null) {
-							StylizedJPanel dataView = new StylizedJPanel();
-							dataView.setLayout(new BoxLayout(dataView, BoxLayout.Y_AXIS));
-							SummaryView sv = new SummaryView(model);
-							TabsView tv = new TabsView(model);
-							dataView.add(sv);
-							dataView.add(tv);
-							add(dataView, BorderLayout.EAST);
-							model.addObserver(sv);
-							empty_workspace.setVisible(false);
+							redrawFirstTime();
 						}
 						model.setCurrentFile(f.getName());
 					} catch (ImportationException ie) {
@@ -94,6 +86,9 @@ public final class ConversionWindow extends StylizedJFrame {
 					ArrayList<File> files = DataChoose.DirectoryChoose();
 					for (File f : files) {
 						model.add(f);
+						if (model.getCurrentFile() == null) {
+							redrawFirstTime();
+						}
 						model.setCurrentFile(f.getName());
 					}
 				} catch (Exception e) {
@@ -119,15 +114,7 @@ public final class ConversionWindow extends StylizedJFrame {
 								File file = new File(f.getPath());
 								model.add(file);
 								if (model.getCurrentFile() == null) {
-									StylizedJPanel dataView = new StylizedJPanel();
-									dataView.setLayout(new BoxLayout(dataView, BoxLayout.Y_AXIS));
-									SummaryView sv = new SummaryView(model);
-									TabsView tv = new TabsView(model);
-									dataView.add(sv);
-									dataView.add(tv);
-									add(dataView, BorderLayout.EAST);
-									model.addObserver(sv);
-									empty_workspace.setVisible(false);
+									redrawFirstTime();
 								}
 								model.setCurrentFile(file.getName());
 							} catch(Exception err) {
@@ -168,6 +155,17 @@ public final class ConversionWindow extends StylizedJFrame {
 	}
 
 	
+	private void redrawFirstTime() {
+		StylizedJPanel dataView = new StylizedJPanel();
+		dataView.setLayout(new BoxLayout(dataView, BoxLayout.Y_AXIS));
+		SummaryView sv = new SummaryView(model);
+		TabsView tv = new TabsView(model);
+		dataView.add(sv);
+		dataView.add(tv);
+		add(dataView, BorderLayout.EAST);
+		model.addObserver(sv);
+		empty_workspace.setVisible(false);
+	}
 	//=======================================================================================================================
 	//=======================================================================================================================
 

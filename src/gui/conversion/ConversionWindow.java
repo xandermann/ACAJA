@@ -100,7 +100,7 @@ public final class ConversionWindow extends StylizedJFrame {
 		
 		JMenu recentFiles = new JMenu("Fichiers recemments importes");
 		FileInformation[] files = this.model.getOldImports();
-		System.out.println(files);
+		//System.out.println(files);
 	
 			for(FileInformation f : files) {
 				if(f != null) {

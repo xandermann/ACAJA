@@ -9,8 +9,8 @@ import gui.Model;
 import tools.*;
 import wrapper.runtime.global.UserRequests;
 // TODO : gerer la presence des fichiers systemes .DS_store, etc dans la methode loadOldImports();
-// TODO : user-friendly & custom exceptions
 // TODO : manage multiple filenames
+
 public final class ConversionModel extends Model {
 	//=======================================================================================================================
 	//=======================================================================================================================
@@ -122,20 +122,26 @@ public final class ConversionModel extends Model {
 				    } });
 				// System.out.println(files.length);
 				for(int i = 0 ; i < files.length ; i++) {
-					try {	
-						FileInputStream fis = new FileInputStream(files[i]);
-						ObjectInputStream ois = new ObjectInputStream(fis);
-						if(i <= 10)  // avoid array out of bounds
-							this.importedFiles[i] = (FileInformation)ois.readObject();
-						ois.close();
-						fis.close();
-				}  catch(SecurityException se) {
-					System.out.println(se.getMessage());
-				} catch(IOException ioe) {
-					System.out.println(ioe.getMessage());
-				} catch(Exception e) {
-					System.out.println(e.getMessage());
-				}
+					if(files[i].getName().contains(".acara")) {
+						try {	
+							FileInputStream fis = new FileInputStream(files[i]);
+							ObjectInputStream ois = new ObjectInputStream(fis);
+							if(i <= 10)  // avoid array out of bounds
+								this.importedFiles[i] = (FileInformation)ois.readObject();
+							ois.close();
+							fis.close();
+					}  catch(SecurityException se) {
+						//System.out.println(se.getMessage());
+						JOptionPane.showMessageDialog(null, "Vous n'avez pas les permissions pour lire le fichier d'import Acara " + files[i].getName());
+					} catch(IOException ioe) {
+						//System.out.println(ioe.getMessage());
+						JOptionPane.showMessageDialog(null, "Impossible d'acceder au fichier " + files[i].getName() + " : erreur d'entree/sortie");
+					} catch(Exception e) {
+						//System.out.println(e.getMessage());
+						JOptionPane.showMessageDialog(null, "Erreur lors de l'acces aux fichiers precedemment importes : " + e.getMessage());
+					}
+					}
+					
 			}
 			//	System.out.println("Loaded old imports...");
 			/*	for(FileInformation f : this.importedFiles) {

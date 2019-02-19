@@ -28,8 +28,7 @@ public class StreamsConsumer implements StreamsManager{
 	 * 
 	 * Enfin le processus fils ( = processus de l'application externe ) doit obliger 
 	 * son processus pere ( = JAVA ) a attendre afin d'eviter l'enchainement en parallele
-	 * d'instructions en java qui ralentiraient la machine realisant les taches de FFMPEG et 
-	 * de JAVA parallelement.
+	 * d'instructions en java qui ralentiraient la machine.
 	 * 
 	 * @param processToBeConsume			ProcessManager contenant les flux a consommer.
 	 */

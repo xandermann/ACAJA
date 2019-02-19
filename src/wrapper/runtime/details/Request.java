@@ -31,6 +31,7 @@ public class Request {
 	
 	
 	
+	
 	public void to(String output) {
 		if((this.output=output)==null) throw new NullPointerException("Output null !");
 	}

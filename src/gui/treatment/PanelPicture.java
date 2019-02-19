@@ -1,8 +1,11 @@
 package gui.treatment;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Graphics;
+import java.awt.GridBagLayout;
 import java.awt.Image;
 
 import javax.swing.ImageIcon;
@@ -14,7 +17,9 @@ import tools.*;
 public class PanelPicture extends JPanel{
 	public PanelPicture() {
 		this.setPreferredSize(new Dimension(600, 550));
-		this.add(new JLabel("Video a editer"));
+		this.setLayout(new GridBagLayout());
+		PanelPictureVisual pic = new PanelPictureVisual();
+		this.add(pic);
 	}
 	
 	@Override

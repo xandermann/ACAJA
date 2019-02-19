@@ -12,7 +12,9 @@ import exceptions.IncorrectFileException;
 import gui.*;
 import gui.style.*;
 import tools.WindowTools;
-
+//TODO : MANAGE MULTIPLE FILENAMES
+//TODO : CODE OPTIMISATION
+//TODO : FIX > 9 MANAGEMENT
 public final class ConversionWindow extends StylizedJFrame {
 	//=======================================================================================================================
 	//=======================================================================================================================
@@ -23,7 +25,7 @@ public final class ConversionWindow extends StylizedJFrame {
 	 */
 	private ConversionModel model;
 	private JLabel empty_workspace;
-	private EntryHistory entries;
+	
 	
 	//=======================================================================================================================
 	//=======================================================================================================================
@@ -35,6 +37,7 @@ public final class ConversionWindow extends StylizedJFrame {
 	private ConversionWindow() {
 		super();
 		model = new ConversionModel();
+		model.loadOldImports();
 		empty_workspace = new JLabel("Pour commencer, ajoutez un fichier audio ou video via le menu.");
 		empty_workspace.setHorizontalAlignment(JLabel.CENTER);
 	}
@@ -56,36 +59,29 @@ public final class ConversionWindow extends StylizedJFrame {
 		importFile.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
-				//try {
 					File f = null;
 					try {
 						f = DataChoose.FileChoose();
-					} catch (ImportationException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-					try {
 						model.add(f);
-						entries.addMediaToHistory(new FileInformation(f.getName(),f.getAbsolutePath()));
-					} catch (IncorrectFileException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+						if (model.getCurrentFile() == null) {
+							StylizedJPanel dataView = new StylizedJPanel();
+							dataView.setLayout(new BoxLayout(dataView, BoxLayout.Y_AXIS));
+							SummaryView sv = new SummaryView(model);
+							TabsView tv = new TabsView(model);
+							dataView.add(sv);
+							dataView.add(tv);
+							add(dataView, BorderLayout.EAST);
+							model.addObserver(sv);
+							empty_workspace.setVisible(false);
+						}
+						model.setCurrentFile(f.getName());
+					} catch (ImportationException ie) {
+						JOptionPane.showMessageDialog(null, ie.getMessage());		
+					} catch (IncorrectFileException ife) {
+						JOptionPane.showMessageDialog(null, ife.getMessage());
+					} catch (Exception e) {
+						System.out.println(e.getMessage());
 					}
-					if (model.getCurrentFile() == null) {
-						StylizedJPanel dataView = new StylizedJPanel();
-						dataView.setLayout(new BoxLayout(dataView, BoxLayout.Y_AXIS));
-						SummaryView sv = new SummaryView(model);
-						TabsView tv = new TabsView(model);
-						dataView.add(sv);
-						dataView.add(tv);
-						add(dataView, BorderLayout.EAST);
-						model.addObserver(sv);
-						empty_workspace.setVisible(false);
-					}
-					model.setCurrentFile(f.getName());
-			///	} catch (Exception e) {
-				//	JOptionPane.showMessageDialog(null, e.getMessage());
-				//}
 			}
 		});
 
@@ -107,7 +103,7 @@ public final class ConversionWindow extends StylizedJFrame {
 		
 		
 		JMenu recentFiles = new JMenu("Fichiers recemments importes");
-		FileInformation[] files = this.entries.getFiles();
+		FileInformation[] files = this.model.getOldImports();
 		System.out.println(files);
 	
 			for(FileInformation f : files) {
@@ -263,7 +259,7 @@ public final class ConversionWindow extends StylizedJFrame {
 		StylizedJMenuBar menu = new StylizedJMenuBar();
 		
 	
-		conversionWindow.entries = EntryHistory.createInstance();
+		
 		
 		
 		menu.add(conversionWindow.drawFileMenu());

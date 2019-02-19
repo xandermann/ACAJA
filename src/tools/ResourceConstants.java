@@ -19,6 +19,7 @@ public final class ResourceConstants {
 	/**
 	 * FICHIERS DE SAUVEGARDES DES PRECEDENTS IMPORTS SUR LE LOGICIEL. 
 	 */
-	public final static String CONVERSION_OLD_IMPORTS = "saves/conversion_old_imports";
-	public final static String PROCESSING_OLD_IMPORTS = "saves/processing_old_imports";
+	public final static String ALL_IMPORTS = "saves/";
+	public final static String CONVERSION_OLD_IMPORTS = "saves/conversion_old_imports/";
+	public final static String PROCESSING_OLD_IMPORTS = "saves/processing_old_imports/";
 }

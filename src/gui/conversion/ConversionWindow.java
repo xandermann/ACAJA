@@ -12,9 +12,9 @@ import exceptions.IncorrectFileException;
 import gui.*;
 import gui.style.*;
 import tools.WindowTools;
-//TODO : MANAGE MULTIPLE FILENAMES
+
 //TODO : CODE OPTIMISATION
-//TODO : FIX > 9 MANAGEMENT
+
 public final class ConversionWindow extends StylizedJFrame {
 	//=======================================================================================================================
 	//=======================================================================================================================
@@ -82,6 +82,7 @@ public final class ConversionWindow extends StylizedJFrame {
 					} catch (Exception e) {
 						System.out.println(e.getMessage());
 					}
+
 			}
 		});
 

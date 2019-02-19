@@ -11,7 +11,7 @@ import wrapper.runtime.global.UserRequests;
 // TODO : gerer la presence des fichiers systemes .DS_store, etc dans la methode loadOldImports();
 // TODO : user-friendly & custom exceptions
 // TODO : fix GUI issue when adding from recentImports
-
+// TODO : manage multiple filenames
 public final class ConversionModel extends Model {
 	//=======================================================================================================================
 	//=======================================================================================================================

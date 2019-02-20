@@ -16,7 +16,7 @@ import javax.swing.JTextField;
 import files.SettingsFile;
 import files.SettingType;
 
-public final class SoundSettingsPanel extends JPanel implements Observer {
+public final class SoundSettingsView extends JPanel implements Observer {
 	//=======================================================================================================================
 	//=======================================================================================================================
 
@@ -32,7 +32,7 @@ public final class SoundSettingsPanel extends JPanel implements Observer {
 	//=======================================================================================================================
 
 	
-	public SoundSettingsPanel(ConversionModel model) {
+	public SoundSettingsView(ConversionModel model) {
 		this.model = model;
 
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));

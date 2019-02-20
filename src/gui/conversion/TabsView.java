@@ -7,8 +7,8 @@ public final class TabsView extends JTabbedPane{
 	
 	public TabsView(ConversionModel model) {
 		this.model = model;
-		VideoSettingsPanel vsp = new VideoSettingsPanel(model);
-		SoundSettingsPanel ssp = new SoundSettingsPanel(model);
+		VideoSettingsView vsp = new VideoSettingsView(model);
+		SoundSettingsView ssp = new SoundSettingsView(model);
 		add("Video",vsp);
 		add("Son",ssp);
 		model.addObserver(vsp);

@@ -8,7 +8,7 @@ import javax.swing.*;
 import files.SettingType;
 import wrapper.language.ResolutionsConstants;
 
-public final class VideoSettingsPanel extends JPanel implements Observer {
+public final class VideoSettingsView extends JPanel implements Observer {
 	//=======================================================================================================================
 	//=======================================================================================================================
 
@@ -23,7 +23,7 @@ public final class VideoSettingsPanel extends JPanel implements Observer {
 	//=======================================================================================================================
 
 	
-	public VideoSettingsPanel(ConversionModel model) {
+	public VideoSettingsView(ConversionModel model) {
 		this.model = model;
 
 		bitrateText = new JTextField();

@@ -13,7 +13,7 @@ public final class ThreadsManager {
 	/**
 	 * [ GESTIONNAIRE DE L'ESPACE D'EXECUTION. ]
 	 * 
-	 * @return	Vaut true si aucunnes operations de conversion n'est deja en cours. 
+	 * @return	Vaut true si aucunne operation de conversion n'est deja en cours. 
 	 */
 	public static boolean manageRuntimeSpace() {
 		if(WatchedConsumer.workIsOnGoing()) {

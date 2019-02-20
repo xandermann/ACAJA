@@ -2,6 +2,8 @@ package wrapper.streams;
 
 import javax.swing.JOptionPane;
 
+import messages.MessageConstants;
+
 /**
  * [ CLASSE POUR LA "CONSOMMATION" DES FLUX DE REPONSES DE FFMPEG. ]
  * 
@@ -63,7 +65,7 @@ public class StreamsConsumer implements StreamsManager{
 			  */
 			 processToBeConsume.getManagedProcess().waitFor();
 		} catch (InterruptedException e) {
-			 JOptionPane.showMessageDialog(null, MessageConstants.FALIURE_ACTIVE_WAIT_FOR);
+			 JOptionPane.showMessageDialog(null, MessageConstants.ERROR_ACTIVE_WAIT_FOR);
 		}
 	}
 	

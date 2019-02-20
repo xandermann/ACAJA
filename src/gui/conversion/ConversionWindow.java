@@ -13,6 +13,7 @@ import gui.*;
 import gui.style.*;
 import threads.ThreadForSave;
 import threads.ThreadForWaitWindow;
+import threads.ThreadsManager;
 
 //TODO : CODE OPTIMISATION
 
@@ -206,37 +207,37 @@ public final class ConversionWindow extends StylizedJFrame {
 		convertItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				StylizedJFrame waitWindow = new StylizedJFrame("Conversion de votre fichier");
-
-				waitWindow.setLayout(new BorderLayout());
-				waitWindow.setSize(400, 150);
-				waitWindow.setLocationRelativeTo(null);
-				waitWindow.add(
-						new JLabel("<html>" + 
-									"<body>" + 
-									"		Conversion du ou des fichier(s)." +
-									"		<br>   "+
-									"		Veuillez patientez..." + 
-									"</body>" + 
-									"</html>", JLabel.CENTER),
-						BorderLayout.CENTER);
-
-				WindowTools.showLogo(waitWindow);
-
-				/**
-				 * DEBUT DE LA CONVERSION.
-				 */
-				model.startSave();
-
-				/**
-				 * LANCEMENT DE LA CONVERSION DANS UN AUTRE PROCESSUS.
-				 */
-				ThreadForSave.saveInNewThread(model);
-
-				/**
-				 * LANCEMENT ET GESTION DE LA FENETRE D'ATTENTE DANS UN AUTRE PROCESSUS.
-				 */
-				ThreadForWaitWindow.waitInNewThread(waitWindow);
+				if(ThreadsManager.manageRuntimeSpace()) {
+					/**
+					 * FENETRE D'ATTENTE. 
+					 */
+					StylizedJFrame waitWindow = new StylizedJFrame("Conversion de votre fichier");
+					waitWindow.setLayout(new BorderLayout());
+					waitWindow.setSize(400, 150);
+					waitWindow.setLocationRelativeTo(null);
+					waitWindow.add(
+							new JLabel("<html>" + 
+										"<body>" + 
+										"		Conversion du ou des fichier(s)." +
+										"		<br>   "+
+										"		Veuillez patientez..." + 
+										"</body>" + 
+										"</html>", JLabel.CENTER),
+							BorderLayout.CENTER);
+					WindowTools.showLogo(waitWindow);
+					/**
+					 * DEBUT DE LA CONVERSION.
+					 */
+					model.startSave();
+					/**
+					 * LANCEMENT DE LA CONVERSION DANS UN AUTRE PROCESSUS.
+					 */
+					ThreadForSave.saveInNewThread(model);
+					/**
+					 * LANCEMENT ET GESTION DE LA FENETRE D'ATTENTE DANS UN AUTRE PROCESSUS.
+					 */
+					ThreadForWaitWindow.waitInNewThread(waitWindow);
+				}
 			}
 		});
 		return convert;

@@ -4,6 +4,8 @@ import java.io.*;
 import java.util.Iterator;
 import javax.swing.JOptionPane;
 
+import messages.MessageConstants;
+
 
 /**
  * [ SUPERCLASSE ABSTRAITE DES ITERATEURS SUR LES FLUX. ]
@@ -54,7 +56,7 @@ public abstract class StreamIterator implements Iterator<String>{
 			/**
 			 * EXCEPTIONS, PAS DE FLUX TROUVES. 
 			 */
-			JOptionPane.showMessageDialog(null, MessageConstants.FALIURE_UNFINDABLE_STREAMS);
+			JOptionPane.showMessageDialog(null, MessageConstants.ERROR_UNFINDABLE_STREAMS);
 		}
 	}
 	

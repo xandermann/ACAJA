@@ -16,10 +16,17 @@ public final class ResourceConstants {
 	public final static String ACAJA_LOGO_PATH_Opacity = "img/LogoAcaja_opacity.png";
 	public final static File ACAJA_LOGO = new File(ACAJA_LOGO_PATH);
 	
+	
+	/**
+	 * FICHIERS TEMPORAIRES. 
+	 */
+	public final static String TEMPORARY_FILES_PATH = "temporary_files/";
+	
+	
 	/**
 	 * FICHIERS DE SAUVEGARDES DES PRECEDENTS IMPORTS SUR LE LOGICIEL. 
 	 */
-	public final static String ALL_IMPORTS = "saves/";
-	public final static String CONVERSION_OLD_IMPORTS = "saves/conversion_old_imports/";
-	public final static String PROCESSING_OLD_IMPORTS = "saves/processing_old_imports/";
+	public final static String ALL_OLD_IMPORTS_PATH = "old_imported_files/";
+	public final static String CONVERSION_OLD_IMPORTS_PATH = ALL_OLD_IMPORTS_PATH+"conversion_old_imports/";
+	public final static String PROCESSING_OLD_IMPORTS_PATH = ALL_OLD_IMPORTS_PATH+"processing_old_imports/";
 }

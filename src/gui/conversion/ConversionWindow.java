@@ -9,6 +9,7 @@ import javax.swing.*;
 
 import exceptions.ImportationException;
 import exceptions.IncorrectFileException;
+import files.FileInformation;
 import gui.*;
 import gui.style.*;
 import threads.ThreadForSave;

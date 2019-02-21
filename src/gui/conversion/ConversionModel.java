@@ -24,7 +24,7 @@ public final class ConversionModel extends Model {
 	private SettingsFile currentFile;
 	//Liste des fichiers siur lesquels on travaille. 
 	private ArrayList<SettingsFile> files;
-	//Tableau des fichiers précedemment importes
+	//Tableau des fichiers precedemment importes.
 	private FileInformation[] importedFiles;
 	
 	
@@ -59,7 +59,7 @@ public final class ConversionModel extends Model {
 		try {
 			if(createDirectories()) {
 				for(int i = 0 ; i < this.importedFiles.length ; i ++) {
-				File f = new File(ResourceConstants.CONVERSION_OLD_IMPORTS + this.importedFiles[i].getFileName() + ".acara");
+				File f = new File(ResourceConstants.CONVERSION_OLD_IMPORTS_PATH + this.importedFiles[i].getFileName() + ".acara");
 				if(!f.exists()) {
 					FileOutputStream fos = new FileOutputStream(f);
 					ObjectOutputStream oos = new ObjectOutputStream(fos);
@@ -82,13 +82,13 @@ public final class ConversionModel extends Model {
 		}
 	}
 
-	/** [ METHODE POUR CREER LES DOSSIERS DES IMPORTS SI ILS N'EXISTENT PAS ]
-	 * 
+	/**
+	 *  [ METHODE POUR CREER LES DOSSIERS DES IMPORTS SI ILS N'EXISTENT PAS ]
 	 */
 	private boolean createDirectories() {
-		File dirSaves = new File(ResourceConstants.ALL_IMPORTS);
-		File dirConversion = new File(ResourceConstants.CONVERSION_OLD_IMPORTS);
-		File dirProcessing = new File(ResourceConstants.PROCESSING_OLD_IMPORTS);
+		File dirSaves = new File(ResourceConstants.ALL_OLD_IMPORTS_PATH);
+		File dirConversion = new File(ResourceConstants.CONVERSION_OLD_IMPORTS_PATH);
+		File dirProcessing = new File(ResourceConstants.PROCESSING_OLD_IMPORTS_PATH);
 		try {
 			boolean res = true;
 			if(!dirSaves.exists())
@@ -108,19 +108,17 @@ public final class ConversionModel extends Model {
 	 * [ CHARGER LES FICHIERS PRECEDEMMENT IMPORTES. ]
 	 * 
 	 * Methode qui recupere les fichiers recemments ouverts a l'ouverture. 
-	 * 
-	 * 
 	 */
 	public void loadOldImports() {
 		
 			if(createDirectories()) {
-				File[] files = new File(ResourceConstants.CONVERSION_OLD_IMPORTS).listFiles();	
+				File[] files = new File(ResourceConstants.CONVERSION_OLD_IMPORTS_PATH).listFiles();	
 				// tri des fichiers par date
 				Arrays.sort(files, new Comparator<File>(){
-				    public int compare(File f1, File f2)
-				    {
+				    public int compare(File f1, File f2){
 				        return Long.valueOf(f1.lastModified()).compareTo(f2.lastModified());
-				    } });
+				    } 
+				});
 				// System.out.println(files.length);
 				for(int i = 0 ; i < files.length ; i++) {
 					if(files[i].getName().contains(".acara")) {
@@ -152,10 +150,6 @@ public final class ConversionModel extends Model {
 			} else {
 				JOptionPane.showMessageDialog(null,"Impossible de creer les dossiers de sauvegarde des imports. Merci de verifier les permissions du repertoire d'installation d'Acara");
 			}
-			
-		
-		
-	
 	}
 	
 	public FileInformation[] getOldImports() {
@@ -256,19 +250,20 @@ public final class ConversionModel extends Model {
 	}
 
 	
-	/** [ SUPPRIMER UN ANCIEN FICHIER D'IMPORTATION ]
-	 * 
+	/** 
+	 * [ SUPPRIMER UN ANCIEN FICHIER D'IMPORTATION ]
 	 */
 	private boolean deleteFile(String fileName) {
 		try {
-			File f = new File(ResourceConstants.CONVERSION_OLD_IMPORTS + fileName + ".acara");
-			if(!(f.exists())) 
-				return true;
+			File f = new File(ResourceConstants.CONVERSION_OLD_IMPORTS_PATH + fileName + ".acara");
+			if(!(f.exists())) return true;
 			return f.delete();
 		} catch(Exception e) {
 			return false;
 		}
 	}
+	
+	
 	/**
 	 * [ SUPPRIMER UN FICHIER. ]
 	 * 

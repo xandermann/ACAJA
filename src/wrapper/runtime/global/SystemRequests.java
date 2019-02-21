@@ -56,8 +56,7 @@ public final class SystemRequests{
 			/**
 			 * INITIALISATION DES PARAMETRES DE LA VIDEO OU DU SON.
 			 */
-			HashMap<SettingType, String> fileSettings = file.getSettings();
-			
+			HashMap<SettingType, String> fileSettings = file.getSettings();		
 			//Parametres a extraire uniquement pour les fichiers video. 
 			if(file.isVideo()) {
 				fileSettings.put(SettingType.VIDEO_CODEC, StreamsFilter.findVideoSetting(informations, 0));
@@ -66,11 +65,10 @@ public final class SystemRequests{
 				fileSettings.put(SettingType.FPS, StreamsFilter.findVideoSetting(informations, 4));
 			}	
 		    fileSettings.put(SettingType.AUDIO_CODEC, StreamsFilter.findAudioSetting(informations, 0));
-			fileSettings.put(SettingType.SAMPLING_RATE,  StreamsFilter.findAudioSetting(informations, 1));
+			fileSettings.put(SettingType.SAMPLING_RATE, StreamsFilter.findAudioSetting(informations, 1));
 			String nbChannels = StreamsFilter.findAudioSetting(informations, 2).contains("mono") ? "1" : "2";
 			fileSettings.put(SettingType.NUMBER_AUDIO_CHANNELS, nbChannels);
 			fileSettings.put(SettingType.AUDIO_BITRATE, StreamsFilter.findAudioSetting(informations, 4));
-			
 			file.setDuration(StreamsFilter.findDuration(informations));
 		}
 	}

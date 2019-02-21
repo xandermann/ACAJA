@@ -100,6 +100,29 @@ public class Request {
 	
 	
 	
+	public Request cut(String numberAudioChannels) {
+		if(numberAudioChannels==null) throw new NullPointerException("NumberAudioChannels null !");
+		askSomethingElse(new String[]{ConversionFlagConstants.FLAG_NUMBER_AUDIO_CHANNELS, numberAudioChannels});
+		return this;
+	}
+	
+	
+	
+	public Request resizeWidthImage(String width, String height) {
+		if(width==null) throw new NullPointerException("Width null !");
+		if(height==null) throw new NullPointerException("Height null !");
+		askSomethingElse(new String[]{ConversionFlagConstants.FLAG_NUMBER_AUDIO_CHANNELS, numberAudioChannels});
+		return this;
+	}
+	
+	public Request extractImage(String numberAudioChannels) {
+		if(numberAudioChannels==null) throw new NullPointerException("NumberAudioChannels null !");
+		askSomethingElse(new String[]{ConversionFlagConstants.FLAG_NUMBER_AUDIO_CHANNELS, numberAudioChannels});
+		return this;
+	}
+	
+	
+	
 	
 	public ProcessManager result() {
 		if(output!=null) askSomethingElse(new String[]{output});

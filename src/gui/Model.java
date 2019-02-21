@@ -1,6 +1,7 @@
 package gui;
 
 import java.util.Observable;
+
 import wrapper.streams.managers.consumers.WatchedConsumer;
 
 /**

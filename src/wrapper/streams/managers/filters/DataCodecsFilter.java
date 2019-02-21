@@ -13,7 +13,7 @@ public final class DataCodecsFilter implements DataStreamsFilter {
 		if(processToStudy == null) throw new NullPointerException("Le ProcessManager recu en parametre est null !");
 
 		/**
-		 *  EXTRACTION DES METADONNEES.
+		 *  EXTRACTION DES CODECS.
 		 */
 		StreamIterator iterator = processToStudy.outputStreamIterator();
 		
@@ -25,7 +25,7 @@ public final class DataCodecsFilter implements DataStreamsFilter {
 		while(iterator.hasNext()) {
 			data = iterator.next();
 			
-			if(keepData==false&&data.contains("-------")) {
+			if(keepData==false && data.contains("-------")) {
 				keepData = true;
 				data = iterator.next();
 			}

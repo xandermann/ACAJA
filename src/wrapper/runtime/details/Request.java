@@ -16,7 +16,7 @@ public class Request {
 	public Request() {
 		input = null;
 		output = null;
-		request = null;
+		request = new ArrayList<String>();
 	}
 	
 	public Request(String input) {

@@ -1,6 +1,5 @@
 package wrapper.runtime.global;
 
-import java.io.*;
 import java.util.HashMap;
 import files.*;
 import wrapper.runtime.details.*;
@@ -71,15 +70,21 @@ public final class SystemRequests{
 	}
 	
 	
+	//=======================================================================================================================
+	
 	
 	public static String[] askVideoCodecs() {
 		return DataCodecsFilter.findVideoCodecs(new Request().codecs().result());
 	}
 	
 	
+	//=======================================================================================================================
+	
+	
 	public static String[] askAudioCodecs() {
 		return DataCodecsFilter.findAudioCodecs(new Request().codecs().result());
 	}
+	
 	
 	
 	//=======================================================================================================================

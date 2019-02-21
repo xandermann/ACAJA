@@ -37,7 +37,7 @@ public final class UserRequests{
 				case VIDEO_BITRATE : 
 					request.videoBitrate(newValue);
 					break;
-				case FPS :
+				case FRAMERATE :
 					request.framerate(newValue);
 					break;
 				case RESOLUTION :

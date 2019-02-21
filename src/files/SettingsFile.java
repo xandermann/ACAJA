@@ -60,7 +60,7 @@ public final class SettingsFile extends SelectableFile implements Modifiable {
 		settings = new HashMap<SettingType, String>();
 
 		//Initialisation des autres parametres.
-		SystemRequests.askSettings(this);
+		SystemRequests.askMetadata(this);
 	}
 
 	

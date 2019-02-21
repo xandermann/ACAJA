@@ -16,7 +16,7 @@ public final class VideoSettingsView extends JPanel implements Observer {
 	private ConversionModel model;
 	private JTextField bitrateText;
 	private JTextField fpsText;
-	private JComboBox codecsComboBox, resolutionsComboBox;
+	private JComboBox<String> codecsComboBox, resolutionsComboBox;
 	
 	
 	//=======================================================================================================================
@@ -90,7 +90,7 @@ public final class VideoSettingsView extends JPanel implements Observer {
 		     codecsComboBox.setSelectedItem(settings.get(SettingType.VIDEO_CODEC));
 		     resolutionsComboBox.setSelectedItem(settings.get(SettingType.RESOLUTION));
 			 bitrateText.setText(settings.get(SettingType.VIDEO_BITRATE)); 
-			 fpsText.setText(settings.get(SettingType.FPS));
+			 fpsText.setText(settings.get(SettingType.FRAMERATE));
 		}
 	}
 

@@ -26,24 +26,22 @@ public final class SystemRequests{
 	
 	
 	/**
-	 * [ METHODE DE CLASSE POUR LE RENSEIGNEMENT DES PARAMETRES D'UNE VIDEO OU D'UN SON. ]
+	 * [ METHODE DE CLASSE POUR LE RENSEIGNEMENT DES METADONNEES D'UNE VIDEO OU D'UN SON. ]
 	 * 
-	 * Cette methode retourne les parametres ( = caracteristiques ) du fichier. 
+	 * Les valeurs des metadonnees du fichier sont recuperes par l'intermediaire d'une simple requete FFmpeg. 
 	 * 
-	 * Les valeurs des parametres du fichier sont recuperes par l'intrermediaire de requetes FFmpeg. 
+	 * Un fichier video posssede des metadonnees video ET audio alors qu'un fichier audio 
+	 * ne possede que des metadonnees audio. 
 	 * 
-	 * Un fichier video posssede des parametres video ET audio alors qu'un fichier audio 
-	 * ne possede que des parametres audio. 
-	 * 
-	 * Parametres video : le codec video, le bitrate video, la resolution, les nombre d'images par 
+	 * Metadonnees video : le codec video, le bitrate video, la resolution, les nombre d'images par 
 	 * secondes (FPS). 
 	 * 
-	 * Paramteres audio : le codec audio, le bitrate audio, le volume en sortie, taux d'echantillonnage,
+	 * Metadonnees audio : le codec audio, le bitrate audio, le volume en sortie, taux d'echantillonnage,
 	 * nombre de canaux audio en sortie. 
 	 * 
 	 * @param file							Le fichier dont on souhaite connaitre les parametres. 
 	*/
-	public static void askSettings(SettingsFile file){
+	public static void askMetadata(SettingsFile file){
 		if(file.containsAudio()){	
 			/**
 			 * REQUETE A SOUMETRE A FFMPEG.
@@ -62,7 +60,7 @@ public final class SystemRequests{
 				fileSettings.put(SettingType.VIDEO_CODEC, StreamsFilter.findVideoSetting(informations, 0));
 				fileSettings.put(SettingType.RESOLUTION, StreamsFilter.findVideoSetting(informations, 2));	
 				fileSettings.put(SettingType.VIDEO_BITRATE, StreamsFilter.findVideoSetting(informations, 3));
-				fileSettings.put(SettingType.FPS, StreamsFilter.findVideoSetting(informations, 4));
+				fileSettings.put(SettingType.FRAMERATE, StreamsFilter.findVideoSetting(informations, 4));
 			}	
 		    fileSettings.put(SettingType.AUDIO_CODEC, StreamsFilter.findAudioSetting(informations, 0));
 			fileSettings.put(SettingType.SAMPLING_RATE, StreamsFilter.findAudioSetting(informations, 1));

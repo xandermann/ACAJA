@@ -15,7 +15,7 @@ public final class MessageConstants {
 			+ "\nexecutant FFMPEG en interne,"
 			+ "\na ete interrompu et a donc echoue !";
 	
-	public static final String ERROR_CONVERSION_IS_ALREADY_ON_GOING =
-			ERROR_PREFIX + "! Une conversion d'un ou plusieurs fichiers est deja en cours !"
+	public static final String ERROR_OPERATION_IS_ALREADY_ON_GOING =
+			ERROR_PREFIX + "! Une operation est deja en cours sur un ou plusieurs fichiers !"
 			+ "\nVeuillez attendre la fin de cette operation pour en demarrer une nouvelle !";
 }

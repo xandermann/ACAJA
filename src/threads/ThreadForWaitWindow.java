@@ -3,6 +3,7 @@ package threads;
 import javax.swing.JFrame;
 import gui.WindowTools;
 import wrapper.streams.managers.consumers.WatchedConsumer;
+
 /**
  * [ CLASSE THREAD POUR GERER LA FENTRE D'ATTENTE. ]
  * 

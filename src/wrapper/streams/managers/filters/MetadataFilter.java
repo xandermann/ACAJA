@@ -1,6 +1,7 @@
 package wrapper.streams.managers.filters;
 
 import wrapper.streams.iterators.*;
+import wrapper.streams.managers.consumers.OutputStreamConsumer;
 
 /**
  * [ CLASSE POUR LE FILTRAGE DES DONNEES CONTENUES DANS UN PROCESS. ]
@@ -71,8 +72,7 @@ public final class MetadataFilter implements DataStreamsFilter {
 		if(metadata == null) throw new NullPointerException("Metadata null !");
 		return metadata.substring(
 				metadata.indexOf("Duration: ") + "Duration: ".length(), 
-				metadata.indexOf("Duration: ") + metadata.substring(metadata.indexOf("Duration: ")).indexOf(",")
-				);
+				metadata.indexOf("Duration: ") + metadata.substring(metadata.indexOf("Duration: ")).indexOf(","));
 	}
 	
 	
@@ -124,6 +124,7 @@ public final class MetadataFilter implements DataStreamsFilter {
 		/**
 		 *  EXTRACTION DES METADONNEES.
 		 */
+		OutputStreamConsumer.consume(processToStudy);
 		StreamIterator iterator = processToStudy.errorStreamIterator();
 		
 		// On ne recupere que les donnees qui nous interesse 
@@ -134,9 +135,7 @@ public final class MetadataFilter implements DataStreamsFilter {
 		
 		while(iterator.hasNext()) {
 			data = iterator.next();
-
-			if(keepData == false && data.contains("Input")) keepData = true;
-			
+			if(keepData == false && data.contains("Input")) keepData = true;			
 			if(keepData == true) metadata += data + " ";
 		}
 		

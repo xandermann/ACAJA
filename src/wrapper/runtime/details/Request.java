@@ -179,6 +179,6 @@ public class Request {
 	}
 	
 	public void make() {
-		WatchedConsumer.consumeStreams(result());
+		WatchedConsumer.consume(result());
 	}
 }

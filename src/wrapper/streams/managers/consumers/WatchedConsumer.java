@@ -2,7 +2,7 @@ package wrapper.streams.managers.consumers;
 
 import wrapper.streams.iterators.ProcessManager;
 
-public class WatchedConsumer extends StreamsConsumer {
+public final class WatchedConsumer extends AllStreamsConsumer {
 	//==================================================================================================================================================
 	
 	
@@ -69,11 +69,11 @@ public class WatchedConsumer extends StreamsConsumer {
 	 * @param processToBeConsume		ProcessManager, un outil pour gerer 
 	 * 									le Process contenant les flux a consommer. 
 	 */
-	public static void consumeStreams(ProcessManager processToBeConsume) {
+	public static void consume(ProcessManager processToBeConsume) {
 		if(processToBeConsume == null)
 			throw new NullPointerException("Le ProcessManager recu en parametre est null !");
 		startToWork();
-		StreamsConsumer.consumeStreams(processToBeConsume);
+		AllStreamsConsumer.consume(processToBeConsume);
 		workIsOver();
 	}
 	

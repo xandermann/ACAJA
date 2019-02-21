@@ -2,6 +2,7 @@ package wrapper.streams.managers.filters;
 
 import java.util.*;
 import wrapper.streams.iterators.*;
+import wrapper.streams.managers.consumers.*;
 
 public final class DataCodecsFilter implements DataStreamsFilter {
 	//=======================================================================================================================
@@ -15,6 +16,7 @@ public final class DataCodecsFilter implements DataStreamsFilter {
 		/**
 		 *  EXTRACTION DES CODECS.
 		 */
+		ErrorStreamConsumer.consume(processToStudy);
 		StreamIterator iterator = processToStudy.outputStreamIterator();
 		
 		// On ne recupere que les donnees qui nous interesse 
@@ -24,12 +26,10 @@ public final class DataCodecsFilter implements DataStreamsFilter {
 		String data = null;	
 		while(iterator.hasNext()) {
 			data = iterator.next();
-			
 			if(keepData==false && data.contains("-------")) {
 				keepData = true;
 				data = iterator.next();
-			}
-			
+			}		
 			if(keepData==true) {
 				String[] filteredData = data.split(" ");
 				if(filteredData[1].contains(typeCodec)) dataCodecs.add(filteredData[2]);

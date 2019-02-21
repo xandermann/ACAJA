@@ -1,4 +1,4 @@
-package wrapper.streams;
+package wrapper.streams.iterators;
 
 import java.io.*;
 import java.util.Iterator;

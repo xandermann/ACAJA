@@ -1,8 +1,10 @@
-package wrapper.streams;
+package wrapper.streams.managers.consumers;
 
 import javax.swing.JOptionPane;
-
 import messages.MessageConstants;
+import wrapper.streams.managers.StreamsManager;
+import wrapper.streams.iterators.*;
+
 
 /**
  * [ CLASSE POUR LA "CONSOMMATION" DES FLUX DE REPONSES DE FFMPEG. ]

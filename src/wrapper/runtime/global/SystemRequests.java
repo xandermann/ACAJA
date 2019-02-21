@@ -3,10 +3,9 @@ package wrapper.runtime.global;
 import java.io.*;
 import java.util.HashMap;
 import files.*;
-import wrapper.runtime.details.FFmpegRuntime;
-import wrapper.runtime.details.Request;
-import wrapper.streams.ProcessManager;
-import wrapper.streams.MetadataFilter;
+import wrapper.runtime.details.*;
+import wrapper.streams.iterators.ProcessManager;
+import wrapper.streams.managers.filters.*;
 
 /**
  * Cette classe a pour but de realiser les requetes FFMPEG
@@ -74,13 +73,14 @@ public final class SystemRequests{
 	
 	
 	public static String[] askVideoCodecs() {
-		return null;
+		return DataCodecsFilter.findVideoCodecs(new Request().codecs().result());
 	}
 	
 	
 	public static String[] askAudioCodecs() {
-		return null;
+		return DataCodecsFilter.findAudioCodecs(new Request().codecs().result());
 	}
+	
 	
 	//=======================================================================================================================
 	//=======================================================================================================================

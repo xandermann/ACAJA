@@ -2,9 +2,8 @@ package wrapper.runtime.global;
 
 import java.util.*;
 import files.*;
-import wrapper.runtime.details.FFmpegRuntime;
 import wrapper.runtime.details.Request;
-import wrapper.streams.WatchedConsumer;
+
 
 /**
  * Ceci est une classe concrete "sterile", c-a-d qu'aucune classe ne peut 

@@ -35,7 +35,7 @@ public final class VideoSettingsView extends JPanel implements Observer {
 
 		JPanel codecPanel = new JPanel();
 		codecPanel.setLayout(new FlowLayout());
-		codecsComboBox = new JComboBox<String>(CodecConstants.ALL_VIDEO_CODECS);
+		codecsComboBox = new JComboBox<String>(CodecConstants.ALL_SUPPORTED_VIDEO_CODECS);
 		codecsComboBox.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

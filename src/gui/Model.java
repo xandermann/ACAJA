@@ -1,7 +1,7 @@
 package gui;
 
 import java.util.Observable;
-import wrapper.streams.WatchedConsumer;
+import wrapper.streams.managers.consumers.WatchedConsumer;
 
 /**
  * [ SUPERCLASSE ABSTRAITE MODEL. ]

@@ -40,7 +40,7 @@ public final class SoundSettingsView extends JPanel implements Observer {
 
 		JPanel codecPanel = new JPanel(new FlowLayout());
 		codecPanel.add(new JLabel("Codec audio : "), BorderLayout.WEST);
-		codecsComboBox = new JComboBox<String>(CodecConstants.ALL_AUDIO_CODECS);
+		codecsComboBox = new JComboBox<String>(CodecConstants.ALL_SUPPORTED_AUDIO_CODECS);
 		codecPanel.add(codecsComboBox, BorderLayout.EAST);
 		add(codecPanel);
 

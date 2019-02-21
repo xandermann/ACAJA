@@ -1,4 +1,6 @@
-package wrapper.streams;
+package wrapper.streams.managers.filters;
+
+import wrapper.streams.iterators.*;
 
 /**
  * [ CLASSE POUR LE FILTRAGE DES DONNEES CONTENUES DANS UN PROCESS. ]

@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import files.SettingsFile;
+import wrapper.language.CodecConstants;
 import files.SettingType;
 
 public final class SoundSettingsView extends JPanel implements Observer {
@@ -39,7 +40,7 @@ public final class SoundSettingsView extends JPanel implements Observer {
 
 		JPanel codecPanel = new JPanel(new FlowLayout());
 		codecPanel.add(new JLabel("Codec audio : "), BorderLayout.WEST);
-		codecsComboBox = new JComboBox<String>(new String[]{"mp3"});
+		codecsComboBox = new JComboBox<String>(CodecConstants.ALL_AUDIO_CODECS);
 		codecPanel.add(codecsComboBox, BorderLayout.EAST);
 		add(codecPanel);
 

@@ -22,6 +22,8 @@ public final class UserRequests{
 	 * @param file
 	 */
 	private static void executeSettingsFile(SettingsFile file) {
+		if(file == null) throw new NullPointerException("SettingsFile null!");
+		
 		Request request = new Request(file.getFullName(), file.getFullName());
 		
 		HashMap<SettingType, String> ffmpegRequests = file.getRequests();
@@ -36,7 +38,7 @@ public final class UserRequests{
 					request.videoBitrate(newValue);
 					break;
 				case FPS :
-					request.fps(newValue);
+					request.framerate(newValue);
 					break;
 				case RESOLUTION :
 					request.resolution(newValue);
@@ -68,6 +70,8 @@ public final class UserRequests{
 	 * @param file
 	 */
 	private static void executeProcessingFile(ProcessingFile file) {
+		if(file == null) throw new NullPointerException("ProcessingFile null!");
+		
 		Request request = new Request(file.getFullName(), file.getFullName());
 		
 		HashMap<ProcessingType, String> ffmpegRequests = file.getPerformedProcessings();
@@ -93,10 +97,7 @@ public final class UserRequests{
 	 */
 	public static void execute(SelectableFile file) {
 		if(file == null) throw new NullPointerException("SelectableFile null!");
-		if(file instanceof SettingsFile) 
-			executeSettingsFile((SettingsFile) file);
-		else
-			executeProcessingFile((ProcessingFile) file);
+		if(file instanceof SettingsFile) executeSettingsFile((SettingsFile) file); else executeProcessingFile((ProcessingFile) file);
 	}
 	
 	

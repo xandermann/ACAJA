@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public final class ResolutionsConstants {
+public final class ResolutionConstants {
 	public final static String[] CIF_RESOLUTIONS = {"128x96", "176x144", "352x288", "704x576", "1408x1152"};
 	
 	public final static String[] VGA_RESOLUTIONS = {"160x120", "320x240", "640x480", "800x600", "852x480"};

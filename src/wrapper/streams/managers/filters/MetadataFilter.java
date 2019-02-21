@@ -1,4 +1,6 @@
-package wrapper.streams;
+package wrapper.streams.managers.filters;
+
+import wrapper.streams.iterators.*;
 
 /**
  * [ CLASSE POUR LE FILTRAGE DES DONNEES CONTENUES DANS UN PROCESS. ]
@@ -6,7 +8,7 @@ package wrapper.streams;
  * Auteurs du projet : 
  * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
  */
-public final class StreamsFilter implements StreamsManager {
+public final class MetadataFilter implements DataStreamsFilter {
 	//=======================================================================================================================
 	//=======================================================================================================================
 	
@@ -15,12 +17,12 @@ public final class StreamsFilter implements StreamsManager {
 	 * [ METHODE INTERNE DE CLASSE. ]
 	 * 
 	 * Cette methode permet de connaitre l'index du caractere situe apres
-	 * une donnee a extraire. Plus simplement cette methode determine la 
-	 * l'index du caractere qui delime la fin de chaine a extraire.
+	 * une donnee a extraire. Plus simplement cette methode permet de determiner 
+	 * la fin de la chaine a extraire.
 	 */
-	private static int findEndIndexSetting(String informations, int fromIndex) {
-		int indexSpace = informations.indexOf(' ', fromIndex);
-		int indexComa = informations.indexOf(',', fromIndex);
+	private static int findEndIndexMetadata(String metadata, int fromIndex) {
+		int indexSpace = metadata.indexOf(' ', fromIndex);
+		int indexComa = metadata.indexOf(',', fromIndex);
 		return indexSpace<indexComa || indexComa==-1 ? indexSpace : indexComa;	
 	}
 	
@@ -28,23 +30,23 @@ public final class StreamsFilter implements StreamsManager {
 	/**
 	 * [ METHODE INTERNE DE CLASSE. ]
 	 * 
-	 * Cette methode permet d'extraire un des parametres d'un 
+	 * Cette methode permet d'extraire une des metadonnees d'un 
 	 * fichier video ou audio dont FFMPEG nous a fourni 
-	 * une longue plage d'informations. 
+	 * une longue plage. 
 	 */
-	private static String findSetting(String informations, String start, int indexSetting) {
-		int indexStart = informations.indexOf(start) + start.length();
-		if(indexSetting != 0) {
+	private static String findMetadata(String metadata, String start, int indexMetadata) {
+		int indexStart = metadata.indexOf(start) + start.length();
+		if(indexMetadata != 0) {
 			int indexEvolve = indexStart;
 			
-			for(int i=0; i<indexSetting; i++) 
-				indexEvolve = informations.indexOf(',', indexEvolve)+1;
+			for(int i=0; i<indexMetadata; i++) 
+				indexEvolve = metadata.indexOf(',', indexEvolve)+1;
 			
 			indexEvolve++;
 			
-			return  informations.substring(indexEvolve,findEndIndexSetting(informations, indexEvolve));
+			return  metadata.substring(indexEvolve,findEndIndexMetadata(metadata, indexEvolve));
 		}else
-			return  informations.substring(indexStart,findEndIndexSetting(informations, indexStart));
+			return  metadata.substring(indexStart,findEndIndexMetadata(metadata, indexStart));
 	}
 	
 	
@@ -56,12 +58,13 @@ public final class StreamsFilter implements StreamsManager {
 	/**
 	 * [ METHODE DE CLASSE. ]
 	 * 
-	 * Methode pour extraire la duree. 
+	 * Methode pour extraire la duree d'un fichier 
+	 * video dans la plage des metadonnees fournie par FFMPEG.
 	 */
-	public static String findDuration(String informations) {
-		return informations.substring(
-					informations.indexOf("Duration: ") + "Duration: ".length(), 
-					informations.indexOf("Duration: ") + informations.substring(informations.indexOf("Duration: ")).indexOf(",")
+	public static String findDuration(String metadata) {
+		return metadata.substring(
+				metadata.indexOf("Duration: ") + "Duration: ".length(), 
+				metadata.indexOf("Duration: ") + metadata.substring(metadata.indexOf("Duration: ")).indexOf(",")
 				);
 	}
 	
@@ -69,24 +72,24 @@ public final class StreamsFilter implements StreamsManager {
 	/**
 	 * [ METHODE DE CLASSE. ]
 	 * 
-	 * Methode pour extraire un parametre d'un fichier 
-	 * video dans la plage d'informations fournie par FFMPEG 
+	 * Methode pour extraire une metadonnee d'un fichier 
+	 * video dans la plage des metadonnees fournie par FFMPEG 
 	 * a partir d'un index. 
 	 */
-	public static String findVideoSetting(String informations, int indexSetting) {
-		return findSetting(informations, "Video: ", indexSetting);
+	public static String findVideoMetadata(String metadata, int indexMetadata) {
+		return findMetadata(metadata, "Video: ", indexMetadata);
 	}
 
 	
 	/**
 	 * [ METHODE DE CLASSE. ]
 	 * 
-	 * Methode pour extraire un parametre d'un fichier 
-	 * audio dans la plage d'informations fournie par FFMPEG 
-	 * a partir d'in index. 
+	 * Methode pour extraire une metadonnee d'un fichier 
+	 * audio dans la plage des metadonnees fournie par FFMPEG 
+	 * a partir d'un index. 
 	 */
-	public static String findAudioSetting(String informations, int indexSetting) {
-		return findSetting(informations, "Audio: ", indexSetting);
+	public static String findAudioMetadata(String metadata, int indexMetadata) {
+		return findMetadata(metadata, "Audio: ", indexMetadata);
 	}
 
 
@@ -97,17 +100,17 @@ public final class StreamsFilter implements StreamsManager {
 	
 	
 	/**
-	 * [ METHODE DE CLASSE POUR EXTRAIRE LES INFORMATIONS SUR UN FICHIER. ]
+	 * [ METHODE DE CLASSE POUR EXTRAIRE LES METADONNEES D'UN FICHIER. ]
 	 * 
 	 * @param processToStudy		ProcessManager pour lequel
-	 * 								on doit filtrer les informations.
+	 * 								on doit filtrer les donnees.
 	 * 
-	 * @return	String				Les donnees filtrees.
+	 * @return	String				Les metadonnees du fichier.
 	 */
-	public static String findInformationsOfMediaFile(ProcessManager processToStudy) {
+	public static String findMetadataOfMediaFile(ProcessManager processToStudy) {
 		if(processToStudy == null)
 			throw new NullPointerException("Le ProcessManager recu en parametre est null !");
-		
+
 		/**
 		 * QUELQUES FAITS A CONNAITRE POUR COMPRENDRE LA LIGNE DE CODE CI-DESSOUS.
 		 * 
@@ -132,29 +135,27 @@ public final class StreamsFilter implements StreamsManager {
 		StreamIterator extractor = processToStudy.errorStreamIterator();
 		
 		/**
-		 *  EXTRACTION DES CARACTERISTIQUES.
+		 *  EXTRACTION DES METADONNEES.
 		 */
 		
 		//On ne recupere que les donnees qui nous interesse
-		//d'ou la presence du booleen keepInformations. 
-		boolean keepInformations = false;
+		//d'ou la presence du booleen keepData. 
+		boolean keepData = false;
 		
-		String informations = "", information = null;	
+		String metadata = "", data = null;	
 		
 		while(extractor.hasNext()) {
-			information = extractor.next();
+			data = extractor.next();
 
-			if( keepInformations == false && information.contains("Input") ) 
-				keepInformations = true;
+			if( keepData == false && data.contains("Input") ) keepData = true;
 			
-			if( keepInformations == true ) 
-				informations += information + " ";
+			if( keepData == true ) metadata += data + " ";
 		}
 		
 		//On ferme le flux.
 		extractor.endReading();
 		
-		return informations;
+		return metadata;
 	}
 	
 	

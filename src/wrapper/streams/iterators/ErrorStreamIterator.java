@@ -1,4 +1,4 @@
-package wrapper.streams;
+package wrapper.streams.iterators;
 
 /**
  * [ CLASSE POUR LE PARCOURS DE STDERR PAR UN ITERATEUR. ]

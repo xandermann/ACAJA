@@ -6,7 +6,8 @@ import java.awt.event.ActionListener;
 import java.util.*;
 import javax.swing.*;
 import files.SettingType;
-import wrapper.language.ResolutionsConstants;
+import wrapper.language.CodecConstants;
+import wrapper.language.ResolutionConstants;
 
 public final class VideoSettingsView extends JPanel implements Observer {
 	//=======================================================================================================================
@@ -34,7 +35,7 @@ public final class VideoSettingsView extends JPanel implements Observer {
 
 		JPanel codecPanel = new JPanel();
 		codecPanel.setLayout(new FlowLayout());
-		codecsComboBox = new JComboBox<String>(new String[]{"mpeg4"});
+		codecsComboBox = new JComboBox<String>(CodecConstants.ALL_SUPPORTED_VIDEO_CODECS);
 		codecsComboBox.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -45,11 +46,11 @@ public final class VideoSettingsView extends JPanel implements Observer {
 		codecPanel.add(new JLabel("Codec video : "), BorderLayout.WEST);
 		codecPanel.add(codecsComboBox, BorderLayout.EAST);
 
-		ResolutionsConstants.getAllResolutions();
+		ResolutionConstants.getAllResolutions();
 		
 		JPanel resolutionPanel = new JPanel();
 		resolutionPanel.setLayout(new FlowLayout());
-		resolutionsComboBox = new JComboBox<String>(ResolutionsConstants.ALL_RESOLUTIONS);
+		resolutionsComboBox = new JComboBox<String>(ResolutionConstants.ALL_RESOLUTIONS);
 		resolutionsComboBox.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

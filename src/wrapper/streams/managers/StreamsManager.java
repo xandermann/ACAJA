@@ -1,3 +1,3 @@
-package wrapper.streams;
+package wrapper.streams.managers;
 
 public interface StreamsManager {}

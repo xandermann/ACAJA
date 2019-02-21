@@ -1,9 +1,8 @@
 package threads;
 
 import javax.swing.JOptionPane;
-
 import messages.MessageConstants;
-import wrapper.streams.WatchedConsumer;
+import wrapper.streams.managers.consumers.WatchedConsumer;
 
 /**
  * [ CLASSE POUR LA GESTION DE L'ESPACE D'EXECUTION POUR LES THREADS. 

@@ -24,7 +24,7 @@ public interface Modifiable {
 	 * @param type_change 		Le type de changement.
 	 * @param change			Les valeurs pour le calcul du changement. 
 	 */
-	public void modify(OperationType typeChange, Object change);
+	public void modify(OperationType typeChange, String change);
 	
 	
 	/**

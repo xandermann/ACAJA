@@ -9,12 +9,11 @@ import javax.swing.*;
 
 import gui.conversion.ConversionWindow;
 import gui.style.*;
-import tools.*;
+import gui.treatment.FrameTreatment;
+import resources.ResourceConstants;
 
 /**
  * [ CLASSE POUR LE LANCEMENT DES FENETRES D'OUVERTURE DU LOGICIEL. ]
- * 
- * TODO commentaire a faire.
  * 
  * Auteurs du projet :
  * 
@@ -45,7 +44,7 @@ public final class OpeningWindow {
 	 * Cette methode permet de generer la fenetre de presentation du logiciel.
 	 */
 	private static void generatePresentationWindow() {
-		JFrame presentationWindow = new JFrame("Acaja - un logiciel à la portee de tous.");
+		JFrame presentationWindow = new JFrame("Acaja - un logiciel a la portee de tous.");
 
 		presentationWindow.setSize(new Dimension(WIDTH, HEIGHT));
 		presentationWindow.setResizable(false);
@@ -98,6 +97,13 @@ public final class OpeningWindow {
 
 		StylizedJButton processingButton = new StylizedJButton("Traitement");
 		processingButton.setPreferredSize(new Dimension(100, 40));
+		processingButton.addActionListener(new ActionListener() {	
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				FrameTreatment f = new FrameTreatment();	
+				openingWindow.dispose();
+			}
+		});
 
 		openingWindow.setResizable(false);
 		openingWindow.setLayout(new BorderLayout());

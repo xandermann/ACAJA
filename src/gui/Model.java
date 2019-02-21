@@ -1,8 +1,8 @@
 package gui;
 
 import java.util.Observable;
+import wrapper.streams.WatchedConsumer;
 
-import wrapper.UserRequests;
 /**
  * [ SUPERCLASSE ABSTRAITE MODEL. ]
  * 
@@ -45,12 +45,12 @@ public abstract class Model extends Observable{
 	 * 
 	 * Cette methode a pour but d'eviter des imprecisions (du a
 	 * un Thread ayant commence en retard ou en avance son travail).
-	 * Le booleen UserRequests.workIsOnGoing ne doit pas souffrir de ses 
+	 * Le booleen WatchedConsumer.workIsOnGoing ne doit pas souffrir de ses 
 	 * imprecisions, ce pourquoi avec cette methode on peut repreciser 
 	 * la valeur du booleen. 
 	 */
 	public void startSave() {
-		UserRequests.startToWork();
+		WatchedConsumer.startToWork();
 	}
 	
 	

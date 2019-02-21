@@ -16,20 +16,20 @@ public final class ListEntry {
 	
 	/** Constructeur d'une entree de liste avec du texte uniquement
 	 * 
-	 * @param p_text String texte a afficher dans la liste
+	 * @param text String texte a afficher dans la liste
 	 */
-	public ListEntry(String p_text) {
-		this.text = p_text;
+	public ListEntry(String text) {
+		this.text = text;
 	}
 	
 	/** Constructeur d'une entree de liste avec du texte et une icone
 	 * 
-	 * @param p_text String texte a afficher dans la liste
-	 * @param p_icon ImageIcon icone a afficher dans la liste
+	 * @param text String texte a afficher dans la liste
+	 * @param icon ImageIcon icone a afficher dans la liste
 	 */
-	public ListEntry(String p_text, ImageIcon p_icon) {
-		this.text = p_text;
-		this.icon = p_icon;
+	public ListEntry(String text, ImageIcon icon) {
+		this.text = text;
+		this.icon = icon;
 	}
 	
 	

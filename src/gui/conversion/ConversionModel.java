@@ -2,14 +2,14 @@ package gui.conversion;
 
 import java.io.*;
 import java.util.*;
-
 import javax.swing.*;
-
 import exceptions.IncorrectFileException;
 import files.*;
 import gui.Model;
-import tools.*;
-import wrapper.UserRequests;
+import resources.*;
+import wrapper.runtime.global.UserRequests;
+// TODO : gerer la presence des fichiers systemes .DS_store, etc dans la methode loadOldImports();
+// TODO : manage multiple filenames
 
 public final class ConversionModel extends Model {
 	//=======================================================================================================================
@@ -24,9 +24,8 @@ public final class ConversionModel extends Model {
 	private SettingsFile currentFile;
 	//Liste des fichiers siur lesquels on travaille. 
 	private ArrayList<SettingsFile> files;
-	//Liste des profils.
-	private ArrayList<Profile> profiles;
-	
+	//Tableau des fichiers precedemment importes.
+	private FileInformation[] importedFiles;
 	
 	
 	//=======================================================================================================================
@@ -39,58 +38,8 @@ public final class ConversionModel extends Model {
 	 */
 	public ConversionModel() {
 		files = new ArrayList<SettingsFile>();
-		profiles = new ArrayList<Profile>();
-	}
-
-	
-
-	//=======================================================================================================================
-	//=======================================================================================================================
-	
-	
-	
-	/**
-	 * [ CHARGER LES PROFILS. ]
-	 * 
-	 * Les profils sont enregistres dans un dossier interne du programme et sont tous
-	 * charges au demarrage. L'utilisateur pourra gerer les profils presents et en
-	 * enregistrer de nouveaux. Creer une classe profile qui prendra tous les
-	 * parametres a enregistrer
-	 * TODO
-	 */
-	public void loadProfiles() {
-		// Charger les fichiers profils dans le dossier des profils
-		// Creer des objets de type profils en lisant les fichiers
-		// Ajouter les fichiers dans la liste
-	}
-
-	
-	/**
-	 * [ AJOUTER UN PROFIL. ] 
-	 * 
-	 * Methode pour ajouter un nouveau profil. 
-	 * TODO
-	 * @param profile Profile		Le nouveau profil a ajouter.
-	 */
-	public void addProfile(Profile profile) {
-		// Creer un nouveau fichier contenant les parametres du profils
-		// Enregistrer le fichier dans le dossier des profils
-		profiles.add(profile);
-	}
-
-	
-	/**
-	 * [ SUPPRIMER UN PROFIL. ]
-	 * 
-	 * Methode pour supprimer un profil. 
-	 * TODO
-	 * @param profile Profile 	Le profil a supprimer. 
-	 */
-	public void removeProfile(Profile profile) {
-		if(profiles.contains(profile)) 
-			profiles.remove(profile);
-		else 
-			JOptionPane.showMessageDialog(null, "Le profil a supprimer n'existe pas");
+		// maximum 10 last files
+		this.importedFiles = new FileInformation[10];
 	}
 
 	
@@ -107,32 +56,104 @@ public final class ConversionModel extends Model {
 	 * de la fenetre. 
 	 */
 	public void saveImports() {
-		ArrayList<File> oldFiles = new ArrayList<File>();
-		for(SettingsFile sf : files) oldFiles.add(sf.getSourceFile());
-		
 		try {
-			ObjectOutputStream saver = new ObjectOutputStream(new FileOutputStream(ResourceConstants.CONVERSION_OLD_IMPORTS));
-			saver.writeObject(oldFiles);
-			saver.close();
-		} catch (IOException e) {}
+			if(createDirectories()) {
+				for(int i = 0 ; i < this.importedFiles.length ; i ++) {
+				File f = new File(ResourceConstants.CONVERSION_OLD_IMPORTS_PATH + this.importedFiles[i].getFileName() + ".acara");
+				if(!f.exists()) {
+					FileOutputStream fos = new FileOutputStream(f);
+					ObjectOutputStream oos = new ObjectOutputStream(fos);
+					oos.writeObject(this.importedFiles[i]);
+					oos.close();
+					fos.close();
+				}
+			}
+			} else {
+				//System.out.println("Impossible de creer les dossiers de sauvegarde des imports");
+				JOptionPane.showMessageDialog(null,"Impossible de creer les dossiers de sauvegarde des imports. Merci de verifier les permissions du repertoire d'installation d'Acara");
+			}
+			
+		} catch(SecurityException se) {
+			System.out.println(se.getMessage());
+		} catch(IOException ioe) {
+			System.out.println(ioe.getMessage());
+		} catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
 	}
-	
+
+	/**
+	 *  [ METHODE POUR CREER LES DOSSIERS DES IMPORTS SI ILS N'EXISTENT PAS ]
+	 */
+	private boolean createDirectories() {
+		File dirSaves = new File(ResourceConstants.ALL_OLD_IMPORTS_PATH);
+		File dirConversion = new File(ResourceConstants.CONVERSION_OLD_IMPORTS_PATH);
+		File dirProcessing = new File(ResourceConstants.PROCESSING_OLD_IMPORTS_PATH);
+		try {
+			boolean res = true;
+			if(!dirSaves.exists())
+				 res = dirSaves.mkdir();
+			if(!dirConversion.exists() && res != false)
+				res = dirConversion.mkdir();
+			if(!dirProcessing.exists() && res != false)
+				res = dirProcessing.mkdir();
+			return res;
+		} catch (Exception e) {
+			return false;
+		}
+				
+	}
 
 	/**
 	 * [ CHARGER LES FICHIERS PRECEDEMMENT IMPORTES. ]
 	 * 
 	 * Methode qui recupere les fichiers recemments ouverts a l'ouverture. 
-	 * 
-	 * @return ArrayList<File> 		La liste des fichiers recement ouverts. 
 	 */
-	public ArrayList<File> loadOldImports() {
-		ArrayList<File> oldFiles = null;
-		try {
-			ObjectInputStream loader = new ObjectInputStream(new FileInputStream(ResourceConstants.CONVERSION_OLD_IMPORTS));
-			oldFiles = (ArrayList<File>) loader.readObject();
-			loader.close();
-	    } catch (ClassNotFoundException e) {} catch (IOException e) {}
-		return oldFiles;
+	public void loadOldImports() {
+		
+			if(createDirectories()) {
+				File[] files = new File(ResourceConstants.CONVERSION_OLD_IMPORTS_PATH).listFiles();	
+				// tri des fichiers par date
+				Arrays.sort(files, new Comparator<File>(){
+				    public int compare(File f1, File f2){
+				        return Long.valueOf(f1.lastModified()).compareTo(f2.lastModified());
+				    } 
+				});
+				// System.out.println(files.length);
+				for(int i = 0 ; i < files.length ; i++) {
+					if(files[i].getName().contains(".acara")) {
+						try {	
+							FileInputStream fis = new FileInputStream(files[i]);
+							ObjectInputStream ois = new ObjectInputStream(fis);
+							if(i <= 10)  // avoid array out of bounds
+								this.importedFiles[i] = (FileInformation)ois.readObject();
+							ois.close();
+							fis.close();
+					}  catch(SecurityException se) {
+						//System.out.println(se.getMessage());
+						JOptionPane.showMessageDialog(null, "Vous n'avez pas les permissions pour lire le fichier d'import Acara " + files[i].getName());
+					} catch(IOException ioe) {
+						//System.out.println(ioe.getMessage());
+						JOptionPane.showMessageDialog(null, "Impossible d'acceder au fichier " + files[i].getName() + " : erreur d'entree/sortie");
+					} catch(Exception e) {
+						//System.out.println(e.getMessage());
+						JOptionPane.showMessageDialog(null, "Erreur lors de l'acces aux fichiers precedemment importes : " + e.getMessage());
+					}
+					}
+					
+			}
+			//	System.out.println("Loaded old imports...");
+			/*	for(FileInformation f : this.importedFiles) {
+					if(f != null) 
+						System.out.println(f.getFileName());
+				} debug ; */
+			} else {
+				JOptionPane.showMessageDialog(null,"Impossible de creer les dossiers de sauvegarde des imports. Merci de verifier les permissions du repertoire d'installation d'Acara");
+			}
+	}
+	
+	public FileInformation[] getOldImports() {
+		return this.importedFiles;
 	}
 
 	
@@ -156,7 +177,7 @@ public final class ConversionModel extends Model {
 	 */
 	public DefaultListModel<ListEntry> getFilenames() {
 		DefaultListModel<ListEntry> filenameList = new DefaultListModel<ListEntry>();
-		for (SettingsFile f : files) filenameList.addElement(new ListEntry(f.getSourceFilename()));
+		for (SettingsFile f : files) filenameList.addElement(new ListEntry(f.getName()));
 		return filenameList;
 	}
 
@@ -182,9 +203,64 @@ public final class ConversionModel extends Model {
 		if(file.exists()) {
 			files.add(new SettingsFile(file));
 			sendChanges();
+		//	System.out.println("File exists ...");
+			FileInformation f = new FileInformation(file.getName(),file.getAbsolutePath());
+		
+			for(int i = 0; i < this.importedFiles.length; i++) {
+					
+				if(this.importedFiles[i] != null) {
+					if(this.importedFiles[i].equals(f)){
+				//	System.out.println("Found match in file " + i + " : " + this.importedFiles[i].getFileName());
+					break;	
+					}
+					
+				}
+			    if(this.importedFiles[i] == null) {
+			    //	System.out.println("Found empty array field at " + i + " : adding " + f.getFileName());
+			        this.importedFiles[i] = f;
+			        this.saveImports();
+			        break;
+			    } 
+			    
+			    
+			    
+			    if(i==9) {
+			  //  	System.out.println("Array is full ...");
+			    	if(deleteFile(this.importedFiles[0].getFileName())) {
+			    		//remove first occurence and moving all others
+			    
+			    	//	System.out.println("File at index 0 (" + this.importedFiles[0].getFileName() + ") removed.");
+			    		for(int j = 1 ; j < this.importedFiles.length ; j ++) {
+			    		//	System.out.println("Replacing " + this.importedFiles[j-1].getFileName() + " by " + this.importedFiles[j] + " in array ( " + (j-1) +" replaced by  " + j);
+			    			this.importedFiles[j-1] = this.importedFiles[j];
+			    		}
+			    			
+			    		//add new fileinformation at last position
+			    		this.importedFiles[9] = f;
+			    	//	System.out.println("Added " + f.getFileName() + " at position 9");
+			    	this.saveImports();	
+			    	}
+			    }
+			}
 		}else 
 			JOptionPane.showMessageDialog(null, "Le fichier selectionne n'existe pas");
 		
+		
+		
+	}
+
+	
+	/** 
+	 * [ SUPPRIMER UN ANCIEN FICHIER D'IMPORTATION ]
+	 */
+	private boolean deleteFile(String fileName) {
+		try {
+			File f = new File(ResourceConstants.CONVERSION_OLD_IMPORTS_PATH + fileName + ".acara");
+			if(!(f.exists())) return true;
+			return f.delete();
+		} catch(Exception e) {
+			return false;
+		}
 	}
 	
 	
@@ -228,7 +304,7 @@ public final class ConversionModel extends Model {
 	 * Methode qui permet de modifier un parametre du fichier
 	 * actuellement selectionne
 	 */
-	public void modify(SettingType typeSeyting, Object setting) {
+	public void modify(SettingType typeSeyting, String setting) {
 		currentFile.modify(typeSeyting, setting);
 	}
 	
@@ -280,8 +356,7 @@ public final class ConversionModel extends Model {
 	 */
 	public void setCurrentFile(String fileName) {
 		for (SettingsFile f : this.getFiles()) {
-			if (f.getSourceFilename().equals(fileName)) 
-				currentFile = f;
+			if (f.getName().equals(fileName)) currentFile = f;
 		}
 		sendChanges();
 	}

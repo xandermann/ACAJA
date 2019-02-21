@@ -20,15 +20,20 @@ public enum SettingType implements OperationType {
 	/**
 	 * Parametre de type FPS de la video.
 	 */
-	FPS,
+	FRAMERATE,
 
+	/**
+	 * Parametre de type resolution video.
+	 */
+	RESOLUTION,
+	
 	/**
 	 * Parametre de type codec audio.
 	 */
 	AUDIO_CODEC,
 	
 	/**
-	 * Parametre de type sampling rate.
+	 * Parametre de type taux d'echantillonage.
 	 */
 	SAMPLING_RATE,
 	
@@ -40,10 +45,5 @@ public enum SettingType implements OperationType {
 	/**
 	 * Parametre de type bitrate audio.
 	 */
-	AUDIO_BITRATE,
-
-	/**
-	 * Parametre de type resolution video.
-	 */
-	VIDEO_RESOLUTION
+	AUDIO_BITRATE
 }

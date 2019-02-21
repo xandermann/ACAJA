@@ -1,9 +1,10 @@
 package files;
+
 import java.io.File;
 import java.util.HashMap;
-
 import exceptions.IncorrectFileException;
-import wrapper.SystemRequests;
+import wrapper.runtime.global.SystemRequests;
+
 /**
  * TODO comentaire a faire. 
  * 
@@ -14,6 +15,8 @@ public final class ProcessingFile extends SelectableFile implements Modifiable{
 	//=======================================================================================================================
 	//=======================================================================================================================
 	
+	
+	
 	/**
 	 * [ ATTRIBUT D'INSTANCE DE LA CLASSE. ]
 	 */
@@ -21,11 +24,13 @@ public final class ProcessingFile extends SelectableFile implements Modifiable{
 	/**
 	 * Les traitements en attente sur this. 
 	 */
-	private HashMap<ProcessingType, Object> performedProcessings;
+	private HashMap<ProcessingType, String> performedProcessings;
 
+	
 	
 	//=======================================================================================================================
 	//=======================================================================================================================
+	
 	
 	
 	/**
@@ -43,58 +48,50 @@ public final class ProcessingFile extends SelectableFile implements Modifiable{
 		/**
 		 * INITIALISATION DE LA TABLE DES TRAITEMENTS EN ATTENTE SUR THIS. 
 		 */
-		performedProcessings = new HashMap<ProcessingType, Object>();
-		
-		/**
-		 * INITIALISATION DE LA DUREE DU SON OU DE LA VIDEO. 
-		 * 
-		 * Si le fichier source est une image alors la duree prend -1, 
-		 * car une image n'a pas de duree. 
-		 */
-		duration = containsAudio() ? SystemRequests.getDuration(sourceFile) : -1;			
+		performedProcessings = new HashMap<ProcessingType, String>();
 	}
 
 	
+	
 	//=======================================================================================================================
 	//=======================================================================================================================
+	
 	
 	
 	/**
 	 * [ METHODE POUR AJOUTER UN TRAITEMENT EN ATTENTE A THIS. ]
 	 * 
 	 * @param string		Le type de taritement a ajouter ne attente. 
-	 * @param object		Les arguments necessaires a connaitre pour executer 
+	 * @param String		Les arguments necessaires a connaitre pour executer 
 	 * 						les traitements. 
 	 */
-	public void modify(OperationType typeProcess, Object process) { 
+	public void modify(OperationType typeProcess, String process) { 
 		performedProcessings.put((ProcessingType) typeProcess, process);
 	}
 
-	
-	//=======================================================================================================================
-	//=======================================================================================================================
-	
 	
 	/**
 	 * [ METHODE POUR SAVOIR SI DES TRAIEMENTS SONT EN ATTENTE SUR CE FICHIER. ]
 	 */
 	public boolean isModified() {
-		return  !performedProcessings.equals(new HashMap<ProcessingType, Object>());
+		return  !performedProcessings.equals(new HashMap<ProcessingType, String>());
 	}
 	
 	
-	//=======================================================================================================================
-	//=======================================================================================================================
 	
+	//=======================================================================================================================
+	//=======================================================================================================================
+
+
 	
 	/**
 	 * [ METHODE ACCESSEUR - GETTER. ]
 	 * 
 	 * Methode pour recuperer les traitements en attente. 
 	 * 
-	 * @return HashMap<String, Object>		Les traitements en attente.
+	 * @return HashMap<String, String>		Les traitements en attente.
 	 */
-	public HashMap<ProcessingType, Object> getPerformedProcessings() {
+	public HashMap<ProcessingType, String> getPerformedProcessings() {
 		return performedProcessings;
 	}
 

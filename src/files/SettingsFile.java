@@ -1,11 +1,9 @@
 package files;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
-
 import exceptions.IncorrectFileException;
-import wrapper.SystemRequests;
+import wrapper.runtime.global.SystemRequests;
 
 /**
  * TODO comentaire a faire.
@@ -23,12 +21,12 @@ public final class SettingsFile extends SelectableFile implements Modifiable {
 	/**
 	 * Les requetes soumises par l'utilisateur.
 	 */
-	private HashMap<SettingType, Object> requests;
+	private HashMap<SettingType, String> requests;
 
 	/**
 	 * Les parametres courants du fichier
 	 */
-	private HashMap<SettingType, Object> settings;
+	private HashMap<SettingType, String> settings;
 
 	
 	
@@ -58,11 +56,11 @@ public final class SettingsFile extends SelectableFile implements Modifiable {
 		 * INITIALISATION DES PARAMETRES DE LA VIDEO.
 		 */
 		// Intiliasation des tables.
-		requests = new HashMap<SettingType, Object>();
-		settings = new HashMap<SettingType, Object>();
+		requests = new HashMap<SettingType, String>();
+		settings = new HashMap<SettingType, String>();
 
-		// Initialisation des autres parametres.
-		SystemRequests.getSettings(this);
+		//Initialisation des autres parametres.
+		SystemRequests.askMetadata(this);
 	}
 
 	
@@ -78,16 +76,10 @@ public final class SettingsFile extends SelectableFile implements Modifiable {
 	 * @param setting  Le parametre a modifier.
 	 * @param newValue La nouvelle valeur du parametre.
 	 */
-	public void modify(OperationType typeSetting, Object setting) {
+	public void modify(OperationType typeSetting, String setting) {
 		requests.put((SettingType) typeSetting, setting);
 	}
 
-	
-	
-	//=======================================================================================================================
-	//=======================================================================================================================
-
-	
 	
 	/**
 	 * [ METHODE POUR SAVOIR SI DES PARAMETRES ONT ETE MODIFIES. ]
@@ -97,9 +89,16 @@ public final class SettingsFile extends SelectableFile implements Modifiable {
 	 * @return booleen True si le fichier a ete modifie.
 	 */
 	public boolean isModified() {
-		return !requests.equals(new HashMap<SettingType, Object>());
+		return !requests.equals(new HashMap<SettingType, String>());
 	}
+	
+	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
 
+	
+	
 	/**
 	 * [ METHODE ACCESSEUR - GETTER. ]
 	 * 
@@ -107,7 +106,7 @@ public final class SettingsFile extends SelectableFile implements Modifiable {
 	 * 
 	 * @return HashMap<String, String> Les parametres du fichier.
 	 */
-	public HashMap<SettingType, Object> getSettings() {
+	public HashMap<SettingType, String> getSettings() {
 		return settings;
 	}
 
@@ -118,7 +117,7 @@ public final class SettingsFile extends SelectableFile implements Modifiable {
 	 * 
 	 * @return HashMap<String, String> Les requetes.
 	 */
-	public HashMap<SettingType, Object> getRequests() {
+	public HashMap<SettingType, String> getRequests() {
 		return requests;
 	}
 

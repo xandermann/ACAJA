@@ -12,10 +12,11 @@ import exceptions.IncorrectFileException;
  * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et
  *         CHEVRIER Jean-christophe.
  */
-public class SelectableFile{
+public class SelectableFile {
 	//=======================================================================================================================
 	//=======================================================================================================================
 
+	
 	
 	/**
 	 * [ ATTRIBUTS D'INSTANCE DE LA CLASSE. ]
@@ -24,7 +25,7 @@ public class SelectableFile{
 	/**
 	 * La duree de la video.
 	 */
-	protected long duration;
+	protected String duration;
 
 	/**
 	 * Le type de fichier.
@@ -42,8 +43,10 @@ public class SelectableFile{
 	private boolean isSelected;
 
 	
+	
 	//=======================================================================================================================
 	//=======================================================================================================================
+	
 	
 	
 	/**
@@ -63,8 +66,10 @@ public class SelectableFile{
 	}
 
 	
+	
 	//=======================================================================================================================
 	//=======================================================================================================================
+	
 	
 	
 	/**
@@ -116,9 +121,11 @@ public class SelectableFile{
 	}
 	
 	
+	
 	//=======================================================================================================================
 	//=======================================================================================================================
 
+	
 	
 	/**
 	 * [ METHODE POUR RENSEIGNER LE TYPE DE FICHIER. ]
@@ -127,11 +134,11 @@ public class SelectableFile{
 	 * ou meme une image.
 	 * 
 	 * 3 valeurs possiblement accordable a typeFile : 
-	 * - MEDIA_FILE_VIDEO ( = 0 ) ; 
-	 * - MEDIA_FILE_AUDIO ( = 1 ) ; 
-	 * - MEDIA_FILE_IMAGE ( = 2 ).
+	 * - MEDIA_FILE_VIDEO ; 
+	 * - MEDIA_FILE_AUDIO ; 
+	 * - MEDIA_FILE_IMAGE.
 	 * 
-	 * @throws IncorrectFileException 
+	 * @throws IncorrectFileException 	Exception sur les fichiers non conformes. 
 	 */
 	private void whoAmI() throws IncorrectFileException {
 		String fileName = sourceFile.getName().toLowerCase();
@@ -146,8 +153,10 @@ public class SelectableFile{
 	}
 
 	
+	
 	//=======================================================================================================================
 	//=======================================================================================================================
+	
 	
 	
 	/**
@@ -184,9 +193,9 @@ public class SelectableFile{
 	 * 
 	 * Methode pour recuperer la duree d'une video.
 	 * 
-	 * @return int Le type du fichier.
+	 * @return  
 	 */
-	public long getDuration() {
+	public String getDuration() {
 		return duration;
 	}
 
@@ -195,9 +204,9 @@ public class SelectableFile{
 	 * 
 	 * Methode pour modifier la duree d'une video.
 	 * 
-	 * @return int Le type du fichier.
+	 * @return
 	 */
-	public void setDuration(long duration) {
+	public void setDuration(String duration) {
 		this.duration = duration;
 	}
 
@@ -226,13 +235,25 @@ public class SelectableFile{
 	/**
 	 * [ METHODE ACCESSEUR - GETTER. ]
 	 * 
-	 * Methode pour recuperer le nom du fichier
+	 * Methode pour recuperer le nom du fichier.
 	 * 
-	 * @return String Le nom du fichier source
+	 * @return String 	Le nom du fichier source.
 	 */
-	public String getSourceFilename() {
+	public String getName() {
 		return sourceFile.getName();
 	}
+	
+	/**
+	 * [ METHODE ACCESSEUR - GETTER. ]
+	 * 
+	 * Methode pour recuperer le nom complet du fichier.
+	 * 
+	 * @return String 	Le nom complet du fichier source.
+	 */
+	public String getFullName() {
+		return sourceFile.getPath();
+	}
+	
 	
 	
 	//=======================================================================================================================

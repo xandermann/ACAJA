@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridLayout;
@@ -28,23 +29,15 @@ import resources.ResourceConstants;
  *         CHEVRIER Jean-christophe.
  */
 public final class OpeningWindow {
-	//=======================================================================================================================
-	//=======================================================================================================================
-	
-	
+
 	/**
 	 * [ CONSTANTES DE CLASSE INTERNES. ]
 	 *
 	 * Dimensions des fenetres de demarrage.
 	 */
-	private final static int WIDTH = 400;
-	private final static int HEIGHT = 400;
+	public final static int WIDTH = 400;
+	public final static int HEIGHT = 500;
 
-	
-	//=======================================================================================================================
-	//=======================================================================================================================
-	
-	
 	/**
 	 * [ METHODE INTERNE DE CLASSE - FENETRE DE PRESENTATION DU LOGICIEL. ]
 	 * 
@@ -59,34 +52,25 @@ public final class OpeningWindow {
 		presentationWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		// Logo en image de fond.
-		presentationWindow.add(new JPanel(){
-			public void paintComponent(Graphics g) {
-				try {
-					g.drawImage(ImageIO.read(ResourceConstants.ACAJA_LOGO), 80, 60, null);
-				} catch (IOException ioe) {}
-			}
-		});
+		presentationWindow.add(new PanelLoadingWindow());
 
 		WindowTools.showLogo(presentationWindow);
 		WindowTools.executeWindow(presentationWindow);
 
 		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {}
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+		}
 
 		presentationWindow.dispose();
+		System.exit(0);
 	}
 
-	
-	//=======================================================================================================================
-	//=======================================================================================================================
-	
-	
 	/**
-	 * [ METHODE INTERNE DE CLASSE - FENETRE CHOIX DU MODE D'UTILISATION DU LOGICIEL. ]
+	 * [ METHODE INTERNE DE CLASSE - FENETRE CHOIX DU MODE D'UTILISATION DU
+	 * LOGICIEL. ]
 	 * 
-	 * Cette methode permet de generer la 
-	 * fenetre du choix de mode d'utilisation du
+	 * Cette methode permet de generer la fenetre du choix de mode d'utilisation du
 	 * logiciel : conversion ou traitement.
 	 */
 	private static void generateChoiceModeWindow() {
@@ -104,10 +88,10 @@ public final class OpeningWindow {
 
 		StylizedJButton processingButton = new StylizedJButton("Traitement");
 		processingButton.setPreferredSize(new Dimension(100, 40));
-		processingButton.addActionListener(new ActionListener() {	
+		processingButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				FrameTreatment f = new FrameTreatment();	
+				FrameTreatment f = new FrameTreatment();
 				openingWindow.dispose();
 			}
 		});
@@ -148,11 +132,6 @@ public final class OpeningWindow {
 		WindowTools.executeWindow(openingWindow);
 	}
 
-	
-	//=======================================================================================================================
-	//=======================================================================================================================
-	
-	
 	/**
 	 * [ METHODE DE CLASSE. ]
 	 * 
@@ -162,8 +141,4 @@ public final class OpeningWindow {
 		generatePresentationWindow();
 		generateChoiceModeWindow();
 	}
-	
-	
-	//=======================================================================================================================
-	//=======================================================================================================================
 }

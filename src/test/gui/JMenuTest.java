@@ -35,8 +35,7 @@ public class JMenuTest {
 		profilesMenu.add(new StylizedJMenuItem("Creer un profil - Item 1"));
 		profilesMenu.add(new StylizedJMenuItem("Charger un profil - Item 2"));
 		profilesMenu.add(new StylizedJMenuItem("Supprimer un profil - Item 3"));
-		
-		
+
 		StylizedJMenu conversionMenu = new StylizedJMenu("Conversion");
 		conversionMenu.add(new StylizedJMenuItem("Ajouter un fichier"));
 		conversionMenu.add(new StylizedJMenuItem("Ajouter une image"));
@@ -105,6 +104,8 @@ public class JMenuTest {
 		}
 
 		frame.dispose();
+
+		// close
 	}
 
 }

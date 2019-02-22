@@ -21,6 +21,8 @@ public class StylizedJMenuItem extends javax.swing.JMenuItem implements Stylized
 	 */
 	public StylizedJMenuItem(String title) {
 		super(title);
+		
+		this.stylize();
 	}
 
 	@Override

@@ -7,13 +7,15 @@ import java.awt.GridLayout;
 
 import javax.swing.*;
 
+import javafx.scene.control.skin.ToolBarSkin;
+
 
 public class PanelButton extends JPanel{
 	
 	public PanelButton() {
 		this.setLayout(new GridLayout(3,2,1,1));
 		
-		JToggleButton rectangle = new JToggleButton();
+		JToggleButton rectangle = new JToggleButton(new ImageIcon(resources.ResourceConstants.rectbutton));
 		JToggleButton pivoteD = new JToggleButton();
 		JToggleButton pivoteG = new JToggleButton();
 		JToggleButton rectangle1 = new JToggleButton();
@@ -33,6 +35,7 @@ public class PanelButton extends JPanel{
 		this.add(rectangle1);
 		this.add(pivoteD1);
 		this.add(pivoteG1);
+		this.repaint();
 		
 	}
 }

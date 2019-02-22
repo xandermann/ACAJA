@@ -11,8 +11,8 @@ import wrapper.streams.managers.consumers.WatchedConsumer;
  * Cette classe comporte une majorité de methodes publiques 
  * retourant this. Cela permet d'enchainer en une meme instruction 
  * un nombre "infini" d'operations, de la memme maniere qu'on le ferait
- * en saisissant les flags de FFmpeg dans un SHELL. Cela ets tres pratique 
- * et tres intuitif. 
+ * en saisissant une multituide de flags dans une commande FFmpeg dans un SHELL. 
+ * Cela est tres pratique et tres intuitif. 
  * 
  * C'est une classe cle dans cet interfacage de FFmpeg 
  * en JAVA. 
@@ -130,7 +130,11 @@ public final class Request {
 
 
 	
-	
+	/**
+	 * [ CONNAITRE LES CODECS SUPPORTES PAR FFMPEG. ]
+	 * 
+	 * @return La requete this. 
+	 */
 	public Request codecs() {
 		askSomethingElse(new String[]{FlagConstants.FLAG_SUPPORTED_CODECS});
 		return this;
@@ -138,7 +142,13 @@ public final class Request {
 	
 	
 	
-	
+	/**
+	 * [ MODIFIER LE CODEC D'UNE VIDEO. ]
+	 * 
+	 * @param videoCodec	Le nouveau codec. 
+	 * 
+	 * @return La requete this. 
+	 */
 	public Request videoCodec(String videoCodec) {
 		if(videoCodec==null) throw new NullPointerException("VideoCodec null !");
 		if(Integer.parseInt(videoCodec)<=0) throw new IllegalArgumentException("VideoCodec negatif ou nul !");
@@ -146,6 +156,13 @@ public final class Request {
 		return this;
 	}
 	
+	/**
+	 * [ MODIFIER LE BITRATE D'UNE VIDEO. ]
+	 * 
+	 * @param videoBitrate	Le nouveau bitrate. 
+	 * 
+	 * @return La requete this. 
+	 */
 	public Request videoBitrate(String videoBitrate) {
 		if(videoBitrate==null) throw new NullPointerException("VideoBitrate null !");
 		if(Integer.parseInt(videoBitrate)<=0) throw new IllegalArgumentException("VideoBitrate negatif ou nul !");
@@ -153,6 +170,13 @@ public final class Request {
 		return this;
 	}
 
+	/**
+	 * [ MODIFIER LA RESOLUTION D'UNE VIDEO. ]
+	 * 
+	 * @param resolution	La nouvelle resolution. 
+	 * 
+	 * @return La requete this. 
+	 */
 	public Request resolution(String resolution) {
 		if(resolution==null) throw new NullPointerException("Resolution null !");
 		if(Integer.parseInt(resolution)<=0) throw new IllegalArgumentException("Resolution negative ou nulle !");
@@ -160,6 +184,13 @@ public final class Request {
 		return this;
 	}
 	
+	/**
+	 * [ MODIFIER LE TAUX D'IMAGES PAR SECONDE (FPS) D'UNE VIDEO. ]
+	 * 
+	 * @param framerate		Le taux d'images. 
+	 * 
+	 * @return La requete this. 
+	 */
 	public Request framerate(String framerate) {
 		if(framerate==null) throw new NullPointerException("Framerate null !");
 		if(Integer.parseInt(framerate)<=0) throw new IllegalArgumentException("Framerate negatif ou nul !");
@@ -169,7 +200,13 @@ public final class Request {
 	
 	
 	
-
+	/**
+	 * [ MODIFIER LE CODEC D'UN AUDIO. ]
+	 * 
+	 * @param audioCodec	Le nouveau codec. 
+	 * 
+	 * @return La requete this. 
+	 */
 	public Request audioCodec(String audioCodec) {
 		if(audioCodec==null) throw new NullPointerException("AudioCodec null !");
 		if(Integer.parseInt(audioCodec)<=0) throw new IllegalArgumentException("AudioCodec negatif ou nul !");
@@ -177,6 +214,13 @@ public final class Request {
 		return this;
 	}
 	
+	/**
+	 * [ MODIFIER LE BITRATE D'UN AUDIO. ]
+	 * 
+	 * @param videoBitrate	Le nouveau bitrate. 
+	 * 
+	 * @return La requete this. 
+	 */
 	public Request audioBitrate(String audioBitrate) {
 		if(audioBitrate==null) throw new NullPointerException("AudioBitrate null !");
 		if(Integer.parseInt(audioBitrate)<=0) throw new IllegalArgumentException("AudioBitrate negatif ou nul !");
@@ -184,6 +228,13 @@ public final class Request {
 		return this;
 	}
 	
+	/**
+	 * [ MODIFIER LE TAUX D'ECHANTILLONAGE D'UN AUDIO. ]
+	 * 
+	 * @param samplingRate	Le nouveau taux d'echantillonage. 
+	 * 
+	 * @return La requete this. 
+	 */
 	public Request samplingRate(String samplingRate) {
 		if(samplingRate==null) throw new NullPointerException("SamplingRate null !");
 		if(Integer.parseInt(samplingRate)<=0) throw new IllegalArgumentException("SamplingRate negative ou nulle !");
@@ -191,6 +242,13 @@ public final class Request {
 		return this;
 	}
 
+	/**
+	 * [ MODIFIER LE NOMBRE DE CANAUX AUDIO. ]
+	 * 
+	 * @param samplingRate	Le nouveau nombre de canaux audio. 
+	 * 
+	 * @return La requete this. 
+	 */
 	public Request numberAudioChannels(String numberAudioChannels) {
 		if(numberAudioChannels==null) throw new NullPointerException("NumberAudioChannels null !");
 		if(Integer.parseInt(numberAudioChannels)<=0) throw new IllegalArgumentException("NumberAudioChannels negative ou nulle !");
@@ -201,6 +259,25 @@ public final class Request {
 	
 	
 	
+	/**
+	 * [ ROGNER UNE VIDEO. ]
+	 * 
+	 * 			xCorner
+	 * 	yCorner + < -------------------- > 
+	 * 		   ^	        width
+	 *		   |				  
+	 * 		   |
+	 * 		   | height
+	 * 		   |
+	 * 		   v 
+	 * 
+	 * @param xCorner	Abscisse du coin gauche. 
+	 * @param yCorner	Ordonnee du coin gauche. 
+	 * @param width		La largeur. 
+	 * @param height	La hauteur. 
+	 * 
+	 * @return La requete this. 
+	 */
 	public Request crop(String xCorner, String yCorner, String width, String height) {
 		if(xCorner==null) throw new NullPointerException("xCorner null !");
 		if(yCorner==null) throw new NullPointerException("yCorner null !");
@@ -219,7 +296,12 @@ public final class Request {
 				FlagConstants.FLAG_CROP[1]+width+s+height+s+xCorner+s+yCorner+FlagConstants.FLAG_CROP[3]});
 		return this;
 	}
-	
+
+	/**
+	 * [ PRIVOTER DE 90° UNE VIDEO. ]
+	 * 
+	 * @return La requete this. 
+	 */
 	public Request rotate() {
 		askSomethingElse(FlagConstants.FLAG_ROTATE);
 		return this;
@@ -228,14 +310,29 @@ public final class Request {
 	
 	
 	
+	/**
+	 * [ EXTRAIRE UNE IMAGE D'UNE VIDEO. ]
+	 * 
+	 * @param time	Le moment de la video ou se situe l'image. 
+	 * 
+	 * @return La requete this. 
+	 */
 	public Request extractImage(String time) {
 		if(time==null) throw new NullPointerException("NumberAudioChannels null !");
 		askSomethingElse(new String[]{
-				FlagConstants.FLAG_PERIOD[0], time, FlagConstants.FLAG_PERIOD[1], "00:00:01.00", 
-				FlagConstants.FLAG_FRAMERATE, "1"});
+				FlagConstants.FLAG_PERIOD[0], time, FlagConstants.FLAG_PERIOD[1], "00:00:01.00"});
+		framerate("1");
 		return this;
 	}
 	
+	/**
+	 * [ REDIMMENSIONNER UNE IMAGE. ]
+	 * 
+	 * @param width		La largeur. 
+	 * @param height	La hauteur. 
+	 * 
+	 * @return La requete this. 
+	 */
 	public Request resizeImage(String width, String height) {
 		if(width==null) throw new NullPointerException("Width null !");
 		if(height==null) throw new NullPointerException("Height null !");
@@ -251,12 +348,21 @@ public final class Request {
 	
 	
 	
-	
+	/**
+	 * [ EXECUTER LA REQUETE ET OBTENIR LE RESULAT. ]
+	 * 
+	 * @return	Le resultat de l'execution de la requete : un ProcessManager. 
+	 */
 	public ProcessManager result() {
 		if(output!=null) askSomethingElse(new String[]{output});
 		return FFmpegRuntime.execute(request);
 	}
 	
+	/**
+	 * [ EXECUTER LA REQUETE ET CONSOMMER EN INTRENE TOUS LES FLUX DE SORTIE DE FFMPEG. ]
+	 * 
+	 * @return La requete this. 
+	 */
 	public Request make() {
 		WatchedConsumer.consume(result());
 		return this;

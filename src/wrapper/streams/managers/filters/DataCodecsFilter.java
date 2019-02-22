@@ -40,7 +40,6 @@ public final class DataCodecsFilter implements DataStreamsFilter {
 		/**
 		 *  EXTRACTION DES CODECS.
 		 */
-		ErrorStreamConsumer.consume(processToStudy);
 		StreamIterator iterator = processToStudy.outputStreamIterator();
 		
 		// On ne recupere que les donnees qui nous interesse 
@@ -59,6 +58,8 @@ public final class DataCodecsFilter implements DataStreamsFilter {
 				if(filteredData[1].contains(typeCodec)) dataCodecs.add(filteredData[2]);
 			}
 		}
+		
+		ErrorStreamConsumer.consume(processToStudy);
 
 		return dataCodecs.toArray(new String[dataCodecs.size()]);
 	}

@@ -32,17 +32,19 @@ public class JMenuTest {
 
 		// Creation JMenu
 		StylizedJMenu profilesMenu = new StylizedJMenu("Profils");
-
-		StylizedJMenuItem item1 = new StylizedJMenuItem("Creer un profil - Item 1");
-		StylizedJMenuItem item2 = new StylizedJMenuItem("Charger un profil - Item 2");
-		StylizedJMenuItem item3 = new StylizedJMenuItem("Supprimer un profil - Item 3");
-
-		profilesMenu.add(item1);
-		profilesMenu.add(item2);
-		profilesMenu.add(item3);
+		profilesMenu.add(new StylizedJMenuItem("Creer un profil - Item 1"));
+		profilesMenu.add(new StylizedJMenuItem("Charger un profil - Item 2"));
+		profilesMenu.add(new StylizedJMenuItem("Supprimer un profil - Item 3"));
+		
+		
+		StylizedJMenu conversionMenu = new StylizedJMenu("Conversion");
+		conversionMenu.add(new StylizedJMenuItem("Ajouter un fichier"));
+		conversionMenu.add(new StylizedJMenuItem("Ajouter une image"));
+		conversionMenu.add(new StylizedJMenuItem("Charger la conversion"));
 
 		// Ajoute les menus
 		barre.add(profilesMenu);
+		barre.add(conversionMenu);
 
 		return barre;
 	}
@@ -70,13 +72,13 @@ public class JMenuTest {
 
 		// JMenu
 		frame.setJMenuBar(JMenuTest.createJMenuBar());
-		
+
 		// Panel
 		StylizedJPanel panel = new StylizedJPanel();
-		
+
 		panel.add(new StylizedJButton("Mon super bouton !"));
 		panel.add(new StylizedJButton("Attention danger !", StyleTheme.DANGER));
-		
+
 		frame.add(panel);
 
 		/*

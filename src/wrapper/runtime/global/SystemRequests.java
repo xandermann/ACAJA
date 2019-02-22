@@ -7,6 +7,8 @@ import wrapper.streams.iterators.ProcessManager;
 import wrapper.streams.managers.filters.*;
 
 /**
+ * [ CLASSE POUR LES GESTION DES REQUETES DU SYSTEM. ]
+ * 
  * Cette classe a pour but de realiser les requetes FFMPEG
  * necessaires au fonctionnement interne de notre logiciel ( d'ou le 
  * de la classe : SystemRequests. ). 
@@ -48,7 +50,7 @@ public final class SystemRequests{
 			/**
 			 * EXTRACTION DES DONNEES.
 			 */
-			String metadata = MetadataFilter.findMetadataOfMediaFile(processManager);
+			String metadata = MetadataFilter.findAllMetadata(processManager);
 			/**
 			 * INITIALISATION DES SETTINGS DU FICHEIR A PARTIR DES METADONNEES.
 			 */

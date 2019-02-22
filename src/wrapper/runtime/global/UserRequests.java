@@ -6,6 +6,8 @@ import wrapper.runtime.details.Request;
 
 
 /**
+ * [ CLASSE POUR LES GESTION DES REQUETES DE L'UTILISATEUR. ]
+ * 
  * Ceci est une classe concrete "sterile", c-a-d qu'aucune classe ne peut 
  * en heriter ( d'ou la presence du final devant class).
  * 
@@ -17,10 +19,11 @@ public final class UserRequests{
 	
 	
 	/**
-	 * [ METHODE INTERNE DE CLASSE. ]
-	 * @param file
+	 * [ METHODE INTERNE DE CLASSE POUR L'EXECUTION DES REQUETES D'UNE CONVERSION. ]
+	 * 
+	 * @param file			Le fichier contentant les requetes et sur lequel les realiser. 
 	 */
-	private static void executeSettingsFile(SettingsFile file) {
+	private static void execute(SettingsFile file) {
 		if(file == null) throw new NullPointerException("SettingsFile null!");
 		
 		Request request = new Request(file.getFullName(), file.getFullName());
@@ -65,10 +68,11 @@ public final class UserRequests{
 	
 	
 	/**
-	 * [ METHODE INTERNE DE CLASSE. ]
-	 * @param file
+	 * [ METHODE INTERNE DE CLASSE POUR L'EXECUTION DES REQUETES D'UN TRAITEMENT. ]
+	 * 
+	 * @param file			Le fichier contentant les requetes et sur lequel les realiser. 
 	 */
-	private static void executeProcessingFile(ProcessingFile file) {
+	private static void execute(ProcessingFile file) {
 		if(file == null) throw new NullPointerException("ProcessingFile null!");
 		
 		Request request = new Request(file.getFullName(), file.getFullName());
@@ -96,7 +100,7 @@ public final class UserRequests{
 	 */
 	public static void execute(SelectableFile file) {
 		if(file == null) throw new NullPointerException("SelectableFile null!");
-		if(file instanceof SettingsFile) executeSettingsFile((SettingsFile) file); else executeProcessingFile((ProcessingFile) file);
+		execute(file instanceof SettingsFile ? (SettingsFile) file : (ProcessingFile) file);
 	}
 	
 	

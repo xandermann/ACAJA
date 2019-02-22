@@ -5,20 +5,61 @@ import wrapper.language.FlagConstants;
 import wrapper.streams.iterators.ProcessManager;
 import wrapper.streams.managers.consumers.WatchedConsumer;
 
-public class Request {
+/**
+ * [ CLASSE POUR LA CONSTITUTION DES REQUETES FFMPEG. ]
+ * 
+ * Cette classe comporte une majorité de methodes publiques 
+ * retourant this. Cela permet d'enchainer en une meme instruction 
+ * un nombre "infini" d'operations, de la memme maniere qu'on le ferait
+ * en saisissant les flags de FFmpeg dans un SHELL. Cela ets tres pratique 
+ * et tres intuitif. 
+ * 
+ * C'est une classe cle dans cet interfacage de FFmpeg 
+ * en JAVA. 
+ * 
+ * Ceci est une classe concrete "sterile", c-a-d qu'aucune classe ne peut 
+ * en heriter ( d'ou la presence du final devant class).
+ * 
+ * Auteurs du projet : 
+ * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
+ *
+ */
+public final class Request {
+	/**
+	 * LA REQUETE FFMPEG : INPUT FILE / FLAG(S) / VALEUR(S) / OUTPUT FILE. 
+	 */
 	private List<String> request;
+	/**
+	 * FICHIER D'ENTREE (pas toujours necessaire).  
+	 */
 	private String input;
+	/**
+	 * FICHIER DE SORTIE (pas toujours necessaire).  
+	 */
 	private String output;
 	
 	
 	
-	
+	/**
+	 * [ CONSTRUCTEUR VIDE ]
+	 * 
+	 * Ce constructeur sert a realiser des requetes qui ne necessitent
+	 * ni de fichier d'entree, ni de fichier de sortie. 
+	 */
 	public Request() {
 		input = null;
 		output = null;
 		request = new ArrayList<String>();
 	}
 	
+	/**
+	 * [ CONSTRUCTEUR AVEC PARAMETRE. ]
+	 * 
+	 * Ce constructeur sert a realiser des requetes qui ne necessitent
+	 * que le fichier d'entree. 
+	 * 
+	 * @param input			Le nom complet ( chemin + nom ) du fichier d'entree. 
+	 */
 	public Request(String input) {
 		if((this.input = input) == null) throw new NullPointerException("input null !");
 		output = null;
@@ -27,6 +68,15 @@ public class Request {
 		request.add(input);
 	}
 	
+	/**
+	 * [ CONSTRUCTEUR AVEC PARAMETRES. ]
+	 * 
+	 * Ce constructeur sert a realiser des requetes qui necessitent
+	 * un fichier d'entree et un ficheir de sortie. 
+	 * 
+	 * @param input			Le nom complet ( chemin + nom ) du fichier d'entree. 
+	 * @param output		Le nom complet ( chemin + nom ) du fichier de sortie. 
+	 */
 	public Request(String input, String output) {
 		if((this.output = output) == null) throw new NullPointerException("Output null !");
 		request = new ArrayList<String>();
@@ -36,14 +86,43 @@ public class Request {
 	
 	
 	
+	/**
+	 * [ AJOUTER/MODIFIER UN FICHIER D'ENTREE. ]
+	 * 
+	 * @param input		Le nom complet ( chemin + nom ) du fichier de sortie. 
+	 * 
+	 * @return La requete this. 
+	 */
+	public Request from(String input) {
+		if(input == null) throw new NullPointerException("Input null !");
+		if(this.input != null) 
+			request.set(1, this.input = input);
+		else{
+			request.add(0, "-i");
+			request.add(1, this.input = input);
+		}
+		return this;
+	}
 	
-	public void to(String output) {
-		if((this.output=output)==null) throw new NullPointerException("Output null !");
+	/**
+	 * [ AJOUTER/MODIFIER UN FICHIER DE SORTIE. ]
+	 * 
+	 * @param output	Le nom complet ( chemin + nom ) du fichier de sortie. 
+	 * 
+	 * @return La requete this. 
+	 */
+	public Request to(String output) {
+		if((this.output = output) == null) throw new NullPointerException("Output null !");
+		return this;
 	}
 	
 	
 	
-	
+	/**
+	 * [ METHODE INTERNE - AJOUTER DES ARGUMENTS A LA REQUETE. ]
+	 * 
+	 * @param somethingElse		Les arguemnts a ajouter. 
+	 */
 	private void askSomethingElse(String[] somethingElse) {
 		if(somethingElse == null) throw new NullPointerException("Argument a ajouter dans la requete null !");		
 		for(String element : somethingElse) request.add(element);
@@ -178,7 +257,8 @@ public class Request {
 		return FFmpegRuntime.execute(request);
 	}
 	
-	public void make() {
+	public Request make() {
 		WatchedConsumer.consume(result());
+		return this;
 	}
 }

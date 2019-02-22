@@ -8,12 +8,23 @@ import java.awt.LayoutManager;
  */
 public class StylizedJPanel extends javax.swing.JPanel implements StylizedComponent {
 
+	/**
+	 * Constructeur du JPanel. Ce constructeur est minimal et ne fait que appeler la
+	 * fonction super() puis stylise le composant.
+	 */
 	public StylizedJPanel() {
 		super();
 
 		this.stylize();
 	}
 
+	/**
+	 * Constructeur du JPanel
+	 * 
+	 * @param layout Si nous avons besoin du LayoutManager, nous pouvons l'inclure
+	 *               ici. Ce constructeur ne fait que l'ajouter via la fonction
+	 *               super()
+	 */
 	public StylizedJPanel(LayoutManager layout) {
 		super(layout);
 

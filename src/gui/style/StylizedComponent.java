@@ -1,5 +1,10 @@
 package gui.style;
 
+/**
+ * Voilà l'interface de l'ensemble des composants Stylisés.
+ * @author alex
+ *
+ */
 public interface StylizedComponent {
 
 	/**

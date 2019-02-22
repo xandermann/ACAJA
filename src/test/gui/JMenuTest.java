@@ -4,12 +4,19 @@ import java.awt.Dimension;
 import javax.swing.*;
 import gui.style.*;
 
-
+/**
+ * Pour ne pas à avoir à relancer l'application à chaque fois, nous créons ici
+ * une "application miniature" pour tester si les composants créées s'affichent
+ * correctement ou pas.
+ * 
+ * @author alex
+ *
+ */
 public class JMenuTest {
 
 	/**
 	 * Creation d'une frame qui test le style des composants graphiques de la
-	 * fenetre
+	 * fenetre.
 	 * 
 	 * @param args
 	 */

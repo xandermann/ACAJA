@@ -8,6 +8,13 @@ import java.awt.Color;
  */
 public class StylizedJMenuItem extends javax.swing.JMenuItem implements StylizedComponent {
 
+	/**
+	 * Constructeur du JMenuItem
+	 * 
+	 * @param title Ajout d'un titre obligatoire pour le JMenuItem. Le constructeur
+	 *              reste très simple car il ne fait qu'appeler la fonction super()
+	 *              de Java.
+	 */
 	public StylizedJMenuItem(String title) {
 		super(title);
 	}

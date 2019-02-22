@@ -1,12 +1,10 @@
 package test.gui;
 
-import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
-import javax.swing.JMenuBar;
 
-import gui.style.StyleConfigurator;
+import gui.style.StyleTheme;
 import gui.style.StylizedJButton;
 import gui.style.StylizedJMenu;
 import gui.style.StylizedJMenuBar;
@@ -70,13 +68,14 @@ public class JMenuTest {
 		 * 
 		 */
 
+		// JMenu
 		frame.setJMenuBar(JMenuTest.createJMenuBar());
 		
+		// Panel
 		StylizedJPanel panel = new StylizedJPanel();
 		
-
 		panel.add(new StylizedJButton("Mon super bouton !"));
-		panel.add(new StylizedJButton("Attention danger !", StyleConfigurator.DANGER));
+		panel.add(new StylizedJButton("Attention danger !", StyleTheme.DANGER));
 		
 		frame.add(panel);
 

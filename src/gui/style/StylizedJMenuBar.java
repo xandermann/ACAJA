@@ -20,8 +20,8 @@ public class StylizedJMenuBar extends javax.swing.JMenuBar implements StylizedCo
 
 	@Override
 	public void stylize() {
-		this.setBackground(StyleConfigurator.BACKGROUND_COLOR);
-		this.setBorder(new LineBorder(StyleConfigurator.BACKGROUND_COLOR_SECONDARY));
+		this.setBackground(StyleTheme.BACKGROUND_COLOR);
+		this.setBorder(new LineBorder(StyleTheme.BACKGROUND_COLOR_SECONDARY));
 	}
 
 }

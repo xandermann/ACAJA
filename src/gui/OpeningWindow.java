@@ -13,7 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import gui.conversion.ConversionWindow;
-import gui.style.StyleConfigurator;
+import gui.style.StyleTheme;
 import gui.style.StylizedJButton;
 import gui.style.StylizedJPanel;
 import gui.treatment.FrameTreatment;
@@ -139,11 +139,11 @@ public final class OpeningWindow {
 		openingWindow.add(eastPanel, BorderLayout.EAST);
 		openingWindow.add(westPanel, BorderLayout.WEST);
 
-		centerPanel.setBackground(StyleConfigurator.BACKGROUND_COLOR);
-		northPanel.setBackground(StyleConfigurator.BACKGROUND_COLOR);
-		southPanel.setBackground(StyleConfigurator.BACKGROUND_COLOR);
-		eastPanel.setBackground(StyleConfigurator.BACKGROUND_COLOR);
-		westPanel.setBackground(StyleConfigurator.BACKGROUND_COLOR);
+		centerPanel.setBackground(StyleTheme.BACKGROUND_COLOR);
+		northPanel.setBackground(StyleTheme.BACKGROUND_COLOR);
+		southPanel.setBackground(StyleTheme.BACKGROUND_COLOR);
+		eastPanel.setBackground(StyleTheme.BACKGROUND_COLOR);
+		westPanel.setBackground(StyleTheme.BACKGROUND_COLOR);
 
 		WindowTools.executeWindow(openingWindow);
 	}

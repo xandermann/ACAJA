@@ -31,7 +31,7 @@ public class StylizedJFrame extends javax.swing.JFrame implements StylizedCompon
 
 	@Override
 	public void stylize() {
-		this.setBackground(StyleConfigurator.BACKGROUND_COLOR);
+		this.setBackground(StyleTheme.BACKGROUND_COLOR);
 	}
 
 }

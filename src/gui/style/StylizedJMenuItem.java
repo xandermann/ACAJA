@@ -29,7 +29,7 @@ public class StylizedJMenuItem extends JMenuItem implements StylizedComponent {
 
 	@Override
 	public void stylize() {
-		this.setBackground(StyleConfigurator.BACKGROUND_COLOR);
+		this.setBackground(StyleTheme.BACKGROUND_COLOR);
 		this.setForeground(Color.BLACK);
 		// this.setBorderPainted(true);
 	}

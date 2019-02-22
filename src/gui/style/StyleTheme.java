@@ -5,7 +5,7 @@ import java.awt.Color;
 /**
  * Classe contenant les constantes concernant le style de l'application.
  */
-public final class StyleConfigurator {
+public final class StyleTheme {
 
 	/**
 	 * Couleur primaire de l'application (ici blanc)

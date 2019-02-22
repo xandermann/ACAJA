@@ -23,7 +23,7 @@ public class StylizedJButton extends javax.swing.JButton implements StylizedComp
 	public StylizedJButton(String text) {
 		super(text);
 		
-		this.color = StyleConfigurator.BACKGROUND_COLOR_SECONDARY;
+		this.color = StyleTheme.BACKGROUND_COLOR_SECONDARY;
 		
 		this.stylize();
 	}

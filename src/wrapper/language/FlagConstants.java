@@ -1,5 +1,14 @@
 package wrapper.language;
 
+/**
+ * [ CLASSE POUR ACCEDER AUX FLAGS ACCEPTES DANS LES REQUETES FFMPEG. ]
+ * 
+ * Ceci est une classe concrete "sterile", c-a-d qu'aucune classe ne peut 
+ * en heriter ( d'ou la presence du final devant class).
+ * 
+ * Auteurs du projet : 
+ * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
+ */
 public final class FlagConstants {
 	public final static String FLAG_SUPPORTED_CODECS = "-codecs";
 	

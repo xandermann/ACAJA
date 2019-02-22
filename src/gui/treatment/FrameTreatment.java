@@ -41,5 +41,6 @@ public class FrameTreatment extends JFrame{
 	
 	public static void main(String[] args) {
 		FrameTreatment f = new FrameTreatment();
+		f.repaint();
 	}
 }

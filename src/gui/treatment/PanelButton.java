@@ -19,8 +19,8 @@ public class PanelButton extends JPanel{
 		JToggleButton pivoteD = new JToggleButton();
 		JToggleButton pivoteG = new JToggleButton();
 		JToggleButton rectangle1 = new JToggleButton();
-		JToggleButton pivoteD1 = new JToggleButton();
-		JToggleButton pivoteG1 = new JToggleButton();
+		JButton pivoteD1 = new JButton(new ImageIcon(resources.ResourceConstants.arrowR));
+		JButton pivoteG1 = new JButton(new ImageIcon(resources.ResourceConstants.arrowL));
 		
 		rectangle.setPreferredSize(new Dimension(35,35));
 		pivoteD.setPreferredSize(new Dimension(35,35));

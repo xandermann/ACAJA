@@ -6,9 +6,12 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 
+import gui.style.StyleConfigurator;
+import gui.style.StylizedJButton;
 import gui.style.StylizedJMenu;
 import gui.style.StylizedJMenuBar;
 import gui.style.StylizedJMenuItem;
+import gui.style.StylizedJPanel;
 
 /**
  * Pour ne pas à avoir à relancer l'application à chaque fois, nous créons ici
@@ -20,6 +23,11 @@ import gui.style.StylizedJMenuItem;
  */
 public class JMenuTest {
 
+	/**
+	 * Méthode qui permet de générer un menu pour le template
+	 * 
+	 * @return Menu généré
+	 */
 	private static StylizedJMenuBar createJMenuBar() {
 		// Creation JMenuBar
 		StylizedJMenuBar barre = new StylizedJMenuBar();
@@ -63,6 +71,14 @@ public class JMenuTest {
 		 */
 
 		frame.setJMenuBar(JMenuTest.createJMenuBar());
+		
+		StylizedJPanel panel = new StylizedJPanel();
+		
+
+		panel.add(new StylizedJButton("Mon super bouton !"));
+		panel.add(new StylizedJButton("Attention danger !", StyleConfigurator.DANGER));
+		
+		frame.add(panel);
 
 		/*
 		 * 

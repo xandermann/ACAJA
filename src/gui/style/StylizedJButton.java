@@ -9,6 +9,11 @@ import java.awt.Color;
 public class StylizedJButton extends javax.swing.JButton implements StylizedComponent {
 
 	/**
+	 * Couleur du bouton
+	 */
+	private Color color;
+	
+	/**
 	 * Constructeur du JButton
 	 * 
 	 * @param title Ajout d'un texte obligatoire pour le JButton. Le constructeur
@@ -17,13 +22,23 @@ public class StylizedJButton extends javax.swing.JButton implements StylizedComp
 	 */
 	public StylizedJButton(String text) {
 		super(text);
+		
+		this.color = StyleConfigurator.BACKGROUND_COLOR_SECONDARY;
+		
+		this.stylize();
+	}
+	
+	public StylizedJButton(String text, Color color) {
+		super(text);
+		
+		this.color = color;
 
 		this.stylize();
 	}
 
 	@Override
 	public void stylize() {
-		this.setBackground(StyleConfigurator.BACKGROUND_COLOR_SECONDARY);
+		this.setBackground(this.color);
 		this.setOpaque(true);
 		this.setBorderPainted(false);
 		this.setForeground(Color.WHITE);

@@ -16,6 +16,9 @@ public final class StyleConfigurator {
 	 * Couleur secondaire (ici bleu)
 	 */
 	public static final Color BACKGROUND_COLOR_SECONDARY = new Color(59, 89, 182);
-	
 
+	/**
+	 * Couleur danger
+	 */
+	public static final Color DANGER = new Color(255, 0, 0);
 }

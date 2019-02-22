@@ -29,46 +29,45 @@ public class StylizedJMenuItem extends javax.swing.JMenuItem implements Stylized
 		this.setForeground(Color.BLACK);
 		// this.setBorderPainted(true);
 	}
+
 	
+
 	/*
-	@Override
-	protected void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		Graphics2D g2d = (Graphics2D) g;
-		g2d.drawString(this.getText(), 200, 200);
-		g2d.setColor(StyleConfigurator.BACKGROUND_COLOR);
-		g2d.fillRect(0, 0, getWidth() - 1, getHeight() - 1);
-	}
-	*/
+	 * @Override protected void paintComponent(Graphics g) {
+	 * super.paintComponent(g); Graphics2D g2d = (Graphics2D) g;
+	 * g2d.drawString(this.getText(), 200, 200);
+	 * g2d.setColor(StyleConfigurator.BACKGROUND_COLOR); g2d.fillRect(0, 0,
+	 * getWidth() - 1, getHeight() - 1); }
+	 */
 
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
 		this.setBackground(StyleConfigurator.BACKGROUND_COLOR);
-		
+
 	}
 
 	@Override
 	public void mouseExited(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mousePressed(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

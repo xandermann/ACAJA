@@ -35,10 +35,17 @@ public class JMenuTest {
 		barre.add(profilesMenu);
 		frame.setJMenuBar(barre);
 
-		frame.setPreferredSize(new Dimension(800, 600));
+		frame.setPreferredSize(new Dimension(800, 200));
 		frame.pack();
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
+		
+		try {
+			Thread.sleep(4000);
+		} catch (InterruptedException e) {
+		}
+		
+		frame.dispose();
 	}
 
 }

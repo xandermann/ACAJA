@@ -11,8 +11,8 @@ import wrapper.streams.managers.consumers.WatchedConsumer;
  * Cette classe comporte une majorité de methodes publiques 
  * retourant this. Cela permet d'enchainer en une meme instruction 
  * un nombre "infini" d'operations, de la memme maniere qu'on le ferait
- * en saisissant les flags de FFmpeg dans un SHELL. Cela ets tres pratique 
- * et tres intuitif. 
+ * en saisissant une multituide de flags dans une commande FFmpeg dans un SHELL. 
+ * Cela est tres pratique et tres intuitif. 
  * 
  * C'est une classe cle dans cet interfacage de FFmpeg 
  * en JAVA. 
@@ -320,8 +320,8 @@ public final class Request {
 	public Request extractImage(String time) {
 		if(time==null) throw new NullPointerException("NumberAudioChannels null !");
 		askSomethingElse(new String[]{
-				FlagConstants.FLAG_PERIOD[0], time, FlagConstants.FLAG_PERIOD[1], "00:00:01.00", 
-				FlagConstants.FLAG_FRAMERATE, "1"});
+				FlagConstants.FLAG_PERIOD[0], time, FlagConstants.FLAG_PERIOD[1], "00:00:01.00"});
+		framerate("1");
 		return this;
 	}
 	

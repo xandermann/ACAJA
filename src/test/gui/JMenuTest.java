@@ -27,10 +27,10 @@ public class JMenuTest {
 		// Creation JMenu
 		StylizedJMenuBar barre = new StylizedJMenuBar();
 
-		JMenu profilesMenu = new JMenu("Profils");
-		profilesMenu.add(new StylizedJMenuItem("Creer un profil"));
-		profilesMenu.add(new StylizedJMenuItem("Creer un profil"));
-		profilesMenu.add(new StylizedJMenuItem("Creer un profil"));
+		StylizedJMenu profilesMenu = new StylizedJMenu("Profils");
+		profilesMenu.add(new StylizedJMenuItem("Creer un profil - Menu 1"));
+		profilesMenu.add(new StylizedJMenuItem("Charger un profil - Menu 2"));
+		profilesMenu.add(new StylizedJMenuItem("Supprimer un profil - Menu 3"));
 
 		barre.add(profilesMenu);
 		frame.setJMenuBar(barre);

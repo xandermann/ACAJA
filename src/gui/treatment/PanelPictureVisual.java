@@ -19,8 +19,7 @@ public class PanelPictureVisual extends JPanel {
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.drawLine(0, 0, 0, this.getHeight());
-		g.drawLine(0, 0, this.getWidth(), 0);
-	
+		g.drawRect(0, 0, this.size().width-1, this.size().height-1);
+		
 	}
 }

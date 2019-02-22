@@ -59,7 +59,7 @@ public final class ConversionModel extends Model {
 		try {
 			if(createDirectories()) {
 				for(int i = 0 ; i < this.importedFiles.length ; i ++) {
-				File f = new File(ResourceConstants.CONVERSION_OLD_IMPORTS_PATH + this.importedFiles[i].getFileName() + ".acara");
+				File f = new File(ResourceConstants.CONVERSION_OLD_IMPORTS_PATH + this.importedFiles[i].getFileName() + ".acaja");
 				if(!f.exists()) {
 					FileOutputStream fos = new FileOutputStream(f);
 					ObjectOutputStream oos = new ObjectOutputStream(fos);
@@ -70,7 +70,7 @@ public final class ConversionModel extends Model {
 			}
 			} else {
 				//System.out.println("Impossible de creer les dossiers de sauvegarde des imports");
-				JOptionPane.showMessageDialog(null,"Impossible de creer les dossiers de sauvegarde des imports. Merci de verifier les permissions du repertoire d'installation d'Acara");
+				JOptionPane.showMessageDialog(null,"Impossible de creer les dossiers de sauvegarde des imports. Merci de verifier les permissions du repertoire d'installation d'acaja");
 			}
 			
 		} catch(SecurityException se) {
@@ -114,14 +114,17 @@ public final class ConversionModel extends Model {
 			if(createDirectories()) {
 				File[] files = new File(ResourceConstants.CONVERSION_OLD_IMPORTS_PATH).listFiles();	
 				// tri des fichiers par date
-				Arrays.sort(files, new Comparator<File>(){
+				if(files != null) {
+					Arrays.sort(files, new Comparator<File>(){
 				    public int compare(File f1, File f2){
 				        return Long.valueOf(f1.lastModified()).compareTo(f2.lastModified());
 				    } 
 				});
+				
+				
 				// System.out.println(files.length);
 				for(int i = 0 ; i < files.length ; i++) {
-					if(files[i].getName().contains(".acara")) {
+					if(files[i].getName().contains(".acaja")) {
 						try {	
 							FileInputStream fis = new FileInputStream(files[i]);
 							ObjectInputStream ois = new ObjectInputStream(fis);
@@ -131,7 +134,7 @@ public final class ConversionModel extends Model {
 							fis.close();
 					}  catch(SecurityException se) {
 						//System.out.println(se.getMessage());
-						JOptionPane.showMessageDialog(null, "Vous n'avez pas les permissions pour lire le fichier d'import Acara " + files[i].getName());
+						JOptionPane.showMessageDialog(null, "Vous n'avez pas les permissions pour lire le fichier d'import acaja " + files[i].getName());
 					} catch(IOException ioe) {
 						//System.out.println(ioe.getMessage());
 						JOptionPane.showMessageDialog(null, "Impossible d'acceder au fichier " + files[i].getName() + " : erreur d'entree/sortie");
@@ -141,14 +144,15 @@ public final class ConversionModel extends Model {
 					}
 					}
 					
-			}
+					}
+				}
 			//	System.out.println("Loaded old imports...");
 			/*	for(FileInformation f : this.importedFiles) {
 					if(f != null) 
 						System.out.println(f.getFileName());
 				} debug ; */
 			} else {
-				JOptionPane.showMessageDialog(null,"Impossible de creer les dossiers de sauvegarde des imports. Merci de verifier les permissions du repertoire d'installation d'Acara");
+				JOptionPane.showMessageDialog(null,"Impossible de creer les dossiers de sauvegarde des imports. Merci de verifier les permissions du repertoire d'installation d'acaja");
 			}
 	}
 	
@@ -255,7 +259,7 @@ public final class ConversionModel extends Model {
 	 */
 	private boolean deleteFile(String fileName) {
 		try {
-			File f = new File(ResourceConstants.CONVERSION_OLD_IMPORTS_PATH + fileName + ".acara");
+			File f = new File(ResourceConstants.CONVERSION_OLD_IMPORTS_PATH + fileName + ".acaja");
 			if(!(f.exists())) return true;
 			return f.delete();
 		} catch(Exception e) {

@@ -17,6 +17,12 @@ public final class ResourceConstants {
 	public final static File ACAJA_LOGO = new File(ACAJA_LOGO_PATH);
 	
 	
+	public final static String rectbutton = "img/formeButton.png";
+	public final static String flou = "img/flou.png";
+	public final static String arrowR = "img/flecheDroite.png";
+	public final static String arrowL = "img/flecheGauche.png";
+	
+	
 	/**
 	 * FICHIERS TEMPORAIRES. 
 	 */

@@ -2,7 +2,22 @@ package wrapper.streams.managers.consumers;
 
 import wrapper.streams.iterators.ProcessManager;
 
-public class WatchedConsumer extends StreamsConsumer {
+/**
+ * [ CLASSE POUR UNE "CONSOMMATION SURVEILLEE" DE TOUS LES FLUX DE SORTIES. ]
+ * 
+ * Cette classe permet 2 chsoes essentielles :
+ * 	- consommation de tous les flux de sorties ;
+ * 	- information sur l'evolution de la consommation des flux.
+ * 
+ * 3 etats sont possibles :
+ * 	- a commencé ;
+ * 	- en cours ;
+ * 	- a terminé. 
+ * 
+ * Auteurs du projet : 
+ * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
+ */
+public final class WatchedConsumer extends AllStreamsConsumer {
 	//==================================================================================================================================================
 	
 	
@@ -12,9 +27,9 @@ public class WatchedConsumer extends StreamsConsumer {
 	 * ( workIsOnGoing => en anglais " travail est en cours ". )
 	 * 
 	 * Ce booleen volatilepermet de savoir quand un processus fils 
-	 * executant FFMPEG est en cours ou non. 
+	 * executant FFmpeg est en cours ou non. 
 	 * 
-	 * Ce booleen est vloatile car il est modifie par plusieurs 
+	 * Ce booleen est volatile car il est modifie par plusieurs 
 	 * processus ( Thread / Runnable ), et le mot-cle "volatile"
 	 * permet de le faire savoir au compilateur JAVAC. 
 	 */
@@ -25,9 +40,9 @@ public class WatchedConsumer extends StreamsConsumer {
 	
 	
 	/**
-	 * [ METHODE DE CLASSE POUR DECLARER LE LANCEMENT DE FFMPEG. ]
+	 * [ METHODE DE CLASSE POUR DECLARER LE LANCEMENT DE FFmpeg. ]
 	 * 
-	 * Cette methode permet de declarer que FFMPEG vient d'etre lancee ou 
+	 * Cette methode permet de declarer que FFmpeg vient d'etre lancee ou 
 	 * va bientot etre lancee en processus fils par JAVA. 
 	 */
 	public static void startToWork() {
@@ -35,10 +50,10 @@ public class WatchedConsumer extends StreamsConsumer {
 	}
 	
 	/**
-	 * [ METHODE DE CLASSE POUR DECLARER LA FIN D'EXCEUTION DE FFMPEG. ]
+	 * [ METHODE DE CLASSE POUR DECLARER LA FIN D'EXCEUTION DE FFmpeg. ]
 	 * 
 	 * Cette methode permet declarer que le processus fils dans lequel 
-	 * s'executait FFMPEG vient de mourir ou va bientot mourir. 
+	 * s'executait FFmpeg vient de mourir ou va bientot mourir. 
 	 */
 	private static void workIsOver() {
 		workIsOnGoing = false;
@@ -48,7 +63,7 @@ public class WatchedConsumer extends StreamsConsumer {
 	 * [ GETTER - METHODE DE CLASSE ACCESSEUR POUR ACCEDER A WORKISONGOING. ]
 	 * 
 	 * Cette methode est un accesseur a la valeur du booleen workIsOnGoing,
-	 * Celui-ci permet de connaitre l'evolution de la " besogne " de FFMPEG.
+	 * Celui-ci permet de connaitre l'evolution de la " besogne " de FFmpeg.
 	 * 
 	 * @return boolean 		La valeur de workIsOnGoing. 
 	 */
@@ -61,19 +76,18 @@ public class WatchedConsumer extends StreamsConsumer {
 	
 	
 	/**
-	 * [ METHODE INTERNE DE CLASSE POUR LA CONSOMMATION DES FLUX DE REPONSES DE FFMPEG. ]
+	 * [ METHODE DE CLASSE POUR LA CONSOMMATION DES FLUX DE REPONSES DE FFmpeg. ]
 	 * 
 	 * Cette methode permet la consommation des flux de reponses ( = de sorties ) de 
-	 * FFMPEG  
+	 * FFmpeg  
 	 * 
 	 * @param processToBeConsume		ProcessManager, un outil pour gerer 
 	 * 									le Process contenant les flux a consommer. 
 	 */
-	public static void consumeStreams(ProcessManager processToBeConsume) {
-		if(processToBeConsume == null)
-			throw new NullPointerException("Le ProcessManager recu en parametre est null !");
+	public static void consume(ProcessManager processToBeConsume) {
+		if(processToBeConsume == null) throw new NullPointerException("Le ProcessManager recu en parametre est null !");
 		startToWork();
-		StreamsConsumer.consumeStreams(processToBeConsume);
+		AllStreamsConsumer.consume(processToBeConsume);
 		workIsOver();
 	}
 	

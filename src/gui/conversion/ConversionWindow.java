@@ -12,9 +12,7 @@ import exceptions.IncorrectFileException;
 import files.FileInformation;
 import gui.*;
 import gui.style.*;
-import threads.ThreadForSave;
-import threads.ThreadForWaitWindow;
-import threads.ThreadsManager;
+import threads.*;
 
 //TODO : CODE OPTIMISATION
 
@@ -208,7 +206,7 @@ public final class ConversionWindow extends StylizedJFrame {
 		convertItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(ThreadsManager.manageRuntimeSpace()) {
+				if(RuntimeSpaceManager.manage()) {
 					/**
 					 * FENETRE D'ATTENTE. 
 					 */

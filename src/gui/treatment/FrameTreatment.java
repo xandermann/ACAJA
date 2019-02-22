@@ -23,7 +23,7 @@ public class FrameTreatment extends JFrame{
 		
 		
 		this.setSize(1000, 625);
-		this.setResizable(false);
+		//this.setResizable(false);
 		this.add(p);
 	}
 	
@@ -41,5 +41,6 @@ public class FrameTreatment extends JFrame{
 	
 	public static void main(String[] args) {
 		FrameTreatment f = new FrameTreatment();
+		f.repaint();
 	}
 }

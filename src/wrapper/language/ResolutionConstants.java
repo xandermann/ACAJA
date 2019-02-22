@@ -4,6 +4,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * [ CLASSE POUR ACCEDER AUX RESOLUTIONS DE VIDEO LES PLUS UTILISEES. ]
+ * 
+ * Ceci est une classe concrete "sterile", c-a-d qu'aucune classe ne peut 
+ * en heriter ( d'ou la presence du final devant class).
+ * 
+ * Auteurs du projet : 
+ * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
+ */
 public final class ResolutionConstants {
 	public final static String[] CIF_RESOLUTIONS = {"128x96", "176x144", "352x288", "704x576", "1408x1152"};
 	

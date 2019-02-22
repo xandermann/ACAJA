@@ -5,10 +5,15 @@ import java.util.List;
 import wrapper.streams.iterators.ProcessManager;
 
 /**
+ * [ CLASSE POUR L'EXECUTION DES REQUETES FFMPEG. ]
+ * 
  * Cette classe se charge de connaitre le chemin vers le fichier executable 
  * de FFMPEG. Elle se charge, aussi comme il a ete dis avant, d'executer
  * des requetes FFMPEG en interne par l'intermediaire de JAVA, sans avoir
  * a utiiser de SHELL ( = interpreteur de lignes de commandes ).
+ * 
+ * Ceci est une classe concrete "sterile", c-a-d qu'aucune classe ne peut 
+ * en heriter ( d'ou la presence du final devant class).
  * 
  * Auteurs du projet : 
  * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.

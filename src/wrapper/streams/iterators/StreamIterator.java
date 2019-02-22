@@ -103,24 +103,4 @@ public abstract class StreamIterator implements Iterator<String>{
 	
 	//=======================================================================================================================
 	//=======================================================================================================================
-	
-	
-	/**
-	 * [ METHODE POUR ARRETER MANUELLEMENT LA LECTURE DU FLUX. ]
-	 */
-	public void endReading() {
-		/**
-		 * ARRET DE LA LECTRURE ET CONSOMMATION DU RESTE DU FLUX. 
-		 * 
-		 * On consomme le reste du flux 
-		 * pour eviter un interblocage.
-		 * 
-		 * Au dernier appel de readNextLine() le flux est close.
-		 */
-		while(hasNext()) readNextLine();
-	}
-	
-	
-	//=======================================================================================================================
-	//=======================================================================================================================
 }

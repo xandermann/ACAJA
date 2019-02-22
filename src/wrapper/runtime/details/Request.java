@@ -2,8 +2,8 @@ package wrapper.runtime.details;
 
 import java.util.*;
 import wrapper.language.FlagConstants;
-import wrapper.streams.ProcessManager;
-import wrapper.streams.WatchedConsumer;
+import wrapper.streams.iterators.ProcessManager;
+import wrapper.streams.managers.consumers.WatchedConsumer;
 
 public class Request {
 	private List<String> request;
@@ -12,6 +12,12 @@ public class Request {
 	
 	
 	
+	
+	public Request() {
+		input = null;
+		output = null;
+		request = null;
+	}
 	
 	public Request(String input) {
 		if((this.input = input) == null) throw new NullPointerException("input null !");
@@ -22,7 +28,6 @@ public class Request {
 	}
 	
 	public Request(String input, String output) {
-		if((this.input = input) == null) throw new NullPointerException("Input null !");
 		if((this.output = output) == null) throw new NullPointerException("Output null !");
 		request = new ArrayList<String>();
 		request.add("-i");
@@ -38,12 +43,21 @@ public class Request {
 	
 	
 	
+	
 	private void askSomethingElse(String[] somethingElse) {
 		if(somethingElse == null) throw new NullPointerException("Argument a ajouter dans la requete null !");		
 		for(String element : somethingElse) request.add(element);
 	}
 
 
+	
+	
+	public Request codecs() {
+		askSomethingElse(new String[]{FlagConstants.FLAG_SUPPORTED_CODECS});
+		return this;
+	}
+	
+	
 	
 	
 	public Request videoCodec(String videoCodec) {

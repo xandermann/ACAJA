@@ -2,8 +2,7 @@ package wrapper.runtime.details;
 
 import java.io.IOException;
 import java.util.List;
-
-import wrapper.streams.ProcessManager;
+import wrapper.streams.iterators.ProcessManager;
 
 /**
  * Cette classe se charge de connaitre le chemin vers le fichier executable 

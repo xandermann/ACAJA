@@ -1,4 +1,6 @@
-package wrapper.streams;
+package wrapper.streams.managers.consumers;
+
+import wrapper.streams.iterators.ProcessManager;
 
 public class WatchedConsumer extends StreamsConsumer {
 	//==================================================================================================================================================

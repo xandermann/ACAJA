@@ -128,7 +128,6 @@ public final class MetadataFilter implements DataStreamsFilter {
 		/**
 		 *  EXTRACTION DES METADONNEES.
 		 */
-		OutputStreamConsumer.consume(processToStudy);
 		StreamIterator iterator = processToStudy.errorStreamIterator();
 		
 		// On ne recupere que les donnees qui nous interesse 
@@ -139,9 +138,11 @@ public final class MetadataFilter implements DataStreamsFilter {
 		
 		while(iterator.hasNext()) {
 			data = iterator.next();
-			if(keepData == false && data.contains("Input")) keepData = true;			
+			if(keepData == false && data.contains("Input")) keepData = true;		
 			if(keepData == true) metadata += data + " ";
 		}
+		
+		OutputStreamConsumer.consume(processToStudy);
 		
 		return metadata;
 	}

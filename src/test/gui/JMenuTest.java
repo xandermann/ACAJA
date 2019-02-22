@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
+import javax.swing.JMenuBar;
 
 import gui.style.StylizedJMenu;
 import gui.style.StylizedJMenuBar;
@@ -19,16 +20,7 @@ import gui.style.StylizedJMenuItem;
  */
 public class JMenuTest {
 
-	/**
-	 * Creation d'une frame qui test le style des composants graphiques de la
-	 * fenetre.
-	 * 
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		JFrame frame = new JFrame();
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+	private static StylizedJMenuBar createJMenuBar() {
 		// Creation JMenuBar
 		StylizedJMenuBar barre = new StylizedJMenuBar();
 
@@ -43,6 +35,22 @@ public class JMenuTest {
 		profilesMenu.add(item2);
 		profilesMenu.add(item3);
 
+		// Ajoute les menus
+		barre.add(profilesMenu);
+
+		return barre;
+	}
+
+	/**
+	 * Creation d'une frame qui test le style des composants graphiques de la
+	 * fenetre.
+	 * 
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		JFrame frame = new JFrame();
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 		/*
 		 * 
 		 * 
@@ -54,9 +62,7 @@ public class JMenuTest {
 		 * 
 		 */
 
-		// Exemple
-
-		item1.setBackground(Color.BLUE);
+		frame.setJMenuBar(JMenuTest.createJMenuBar());
 
 		/*
 		 * 
@@ -68,10 +74,6 @@ public class JMenuTest {
 		 * 
 		 * 
 		 */
-
-		// Ajoute les menus
-		barre.add(profilesMenu);
-		frame.setJMenuBar(barre);
 
 		// Cree la fenetre
 		frame.setPreferredSize(new Dimension(800, 200));

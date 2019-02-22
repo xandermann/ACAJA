@@ -6,11 +6,13 @@ import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.JMenuItem;
+
 /**
  * Classe qui permet de styliser le composant java swing correspondant pour
  * designer l'application.
  */
-public class StylizedJMenuItem extends javax.swing.JMenuItem implements StylizedComponent, MouseListener {
+public class StylizedJMenuItem extends JMenuItem implements StylizedComponent {
 
 	/**
 	 * Constructeur du JMenuItem
@@ -21,7 +23,7 @@ public class StylizedJMenuItem extends javax.swing.JMenuItem implements Stylized
 	 */
 	public StylizedJMenuItem(String title) {
 		super(title);
-		
+
 		this.stylize();
 	}
 
@@ -32,8 +34,6 @@ public class StylizedJMenuItem extends javax.swing.JMenuItem implements Stylized
 		// this.setBorderPainted(true);
 	}
 
-	
-
 	/*
 	 * @Override protected void paintComponent(Graphics g) {
 	 * super.paintComponent(g); Graphics2D g2d = (Graphics2D) g;
@@ -41,35 +41,5 @@ public class StylizedJMenuItem extends javax.swing.JMenuItem implements Stylized
 	 * g2d.setColor(StyleConfigurator.BACKGROUND_COLOR); g2d.fillRect(0, 0,
 	 * getWidth() - 1, getHeight() - 1); }
 	 */
-
-	@Override
-	public void mouseClicked(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent arg0) {
-		this.setBackground(StyleConfigurator.BACKGROUND_COLOR);
-
-	}
-
-	@Override
-	public void mouseExited(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mousePressed(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
 
 }

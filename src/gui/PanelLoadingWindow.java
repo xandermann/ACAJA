@@ -40,7 +40,7 @@ public class PanelLoadingWindow extends StylizedJPanel {
 	 */
 	public PanelLoadingWindow(boolean withImage, int[] points) {
 		this.pointsLoadingBar = points;
-		this.withImage = withImage
+		this.withImage = withImage;
 	}
 
 	/**

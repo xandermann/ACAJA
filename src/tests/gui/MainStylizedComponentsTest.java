@@ -1,8 +1,11 @@
 package tests.gui;
 
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import gui.PanelLoadingWindow;
 import gui.style.StyleTheme;
@@ -20,7 +23,7 @@ import gui.style.StylizedJPanel;
  * @author alex
  *
  */
-public class JMenuTest {
+public class MainStylizedComponentsTest {
 
 	/**
 	 * Méthode qui permet de générer un menu pour le template
@@ -71,14 +74,21 @@ public class JMenuTest {
 		 */
 
 		// JMenu
-		frame.setJMenuBar(JMenuTest.createJMenuBar());
+		frame.setJMenuBar(MainStylizedComponentsTest.createJMenuBar());
 
 		// Panel
 		StylizedJPanel panel = new StylizedJPanel();
 
 		panel.add(new StylizedJButton("Mon super bouton !"));
 		panel.add(new StylizedJButton("Attention danger !", StyleTheme.DANGER));
-		panel.add(new PanelLoadingWindow());
+		panel.add(new JPanel() {
+			public void paintComponent(Graphics g) {
+				super.paintComponent(g);
+				
+				g.setColor(Color.RED);
+				g.fillRect(0, 0, 40, 40);
+			}
+		});
 
 		frame.add(panel);
 

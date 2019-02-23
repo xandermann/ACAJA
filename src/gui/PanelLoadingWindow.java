@@ -11,15 +11,37 @@ import resources.ResourceConstants;
 
 public class PanelLoadingWindow extends StylizedJPanel {
 
+	private int[] pointsLoadingBar;
 	/**
 	 * Pourcentage total de la barre
 	 */
 	private int percentage;
 
+	private boolean withImage;
+	
 	/**
 	 * Recuperer la largeur de la fenetre
 	 */
 	private final int WIDTH = OpeningWindow.WIDTH;
+
+	/**
+	 * Constructeur sans parametre, ajoute 4 points pour la barre de chargement
+	 * Configuration par defaut
+	 */
+	public PanelLoadingWindow() {
+		this.pointsLoadingBar = new int[] { 50, 330, 280, 25 };
+		this.withImage = true;
+	}
+	
+	/**
+	 * Constructeur qui ajoute les 4 points de la barre de chargement
+	 * @param withImage Defini si l'on affiche l'image ou non (utilise pour les tests)
+	 * @param points Ajoute les 4 points de la barre
+	 */
+	public PanelLoadingWindow(boolean withImage, int[] points) {
+		this.pointsLoadingBar = points;
+		this.withImage = withImage
+	}
 
 	/**
 	 * Met a jour le pourcentage de la fenêtre

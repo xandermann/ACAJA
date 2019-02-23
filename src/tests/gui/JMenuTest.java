@@ -1,9 +1,10 @@
-package test.gui;
+package tests.gui;
 
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
 
+import gui.PanelLoadingWindow;
 import gui.style.StyleTheme;
 import gui.style.StylizedJButton;
 import gui.style.StylizedJMenu;
@@ -77,6 +78,7 @@ public class JMenuTest {
 
 		panel.add(new StylizedJButton("Mon super bouton !"));
 		panel.add(new StylizedJButton("Attention danger !", StyleTheme.DANGER));
+		panel.add(new PanelLoadingWindow());
 
 		frame.add(panel);
 

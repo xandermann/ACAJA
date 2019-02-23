@@ -36,7 +36,7 @@ public final class OpeningWindow {
 	 * Dimensions des fenetres de demarrage.
 	 */
 	public final static int WIDTH = 400;
-	public final static int HEIGHT = 500;
+	public final static int HEIGHT = 400;
 
 	/**
 	 * [ METHODE INTERNE DE CLASSE - FENETRE DE PRESENTATION DU LOGICIEL. ]
@@ -51,8 +51,11 @@ public final class OpeningWindow {
 		presentationWindow.setLocationRelativeTo(null);
 		presentationWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		// Logo en image de fond.
+		//
+		// Design de l'OpeningWindow, ajout du panel
 		presentationWindow.add(new PanelLoadingWindow());
+		//
+		//
 
 		WindowTools.showLogo(presentationWindow);
 		WindowTools.executeWindow(presentationWindow);
@@ -63,7 +66,6 @@ public final class OpeningWindow {
 		}
 
 		presentationWindow.dispose();
-		System.exit(0);
 	}
 
 	/**

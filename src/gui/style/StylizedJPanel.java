@@ -2,11 +2,13 @@ package gui.style;
 
 import java.awt.LayoutManager;
 
+import javax.swing.JPanel;
+
 /**
  * Classe qui permet de styliser le composant java swing correspondant pour
  * designer l'application.
  */
-public class StylizedJPanel extends javax.swing.JPanel implements StylizedComponent {
+public class StylizedJPanel extends JPanel implements StylizedComponent {
 
 	/**
 	 * Constructeur du JPanel. Ce constructeur est minimal et ne fait que appeler la

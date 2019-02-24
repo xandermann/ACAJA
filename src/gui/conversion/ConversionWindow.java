@@ -137,14 +137,14 @@ public final class ConversionWindow extends StylizedJFrame {
 				recentFiles.add(itemFile);
 				itemFile.addActionListener(new ActionListener() {
 					@Override
-					public void actionPerformed(ActionEvent e) {
+					public void actionPerformed(ActionEvent ae) {
 						try {
 							File file = new File(f.getPath());
 							model.add(file);
 							if (model.getCurrentFile() == null) redrawFirstTime();
 							model.setCurrentFile(file.getName());
-						} catch(Exception err) {
-								JOptionPane.showMessageDialog(null, err.getMessage());
+						} catch(Exception e) {
+								JOptionPane.showMessageDialog(null, e.getMessage());
 						}
 							
 					}

@@ -18,7 +18,7 @@ public class ImageView extends JPanel {
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		ProcessingTools.drawDeco(g, this.size().height, this.size().width);
-		ImageIcon m = new ImageIcon(resources.ResourceConstants.ACAJA_LOGO_PATH_Opacity);
+		ImageIcon m = new ImageIcon(resources.ResourceConstants.ACAJA_LOGO_OPACITY_PATH);
 		Image monImage = m.getImage();
 		g.drawImage(monImage, this.size().height / 2 - 130, this.size().width / 2 - 150, this);
 	}

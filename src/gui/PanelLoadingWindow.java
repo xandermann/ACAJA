@@ -1,6 +1,5 @@
 package gui;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.io.IOException;
 
@@ -21,7 +20,8 @@ public class PanelLoadingWindow extends StylizedJPanel {
 	private boolean withImage;
 
 	/**
-	 * Recuperer la largeur de la barre de chargement (120 = les marges a gauche et a droite)
+	 * Recuperer la largeur de la barre de chargement (120 = les marges a gauche et
+	 * a droite)
 	 */
 	private final int WIDTH = OpeningWindow.WIDTH - 120;
 
@@ -81,17 +81,16 @@ public class PanelLoadingWindow extends StylizedJPanel {
 			System.exit(1);
 		}
 
-		g.setColor(Color.RED);
+		g.setColor(StyleTheme.BACKGROUND_COLOR);
 		g.fillRect(50, 330, 280, 25);
 
 		// g.setColor(Color.BLACK);
 		// g.drawString("Imaginez que la barre existe", 55, 340);
 		// g.drawString("TODO: Barre de chargement -> Alexandre H", 55, 355);
-		
+
 		g.setColor(StyleTheme.BACKGROUND_COLOR_SECONDARY);
 		g.fillRect(50, 330, this.getCalcultatedWidth(), 25);
 
-	
 	}
 
 }

@@ -2,7 +2,7 @@ package gui.conversion.views;
 
 import javax.swing.ImageIcon;
 
-public final class ListEntry {
+public final class EntryView {
 	//=======================================================================================================================
 	//=======================================================================================================================
 	
@@ -18,7 +18,7 @@ public final class ListEntry {
 	 * 
 	 * @param text String texte a afficher dans la liste
 	 */
-	public ListEntry(String text) {
+	public EntryView(String text) {
 		this.text = text;
 	}
 	
@@ -27,7 +27,7 @@ public final class ListEntry {
 	 * @param text String texte a afficher dans la liste
 	 * @param icon ImageIcon icone a afficher dans la liste
 	 */
-	public ListEntry(String text, ImageIcon icon) {
+	public EntryView(String text, ImageIcon icon) {
 		this.text = text;
 		this.icon = icon;
 	}

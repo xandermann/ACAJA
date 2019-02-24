@@ -8,7 +8,7 @@ import files.*;
 import files.enumerations.SettingType;
 import files.files.SettingsFile;
 import gui.Model;
-import gui.conversion.views.ListEntry;
+import gui.conversion.views.EntryView;
 import messages.MessageConstants;
 import resources.ResourceConstants;
 import resources.ResourcesManager;
@@ -157,9 +157,9 @@ public final class ConversionModel extends Model {
 	 * 
 	 * @return DefaultListModel<ListEntry>		La liste des noms des fichiers. 
 	 */
-	public DefaultListModel<ListEntry> getFilenames() {
-		DefaultListModel<ListEntry> filenameList = new DefaultListModel<ListEntry>();
-		for (SettingsFile f : files) filenameList.addElement(new ListEntry(f.getSourceFileName()));
+	public DefaultListModel<EntryView> getFilenames() {
+		DefaultListModel<EntryView> filenameList = new DefaultListModel<EntryView>();
+		for (SettingsFile f : files) filenameList.addElement(new EntryView(f.getSourceFileName()));
 		return filenameList;
 	}
 

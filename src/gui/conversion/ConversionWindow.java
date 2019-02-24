@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
 import exceptions.ImportationException;
 import exceptions.IncorrectFileException;
 import files.FileInformation;
-import gui.FilesManager;
+import gui.FileChooser;
 import gui.WindowTools;
 import gui.style.StylizedJFrame;
 import gui.style.StylizedJMenuBar;
@@ -99,7 +99,7 @@ public final class ConversionWindow extends StylizedJFrame {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
 					try {
-						File f = FilesManager.chooseFile();
+						File f = FileChooser.chooseFile();
 						model.add(f);
 						if (model.getCurrentFile() == null) redrawFirstTime();
 						model.setCurrentFile(f.getName());
@@ -115,7 +115,7 @@ public final class ConversionWindow extends StylizedJFrame {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
 				try {
-					ArrayList<File> files = FilesManager.chooseDirectoryAndListSonFiles();
+					ArrayList<File> files = FileChooser.chooseDirectoryAndListSonFiles();
 					for (File f : files) {
 						model.add(f);
 						if(model.getCurrentFile() == null) redrawFirstTime();
@@ -201,7 +201,7 @@ public final class ConversionWindow extends StylizedJFrame {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
 				try {
-					model.setDestinationFolder(FilesManager.chooseDirectory());
+					model.setDestinationFolder(FileChooser.chooseDirectory());
 				} catch (ImportationException ie) {
 					JOptionPane.showMessageDialog(null, ie.getMessage());
 				}

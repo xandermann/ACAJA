@@ -8,6 +8,7 @@ import files.*;
 import gui.Model;
 import messages.MessageConstants;
 import resources.ResourceConstants;
+import resources.ResourcesManager;
 import wrapper.runtime.global.UserRequests;
 
 
@@ -71,7 +72,7 @@ public final class ConversionModel extends Model {
 	 */
 	public void saveImports() {
 		try {
-			 if(createDirectories()) {
+			 if(ResourcesManager.checkResources()) {
 				for(int i = 0 ; i < oldImportedFiles.length ; i ++) {
 					File f = new File(ResourceConstants.CONVERSION_OLD_IMPORTS_PATH 
 									  + oldImportedFiles[i].getFileName() + ".acaja");
@@ -92,26 +93,6 @@ public final class ConversionModel extends Model {
 	}
 
 	
-	/**
-	 *  [ METHODE POUR CREER LES DOSSIERS DES IMPORTS SI ILS N'EXISTENT PAS ]
-	 */
-	private boolean createDirectories() {
-		File dirSaves = new File(ResourceConstants.ALL_OLD_IMPORTS_PATH);
-		File dirConversion = new File(ResourceConstants.CONVERSION_OLD_IMPORTS_PATH);
-		File dirProcessing = new File(ResourceConstants.PROCESSING_OLD_IMPORTS_PATH);
-		try {
-			boolean res = true;
-			if(!dirSaves.exists())
-				 res = dirSaves.mkdir();
-			if(!dirConversion.exists() && res != false)
-				res = dirConversion.mkdir();
-			if(!dirProcessing.exists() && res != false)
-				res = dirProcessing.mkdir();
-			return res;
-		} catch (Exception e) {
-			return false;
-		}				
-	}
 
 	
 	/**
@@ -120,7 +101,7 @@ public final class ConversionModel extends Model {
 	 * Methode qui recupere les fichiers recemments ouverts a l'ouverture. 
 	 */
 	public void loadOldImports() {
-		if(createDirectories()) {
+		if(ResourcesManager.checkResources()) {
 			File[] files = new File(ResourceConstants.CONVERSION_OLD_IMPORTS_PATH).listFiles();	
 			// tri des fichiers par date
 			if(files != null) {

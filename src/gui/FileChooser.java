@@ -7,7 +7,7 @@ import javax.swing.JFileChooser;
 
 import exceptions.ImportationException;
 
-public final class FilesManager {
+public final class FileChooser {
 	//=======================================================================================================================
 	//=======================================================================================================================
 
@@ -51,7 +51,7 @@ public final class FilesManager {
 	
 	public static ArrayList<File> chooseDirectoryAndListSonFiles() throws ImportationException {
 		ArrayList<File> sonFiles = new ArrayList<File>();	
-		File importDirectory = FilesManager.chooseDirectory();
+		File importDirectory = FileChooser.chooseDirectory();
 		for(File f : importDirectory.listFiles()) sonFiles.add(f);	
 		return sonFiles;
 	}

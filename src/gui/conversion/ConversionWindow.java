@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
 import exceptions.ImportationException;
@@ -66,28 +67,22 @@ public final class ConversionWindow extends StylizedJFrame {
 	private JMenu drawFileMenu() {
 		JMenu filesMenu = new JMenu("Fichier");
 
+		
 		StylizedJMenuItem importFile = new StylizedJMenuItem("Importer un fichier");
 		importFile.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
-					File f = null;
 					try {
-						f = DataChoose.FileChoose();
+						File f = DataChoose.FileChoose();
 						model.add(f);
-						if (model.getCurrentFile() == null) {
-							redrawFirstTime();
-						}
+						if (model.getCurrentFile() == null) redrawFirstTime();
 						model.setCurrentFile(f.getName());
-					} catch (ImportationException ie) {
-						JOptionPane.showMessageDialog(null, ie.getMessage());		
-					} catch (IncorrectFileException ife) {
-						JOptionPane.showMessageDialog(null, ife.getMessage());
 					} catch (Exception e) {
-						System.out.println(e.getMessage());
+						JOptionPane.showMessageDialog(null, e.getMessage());
 					}
-
 			}
 		});
+		
 
 		StylizedJMenuItem importFolder = new StylizedJMenuItem("Importer un dossier");
 		importFolder.addActionListener(new ActionListener() {
@@ -97,9 +92,7 @@ public final class ConversionWindow extends StylizedJFrame {
 					ArrayList<File> files = DataChoose.DirectoryChoose();
 					for (File f : files) {
 						model.add(f);
-						if (model.getCurrentFile() == null) {
-							redrawFirstTime();
-						}
+						if(model.getCurrentFile() == null) redrawFirstTime();
 						model.setCurrentFile(f.getName());
 					}
 				} catch (Exception e) {
@@ -111,34 +104,28 @@ public final class ConversionWindow extends StylizedJFrame {
 		
 		JMenu recentFiles = new JMenu("Fichiers recemments importes");
 		FileInformation[] files = this.model.getOldImports();
-		//System.out.println(files);
-	
-			for(FileInformation f : files) {
-				if(f != null) {
-					StylizedJMenuItem itemFile = new StylizedJMenuItem(f.getFileName());
-					recentFiles.add(itemFile);
-					itemFile.addActionListener(new ActionListener() {
-						@Override
-						public void actionPerformed(ActionEvent e) {
-							try {
-								
-								File file = new File(f.getPath());
-								model.add(file);
-								if (model.getCurrentFile() == null) {
-									redrawFirstTime();
-								}
-								model.setCurrentFile(file.getName());
-							} catch(Exception err) {
+		for(FileInformation f : files) {
+			if(f != null) {
+				StylizedJMenuItem itemFile = new StylizedJMenuItem(f.getFileName());
+				recentFiles.add(itemFile);
+				itemFile.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						try {
+							File file = new File(f.getPath());
+							model.add(file);
+							if (model.getCurrentFile() == null) redrawFirstTime();
+							model.setCurrentFile(file.getName());
+						} catch(Exception err) {
 								JOptionPane.showMessageDialog(null, err.getMessage());
-							}
-							
 						}
-					});
-				}	
-			}
+							
+					}
+				});
+			}	
+	    }
 		
-		
-		
+			
 		StylizedJMenuItem clearLibrary = new StylizedJMenuItem("Vider la bibliotheque");
 		clearLibrary.addActionListener(new ActionListener() {
 			@Override
@@ -147,6 +134,7 @@ public final class ConversionWindow extends StylizedJFrame {
 			}
 		});
 
+		
 		StylizedJMenuItem quit = new StylizedJMenuItem("Quitter");
 		quit.addActionListener(new ActionListener() {
 			@Override
@@ -156,6 +144,23 @@ public final class ConversionWindow extends StylizedJFrame {
 			}
 		});
 
+		JMenuItem exportFolder = new JMenuItem("Repertoire de sortie :");
+		exportFolder.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent ae) {
+				try {
+					ArrayList<File> files = DataChoose.DirectoryChoose();
+					for (File f : files) {
+						model.add(f);
+						if(model.getCurrentFile() == null) redrawFirstTime();
+						model.setCurrentFile(f.getName());
+					}
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(null, e.getMessage());
+				}
+			}
+		});
+		
 		filesMenu.add(importFile);
 		filesMenu.add(importFolder);
 		filesMenu.add(recentFiles);
@@ -177,6 +182,8 @@ public final class ConversionWindow extends StylizedJFrame {
 		model.addObserver(sv);
 		empty_workspace.setVisible(false);
 	}
+	
+	
 	//=======================================================================================================================
 	//=======================================================================================================================
 
@@ -272,14 +279,14 @@ public final class ConversionWindow extends StylizedJFrame {
 
 		WindowTools.showLogo(conversionWindow);
 
+		
 		LibraryViewController lv = new LibraryViewController(conversionWindow.model, conversionWindow.model.getFilenames());
 		TabsView tv = new TabsView(conversionWindow.model);
 
+		
 		StylizedJPanel p = new StylizedJPanel();
 		p.setLayout(new BorderLayout());
 		StylizedJMenuBar menu = new StylizedJMenuBar();
-		
-	
 		
 		
 		
@@ -287,6 +294,7 @@ public final class ConversionWindow extends StylizedJFrame {
 		menu.add(conversionWindow.drawOptionsMenu());
 		menu.add(conversionWindow.drawConvertMenu());
 
+		
 		conversionWindow.setJMenuBar(menu);
 		conversionWindow.model.addObserver(lv);
 		p.add(tv, BorderLayout.CENTER);
@@ -295,7 +303,6 @@ public final class ConversionWindow extends StylizedJFrame {
 		conversionWindow.add(lv, BorderLayout.WEST);
 		conversionWindow.add(p, BorderLayout.CENTER);
 
-	
 		
 		WindowTools.executeWindow(conversionWindow);
 	}

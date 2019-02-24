@@ -42,6 +42,11 @@ public class SelectableFile {
 	 */
 	private boolean isSelected;
 
+	/**
+	 * Le nom complet (chemin+nom) du fichier de sortie.
+	 */
+	private String destinationFile;
+	
 	
 	
 	//=======================================================================================================================
@@ -62,6 +67,7 @@ public class SelectableFile {
 		if((this.sourceFile = sourceFile) == null)
 			throw new NullPointerException("Le fichier source recu en parametre est null !");
 		isSelected = false;
+		destinationFile = "";
 		whoAmI();
 	}
 
@@ -211,6 +217,17 @@ public class SelectableFile {
 	}
 
 	/**
+	 * [ METHODE ACCESSEUR - SETTER. ]
+	 * 
+	 * Methode pour modifier la duree d'une video.
+	 * 
+	 * @return
+	 */
+	public void setDestinationFile(String destinationFile) {
+		this.destinationFile = destinationFile;
+	}
+	
+	/**
 	 * [ METHODE ACCESSEUR - GETTER. ]
 	 * 
 	 * Methode pour recuperer le type du fichier.
@@ -239,7 +256,7 @@ public class SelectableFile {
 	 * 
 	 * @return String 	Le nom du fichier source.
 	 */
-	public String getName() {
+	public String getSourceFileName() {
 		return sourceFile.getName();
 	}
 	
@@ -250,8 +267,30 @@ public class SelectableFile {
 	 * 
 	 * @return String 	Le nom complet du fichier source.
 	 */
-	public String getFullName() {
+	public String getSourceFileFullName() {
 		return sourceFile.getPath();
+	}
+	
+	/**
+	 * [ METHODE ACCESSEUR - GETTER. ]
+	 * 
+	 * Methode pour recuperer le nom du fichier.
+	 * 
+	 * @return String 	Le nom du fichier source.
+	 */
+	public String getDestinationFileName() {
+		return destinationFile.split("\\")[destinationFile.split("\\").length];
+	}
+	
+	/**
+	 * [ METHODE ACCESSEUR - GETTER. ]
+	 * 
+	 * Methode pour recuperer le nom complet du fichier.
+	 * 
+	 * @return String 	Le nom complet du fichier source.
+	 */
+	public String getDestinationFileFullName() {
+		return destinationFile;
 	}
 	
 	

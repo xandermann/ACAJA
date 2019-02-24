@@ -32,26 +32,30 @@ public final class ConversionModel extends Model {
 	/**
 	 * [ ATTRIBUTS D'INSTANCE. ]
 	 */
+	
 	//Fichier courant. 
 	private SettingsFile currentFile;
 	//Liste des fichiers siur lesquels on travaille. 
 	private ArrayList<SettingsFile> files;
 	//Tableau des fichiers precedemment importes.
 	private FileInformation[] importedFiles;
+	//Repertoire de destination des fichiers exportes.
+	private File destinationFolder;
 	
 	
 	//=======================================================================================================================
 	//=======================================================================================================================
 
-	
-	
+
+
 	/**
 	 * [ CONSTRUCTEUR. ]
 	 */
 	public ConversionModel() {
 		files = new ArrayList<SettingsFile>();
 		// maximum 10 last files
-		this.importedFiles = new FileInformation[10];
+		importedFiles = new FileInformation[10];
+		destinationFolder = new File("/");
 	}
 
 	
@@ -94,6 +98,7 @@ public final class ConversionModel extends Model {
 		}
 	}
 
+	
 	/**
 	 *  [ METHODE POUR CREER LES DOSSIERS DES IMPORTS SI ILS N'EXISTENT PAS ]
 	 */
@@ -112,10 +117,10 @@ public final class ConversionModel extends Model {
 			return res;
 		} catch (Exception e) {
 			return false;
-		}
-				
+		}				
 	}
 
+	
 	/**
 	 * [ CHARGER LES FICHIERS PRECEDEMMENT IMPORTES. ]
 	 * 
@@ -193,7 +198,7 @@ public final class ConversionModel extends Model {
 	 */
 	public DefaultListModel<ListEntry> getFilenames() {
 		DefaultListModel<ListEntry> filenameList = new DefaultListModel<ListEntry>();
-		for (SettingsFile f : files) filenameList.addElement(new ListEntry(f.getName()));
+		for (SettingsFile f : files) filenameList.addElement(new ListEntry(f.getSourceFileName()));
 		return filenameList;
 	}
 
@@ -315,7 +320,7 @@ public final class ConversionModel extends Model {
 	
 	
 	/**
-	 * [ MODIFIER  UN FICHIER. ]
+	 * [ MODIFIER LE FICHIER COURANT. ]
 	 * 
 	 * Methode qui permet de modifier un parametre du fichier
 	 * actuellement selectionne
@@ -324,7 +329,15 @@ public final class ConversionModel extends Model {
 		currentFile.modify(typeSeyting, setting);
 	}
 	
-
+	
+	/**
+	 * MODIGFIER LE FICHIER DE DESTIANTION DU FICHEIR COURANT. 
+	 */
+	public void setDestination(String destinationFile) {
+		currentFile.setDestinationFile(destinationFolder.getPath()+"\\"+destinationFile);
+	}
+	
+	
 	
 	//=======================================================================================================================
 	//=======================================================================================================================
@@ -372,7 +385,7 @@ public final class ConversionModel extends Model {
 	 */
 	public void setCurrentFile(String fileName) {
 		for (SettingsFile f : this.getFiles()) {
-			if (f.getName().equals(fileName)) currentFile = f;
+			if (f.getSourceFileName().equals(fileName)) currentFile = f;
 		}
 		sendChanges();
 	}
@@ -388,6 +401,17 @@ public final class ConversionModel extends Model {
 	}
 	
 
+	/**
+	 * [ SETTER - CHANGER DE REPERTOIRE DE DESTINATION. ]
+	 * 
+	 * Methode pour modifier le repertoire de destination.
+	 * 
+	 * @param destinationFolder 	Le nouveau repertoire de destination.
+	 */
+	public void setDestinationFolder(String destinationFolder) {
+		this.destinationFolder = new File(destinationFolder);
+	}
+	
 	
 	//=======================================================================================================================
 	//=======================================================================================================================

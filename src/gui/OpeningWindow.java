@@ -77,7 +77,6 @@ public final class OpeningWindow {
 		}
 
 		presentationWindow.dispose();
-		System.exit(0);
 	}
 
 	/**

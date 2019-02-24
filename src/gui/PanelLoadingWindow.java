@@ -84,9 +84,9 @@ public class PanelLoadingWindow extends StylizedJPanel {
 		g.setColor(Color.RED);
 		g.fillRect(50, 330, 280, 25);
 
-		g.setColor(Color.BLACK);
-		g.drawString("Imaginez que la barre existe", 55, 340);
-		g.drawString("TODO: Barre de chargement -> Alexandre H", 55, 355);
+		// g.setColor(Color.BLACK);
+		// g.drawString("Imaginez que la barre existe", 55, 340);
+		// g.drawString("TODO: Barre de chargement -> Alexandre H", 55, 355);
 		
 		g.setColor(StyleTheme.BACKGROUND_COLOR_SECONDARY);
 		g.fillRect(50, 330, this.getCalcultatedWidth(), 25);

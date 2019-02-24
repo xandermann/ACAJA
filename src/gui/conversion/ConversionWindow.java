@@ -247,7 +247,7 @@ public final class ConversionWindow extends StylizedJFrame {
 							new JLabel("<html>" + 
 										"<body>" + 
 										"		Conversion du ou des fichier(s)." +
-										"		<br>   "+
+										"		<br>" +
 										"		Veuillez patientez..." + 
 										"</body>" + 
 										"</html>", JLabel.CENTER),

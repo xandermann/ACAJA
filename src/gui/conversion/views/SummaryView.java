@@ -1,8 +1,7 @@
 package gui.conversion.views;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.io.File;
 import java.util.*;
 import javax.swing.*;
@@ -34,26 +33,31 @@ public final class SummaryView extends StylizedJPanel implements Observer {
 		
 		
 		StylizedJPanel inputFilePanel = new StylizedJPanel();
+		inputFilePanel.setBackground(Color.LIGHT_GRAY);
 		inputFilePanel.add(new JLabel("Fichier selectionne : "), BorderLayout.EAST);
 		inputFilePanel.add(inputFileLabel = new JLabel("NA"), BorderLayout.WEST);
 		
 		
 		StylizedJPanel videoPanel = new StylizedJPanel();
+		videoPanel.setBackground(Color.LIGHT_GRAY);
 		videoPanel.add(new JLabel("Codec video actuel : "), BorderLayout.EAST);
 		videoPanel.add(videoLabel = new JLabel("NA"), BorderLayout.WEST);
 		
 		
 		StylizedJPanel audioPanel = new StylizedJPanel();
+		audioPanel.setBackground(Color.LIGHT_GRAY);
 		audioPanel.add(new JLabel("Codec audio actuel : "), BorderLayout.EAST);
 		audioPanel.add(soundLabel = new JLabel("NA"), BorderLayout.WEST);
 		
 		
 		StylizedJPanel durationLabelPanel = new StylizedJPanel();
+		durationLabelPanel.setBackground(Color.LIGHT_GRAY);
 		durationLabelPanel.add(new JLabel("Duree : "), BorderLayout.EAST);
 		durationLabelPanel.add(durationLabel = new JLabel("NA"),BorderLayout.WEST);
 
 		
 		StylizedJPanel outputFilePanel = new StylizedJPanel();
+		outputFilePanel.setBackground(Color.LIGHT_GRAY);
 		outputFilePanel.add(new JLabel("Fichier de destination : "), BorderLayout.EAST);
 		outputFilePanel.add(outputFileText = new JTextField("NA"),BorderLayout.WEST);
 		outputFileText.setPreferredSize(new Dimension(100, 20));

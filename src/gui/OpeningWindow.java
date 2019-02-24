@@ -121,7 +121,7 @@ public final class OpeningWindow {
 		processingButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				ProcessingWindow f = new ProcessingWindow();
+				ProcessingWindow.generateProcessingWindow();
 				openingWindow.dispose();
 			}
 		});

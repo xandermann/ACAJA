@@ -10,9 +10,9 @@ import gui.style.StylizedJMenuBar;
 
 public class ProcessingWindow extends JFrame {
 
-	public ProcessingWindow() {
+	
+	private ProcessingWindow() {
 		createJMenu();
-		this.setVisible(true);
 		this.setBackground(Color.lightGray);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		// WindowTools.showLogo(this);
@@ -25,6 +25,7 @@ public class ProcessingWindow extends JFrame {
 		this.add(p);
 	}
 
+	
 	private void createJMenu() {
 		StylizedJMenuBar jm = new StylizedJMenuBar();
 		JMenu fileMenu = new JMenu("Fichier");
@@ -36,7 +37,13 @@ public class ProcessingWindow extends JFrame {
 		this.setJMenuBar(jm);
 
 	}
+	
+	
+	public static void generateProcessingWindow() {
+		new ProcessingWindow();
+	}
 
+	
 	public static void main(String[] args) {
 		ProcessingWindow f = new ProcessingWindow();
 		f.repaint();

@@ -1,36 +1,20 @@
 package gui.conversion;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.*;
+import java.awt.event.*;
 import java.io.File;
 import java.util.ArrayList;
-
-import javax.swing.BoxLayout;
-import javax.swing.JFileChooser;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-
-import exceptions.ImportationException;
-import exceptions.IncorrectFileException;
+import javax.swing.*;
+import exceptions.*;
 import files.FileInformation;
 import gui.FileChooser;
 import gui.WindowTools;
 import gui.conversion.controllers.ConversionWindowController;
 import gui.conversion.model.ConversionModel;
-import gui.conversion.views.LibraryViewController;
-import gui.conversion.views.SummaryView;
-import gui.conversion.views.TabsView;
-import gui.style.StylizedJFrame;
-import gui.style.StylizedJMenuBar;
-import gui.style.StylizedJMenuItem;
-import gui.style.StylizedJPanel;
-import threads.RuntimeSpaceManager;
-import threads.ThreadForSave;
-import threads.ThreadForWaitWindow;
+import gui.conversion.views.*;
+import gui.processing.ProcessingWindow;
+import gui.style.*;
+import threads.*;
 
 //TODO : CODE OPTIMISATION
 
@@ -78,6 +62,8 @@ public final class ConversionWindow extends StylizedJFrame {
 		TabsView tv = new TabsView(model);
 		dataView.add(sv);
 		dataView.add(tv);
+		sv.setBackground(Color.LIGHT_GRAY);
+		dataView.setBackground(Color.LIGHT_GRAY);
 		add(dataView, BorderLayout.EAST);
 		model.addObserver(sv);
 		empty_workspace.setVisible(false);
@@ -215,6 +201,13 @@ public final class ConversionWindow extends StylizedJFrame {
 		
 		
 		StylizedJMenuItem switchMode = new StylizedJMenuItem("Passer en mode traitement");
+		switchMode.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent ae) {
+				ProcessingWindow.generateProcessingWindow();
+				dispose();
+			}
+		});
 
 		optionsMenu.add(exportFolder);
 		optionsMenu.add(switchMode);

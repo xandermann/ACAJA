@@ -13,9 +13,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import files.SettingsFile;
-import wrapper.language.CodecConstants;
 import files.SettingType;
+import wrapper.language.CodecConstants;
 
 public final class SoundSettingsView extends JPanel implements Observer {
 	//=======================================================================================================================

@@ -1,18 +1,28 @@
 package gui.conversion;
 
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
 
-import javax.swing.*;
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JOptionPane;
 
 import exceptions.ImportationException;
 import exceptions.IncorrectFileException;
 import files.FileInformation;
-import gui.*;
-import gui.style.*;
-import threads.*;
+import gui.WindowTools;
+import gui.style.StylizedJFrame;
+import gui.style.StylizedJMenuBar;
+import gui.style.StylizedJMenuItem;
+import gui.style.StylizedJPanel;
+import threads.RuntimeSpaceManager;
+import threads.ThreadForSave;
+import threads.ThreadForWaitWindow;
 
 //TODO : CODE OPTIMISATION
 

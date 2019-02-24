@@ -2,7 +2,9 @@ package gui.conversion;
 
 import java.io.File;
 import java.util.ArrayList;
+
 import javax.swing.JFileChooser;
+
 import exceptions.ImportationException;
 
 public final class DataChoose {

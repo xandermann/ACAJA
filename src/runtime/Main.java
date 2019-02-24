@@ -9,11 +9,11 @@ public final class Main {
 	/**
 	 * [ METHODE PRINCIPALE DU LOGICIEL. ]
 	 * 
-	 * @param args	Le tableau d'arguments. 
+	 * @param args Le tableau d'arguments par defaut.
 	 */
 	public static void main(String[] args) {
 		/**
-		 * DEMARAGE DE LA FENETRE D'OUVERTURE DU LOGICIEL. 
+		 * DEMARAGE DE LA FENETRE D'OUVERTURE DU LOGICIEL.
 		 */
 		OpeningWindow.generateOpeningWindow();
 	}

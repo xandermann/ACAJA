@@ -1,12 +1,16 @@
 package gui.conversion;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.util.Observable;
+import java.util.Observer;
 
-import java.util.*;
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
-import javax.swing.*;
-
-import files.*;
+import files.SettingType;
 
 public final class SummaryView extends JPanel implements Observer {
 	//=======================================================================================================================

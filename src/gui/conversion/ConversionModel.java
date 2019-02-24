@@ -1,12 +1,24 @@
 package gui.conversion;
 
-import java.io.*;
-import java.util.*;
-import javax.swing.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+
 import exceptions.IncorrectFileException;
-import files.*;
+import files.FileInformation;
+import files.SettingType;
+import files.SettingsFile;
 import gui.Model;
-import resources.*;
+import resources.ResourceConstants;
 import wrapper.runtime.global.UserRequests;
 // TODO : gerer la presence des fichiers systemes .DS_store, etc dans la methode loadOldImports();
 // TODO : manage multiple filenames

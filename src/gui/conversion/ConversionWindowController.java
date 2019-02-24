@@ -1,6 +1,7 @@
 package gui.conversion;
 
-import java.awt.event.*;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 public final class ConversionWindowController implements WindowListener {
 	private ConversionModel model;

@@ -23,7 +23,11 @@ import gui.style.StylizedJPanel;
  *         CHEVRIER Jean-christophe.
  */
 public final class OpeningWindow {
-
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
+	
 	/**
 	 * [ CONSTANTES DE CLASSE INTERNES. ]
 	 *
@@ -32,12 +36,19 @@ public final class OpeningWindow {
 	public final static int WIDTH = 400;
 	public final static int HEIGHT = 400;
 
+	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
+	
 	/**
 	 * [ METHODE INTERNE DE CLASSE - FENETRE DE PRESENTATION DU LOGICIEL. ]
 	 * 
 	 * Cette methode permet de generer la fenetre de presentation du logiciel.
 	 */
-	private static void generatePresentationWindow() {
+	private static void generateLoadingWindow() {
 		JFrame presentationWindow = new JFrame("Acaja - un logiciel a la portee de tous.");
 
 		presentationWindow.setSize(new Dimension(WIDTH, HEIGHT));
@@ -78,6 +89,13 @@ public final class OpeningWindow {
 		presentationWindow.dispose();
 	}
 
+	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
+	
 	/**
 	 * [ METHODE INTERNE DE CLASSE - FENETRE CHOIX DU MODE D'UTILISATION DU
 	 * LOGICIEL. ]
@@ -144,13 +162,25 @@ public final class OpeningWindow {
 		WindowTools.executeWindow(openingWindow);
 	}
 
+	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
+	
 	/**
 	 * [ METHODE DE CLASSE. ]
 	 * 
 	 * Methode pour lancer les fenetres de demarrage du logiciel ACAJA.
 	 */
 	public static void generateOpeningWindow() {
-		generatePresentationWindow();
+		generateLoadingWindow();
 		generateChoiceModeWindow();
 	}
+	
+	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
 }

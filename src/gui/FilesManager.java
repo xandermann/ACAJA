@@ -1,4 +1,4 @@
-package gui.conversion;
+package gui;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -7,7 +7,7 @@ import javax.swing.JFileChooser;
 
 import exceptions.ImportationException;
 
-public final class DataChoose {
+public final class FilesManager {
 	//=======================================================================================================================
 	//=======================================================================================================================
 

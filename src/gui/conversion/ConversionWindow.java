@@ -8,6 +8,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -16,6 +17,7 @@ import javax.swing.JOptionPane;
 import exceptions.ImportationException;
 import exceptions.IncorrectFileException;
 import files.FileInformation;
+import gui.FilesManager;
 import gui.WindowTools;
 import gui.style.StylizedJFrame;
 import gui.style.StylizedJMenuBar;
@@ -32,6 +34,7 @@ public final class ConversionWindow extends StylizedJFrame {
 	//=======================================================================================================================
 
 	
+	
 	/**
 	 * [ ATTRRIBUTS D'INSTANCE. ]
 	 */
@@ -39,9 +42,11 @@ public final class ConversionWindow extends StylizedJFrame {
 	private JLabel empty_workspace;
 	
 	
+	
 	//=======================================================================================================================
 	//=======================================================================================================================
 
+	
 	
 	/**
 	 * [ CONSTRUCTEUR INTERNE - ENCAPSULE. ]
@@ -55,9 +60,30 @@ public final class ConversionWindow extends StylizedJFrame {
 	}
 
 	
+	
 	//=======================================================================================================================
 	//=======================================================================================================================
 
+	
+	
+	private void redrawFirstTime() {
+		StylizedJPanel dataView = new StylizedJPanel();
+		dataView.setLayout(new BoxLayout(dataView, BoxLayout.Y_AXIS));
+		SummaryView sv = new SummaryView(model);
+		TabsView tv = new TabsView(model);
+		dataView.add(sv);
+		dataView.add(tv);
+		add(dataView, BorderLayout.EAST);
+		model.addObserver(sv);
+		empty_workspace.setVisible(false);
+	}
+	
+	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
 	
 	/**
 	 * [ METHODE INTERNE POUR LA CONSTRUCTION DU MENU DES FICHIERS. ]
@@ -73,7 +99,7 @@ public final class ConversionWindow extends StylizedJFrame {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
 					try {
-						File f = DataChoose.FileChoose();
+						File f = FilesManager.FileChoose();
 						model.add(f);
 						if (model.getCurrentFile() == null) redrawFirstTime();
 						model.setCurrentFile(f.getName());
@@ -89,7 +115,7 @@ public final class ConversionWindow extends StylizedJFrame {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
 				try {
-					ArrayList<File> files = DataChoose.DirectoryChoose();
+					ArrayList<File> files = FilesManager.DirectoryChoose();
 					for (File f : files) {
 						model.add(f);
 						if(model.getCurrentFile() == null) redrawFirstTime();
@@ -144,22 +170,7 @@ public final class ConversionWindow extends StylizedJFrame {
 			}
 		});
 
-		JMenuItem exportFolder = new JMenuItem("Repertoire de sortie :");
-		exportFolder.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent ae) {
-				try {
-					ArrayList<File> files = DataChoose.DirectoryChoose();
-					for (File f : files) {
-						model.add(f);
-						if(model.getCurrentFile() == null) redrawFirstTime();
-						model.setCurrentFile(f.getName());
-					}
-				} catch (Exception e) {
-					JOptionPane.showMessageDialog(null, e.getMessage());
-				}
-			}
-		});
+
 		
 		filesMenu.add(importFile);
 		filesMenu.add(importFolder);
@@ -170,23 +181,12 @@ public final class ConversionWindow extends StylizedJFrame {
 		return filesMenu;
 	}
 
-	
-	private void redrawFirstTime() {
-		StylizedJPanel dataView = new StylizedJPanel();
-		dataView.setLayout(new BoxLayout(dataView, BoxLayout.Y_AXIS));
-		SummaryView sv = new SummaryView(model);
-		TabsView tv = new TabsView(model);
-		dataView.add(sv);
-		dataView.add(tv);
-		add(dataView, BorderLayout.EAST);
-		model.addObserver(sv);
-		empty_workspace.setVisible(false);
-	}
-	
+
 	
 	//=======================================================================================================================
 	//=======================================================================================================================
 
+	
 	
 	/**
 	 * [ METHODE INTERNE POUR LA CONSTRUCTION DU MENU DES OPTIONS. ]
@@ -196,19 +196,33 @@ public final class ConversionWindow extends StylizedJFrame {
 	private JMenu drawOptionsMenu() {
 		JMenu optionsMenu = new JMenu("Options");
 
-		StylizedJMenuItem outputFolder = new StylizedJMenuItem("Changer le repertoire de sortie");
+		StylizedJMenuItem exportFolder = new StylizedJMenuItem("Changer le repertoire de sortie");
+		exportFolder.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent ae) {
+				JFileChooser jdc = new JFileChooser("Parcourir");
+				jdc.showOpenDialog(null);
+				jdc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+				jdc.setAcceptAllFileFilterUsed(true);
+				model.setDestinationFolder(jdc.getCurrentDirectory());
+			}
+		});
+		
+		
 		StylizedJMenuItem switchMode = new StylizedJMenuItem("Passer en mode traitement");
 
-		optionsMenu.add(outputFolder);
+		optionsMenu.add(exportFolder);
 		optionsMenu.add(switchMode);
 
 		return optionsMenu;
 	}
 
 	
+	
 	//=======================================================================================================================
 	//=======================================================================================================================
 
+	
 	
 	/**
 	 * [ METHODE INTERNE POUR LA CONSTRUCTION DU MENU DE CONVERTION. ]
@@ -260,9 +274,11 @@ public final class ConversionWindow extends StylizedJFrame {
 	}
 
 	
+	
 	//=======================================================================================================================
 	//=======================================================================================================================
 
+	
 	
 	/**
 	 * [ METHODE DE CLASSE DE CONSTRUCTION ET DE GENERATION DE LA FENETRE DE CONVERSION. ]
@@ -307,6 +323,7 @@ public final class ConversionWindow extends StylizedJFrame {
 		WindowTools.executeWindow(conversionWindow);
 	}
 
+	
 	
 	//=======================================================================================================================
 	//=======================================================================================================================

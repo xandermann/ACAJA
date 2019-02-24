@@ -18,6 +18,7 @@ import files.FileInformation;
 import files.SettingType;
 import files.SettingsFile;
 import gui.Model;
+import messages.MessageConstants;
 import resources.ResourceConstants;
 import wrapper.runtime.global.UserRequests;
 // TODO : gerer la presence des fichiers systemes .DS_store, etc dans la methode loadOldImports();
@@ -74,27 +75,21 @@ public final class ConversionModel extends Model {
 	public void saveImports() {
 		try {
 			if(createDirectories()) {
-				for(int i = 0 ; i < this.importedFiles.length ; i ++) {
-				File f = new File(ResourceConstants.CONVERSION_OLD_IMPORTS_PATH + this.importedFiles[i].getFileName() + ".acaja");
-				if(!f.exists()) {
-					FileOutputStream fos = new FileOutputStream(f);
-					ObjectOutputStream oos = new ObjectOutputStream(fos);
-					oos.writeObject(this.importedFiles[i]);
-					oos.close();
-					fos.close();
+				for(int i = 0 ; i < importedFiles.length ; i ++) {
+					File f = new File(ResourceConstants.CONVERSION_OLD_IMPORTS_PATH + importedFiles[i].getFileName() + ".acaja");
+					if(!f.exists()) {
+						FileOutputStream fos = new FileOutputStream(f);
+						ObjectOutputStream oos = new ObjectOutputStream(fos);
+						oos.writeObject(this.importedFiles[i]);
+						oos.close();
+						fos.close();
+					}
 				}
-			}
 			} else {
-				//System.out.println("Impossible de creer les dossiers de sauvegarde des imports");
-				JOptionPane.showMessageDialog(null,"Impossible de creer les dossiers de sauvegarde des imports. Merci de verifier les permissions du repertoire d'installation d'acaja");
+				JOptionPane.showMessageDialog(null, MessageConstants.ERROR_SAVE_IMPORTS);
 			}
-			
-		} catch(SecurityException se) {
-			System.out.println(se.getMessage());
-		} catch(IOException ioe) {
-			System.out.println(ioe.getMessage());
 		} catch(Exception e) {
-			System.out.println(e.getMessage());
+			JOptionPane.showMessageDialog(null, e.getMessage());
 		}
 	}
 
@@ -127,19 +122,15 @@ public final class ConversionModel extends Model {
 	 * Methode qui recupere les fichiers recemments ouverts a l'ouverture. 
 	 */
 	public void loadOldImports() {
-		
-			if(createDirectories()) {
-				File[] files = new File(ResourceConstants.CONVERSION_OLD_IMPORTS_PATH).listFiles();	
-				// tri des fichiers par date
-				if(files != null) {
-					Arrays.sort(files, new Comparator<File>(){
-				    public int compare(File f1, File f2){
-				        return Long.valueOf(f1.lastModified()).compareTo(f2.lastModified());
-				    } 
+		if(createDirectories()) {
+			File[] files = new File(ResourceConstants.CONVERSION_OLD_IMPORTS_PATH).listFiles();	
+			// tri des fichiers par date
+			if(files != null) {
+				Arrays.sort(files, new Comparator<File>(){
+					public int compare(File f1, File f2){
+						return Long.valueOf(f1.lastModified()).compareTo(f2.lastModified());
+					} 
 				});
-				
-				
-				// System.out.println(files.length);
 				for(int i = 0 ; i < files.length ; i++) {
 					if(files[i].getName().contains(".acaja")) {
 						try {	
@@ -149,32 +140,22 @@ public final class ConversionModel extends Model {
 								this.importedFiles[i] = (FileInformation)ois.readObject();
 							ois.close();
 							fis.close();
-					}  catch(SecurityException se) {
-						//System.out.println(se.getMessage());
-						JOptionPane.showMessageDialog(null, "Vous n'avez pas les permissions pour lire le fichier d'import acaja " + files[i].getName());
-					} catch(IOException ioe) {
-						//System.out.println(ioe.getMessage());
-						JOptionPane.showMessageDialog(null, "Impossible d'acceder au fichier " + files[i].getName() + " : erreur d'entree/sortie");
-					} catch(Exception e) {
-						//System.out.println(e.getMessage());
-						JOptionPane.showMessageDialog(null, "Erreur lors de l'acces aux fichiers precedemment importes : " + e.getMessage());
-					}
-					}
-					
+						}  catch(SecurityException se) {
+							JOptionPane.showMessageDialog(null, 
+									"Vous n'avez pas les permissions pour lire le fichier d'import acaja " + files[i].getName() + " !");
+						} catch(IOException ioe) {
+							JOptionPane.showMessageDialog(null, 
+									"Impossible d'acceder au fichier " + files[i].getName() + " : erreur d'entree/sortie !");
+						} catch(Exception e) {
+								JOptionPane.showMessageDialog(null, 
+									"Erreur lors de l'acces aux fichiers precedemment importes : " + e.getMessage() + " !");
+						}
 					}
 				}
-			//	System.out.println("Loaded old imports...");
-			/*	for(FileInformation f : this.importedFiles) {
-					if(f != null) 
-						System.out.println(f.getFileName());
-				} debug ; */
-			} else {
-				JOptionPane.showMessageDialog(null,"Impossible de creer les dossiers de sauvegarde des imports. Merci de verifier les permissions du repertoire d'installation d'acaja");
 			}
-	}
-	
-	public FileInformation[] getOldImports() {
-		return this.importedFiles;
+		} else {
+			JOptionPane.showMessageDialog(null, MessageConstants.ERROR_SAVE_IMPORTS);
+		}
 	}
 
 	
@@ -189,10 +170,6 @@ public final class ConversionModel extends Model {
 	 * 
 	 * Methode pour recuperer les noms des fichiers sous la forme
 	 * d'une DefaultListModel afin de l'afficher dans la liste du ConversionPanel. 
-	 * 
-	 * TODO
-	 * Par la suite, cette methode recuperera egalement les types des fichiers pour
-	 * afficher leur icone. 
 	 * 
 	 * @return DefaultListModel<ListEntry>		La liste des noms des fichiers. 
 	 */
@@ -210,6 +187,19 @@ public final class ConversionModel extends Model {
 	
 	
 	
+	/** 
+	 * [ SUPPRIMER UN ANCIEN FICHIER D'IMPORTATION ]
+	 */
+	private boolean removeOldImport(String fileName) {
+		try {
+			File f = new File(ResourceConstants.CONVERSION_OLD_IMPORTS_PATH + fileName + ".acaja");
+			if(!(f.exists())) return true;
+			return f.delete();
+		} catch(Exception e) {
+			return false;
+		}
+	}
+	
 	
 	/**
 	 * [ AJOUTER UN FICHIER. ]
@@ -224,66 +214,30 @@ public final class ConversionModel extends Model {
 		if(file.exists()) {
 			files.add(new SettingsFile(file));
 			sendChanges();
-		//	System.out.println("File exists ...");
 			FileInformation f = new FileInformation(file.getName(),file.getAbsolutePath());
-		
-			for(int i = 0; i < this.importedFiles.length; i++) {
-					
-				if(this.importedFiles[i] != null) {
-					if(this.importedFiles[i].equals(f)){
-				//	System.out.println("Found match in file " + i + " : " + this.importedFiles[i].getFileName());
-					break;	
-					}
-					
+			for(int i = 0; i < importedFiles.length; i++) {
+				if(importedFiles[i] != null) {
+					if(importedFiles[i].equals(f)) break;	
 				}
-			    if(this.importedFiles[i] == null) {
-			    //	System.out.println("Found empty array field at " + i + " : adding " + f.getFileName());
-			        this.importedFiles[i] = f;
+			    if(importedFiles[i] == null) {
+			        importedFiles[i] = f;
 			        this.saveImports();
 			        break;
 			    } 
-			    
-			    
-			    
 			    if(i==9) {
-			  //  	System.out.println("Array is full ...");
-			    	if(deleteFile(this.importedFiles[0].getFileName())) {
-			    		//remove first occurence and moving all others
-			    
-			    	//	System.out.println("File at index 0 (" + this.importedFiles[0].getFileName() + ") removed.");
-			    		for(int j = 1 ; j < this.importedFiles.length ; j ++) {
-			    		//	System.out.println("Replacing " + this.importedFiles[j-1].getFileName() + " by " + this.importedFiles[j] + " in array ( " + (j-1) +" replaced by  " + j);
-			    			this.importedFiles[j-1] = this.importedFiles[j];
+			    	if(removeOldImport(importedFiles[0].getFileName())) {
+			    		for(int j = 1 ; j < importedFiles.length ; j ++) {
+			    			importedFiles[j-1] = importedFiles[j];
 			    		}
-			    			
-			    		//add new fileinformation at last position
-			    		this.importedFiles[9] = f;
-			    	//	System.out.println("Added " + f.getFileName() + " at position 9");
-			    	this.saveImports();	
+			    		importedFiles[9] = f;
+			    		saveImports();	
 			    	}
 			    }
 			}
 		}else 
 			JOptionPane.showMessageDialog(null, "Le fichier selectionne n'existe pas");
-		
-		
-		
 	}
 
-	
-	/** 
-	 * [ SUPPRIMER UN ANCIEN FICHIER D'IMPORTATION ]
-	 */
-	private boolean deleteFile(String fileName) {
-		try {
-			File f = new File(ResourceConstants.CONVERSION_OLD_IMPORTS_PATH + fileName + ".acaja");
-			if(!(f.exists())) return true;
-			return f.delete();
-		} catch(Exception e) {
-			return false;
-		}
-	}
-	
 	
 	/**
 	 * [ SUPPRIMER UN FICHIER. ]
@@ -331,7 +285,7 @@ public final class ConversionModel extends Model {
 	
 	
 	/**
-	 * MODIGFIER LE FICHIER DE DESTIANTION DU FICHEIR COURANT. 
+	 * MODIFIER LE FICHIER DE DESTINATION DU FICHEIR COURANT. 
 	 */
 	public void setDestination(String destinationFile) {
 		currentFile.setDestinationFile(destinationFolder.getPath()+"\\"+destinationFile);
@@ -394,12 +348,22 @@ public final class ConversionModel extends Model {
 	/**
 	 * [ GETTER - OBTENIR LA LISTE DES FICHIERS. ]
 	 * 
-	 * Methode qui retourne la liste des fichiers actuellement dans la bibliotheque
+	 * Methode qui retourne la liste des fichiers actuellement dans la bibliotheque.
 	 */
 	public ArrayList<SettingsFile> getFiles() {
 		return files;
 	}
 	
+	
+	/**
+	 * [ GETTER - OBTENIR LE LE TABLEAU DES FICHEIRS PRECDEMMENT IMPORTES. ]
+	 * 
+	 * Methode qui retourne la liste des fichiers precdemment importes. 
+	 */
+	public FileInformation[] getOldImports() {
+		return importedFiles;
+	}
+
 
 	/**
 	 * [ SETTER - CHANGER DE REPERTOIRE DE DESTINATION. ]
@@ -408,8 +372,8 @@ public final class ConversionModel extends Model {
 	 * 
 	 * @param destinationFolder 	Le nouveau repertoire de destination.
 	 */
-	public void setDestinationFolder(String destinationFolder) {
-		this.destinationFolder = new File(destinationFolder);
+	public void setDestinationFolder(File destinationFolder) {
+		this.destinationFolder = destinationFolder;
 	}
 	
 	

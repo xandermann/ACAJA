@@ -1,22 +1,12 @@
 package gui.conversion.views;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.HashMap;
-import java.util.Observable;
-import java.util.Observer;
-
-import javax.swing.BoxLayout;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-
+import java.awt.*;
+import java.awt.event.*;
+import java.util.*;
+import javax.swing.*;
 import files.enumerations.SettingType;
 import gui.conversion.model.ConversionModel;
+import gui.style.StylizedJPanel;
 import wrapper.language.CodecConstants;
 
 public final class SoundSettingsView extends SettingsView{
@@ -39,11 +29,10 @@ public final class SoundSettingsView extends SettingsView{
 		super(model);
 
 
-		JPanel codecPanel = new JPanel(new FlowLayout());
+		StylizedJPanel codecPanel = new StylizedJPanel();
 		codecPanel.add(new JLabel("Codec audio : "), BorderLayout.WEST);
 		codecsComboBox = new JComboBox<String>(CodecConstants.ALL_SUPPORTED_AUDIO_CODECS);
 		codecPanel.add(codecsComboBox, BorderLayout.EAST);
-		
 		codecsComboBox.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -55,7 +44,7 @@ public final class SoundSettingsView extends SettingsView{
 		});
 
 		
-		JPanel bitratePanel = new JPanel(new FlowLayout());
+		StylizedJPanel bitratePanel = new StylizedJPanel();
 		bitratePanel.add(new JLabel("Bitrate (kb/s) : "), BorderLayout.WEST);
 		bitrateText = new JTextField();
 		bitrateText.setPreferredSize(new Dimension(100, 20));
@@ -70,7 +59,7 @@ public final class SoundSettingsView extends SettingsView{
 		});
 
 		
-		JPanel samplingRatePanel = new JPanel(new FlowLayout());
+		StylizedJPanel samplingRatePanel = new StylizedJPanel();
 		samplingRatePanel.add(new JLabel("Taux d'echantillonnage (Hz) : "), BorderLayout.WEST);
 		samplingRateText = new JTextField();
 		samplingRateText.setPreferredSize(new Dimension(100, 20));
@@ -85,7 +74,7 @@ public final class SoundSettingsView extends SettingsView{
 		});
 		
 
-		JPanel channelsPanel = new JPanel(new FlowLayout());
+		StylizedJPanel channelsPanel = new StylizedJPanel();
 		channelsPanel.add(new JLabel("Nombre de canaux audio en sortie : "), BorderLayout.WEST);
 		channelsText = new JTextField();
 		channelsText.setPreferredSize(new Dimension(100, 20));
@@ -104,10 +93,6 @@ public final class SoundSettingsView extends SettingsView{
 		add(bitratePanel);
 		add(samplingRatePanel);
 		add(channelsPanel);
-		
-		
-		setSize(new Dimension(300, 400));
-		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 	}
 
 	

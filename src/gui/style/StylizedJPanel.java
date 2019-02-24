@@ -16,7 +16,6 @@ public class StylizedJPanel extends JPanel implements StylizedComponent {
 	 */
 	public StylizedJPanel() {
 		super();
-
 		this.stylize();
 	}
 
@@ -29,7 +28,6 @@ public class StylizedJPanel extends JPanel implements StylizedComponent {
 	 */
 	public StylizedJPanel(LayoutManager layout) {
 		super(layout);
-
 		this.stylize();
 	}
 

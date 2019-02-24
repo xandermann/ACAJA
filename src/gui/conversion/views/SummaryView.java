@@ -9,8 +9,10 @@ import javax.swing.*;
 
 import files.enumerations.SettingType;
 import gui.conversion.model.ConversionModel;
+import gui.style.StyleTheme;
+import gui.style.StylizedJPanel;
 
-public final class SummaryView extends JPanel implements Observer {
+public final class SummaryView extends StylizedJPanel implements Observer {
 	//=======================================================================================================================
 	//=======================================================================================================================
 
@@ -25,36 +27,33 @@ public final class SummaryView extends JPanel implements Observer {
 
 	
 	public SummaryView(ConversionModel model) {
-		this.model = model;
+		super();
+		if((this.model = model) == null) throw new NullPointerException("ConversionModel null !");
+		setSize(new Dimension(300, 100));
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-
 		
-		JPanel inputFilePanel = new JPanel();
-		inputFilePanel.setLayout(new FlowLayout());
+		
+		StylizedJPanel inputFilePanel = new StylizedJPanel();
 		inputFilePanel.add(new JLabel("Fichier selectionne : "), BorderLayout.EAST);
 		inputFilePanel.add(inputFileLabel = new JLabel("NA"), BorderLayout.WEST);
 		
 		
-		JPanel videoPanel = new JPanel();
-		videoPanel.setLayout(new FlowLayout());
+		StylizedJPanel videoPanel = new StylizedJPanel();
 		videoPanel.add(new JLabel("Codec video actuel : "), BorderLayout.EAST);
 		videoPanel.add(videoLabel = new JLabel("NA"), BorderLayout.WEST);
 		
 		
-		JPanel audioPanel = new JPanel();
-		audioPanel.setLayout(new FlowLayout());
+		StylizedJPanel audioPanel = new StylizedJPanel();
 		audioPanel.add(new JLabel("Codec audio actuel : "), BorderLayout.EAST);
 		audioPanel.add(soundLabel = new JLabel("NA"), BorderLayout.WEST);
 		
 		
-		JPanel durationLabelPanel = new JPanel();
-		durationLabelPanel.setLayout(new FlowLayout());
+		StylizedJPanel durationLabelPanel = new StylizedJPanel();
 		durationLabelPanel.add(new JLabel("Duree : "), BorderLayout.EAST);
 		durationLabelPanel.add(durationLabel = new JLabel("NA"),BorderLayout.WEST);
 
 		
-		JPanel outputFilePanel = new JPanel();
-		outputFilePanel.setLayout(new FlowLayout());
+		StylizedJPanel outputFilePanel = new StylizedJPanel();
 		outputFilePanel.add(new JLabel("Fichier de destination : "), BorderLayout.EAST);
 		outputFilePanel.add(outputFileText = new JTextField("NA"),BorderLayout.WEST);
 		outputFileText.setPreferredSize(new Dimension(100, 20));
@@ -71,9 +70,6 @@ public final class SummaryView extends JPanel implements Observer {
 		add(audioPanel);
 		add(durationLabelPanel);
 		add(outputFilePanel);
-		
-		
-		setSize(new Dimension(300, 100));
 	}
 
 	

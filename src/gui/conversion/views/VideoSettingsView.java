@@ -17,6 +17,7 @@ import javax.swing.JTextField;
 
 import files.enumerations.SettingType;
 import gui.conversion.model.ConversionModel;
+import gui.style.StylizedJPanel;
 import wrapper.language.CodecConstants;
 import wrapper.language.ResolutionConstants;
 
@@ -39,8 +40,7 @@ public final class VideoSettingsView extends SettingsView{
 
 
 		codecsComboBox = new JComboBox<String>(CodecConstants.ALL_SUPPORTED_VIDEO_CODECS);
-		JPanel codecPanel = new JPanel();
-		codecPanel.setLayout(new FlowLayout());
+		StylizedJPanel codecPanel = new StylizedJPanel();
 		codecPanel.add(new JLabel("Codec video : "), BorderLayout.WEST);
 		codecPanel.add(codecsComboBox, BorderLayout.EAST);
 		codecsComboBox.addActionListener(new ActionListener() {
@@ -55,8 +55,7 @@ public final class VideoSettingsView extends SettingsView{
 
 		
 		bitrateText = new JTextField();
-		JPanel bitratePanel = new JPanel();
-		bitratePanel.setLayout(new FlowLayout());
+		StylizedJPanel bitratePanel = new StylizedJPanel();
 		bitratePanel.add(new JLabel("Bitrate (kb/s) : "), BorderLayout.WEST);
 		bitrateText.setPreferredSize(new Dimension(100, 20));
 		bitratePanel.add(bitrateText, BorderLayout.EAST);
@@ -71,8 +70,7 @@ public final class VideoSettingsView extends SettingsView{
 		
 		
 		resolutionsComboBox = new JComboBox<String>(ResolutionConstants.ALL_RESOLUTIONS);
-		JPanel resolutionPanel = new JPanel();
-		resolutionPanel.setLayout(new FlowLayout());
+		StylizedJPanel resolutionPanel = new StylizedJPanel();
 		resolutionPanel.add(new JLabel("Resolution : "), BorderLayout.WEST);
 		resolutionPanel.add(resolutionsComboBox, BorderLayout.EAST);
 		resolutionsComboBox.addActionListener(new ActionListener() {
@@ -87,8 +85,7 @@ public final class VideoSettingsView extends SettingsView{
 
 		
 		fpsText = new JTextField();
-		JPanel fpsTextPanel= new JPanel();
-		fpsTextPanel.setLayout(new FlowLayout());
+		StylizedJPanel fpsTextPanel= new StylizedJPanel();
 		fpsTextPanel.add(new JLabel("Images par seconde (fps) : "), BorderLayout.WEST);
 		fpsText.setPreferredSize(new Dimension(100, 20));
 		fpsTextPanel.add(fpsText, BorderLayout.EAST);
@@ -109,7 +106,6 @@ public final class VideoSettingsView extends SettingsView{
 		
 		
 		setSize(new Dimension(300, 400));
-		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 	}
 
 	

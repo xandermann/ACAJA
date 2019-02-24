@@ -29,9 +29,9 @@ public class ProcessingWindow extends JFrame {
 		StylizedJMenuBar jm = new StylizedJMenuBar();
 		JMenu fileMenu = new JMenu("Fichier");
 		jm.add(fileMenu);
-		JMenu libraryMenu = new JMenu("Bibliothèque");
+		JMenu libraryMenu = new JMenu("Bibliotheque");
 		jm.add(libraryMenu);
-		JMenu videoMenu = new JMenu("Vidéo");
+		JMenu videoMenu = new JMenu("Video");
 		jm.add(videoMenu);
 		this.setJMenuBar(jm);
 

@@ -7,7 +7,7 @@ import java.awt.Graphics;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import gui.PanelLoadingWindow;
+import gui.LoadingView;
 import gui.style.StyleTheme;
 import gui.style.StylizedJButton;
 import gui.style.StylizedJMenu;

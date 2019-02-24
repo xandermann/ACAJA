@@ -58,8 +58,8 @@ public final class OpeningWindow {
 
 		//
 		// Design de l'OpeningWindow, ajout du panel
-		PanelLoadingWindow panelLoadingWindow = new PanelLoadingWindow();
-		presentationWindow.add(panelLoadingWindow);
+		LoadingView loadingView = new LoadingView();
+		presentationWindow.add(loadingView);
 		//
 		//
 
@@ -70,15 +70,15 @@ public final class OpeningWindow {
 		try {
 			Thread.sleep(1000);
 
-			panelLoadingWindow.setPercentage(36);
+			loadingView.setPercentage(36);
 
 			Thread.sleep(1000);
 
-			panelLoadingWindow.setPercentage(80);
+			loadingView.setPercentage(80);
 
 			Thread.sleep(500);
 
-			panelLoadingWindow.setPercentage(100);
+			loadingView.setPercentage(100);
 
 			Thread.sleep(500);
 

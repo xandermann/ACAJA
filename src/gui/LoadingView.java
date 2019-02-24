@@ -9,7 +9,7 @@ import gui.style.StyleTheme;
 import gui.style.StylizedJPanel;
 import resources.ResourceConstants;
 
-public class PanelLoadingWindow extends StylizedJPanel {
+public class LoadingView extends StylizedJPanel {
 
 	private int[] pointsLoadingBar;
 	/**
@@ -29,7 +29,7 @@ public class PanelLoadingWindow extends StylizedJPanel {
 	 * Constructeur sans parametre, ajoute 4 points pour la barre de chargement
 	 * Configuration par defaut
 	 */
-	public PanelLoadingWindow() {
+	public LoadingView() {
 		this.pointsLoadingBar = new int[] { 50, 330, 280, 25 };
 		this.withImage = true;
 	}
@@ -41,7 +41,7 @@ public class PanelLoadingWindow extends StylizedJPanel {
 	 *                  tests)
 	 * @param points    Ajoute les 4 points de la barre
 	 */
-	public PanelLoadingWindow(boolean withImage, int[] points) {
+	public LoadingView(boolean withImage, int[] points) {
 		this.pointsLoadingBar = points;
 		this.withImage = withImage;
 	}

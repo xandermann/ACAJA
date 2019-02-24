@@ -53,7 +53,7 @@ public final class ConversionModel extends Model {
 		files = new ArrayList<SettingsFile>();
 		// maximum 10 last files
 		oldImportedFiles = new FileInformation[10];
-		destinationFolder = new File("/");
+		destinationFolder = null;
 	}
 
 	
@@ -71,14 +71,14 @@ public final class ConversionModel extends Model {
 	 */
 	public void saveImports() {
 		try {
-			if(createDirectories()) {
+			 if(createDirectories()) {
 				for(int i = 0 ; i < oldImportedFiles.length ; i ++) {
 					File f = new File(ResourceConstants.CONVERSION_OLD_IMPORTS_PATH 
 									  + oldImportedFiles[i].getFileName() + ".acaja");
 					if(!f.exists()) {
 						FileOutputStream fos = new FileOutputStream(f);
 						ObjectOutputStream oos = new ObjectOutputStream(fos);
-						oos.writeObject(this.oldImportedFiles[i]);
+						oos.writeObject(oldImportedFiles[i]);
 						oos.close();
 						fos.close();
 					}
@@ -87,7 +87,7 @@ public final class ConversionModel extends Model {
 				JOptionPane.showMessageDialog(null, MessageConstants.ERROR_SAVE_IMPORTS);
 			}
 		} catch(Exception e) {
-			JOptionPane.showMessageDialog(null, e.getMessage());
+			//JOptionPane.showMessageDialog(null, e.getMessage());
 		}
 	}
 
@@ -221,7 +221,7 @@ public final class ConversionModel extends Model {
 				}
 			    if(oldImportedFiles[i] == null) {
 			        oldImportedFiles[i] = f;
-			        this.saveImports();
+			        saveImports();
 			        break;
 			    } 
 			    if(i==9) {

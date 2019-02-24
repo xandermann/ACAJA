@@ -104,8 +104,7 @@ public final class ConversionWindow extends StylizedJFrame {
 						if (model.getCurrentFile() == null) redrawFirstTime();
 						model.setCurrentFile(f.getName());
 					} catch (Exception e) {
-						System.out.println(e.getMessage());
-						//JOptionPane.showMessageDialog(null, e.getMessage());
+						JOptionPane.showMessageDialog(null, e.getMessage());
 					}
 			}
 		});

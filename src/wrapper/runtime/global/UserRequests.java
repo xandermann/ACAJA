@@ -26,7 +26,7 @@ public final class UserRequests{
 	private static void executeSettingsFile(SettingsFile file) {
 		if(file == null) throw new NullPointerException("SettingsFile null!");
 		
-		Request request = new Request(file.getFullName(), "ff.avi");
+		Request request = new Request(file.getSourceFileFullName(), file.getDestinationFileFullName());
 		
 		HashMap<SettingType, String> ffmpegRequests = file.getRequests();
 		
@@ -34,35 +34,27 @@ public final class UserRequests{
 			String newValue = ffmpegRequests.get(requestKey);
 			switch(requestKey) {
 				case VIDEO_CODEC :
-					System.out.println("passe 1");
 					request.videoCodec(newValue);
 					break;
 				case VIDEO_BITRATE : 
-					System.out.println("pasvevese 1");
 					request.videoBitrate(newValue);
 					break;
 				case FRAMERATE :
-					System.out.println("paseggese 1");
 					request.framerate(newValue);
 					break;
 				case RESOLUTION :
-					System.out.println("piguiguasse 1");
 					request.resolution(newValue);
 					break;
 				case AUDIO_CODEC : 
-					System.out.println("pahohsse 1");
 					request.audioCodec(newValue);
 					break;
 				case AUDIO_BITRATE : 
-					System.out.println("pahohsse 1");
 					request.audioBitrate(newValue);
 					break;
 				case SAMPLING_RATE : 
-					System.out.println("pefeffasse 1");
 					request.samplingRate(newValue);
 					break;
 				case NUMBER_AUDIO_CHANNELS : 
-					System.out.println("passbbbe 1");
 					request.numberAudioChannels(newValue);
 					break;
 			}
@@ -83,7 +75,7 @@ public final class UserRequests{
 	private static void executeProcessingFile(ProcessingFile file) {
 		if(file == null) throw new NullPointerException("ProcessingFile null!");
 		
-		Request request = new Request(file.getFullName(), file.getFullName());
+		Request request = new Request(file.getSourceFileFullName(), file.getDestinationFileFullName());
 		
 		HashMap<ProcessingType, String> ffmpegRequests = file.getPerformedProcessings();
 		

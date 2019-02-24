@@ -1,29 +1,25 @@
 package gui.conversion;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-
-import javax.swing.DefaultListModel;
-import javax.swing.JOptionPane;
-
+import java.io.*;
+import java.util.*;
+import javax.swing.*;
 import exceptions.IncorrectFileException;
-import files.FileInformation;
-import files.SettingType;
-import files.SettingsFile;
+import files.*;
 import gui.Model;
 import messages.MessageConstants;
 import resources.ResourceConstants;
 import wrapper.runtime.global.UserRequests;
-// TODO : gerer la presence des fichiers systemes .DS_store, etc dans la methode loadOldImports();
-// TODO : manage multiple filenames
 
+
+/**
+ * [ MODELE POUR LA FENETRE DE CONVERSION. ]
+ * 
+ * TODO : gerer la presence des fichiers systemes .DS_store, etc dans la methode loadOldImports();
+ * TODO : manage multiple filenames
+ * 
+ * Auteurs du projet : 
+ * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
+ */
 public final class ConversionModel extends Model {
 	//=======================================================================================================================
 	//=======================================================================================================================
@@ -39,9 +35,10 @@ public final class ConversionModel extends Model {
 	//Liste des fichiers siur lesquels on travaille. 
 	private ArrayList<SettingsFile> files;
 	//Tableau des fichiers precedemment importes.
-	private FileInformation[] importedFiles;
+	private FileInformation[] oldImportedFiles;
 	//Repertoire de destination des fichiers exportes.
 	private File destinationFolder;
+	
 	
 	
 	//=======================================================================================================================
@@ -55,7 +52,7 @@ public final class ConversionModel extends Model {
 	public ConversionModel() {
 		files = new ArrayList<SettingsFile>();
 		// maximum 10 last files
-		importedFiles = new FileInformation[10];
+		oldImportedFiles = new FileInformation[10];
 		destinationFolder = new File("/");
 	}
 
@@ -75,12 +72,13 @@ public final class ConversionModel extends Model {
 	public void saveImports() {
 		try {
 			if(createDirectories()) {
-				for(int i = 0 ; i < importedFiles.length ; i ++) {
-					File f = new File(ResourceConstants.CONVERSION_OLD_IMPORTS_PATH + importedFiles[i].getFileName() + ".acaja");
+				for(int i = 0 ; i < oldImportedFiles.length ; i ++) {
+					File f = new File(ResourceConstants.CONVERSION_OLD_IMPORTS_PATH 
+									  + oldImportedFiles[i].getFileName() + ".acaja");
 					if(!f.exists()) {
 						FileOutputStream fos = new FileOutputStream(f);
 						ObjectOutputStream oos = new ObjectOutputStream(fos);
-						oos.writeObject(this.importedFiles[i]);
+						oos.writeObject(this.oldImportedFiles[i]);
 						oos.close();
 						fos.close();
 					}
@@ -136,19 +134,21 @@ public final class ConversionModel extends Model {
 						try {	
 							FileInputStream fis = new FileInputStream(files[i]);
 							ObjectInputStream ois = new ObjectInputStream(fis);
-							if(i <= 10)  // avoid array out of bounds
-								this.importedFiles[i] = (FileInformation)ois.readObject();
+							if(i <= 10) oldImportedFiles[i] = (FileInformation)ois.readObject(); // avoid array out of bounds
 							ois.close();
 							fis.close();
 						}  catch(SecurityException se) {
 							JOptionPane.showMessageDialog(null, 
-									"Vous n'avez pas les permissions pour lire le fichier d'import acaja " + files[i].getName() + " !");
+									"Vous n'avez pas les permissions pour lire le fichier d'import acaja " 
+									 + files[i].getName() + " !");
 						} catch(IOException ioe) {
 							JOptionPane.showMessageDialog(null, 
-									"Impossible d'acceder au fichier " + files[i].getName() + " : erreur d'entree/sortie !");
+									"Impossible d'acceder au fichier " + files[i].getName() 
+									 + " : erreur d'entree/sortie !");
 						} catch(Exception e) {
 								JOptionPane.showMessageDialog(null, 
-									"Erreur lors de l'acces aux fichiers precedemment importes : " + e.getMessage() + " !");
+									"Erreur lors de l'acces aux fichiers precedemment importes : " 
+								     + e.getMessage() + " !");
 						}
 					}
 				}
@@ -215,27 +215,27 @@ public final class ConversionModel extends Model {
 			files.add(new SettingsFile(file));
 			sendChanges();
 			FileInformation f = new FileInformation(file.getName(),file.getAbsolutePath());
-			for(int i = 0; i < importedFiles.length; i++) {
-				if(importedFiles[i] != null) {
-					if(importedFiles[i].equals(f)) break;	
+			for(int i = 0; i < oldImportedFiles.length; i++) {
+				if(oldImportedFiles[i] != null) {
+					if(oldImportedFiles[i].equals(f)) break;	
 				}
-			    if(importedFiles[i] == null) {
-			        importedFiles[i] = f;
+			    if(oldImportedFiles[i] == null) {
+			        oldImportedFiles[i] = f;
 			        this.saveImports();
 			        break;
 			    } 
 			    if(i==9) {
-			    	if(removeOldImport(importedFiles[0].getFileName())) {
-			    		for(int j = 1 ; j < importedFiles.length ; j ++) {
-			    			importedFiles[j-1] = importedFiles[j];
+			    	if(removeOldImport(oldImportedFiles[0].getFileName())) {
+			    		for(int j = 1 ; j < oldImportedFiles.length ; j ++) {
+			    			oldImportedFiles[j-1] = oldImportedFiles[j];
 			    		}
-			    		importedFiles[9] = f;
+			    		oldImportedFiles[9] = f;
 			    		saveImports();	
 			    	}
 			    }
 			}
 		}else 
-			JOptionPane.showMessageDialog(null, "Le fichier selectionne n'existe pas");
+			JOptionPane.showMessageDialog(null, MessageConstants.ERROR_ABSENT_SELECTED_FILE);
 	}
 
 	
@@ -252,7 +252,7 @@ public final class ConversionModel extends Model {
 			currentFile = null;
 			sendChanges();
 		}else
-			JOptionPane.showMessageDialog(null, "Le fichier a supprimer n'est pas present dans la bibliotheque");
+			JOptionPane.showMessageDialog(null, MessageConstants.ERROR_UNFINDABLE_FILE_TO_REMOVE);
 	}
 	
 	
@@ -285,17 +285,11 @@ public final class ConversionModel extends Model {
 	
 	
 	/**
-	 * MODIFIER LE FICHIER DE DESTINATION DU FICHEIR COURANT. 
+	 * MODIFIER LE FICHIER DE DESTINATION DU FICHIER COURANT. 
 	 */
 	public void setDestination(String destinationFile) {
 		currentFile.setDestinationFile(destinationFolder.getPath()+"\\"+destinationFile);
 	}
-	
-	
-	
-	//=======================================================================================================================
-	//=======================================================================================================================
-	
 	
 	
 	/**
@@ -361,7 +355,7 @@ public final class ConversionModel extends Model {
 	 * Methode qui retourne la liste des fichiers precdemment importes. 
 	 */
 	public FileInformation[] getOldImports() {
-		return importedFiles;
+		return oldImportedFiles;
 	}
 
 

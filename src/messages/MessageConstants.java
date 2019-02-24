@@ -1,5 +1,14 @@
 package messages;
 
+/**
+ * [ CLASSE POUR LES MESSAGES. ]
+ * 
+ * Cette classe a pour but de repertorier les messages
+ * a la maniere d'un dictionanire. 
+ * 
+ * Auteurs du projet : 
+ * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
+ */
 public final class MessageConstants {
 	private static final String ERROR_PREFIX = "ERREUR ";
 
@@ -23,4 +32,12 @@ public final class MessageConstants {
 			INTERNAL_ERROR_PREFIX
 			+ "Impossible de creer les dossiers de sauvegarde des imports ! "
 			+ "Merci de verifier les permissions du repertoire d'installation d'acaja.";
+	
+	public static final String ERROR_UNFINDABLE_FILE_TO_REMOVE = 
+			INTERNAL_ERROR_PREFIX
+			+ "Le fichier a supprimer n'est pas present dans la bibliotheque !";
+	
+	public static final String ERROR_ABSENT_SELECTED_FILE = 
+			ERROR_PREFIX
+			+ "Le fichier selectionne n'existe pas !";
 }

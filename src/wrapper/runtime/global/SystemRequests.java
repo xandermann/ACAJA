@@ -7,7 +7,7 @@ import wrapper.streams.iterators.ProcessManager;
 import wrapper.streams.managers.filters.*;
 
 /**
- * [ CLASSE POUR LES GESTION DES REQUETES DU SYSTEM. ]
+ * [ CLASSE POUR LES GESTION DES REQUETES DU SYSTEME. ]
  * 
  * Cette classe a pour but de realiser les requetes FFMPEG
  * necessaires au fonctionnement interne de notre logiciel ( d'ou le 
@@ -46,7 +46,7 @@ public final class SystemRequests{
 			/**
 			 * REQUETE A SOUMETRE A FFMPEG.
 			 */
-			ProcessManager processManager = (new Request(file.getFullName())).result();
+			ProcessManager processManager = (new Request(file.getSourceFileFullName())).result();
 			/**
 			 * EXTRACTION DES DONNEES.
 			 */

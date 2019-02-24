@@ -3,6 +3,8 @@ package gui.conversion;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.Observable;
 import java.util.Observer;
@@ -16,75 +18,122 @@ import javax.swing.JTextField;
 import files.SettingType;
 import wrapper.language.CodecConstants;
 
-public final class SoundSettingsView extends JPanel implements Observer {
+public final class SoundSettingsView extends SettingsView{
 	//=======================================================================================================================
 	//=======================================================================================================================
 
 	
-	private ConversionModel model;
+	
 	private JComboBox<String> codecsComboBox;
-	private JTextField bitrate;
-	private JTextField samplingRate;
-	private JTextField channels;
+	private JTextField bitrateText, samplingRateText, channelsText;
 
+	
 	
 	//=======================================================================================================================
 	//=======================================================================================================================
 
+	
 	
 	public SoundSettingsView(ConversionModel model) {
-		this.model = model;
+		super(model);
 
-		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
 		JPanel codecPanel = new JPanel(new FlowLayout());
 		codecPanel.add(new JLabel("Codec audio : "), BorderLayout.WEST);
 		codecsComboBox = new JComboBox<String>(CodecConstants.ALL_SUPPORTED_AUDIO_CODECS);
 		codecPanel.add(codecsComboBox, BorderLayout.EAST);
-		add(codecPanel);
+		
+		codecsComboBox.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(model.getCurrentFile() != null) {
+					if(isChange == true)
+						model.modify(SettingType.AUDIO_CODEC, ((JComboBox) e.getSource()).getSelectedItem().toString());
+				}
+			}
+		});
 
+		
 		JPanel bitratePanel = new JPanel(new FlowLayout());
 		bitratePanel.add(new JLabel("Bitrate (kb/s) : "), BorderLayout.WEST);
-		bitrate = new JTextField();
-		bitrate.setPreferredSize(new Dimension(300, 20));
-		bitratePanel.add(bitrate, BorderLayout.EAST);
-		add(bitratePanel);
+		bitrateText = new JTextField();
+		bitrateText.setPreferredSize(new Dimension(300, 20));
+		bitratePanel.add(bitrateText, BorderLayout.EAST);
+		bitrateText.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(model.getCurrentFile() != null) {
+					if(isChange == true) model.modify(SettingType.AUDIO_BITRATE, bitrateText.getText());
+				}
+			}
+		});
 
+		
 		JPanel samplingRatePanel = new JPanel(new FlowLayout());
 		samplingRatePanel.add(new JLabel("Taux d'echantillonnage (Hz) : "), BorderLayout.WEST);
-		samplingRate = new JTextField();
-		samplingRate.setPreferredSize(new Dimension(300, 20));
-		samplingRatePanel.add(samplingRate, BorderLayout.EAST);
-		add(samplingRatePanel);
+		samplingRateText = new JTextField();
+		samplingRateText.setPreferredSize(new Dimension(300, 20));
+		samplingRatePanel.add(samplingRateText, BorderLayout.EAST);
+		samplingRateText.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(model.getCurrentFile() != null) {
+					if(isChange == true) model.modify(SettingType.SAMPLING_RATE, samplingRateText.getText());
+				}
+			}
+		});
+		
 
 		JPanel channelsPanel = new JPanel(new FlowLayout());
 		channelsPanel.add(new JLabel("Nombre de canaux audio en sortie : "), BorderLayout.WEST);
-		channels = new JTextField();
-		channels.setPreferredSize(new Dimension(300, 20));
-		channelsPanel.add(channels, BorderLayout.EAST);
+		channelsText = new JTextField();
+		channelsText.setPreferredSize(new Dimension(300, 20));
+		channelsPanel.add(channelsText, BorderLayout.EAST);
+		channelsText.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(model.getCurrentFile() != null) {
+					if(isChange == true) model.modify(SettingType.NUMBER_AUDIO_CHANNELS ,channelsText.getText());
+				}
+			}
+		});
+		
+		
+		add(codecPanel);
+		add(bitratePanel);
+		add(samplingRatePanel);
 		add(channelsPanel);
+		
+		
+		setSize(new Dimension(400, 400));
+		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 	}
 
+	
 	
 	//=======================================================================================================================
 	//=======================================================================================================================
 
+	
 	
 	@Override
 	public void update(Observable o, Object arg) {
+		isChange = false;
 		if(model.getCurrentFile() != null){
 			HashMap<SettingType, String> settings = model.getCurrentFile().getSettings();
 			codecsComboBox.setSelectedItem(settings.get(SettingType.AUDIO_CODEC));
-			bitrate.setText(settings.get(SettingType.AUDIO_BITRATE));
-			samplingRate.setText(settings.get(SettingType.SAMPLING_RATE));
-			channels.setText(settings.get(SettingType.NUMBER_AUDIO_CHANNELS));
+			bitrateText.setText(settings.get(SettingType.AUDIO_BITRATE));
+			samplingRateText.setText(settings.get(SettingType.SAMPLING_RATE));
+			channelsText.setText(settings.get(SettingType.NUMBER_AUDIO_CHANNELS));
 		}else{
 			codecsComboBox.setSelectedIndex(0);
-			bitrate.setText("");
-			samplingRate.setText("");
-			channels.setText("");
+			bitrateText.setText("");
+			samplingRateText.setText("");
+			channelsText.setText("");
 		}
+		isChange = true;
 	}
+	
 	
 
 	//=======================================================================================================================

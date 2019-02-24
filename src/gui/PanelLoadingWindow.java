@@ -6,6 +6,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import gui.style.StyleTheme;
 import gui.style.StylizedJPanel;
 import resources.ResourceConstants;
 
@@ -18,11 +19,11 @@ public class PanelLoadingWindow extends StylizedJPanel {
 	private int percentage;
 
 	private boolean withImage;
-	
+
 	/**
-	 * Recuperer la largeur de la fenetre
+	 * Recuperer la largeur de la barre de chargement (120 = les marges a gauche et a droite)
 	 */
-	private final int WIDTH = OpeningWindow.WIDTH;
+	private final int WIDTH = OpeningWindow.WIDTH - 120;
 
 	/**
 	 * Constructeur sans parametre, ajoute 4 points pour la barre de chargement
@@ -32,11 +33,13 @@ public class PanelLoadingWindow extends StylizedJPanel {
 		this.pointsLoadingBar = new int[] { 50, 330, 280, 25 };
 		this.withImage = true;
 	}
-	
+
 	/**
 	 * Constructeur qui ajoute les 4 points de la barre de chargement
-	 * @param withImage Defini si l'on affiche l'image ou non (utilise pour les tests)
-	 * @param points Ajoute les 4 points de la barre
+	 * 
+	 * @param withImage Defini si l'on affiche l'image ou non (utilise pour les
+	 *                  tests)
+	 * @param points    Ajoute les 4 points de la barre
 	 */
 	public PanelLoadingWindow(boolean withImage, int[] points) {
 		this.pointsLoadingBar = points;
@@ -50,6 +53,7 @@ public class PanelLoadingWindow extends StylizedJPanel {
 	 */
 	public void setPercentage(int percentage) {
 		this.percentage = percentage;
+		this.repaint();
 	}
 
 	/**
@@ -83,7 +87,11 @@ public class PanelLoadingWindow extends StylizedJPanel {
 		g.setColor(Color.BLACK);
 		g.drawString("Imaginez que la barre existe", 55, 340);
 		g.drawString("TODO: Barre de chargement -> Alexandre H", 55, 355);
+		
+		g.setColor(StyleTheme.BACKGROUND_COLOR_SECONDARY);
+		g.fillRect(50, 330, this.getCalcultatedWidth(), 25);
 
+	
 	}
 
 }

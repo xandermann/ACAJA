@@ -1,15 +1,11 @@
 package gui;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -18,7 +14,6 @@ import gui.style.StyleTheme;
 import gui.style.StylizedJButton;
 import gui.style.StylizedJPanel;
 import gui.treatment.FrameTreatment;
-import resources.ResourceConstants;
 
 /**
  * [ CLASSE POUR LE LANCEMENT DES FENETRES D'OUVERTURE DU LOGICIEL. ]
@@ -53,19 +48,36 @@ public final class OpeningWindow {
 
 		//
 		// Design de l'OpeningWindow, ajout du panel
-		presentationWindow.add(new PanelLoadingWindow());
+		PanelLoadingWindow panelLoadingWindow = new PanelLoadingWindow();
+		presentationWindow.add(panelLoadingWindow);
 		//
 		//
 
 		WindowTools.showLogo(presentationWindow);
 		WindowTools.executeWindow(presentationWindow);
 
+		// Menipulation de la barre de chargement
 		try {
-			Thread.sleep(3000);
+			Thread.sleep(1000);
+
+			panelLoadingWindow.setPercentage(36);
+
+			Thread.sleep(1000);
+
+			panelLoadingWindow.setPercentage(80);
+
+			Thread.sleep(500);
+
+			panelLoadingWindow.setPercentage(100);
+
+			Thread.sleep(500);
+
 		} catch (InterruptedException e) {
+
 		}
 
 		presentationWindow.dispose();
+		System.exit(0);
 	}
 
 	/**

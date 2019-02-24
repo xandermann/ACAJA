@@ -73,6 +73,10 @@ public class PanelLoadingWindow extends StylizedJPanel {
 
 	@Override
 	public void paintComponent(Graphics g) {
+		
+		// Ces 2 lignes de code corrigent un bug (barre noire a droite)
+		g.setColor(StyleTheme.BACKGROUND_COLOR);
+		g.fillRect(0, 0, OpeningWindow.WIDTH, OpeningWindow.HEIGHT);
 
 		// Ajout du logo
 		try {

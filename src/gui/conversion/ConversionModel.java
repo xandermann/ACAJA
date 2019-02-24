@@ -288,7 +288,7 @@ public final class ConversionModel extends Model {
 	 * MODIFIER LE FICHIER DE DESTINATION DU FICHIER COURANT. 
 	 */
 	public void setDestination(String destinationFile) {
-		currentFile.setDestinationFile(destinationFolder.getPath()+"\\"+destinationFile);
+		currentFile.setDestinationName(destinationFile);
 	}
 	
 	
@@ -368,6 +368,9 @@ public final class ConversionModel extends Model {
 	 */
 	public void setDestinationFolder(File destinationFolder) {
 		this.destinationFolder = destinationFolder;
+		for(SettingsFile f : files) {
+			f.setDestinationPath(destinationFolder.getPath());
+		}
 	}
 	
 	

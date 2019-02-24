@@ -53,8 +53,9 @@ public final class SummaryView extends JPanel implements Observer {
 		
 		JPanel outputFilePanel = new JPanel();
 		outputFilePanel.setLayout(new FlowLayout());
-		outputFilePanel.add(new JLabel("Duree : "), BorderLayout.EAST);
+		outputFilePanel.add(new JLabel("Fichier de destination : "), BorderLayout.EAST);
 		outputFilePanel.add(outputFileText = new JTextField("NA"),BorderLayout.WEST);
+		outputFileText.setPreferredSize(new Dimension(100, 20));
 		outputFileText.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -70,7 +71,7 @@ public final class SummaryView extends JPanel implements Observer {
 		add(outputFilePanel);
 		
 		
-		setSize(new Dimension(400, 100));
+		setSize(new Dimension(300, 100));
 	}
 
 	

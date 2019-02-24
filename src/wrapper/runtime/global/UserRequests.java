@@ -27,7 +27,7 @@ public final class UserRequests{
 		if(file == null) throw new NullPointerException("SettingsFile null!");
 		
 		Request request = new Request(file.getSourceFileFullName(), file.getDestinationFileFullName());
-		
+
 		HashMap<SettingType, String> ffmpegRequests = file.getRequests();
 		
 		for(SettingType requestKey : ffmpegRequests.keySet()) {

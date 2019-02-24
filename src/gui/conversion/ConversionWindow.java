@@ -99,12 +99,13 @@ public final class ConversionWindow extends StylizedJFrame {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
 					try {
-						File f = FilesManager.FileChoose();
+						File f = FilesManager.chooseFile();
 						model.add(f);
 						if (model.getCurrentFile() == null) redrawFirstTime();
 						model.setCurrentFile(f.getName());
 					} catch (Exception e) {
-						JOptionPane.showMessageDialog(null, e.getMessage());
+						System.out.println(e.getMessage());
+						//JOptionPane.showMessageDialog(null, e.getMessage());
 					}
 			}
 		});
@@ -115,7 +116,7 @@ public final class ConversionWindow extends StylizedJFrame {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
 				try {
-					ArrayList<File> files = FilesManager.DirectoryChoose();
+					ArrayList<File> files = FilesManager.chooseDirectoryAndListSonFiles();
 					for (File f : files) {
 						model.add(f);
 						if(model.getCurrentFile() == null) redrawFirstTime();
@@ -200,11 +201,11 @@ public final class ConversionWindow extends StylizedJFrame {
 		exportFolder.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
-				JFileChooser jdc = new JFileChooser("Parcourir");
-				jdc.showOpenDialog(null);
-				jdc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-				jdc.setAcceptAllFileFilterUsed(true);
-				model.setDestinationFolder(jdc.getCurrentDirectory());
+				try {
+					model.setDestinationFolder(FilesManager.chooseDirectory());
+				} catch (ImportationException ie) {
+					JOptionPane.showMessageDialog(null, ie.getMessage());
+				}
 			}
 		});
 		
@@ -288,7 +289,7 @@ public final class ConversionWindow extends StylizedJFrame {
 
 		conversionWindow.setResizable(false);
 		conversionWindow.setTitle("Acaja - Mode Conversion");
-		conversionWindow.setSize(new Dimension(1000, 600));
+		conversionWindow.setSize(new Dimension(600, 600));
 		conversionWindow.setLocationRelativeTo(null);
 		conversionWindow.setDefaultCloseOperation(StylizedJFrame.EXIT_ON_CLOSE);
 		conversionWindow.addWindowListener(new ConversionWindowController(conversionWindow.model));

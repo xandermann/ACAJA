@@ -57,7 +57,7 @@ public final class SoundSettingsView extends SettingsView{
 		JPanel bitratePanel = new JPanel(new FlowLayout());
 		bitratePanel.add(new JLabel("Bitrate (kb/s) : "), BorderLayout.WEST);
 		bitrateText = new JTextField();
-		bitrateText.setPreferredSize(new Dimension(300, 20));
+		bitrateText.setPreferredSize(new Dimension(100, 20));
 		bitratePanel.add(bitrateText, BorderLayout.EAST);
 		bitrateText.addActionListener(new ActionListener() {
 			@Override
@@ -72,7 +72,7 @@ public final class SoundSettingsView extends SettingsView{
 		JPanel samplingRatePanel = new JPanel(new FlowLayout());
 		samplingRatePanel.add(new JLabel("Taux d'echantillonnage (Hz) : "), BorderLayout.WEST);
 		samplingRateText = new JTextField();
-		samplingRateText.setPreferredSize(new Dimension(300, 20));
+		samplingRateText.setPreferredSize(new Dimension(100, 20));
 		samplingRatePanel.add(samplingRateText, BorderLayout.EAST);
 		samplingRateText.addActionListener(new ActionListener() {
 			@Override
@@ -87,7 +87,7 @@ public final class SoundSettingsView extends SettingsView{
 		JPanel channelsPanel = new JPanel(new FlowLayout());
 		channelsPanel.add(new JLabel("Nombre de canaux audio en sortie : "), BorderLayout.WEST);
 		channelsText = new JTextField();
-		channelsText.setPreferredSize(new Dimension(300, 20));
+		channelsText.setPreferredSize(new Dimension(100, 20));
 		channelsPanel.add(channelsText, BorderLayout.EAST);
 		channelsText.addActionListener(new ActionListener() {
 			@Override
@@ -105,7 +105,7 @@ public final class SoundSettingsView extends SettingsView{
 		add(channelsPanel);
 		
 		
-		setSize(new Dimension(400, 400));
+		setSize(new Dimension(300, 400));
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 	}
 

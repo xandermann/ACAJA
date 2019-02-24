@@ -45,7 +45,7 @@ public class SelectableFile {
 	/**
 	 * Le nom complet (chemin+nom) du fichier de sortie.
 	 */
-	private String destinationFile;
+	private String[] destinationFile;
 	
 	
 	
@@ -67,7 +67,7 @@ public class SelectableFile {
 		if((this.sourceFile = sourceFile) == null)
 			throw new NullPointerException("Le fichier source recu en parametre est null !");
 		isSelected = false;
-		destinationFile = "";
+		destinationFile = new String[]{"", ""};
 		whoAmI();
 	}
 
@@ -219,12 +219,23 @@ public class SelectableFile {
 	/**
 	 * [ METHODE ACCESSEUR - SETTER. ]
 	 * 
-	 * Methode pour modifier la duree d'une video.
+	 * Methode pour modifier le chemin du fichier de destination.
 	 * 
 	 * @return
 	 */
-	public void setDestinationFile(String destinationFile) {
-		this.destinationFile = destinationFile;
+	public void setDestinationPath(String destinationFolder) {
+		this.destinationFile[0] = destinationFolder;
+	}
+	
+	/**
+	 * [ METHODE ACCESSEUR - SETTER. ]
+	 * 
+	 * Methode pour modifier le nom du fichier de destination.
+	 * 
+	 * @return
+	 */
+	public void setDestinationName(String destinationName) {
+		this.destinationFile[1] = destinationName;
 	}
 	
 	/**
@@ -274,23 +285,26 @@ public class SelectableFile {
 	/**
 	 * [ METHODE ACCESSEUR - GETTER. ]
 	 * 
-	 * Methode pour recuperer le nom du fichier.
+	 * Methode pour recuperer le nom du fichier de destiation.
 	 * 
 	 * @return String 	Le nom du fichier source.
 	 */
 	public String getDestinationFileName() {
-		return destinationFile.split("\\")[destinationFile.split("\\").length];
-	}
+		return destinationFile[1];
+	}	
 	
 	/**
 	 * [ METHODE ACCESSEUR - GETTER. ]
 	 * 
-	 * Methode pour recuperer le nom complet du fichier.
+	 * Methode pour recuperer le nom complet (chemin+nom) du fichier.
 	 * 
 	 * @return String 	Le nom complet du fichier source.
 	 */
 	public String getDestinationFileFullName() {
-		return destinationFile;
+		if(destinationFile[0]=="" && destinationFile[1]=="")
+			return "";
+		else
+			return destinationFile[0]+"\\"+destinationFile[1];
 	}
 	
 	

@@ -57,7 +57,7 @@ public final class VideoSettingsView extends SettingsView{
 		JPanel bitratePanel = new JPanel();
 		bitratePanel.setLayout(new FlowLayout());
 		bitratePanel.add(new JLabel("Bitrate (kb/s) : "), BorderLayout.WEST);
-		bitrateText.setPreferredSize(new Dimension(300, 20));
+		bitrateText.setPreferredSize(new Dimension(100, 20));
 		bitratePanel.add(bitrateText, BorderLayout.EAST);
 		bitrateText.addActionListener(new ActionListener() {
 			@Override
@@ -89,7 +89,7 @@ public final class VideoSettingsView extends SettingsView{
 		JPanel fpsTextPanel= new JPanel();
 		fpsTextPanel.setLayout(new FlowLayout());
 		fpsTextPanel.add(new JLabel("Images par seconde (fps) : "), BorderLayout.WEST);
-		fpsText.setPreferredSize(new Dimension(300, 20));
+		fpsText.setPreferredSize(new Dimension(100, 20));
 		fpsTextPanel.add(fpsText, BorderLayout.EAST);
 		fpsText.addActionListener(new ActionListener() {
 			@Override
@@ -107,7 +107,7 @@ public final class VideoSettingsView extends SettingsView{
 		add(fpsTextPanel);
 		
 		
-		setSize(new Dimension(400, 400));
+		setSize(new Dimension(300, 400));
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 	}
 

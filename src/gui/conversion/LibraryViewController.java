@@ -25,7 +25,7 @@ public final class LibraryViewController extends JList implements Observer, Mous
 	public LibraryViewController(ConversionModel model, DefaultListModel listModel) {
 		super(listModel);
 		this.model = model;
-		setFixedCellWidth(400);
+		setFixedCellWidth(250);
 		setVisible(true);
 		addMouseListener(this);
 		addKeyListener(this);

@@ -9,10 +9,10 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 
 import gui.conversion.ConversionWindow;
+import gui.processing.ProcessingWindow;
 import gui.style.StyleTheme;
 import gui.style.StylizedJButton;
 import gui.style.StylizedJPanel;
-import gui.treatment.FrameTreatment;
 
 /**
  * [ CLASSE POUR LE LANCEMENT DES FENETRES D'OUVERTURE DU LOGICIEL. ]
@@ -103,7 +103,7 @@ public final class OpeningWindow {
 		processingButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				FrameTreatment f = new FrameTreatment();
+				ProcessingWindow f = new ProcessingWindow();
 				openingWindow.dispose();
 			}
 		});

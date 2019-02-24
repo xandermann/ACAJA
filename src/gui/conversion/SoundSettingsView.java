@@ -72,12 +72,17 @@ public final class SoundSettingsView extends JPanel implements Observer {
 	
 	@Override
 	public void update(Observable o, Object arg) {
-		if (model.getCurrentFile() != null) {
+		if(model.getCurrentFile() != null){
 			HashMap<SettingType, String> settings = model.getCurrentFile().getSettings();
 			codecsComboBox.setSelectedItem(settings.get(SettingType.AUDIO_CODEC));
 			bitrate.setText(settings.get(SettingType.AUDIO_BITRATE));
 			samplingRate.setText(settings.get(SettingType.SAMPLING_RATE));
 			channels.setText(settings.get(SettingType.NUMBER_AUDIO_CHANNELS));
+		}else{
+			codecsComboBox.setSelectedIndex(0);
+			bitrate.setText("");
+			samplingRate.setText("");
+			channels.setText("");
 		}
 	}
 	

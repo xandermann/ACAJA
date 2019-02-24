@@ -96,12 +96,17 @@ public final class VideoSettingsView extends JPanel implements Observer {
 	
 	@Override
 	public void update(Observable o, Object arg) {
-		if(model.getCurrentFile() != null) {
+		if(model.getCurrentFile() != null){
 		     HashMap<SettingType, String> settings = model.getCurrentFile().getSettings();
 		     codecsComboBox.setSelectedItem(settings.get(SettingType.VIDEO_CODEC));
 		     resolutionsComboBox.setSelectedItem(settings.get(SettingType.RESOLUTION));
 			 bitrateText.setText(settings.get(SettingType.VIDEO_BITRATE)); 
 			 fpsText.setText(settings.get(SettingType.FRAMERATE));
+		}else{
+			 codecsComboBox.setSelectedIndex(0);
+			 resolutionsComboBox.setSelectedIndex(0);
+			 bitrateText.setText("");
+			 fpsText.setText("");
 		}
 	}
 

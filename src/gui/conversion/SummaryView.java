@@ -77,6 +77,7 @@ public final class SummaryView extends JPanel implements Observer {
 			name.setText("NA");
 			videoSummary.setText("NA");
 			soundSummary.setText("NA");
+			duration.setText("NA");
 		}
 	}
 

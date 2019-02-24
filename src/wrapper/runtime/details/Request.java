@@ -151,7 +151,6 @@ public final class Request {
 	 */
 	public Request videoCodec(String videoCodec) {
 		if(videoCodec==null) throw new NullPointerException("VideoCodec null !");
-		if(Integer.parseInt(videoCodec)<=0) throw new IllegalArgumentException("VideoCodec negatif ou nul !");
 		askSomethingElse(new String[]{FlagConstants.FLAG_VIDEO_CODEC, videoCodec});
 		return this;
 	}
@@ -179,7 +178,6 @@ public final class Request {
 	 */
 	public Request resolution(String resolution) {
 		if(resolution==null) throw new NullPointerException("Resolution null !");
-		if(Integer.parseInt(resolution)<=0) throw new IllegalArgumentException("Resolution negative ou nulle !");
 		askSomethingElse(new String[]{FlagConstants.FLAG_RESOLUTION, resolution});
 		return this;
 	}
@@ -209,7 +207,6 @@ public final class Request {
 	 */
 	public Request audioCodec(String audioCodec) {
 		if(audioCodec==null) throw new NullPointerException("AudioCodec null !");
-		if(Integer.parseInt(audioCodec)<=0) throw new IllegalArgumentException("AudioCodec negatif ou nul !");
 		askSomethingElse(new String[]{FlagConstants.FLAG_AUDIO_CODEC, audioCodec});
 		return this;
 	}

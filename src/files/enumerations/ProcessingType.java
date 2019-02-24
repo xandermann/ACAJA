@@ -1,4 +1,4 @@
-package files;
+package files.enumerations;
 
 /**
  * [ ENUMERATION DES TYPES DE TRAITEMENTS. ]

@@ -1,4 +1,7 @@
-package files;
+package files.files;
+
+import files.enumerations.OperationType;
+
 /**
  * [ INTERFACE POUR LES FICHIERS MODIFIABLES. ]
  * 

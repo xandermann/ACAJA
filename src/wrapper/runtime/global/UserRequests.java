@@ -2,6 +2,11 @@ package wrapper.runtime.global;
 
 import java.util.*;
 import files.*;
+import files.enumerations.ProcessingType;
+import files.enumerations.SettingType;
+import files.files.ProcessingFile;
+import files.files.SelectableFile;
+import files.files.SettingsFile;
 import wrapper.runtime.details.Request;
 
 

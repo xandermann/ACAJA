@@ -1,8 +1,10 @@
-package files;
+package files.files;
 
 import java.io.File;
 import java.util.HashMap;
 import exceptions.IncorrectFileException;
+import files.enumerations.OperationType;
+import files.enumerations.SettingType;
 import wrapper.runtime.global.SystemRequests;
 
 /**

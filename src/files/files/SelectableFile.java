@@ -1,8 +1,9 @@
-package files;
+package files.files;
 
 import java.io.File;
 
 import exceptions.IncorrectFileException;
+import files.enumerations.MediaFileType;
 
 /**
  * TODO comentaire a faire.

@@ -1,4 +1,4 @@
-package gui.conversion;
+package gui.conversion.views;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -15,7 +15,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import files.SettingType;
+import files.enumerations.SettingType;
+import gui.conversion.model.ConversionModel;
 import wrapper.language.CodecConstants;
 import wrapper.language.ResolutionConstants;
 

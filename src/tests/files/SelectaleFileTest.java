@@ -8,8 +8,8 @@ import java.io.File;
 import org.junit.Test;
 
 import exceptions.IncorrectFileException;
-import files.MediaFileType;
-import files.SelectableFile;
+import files.enumerations.MediaFileType;
+import files.files.SelectableFile;
 
 public final class SelectaleFileTest {
 

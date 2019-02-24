@@ -2,7 +2,7 @@ package tests.conversion;
 
 import org.junit.Test;
 
-import gui.conversion.ConversionModel;
+import gui.conversion.model.ConversionModel;
 
 public final class TestConversionModel {
 

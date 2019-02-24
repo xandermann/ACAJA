@@ -1,11 +1,14 @@
-package gui.conversion;
+package gui.conversion.model;
 
 import java.io.*;
 import java.util.*;
 import javax.swing.*;
 import exceptions.IncorrectFileException;
 import files.*;
+import files.enumerations.SettingType;
+import files.files.SettingsFile;
 import gui.Model;
+import gui.conversion.views.ListEntry;
 import messages.MessageConstants;
 import resources.ResourceConstants;
 import resources.ResourcesManager;

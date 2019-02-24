@@ -1,6 +1,8 @@
-package gui.conversion;
+package gui.conversion.views;
 
 import javax.swing.JTabbedPane;
+
+import gui.conversion.model.ConversionModel;
 
 public final class TabsView extends JTabbedPane{
 	private ConversionModel model;

@@ -2,6 +2,8 @@ package wrapper.runtime.global;
 
 import java.util.HashMap;
 import files.*;
+import files.enumerations.SettingType;
+import files.files.SettingsFile;
 import wrapper.runtime.details.*;
 import wrapper.streams.iterators.ProcessManager;
 import wrapper.streams.managers.filters.*;

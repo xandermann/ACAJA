@@ -1,4 +1,4 @@
-package gui.conversion;
+package gui.conversion.views;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -6,7 +6,9 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.*;
 import javax.swing.*;
-import files.SettingType;
+
+import files.enumerations.SettingType;
+import gui.conversion.model.ConversionModel;
 
 public final class SummaryView extends JPanel implements Observer {
 	//=======================================================================================================================

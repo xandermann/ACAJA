@@ -5,7 +5,7 @@ import java.io.File;
 import org.junit.Test;
 
 import exceptions.IncorrectFileException;
-import files.SettingsFile;
+import files.files.SettingsFile;
 
 public final class SettingsFileTest {
 

@@ -1,4 +1,4 @@
-package gui.conversion;
+package gui.conversion.views;
 
 import javax.swing.ImageIcon;
 

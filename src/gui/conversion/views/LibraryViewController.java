@@ -1,4 +1,4 @@
-package gui.conversion;
+package gui.conversion.views;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -9,6 +9,8 @@ import java.util.Observer;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
+
+import gui.conversion.model.ConversionModel;
 
 public final class LibraryViewController extends JList implements Observer, MouseListener, KeyListener {
 	//=======================================================================================================================

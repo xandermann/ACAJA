@@ -1,4 +1,4 @@
-package gui.conversion;
+package gui.conversion.views;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -6,6 +6,8 @@ import java.util.Observer;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import gui.conversion.model.ConversionModel;
 
 public abstract class SettingsView extends JPanel implements Observer {
 	protected ConversionModel model;

@@ -75,6 +75,11 @@ public final class SystemRequests{
 	//=======================================================================================================================
 	
 	
+	/**
+	 * [ CONNAITRE LES CODECS VIDEO SUPPORTES PAR FFMPEG. ]
+	 * 
+	 * @return	Le tableau des codecs video supportes. 
+	 */
 	public static String[] askVideoCodecs() {
 		return DataCodecsFilter.findVideoCodecs(new Request().codecs().result());
 	}
@@ -83,6 +88,12 @@ public final class SystemRequests{
 	//=======================================================================================================================
 	
 	
+	
+	/**
+	 * [ CONNAITRE LES CODECS AUDIO SUPPORTES PAR FFMPEG. ]
+	 * 
+	 * @return	Le tableau des codecs audio supportes. 
+	 */
 	public static String[] askAudioCodecs() {
 		return DataCodecsFilter.findAudioCodecs(new Request().codecs().result());
 	}

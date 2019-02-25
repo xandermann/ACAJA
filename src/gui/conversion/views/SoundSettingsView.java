@@ -34,7 +34,6 @@ public final class SoundSettingsView extends SettingsView{
 		codecsComboBox = new JComboBox<String>(CodecConstants.ALL_SUPPORTED_AUDIO_CODECS);
 		codecPanel.add(codecsComboBox, BorderLayout.EAST);
 		codecsComboBox.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(model.getCurrentFile() != null) {
 					if(isChange == true)
@@ -49,13 +48,14 @@ public final class SoundSettingsView extends SettingsView{
 		bitrateText = new JTextField();
 		bitrateText.setPreferredSize(new Dimension(100, 20));
 		bitratePanel.add(bitrateText, BorderLayout.EAST);
-		bitrateText.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
+		bitrateText.addKeyListener(new KeyListener() {
+			public void keyTyped(KeyEvent e) {}
+			public void keyPressed(KeyEvent e) {
 				if(model.getCurrentFile() != null) {
 					if(isChange == true) model.modify(SettingType.AUDIO_BITRATE, bitrateText.getText());
 				}
 			}
+			public void keyReleased(KeyEvent e) {}
 		});
 
 		
@@ -64,13 +64,14 @@ public final class SoundSettingsView extends SettingsView{
 		samplingRateText = new JTextField();
 		samplingRateText.setPreferredSize(new Dimension(100, 20));
 		samplingRatePanel.add(samplingRateText, BorderLayout.EAST);
-		samplingRateText.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
+		samplingRateText.addKeyListener(new KeyListener() {
+			public void keyTyped(KeyEvent e) {}
+			public void keyPressed(KeyEvent e) {
 				if(model.getCurrentFile() != null) {
 					if(isChange == true) model.modify(SettingType.SAMPLING_RATE, samplingRateText.getText());
 				}
 			}
+			public void keyReleased(KeyEvent e) {}
 		});
 		
 
@@ -79,13 +80,14 @@ public final class SoundSettingsView extends SettingsView{
 		channelsText = new JTextField();
 		channelsText.setPreferredSize(new Dimension(100, 20));
 		channelsPanel.add(channelsText, BorderLayout.EAST);
-		channelsText.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
+		channelsText.addKeyListener(new KeyListener() {
+			public void keyTyped(KeyEvent e) {}
+			public void keyPressed(KeyEvent e) {
 				if(model.getCurrentFile() != null) {
 					if(isChange == true) model.modify(SettingType.NUMBER_AUDIO_CHANNELS ,channelsText.getText());
 				}
 			}
+			public void keyReleased(KeyEvent e) {}
 		});
 		
 		

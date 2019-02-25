@@ -305,7 +305,7 @@ public class SelectableFile {
 		if(destinationFile[0]=="" && destinationFile[1]=="")
 			return "";
 		else
-			return destinationFile[0]+"\\"+destinationFile[1];
+			return destinationFile[0]+File.separator+destinationFile[1];
 	}
 	
 	

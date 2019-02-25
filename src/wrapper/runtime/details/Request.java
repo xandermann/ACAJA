@@ -8,7 +8,7 @@ import wrapper.streams.managers.consumers.WatchedConsumer;
 /**
  * [ CLASSE POUR LA CONSTITUTION DES REQUETES FFMPEG. ]
  * 
- * Cette classe comporte une majorité de methodes publiques 
+ * Cette classe comporte une majoritï¿½ de methodes publiques 
  * retourant this. Cela permet d'enchainer en une meme instruction 
  * un nombre "infini" d'operations, de la memme maniere qu'on le ferait
  * en saisissant une multituide de flags dans une commande FFmpeg dans un SHELL. 
@@ -295,7 +295,7 @@ public final class Request {
 	}
 
 	/**
-	 * [ PRIVOTER DE 90° UNE VIDEO. ]
+	 * [ PRIVOTER DE 90ï¿½ UNE VIDEO. ]
 	 * 
 	 * @return La requete this. 
 	 */
@@ -352,6 +352,8 @@ public final class Request {
 	 */
 	public ProcessManager result() {
 		if(output!=null) askSomethingElse(new String[]{output});
+		for(String s : this.request)
+			System.out.println(s);
 		return FFmpegRuntime.execute(request);
 	}
 	

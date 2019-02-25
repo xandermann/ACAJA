@@ -36,8 +36,11 @@ public final class FileChooser {
 		jdc.showOpenDialog(null);
 
 		File importDirectory = jdc.getSelectedFile();
-		if(!importDirectory.isDirectory() || importDirectory == null) 
+		if(!importDirectory.isDirectory() || importDirectory == null) {
+			System.out.println("sdsd");
 			throw new ImportationException(ImportationException.ABSENT_DIRECTORY);
+		}
+			
 		
 		return importDirectory;
 	}

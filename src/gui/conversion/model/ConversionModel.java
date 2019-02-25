@@ -8,7 +8,7 @@ import files.*;
 import files.enumerations.SettingType;
 import files.files.SettingsFile;
 import gui.Model;
-import gui.conversion.views.EntryView;
+import gui.conversion.views_controllers.EntryView;
 import messages.MessageConstants;
 import resources.ResourceConstants;
 import resources.ResourcesManager;

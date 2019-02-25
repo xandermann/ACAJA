@@ -9,9 +9,8 @@ import exceptions.*;
 import files.FileInformation;
 import gui.FileChooser;
 import gui.WindowTools;
-import gui.conversion.controllers.ConversionWindowController;
 import gui.conversion.model.ConversionModel;
-import gui.conversion.views.*;
+import gui.conversion.views_controllers.*;
 import gui.processing.ProcessingWindow;
 import gui.style.*;
 import threads.*;
@@ -290,7 +289,6 @@ public final class ConversionWindow extends StylizedJFrame {
 		conversionWindow.setSize(new Dimension(600, 600));
 		conversionWindow.setLocationRelativeTo(null);
 		conversionWindow.setDefaultCloseOperation(StylizedJFrame.EXIT_ON_CLOSE);
-		conversionWindow.addWindowListener(new ConversionWindowController(conversionWindow.model));
 
 		WindowTools.showLogo(conversionWindow);
 

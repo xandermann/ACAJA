@@ -1,4 +1,4 @@
-package gui.conversion.views;
+package gui.conversion.views_controllers;
 
 import javax.swing.JTabbedPane;
 import gui.conversion.model.ConversionModel;

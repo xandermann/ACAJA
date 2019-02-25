@@ -12,18 +12,18 @@ public class ProcessingWindow extends JFrame {
 
 	
 	private ProcessingWindow() {
-		createJMenu();
-		setBackground(Color.lightGray);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setLocationRelativeTo(null);
+		this.createJMenu();
+		this.setBackground(Color.lightGray);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		// WindowTools.showLogo(this);
 		WindowTools.executeWindow(this);
 
 		ProcessingView p = new ProcessingView();
 
-		setSize(1000, 625);
-		// this.setResizable(false);
-		add(p);
+		this.setSize(1000, 625);
+		this.setResizable(false);
+		this.add(p);
 	}
 
 	

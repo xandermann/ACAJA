@@ -1,4 +1,4 @@
-package tests.gui;
+package tests.gui.style;
 
 import java.awt.Color;
 import java.awt.Dimension;

@@ -2,7 +2,7 @@ package gui.style;
 
 /**
  * Voilà l'interface de l'ensemble des composants Stylisés.
- * @author alex
+ * @author xandermann
  *
  */
 public interface StylizedComponent {

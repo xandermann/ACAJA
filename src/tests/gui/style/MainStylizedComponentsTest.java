@@ -1,4 +1,4 @@
-package tests.gui;
+package tests.gui.style;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -7,7 +7,6 @@ import java.awt.Graphics;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import gui.LoadingView;
 import gui.style.StyleTheme;
 import gui.style.StylizedJButton;
 import gui.style.StylizedJMenu;

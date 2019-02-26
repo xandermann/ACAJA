@@ -255,6 +255,17 @@ public final class ConversionModel extends Model {
 	//=======================================================================================================================
 	//=======================================================================================================================
 	
+
+	
+	/**
+	 * [ LE MODELE CONTIENT-IL DES FICHIERS QUI ON ETE MODIFIES ? ]
+	 */
+	public boolean isModified() {
+		for(SettingsFile sf : files) {
+			if(sf.isModified()) return true;
+		}
+		return false;
+	}
 	
 	
 	/**
@@ -263,8 +274,8 @@ public final class ConversionModel extends Model {
 	 * Methode qui permet de modifier un parametre du fichier
 	 * actuellement selectionne
 	 */
-	public void modify(SettingType typeSeyting, String setting) {
-		currentFile.modify(typeSeyting, setting);
+	public void modify(SettingType typeSetting, String setting) {
+		currentFile.modify(typeSetting, setting);
 	}
 	
 	

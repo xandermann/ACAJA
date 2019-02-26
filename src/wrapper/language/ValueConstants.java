@@ -1,0 +1,7 @@
+package wrapper.language;
+
+public final class ValueConstants {
+	public final static String WORSE_QUALITY = "0";
+	public final static String AVERAGE_QUALITY = "25";
+	public final static String BEST_QUALITY = "51";
+}

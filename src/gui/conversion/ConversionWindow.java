@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import javax.swing.*;
 import exceptions.*;
 import files.FileInformation;
+import files.enumerations.SettingType;
+import files.files.SettingsFile;
 import gui.FileChooser;
 import gui.WindowTools;
 import gui.conversion.model.ConversionModel;
@@ -14,6 +16,7 @@ import gui.conversion.views_controllers.*;
 import gui.processing.ProcessingWindow;
 import gui.style.*;
 import threads.*;
+import wrapper.language.ValueConstants;
 
 //TODO : CODE OPTIMISATION
 
@@ -155,9 +158,7 @@ public final class ConversionWindow extends StylizedJFrame {
 		quit.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
-				dispose();
-				System.exit(0);
-				
+				System.exit(0);		
 			}
 		});
 
@@ -225,38 +226,36 @@ public final class ConversionWindow extends StylizedJFrame {
 	 * [ METHODE INTERNE POUR LA GESTION DE LA CONVERSION. ]
 	 */
 	private void convert() {
-		if(RuntimeSpaceManager.manage()) {
-			/**
-			 * FENETRE D'ATTENTE. 
-			 */
-			StylizedJFrame waitWindow = new StylizedJFrame("Conversion de votre fichier");
-			waitWindow.setLayout(new BorderLayout());
-			waitWindow.setSize(400, 150);
-			waitWindow.setResizable(false);
-			waitWindow.setLocationRelativeTo(null);
-			waitWindow.add(
-					new JLabel("<html>" + 
-								"<body>" + 
-								"		Conversion du ou des fichier(s)." +
-								"		<br>" +
-								"		Veuillez patientez..." + 
-								"</body>" + 
-								"</html>", JLabel.CENTER),
-					BorderLayout.CENTER);
-			WindowTools.showLogo(waitWindow);
-			/**
-			 * DEBUT DE LA CONVERSION.
-			 */
-			model.startSave();
-			/**
-			 * LANCEMENT DE LA CONVERSION DANS UN AUTRE PROCESSUS.
-			 */
-			ThreadForSave.saveInNewThread(model);
-			/**
-			 * LANCEMENT ET GESTION DE LA FENETRE D'ATTENTE DANS UN AUTRE PROCESSUS.
-			 */
-			ThreadForWaitWindow.waitInNewThread(waitWindow);
-		}
+		/**
+		 * FENETRE D'ATTENTE. 
+		 */
+		StylizedJFrame waitWindow = new StylizedJFrame("Conversion de votre fichier");
+		waitWindow.setLayout(new BorderLayout());
+		waitWindow.setSize(400, 150);
+		waitWindow.setResizable(false);
+		waitWindow.setLocationRelativeTo(null);
+		waitWindow.add(
+				new JLabel("<html>" + 
+							"<body>" + 
+							"		Conversion du ou des fichier(s)." +
+							"		<br>" +
+							"		Veuillez patientez..." + 
+							"</body>" + 
+							"</html>", JLabel.CENTER),
+				BorderLayout.CENTER);
+		WindowTools.showLogo(waitWindow);
+		/**
+		 * DEBUT DE LA CONVERSION.
+		 */
+		model.startSave();
+		/**
+		 * LANCEMENT DE LA CONVERSION DANS UN AUTRE PROCESSUS.
+		 */
+		ThreadForSave.saveInNewThread(model);
+		/**
+		 * LANCEMENT ET GESTION DE LA FENETRE D'ATTENTE DANS UN AUTRE PROCESSUS.
+		 */
+		ThreadForWaitWindow.waitInNewThread(waitWindow);
 	}
 	
 	
@@ -264,71 +263,93 @@ public final class ConversionWindow extends StylizedJFrame {
 	/**
 	 * [ METHODE INTERNE POUR LA COSNTRUCTION DE LA FENETRE DE FINALISATION. ]
 	 */
-	private void generateConvertWindow() {
-		StylizedJFrame outputWindow = new StylizedJFrame("Demarrer la conversion");
-		outputWindow.setResizable(false);
-		outputWindow.setSize(new Dimension(400, 200));
-		outputWindow.setLocationRelativeTo(null);
-		outputWindow.setBackground(StyleTheme.BACKGROUND_COLOR);
-		JPanel window = new JPanel(new BorderLayout());
-		
-		JPanel title = new JPanel(new BorderLayout());
-		
-		JPanel outputPanel = new JPanel(new BorderLayout());
-		JLabel info = new JLabel("<html><br>Choisissez le repertoire et la qualite en sortie : </html>",JLabel.CENTER);
-		JLabel outputFolderLabel = new JLabel("<html><br>Repertoire de sortie : </html>", JLabel.CENTER);
-		title.add(info,BorderLayout.CENTER);
-		StylizedJButton outputFolderButton = new StylizedJButton("Parcourir");
-		outputFolderButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent ae) {
-				try {
-					model.setDestinationFolder(FileChooser.chooseDirectory());
-				} catch (ImportationException ie) {
-					JOptionPane.showMessageDialog(null, ie.getMessage());
+	private void drawConvertWindow() {
+		if(RuntimeSpaceManager.manage() && model.isModified()) {
+			StylizedJFrame outputWindow = new StylizedJFrame("Demarrer la conversion");
+			outputWindow.setResizable(false);
+			outputWindow.setSize(new Dimension(400, 280));
+			outputWindow.setLocationRelativeTo(null);
+			outputWindow.setBackground(StyleTheme.BACKGROUND_COLOR);
+			
+			JPanel window = new JPanel(new BorderLayout());		
+			JPanel title = new JPanel(new BorderLayout());
+			JPanel outputPanel = new JPanel(new BorderLayout());
+			JLabel info = new JLabel("<html><br>Choisissez le repertoire et la qualite en sortie : </html>",JLabel.CENTER);
+			JLabel outputFolderLabel = new JLabel("<html><br>Repertoire de sortie : </html>", JLabel.CENTER);
+			title.add(info,BorderLayout.CENTER);
+			StylizedJButton outputFolderButton = new StylizedJButton("Parcourir");
+			outputFolderButton.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent ae) {
+					try {
+						model.setDestinationFolder(FileChooser.chooseDirectory());
+					} catch (ImportationException ie) {
+						JOptionPane.showMessageDialog(null, ie.getMessage());
+					}
 				}
-			}
-		});
-		
-		JPanel browse = new JPanel();
-		browse.add(outputFolderButton,BorderLayout.CENTER);
-		browse.setPreferredSize(new Dimension(100,40));
-		outputPanel.add(title,BorderLayout.NORTH);
-		outputPanel.add(outputFolderLabel,BorderLayout.CENTER);
-		outputPanel.add(browse,BorderLayout.SOUTH);
-		window.add(outputPanel,BorderLayout.NORTH);
-		
-		
-		JLabel quality = new JLabel("<html>Qualite : </html>");
-		ButtonGroup qualityChoice = new ButtonGroup();
-		
-		JRadioButton qualityMedium = new JRadioButton("moyenne");
-		JRadioButton qualityHigh = new JRadioButton("optimale");
-		
-		
-		qualityChoice.add(qualityHigh);
-		qualityChoice.add(qualityMedium);
-		StylizedJButton buttonConvert = new StylizedJButton("Convertir");
-		buttonConvert.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				outputWindow.dispose();
-				convert();
-			}
-		});
+			});
+			
+			JPanel browse = new JPanel();
+			browse.add(outputFolderButton,BorderLayout.CENTER);
+			browse.setPreferredSize(new Dimension(100,60));
+			outputPanel.add(title,BorderLayout.NORTH);
+			outputPanel.add(outputFolderLabel,BorderLayout.CENTER);
+			outputPanel.add(browse,BorderLayout.SOUTH);
+			window.add(outputPanel,BorderLayout.NORTH);
+			
+			
+			JLabel quality = new JLabel("<html>Qualite : </html>", JLabel.CENTER);
+			ButtonGroup qualityChoice = new ButtonGroup();
+			JRadioButton qualityBad = new JRadioButton("basse");
+			JRadioButton qualityMedium = new JRadioButton("moyenne");
+			JRadioButton qualityHigh = new JRadioButton("optimale");
+			qualityChoice.add(qualityBad);
+			qualityChoice.add(qualityHigh);
+			qualityChoice.add(qualityMedium);
+			qualityBad.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					for(SettingsFile f : model.getFiles()) f.modify(SettingType.QUALITY, ValueConstants.WORSE_QUALITY);
+				}
+			});
+			qualityMedium.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					for(SettingsFile f : model.getFiles()) f.modify(SettingType.QUALITY, ValueConstants.AVERAGE_QUALITY);
+				}
+			});
+			qualityHigh.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					for(SettingsFile f : model.getFiles()) f.modify(SettingType.QUALITY, ValueConstants.BEST_QUALITY);
+				}
+			});
+			qualityMedium.setSelected(true);
+			for(SettingsFile f : model.getFiles()) f.modify(SettingType.QUALITY, ValueConstants.AVERAGE_QUALITY);
+			
 
-		JPanel qualityPanel = new JPanel();
-		qualityPanel.setSize(new Dimension(400,70));
-		qualityPanel.add(quality);
-		qualityPanel.add(qualityHigh);
-		qualityPanel.add(qualityMedium);
-		JPanel convert = new JPanel();
-		convert.add(buttonConvert);
-		convert.setPreferredSize(new Dimension(100,40));
-		window.add(qualityPanel,BorderLayout.CENTER);
-		window.add(convert,BorderLayout.SOUTH);
-		outputWindow.add(window);
-		WindowTools.executeWindow(outputWindow);
+			
+			StylizedJButton buttonConvert = new StylizedJButton("Convertir");
+			buttonConvert.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					outputWindow.dispose();
+					convert();
+				}
+			});
+
+			JPanel qualityPanel = new JPanel(new BorderLayout());
+			qualityPanel.setSize(new Dimension(400,40));
+			qualityPanel.add(quality, BorderLayout.NORTH);
+			JPanel qualityTypesPanel = new JPanel();
+			qualityTypesPanel.add(qualityBad);
+			qualityTypesPanel.add(qualityMedium);
+			qualityTypesPanel.add(qualityHigh);
+			qualityPanel.add(qualityTypesPanel, BorderLayout.CENTER);
+			JPanel convert = new JPanel();
+			convert.add(buttonConvert);
+			convert.setPreferredSize(new Dimension(100,60));
+			window.add(qualityPanel,BorderLayout.CENTER);
+			window.add(convert,BorderLayout.SOUTH);
+			outputWindow.add(window);
+			WindowTools.executeWindow(outputWindow);
+		}
 	}
 	
 	
@@ -346,7 +367,7 @@ public final class ConversionWindow extends StylizedJFrame {
 		convertItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				generateConvertWindow();
+				drawConvertWindow();
 			}
 		});
 		return convert;

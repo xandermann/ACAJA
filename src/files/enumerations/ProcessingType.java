@@ -6,4 +6,9 @@ package files.enumerations;
  * Auteurs du projet : 
  * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
  */
-public enum ProcessingType implements OperationType {}
+public enum ProcessingType implements OperationType {
+	/**
+	 * Parametre du type de qualite. 
+	 */
+	QUALITY
+}

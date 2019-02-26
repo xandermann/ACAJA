@@ -38,6 +38,9 @@ public final class UserRequests{
 		for(SettingType requestKey : ffmpegRequests.keySet()) {
 			String newValue = ffmpegRequests.get(requestKey);
 			switch(requestKey) {
+				case QUALITY :
+					request.quality(newValue);
+					break;
 				case VIDEO_CODEC :
 					request.videoCodec(newValue);
 					break;
@@ -86,7 +89,11 @@ public final class UserRequests{
 		
 		for(ProcessingType requestKey : ffmpegRequests.keySet()) {
 			String newValue = ffmpegRequests.get(requestKey);
-			switch(requestKey) {}
+			switch(requestKey) {
+			case QUALITY :
+				request.quality(newValue);
+				break;
+			}
 		}
 		
 		request.make();

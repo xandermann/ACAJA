@@ -47,8 +47,6 @@ public final class Request {
 	 * ni de fichier d'entree, ni de fichier de sortie. 
 	 */
 	public Request() {
-		input = null;
-		output = null;
 		request = new ArrayList<String>();
 	}
 	
@@ -61,11 +59,8 @@ public final class Request {
 	 * @param input			Le nom complet ( chemin + nom ) du fichier d'entree. 
 	 */
 	public Request(String input) {
-		if((this.input = input) == null) throw new NullPointerException("input null !");
-		output = null;
 		request = new ArrayList<String>();
-		request.add("-i");
-		request.add(input);
+		from(input);
 	}
 	
 	/**
@@ -78,10 +73,9 @@ public final class Request {
 	 * @param output		Le nom complet ( chemin + nom ) du fichier de sortie. 
 	 */
 	public Request(String input, String output) {
-		if((this.output = output) == null) throw new NullPointerException("Output null !");
 		request = new ArrayList<String>();
-		request.add("-i");
-		request.add(input);
+		from(input);
+		to(output);
 	}
 	
 	
@@ -343,7 +337,17 @@ public final class Request {
 		return this;
 	}
 	
-	
+	/**
+	 * [ CHOISIR LA QUALITE. ]
+	 * 
+	 * @param quality		La qualite. 
+	 * 
+	 * @return La requete this. 
+	 */
+	public Request quality(String quality) {
+		askSomethingElse(new String[]{FlagConstants.FLAG_QUALITY, quality});
+		return this;
+	}
 	
 	/**
 	 * [ EXECUTER LA REQUETE ET OBTENIR LE RESULAT. ]

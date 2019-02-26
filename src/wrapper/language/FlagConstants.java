@@ -12,8 +12,7 @@ package wrapper.language;
 public final class FlagConstants {
 	public final static String FLAG_SUPPORTED_CODECS = "-codecs";
 	
-	public final static String[] FLAG_BEST_QUALITY_CONVERSION = {"-crf", "0"};
-	public final static String[] FLAG_WORSE_QUALITY_CONVERSION = {"-crf", "51"};
+	public final static String FLAG_QUALITY = "-crf";
 	
 	public final static String FLAG_VIDEO_CODEC = "-vcodec";
 	public final static String FLAG_VIDEO_BITRATE = "-b";

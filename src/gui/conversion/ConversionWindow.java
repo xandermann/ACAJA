@@ -119,7 +119,7 @@ public final class ConversionWindow extends StylizedJFrame {
 		
 		
 		JMenu recentFiles = new JMenu("Fichiers recemments importes");
-		FileInformation[] files = this.model.getOldImports();
+		FileInformation[] files = model.getOldImports();
 		for(FileInformation f : files) {
 			if(f != null) {
 				StylizedJMenuItem itemFile = new StylizedJMenuItem(f.getFileName());
@@ -160,7 +160,6 @@ public final class ConversionWindow extends StylizedJFrame {
 				
 			}
 		});
-
 
 		
 		filesMenu.add(importFile);
@@ -219,11 +218,124 @@ public final class ConversionWindow extends StylizedJFrame {
 	
 	//=======================================================================================================================
 	//=======================================================================================================================
+	
+	
 
+	/**
+	 * [ METHODE INTERNE POUR LA GESTION DE LA CONVERSION. ]
+	 */
+	private void convert() {
+		if(RuntimeSpaceManager.manage()) {
+			/**
+			 * FENETRE D'ATTENTE. 
+			 */
+			StylizedJFrame waitWindow = new StylizedJFrame("Conversion de votre fichier");
+			waitWindow.setLayout(new BorderLayout());
+			waitWindow.setSize(400, 150);
+			waitWindow.setResizable(false);
+			waitWindow.setLocationRelativeTo(null);
+			waitWindow.add(
+					new JLabel("<html>" + 
+								"<body>" + 
+								"		Conversion du ou des fichier(s)." +
+								"		<br>" +
+								"		Veuillez patientez..." + 
+								"</body>" + 
+								"</html>", JLabel.CENTER),
+					BorderLayout.CENTER);
+			WindowTools.showLogo(waitWindow);
+			/**
+			 * DEBUT DE LA CONVERSION.
+			 */
+			model.startSave();
+			/**
+			 * LANCEMENT DE LA CONVERSION DANS UN AUTRE PROCESSUS.
+			 */
+			ThreadForSave.saveInNewThread(model);
+			/**
+			 * LANCEMENT ET GESTION DE LA FENETRE D'ATTENTE DANS UN AUTRE PROCESSUS.
+			 */
+			ThreadForWaitWindow.waitInNewThread(waitWindow);
+		}
+	}
+	
 	
 	
 	/**
-	 * [ METHODE INTERNE POUR LA CONSTRUCTION DU MENU DE CONVERTION. ]
+	 * [ METHODE INTERNE POUR LA COSNTRUCTION DE LA FENETRE DE FINALISATION. ]
+	 */
+	private void generateConvertWindow() {
+		StylizedJFrame outputWindow = new StylizedJFrame("Demarrer la conversion");
+		outputWindow.setResizable(false);
+		outputWindow.setSize(new Dimension(400, 200));
+		outputWindow.setLocationRelativeTo(null);
+		outputWindow.setBackground(StyleTheme.BACKGROUND_COLOR);
+		JPanel window = new JPanel(new BorderLayout());
+		
+		JPanel title = new JPanel(new BorderLayout());
+		
+		JPanel outputPanel = new JPanel(new BorderLayout());
+		JLabel info = new JLabel("<html><br>Choisissez le repertoire et la qualite en sortie : </html>",JLabel.CENTER);
+		JLabel outputFolderLabel = new JLabel("<html><br>Repertoire de sortie : </html>", JLabel.CENTER);
+		title.add(info,BorderLayout.CENTER);
+		StylizedJButton outputFolderButton = new StylizedJButton("Parcourir");
+		outputFolderButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent ae) {
+				try {
+					model.setDestinationFolder(FileChooser.chooseDirectory());
+				} catch (ImportationException ie) {
+					JOptionPane.showMessageDialog(null, ie.getMessage());
+				}
+			}
+		});
+		
+		JPanel browse = new JPanel();
+		browse.add(outputFolderButton,BorderLayout.CENTER);
+		browse.setPreferredSize(new Dimension(100,40));
+		outputPanel.add(title,BorderLayout.NORTH);
+		outputPanel.add(outputFolderLabel,BorderLayout.CENTER);
+		outputPanel.add(browse,BorderLayout.SOUTH);
+		window.add(outputPanel,BorderLayout.NORTH);
+		
+		
+		JLabel quality = new JLabel("<html>Qualite : </html>");
+		ButtonGroup qualityChoice = new ButtonGroup();
+		
+		JRadioButton qualityMedium = new JRadioButton("moyenne");
+		JRadioButton qualityHigh = new JRadioButton("optimale");
+		
+		
+		qualityChoice.add(qualityHigh);
+		qualityChoice.add(qualityMedium);
+		StylizedJButton buttonConvert = new StylizedJButton("Convertir");
+		buttonConvert.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				outputWindow.dispose();
+				convert();
+			}
+		});
+
+		JPanel qualityPanel = new JPanel();
+		qualityPanel.setSize(new Dimension(400,70));
+		qualityPanel.add(quality);
+		qualityPanel.add(qualityHigh);
+		qualityPanel.add(qualityMedium);
+		JPanel convert = new JPanel();
+		convert.add(buttonConvert);
+		convert.setPreferredSize(new Dimension(100,40));
+		window.add(qualityPanel,BorderLayout.CENTER);
+		window.add(convert,BorderLayout.SOUTH);
+		outputWindow.add(window);
+		WindowTools.executeWindow(outputWindow);
+	}
+	
+	
+	
+	
+	/**
+	 * [ METHODE INTERNE POUR LA CONSTRUCTION DU MENU DE CONVERSION. ]
 	 * 
 	 * @return JMenu Le menu de la conversion.
 	 */
@@ -231,44 +343,10 @@ public final class ConversionWindow extends StylizedJFrame {
 		JMenu convert = new JMenu("Convertir");
 		StylizedJMenuItem convertItem = new StylizedJMenuItem("Convertir les fichiers");
 		convert.add(convertItem);
-
 		convertItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ConversionWindow.generateOutputWindow();
-				if(RuntimeSpaceManager.manage()) {
-					/**
-					 * FENETRE D'ATTENTE. 
-					 */
-					StylizedJFrame waitWindow = new StylizedJFrame("Conversion de votre fichier");
-					waitWindow.setLayout(new BorderLayout());
-					waitWindow.setSize(400, 150);
-					waitWindow.setResizable(false);
-					waitWindow.setLocationRelativeTo(null);
-					waitWindow.add(
-							new JLabel("<html>" + 
-										"<body>" + 
-										"		Conversion du ou des fichier(s)." +
-										"		<br>" +
-										"		Veuillez patientez..." + 
-										"</body>" + 
-										"</html>", JLabel.CENTER),
-							BorderLayout.CENTER);
-					WindowTools.showLogo(waitWindow);
-					
-					/**
-					 * DEBUT DE LA CONVERSION.
-					 */
-					model.startSave();
-					/**
-					 * LANCEMENT DE LA CONVERSION DANS UN AUTRE PROCESSUS.
-					 */
-					ThreadForSave.saveInNewThread(model);
-					/**
-					 * LANCEMENT ET GESTION DE LA FENETRE D'ATTENTE DANS UN AUTRE PROCESSUS.
-					 */
-					ThreadForWaitWindow.waitInNewThread(waitWindow);
-				}
+				generateConvertWindow();
 			}
 		});
 		return convert;
@@ -280,56 +358,6 @@ public final class ConversionWindow extends StylizedJFrame {
 	//=======================================================================================================================
 
 	
-	
-	private static void generateOutputWindow() {
-			StylizedJFrame outputWindow = new StylizedJFrame("Demarrer la conversion");
-			outputWindow.setResizable(false);
-			outputWindow.setSize(new Dimension(400, 200));
-			outputWindow.setLocationRelativeTo(null);
-			outputWindow.setBackground(StyleTheme.BACKGROUND_COLOR);
-			JPanel window = new JPanel(new BorderLayout());
-			
-			JPanel title = new JPanel(new BorderLayout());
-			
-			JPanel outputPanel = new JPanel(new BorderLayout());
-			JLabel info = new JLabel("<html><br>Choisissez le repertoire et la qualite en sortie : </html>",JLabel.CENTER);
-			JLabel outputFolderLabel = new JLabel("<html><br>Repertoire de sortie : </html>", JLabel.CENTER);
-			title.add(info,BorderLayout.CENTER);
-			StylizedJButton outputFolderButton = new StylizedJButton("Parcourir");
-			JPanel browse = new JPanel();
-			browse.add(outputFolderButton,BorderLayout.CENTER);
-			browse.setPreferredSize(new Dimension(100,40));
-			outputPanel.add(title,BorderLayout.NORTH);
-			outputPanel.add(outputFolderLabel,BorderLayout.CENTER);
-			outputPanel.add(browse,BorderLayout.SOUTH);
-			window.add(outputPanel,BorderLayout.NORTH);
-			
-			
-			JLabel quality = new JLabel("<html>Qualite : </html>");
-			ButtonGroup qualityChoice = new ButtonGroup();
-			
-			JRadioButton qualityMedium = new JRadioButton("moyenne");
-			JRadioButton qualityHigh = new JRadioButton("optimale");
-			
-			
-			qualityChoice.add(qualityHigh);
-			qualityChoice.add(qualityMedium);
-			StylizedJButton buttonConvert = new StylizedJButton("Convertir");
-			
-
-			JPanel qualityPanel = new JPanel();
-			qualityPanel.setSize(new Dimension(400,70));
-			qualityPanel.add(quality);
-			qualityPanel.add(qualityHigh);
-			qualityPanel.add(qualityMedium);
-			JPanel convert = new JPanel();
-			convert.add(buttonConvert);
-			convert.setPreferredSize(new Dimension(100,40));
-			window.add(qualityPanel,BorderLayout.CENTER);
-			window.add(convert,BorderLayout.SOUTH);
-			outputWindow.add(window);
-			WindowTools.executeWindow(outputWindow);
-	}
 	
 	/**
 	 * [ METHODE DE CLASSE DE CONSTRUCTION ET DE GENERATION DE LA FENETRE DE CONVERSION. ]
@@ -353,7 +381,6 @@ public final class ConversionWindow extends StylizedJFrame {
 		StylizedJPanel p = new StylizedJPanel();
 		p.setLayout(new BorderLayout());
 		StylizedJMenuBar menu = new StylizedJMenuBar();
-		
 		
 		
 		menu.add(conversionWindow.drawFileMenu());

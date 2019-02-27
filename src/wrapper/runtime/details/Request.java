@@ -1,7 +1,7 @@
 package wrapper.runtime.details;
 
 import java.util.*;
-import wrapper.language.FlagConstants;
+import wrapper.language.*;
 import wrapper.streams.iterators.ProcessManager;
 import wrapper.streams.managers.consumers.WatchedConsumer;
 
@@ -384,7 +384,7 @@ public final class Request {
 	 * @return La requete this. 
 	 */
 	public Request frame(String time) {
-		cut(time, "00:00:01.00");
+		cut(time, ValueConstants.ONE_SECOND);
 		framerate("1");
 		return this;
 	}

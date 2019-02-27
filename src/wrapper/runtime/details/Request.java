@@ -310,8 +310,7 @@ public final class Request {
 	 */
 	public Request extractImage(String time) {
 		if(time==null) throw new NullPointerException("NumberAudioChannels null !");
-		askSomethingElse(new String[]{
-				FlagConstants.FLAG_PERIOD[0], time, FlagConstants.FLAG_PERIOD[1], "00:00:01.00"});
+		askSomethingElse(new String[]{FlagConstants.FLAG_PERIOD[0], time, FlagConstants.FLAG_PERIOD[1], "00:00:01.00"});
 		framerate("1");
 		return this;
 	}
@@ -331,9 +330,7 @@ public final class Request {
 		if(Integer.parseInt(width)<=0) throw new IllegalArgumentException("Width negative ou nulle !");
 		if(Integer.parseInt(height)<=0) throw new IllegalArgumentException("Height negative ou nulle !");
 		
-		askSomethingElse(new String[]{
-				FlagConstants.FLAG_RESIZE[0], 
-				FlagConstants.FLAG_RESIZE[1]+width+FlagConstants.FLAG_RESIZE[2]+height});
+		askSomethingElse(new String[]{FlagConstants.FLAG_RESIZE[0], FlagConstants.FLAG_RESIZE[1]+width+FlagConstants.FLAG_RESIZE[2]+height});
 		return this;
 	}
 	

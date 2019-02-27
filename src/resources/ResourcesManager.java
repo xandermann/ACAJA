@@ -4,23 +4,33 @@ import java.io.File;
 
 public final class ResourcesManager {
 	/**
+	 * [ VERIFIER L'EXISTENCE D'UN REPERTOIRE. ]
+	 * 
+	 * @param directory		Le repertoire.
+	 * @return boolean		Vaut true si le repertoire existe ou a reussi a etre recreer. 
+	 */
+	public static boolean checkDirectory(File directory) {
+		if(!directory.exists())
+			return directory.mkdir();
+		return true;
+	}
+	
+	public static boolean checkImports() {
+		return checkDirectory(ResourceConstants.ALL_OLD_IMPORTS);
+	}
+	
+	public static boolean checkConversionImports() {
+		return checkDirectory(ResourceConstants.CONVERSION_OLD_IMPORTS);
+	}
+	
+	public static boolean checkProcessingImports() {
+		return checkDirectory(ResourceConstants.PROCESSING_OLD_IMPORTS);
+	}
+	
+	/**
 	 *  [ METHODE DE CLASSE POUR CREER LES DOSSIERS DES IMPORTS SI ILS N'EXISTENT PAS ]
 	 */
 	public static boolean checkResources() {
-		File dirSaves = new File(ResourceConstants.ALL_OLD_IMPORTS_PATH);
-		File dirConversion = new File(ResourceConstants.CONVERSION_OLD_IMPORTS_PATH);
-		File dirProcessing = new File(ResourceConstants.PROCESSING_OLD_IMPORTS_PATH);
-		try {
-			boolean res = true;
-			if(!dirSaves.exists())
-				 res = dirSaves.mkdir();
-			if(!dirConversion.exists() && res != false)
-				res = dirConversion.mkdir();
-			if(!dirProcessing.exists() && res != false)
-				res = dirProcessing.mkdir();
-			return res;
-		} catch (Exception e) {
-			return false;
-		}				
+		return checkImports() && checkConversionImports() && checkProcessingImports();
 	}
 }

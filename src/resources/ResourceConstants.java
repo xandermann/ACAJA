@@ -27,6 +27,7 @@ public final class ResourceConstants {
 	 * FICHIERS TEMPORAIRES.
 	 */
 	public final static String TEMPORARY_FILES_PATH = "temporary_files/";
+	public final static File TEMPORARY_FILES = new File(TEMPORARY_FILES_PATH);
 
 	/**
 	 * FICHIERS DE SAUVEGARDES DES PRECEDENTS IMPORTS SUR LE LOGICIEL.
@@ -34,4 +35,7 @@ public final class ResourceConstants {
 	public final static String ALL_OLD_IMPORTS_PATH = "old_imports/";
 	public final static String CONVERSION_OLD_IMPORTS_PATH = ALL_OLD_IMPORTS_PATH + "conversion_old_imports/";
 	public final static String PROCESSING_OLD_IMPORTS_PATH = ALL_OLD_IMPORTS_PATH + "processing_old_imports/";
+	public final static File ALL_OLD_IMPORTS = new File(ALL_OLD_IMPORTS_PATH);
+	public final static File CONVERSION_OLD_IMPORTS = new File(CONVERSION_OLD_IMPORTS_PATH);
+	public final static File PROCESSING_OLD_IMPORTS = new File(ALL_OLD_IMPORTS_PATH);
 }

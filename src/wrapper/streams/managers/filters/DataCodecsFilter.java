@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.*;
 
+import resources.NamesSpaceManager;
 import resources.ResourceConstants;
 import wrapper.streams.iterators.*;
 import wrapper.streams.managers.consumers.*;
@@ -50,7 +51,7 @@ public final class DataCodecsFilter implements DataStreamsFilter {
 		List<String> dataCodecs = new ArrayList<String>();
 		
 		try {
-			Writer saver = new BufferedWriter(new FileWriter(ResourceConstants.STDOUT_ANSWERS));
+			Writer saver = new BufferedWriter(new FileWriter(NamesSpaceManager.out()));
 			boolean keepData = false; 
 			String data = null;	
 			while(iterator.hasNext()) {

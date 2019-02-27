@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 
+import resources.NamesSpaceManager;
 import resources.ResourceConstants;
 import wrapper.streams.iterators.*;
 import wrapper.streams.managers.consumers.OutputStreamConsumer;
@@ -138,7 +139,7 @@ public final class MetadataFilter implements DataStreamsFilter {
 		String metadata = "";
 				
 		try {
-			Writer saver = new BufferedWriter(new FileWriter(ResourceConstants.STDERR_ANSWERS));
+			Writer saver = new BufferedWriter(new FileWriter(NamesSpaceManager.err()));
 			boolean keepData = false; 
 			String data = null;	
 			while(iterator.hasNext()) {

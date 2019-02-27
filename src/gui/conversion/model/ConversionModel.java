@@ -75,7 +75,7 @@ public final class ConversionModel extends Model {
 	 */
 	public void saveImports() {
 		try {
-			 if(ResourcesManager.checkResources()) {
+			 if(ResourcesManager.checkConversionImports()) {
 				for(int i = 0 ; i < oldImportedFiles.length ; i ++) {
 					File f = new File(ResourceConstants.CONVERSION_OLD_IMPORTS_PATH + oldImportedFiles[i].getFileName() + ".acaja");
 					if(!f.exists()) {
@@ -103,7 +103,7 @@ public final class ConversionModel extends Model {
 	 * Methode qui recupere les fichiers recemments ouverts a l'ouverture. 
 	 */
 	public void loadOldImports() {
-		if(ResourcesManager.checkResources()) {
+		if(ResourcesManager.checkConversionImports()) {
 			File[] files = ResourceConstants.CONVERSION_OLD_IMPORTS.listFiles();	
 			// tri des fichiers par date
 			if(files != null) {

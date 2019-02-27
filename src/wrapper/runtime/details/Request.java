@@ -420,7 +420,6 @@ public final class Request {
 	 */
 	public ProcessManager result() {
 		if(output!=null) askSomethingElse(new String[]{output});
-		for(String s : request) System.out.println(s);
 		return FFmpegRuntime.execute(request);
 	}
 	

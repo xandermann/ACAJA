@@ -15,6 +15,7 @@ import gui.conversion.model.ConversionModel;
 import gui.conversion.views_controllers.*;
 import gui.processing.ProcessingWindow;
 import gui.style.*;
+import resources.ResourcesManager;
 import threads.*;
 import wrapper.language.ValueConstants;
 
@@ -158,6 +159,7 @@ public final class ConversionWindow extends StylizedJFrame {
 		quit.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
+				ResourcesManager.clearResources();
 				System.exit(0);		
 			}
 		});
@@ -203,7 +205,7 @@ public final class ConversionWindow extends StylizedJFrame {
 		StylizedJMenuItem switchMode = new StylizedJMenuItem("Passer en mode traitement");
 		switchMode.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent ae) {
+			public void actionPerformed(ActionEvent ae) {			
 				ProcessingWindow.generateProcessingWindow();
 				dispose();
 			}
@@ -385,7 +387,18 @@ public final class ConversionWindow extends StylizedJFrame {
 	 */
 	public static void generateConversionWindow() {
 		ConversionWindow conversionWindow = new ConversionWindow();
-
+		
+		conversionWindow.addWindowListener(new WindowListener() {
+			public void windowOpened(WindowEvent e) {}
+			public void windowClosing(WindowEvent e) {
+				ResourcesManager.clearResources();
+			}
+			public void windowClosed(WindowEvent e) {}
+			public void windowIconified(WindowEvent e) {}
+			public void windowDeiconified(WindowEvent e) {}
+			public void windowActivated(WindowEvent e) {}
+			public void windowDeactivated(WindowEvent e) {}
+		});
 		conversionWindow.setResizable(false);
 		conversionWindow.setTitle("Acaja - Mode Conversion");
 		conversionWindow.setSize(new Dimension(600, 600));

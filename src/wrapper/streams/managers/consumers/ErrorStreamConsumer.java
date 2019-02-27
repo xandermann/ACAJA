@@ -1,13 +1,8 @@
 package wrapper.streams.managers.consumers;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Writer;
-
-import resources.ResourceConstants;
-import wrapper.streams.iterators.ProcessManager;
-import wrapper.streams.iterators.StreamIterator;
+import java.io.*;
+import resources.*;
+import wrapper.streams.iterators.*;
 
 /**
  * [ CLASSE POUR LA "CONSOMMATION" DU FLUX STDERR. ]
@@ -35,9 +30,11 @@ public final class ErrorStreamConsumer implements StreamsConsumer {
 		 */ 
 		StreamIterator consumer = processToBeConsume.errorStreamIterator();
 		try {
-			Writer saver = new BufferedWriter(new FileWriter(ResourceConstants.STDERR_ANSWERS));
-			while(consumer.hasNext()) saver.write(consumer.next()+"\n");
-			saver.close();
+			if(consumer.hasNext()) {
+				Writer saver = new BufferedWriter(new FileWriter(NamesSpaceManager.err()));
+				while(consumer.hasNext()) saver.write(consumer.next()+"\n");
+				saver.close();
+			}
 		} catch (IOException e) {}
 	}
 }

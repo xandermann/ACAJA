@@ -280,7 +280,7 @@ public class SelectableFile {
 	 * @return String 	Le nom complet du fichier source.
 	 */
 	public String getSourceFileFullName() {
-		return sourceFile.getPath();
+		return sourceFile.getAbsolutePath();
 	}
 	
 	/**

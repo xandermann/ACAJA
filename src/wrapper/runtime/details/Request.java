@@ -25,6 +25,11 @@ import wrapper.streams.managers.consumers.WatchedConsumer;
  *
  */
 public final class Request {
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
+	
 	/**
 	 * LA REQUETE FFMPEG : INPUT FILE / FLAG(S) / VALEUR(S) / OUTPUT FILE. 
 	 */
@@ -38,6 +43,9 @@ public final class Request {
 	 */
 	private String output;
 	
+	
+	
+	//=======================================================================================================================
 	
 	
 	
@@ -81,6 +89,9 @@ public final class Request {
 	
 	
 	
+	//=======================================================================================================================
+	
+	
 	
 	/**
 	 * [ AJOUTER/MODIFIER UN FICHIER D'ENTREE. ]
@@ -114,6 +125,9 @@ public final class Request {
 	
 	
 	
+	//=======================================================================================================================
+	
+	
 	
 	/**
 	 * [ METHODE INTERNE - AJOUTER DES ARGUMENTS A LA REQUETE. ]
@@ -127,6 +141,9 @@ public final class Request {
 
 
 	
+	//=======================================================================================================================
+	
+	
 	
 	/**
 	 * [ CONNAITRE LES CODECS SUPPORTES PAR FFMPEG. ]
@@ -138,6 +155,9 @@ public final class Request {
 		return this;
 	}
 	
+	
+	
+	//=======================================================================================================================
 	
 	
 	
@@ -195,6 +215,9 @@ public final class Request {
 		return this;
 	}
 	
+	
+	
+	//=======================================================================================================================
 	
 	
 	
@@ -255,6 +278,9 @@ public final class Request {
 
 	
 	
+	//=======================================================================================================================
+	
+	
 	
 	/**
 	 * [ ROGNER. ]
@@ -295,8 +321,14 @@ public final class Request {
 	}
 
 	/**
-	 * [ COUPER UNE VIDEO. ]
+	 * [ COUPER. ]
 	 * 
+	 *  [ -------------------------------------- ] 	=>	input video
+	 *  
+	 *  			[ --------------------- ]		=>	output video
+	 *  		   time			        time+period
+	 *  
+	 *  
 	 * @param time		Le temps de depart de coupage de la video. 
 	 * @param perod		La periode a conserver de la video a partir du temps de depart. 
 	 * 
@@ -306,7 +338,6 @@ public final class Request {
 		if(time==null) throw new NullPointerException("Time null !");
 		if(period==null) throw new NullPointerException("Period null !");
 		askSomethingElse(new String[]{FlagConstants.FLAG_PERIOD[0], time, FlagConstants.FLAG_PERIOD[1], period});
-		framerate("1");
 		return this;
 	}
 	
@@ -341,24 +372,9 @@ public final class Request {
 	
 	
 	
+	//=======================================================================================================================
 	
 	
-	/**
-	 * [ CHOISIR LA QUALITE. ]
-	 * 
-	 * @param quality		La qualite. 
-	 * 
-	 * @return La requete this. 
-	 */
-	public Request quality(String quality) {
-		askSomethingElse(new String[]{FlagConstants.FLAG_QUALITY, quality});
-		return this;
-	}
-	
-	
-	
-	
-
 	
 	/**
 	 * [ EXTRAIRE UNE IMAGE. ]
@@ -375,6 +391,27 @@ public final class Request {
 	
 	
 	
+	//=======================================================================================================================
+
+	
+	
+	/**
+	 * [ CHOISIR LA QUALITE. ]
+	 * 
+	 * @param quality		La qualite. 
+	 * 
+	 * @return La requete this. 
+	 */
+	public Request quality(String quality) {
+		askSomethingElse(new String[]{FlagConstants.FLAG_QUALITY, quality});
+		return this;
+	}
+	
+	
+	
+	//=======================================================================================================================
+	
+	
 	
 	/**
 	 * [ EXECUTER LA REQUETE ET OBTENIR LE RESULAT. ]
@@ -383,6 +420,7 @@ public final class Request {
 	 */
 	public ProcessManager result() {
 		if(output!=null) askSomethingElse(new String[]{output});
+		for(String s : request) System.out.println(s);
 		return FFmpegRuntime.execute(request);
 	}
 	
@@ -395,4 +433,9 @@ public final class Request {
 		WatchedConsumer.consume(result());
 		return this;
 	}
+	
+	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
 }

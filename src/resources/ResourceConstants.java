@@ -28,6 +28,7 @@ public final class ResourceConstants {
 	 */
 	public final static String TEMPORARY_FILES_PATH = "temporary_files/";
 	public final static File TEMPORARY_FILES = new File(TEMPORARY_FILES_PATH);
+	public final static String TEMPORARY_FILES_FULL_PATH = TEMPORARY_FILES.getAbsolutePath();
 
 	/**
 	 * FICHIERS DE SAUVEGARDES DES PRECEDENTS IMPORTS SUR LE LOGICIEL.

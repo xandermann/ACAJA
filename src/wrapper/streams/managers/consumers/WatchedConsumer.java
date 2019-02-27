@@ -74,7 +74,7 @@ public final class WatchedConsumer extends AllStreamsConsumer {
 
     //==================================================================================================================================================
 	
-	
+
 	/**
 	 * [ METHODE DE CLASSE POUR LA CONSOMMATION DES FLUX DE REPONSES DE FFmpeg. ]
 	 * 
@@ -90,7 +90,6 @@ public final class WatchedConsumer extends AllStreamsConsumer {
 		AllStreamsConsumer.consume(processToBeConsume);
 		workIsOver();
 	}
-	
 	
 
    //==================================================================================================================================================

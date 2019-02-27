@@ -130,12 +130,9 @@ public final class MetadataFilter implements DataStreamsFilter {
 		 */
 		StreamIterator iterator = processToStudy.errorStreamIterator();
 		
-		// On ne recupere que les donnees qui nous interesse 
-		// d'ou la presence du booleen keepData. 
+		// On ne recupere que les donnees qui nous interesse. 
 		boolean keepData = false; 
-		
 		String metadata = "", data = null;	
-		
 		while(iterator.hasNext()) {
 			data = iterator.next();
 			if(keepData == false && data.contains("Input")) keepData = true;		

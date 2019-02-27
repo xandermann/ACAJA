@@ -42,8 +42,7 @@ public final class DataCodecsFilter implements DataStreamsFilter {
 		 */
 		StreamIterator iterator = processToStudy.outputStreamIterator();
 		
-		// On ne recupere que les donnees qui nous interesse 
-		// d'ou la presence du booleen keepData. 
+		// On ne recupere que les donnees qui nous interesse.
 		boolean keepData = false; 
 		List<String> dataCodecs = new ArrayList<String>();
 		String data = null;	

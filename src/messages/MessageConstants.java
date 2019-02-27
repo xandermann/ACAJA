@@ -39,5 +39,5 @@ public final class MessageConstants {
 	
 	public static final String ERROR_ABSENT_SELECTED_FILE = 
 			ERROR_PREFIX
-			+ "Le fichier selectionne n'existe pas !";
+			+ "! Le fichier selectionne n'existe pas !";
 }

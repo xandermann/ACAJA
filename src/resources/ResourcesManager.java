@@ -10,9 +10,7 @@ public final class ResourcesManager {
 	 * @return boolean		Vaut true si le repertoire existe ou a reussi a etre recreer. 
 	 */
 	public static boolean checkDirectory(File directory) {
-		if(!directory.exists())
-			return directory.mkdir();
-		return true;
+		return directory.exists() ? true : directory.mkdir();
 	}
 	
 	public static boolean checkImports() {

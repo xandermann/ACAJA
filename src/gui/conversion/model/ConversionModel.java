@@ -77,8 +77,7 @@ public final class ConversionModel extends Model {
 		try {
 			 if(ResourcesManager.checkResources()) {
 				for(int i = 0 ; i < oldImportedFiles.length ; i ++) {
-					File f = new File(ResourceConstants.CONVERSION_OLD_IMPORTS_PATH 
-									  + oldImportedFiles[i].getFileName() + ".acaja");
+					File f = new File(ResourceConstants.CONVERSION_OLD_IMPORTS_PATH + oldImportedFiles[i].getFileName() + ".acaja");
 					if(!f.exists()) {
 						FileOutputStream fos = new FileOutputStream(f);
 						ObjectOutputStream oos = new ObjectOutputStream(fos);
@@ -105,7 +104,7 @@ public final class ConversionModel extends Model {
 	 */
 	public void loadOldImports() {
 		if(ResourcesManager.checkResources()) {
-			File[] files = new File(ResourceConstants.CONVERSION_OLD_IMPORTS_PATH).listFiles();	
+			File[] files = ResourceConstants.CONVERSION_OLD_IMPORTS.listFiles();	
 			// tri des fichiers par date
 			if(files != null) {
 				Arrays.sort(files, new Comparator<File>(){

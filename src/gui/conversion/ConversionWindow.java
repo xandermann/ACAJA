@@ -9,7 +9,7 @@ import exceptions.*;
 import files.FileInformation;
 import files.enumerations.SettingType;
 import files.files.SettingsFile;
-import gui.FileChooser;
+import gui.JFileChooserManager;
 import gui.WindowTools;
 import gui.conversion.model.ConversionModel;
 import gui.conversion.views_controllers.*;
@@ -92,7 +92,7 @@ public final class ConversionWindow extends StylizedJFrame {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
 					try {
-						File f = FileChooser.chooseFile();
+						File f = JFileChooserManager.chooseFile();
 						model.add(f);
 						if (model.getCurrentFile() == null) redrawFirstTime();
 						model.setCurrentFile(f.getName());
@@ -108,7 +108,7 @@ public final class ConversionWindow extends StylizedJFrame {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
 				try {
-					ArrayList<File> files = FileChooser.chooseDirectoryAndListSonFiles();
+					ArrayList<File> files = JFileChooserManager.chooseDirectoryAndListSonFiles();
 					for (File f : files) {
 						model.add(f);
 						if(model.getCurrentFile() == null) redrawFirstTime();
@@ -192,7 +192,7 @@ public final class ConversionWindow extends StylizedJFrame {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
 				try {
-					model.setDestinationFolder(FileChooser.chooseDirectory());
+					model.setDestinationFolder(JFileChooserManager.chooseDirectory());
 				} catch (ImportationException ie) {
 					JOptionPane.showMessageDialog(null, ie.getMessage());
 				}
@@ -282,7 +282,7 @@ public final class ConversionWindow extends StylizedJFrame {
 				@Override
 				public void actionPerformed(ActionEvent ae) {
 					try {
-						model.setDestinationFolder(FileChooser.chooseDirectory());
+						model.setDestinationFolder(JFileChooserManager.chooseDirectory());
 					} catch (ImportationException ie) {
 						JOptionPane.showMessageDialog(null, ie.getMessage());
 					}

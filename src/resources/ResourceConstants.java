@@ -57,12 +57,15 @@ public final class ResourceConstants {
 	
 	
 	/**
-	 * DATE COURANTE. 
+	 * @return String 		DATE COURANTE (YYYY-MM-DD). 
 	 */
 	public static String day() {
 		return Instant.now().toString().substring(0, Instant.now().toString().indexOf("T"));
 	}
 	
+	/**
+	 * @return String 		DATE COUTRANTE (YYYY-MM-DD) + MOMENT COURANT (EN MILLISECONDES).
+	 */
 	public static String now() {
 		return day()+"_"+System.currentTimeMillis();
 	}

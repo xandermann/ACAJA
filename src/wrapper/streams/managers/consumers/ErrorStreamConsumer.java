@@ -1,5 +1,11 @@
 package wrapper.streams.managers.consumers;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
+
+import resources.ResourceConstants;
 import wrapper.streams.iterators.ProcessManager;
 import wrapper.streams.iterators.StreamIterator;
 
@@ -28,6 +34,10 @@ public final class ErrorStreamConsumer implements StreamsConsumer {
 		 * ( STDERR de l'application externe : FFMPEG. ).
 		 */ 
 		StreamIterator consumer = processToBeConsume.errorStreamIterator();
-		while(consumer.hasNext()) consumer.next();
+		try {
+			Writer saver = new BufferedWriter(new FileWriter(ResourceConstants.STDERR_ANSWERS));
+			while(consumer.hasNext()) saver.write(consumer.next()+"\n");
+			saver.close();
+		} catch (IOException e) {}
 	}
 }

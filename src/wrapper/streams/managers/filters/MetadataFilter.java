@@ -1,5 +1,11 @@
 package wrapper.streams.managers.filters;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
+
+import resources.ResourceConstants;
 import wrapper.streams.iterators.*;
 import wrapper.streams.managers.consumers.OutputStreamConsumer;
 
@@ -129,18 +135,21 @@ public final class MetadataFilter implements DataStreamsFilter {
 		 *  EXTRACTION DES METADONNEES.
 		 */
 		StreamIterator iterator = processToStudy.errorStreamIterator();
-		
-		// On ne recupere que les donnees qui nous interesse. 
-		boolean keepData = false; 
-		String metadata = "", data = null;	
-		while(iterator.hasNext()) {
-			data = iterator.next();
-			if(keepData == false && data.contains("Input")) keepData = true;		
-			if(keepData == true) metadata += data + " ";
-		}
+		String metadata = "";
+				
+		try {
+			Writer saver = new BufferedWriter(new FileWriter(ResourceConstants.STDERR_ANSWERS));
+			boolean keepData = false; 
+			String data = null;	
+			while(iterator.hasNext()) {
+				saver.write((data = iterator.next())+"\n");
+				if(keepData == false && data.contains("Input")) keepData = true;		
+				if(keepData == true) metadata += data + " ";
+			}
+			saver.close();
+		} catch (IOException e) {}
 		
 		OutputStreamConsumer.consume(processToStudy);
-		
 		return metadata;
 	}
 	

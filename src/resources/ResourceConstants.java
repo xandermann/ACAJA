@@ -39,4 +39,13 @@ public final class ResourceConstants {
 	public final static File ALL_OLD_IMPORTS = new File(ALL_OLD_IMPORTS_PATH);
 	public final static File CONVERSION_OLD_IMPORTS = new File(CONVERSION_OLD_IMPORTS_PATH);
 	public final static File PROCESSING_OLD_IMPORTS = new File(ALL_OLD_IMPORTS_PATH);
+	
+	/**
+	 * STOCKAGE DES FLUX. 
+	 */
+	public final static String ANSWERS_PATH = "last_answers/";
+	public final static String STDOUT_ANSWERS_PATH = ANSWERS_PATH + "stdout.txt";
+	public final static String STDERR_ANSWERS_PATH = ANSWERS_PATH + "stderr.txt";
+	public final static File STDOUT_ANSWERS = new File(STDOUT_ANSWERS_PATH);
+	public final static File STDERR_ANSWERS = new File(STDERR_ANSWERS_PATH);
 }

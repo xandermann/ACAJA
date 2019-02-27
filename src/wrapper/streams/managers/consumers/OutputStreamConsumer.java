@@ -1,5 +1,7 @@
 package wrapper.streams.managers.consumers;
 
+import java.io.*;
+import resources.ResourceConstants;
 import wrapper.streams.iterators.ProcessManager;
 import wrapper.streams.iterators.StreamIterator;
 
@@ -28,6 +30,10 @@ public final class OutputStreamConsumer implements StreamsConsumer {
 		 * ( STDOUT de l'application externe : FFMPEG. ).
 		 */
 		StreamIterator consumer = processToBeConsume.outputStreamIterator();
-		while(consumer.hasNext()) consumer.next();
+		try {
+			Writer saver = new BufferedWriter(new FileWriter(ResourceConstants.STDOUT_ANSWERS));
+			while(consumer.hasNext()) saver.write(consumer.next()+"\n");
+			saver.close();
+		} catch (IOException e) {}
 	}
 }

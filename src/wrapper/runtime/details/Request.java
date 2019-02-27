@@ -40,6 +40,7 @@ public final class Request {
 	
 	
 	
+	
 	/**
 	 * [ CONSTRUCTEUR VIDE ]
 	 * 
@@ -80,6 +81,7 @@ public final class Request {
 	
 	
 	
+	
 	/**
 	 * [ AJOUTER/MODIFIER UN FICHIER D'ENTREE. ]
 	 * 
@@ -112,6 +114,7 @@ public final class Request {
 	
 	
 	
+	
 	/**
 	 * [ METHODE INTERNE - AJOUTER DES ARGUMENTS A LA REQUETE. ]
 	 * 
@@ -124,6 +127,7 @@ public final class Request {
 
 
 	
+	
 	/**
 	 * [ CONNAITRE LES CODECS SUPPORTES PAR FFMPEG. ]
 	 * 
@@ -133,6 +137,7 @@ public final class Request {
 		askSomethingElse(new String[]{FlagConstants.FLAG_SUPPORTED_CODECS});
 		return this;
 	}
+	
 	
 	
 	
@@ -189,6 +194,7 @@ public final class Request {
 		askSomethingElse(new String[]{FlagConstants.FLAG_FRAMERATE, framerate});
 		return this;
 	}
+	
 	
 	
 	
@@ -251,7 +257,7 @@ public final class Request {
 	
 	
 	/**
-	 * [ ROGNER UNE VIDEO. ]
+	 * [ ROGNER. ]
 	 * 
 	 * 			xCorner
 	 * 	yCorner + < -------------------- > 
@@ -289,7 +295,23 @@ public final class Request {
 	}
 
 	/**
-	 * [ PRIVOTER DE 90� UNE VIDEO. ]
+	 * [ COUPER UNE VIDEO. ]
+	 * 
+	 * @param time		Le temps de depart de coupage de la video. 
+	 * @param perod		La periode a conserver de la video a partir du temps de depart. 
+	 * 
+	 * @return La requete this. 
+	 */
+	public Request cut(String time, String period) {
+		if(time==null) throw new NullPointerException("Time null !");
+		if(period==null) throw new NullPointerException("Period null !");
+		askSomethingElse(new String[]{FlagConstants.FLAG_PERIOD[0], time, FlagConstants.FLAG_PERIOD[1], period});
+		framerate("1");
+		return this;
+	}
+	
+	/**
+	 * [ PRIVOTER DE 90 DEGRES. ]
 	 * 
 	 * @return La requete this. 
 	 */
@@ -298,32 +320,15 @@ public final class Request {
 		return this;
 	}
 	
-	
-	
-	
 	/**
-	 * [ EXTRAIRE UNE IMAGE D'UNE VIDEO. ]
-	 * 
-	 * @param time	Le moment de la video ou se situe l'image. 
-	 * 
-	 * @return La requete this. 
-	 */
-	public Request extractImage(String time) {
-		if(time==null) throw new NullPointerException("NumberAudioChannels null !");
-		askSomethingElse(new String[]{FlagConstants.FLAG_PERIOD[0], time, FlagConstants.FLAG_PERIOD[1], "00:00:01.00"});
-		framerate("1");
-		return this;
-	}
-	
-	/**
-	 * [ REDIMMENSIONNER UNE IMAGE. ]
+	 * [ REDIMMENSIONNER. ]
 	 * 
 	 * @param width		La largeur. 
 	 * @param height	La hauteur. 
 	 * 
 	 * @return La requete this. 
 	 */
-	public Request resizeImage(String width, String height) {
+	public Request resize(String width, String height) {
 		if(width==null) throw new NullPointerException("Width null !");
 		if(height==null) throw new NullPointerException("Height null !");
 		
@@ -333,6 +338,10 @@ public final class Request {
 		askSomethingElse(new String[]{FlagConstants.FLAG_RESIZE[0], FlagConstants.FLAG_RESIZE[1]+width+FlagConstants.FLAG_RESIZE[2]+height});
 		return this;
 	}
+	
+	
+	
+	
 	
 	/**
 	 * [ CHOISIR LA QUALITE. ]
@@ -345,6 +354,27 @@ public final class Request {
 		askSomethingElse(new String[]{FlagConstants.FLAG_QUALITY, quality});
 		return this;
 	}
+	
+	
+	
+	
+
+	
+	/**
+	 * [ EXTRAIRE UNE IMAGE. ]
+	 * 
+	 * @param time	Le moment de la video ou se situe l'image. 
+	 * 
+	 * @return La requete this. 
+	 */
+	public Request frame(String time) {
+		cut(time, "00:00:01.00");
+		framerate("1");
+		return this;
+	}
+	
+	
+	
 	
 	/**
 	 * [ EXECUTER LA REQUETE ET OBTENIR LE RESULAT. ]

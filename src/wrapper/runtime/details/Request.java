@@ -1,14 +1,14 @@
 package wrapper.runtime.details;
 
 import java.util.*;
-import wrapper.language.FlagConstants;
+import wrapper.language.*;
 import wrapper.streams.iterators.ProcessManager;
 import wrapper.streams.managers.consumers.WatchedConsumer;
 
 /**
  * [ CLASSE POUR LA CONSTITUTION DES REQUETES FFMPEG. ]
  * 
- * Cette classe comporte une majorité de methodes publiques 
+ * Cette classe comporte une majoritï¿½ de methodes publiques 
  * retourant this. Cela permet d'enchainer en une meme instruction 
  * un nombre "infini" d'operations, de la memme maniere qu'on le ferait
  * en saisissant une multituide de flags dans une commande FFmpeg dans un SHELL. 
@@ -25,6 +25,11 @@ import wrapper.streams.managers.consumers.WatchedConsumer;
  *
  */
 public final class Request {
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
+	
 	/**
 	 * LA REQUETE FFMPEG : INPUT FILE / FLAG(S) / VALEUR(S) / OUTPUT FILE. 
 	 */
@@ -40,6 +45,10 @@ public final class Request {
 	
 	
 	
+	//=======================================================================================================================
+	
+	
+	
 	/**
 	 * [ CONSTRUCTEUR VIDE ]
 	 * 
@@ -47,8 +56,6 @@ public final class Request {
 	 * ni de fichier d'entree, ni de fichier de sortie. 
 	 */
 	public Request() {
-		input = null;
-		output = null;
 		request = new ArrayList<String>();
 	}
 	
@@ -61,11 +68,8 @@ public final class Request {
 	 * @param input			Le nom complet ( chemin + nom ) du fichier d'entree. 
 	 */
 	public Request(String input) {
-		if((this.input = input) == null) throw new NullPointerException("input null !");
-		output = null;
 		request = new ArrayList<String>();
-		request.add("-i");
-		request.add(input);
+		from(input);
 	}
 	
 	/**
@@ -78,11 +82,14 @@ public final class Request {
 	 * @param output		Le nom complet ( chemin + nom ) du fichier de sortie. 
 	 */
 	public Request(String input, String output) {
-		if((this.output = output) == null) throw new NullPointerException("Output null !");
 		request = new ArrayList<String>();
-		request.add("-i");
-		request.add(input);
+		from(input);
+		to(output);
 	}
+	
+	
+	
+	//=======================================================================================================================
 	
 	
 	
@@ -118,6 +125,10 @@ public final class Request {
 	
 	
 	
+	//=======================================================================================================================
+	
+	
+	
 	/**
 	 * [ METHODE INTERNE - AJOUTER DES ARGUMENTS A LA REQUETE. ]
 	 * 
@@ -130,6 +141,10 @@ public final class Request {
 
 
 	
+	//=======================================================================================================================
+	
+	
+	
 	/**
 	 * [ CONNAITRE LES CODECS SUPPORTES PAR FFMPEG. ]
 	 * 
@@ -139,6 +154,10 @@ public final class Request {
 		askSomethingElse(new String[]{FlagConstants.FLAG_SUPPORTED_CODECS});
 		return this;
 	}
+	
+	
+	
+	//=======================================================================================================================
 	
 	
 	
@@ -195,6 +214,10 @@ public final class Request {
 		askSomethingElse(new String[]{FlagConstants.FLAG_FRAMERATE, framerate});
 		return this;
 	}
+	
+	
+	
+	//=======================================================================================================================
 	
 	
 	
@@ -255,9 +278,12 @@ public final class Request {
 
 	
 	
+	//=======================================================================================================================
+	
+	
 	
 	/**
-	 * [ ROGNER UNE VIDEO. ]
+	 * [ ROGNER. ]
 	 * 
 	 * 			xCorner
 	 * 	yCorner + < -------------------- > 
@@ -295,7 +321,28 @@ public final class Request {
 	}
 
 	/**
-	 * [ PRIVOTER DE 90° UNE VIDEO. ]
+	 * [ COUPER. ]
+	 * 
+	 *  [ -------------------------------------- ] 	=>	input video
+	 *  
+	 *  			[ --------------------- ]		=>	output video
+	 *  		   time			        time+period
+	 *  
+	 *  
+	 * @param time		Le temps de depart de coupage de la video. 
+	 * @param perod		La periode a conserver de la video a partir du temps de depart. 
+	 * 
+	 * @return La requete this. 
+	 */
+	public Request cut(String time, String period) {
+		if(time==null) throw new NullPointerException("Time null !");
+		if(period==null) throw new NullPointerException("Period null !");
+		askSomethingElse(new String[]{FlagConstants.FLAG_PERIOD[0], time, FlagConstants.FLAG_PERIOD[1], period});
+		return this;
+	}
+	
+	/**
+	 * [ PRIVOTER DE 90 DEGRES. ]
 	 * 
 	 * @return La requete this. 
 	 */
@@ -304,44 +351,65 @@ public final class Request {
 		return this;
 	}
 	
-	
-	
-	
 	/**
-	 * [ EXTRAIRE UNE IMAGE D'UNE VIDEO. ]
-	 * 
-	 * @param time	Le moment de la video ou se situe l'image. 
-	 * 
-	 * @return La requete this. 
-	 */
-	public Request extractImage(String time) {
-		if(time==null) throw new NullPointerException("NumberAudioChannels null !");
-		askSomethingElse(new String[]{
-				FlagConstants.FLAG_PERIOD[0], time, FlagConstants.FLAG_PERIOD[1], "00:00:01.00"});
-		framerate("1");
-		return this;
-	}
-	
-	/**
-	 * [ REDIMMENSIONNER UNE IMAGE. ]
+	 * [ REDIMMENSIONNER. ]
 	 * 
 	 * @param width		La largeur. 
 	 * @param height	La hauteur. 
 	 * 
 	 * @return La requete this. 
 	 */
-	public Request resizeImage(String width, String height) {
+	public Request resize(String width, String height) {
 		if(width==null) throw new NullPointerException("Width null !");
 		if(height==null) throw new NullPointerException("Height null !");
 		
 		if(Integer.parseInt(width)<=0) throw new IllegalArgumentException("Width negative ou nulle !");
 		if(Integer.parseInt(height)<=0) throw new IllegalArgumentException("Height negative ou nulle !");
 		
-		askSomethingElse(new String[]{
-				FlagConstants.FLAG_RESIZE[0], 
-				FlagConstants.FLAG_RESIZE[1]+width+FlagConstants.FLAG_RESIZE[2]+height});
+		askSomethingElse(new String[]{FlagConstants.FLAG_RESIZE[0], FlagConstants.FLAG_RESIZE[1]+width+FlagConstants.FLAG_RESIZE[2]+height});
 		return this;
 	}
+	
+	
+	
+	//=======================================================================================================================
+	
+	
+	
+	/**
+	 * [ EXTRAIRE UNE IMAGE. ]
+	 * 
+	 * @param time	Le moment de la video ou se situe l'image. 
+	 * 
+	 * @return La requete this. 
+	 */
+	public Request frame(String time) {
+		cut(time, ValueConstants.ONE_SECOND);
+		framerate("1");
+		return this;
+	}
+	
+	
+	
+	//=======================================================================================================================
+
+	
+	
+	/**
+	 * [ CHOISIR LA QUALITE. ]
+	 * 
+	 * @param quality		La qualite. 
+	 * 
+	 * @return La requete this. 
+	 */
+	public Request quality(String quality) {
+		askSomethingElse(new String[]{FlagConstants.FLAG_QUALITY, quality});
+		return this;
+	}
+	
+	
+	
+	//=======================================================================================================================
 	
 	
 	
@@ -364,4 +432,9 @@ public final class Request {
 		WatchedConsumer.consume(result());
 		return this;
 	}
+	
+	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
 }

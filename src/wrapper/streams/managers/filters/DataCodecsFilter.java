@@ -1,6 +1,13 @@
 package wrapper.streams.managers.filters;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
 import java.util.*;
+
+import resources.NamesSpaceManager;
+import resources.ResourceConstants;
 import wrapper.streams.iterators.*;
 import wrapper.streams.managers.consumers.*;
 
@@ -41,26 +48,27 @@ public final class DataCodecsFilter implements DataStreamsFilter {
 		 *  EXTRACTION DES CODECS.
 		 */
 		StreamIterator iterator = processToStudy.outputStreamIterator();
-		
-		// On ne recupere que les donnees qui nous interesse 
-		// d'ou la presence du booleen keepData. 
-		boolean keepData = false; 
 		List<String> dataCodecs = new ArrayList<String>();
-		String data = null;	
-		while(iterator.hasNext()) {
-			data = iterator.next();
-			if(keepData==false && data.contains("-------")) {
-				keepData = true;
-				data = iterator.next();
-			}		
-			if(keepData==true) {
-				String[] filteredData = data.split(" ");
-				if(filteredData[1].contains(typeCodec)) dataCodecs.add(filteredData[2]);
-			}
-		}
 		
-		ErrorStreamConsumer.consume(processToStudy);
+		try {
+			Writer saver = new BufferedWriter(new FileWriter(NamesSpaceManager.out()));
+			boolean keepData = false; 
+			String data = null;	
+			while(iterator.hasNext()) {
+				saver.write((data = iterator.next())+"\n");
+				if(keepData==false && data.contains("-------")) {
+					keepData = true;
+					data = iterator.next();
+				}		
+				if(keepData==true) {
+					String[] filteredData = data.split(" ");
+					if(filteredData[1].contains(typeCodec)) dataCodecs.add(filteredData[2]);
+				}
+			}
+			saver.close();
+		} catch (IOException e) {}
 
+		ErrorStreamConsumer.consume(processToStudy);
 		return dataCodecs.toArray(new String[dataCodecs.size()]);
 	}
 	

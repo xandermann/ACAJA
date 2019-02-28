@@ -1,4 +1,4 @@
-package gui.conversion.views;
+package gui.conversion.views_controllers;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -27,7 +27,7 @@ public final class LibraryViewController extends JList implements Observer, Mous
 	public LibraryViewController(ConversionModel model, DefaultListModel listModel) {
 		super(listModel);
 		if((this.model = model) == null) throw new NullPointerException("ConversionModel null !");
-		setFixedCellWidth(250);
+		setFixedCellWidth(270);
 		setVisible(true);
 		addMouseListener(this);
 		addKeyListener(this);

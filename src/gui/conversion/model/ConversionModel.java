@@ -8,7 +8,7 @@ import files.*;
 import files.enumerations.SettingType;
 import files.files.SettingsFile;
 import gui.Model;
-import gui.conversion.views.EntryView;
+import gui.conversion.views_controllers.EntryView;
 import messages.MessageConstants;
 import resources.ResourceConstants;
 import resources.ResourcesManager;
@@ -75,10 +75,9 @@ public final class ConversionModel extends Model {
 	 */
 	public void saveImports() {
 		try {
-			 if(ResourcesManager.checkResources()) {
+			 if(ResourcesManager.checkConversionImports()) {
 				for(int i = 0 ; i < oldImportedFiles.length ; i ++) {
-					File f = new File(ResourceConstants.CONVERSION_OLD_IMPORTS_PATH 
-									  + oldImportedFiles[i].getFileName() + ".acaja");
+					File f = new File(ResourceConstants.CONVERSION_OLD_IMPORTS_PATH + oldImportedFiles[i].getFileName() + ".acaja");
 					if(!f.exists()) {
 						FileOutputStream fos = new FileOutputStream(f);
 						ObjectOutputStream oos = new ObjectOutputStream(fos);
@@ -104,8 +103,8 @@ public final class ConversionModel extends Model {
 	 * Methode qui recupere les fichiers recemments ouverts a l'ouverture. 
 	 */
 	public void loadOldImports() {
-		if(ResourcesManager.checkResources()) {
-			File[] files = new File(ResourceConstants.CONVERSION_OLD_IMPORTS_PATH).listFiles();	
+		if(ResourcesManager.checkConversionImports()) {
+			File[] files = ResourceConstants.CONVERSION_OLD_IMPORTS.listFiles();	
 			// tri des fichiers par date
 			if(files != null) {
 				Arrays.sort(files, new Comparator<File>(){
@@ -255,6 +254,17 @@ public final class ConversionModel extends Model {
 	//=======================================================================================================================
 	//=======================================================================================================================
 	
+
+	
+	/**
+	 * [ LE MODELE CONTIENT-IL DES FICHIERS QUI ON ETE MODIFIES ? ]
+	 */
+	public boolean isModified() {
+		for(SettingsFile sf : files) {
+			if(sf.isModified()) return true;
+		}
+		return false;
+	}
 	
 	
 	/**
@@ -263,8 +273,8 @@ public final class ConversionModel extends Model {
 	 * Methode qui permet de modifier un parametre du fichier
 	 * actuellement selectionne
 	 */
-	public void modify(SettingType typeSeyting, String setting) {
-		currentFile.modify(typeSeyting, setting);
+	public void modify(SettingType typeSetting, String setting) {
+		currentFile.modify(typeSetting, setting);
 	}
 	
 	

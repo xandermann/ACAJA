@@ -8,42 +8,46 @@ package files.enumerations;
  */
 public enum SettingType implements OperationType {
 	/**
-	 * Parametre de type codec video.
+	 * Parametre du type de qualite. 
+	 */
+	QUALITY,
+	/**
+	 * Parametre du type de codec video.
 	 */
 	VIDEO_CODEC,
 
 	/**
-	 * Parametre de type bitrate video.
+	 * Parametre du type de bitrate video.
 	 */
 	VIDEO_BITRATE,
 
 	/**
-	 * Parametre de type FPS de la video.
+	 * Parametre du type de FPS de la video.
 	 */
 	FRAMERATE,
 
 	/**
-	 * Parametre de type resolution video.
+	 * Parametre du type de resolution video.
 	 */
 	RESOLUTION,
 	
 	/**
-	 * Parametre de type codec audio.
+	 * Parametre du type de codec audio.
 	 */
 	AUDIO_CODEC,
 	
 	/**
-	 * Parametre de type taux d'echantillonage.
+	 * Parametre du type de taux d'echantillonage.
 	 */
 	SAMPLING_RATE,
 	
 	/**
-	 * Parametre de type nombre de canaux audio.
+	 * Parametre du type de nombre de canaux audio.
 	 */
 	NUMBER_AUDIO_CHANNELS,
 
 	/**
-	 * Parametre de type bitrate audio.
+	 * Parametre du type de bitrate audio.
 	 */
 	AUDIO_BITRATE
 }

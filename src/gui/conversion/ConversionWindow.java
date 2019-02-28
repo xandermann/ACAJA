@@ -7,14 +7,17 @@ import java.util.ArrayList;
 import javax.swing.*;
 import exceptions.*;
 import files.FileInformation;
-import gui.FileChooser;
+import files.enumerations.SettingType;
+import files.files.SettingsFile;
+import gui.JFileChooserManager;
 import gui.WindowTools;
-import gui.conversion.controllers.ConversionWindowController;
 import gui.conversion.model.ConversionModel;
-import gui.conversion.views.*;
+import gui.conversion.views_controllers.*;
 import gui.processing.ProcessingWindow;
 import gui.style.*;
+import resources.ResourcesManager;
 import threads.*;
+import wrapper.language.ValueConstants;
 
 //TODO : CODE OPTIMISATION
 
@@ -90,7 +93,7 @@ public final class ConversionWindow extends StylizedJFrame {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
 					try {
-						File f = FileChooser.chooseFile();
+						File f = JFileChooserManager.chooseFile();
 						model.add(f);
 						if (model.getCurrentFile() == null) redrawFirstTime();
 						model.setCurrentFile(f.getName());
@@ -106,7 +109,7 @@ public final class ConversionWindow extends StylizedJFrame {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
 				try {
-					ArrayList<File> files = FileChooser.chooseDirectoryAndListSonFiles();
+					ArrayList<File> files = JFileChooserManager.chooseDirectoryAndListSonFiles();
 					for (File f : files) {
 						model.add(f);
 						if(model.getCurrentFile() == null) redrawFirstTime();
@@ -120,7 +123,7 @@ public final class ConversionWindow extends StylizedJFrame {
 		
 		
 		JMenu recentFiles = new JMenu("Fichiers recemments importes");
-		FileInformation[] files = this.model.getOldImports();
+		FileInformation[] files = model.getOldImports();
 		for(FileInformation f : files) {
 			if(f != null) {
 				StylizedJMenuItem itemFile = new StylizedJMenuItem(f.getFileName());
@@ -156,11 +159,10 @@ public final class ConversionWindow extends StylizedJFrame {
 		quit.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
-				System.exit(0);
-				dispose();
+				ResourcesManager.clearResources();
+				System.exit(0);		
 			}
 		});
-
 
 		
 		filesMenu.add(importFile);
@@ -187,12 +189,12 @@ public final class ConversionWindow extends StylizedJFrame {
 	private JMenu drawOptionsMenu() {
 		JMenu optionsMenu = new JMenu("Options");
 
-		StylizedJMenuItem exportFolder = new StylizedJMenuItem("Changer le repertoire de sortie");
+		StylizedJMenuItem exportFolder = new StylizedJMenuItem("Choisir le repertoire de sortie");
 		exportFolder.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
 				try {
-					model.setDestinationFolder(FileChooser.chooseDirectory());
+					model.setDestinationFolder(JFileChooserManager.chooseDirectory());
 				} catch (ImportationException ie) {
 					JOptionPane.showMessageDialog(null, ie.getMessage());
 				}
@@ -203,7 +205,7 @@ public final class ConversionWindow extends StylizedJFrame {
 		StylizedJMenuItem switchMode = new StylizedJMenuItem("Passer en mode traitement");
 		switchMode.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent ae) {
+			public void actionPerformed(ActionEvent ae) {			
 				ProcessingWindow.generateProcessingWindow();
 				dispose();
 			}
@@ -219,11 +221,144 @@ public final class ConversionWindow extends StylizedJFrame {
 	
 	//=======================================================================================================================
 	//=======================================================================================================================
+	
+	
 
+	/**
+	 * [ METHODE INTERNE POUR LA GESTION DE LA CONVERSION. ]
+	 */
+	private void convert() {
+		/**
+		 * FENETRE D'ATTENTE. 
+		 */
+		StylizedJFrame waitWindow = new StylizedJFrame("Conversion de votre fichier");
+		waitWindow.setLayout(new BorderLayout());
+		waitWindow.setSize(400, 150);
+		waitWindow.setResizable(false);
+		waitWindow.setLocationRelativeTo(null);
+		waitWindow.add(
+				new JLabel("<html>" + 
+							"<body>" + 
+							"		Conversion du ou des fichier(s)." +
+							"		<br>" +
+							"		Veuillez patientez..." + 
+							"</body>" + 
+							"</html>", JLabel.CENTER),
+				BorderLayout.CENTER);
+		WindowTools.showLogo(waitWindow);
+		/**
+		 * DEBUT DE LA CONVERSION.
+		 */
+		model.startSave();
+		/**
+		 * LANCEMENT DE LA CONVERSION DANS UN AUTRE PROCESSUS.
+		 */
+		ThreadForSave.saveInNewThread(model);
+		/**
+		 * LANCEMENT ET GESTION DE LA FENETRE D'ATTENTE DANS UN AUTRE PROCESSUS.
+		 */
+		ThreadForWaitWindow.waitInNewThread(waitWindow);
+	}
+	
 	
 	
 	/**
-	 * [ METHODE INTERNE POUR LA CONSTRUCTION DU MENU DE CONVERTION. ]
+	 * [ METHODE INTERNE POUR LA COSNTRUCTION DE LA FENETRE DE FINALISATION. ]
+	 */
+	private void drawConvertWindow() {
+		if(RuntimeSpaceManager.manage() && model.isModified()) {
+			StylizedJFrame outputWindow = new StylizedJFrame("Demarrer la conversion");
+			outputWindow.setResizable(false);
+			outputWindow.setSize(new Dimension(400, 280));
+			outputWindow.setLocationRelativeTo(null);
+			outputWindow.setBackground(StyleTheme.BACKGROUND_COLOR);
+			
+			JPanel window = new JPanel(new BorderLayout());		
+			JPanel title = new JPanel(new BorderLayout());
+			JPanel outputPanel = new JPanel(new BorderLayout());
+			JLabel info = new JLabel("<html><br>Choisissez le repertoire et la qualite en sortie : </html>",JLabel.CENTER);
+			JLabel outputFolderLabel = new JLabel("<html><br>Repertoire de sortie : </html>", JLabel.CENTER);
+			title.add(info,BorderLayout.CENTER);
+			StylizedJButton outputFolderButton = new StylizedJButton("Parcourir");
+			outputFolderButton.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent ae) {
+					try {
+						model.setDestinationFolder(JFileChooserManager.chooseDirectory());
+					} catch (ImportationException ie) {
+						JOptionPane.showMessageDialog(null, ie.getMessage());
+					}
+				}
+			});
+			
+			JPanel browse = new JPanel();
+			browse.add(outputFolderButton,BorderLayout.CENTER);
+			browse.setPreferredSize(new Dimension(100,60));
+			outputPanel.add(title,BorderLayout.NORTH);
+			outputPanel.add(outputFolderLabel,BorderLayout.CENTER);
+			outputPanel.add(browse,BorderLayout.SOUTH);
+			window.add(outputPanel,BorderLayout.NORTH);
+			
+			
+			JLabel quality = new JLabel("<html>Qualite : </html>", JLabel.CENTER);
+			ButtonGroup qualityChoice = new ButtonGroup();
+			JRadioButton qualityBad = new JRadioButton("basse");
+			JRadioButton qualityMedium = new JRadioButton("moyenne");
+			JRadioButton qualityHigh = new JRadioButton("optimale");
+			qualityChoice.add(qualityBad);
+			qualityChoice.add(qualityHigh);
+			qualityChoice.add(qualityMedium);
+			qualityBad.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					for(SettingsFile f : model.getFiles()) f.modify(SettingType.QUALITY, ValueConstants.WORSE_QUALITY);
+				}
+			});
+			qualityMedium.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					for(SettingsFile f : model.getFiles()) f.modify(SettingType.QUALITY, ValueConstants.AVERAGE_QUALITY);
+				}
+			});
+			qualityHigh.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					for(SettingsFile f : model.getFiles()) f.modify(SettingType.QUALITY, ValueConstants.BEST_QUALITY);
+				}
+			});
+			qualityMedium.setSelected(true);
+			for(SettingsFile f : model.getFiles()) f.modify(SettingType.QUALITY, ValueConstants.AVERAGE_QUALITY);
+			
+
+			
+			StylizedJButton buttonConvert = new StylizedJButton("Convertir");
+			buttonConvert.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					outputWindow.dispose();
+					convert();
+				}
+			});
+
+			JPanel qualityPanel = new JPanel(new BorderLayout());
+			qualityPanel.setSize(new Dimension(400,40));
+			qualityPanel.add(quality, BorderLayout.NORTH);
+			JPanel qualityTypesPanel = new JPanel();
+			qualityTypesPanel.add(qualityBad);
+			qualityTypesPanel.add(qualityMedium);
+			qualityTypesPanel.add(qualityHigh);
+			qualityPanel.add(qualityTypesPanel, BorderLayout.CENTER);
+			JPanel convert = new JPanel();
+			convert.add(buttonConvert);
+			convert.setPreferredSize(new Dimension(100,60));
+			window.add(qualityPanel,BorderLayout.CENTER);
+			window.add(convert,BorderLayout.SOUTH);
+			outputWindow.add(window);
+			WindowTools.executeWindow(outputWindow);
+		}
+	}
+	
+	
+	
+	
+	/**
+	 * [ METHODE INTERNE POUR LA CONSTRUCTION DU MENU DE CONVERSION. ]
 	 * 
 	 * @return JMenu Le menu de la conversion.
 	 */
@@ -231,41 +366,10 @@ public final class ConversionWindow extends StylizedJFrame {
 		JMenu convert = new JMenu("Convertir");
 		StylizedJMenuItem convertItem = new StylizedJMenuItem("Convertir les fichiers");
 		convert.add(convertItem);
-
 		convertItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(RuntimeSpaceManager.manage()) {
-					/**
-					 * FENETRE D'ATTENTE. 
-					 */
-					StylizedJFrame waitWindow = new StylizedJFrame("Conversion de votre fichier");
-					waitWindow.setLayout(new BorderLayout());
-					waitWindow.setSize(400, 150);
-					waitWindow.setLocationRelativeTo(null);
-					waitWindow.add(
-							new JLabel("<html>" + 
-										"<body>" + 
-										"		Conversion du ou des fichier(s)." +
-										"		<br>" +
-										"		Veuillez patientez..." + 
-										"</body>" + 
-										"</html>", JLabel.CENTER),
-							BorderLayout.CENTER);
-					WindowTools.showLogo(waitWindow);
-					/**
-					 * DEBUT DE LA CONVERSION.
-					 */
-					model.startSave();
-					/**
-					 * LANCEMENT DE LA CONVERSION DANS UN AUTRE PROCESSUS.
-					 */
-					ThreadForSave.saveInNewThread(model);
-					/**
-					 * LANCEMENT ET GESTION DE LA FENETRE D'ATTENTE DANS UN AUTRE PROCESSUS.
-					 */
-					ThreadForWaitWindow.waitInNewThread(waitWindow);
-				}
+				drawConvertWindow();
 			}
 		});
 		return convert;
@@ -283,13 +387,23 @@ public final class ConversionWindow extends StylizedJFrame {
 	 */
 	public static void generateConversionWindow() {
 		ConversionWindow conversionWindow = new ConversionWindow();
-
+		
+		conversionWindow.addWindowListener(new WindowListener() {
+			public void windowOpened(WindowEvent e) {}
+			public void windowClosing(WindowEvent e) {
+				ResourcesManager.clearResources();
+			}
+			public void windowClosed(WindowEvent e) {}
+			public void windowIconified(WindowEvent e) {}
+			public void windowDeiconified(WindowEvent e) {}
+			public void windowActivated(WindowEvent e) {}
+			public void windowDeactivated(WindowEvent e) {}
+		});
 		conversionWindow.setResizable(false);
 		conversionWindow.setTitle("Acaja - Mode Conversion");
 		conversionWindow.setSize(new Dimension(600, 600));
 		conversionWindow.setLocationRelativeTo(null);
 		conversionWindow.setDefaultCloseOperation(StylizedJFrame.EXIT_ON_CLOSE);
-		conversionWindow.addWindowListener(new ConversionWindowController(conversionWindow.model));
 
 		WindowTools.showLogo(conversionWindow);
 
@@ -301,7 +415,6 @@ public final class ConversionWindow extends StylizedJFrame {
 		StylizedJPanel p = new StylizedJPanel();
 		p.setLayout(new BorderLayout());
 		StylizedJMenuBar menu = new StylizedJMenuBar();
-		
 		
 		
 		menu.add(conversionWindow.drawFileMenu());

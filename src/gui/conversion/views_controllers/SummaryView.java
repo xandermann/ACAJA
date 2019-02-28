@@ -1,4 +1,4 @@
-package gui.conversion.views;
+package gui.conversion.views_controllers;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -59,13 +59,14 @@ public final class SummaryView extends StylizedJPanel implements Observer {
 		StylizedJPanel outputFilePanel = new StylizedJPanel();
 		outputFilePanel.setBackground(Color.LIGHT_GRAY);
 		outputFilePanel.add(new JLabel("Fichier de destination : "), BorderLayout.EAST);
-		outputFilePanel.add(outputFileText = new JTextField("NA"),BorderLayout.WEST);
+		outputFilePanel.add(outputFileText = new JTextField(""),BorderLayout.WEST);
 		outputFileText.setPreferredSize(new Dimension(100, 20));
-		outputFileText.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if(model.getCurrentFile() != null) model.setDestination(outputFileText.getText());
+		outputFileText.addKeyListener(new KeyListener() {
+			public void keyPressed(KeyEvent e) {
+				if(model.getCurrentFile() != null) model.setDestination(((JTextField)e.getSource()).getText());
 			}
+			public void keyTyped(KeyEvent e) {}
+			public void keyReleased(KeyEvent e) {}
 		});
 		
 		
@@ -94,7 +95,7 @@ public final class SummaryView extends StylizedJPanel implements Observer {
 			videoLabel.setText("NA");
 			soundLabel.setText("NA");
 			durationLabel.setText("NA");
-			outputFileText.setText("NA");
+			outputFileText.setText("");
 		}
 	}
 

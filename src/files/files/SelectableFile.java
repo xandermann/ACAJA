@@ -280,7 +280,7 @@ public class SelectableFile {
 	 * @return String 	Le nom complet du fichier source.
 	 */
 	public String getSourceFileFullName() {
-		return sourceFile.getPath();
+		return sourceFile.getAbsolutePath();
 	}
 	
 	/**
@@ -302,10 +302,7 @@ public class SelectableFile {
 	 * @return String 	Le nom complet du fichier source.
 	 */
 	public String getDestinationFileFullName() {
-		if(destinationFile[0]=="" && destinationFile[1]=="")
-			return "";
-		else
-			return destinationFile[0]+"\\"+destinationFile[1];
+		return destinationFile[0].equals("") && destinationFile[1].equals("") ? "" : destinationFile[0]+File.separator+destinationFile[1];
 	}
 	
 	

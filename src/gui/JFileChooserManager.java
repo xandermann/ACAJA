@@ -7,7 +7,7 @@ import javax.swing.JFileChooser;
 
 import exceptions.ImportationException;
 
-public final class FileChooser {
+public final class JFileChooserManager {
 	//=======================================================================================================================
 	//=======================================================================================================================
 
@@ -36,8 +36,10 @@ public final class FileChooser {
 		jdc.showOpenDialog(null);
 
 		File importDirectory = jdc.getSelectedFile();
-		if(!importDirectory.isDirectory() || importDirectory == null) 
+		if(importDirectory == null || !importDirectory.isDirectory()) {
 			throw new ImportationException(ImportationException.ABSENT_DIRECTORY);
+		}
+			
 		
 		return importDirectory;
 	}
@@ -51,7 +53,7 @@ public final class FileChooser {
 	
 	public static ArrayList<File> chooseDirectoryAndListSonFiles() throws ImportationException {
 		ArrayList<File> sonFiles = new ArrayList<File>();	
-		File importDirectory = FileChooser.chooseDirectory();
+		File importDirectory = JFileChooserManager.chooseDirectory();
 		for(File f : importDirectory.listFiles()) sonFiles.add(f);	
 		return sonFiles;
 	}

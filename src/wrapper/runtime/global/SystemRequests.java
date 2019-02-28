@@ -1,9 +1,14 @@
 package wrapper.runtime.global;
 
+import java.io.File;
 import java.util.HashMap;
+
+import exceptions.IncorrectFileException;
 import files.*;
 import files.enumerations.SettingType;
+import files.files.SelectableFile;
 import files.files.SettingsFile;
+import resources.ResourceConstants;
 import wrapper.runtime.details.*;
 import wrapper.streams.iterators.ProcessManager;
 import wrapper.streams.managers.filters.*;
@@ -100,6 +105,29 @@ public final class SystemRequests{
 		return DataCodecsFilter.findAudioCodecs(new Request().codecs().result());
 	}
 	
+	
+	
+	//=======================================================================================================================
+	
+	
+	
+	public static File askFrame(SelectableFile file, String time) {
+		if(!file.isVideo()) throw new IllegalArgumentException("SelectableFile null !");
+		String input = file.getSourceFileFullName();
+		//ResourceConstants.TEMPORARY_FILES_FULL_PATH+File.separator+file.getSourceFileName().split("[.]")[0]+".jpg";
+		String output = file.getDestinationFileFullName();
+		(new Request(input, output)).frame(time).make();
+		return (new File(output));
+	}
+	
+	
+	public static File askFrame(SelectableFile file, String time, int width, int height) {
+		if(!file.isVideo()) throw new IllegalArgumentException("SelectableFile null !");
+		String input = file.getSourceFileFullName();
+		String output = file.getDestinationFileFullName();
+		(new Request(input, output)).frame(time).resize(width+"", height+"").make();
+		return (new File(output));
+	}
 	
 	
 	//=======================================================================================================================

@@ -62,11 +62,11 @@ public final class SummaryView extends StylizedJPanel implements Observer {
 		outputFilePanel.add(outputFileText = new JTextField(""),BorderLayout.WEST);
 		outputFileText.setPreferredSize(new Dimension(100, 20));
 		outputFileText.addKeyListener(new KeyListener() {
-			public void keyPressed(KeyEvent e) {
-				if(model.getCurrentFile() != null) model.setDestination(((JTextField)e.getSource()).getText());
-			}
+			public void keyPressed(KeyEvent e) {}
 			public void keyTyped(KeyEvent e) {}
-			public void keyReleased(KeyEvent e) {}
+			public void keyReleased(KeyEvent e) {
+				if(model.getCurrentFile() != null) model.setDestination(outputFileText.getText());
+			}
 		});
 		
 		

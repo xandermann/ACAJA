@@ -50,12 +50,12 @@ public final class VideoSettingsView extends SettingsView{
 		bitratePanel.add(bitrateText, BorderLayout.EAST);
 		bitrateText.addKeyListener(new KeyListener() {
 			public void keyTyped(KeyEvent e) {}
-			public void keyPressed(KeyEvent e) {
+			public void keyPressed(KeyEvent e) {}
+			public void keyReleased(KeyEvent e) {
 				if(model.getCurrentFile() != null) {
 					if(isChange == true) model.modify(SettingType.VIDEO_BITRATE, bitrateText.getText());
 				}
 			}
-			public void keyReleased(KeyEvent e) {}
 		});
 		
 		
@@ -81,12 +81,12 @@ public final class VideoSettingsView extends SettingsView{
 		fpsTextPanel.add(fpsText, BorderLayout.EAST);
 		fpsText.addKeyListener(new KeyListener() {
 			public void keyTyped(KeyEvent e) {}
-			public void keyPressed(KeyEvent e) {
+			public void keyPressed(KeyEvent e) {}
+			public void keyReleased(KeyEvent e) {
 				if(model.getCurrentFile() != null) {
 					if(isChange == true) model.modify(SettingType.FRAMERATE, fpsText.getText());
 				}
 			}
-			public void keyReleased(KeyEvent e) {}
 		});
 		
 		

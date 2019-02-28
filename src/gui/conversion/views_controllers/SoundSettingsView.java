@@ -51,12 +51,12 @@ public final class SoundSettingsView extends SettingsView{
 		bitratePanel.add(bitrateText, BorderLayout.EAST);
 		bitrateText.addKeyListener(new KeyListener() {
 			public void keyTyped(KeyEvent e) {}
-			public void keyPressed(KeyEvent e) {
+			public void keyPressed(KeyEvent e) {}
+			public void keyReleased(KeyEvent e) {
 				if(model.getCurrentFile() != null) {
 					if(isChange == true) model.modify(SettingType.AUDIO_BITRATE, bitrateText.getText());
 				}
 			}
-			public void keyReleased(KeyEvent e) {}
 		});
 
 		
@@ -67,12 +67,12 @@ public final class SoundSettingsView extends SettingsView{
 		samplingRatePanel.add(samplingRateText, BorderLayout.EAST);
 		samplingRateText.addKeyListener(new KeyListener() {
 			public void keyTyped(KeyEvent e) {}
-			public void keyPressed(KeyEvent e) {
+			public void keyPressed(KeyEvent e) {}
+			public void keyReleased(KeyEvent e) {
 				if(model.getCurrentFile() != null) {
 					if(isChange == true) model.modify(SettingType.SAMPLING_RATE, samplingRateText.getText());
 				}
 			}
-			public void keyReleased(KeyEvent e) {}
 		});
 		
 
@@ -83,12 +83,12 @@ public final class SoundSettingsView extends SettingsView{
 		channelsPanel.add(channelsText, BorderLayout.EAST);
 		channelsText.addKeyListener(new KeyListener() {
 			public void keyTyped(KeyEvent e) {}
-			public void keyPressed(KeyEvent e) {
+			public void keyPressed(KeyEvent e) {}
+			public void keyReleased(KeyEvent e) {
 				if(model.getCurrentFile() != null) {
-					if(isChange == true) model.modify(SettingType.NUMBER_AUDIO_CHANNELS ,channelsText.getText());
+					if(isChange == true) model.modify(SettingType.NUMBER_AUDIO_CHANNELS, channelsText.getText());
 				}
 			}
-			public void keyReleased(KeyEvent e) {}
 		});
 		
 		

@@ -21,6 +21,10 @@ public final class NamesSpaceManager {
 	 */
 	private final static String TEXT = ".txt", JPG = ".jpg";
 	
+	
+	//=======================================================================================================================
+	
+	
 	/**
 	 * [ GENERER UN NOM UNIQUE POUR UN FICHIER TEMPORAIRE HORODATE ]
 	 * 

@@ -41,7 +41,7 @@ public final class ResourceConstants {
 	/**
 	 * FICHIERS DE SAUVEGARDES DES PRECEDENTS IMPORTS SUR LE LOGICIEL.
 	 */
-	public final static String OLD_IMPORTS_PATH = "old_imports/";
+	public final static String OLD_IMPORTS_PATH = "imports/";
 	public final static String CONVERSION_OLD_IMPORTS_PATH = OLD_IMPORTS_PATH + "conversion/";
 	public final static String PROCESSING_OLD_IMPORTS_PATH = OLD_IMPORTS_PATH + "processing/";
 	public final static File OLD_IMPORTS = new File(OLD_IMPORTS_PATH);
@@ -52,7 +52,7 @@ public final class ResourceConstants {
 	/**
 	 * FICHIERS DE SAUVEGARDES DES FLUX. 
 	 */
-	public final static String ANSWERS_PATH = "last_answers/";
+	public final static String ANSWERS_PATH = "answers/";
 	public final static String STDOUT_ANSWERS_PATH = ANSWERS_PATH + "stdout/";
 	public final static String STDERR_ANSWERS_PATH = ANSWERS_PATH + "stderr/";
 	public final static File ANSWERS = new File(ANSWERS_PATH);

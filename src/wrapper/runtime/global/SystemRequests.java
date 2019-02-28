@@ -48,36 +48,36 @@ public final class SystemRequests{
 	 * nombre de canaux audio en sortie. 
 	 * 
 	 * @param file							Le fichier dont on souhaite connaitre les parametres. 
+	 * @throws IncorrectFileException 
 	*/
-	public static void askMetadata(SettingsFile file){
+	public static void askMetadata(SettingsFile file) throws IncorrectFileException{
 		if(file==null) throw new NullPointerException("File null !");
-		if(file.containsAudio()){	
-			/**
-			 * REQUETE A SOUMETRE A FFMPEG.
-			 */
-			ProcessManager processManager = (new Request(file.getSourceFileFullName())).result();
-			/**
-			 * EXTRACTION DES DONNEES.
-			 */
-			String metadata = MetadataFilter.findAllMetadata(processManager);
-			/**
-			 * INITIALISATION DES SETTINGS DU FICHEIR A PARTIR DES METADONNEES.
-			 */
-			HashMap<SettingType, String> fileMetadata = file.getSettings();		
-			//Parametres a extraire uniquement pour les fichiers video. 
-			if(file.isVideo()) {
-				fileMetadata.put(SettingType.VIDEO_CODEC, MetadataFilter.findVideoMetadata(metadata, 0));
-				fileMetadata.put(SettingType.RESOLUTION, MetadataFilter.findVideoMetadata(metadata, 2));	
-				fileMetadata.put(SettingType.VIDEO_BITRATE, MetadataFilter.findVideoMetadata(metadata, 3));
-				fileMetadata.put(SettingType.FRAMERATE, MetadataFilter.findVideoMetadata(metadata, 4));
-			}	
-		    fileMetadata.put(SettingType.AUDIO_CODEC, MetadataFilter.findAudioMetadata(metadata, 0));
-			fileMetadata.put(SettingType.SAMPLING_RATE, MetadataFilter.findAudioMetadata(metadata, 1));
-			String nbChannels = MetadataFilter.findAudioMetadata(metadata, 2).contains("mono") ? "1" : "2";
-			fileMetadata.put(SettingType.NUMBER_AUDIO_CHANNELS, nbChannels);
-			fileMetadata.put(SettingType.AUDIO_BITRATE, MetadataFilter.findAudioMetadata(metadata, 4));
-			file.setDuration(MetadataFilter.findDuration(metadata));
-		}
+		if(!file.isVideo()) throw new IncorrectFileException(IncorrectFileException.REQUIRED_TYPE_VIDEO);
+		/**
+		 * REQUETE A SOUMETRE A FFMPEG.
+		 */
+		ProcessManager processManager = (new Request(file.getSourceFileFullName())).result();
+		/**
+		 * EXTRACTION DES DONNEES.
+		 */
+		String metadata = MetadataFilter.findAllMetadata(processManager);
+		/**
+		 * INITIALISATION DES SETTINGS DU FICHEIR A PARTIR DES METADONNEES.
+		 */
+		HashMap<SettingType, String> fileMetadata = file.getSettings();		
+		//Parametres a extraire uniquement pour les fichiers video. 
+		if(file.isVideo()) {
+			fileMetadata.put(SettingType.VIDEO_CODEC, MetadataFilter.findVideoMetadata(metadata, 0));
+			fileMetadata.put(SettingType.RESOLUTION, MetadataFilter.findVideoMetadata(metadata, 2));	
+			fileMetadata.put(SettingType.VIDEO_BITRATE, MetadataFilter.findVideoMetadata(metadata, 3));
+			fileMetadata.put(SettingType.FRAMERATE, MetadataFilter.findVideoMetadata(metadata, 4));
+		}	
+	    fileMetadata.put(SettingType.AUDIO_CODEC, MetadataFilter.findAudioMetadata(metadata, 0));
+		fileMetadata.put(SettingType.SAMPLING_RATE, MetadataFilter.findAudioMetadata(metadata, 1));
+		String nbChannels = MetadataFilter.findAudioMetadata(metadata, 2).contains("mono") ? "1" : "2";
+		fileMetadata.put(SettingType.NUMBER_AUDIO_CHANNELS, nbChannels);
+		fileMetadata.put(SettingType.AUDIO_BITRATE, MetadataFilter.findAudioMetadata(metadata, 4));
+		file.setDuration(MetadataFilter.findDuration(metadata));
 	}
 	
 	
@@ -120,8 +120,9 @@ public final class SystemRequests{
 	 * 
 	 * @return	La frame. 
 	 */
-	public static File askFrame(SelectableFile file, String time) {
+	public static File askFrame(SelectableFile file, String time) throws IncorrectFileException {
 		if(file==null) throw new NullPointerException("File null !");
+		if(!file.isVideo()) throw new IncorrectFileException(IncorrectFileException.REQUIRED_TYPE_VIDEO);
 		if(!file.isVideo()) throw new IllegalArgumentException("SelectableFile null !");
 		if(time==null) throw new NullPointerException("Time null !");
 		
@@ -139,9 +140,11 @@ public final class SystemRequests{
 	 * @param time		L'instant precis ou extraire la frame. 
 	 * 
 	 * @return	La frame redimensionnee. 
+	 * @throws IncorrectFileException 
 	 */
-	public static File askFrame(SelectableFile file, String time, int width, int height) {
-		if(!file.isVideo()) throw new IllegalArgumentException("SelectableFile null !");
+	public static File askFrame(SelectableFile file, String time, int width, int height) throws IncorrectFileException {
+		if(file==null) throw new NullPointerException("File null !");
+		if(!file.isVideo()) throw new IncorrectFileException(IncorrectFileException.REQUIRED_TYPE_VIDEO);
 		if(time==null) throw new NullPointerException("Time null !");
 		if(width<=0) throw new IllegalArgumentException("Width negative ou nulle !");
 		if(height<=0) throw new IllegalArgumentException("Height negative ou nulle !");

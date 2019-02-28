@@ -72,30 +72,25 @@ public final class SettingsFile extends SelectableFile implements Modifiable {
 
 	
 	
-	/**
-	 * Methode pour modifier les parametres de la video.
-	 * 
-	 * @param setting  Le parametre a modifier.
-	 * @param newValue La nouvelle valeur du parametre.
-	 */
+	@Override
 	public void modify(OperationType typeSetting, String setting) {
 		requests.put((SettingType) typeSetting, setting);
 	}
-
 	
-	/**
-	 * [ METHODE POUR SAVOIR SI DES PARAMETRES ONT ETE MODIFIES. ]
-	 * 
-	 * Methode pour tester si les parametres du fichier ont ete modifies.
-	 * 
-	 * @return booleen True si le fichier a ete modifie.
-	 */
+	@Override
 	public boolean isModified() {
 		return !requests.equals(new HashMap<SettingType, String>());
 	}
 	
+	public String recent(OperationType typeSetting) {
+		return requests.containsKey(typeSetting) ? requests.get(typeSetting) : settings.get(typeSetting);
+	}
+
+	public String old(OperationType typeSetting) {
+		return settings.get(typeSetting);
+	}
 	
-	
+		
 	//=======================================================================================================================
 	//=======================================================================================================================
 
@@ -103,8 +98,7 @@ public final class SettingsFile extends SelectableFile implements Modifiable {
 	
 	/**
 	 * [ METHODE ACCESSEUR - GETTER. ]
-	 * 
-	 * Methode pour recuperer les parametres du fichier.
+	 * 	 * Methode pour recuperer les parametres du fichier.
 	 * 
 	 * @return HashMap<String, String> Les parametres du fichier.
 	 */

@@ -5,6 +5,7 @@ import java.awt.event.*;
 import java.util.*;
 import javax.swing.*;
 import files.enumerations.SettingType;
+import files.files.SettingsFile;
 import gui.conversion.model.ConversionModel;
 import gui.style.StylizedJPanel;
 import wrapper.language.CodecConstants;
@@ -50,12 +51,12 @@ public final class SoundSettingsView extends SettingsView{
 		bitratePanel.add(bitrateText, BorderLayout.EAST);
 		bitrateText.addKeyListener(new KeyListener() {
 			public void keyTyped(KeyEvent e) {}
-			public void keyPressed(KeyEvent e) {
+			public void keyPressed(KeyEvent e) {}
+			public void keyReleased(KeyEvent e) {
 				if(model.getCurrentFile() != null) {
 					if(isChange == true) model.modify(SettingType.AUDIO_BITRATE, bitrateText.getText());
 				}
 			}
-			public void keyReleased(KeyEvent e) {}
 		});
 
 		
@@ -66,12 +67,12 @@ public final class SoundSettingsView extends SettingsView{
 		samplingRatePanel.add(samplingRateText, BorderLayout.EAST);
 		samplingRateText.addKeyListener(new KeyListener() {
 			public void keyTyped(KeyEvent e) {}
-			public void keyPressed(KeyEvent e) {
+			public void keyPressed(KeyEvent e) {}
+			public void keyReleased(KeyEvent e) {
 				if(model.getCurrentFile() != null) {
 					if(isChange == true) model.modify(SettingType.SAMPLING_RATE, samplingRateText.getText());
 				}
 			}
-			public void keyReleased(KeyEvent e) {}
 		});
 		
 
@@ -82,12 +83,12 @@ public final class SoundSettingsView extends SettingsView{
 		channelsPanel.add(channelsText, BorderLayout.EAST);
 		channelsText.addKeyListener(new KeyListener() {
 			public void keyTyped(KeyEvent e) {}
-			public void keyPressed(KeyEvent e) {
+			public void keyPressed(KeyEvent e) {}
+			public void keyReleased(KeyEvent e) {
 				if(model.getCurrentFile() != null) {
-					if(isChange == true) model.modify(SettingType.NUMBER_AUDIO_CHANNELS ,channelsText.getText());
+					if(isChange == true) model.modify(SettingType.NUMBER_AUDIO_CHANNELS, channelsText.getText());
 				}
 			}
-			public void keyReleased(KeyEvent e) {}
 		});
 		
 		
@@ -108,11 +109,11 @@ public final class SoundSettingsView extends SettingsView{
 	public void update(Observable o, Object arg) {
 		isChange = false;
 		if(model.getCurrentFile() != null){
-			HashMap<SettingType, String> settings = model.getCurrentFile().getSettings();
-			codecsComboBox.setSelectedItem(settings.get(SettingType.AUDIO_CODEC));
-			bitrateText.setText(settings.get(SettingType.AUDIO_BITRATE));
-			samplingRateText.setText(settings.get(SettingType.SAMPLING_RATE));
-			channelsText.setText(settings.get(SettingType.NUMBER_AUDIO_CHANNELS));
+			SettingsFile settings = model.getCurrentFile();
+			codecsComboBox.setSelectedItem(settings.recent(SettingType.AUDIO_CODEC));
+			bitrateText.setText(settings.recent(SettingType.AUDIO_BITRATE));
+			samplingRateText.setText(settings.recent(SettingType.SAMPLING_RATE));
+			channelsText.setText(settings.recent(SettingType.NUMBER_AUDIO_CHANNELS));
 		}else{
 			codecsComboBox.setSelectedIndex(0);
 			bitrateText.setText("");

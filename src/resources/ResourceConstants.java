@@ -19,17 +19,23 @@ public final class ResourceConstants {
 	public final static String ACAJA_LOGO_OPACITY_PATH = "img/LogoAcaja_opacity.png";
 	public final static File ACAJA_LOGO = new File(ACAJA_LOGO_PATH);
 
+	
+	/**
+	 * IMAGES UTILES.
+	 */
 	public final static String BUTTON_RECT = "img/formeButton.png";
 	public final static String BLURRED = "img/flou.png";
 	public final static String RIGHT_ARROW = "img/flecheDroite.png";
 	public final static String LEFT_ARROW = "img/flecheGauche.png";
 
+	
 	/**
 	 * FICHIERS TEMPORAIRES.
 	 */
 	public final static String TEMPORARY_FILES_PATH = "temporary_files/";
 	public final static File TEMPORARY_FILES = new File(TEMPORARY_FILES_PATH);
 	public final static String TEMPORARY_FILES_FULL_PATH = TEMPORARY_FILES.getAbsolutePath();
+	public final static String TEMPORARY_FILES_PREFIX = TEMPORARY_FILES_FULL_PATH + "temporary_";
 
 	
 	/**
@@ -44,7 +50,7 @@ public final class ResourceConstants {
 	
 	
 	/**
-	 * FICHIERS DE STOCKAGE DES FLUX. 
+	 * FICHIERS DE SAUVEGARDES DES FLUX. 
 	 */
 	public final static String ANSWERS_PATH = "last_answers/";
 	public final static String STDOUT_ANSWERS_PATH = ANSWERS_PATH + "stdout/";
@@ -60,9 +66,9 @@ public final class ResourceConstants {
 	 * @return String 		DATE COURANTE (YYYY-MM-DD). 
 	 */
 	public static String day() {
-		return Instant.now().toString().substring(0, Instant.now().toString().indexOf("T"));
+		String now = Instant.now().toString();
+		return now.substring(0, now.indexOf("T"));
 	}
-	
 	/**
 	 * @return String 		DATE COUTRANTE (YYYY-MM-DD) + MOMENT COURANT (EN MILLISECONDES).
 	 */

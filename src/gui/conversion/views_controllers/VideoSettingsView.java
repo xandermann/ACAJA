@@ -1,27 +1,14 @@
 package gui.conversion.views_controllers;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.util.HashMap;
-import java.util.Observable;
-import java.util.Observer;
-
-import javax.swing.BoxLayout;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-
+import java.awt.*;
+import java.awt.event.*;
+import java.util.*;
+import javax.swing.*;
 import files.enumerations.SettingType;
+import files.files.SettingsFile;
 import gui.conversion.model.ConversionModel;
 import gui.style.StylizedJPanel;
-import wrapper.language.CodecConstants;
-import wrapper.language.ResolutionConstants;
+import wrapper.language.*;
 
 public final class VideoSettingsView extends SettingsView{
 	//=======================================================================================================================
@@ -63,12 +50,12 @@ public final class VideoSettingsView extends SettingsView{
 		bitratePanel.add(bitrateText, BorderLayout.EAST);
 		bitrateText.addKeyListener(new KeyListener() {
 			public void keyTyped(KeyEvent e) {}
-			public void keyPressed(KeyEvent e) {
+			public void keyPressed(KeyEvent e) {}
+			public void keyReleased(KeyEvent e) {
 				if(model.getCurrentFile() != null) {
 					if(isChange == true) model.modify(SettingType.VIDEO_BITRATE, bitrateText.getText());
 				}
 			}
-			public void keyReleased(KeyEvent e) {}
 		});
 		
 		
@@ -94,12 +81,12 @@ public final class VideoSettingsView extends SettingsView{
 		fpsTextPanel.add(fpsText, BorderLayout.EAST);
 		fpsText.addKeyListener(new KeyListener() {
 			public void keyTyped(KeyEvent e) {}
-			public void keyPressed(KeyEvent e) {
+			public void keyPressed(KeyEvent e) {}
+			public void keyReleased(KeyEvent e) {
 				if(model.getCurrentFile() != null) {
 					if(isChange == true) model.modify(SettingType.FRAMERATE, fpsText.getText());
 				}
 			}
-			public void keyReleased(KeyEvent e) {}
 		});
 		
 		
@@ -123,11 +110,11 @@ public final class VideoSettingsView extends SettingsView{
 	public void update(Observable o, Object arg) {
 		isChange = false;
 		if(model.getCurrentFile() != null){
-		     HashMap<SettingType, String> settings = model.getCurrentFile().getSettings();
-		     codecsComboBox.setSelectedItem(settings.get(SettingType.VIDEO_CODEC));
-		     resolutionsComboBox.setSelectedItem(settings.get(SettingType.RESOLUTION));
-			 bitrateText.setText(settings.get(SettingType.VIDEO_BITRATE)); 
-			 fpsText.setText(settings.get(SettingType.FRAMERATE));
+		     SettingsFile settings = model.getCurrentFile();
+		     codecsComboBox.setSelectedItem(settings.recent(SettingType.VIDEO_CODEC));
+		     resolutionsComboBox.setSelectedItem(settings.recent(SettingType.RESOLUTION));
+			 bitrateText.setText(settings.recent(SettingType.VIDEO_BITRATE)); 
+			 fpsText.setText(settings.recent(SettingType.FRAMERATE));
 		}else{		 
 			 codecsComboBox.setSelectedIndex(0);
 			 resolutionsComboBox.setSelectedIndex(0);

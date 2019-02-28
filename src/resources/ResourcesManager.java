@@ -170,98 +170,77 @@ public final class ResourcesManager {
 	/**
 	 * [ LEVE UNE EXCEPTION SI ABSENCE DU REPERTOIRE IMPORTS\. ]
 	 * 
-	 * @return booleen							Vaut true si aucuns problemes recontres. 
-	 * 
 	 * @throws UnfindableResourceException		Exception sur les ressources introuvables. 
 	 */
-	public static boolean secureImports() throws UnfindableResourceException {
+	public static void secureImports() throws UnfindableResourceException {
 		if(!checkImports())
 			throw new UnfindableResourceException(UnfindableResourceException.UAITR_IMPORTS);
-		return true;
 	}
 	
 	
 	/**
 	 * [ LEVE UNE EXCEPTION SI ABSENCE DU REPERTOIRE IMPORTS\CONVERSION\. ]
 	 * 
-	 * @return booleen							Vaut true si aucuns problemes recontres. 
-	 * 
 	 * @throws UnfindableResourceException		Exception sur les ressources introuvables. 
 	 */
-	public static boolean secureConversionImports() throws UnfindableResourceException {
+	public static void secureConversionImports() throws UnfindableResourceException {
 		if(!checkConversionImports())
 			throw new UnfindableResourceException(UnfindableResourceException.UAITR_CONVERSION_IMPORTS);
-		return true;
 	}
 	
 	
 	/**
 	 * [ LEVE UNE EXCEPTION SI ABSENCE DU REPERTOIRE IMPORTS\CONVERSION\. ]
 	 * 
-	 * @return booleen							Vaut true si aucuns problemes recontres. 
-	 * 
 	 * @throws UnfindableResourceException		Exception sur les ressources introuvables. 
 	 */
-	public static boolean secureProcessingImports() throws UnfindableResourceException {
+	public static void secureProcessingImports() throws UnfindableResourceException {
 		if(!checkConversionImports())
 			throw new UnfindableResourceException(UnfindableResourceException.UAITR_PROCESSING_IMPORTS);
-		return true;
 	}
 	
 	
 	/**
 	 * [ LEVE UNE EXCEPTION SI ABSENCE DU REPERTOIRE ANSWERS\. ]
 	 * 
-	 * @return booleen							Vaut true si aucuns problemes recontres. 
-	 * 
 	 * @throws UnfindableResourceException		Exception sur les ressources introuvables. 
 	 */
-	public static boolean secureAnswers() throws UnfindableResourceException {
+	public static void secureAnswers() throws UnfindableResourceException {
 		if(!checkAnswers())
 			throw new UnfindableResourceException(UnfindableResourceException.UAITR_ANSWERS);
-		return true;
 	}
 	
 	
 	/**
 	 * [ LEVE UNE EXCEPTION SI ABSENCE DU REPERTOIRE ANSWERS\STDERR\. ]
 	 * 
-	 * @return booleen							Vaut true si aucuns problemes recontres. 
-	 * 
 	 * @throws UnfindableResourceException		Exception sur les ressources introuvables. 
 	 */
-	public static boolean secureErr() throws UnfindableResourceException {
+	public static void secureErr() throws UnfindableResourceException {
 		if(!checkAnswers())
 			throw new UnfindableResourceException(UnfindableResourceException.UAITR_STDERR_ANSWERS);
-		return true;
 	}
 	
 	
 	/**
 	 * [ LEVE UNE EXCEPTION SI ABSENCE DU REPERTOIRE ANSWERS\STDOUT\. ]
 	 * 
-	 * @return booleen							Vaut true si aucuns problemes recontres. 
-	 * 
 	 * @throws UnfindableResourceException		Exception sur les ressources introuvables. 
 	 */
-	public static boolean secureOut() throws UnfindableResourceException {
+	public static void secureOut() throws UnfindableResourceException {
 		if(!checkAnswers())
 			throw new UnfindableResourceException(UnfindableResourceException.UAITR_STDOUT_ANSWERS);
-		return true;
 	}
 	
 	
 	/**
-	 * [ LEVE UNE EXCEPTION SI ABSENCE DU REPERTOIRE TEMPORARY_FILES\. ]
-	 * 
-	 * @return booleen							Vaut true si aucuns problemes recontres. 
+	 * [ LEVE UNE EXCEPTION SI ABSENCE DU REPERTOIRE TEMPORARY_FILES\. ] 
 	 * 
 	 * @throws UnfindableResourceException		Exception sur les ressources introuvables. 
 	 */
-	public static boolean secureTemporaryFiles() throws UnfindableResourceException {
+	public static void secureTemporaryFiles() throws UnfindableResourceException {
 		if(!checkTemporaryFiles())
 			throw new UnfindableResourceException(UnfindableResourceException.UAITR_TEMPORARY_FILES);
-		return true;
 	}
 
 	

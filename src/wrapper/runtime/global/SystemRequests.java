@@ -8,6 +8,7 @@ import files.*;
 import files.enumerations.SettingType;
 import files.files.SelectableFile;
 import files.files.SettingsFile;
+import resources.NamesSpaceManager;
 import resources.ResourceConstants;
 import wrapper.runtime.details.*;
 import wrapper.streams.iterators.ProcessManager;
@@ -114,8 +115,7 @@ public final class SystemRequests{
 	public static File askFrame(SelectableFile file, String time) {
 		if(!file.isVideo()) throw new IllegalArgumentException("SelectableFile null !");
 		String input = file.getSourceFileFullName();
-		//ResourceConstants.TEMPORARY_FILES_FULL_PATH+File.separator+file.getSourceFileName().split("[.]")[0]+".jpg";
-		String output = file.getDestinationFileFullName();
+		String output = NamesSpaceManager._temporary();
 		(new Request(input, output)).frame(time).make();
 		return (new File(output));
 	}
@@ -124,7 +124,7 @@ public final class SystemRequests{
 	public static File askFrame(SelectableFile file, String time, int width, int height) {
 		if(!file.isVideo()) throw new IllegalArgumentException("SelectableFile null !");
 		String input = file.getSourceFileFullName();
-		String output = file.getDestinationFileFullName();
+		String output = NamesSpaceManager._temporary();
 		(new Request(input, output)).frame(time).resize(width+"", height+"").make();
 		return (new File(output));
 	}

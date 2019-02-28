@@ -366,7 +366,8 @@ public final class Request {
 		if(Integer.parseInt(width)<=0) throw new IllegalArgumentException("Width negative ou nulle !");
 		if(Integer.parseInt(height)<=0) throw new IllegalArgumentException("Height negative ou nulle !");
 		
-		askSomethingElse(new String[]{FlagConstants.FLAG_RESIZE[0], FlagConstants.FLAG_RESIZE[1]+width+FlagConstants.FLAG_RESIZE[2]+height});
+		askSomethingElse(new String[]{FlagConstants.FLAG_RESIZE[0],
+						FlagConstants.FLAG_RESIZE[1]+width+FlagConstants.FLAG_RESIZE[2]+height});
 		return this;
 	}
 	
@@ -377,13 +378,14 @@ public final class Request {
 	
 	
 	/**
-	 * [ EXTRAIRE UNE IMAGE. ]
+	 * [ EXTRAIRE UNE IMAGE / FRAME. ]
 	 * 
 	 * @param time	Le moment de la video ou se situe l'image. 
 	 * 
 	 * @return La requete this. 
 	 */
 	public Request frame(String time) {
+		if(time==null) throw new NullPointerException("Time null !");
 		cut(time, ValueConstants.ONE_SECOND);
 		framerate("1");
 		return this;
@@ -403,6 +405,7 @@ public final class Request {
 	 * @return La requete this. 
 	 */
 	public Request quality(String quality) {
+		if(quality==null) throw new NullPointerException("Quality null !");
 		askSomethingElse(new String[]{FlagConstants.FLAG_QUALITY, quality});
 		return this;
 	}

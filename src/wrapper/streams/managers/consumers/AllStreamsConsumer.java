@@ -1,6 +1,8 @@
 package wrapper.streams.managers.consumers;
 
 import javax.swing.JOptionPane;
+
+import exceptions.UnfindableResourceException;
 import messages.MessageConstants;
 import wrapper.streams.iterators.*;
 
@@ -33,9 +35,11 @@ public class AllStreamsConsumer implements StreamsConsumer {
 	 * son processus pere ( = JAVA ) a attendre afin d'eviter l'enchainement en parallele
 	 * d'instructions en java qui ralentiraient la machine.
 	 * 
-	 * @param processToBeConsume			ProcessManager contenant les flux a consommer.
+	 * @param processToBeConsume				ProcessManager contenant les flux a consommer.
+	 * 
+	 * @throws UnfindableResourceException		Exception sur les ressources introuvables. 
 	 */
-	public static void consume(ProcessManager processToBeConsume) {
+	public static void consume(ProcessManager processToBeConsume) throws UnfindableResourceException {
 		if(processToBeConsume == null) 
 			throw new NullPointerException("Le ProcessManager recu en parametre est null !");
 		

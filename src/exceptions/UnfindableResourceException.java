@@ -1,7 +1,7 @@
 package exceptions;
 
 public final class UnfindableResourceException extends Exception {
-	//UAITR = UNFINDABLE_AND_IMPOSSIBLE_TO_RECREATE
+	//UAITR = UNFINDABLE_AND_IMPOSSIBLE_TO_RECREATE.
 	
 	private final static String UAITR_PREFIX = "Le repertoire ";
 	private final static String UAITR_SUFFIX = " est introuvable et est impossible a recreer !";

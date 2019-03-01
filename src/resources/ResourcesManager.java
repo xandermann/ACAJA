@@ -217,7 +217,7 @@ public final class ResourcesManager {
 	 * @throws UnfindableResourceException		Exception sur les ressources introuvables. 
 	 */
 	public static void secureErr() throws UnfindableResourceException {
-		if(!checkAnswers())
+		if(!checkErr())
 			throw new UnfindableResourceException(UnfindableResourceException.UAITR_STDERR_ANSWERS);
 	}
 	
@@ -228,7 +228,7 @@ public final class ResourcesManager {
 	 * @throws UnfindableResourceException		Exception sur les ressources introuvables. 
 	 */
 	public static void secureOut() throws UnfindableResourceException {
-		if(!checkAnswers())
+		if(!checkOut())
 			throw new UnfindableResourceException(UnfindableResourceException.UAITR_STDOUT_ANSWERS);
 	}
 	

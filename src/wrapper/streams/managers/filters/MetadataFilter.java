@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 
+import exceptions.UnfindableResourceException;
 import resources.NamesSpaceManager;
 import resources.ResourceConstants;
 import wrapper.streams.iterators.*;
@@ -125,11 +126,13 @@ public final class MetadataFilter implements DataStreamsFilter {
 	/**
 	 * [ METHODE DE CLASSE POUR EXTRAIRE LES METADONNEES D'UN FICHIER. ]
 	 * 
-	 * @param processToStudy		ProcessManager contenant les flux a filter.
+	 * @param processToStudy					ProcessManager contenant les flux a filter.
 	 * 
-	 * @return	String				Les metadonnees du fichier.
+	 * @return	String							Les metadonnees du fichier.
+	 * 
+	 * @throws UnfindableResourceException 		Exception sur les ressources introuvables. 
 	 */
-	public static String findAllMetadata(ProcessManager processToStudy) {
+	public static String findAllMetadata(ProcessManager processToStudy) throws UnfindableResourceException {
 		if(processToStudy == null) throw new NullPointerException("Le ProcessManager recu en parametre est null !");
 
 		/**

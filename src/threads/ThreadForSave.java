@@ -1,5 +1,8 @@
 package threads;
 
+import javax.swing.JOptionPane;
+
+import exceptions.UnfindableResourceException;
 import gui.Model;
 
 /**
@@ -30,7 +33,11 @@ public class ThreadForSave extends Thread{
 	 * [ DEROULEMENT DU THREAD - SAUVEGARDE. ]
 	 */
     public void run() {
-    	model.save();
+    	try {
+			model.save();
+		} catch (UnfindableResourceException ure) {
+			JOptionPane.showMessageDialog(null, ure.getMessage());
+		}
     }
     
     

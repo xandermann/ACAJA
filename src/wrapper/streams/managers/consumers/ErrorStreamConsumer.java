@@ -1,6 +1,8 @@
 package wrapper.streams.managers.consumers;
 
 import java.io.*;
+
+import exceptions.UnfindableResourceException;
 import resources.*;
 import wrapper.streams.iterators.*;
 
@@ -17,9 +19,11 @@ public final class ErrorStreamConsumer implements StreamsConsumer {
 	/**
 	 * [ METHODE DE CLASSE : CONSOMMER STDERR. ]
 	 * 
-	 * @param processToBeConsume	Le ProcessManager contenant le fux STDERR a consommer.
+	 * @param processToBeConsume				Le ProcessManager contenant le fux STDERR a consommer.
+	 * 
+	 * @throws UnfindableResourceException		Exception sur les ressources introuvables. 
 	 */
-	public static void consume(ProcessManager processToBeConsume) {
+	public static void consume(ProcessManager processToBeConsume) throws UnfindableResourceException {
 		if(processToBeConsume == null) 
 			throw new NullPointerException("Le ProcessManager recu en parametre est null !");
 		/**

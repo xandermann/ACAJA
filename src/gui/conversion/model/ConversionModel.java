@@ -1,6 +1,5 @@
 package gui.conversion.model;
 
-import java.awt.HeadlessException;
 import java.io.*;
 import java.util.*;
 import javax.swing.*;
@@ -292,8 +291,10 @@ public final class ConversionModel extends Model {
 	 * [ CONVERTIR LES FICHIERS MODIFIES. ]
 	 * 
 	 * Methode pour demarrer la conversion des SettingsFile modifies. 
+	 * 
+	 * @throws UnfindableResourceException 		Exception sur les ressources introuvables. 
 	 */
-	public void save() {
+	public void save() throws UnfindableResourceException {
 		for(SettingsFile sf : files) {
 			if(sf.isModified()) UserRequests.execute(sf);		
 		}

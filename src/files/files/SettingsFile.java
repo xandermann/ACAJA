@@ -3,6 +3,7 @@ package files.files;
 import java.io.File;
 import java.util.HashMap;
 import exceptions.IncorrectFileException;
+import exceptions.UnfindableResourceException;
 import files.enumerations.OperationType;
 import files.enumerations.SettingType;
 import wrapper.runtime.global.SystemRequests;
@@ -39,10 +40,13 @@ public final class SettingsFile extends SelectableFile implements Modifiable {
 	/**
 	 * [ CONSTRUCTEUR. ]
 	 * 
-	 * @param file 						Le fichier source.
-	 * @throws IncorrectFileException	L'exception sur les fichiers de type incorrect. 
+	 * @param file 								Le fichier source.
+	 * 
+	 * @throws IncorrectFileException			L'exception sur les fichiers de type incorrect. 
+	 * 
+	 * @throws UnfindableResourceException		Exception sur les ressources introuvables. 
 	 */
-	public SettingsFile(File file) throws IncorrectFileException {
+	public SettingsFile(File file) throws IncorrectFileException, UnfindableResourceException {
 		/**
 		 * INITIALISATION DES ATTRIBUTS HETITES DE LA CLASSE SELECTABLEFILE.
 		 */

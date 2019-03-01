@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.*;
 
+import exceptions.UnfindableResourceException;
 import resources.NamesSpaceManager;
 import resources.ResourceConstants;
 import wrapper.streams.iterators.*;
@@ -31,15 +32,17 @@ public final class DataCodecsFilter implements DataStreamsFilter {
 	/**
 	 * [ METHODE INTERNE DE CLASSE POUR LE FILTRAGE DES CODECS. ]
 	 * 
-	 * @param typeCodec				Les codecs recherches : 
-	 * 								"A" => codecs audio. 
-	 * 								"V" => codecs video. 
+	 * @param typeCodec							Les codecs recherches : 
+	 * 											"A" => codecs audio. 
+	 * 											"V" => codecs video. 
 	 * 
-	 * @param processToStudy		Le ProcessManager contenant les flux a filtrer. 
+	 * @param processToStudy					Le ProcessManager contenant les flux a filtrer. 
 	 * 
-	 * @return						Les codecs recherches. 
+	 * @return									Les codecs recherches. 
+	 * 
+	 * @throws UnfindableResourceException		Exception sur les ressources introuvables. 
 	 */
-	private static String[] findCodecs(String typeCodec, ProcessManager processToStudy) {
+	private static String[] findCodecs(String typeCodec, ProcessManager processToStudy) throws UnfindableResourceException {
 		if(typeCodec == null) throw new NullPointerException("Le typeCodec recu en parametre est null !");
 		if(!typeCodec.equals("A") && !typeCodec.equals("V")) throw new IllegalArgumentException("Type de codecs inconnu !");
 		if(processToStudy == null) throw new NullPointerException("Le ProcessManager recu en parametre est null !");
@@ -80,11 +83,13 @@ public final class DataCodecsFilter implements DataStreamsFilter {
 	/**
 	 * [ METHODE DE CLASSE POUR RECUPERER TOUS LES CODECS VIDEO SUPPORTES PAR FFmpeg. ]
 	 * 
-	 * @param processToStudy		Le ProcessManager contenant les flux a filtrer. 
+	 * @param processToStudy					Le ProcessManager contenant les flux a filtrer. 
 	 * 
-	 * @return						Les codecs video supportes par FFmpeg.
+	 * @return									Les codecs video supportes par FFmpeg.
+	 * 
+	 * @throws UnfindableResourceException		Exception sur les ressources introuvables. 
 	 */
-	public static String[] findVideoCodecs(ProcessManager processToStudy) {
+	public static String[] findVideoCodecs(ProcessManager processToStudy) throws UnfindableResourceException {
 		if(processToStudy == null) throw new NullPointerException("Le ProcessManager recu en parametre est null !");
 		return findCodecs("V", processToStudy);
 	}
@@ -97,11 +102,13 @@ public final class DataCodecsFilter implements DataStreamsFilter {
 	/**
 	 * [ METHODE DE CLASSE POUR RECUPERER TOUS LES CODECS AUDIO SUPPORTES PAR FFmpeg. ]
 	 * 
-	 * @param processToStudy		Le ProcessManager contenant les flux a filtrer. 
+	 * @param processToStudy					Le ProcessManager contenant les flux a filtrer. 
 	 * 
-	 * @return						Les codecs audio supportes par FFmpeg.
+	 * @return									Les codecs audio supportes par FFmpeg
+	 * 
+	 * @throws UnfindableResourceException 		Exception sur les ressources introuvables. 
 	 */
-	public static String[] findAudioCodecs(ProcessManager processToStudy) {
+	public static String[] findAudioCodecs(ProcessManager processToStudy) throws UnfindableResourceException {
 		if(processToStudy == null) throw new NullPointerException("Le ProcessManager recu en parametre est null !");
 		return findCodecs("A", processToStudy);
 	}

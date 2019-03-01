@@ -2,6 +2,8 @@ package resources;
 
 import java.io.File;
 
+import exceptions.UnfindableResourceException;
+
 /**
  * [ GESTIONNAIRE DE L'ESPACE DE NOMS. ]
  * 
@@ -29,8 +31,11 @@ public final class NamesSpaceManager {
 	 * [ GENERER UN NOM UNIQUE POUR UN FICHIER TEMPORAIRE HORODATE ]
 	 * 
 	 * @return	Le nom unique horodate.
+	 * 
+	 * @throws UnfindableResourceException		Exception sur les ressources introuvables. 
 	 */
-	public static String _temporary() {
+	public static String _temporary() throws UnfindableResourceException {
+		ResourcesManager.secureTemporaryFiles();
 		return ResourceConstants.TEMPORARY_FILES_PREFIX+ResourceConstants.now()+JPG;
 	}
 	
@@ -38,8 +43,12 @@ public final class NamesSpaceManager {
 	 * [ GENERER UN NOM UNIQUE POUR UN FICHIER DE SAUVEGARDE HORODATE DE STDERR. ]
 	 * 
 	 * @return	Le nom unique horodate.
+	 * 
+	 * @throws UnfindableResourceException		Exception sur les ressources introuvables. 
 	 */
-	public static String _err() {
+	public static String _err() throws UnfindableResourceException {
+		ResourcesManager.secureAnswers();
+		ResourcesManager.secureErr();
 		return ResourceConstants.STDERR_ANSWER_PREFIX+ResourceConstants.now()+TEXT;
 	}
 	
@@ -47,8 +56,12 @@ public final class NamesSpaceManager {
 	 * [ GENERER UN NOM UNIQUE POUR UN FICHIER DE SAUVEGARDE HORODATE DE STDOUT. ]
 	 * 
 	 * @return	Le nom unique horodate.
+	 * 
+	 * @throws UnfindableResourceException		Exception sur les ressources introuvables. 
 	 */
-	public static String _out() {
+	public static String _out() throws UnfindableResourceException {
+		ResourcesManager.secureAnswers();
+		ResourcesManager.secureOut();
 		return ResourceConstants.STDOUT_ANSWER_PREFIX+ResourceConstants.now()+TEXT;
 	}
 	
@@ -61,8 +74,10 @@ public final class NamesSpaceManager {
 	 * [ GENERER UN FICHIER STDERR. ]
 	 * 
 	 * @return	Le fichier.
+	 * 
+	 * @throws UnfindableResourceException		Exception sur les ressources introuvables. 
 	 */
-	public static File err() {
+	public static File err() throws UnfindableResourceException {
 		return new File(_err());
 	}
 	
@@ -70,8 +85,10 @@ public final class NamesSpaceManager {
 	 * [ GENERER UN FICHIER STDOUT. ]
 	 * 
 	 * @return	Le fichier.
+	 * 
+	 * @throws UnfindableResourceException		Exception sur les ressources introuvables. 
 	 */
-	public static File out() {
+	public static File out() throws UnfindableResourceException {
 		return new File(_out());
 	}
 	
@@ -79,8 +96,10 @@ public final class NamesSpaceManager {
 	 * [ GENERER UN FICHIER TEMPORAIRE. ]
 	 * 
 	 * @return	Le fichier.
+	 * 
+	 * @throws UnfindableResourceException		Exception sur les ressources introuvables. 
 	 */
-	public static File temporary() {
+	public static File temporary() throws UnfindableResourceException {
 		return new File(_temporary());
 	}
 	

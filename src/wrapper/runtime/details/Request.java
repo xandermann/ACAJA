@@ -1,6 +1,8 @@
 package wrapper.runtime.details;
 
 import java.util.*;
+
+import exceptions.UnfindableResourceException;
 import wrapper.language.*;
 import wrapper.streams.iterators.ProcessManager;
 import wrapper.streams.managers.consumers.WatchedConsumer;
@@ -430,8 +432,10 @@ public final class Request {
 	 * [ EXECUTER LA REQUETE ET CONSOMMER EN INTRENE TOUS LES FLUX DE SORTIE DE FFMPEG. ]
 	 * 
 	 * @return La requete this. 
+	 * 
+	 * @throws UnfindableResourceException		Exception sur les ressources introuvables.
 	 */
-	public Request make() {
+	public Request make() throws UnfindableResourceException {
 		WatchedConsumer.consume(result());
 		return this;
 	}

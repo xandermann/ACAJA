@@ -46,7 +46,7 @@ public final class ResourceConstants {
 	public final static String PROCESSING_OLD_IMPORTS_PATH = OLD_IMPORTS_PATH + "processing/";
 	public final static File OLD_IMPORTS = new File(OLD_IMPORTS_PATH);
 	public final static File CONVERSION_OLD_IMPORTS = new File(CONVERSION_OLD_IMPORTS_PATH);
-	public final static File PROCESSING_OLD_IMPORTS = new File(OLD_IMPORTS_PATH);
+	public final static File PROCESSING_OLD_IMPORTS = new File(PROCESSING_OLD_IMPORTS_PATH);
 	
 	
 	/**

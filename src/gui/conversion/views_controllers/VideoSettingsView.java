@@ -16,7 +16,7 @@ public final class VideoSettingsView extends SettingsView{
 
 	
 	private JTextField bitrateText, fpsText;
-	private JComboBox<String> codecsComboBox, resolutionsComboBox;
+	private JComboBox<String> formatComboBox, codecsComboBox, resolutionsComboBox;
 	
 	
 	//=======================================================================================================================
@@ -29,9 +29,22 @@ public final class VideoSettingsView extends SettingsView{
 
 
 		codecsComboBox = new JComboBox<String>(CodecConstants.ALL_SUPPORTED_VIDEO_CODECS);
+		formatComboBox = new JComboBox<String>(CodecConstants.ALL_EXTENSIONS);
+		StylizedJPanel formatPanel = new StylizedJPanel();
 		StylizedJPanel codecPanel = new StylizedJPanel();
 		codecPanel.add(new JLabel("Codec video : "), BorderLayout.WEST);
 		codecPanel.add(codecsComboBox, BorderLayout.EAST);
+		formatPanel.add(new JLabel("Format de sortie : "), BorderLayout.WEST);
+		formatPanel.add(formatComboBox,BorderLayout.EAST);
+		formatComboBox.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO 
+				
+			}
+			
+		});
 		codecsComboBox.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -89,7 +102,7 @@ public final class VideoSettingsView extends SettingsView{
 			}
 		});
 		
-		
+		add(formatPanel);
 		add(codecPanel);
 		add(bitratePanel);
 		add(resolutionPanel);

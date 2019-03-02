@@ -1,6 +1,8 @@
 package wrapper.runtime.global;
 
 import java.util.*;
+
+import exceptions.UnfindableResourceException;
 import files.*;
 import files.enumerations.ProcessingType;
 import files.enumerations.SettingType;
@@ -26,9 +28,11 @@ public final class UserRequests{
 	/**
 	 * [ METHODE INTERNE DE CLASSE POUR L'EXECUTION DES REQUETES D'UNE CONVERSION. ]
 	 * 
-	 * @param file			Le fichier contentant les requetes et sur lequel les realiser. 
+	 * @param file								Le fichier contentant les requetes et sur lequel les realiser. 
+	 * 
+	 * @throws UnfindableResourceException		Exception sur les ressources introuvables. 
 	 */
-	private static void executeSettingsFile(SettingsFile file) {
+	private static void executeSettingsFile(SettingsFile file) throws UnfindableResourceException {
 		if(file == null) throw new NullPointerException("SettingsFile null!");
 		
 		Request request = new Request(file.getSourceFileFullName(), file.getDestinationFileFullName());
@@ -78,9 +82,11 @@ public final class UserRequests{
 	/**
 	 * [ METHODE INTERNE DE CLASSE POUR L'EXECUTION DES REQUETES D'UN TRAITEMENT. ]
 	 * 
-	 * @param file			Le fichier contentant les requetes et sur lequel les realiser. 
+	 * @param file								Le fichier contentant les requetes et sur lequel les realiser. 
+	 * 
+	 * @throws UnfindableResourceException		Exception sur les ressources introuvables. 
 	 */
-	private static void executeProcessingFile(ProcessingFile file) {
+	private static void executeProcessingFile(ProcessingFile file) throws UnfindableResourceException {
 		if(file == null) throw new NullPointerException("ProcessingFile null!");
 		
 		Request request = new Request(file.getSourceFileFullName(), file.getDestinationFileFullName());
@@ -108,9 +114,11 @@ public final class UserRequests{
 	 * 
 	 * Methode pour appliquer des modifications sur un ficheir media. 
 	 * 
-	 * @param file 		La fichier sur lequel il faut realiser les modifications. 
+	 * @param file 								Le fichier sur lequel il faut realiser les modifications. 
+	 * 
+	 * @throws UnfindableResourceException		Exception sur les ressources introuvables. 
 	 */
-	public static void execute(SelectableFile file) {
+	public static void execute(SelectableFile file) throws UnfindableResourceException {
 		if(file == null) throw new NullPointerException("SelectableFile null!");
 		if(file instanceof SettingsFile)
 			executeSettingsFile((SettingsFile) file);

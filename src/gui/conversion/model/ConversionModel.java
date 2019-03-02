@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.*;
 import javax.swing.*;
 import exceptions.IncorrectFileException;
+import exceptions.UnfindableResourceException;
 import files.*;
 import files.enumerations.SettingType;
 import files.files.SettingsFile;
@@ -72,25 +73,24 @@ public final class ConversionModel extends Model {
 	 * 
 	 * Methode qui sauvegarde les fichiers recemments ouverts a la fermeture
 	 * de la fenetre. 
-	 */
-	public void saveImports() {
-		try {
-			 if(ResourcesManager.checkConversionImports()) {
-				for(int i = 0 ; i < oldImportedFiles.length ; i ++) {
-					File f = new File(ResourceConstants.CONVERSION_OLD_IMPORTS_PATH + oldImportedFiles[i].getFileName() + ".acaja");
-					if(!f.exists()) {
-						FileOutputStream fos = new FileOutputStream(f);
-						ObjectOutputStream oos = new ObjectOutputStream(fos);
-						oos.writeObject(oldImportedFiles[i]);
-						oos.close();
-						fos.close();
-					}
-				}
-			} else {
-				JOptionPane.showMessageDialog(null, MessageConstants.ERROR_SAVE_IMPORTS);
+	 * 
+	 * @throws UnfindableResourceException		Exception sur les fichiers introuvables.
+	 * @throws  
+	 */	
+	public void saveImports() throws UnfindableResourceException {
+		ResourcesManager.secureConversionImports();
+		for(int i = 0 ; i < oldImportedFiles.length ; i ++) {
+			File f = new File(ResourceConstants.CONVERSION_OLD_IMPORTS_PATH + oldImportedFiles[i].getFileName() + ".acaja");
+			if(!f.exists()) {
+				try {
+					FileOutputStream fos = new FileOutputStream(f);
+					ObjectOutputStream oos = new ObjectOutputStream(fos);
+					oos.writeObject(oldImportedFiles[i]);
+					oos.close();
+					fos.close();
+				} catch (FileNotFoundException fde) {
+				} catch (IOException ioe) {}
 			}
-		} catch(Exception e) {
-			//JOptionPane.showMessageDialog(null, e.getMessage());
 		}
 	}
 
@@ -101,43 +101,42 @@ public final class ConversionModel extends Model {
 	 * [ CHARGER LES FICHIERS PRECEDEMMENT IMPORTES. ]
 	 * 
 	 * Methode qui recupere les fichiers recemments ouverts a l'ouverture. 
+	 * 
+	 * @throws UnfindableResourceException 		Exception sur les fichiers introuvables.
 	 */
-	public void loadOldImports() {
-		if(ResourcesManager.checkConversionImports()) {
-			File[] files = ResourceConstants.CONVERSION_OLD_IMPORTS.listFiles();	
-			// tri des fichiers par date
-			if(files != null) {
-				Arrays.sort(files, new Comparator<File>(){
-					public int compare(File f1, File f2){
-						return Long.valueOf(f1.lastModified()).compareTo(f2.lastModified());
-					} 
-				});
-				for(int i = 0 ; i < files.length ; i++) {
-					if(files[i].getName().contains(".acaja")) {
-						try {	
-							FileInputStream fis = new FileInputStream(files[i]);
-							ObjectInputStream ois = new ObjectInputStream(fis);
-							if(i <= 10) oldImportedFiles[i] = (FileInformation)ois.readObject(); // avoid array out of bounds
-							ois.close();
-							fis.close();
-						}  catch(SecurityException se) {
+	public void loadOldImports() throws UnfindableResourceException {
+		ResourcesManager.secureConversionImports();
+		File[] files = ResourceConstants.CONVERSION_OLD_IMPORTS.listFiles();	
+		// tri des fichiers par date
+		if(files != null) {
+			Arrays.sort(files, new Comparator<File>(){
+				public int compare(File f1, File f2){
+					return Long.valueOf(f1.lastModified()).compareTo(f2.lastModified());
+				} 
+			});
+			for(int i = 0 ; i < files.length ; i++) {
+				if(files[i].getName().contains(".acaja")) {
+					try {	
+						FileInputStream fis = new FileInputStream(files[i]);
+						ObjectInputStream ois = new ObjectInputStream(fis);
+						if(i <= 10) oldImportedFiles[i] = (FileInformation)ois.readObject(); 
+						ois.close();
+						fis.close();
+					}  catch(SecurityException se) {
+						JOptionPane.showMessageDialog(null, 
+								"Vous n'avez pas les permissions pour lire le fichier d'import acaja " 
+								 + files[i].getName() + " !");
+					} catch(IOException ioe) {
+						JOptionPane.showMessageDialog(null, 
+								"Impossible d'acceder au fichier " + files[i].getName() 
+								 + " : erreur d'entree/sortie !");
+					} catch(Exception e) {
 							JOptionPane.showMessageDialog(null, 
-									"Vous n'avez pas les permissions pour lire le fichier d'import acaja " 
-									 + files[i].getName() + " !");
-						} catch(IOException ioe) {
-							JOptionPane.showMessageDialog(null, 
-									"Impossible d'acceder au fichier " + files[i].getName() 
-									 + " : erreur d'entree/sortie !");
-						} catch(Exception e) {
-								JOptionPane.showMessageDialog(null, 
-									"Erreur lors de l'acces aux fichiers precedemment importes : " 
-								     + e.getMessage() + " !");
-						}
+								"Erreur lors de l'acces aux fichiers precedemment importes : " 
+							     + e.getMessage() + " !");
 					}
 				}
 			}
-		} else {
-			JOptionPane.showMessageDialog(null, MessageConstants.ERROR_SAVE_IMPORTS);
 		}
 	}
 
@@ -191,9 +190,11 @@ public final class ConversionModel extends Model {
 	 * 
 	 * @param file SettingsFile 		Le fichier a ajouter a la bibliotheque
 	 * 
-	 * @throws IncorrectFileException 	Exception levee pour les fichers incorrects. 
+	 * @throws IncorrectFileException 			Exception levee pour les fichers incorrects. 
+	 * 
+	 * @throws UnfindableResourceException 		Exception sur les fichiers introuvables.
 	 */
-	public void add(File file) throws IncorrectFileException {
+	public void add(File file) throws IncorrectFileException, UnfindableResourceException {
 		if(file.exists()) {
 			files.add(new SettingsFile(file));
 			sendChanges();
@@ -290,8 +291,10 @@ public final class ConversionModel extends Model {
 	 * [ CONVERTIR LES FICHIERS MODIFIES. ]
 	 * 
 	 * Methode pour demarrer la conversion des SettingsFile modifies. 
+	 * 
+	 * @throws UnfindableResourceException 		Exception sur les ressources introuvables. 
 	 */
-	public void save() {
+	public void save() throws UnfindableResourceException {
 		for(SettingsFile sf : files) {
 			if(sf.isModified()) UserRequests.execute(sf);		
 		}

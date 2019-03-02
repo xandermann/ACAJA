@@ -46,7 +46,11 @@ public final class ConversionWindow extends StylizedJFrame {
 	private ConversionWindow() {
 		super();
 		model = new ConversionModel();
-		model.loadOldImports();
+		try {
+			model.loadOldImports();
+		} catch (UnfindableResourceException ure) {
+			JOptionPane.showMessageDialog(null, ure.getMessage());
+		}
 		empty_workspace = new JLabel("Pour commencer, ajoutez un fichier audio ou video via le menu.");
 		empty_workspace.setHorizontalAlignment(JLabel.CENTER);
 	}

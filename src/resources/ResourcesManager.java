@@ -2,6 +2,8 @@ package resources;
 
 import java.io.File;
 
+import exceptions.UnfindableResourceException;
+
 /**
  * [ GESTIONNAIRE DES RESSOURCES. ]
  * 
@@ -67,7 +69,7 @@ public final class ResourcesManager {
 	 * 
 	 * @return boolean		Vaut true si le repertoire existe ou a reussi a etre recreer. 
 	 */
-	public static boolean checkAnswsers() {
+	public static boolean checkAnswers() {
 		return checkDirectory(ResourceConstants.ANSWERS);
 	}
 	
@@ -77,7 +79,7 @@ public final class ResourcesManager {
 	 * @return boolean		Vaut true si le repertoire existe ou a reussi a etre recreer. 
 	 */
 	public static boolean checkErr() {
-		return checkAnswsers() && checkDirectory(ResourceConstants.STDERR_ANSWERS);
+		return checkAnswers() && checkDirectory(ResourceConstants.STDERR_ANSWERS);
 	}
 
 	/**
@@ -86,7 +88,7 @@ public final class ResourcesManager {
 	 * @return boolean		Vaut true si le repertoire existe ou a reussi a etre recreer. 
 	 */
 	public static boolean checkOut() {
-		return checkAnswsers() && checkDirectory(ResourceConstants.STDOUT_ANSWERS);
+		return checkAnswers() && checkDirectory(ResourceConstants.STDOUT_ANSWERS);
 	}
 	
 	
@@ -159,4 +161,89 @@ public final class ResourcesManager {
 		boolean succeed3 = clearOut();
 		return succeed && succeed2 && succeed3;
 	}
+	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
+	/**
+	 * [ LEVE UNE EXCEPTION SI ABSENCE DU REPERTOIRE IMPORTS\. ]
+	 * 
+	 * @throws UnfindableResourceException		Exception sur les ressources introuvables. 
+	 */
+	public static void secureImports() throws UnfindableResourceException {
+		if(!checkImports())
+			throw new UnfindableResourceException(UnfindableResourceException.UAITR_IMPORTS);
+	}
+	
+	
+	/**
+	 * [ LEVE UNE EXCEPTION SI ABSENCE DU REPERTOIRE IMPORTS\CONVERSION\. ]
+	 * 
+	 * @throws UnfindableResourceException		Exception sur les ressources introuvables. 
+	 */
+	public static void secureConversionImports() throws UnfindableResourceException {
+		if(!checkConversionImports())
+			throw new UnfindableResourceException(UnfindableResourceException.UAITR_CONVERSION_IMPORTS);
+	}
+	
+	
+	/**
+	 * [ LEVE UNE EXCEPTION SI ABSENCE DU REPERTOIRE IMPORTS\CONVERSION\. ]
+	 * 
+	 * @throws UnfindableResourceException		Exception sur les ressources introuvables. 
+	 */
+	public static void secureProcessingImports() throws UnfindableResourceException {
+		if(!checkConversionImports())
+			throw new UnfindableResourceException(UnfindableResourceException.UAITR_PROCESSING_IMPORTS);
+	}
+	
+	
+	/**
+	 * [ LEVE UNE EXCEPTION SI ABSENCE DU REPERTOIRE ANSWERS\. ]
+	 * 
+	 * @throws UnfindableResourceException		Exception sur les ressources introuvables. 
+	 */
+	public static void secureAnswers() throws UnfindableResourceException {
+		if(!checkAnswers())
+			throw new UnfindableResourceException(UnfindableResourceException.UAITR_ANSWERS);
+	}
+	
+	
+	/**
+	 * [ LEVE UNE EXCEPTION SI ABSENCE DU REPERTOIRE ANSWERS\STDERR\. ]
+	 * 
+	 * @throws UnfindableResourceException		Exception sur les ressources introuvables. 
+	 */
+	public static void secureErr() throws UnfindableResourceException {
+		if(!checkErr())
+			throw new UnfindableResourceException(UnfindableResourceException.UAITR_STDERR_ANSWERS);
+	}
+	
+	
+	/**
+	 * [ LEVE UNE EXCEPTION SI ABSENCE DU REPERTOIRE ANSWERS\STDOUT\. ]
+	 * 
+	 * @throws UnfindableResourceException		Exception sur les ressources introuvables. 
+	 */
+	public static void secureOut() throws UnfindableResourceException {
+		if(!checkOut())
+			throw new UnfindableResourceException(UnfindableResourceException.UAITR_STDOUT_ANSWERS);
+	}
+	
+	
+	/**
+	 * [ LEVE UNE EXCEPTION SI ABSENCE DU REPERTOIRE TEMPORARY_FILES\. ] 
+	 * 
+	 * @throws UnfindableResourceException		Exception sur les ressources introuvables. 
+	 */
+	public static void secureTemporaryFiles() throws UnfindableResourceException {
+		if(!checkTemporaryFiles())
+			throw new UnfindableResourceException(UnfindableResourceException.UAITR_TEMPORARY_FILES);
+	}
+
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
 }

@@ -1,5 +1,6 @@
 package wrapper.streams.managers.consumers;
 
+import exceptions.UnfindableResourceException;
 import wrapper.streams.iterators.ProcessManager;
 
 /**
@@ -81,10 +82,12 @@ public final class WatchedConsumer extends AllStreamsConsumer {
 	 * Cette methode permet la consommation des flux de reponses ( = de sorties ) de 
 	 * FFmpeg  
 	 * 
-	 * @param processToBeConsume		ProcessManager, un outil pour gerer 
-	 * 									le Process contenant les flux a consommer. 
+	 * @param processToBeConsume				ProcessManager, un outil pour gerer 
+	 * 											le Process contenant les flux a consommer. 
+	 * 
+	 * @throws UnfindableResourceException		Exception sur les ressources introuvables. 
 	 */
-	public static void consume(ProcessManager processToBeConsume) {
+	public static void consume(ProcessManager processToBeConsume) throws UnfindableResourceException {
 		if(processToBeConsume == null) throw new NullPointerException("Le ProcessManager recu en parametre est null !");
 		startToWork();
 		AllStreamsConsumer.consume(processToBeConsume);

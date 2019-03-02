@@ -3,11 +3,15 @@ package wrapper.runtime.global;
 import java.io.File;
 import java.util.HashMap;
 
+import javax.swing.JOptionPane;
+
 import exceptions.IncorrectFileException;
+import exceptions.UnfindableResourceException;
 import files.*;
 import files.enumerations.SettingType;
 import files.files.SelectableFile;
 import files.files.SettingsFile;
+import messages.MessageConstants;
 import resources.NamesSpaceManager;
 import resources.ResourceConstants;
 import wrapper.runtime.details.*;
@@ -47,10 +51,13 @@ public final class SystemRequests{
 	 * Metadonnees audio : le codec audio, le bitrate audio, le volume en sortie, taux d'echantillonnage,
 	 * nombre de canaux audio en sortie. 
 	 * 
-	 * @param file							Le fichier dont on souhaite connaitre les parametres. 
-	 * @throws IncorrectFileException 
+	 * @param file									Le fichier dont on souhaite connaitre les parametres. 
+	 * 
+	 * @throws IncorrectFileException 				Exception sur les ressources introuvables.  
+	 * 
+	 * @throws UnfindableResourceException			Exception sur les ressources introuvables.
 	*/
-	public static void askMetadata(SettingsFile file) throws IncorrectFileException{
+	public static void askMetadata(SettingsFile file) throws IncorrectFileException, UnfindableResourceException{
 		if(file==null) throw new NullPointerException("File null !");
 		if(!file.isVideo()) throw new IncorrectFileException(IncorrectFileException.REQUIRED_TYPE_VIDEO);
 		/**
@@ -90,7 +97,12 @@ public final class SystemRequests{
 	 * @return	Le tableau des codecs video supportes. 
 	 */
 	public static String[] askVideoCodecs() {
-		return DataCodecsFilter.findVideoCodecs(new Request().codecs().result());
+		try {
+			return DataCodecsFilter.findVideoCodecs(new Request().codecs().result());
+		} catch (UnfindableResourceException ure) {
+			JOptionPane.showMessageDialog(null, ure.getMessage());
+			return null;
+		}
 	}
 	
 	
@@ -104,7 +116,12 @@ public final class SystemRequests{
 	 * @return	Le tableau des codecs audio supportes. 
 	 */
 	public static String[] askAudioCodecs() {
-		return DataCodecsFilter.findAudioCodecs(new Request().codecs().result());
+		try {
+			return DataCodecsFilter.findAudioCodecs(new Request().codecs().result());
+		} catch (UnfindableResourceException ure) {
+			JOptionPane.showMessageDialog(null, ure.getMessage());
+			return null;
+		}
 	}
 	
 	
@@ -119,8 +136,12 @@ public final class SystemRequests{
 	 * @param time		L'instant precis ou extraire la frame. 
 	 * 
 	 * @return	La frame. 
+	 * 
+	 * @throws IncorrectFileException			Exception sur les fichiers incorrects. 
+	 * 
+	 * @throws UnfindableResourceException		Exception sur les ressources introuvables.  
 	 */
-	public static File askFrame(SelectableFile file, String time) throws IncorrectFileException {
+	public static File askFrame(SelectableFile file, String time) throws IncorrectFileException, UnfindableResourceException {
 		if(file==null) throw new NullPointerException("File null !");
 		if(!file.isVideo()) throw new IncorrectFileException(IncorrectFileException.REQUIRED_TYPE_VIDEO);
 		if(!file.isVideo()) throw new IllegalArgumentException("SelectableFile null !");
@@ -140,9 +161,12 @@ public final class SystemRequests{
 	 * @param time		L'instant precis ou extraire la frame. 
 	 * 
 	 * @return	La frame redimensionnee. 
-	 * @throws IncorrectFileException 
+	 * 
+	 * @throws IncorrectFileException			Exception sur les fichiers incorrects. 
+	 * 
+	 * @throws UnfindableResourceException		Exception sur les ressources introuvables. 
 	 */
-	public static File askFrame(SelectableFile file, String time, int width, int height) throws IncorrectFileException {
+	public static File askFrame(SelectableFile file, String time, int width, int height) throws IncorrectFileException, UnfindableResourceException {
 		if(file==null) throw new NullPointerException("File null !");
 		if(!file.isVideo()) throw new IncorrectFileException(IncorrectFileException.REQUIRED_TYPE_VIDEO);
 		if(time==null) throw new NullPointerException("Time null !");

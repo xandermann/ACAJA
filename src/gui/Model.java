@@ -2,6 +2,7 @@ package gui;
 
 import java.util.Observable;
 
+import exceptions.UnfindableResourceException;
 import wrapper.streams.managers.consumers.WatchedConsumer;
 
 /**
@@ -64,8 +65,10 @@ public abstract class Model extends Observable{
 	 * 
 	 * Le code de la methode est diffreent selon la sous-classe, ce pourquoi
 	 * on declare la methode pour l'instant en abstract.
+	 * 
+	 * @throws UnfindableResourceException		Exception sur les ressources introuvables. 
 	 */
-	public abstract void save();
+	public abstract void save() throws UnfindableResourceException;
 	
 	
 	

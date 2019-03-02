@@ -5,6 +5,7 @@ import java.io.File;
 import org.junit.Test;
 
 import exceptions.IncorrectFileException;
+import exceptions.UnfindableResourceException;
 import files.files.SettingsFile;
 
 public final class SettingsFileTest {
@@ -25,9 +26,11 @@ public final class SettingsFileTest {
 	 * Constructeur OK
 	 * 
 	 * @throws IncorrectFileException 
+	 * 
+	 * @throws UnfindableResourceException 
 	 */
 	@Test
-	public void constructeurOKTest() throws IncorrectFileException {
+	public void constructeurOKTest() throws IncorrectFileException, UnfindableResourceException {
 		SettingsFile sf = new SettingsFile(new File("A.mp3"));
 	}
 
@@ -37,9 +40,11 @@ public final class SettingsFileTest {
 	 * Constructeur mauvais
 	 * 
 	 * @throws IncorrectFileException 
+	 * 
+	 * @throws UnfindableResourceException 
 	 */
 	@Test
-	public void constructeurMauvaisTest() throws IncorrectFileException {
+	public void constructeurMauvaisTest() throws IncorrectFileException, UnfindableResourceException {
 		SettingsFile sf = new SettingsFile(new File("A.txt"));
 	}
 

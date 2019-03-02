@@ -23,8 +23,7 @@ public final class VideoSettingsView extends SettingsView{
 	//=======================================================================================================================
 
 	private void updateVideoCodecs() {
-		if(model.getCurrentFile() != null) 
-			if(isChange == true && formatComboBox.getSelectedItem() != null) {
+			if(model.getCurrentFile() != null && isChange == true && formatComboBox.getSelectedItem() != null) {
 				String videoFormat = formatComboBox.getSelectedItem().toString();
 				model.modify(SettingType.VIDEO_FORMAT, videoFormat);
 				Map<String,String> codecs = CodecConstants.CORRESPONDING_EXTENSION.get(videoFormat);

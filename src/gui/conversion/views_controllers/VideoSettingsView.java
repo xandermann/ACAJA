@@ -3,6 +3,8 @@ package gui.conversion.views_controllers;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
+import java.util.List;
+
 import javax.swing.*;
 import files.enumerations.SettingType;
 import files.files.SettingsFile;
@@ -17,42 +19,48 @@ public final class VideoSettingsView extends SettingsView{
 	
 	private JTextField bitrateText, fpsText;
 	private JComboBox<String> formatComboBox, codecsComboBox, resolutionsComboBox;
-	
+	private SoundSettingsView ssp;
 	
 	//=======================================================================================================================
 	//=======================================================================================================================
 
 	private void updateVideoCodecs() {
-			if(model.getCurrentFile() != null && isChange == true && formatComboBox.getSelectedItem() != null) {
+			if(formatComboBox.getSelectedItem() == null) {
+				formatComboBox.setSelectedIndex(0);
+				if(codecsComboBox.getSelectedItem() == null) {
+					codecsComboBox.setSelectedIndex(0);
+				}
+			}
+				
+			if(model.getCurrentFile() != null) {
 				String videoFormat = formatComboBox.getSelectedItem().toString();
-				model.modify(SettingType.VIDEO_FORMAT, videoFormat);
-				Map<String,String> codecs = CodecConstants.CORRESPONDING_EXTENSION.get(videoFormat);
+				model.getCurrentFile().modify(SettingType.VIDEO_FORMAT, videoFormat);
+				Map<String,List<String>> codecs = CodecConstants.CORRESPONDING_EXTENSION.get(videoFormat);
 				String[] videoCodecs = Arrays.copyOf(codecs.keySet().toArray(), codecs.keySet().toArray().length, String[].class);
 				codecsComboBox.removeAllItems();
 				codecsComboBox.setModel(new DefaultComboBoxModel(videoCodecs));
 				codecsComboBox.setSelectedIndex(0);
+				ssp.updateAudioCodecs();
 			}
-		
+			
 	}
 	
-	public VideoSettingsView(ConversionModel model) {
+	public VideoSettingsView(ConversionModel model, SoundSettingsView setssp) {
 		super(model);
 		formatComboBox = new JComboBox<String>(CodecConstants.ALL_EXTENSIONS);
-		
+		ssp = setssp;
 		codecsComboBox = new JComboBox<String>(CodecConstants.ALL_SUPPORTED_VIDEO_CODECS);
 		StylizedJPanel formatPanel = new StylizedJPanel();
 		formatPanel.add(new JLabel("Format de sortie : "), BorderLayout.WEST);
 		formatPanel.add(formatComboBox,BorderLayout.EAST);
 		formatComboBox.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				updateVideoCodecs();		
 			}
-			
 		});
-		formatComboBox.setSelectedIndex(0);
-		updateVideoCodecs();
+		
+		
 		StylizedJPanel codecPanel = new StylizedJPanel();
 		codecPanel.add(new JLabel("Codec video : "), BorderLayout.WEST);
 		codecPanel.add(codecsComboBox, BorderLayout.EAST);
@@ -118,7 +126,7 @@ public final class VideoSettingsView extends SettingsView{
 		add(bitratePanel);
 		add(resolutionPanel);
 		add(fpsTextPanel);
-		
+		//updateVideoCodecs();
 	
 		setSize(new Dimension(300, 400));
 	}
@@ -135,11 +143,13 @@ public final class VideoSettingsView extends SettingsView{
 		isChange = false;
 		if(model.getCurrentFile() != null){
 		     SettingsFile settings = model.getCurrentFile();
+		     formatComboBox.setSelectedItem(settings.recent(SettingType.VIDEO_FORMAT));
 		     codecsComboBox.setSelectedItem(settings.recent(SettingType.VIDEO_CODEC));
 		     resolutionsComboBox.setSelectedItem(settings.recent(SettingType.RESOLUTION));
 			 bitrateText.setText(settings.recent(SettingType.VIDEO_BITRATE)); 
 			 fpsText.setText(settings.recent(SettingType.FRAMERATE));
 		}else{		 
+			 formatComboBox.setSelectedIndex(0);
 			 codecsComboBox.setSelectedIndex(0);
 			 resolutionsComboBox.setSelectedIndex(0);
 			 bitrateText.setText("");

@@ -7,8 +7,8 @@ import java.util.concurrent.TimeUnit;
 
 import javax.swing.JOptionPane;
 
-public class Tools {
-	public static String millisecondsToTime(long millis) {
+public class TimeTools {
+	public static String millisToTime(long millis) {
 		String time = "";
 		
 	    millis -= TimeUnit.DAYS.toMillis(TimeUnit.MILLISECONDS.toDays(millis));
@@ -33,7 +33,7 @@ public class Tools {
 	}
 	
 	
-	public static long timeToMiliseconds(String time) {
+	public static long timeToMillis(String time) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
         sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
         try {

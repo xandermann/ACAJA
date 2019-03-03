@@ -15,8 +15,7 @@ import resources.*;
  * Cette classe affiche dans un GridLayout les fichiers de 
  * sauvegarde des flux.
  * 
- * Les fichiers sont disposes dans l'affichage dans l'ordre 
- * du plus recent au plus ancien.
+ * Les fichiers affiches dans l'ordre du plus recent au plus ancien.
  * 
  * Ceci est une classe concrete "sterile", c-a-d qu'aucune classe ne peut 
  * en heriter ( d'ou la presence du final devant class).

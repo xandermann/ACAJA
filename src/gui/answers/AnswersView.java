@@ -3,21 +3,11 @@ package gui.answers;
 import java.io.File;
 import java.util.*;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
-
 import javax.swing.*;
-
 import gui.WindowTools;
-import gui.conversion.ConversionWindow;
-import gui.processing.ProcessingWindow;
-import gui.style.StyleTheme;
-import gui.style.StylizedJButton;
-import gui.style.StylizedJPanel;
-
 import java.awt.*;
 import java.awt.event.*;
-
-import resources.ResourceConstants;
+import resources.*;
 
 public final class AnswersView extends JPanel {
 	public AnswersView() {
@@ -41,18 +31,10 @@ public final class AnswersView extends JPanel {
 		setSize(new Dimension(400, (30*files.size())<500 ? (30*files.size()) : 500));
 		
 		for(File f : files) {
-			String n = f.getName();
-		    long millis = Long.parseLong(n.substring(n.lastIndexOf("_")+1, n.indexOf(".")));
-		    millis -= TimeUnit.DAYS.toMillis(TimeUnit.MILLISECONDS.toDays(millis));
-		    long hours = TimeUnit.MILLISECONDS.toHours(millis);
-		    millis -= TimeUnit.HOURS.toMillis(hours);
-	        long minutes = TimeUnit.MILLISECONDS.toMinutes(millis);
-	        millis -= TimeUnit.MINUTES.toMillis(minutes);
-            long seconds = TimeUnit.MILLISECONDS.toSeconds(millis);
-            millis -= TimeUnit.SECONDS.toMillis(seconds);
-            
+			String n = f.getName();            
 			JButton j = new JButton(
-					"Rapport du "+n.substring(n.indexOf("_")+1, n.lastIndexOf("_")) +" a "+hours+":"+minutes+":"+seconds+"."+millis+".");
+					"Rapport du "+n.substring(n.indexOf("_")+1, n.lastIndexOf("_")) + " a " +
+					TimeTools.millisToTime(Long.parseLong(n.substring(n.lastIndexOf("_")+1, n.indexOf(".")))));
 			j.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					JFrame window = new JFrame("Affichage de la reponse : "+f.getName()+".");

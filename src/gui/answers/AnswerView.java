@@ -54,7 +54,7 @@ public final class AnswerView extends JPanel{
 				TimeTools.millisToTime(Long.parseLong(n.substring(n.lastIndexOf("_")+1, n.indexOf(".")))), 
 				JLabel.CENTER));
 		JPanel area = new JPanel(new BorderLayout());
-		name.setSize(new Dimension(500, 750));
+		name.setSize(new Dimension(500, 450));
 		area.add(new JScrollPane(text));
 		
 		add(name, BorderLayout.NORTH);

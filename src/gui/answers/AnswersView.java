@@ -57,7 +57,6 @@ public final class AnswersView extends JPanel {
 		 */
 		setLayout(new GridLayout(files.size(), 1));
 		setSize(new Dimension(400, (30*files.size())<500 ? (30*files.size()) : 500));
-		
 		for(File f : files) {
 			String n = f.getName();            
 			JButton j = new JButton(
@@ -75,8 +74,7 @@ public final class AnswersView extends JPanel {
 				}
 			});
 			add(j);
-		}
-		
+		}		
 		new JScrollPane(this);
 	}
 }

@@ -11,6 +11,7 @@ import files.enumerations.SettingType;
 import files.files.SettingsFile;
 import gui.JFileChooserManager;
 import gui.WindowTools;
+import gui.answers.AnswersWindow;
 import gui.conversion.model.ConversionModel;
 import gui.conversion.views_controllers.*;
 import gui.processing.ProcessingWindow;
@@ -216,8 +217,17 @@ public final class ConversionWindow extends StylizedJFrame {
 			}
 		});
 
+		StylizedJMenuItem answsers = new StylizedJMenuItem("Etudier les reponses de ffmpeg");
+		answsers.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent ae) {			
+				new AnswersWindow();
+			}
+		});
+		
 		optionsMenu.add(exportFolder);
 		optionsMenu.add(switchMode);
+		optionsMenu.add(answsers);
 
 		return optionsMenu;
 	}

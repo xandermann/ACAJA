@@ -156,7 +156,7 @@ public final class SystemRequests{
 	}
 	
 	/**
-	 * [ OBTENIR UNE FRAME D'UNE VIDEO A INSTANT PRECIS ET LA REDIMMENSIONNER. ]
+	 * [ OBTENIR UNE FRAME D'UNE VIDEO A UN INSTANT PRECIS ET LA REDIMMENSIONNER. ]
 	 * 
 	 * @param file		La video.
 	 * 

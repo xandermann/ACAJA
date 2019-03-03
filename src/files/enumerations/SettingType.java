@@ -12,6 +12,10 @@ public enum SettingType implements OperationType {
 	 */
 	QUALITY,
 	/**
+	 * Parametre du format de fichier.
+	 */
+	VIDEO_FORMAT,
+	/**
 	 * Parametre du type de codec video.
 	 */
 	VIDEO_CODEC,

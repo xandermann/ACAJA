@@ -30,7 +30,6 @@ public final class CodecConstants {
 		Map<String, Map<String,String>> initialize_extensions = new HashMap<String,Map<String,String>>();
 		Map<String, String> compatible_codecs = new HashMap<String,String>();
 		for(String extension : ALL_EXTENSIONS) {
-			compatible_codecs.clear();
 			switch(extension){
 			case ".3g2":
 				//mpeg4 
@@ -70,11 +69,15 @@ public final class CodecConstants {
 			//case ".aaf": break;
 			case ".asf":
 				//multi = compatible with all codecs 
-				compatible_codecs.put("multi","multi");
+				for(String videoCodec : ALL_SUPPORTED_VIDEO_CODECS)
+					for(String audioCodec : ALL_SUPPORTED_AUDIO_CODECS)
+						compatible_codecs.put(videoCodec, audioCodec);
 				break;
 			case ".avi":
 				//multi = compatible with all codecs
-				compatible_codecs.put("multi","multi");
+				for(String videoCodec : ALL_SUPPORTED_VIDEO_CODECS)
+					for(String audioCodec : ALL_SUPPORTED_AUDIO_CODECS)
+						compatible_codecs.put(videoCodec, audioCodec);
 				break;
 			case ".flv":
 				//h264
@@ -106,7 +109,9 @@ public final class CodecConstants {
 				break;
 			case ".mkv":
 				//multi = compatible with all codecs
-				compatible_codecs.put("multi","multi");
+				for(String videoCodec : ALL_SUPPORTED_VIDEO_CODECS)
+					for(String audioCodec : ALL_SUPPORTED_AUDIO_CODECS)
+						compatible_codecs.put(videoCodec, audioCodec);
 				break;
 			case ".mp2":
 				//mpeg1
@@ -179,6 +184,7 @@ public final class CodecConstants {
 				
 			}
 			initialize_extensions.put(extension,compatible_codecs);
+			compatible_codecs = new HashMap<String,String>();
 		}
 		CORRESPONDING_EXTENSION = Collections.unmodifiableMap(initialize_extensions);
 	}

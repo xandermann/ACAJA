@@ -17,9 +17,9 @@ import javax.swing.JPanel;
 import resources.ResourceConstants;
 
 public class PictureVisualView extends JPanel implements Observer{
-	private Model model;
+	private ModelARenomer model;
 
-	public PictureVisualView(Model m) {
+	public PictureVisualView(ModelARenomer m) {
 		model = m;
 		this.setPreferredSize(new Dimension(500, 350));
 		DrawChange d = new DrawChange(model);

@@ -3,11 +3,11 @@ package gui.processing;
 import java.util.ArrayList;
 import java.util.Observable;
 
-public class Model extends Observable{
+public class ModelARenomer extends Observable{
 	
 	private ArrayList<Form> listRect;
 	
-	public Model() {
+	public ModelARenomer() {
 		listRect = new ArrayList<>();
 	}
 

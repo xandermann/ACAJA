@@ -15,7 +15,7 @@ public class PicturePan extends JPanel {
 	public PicturePan() {
 		this.setPreferredSize(new Dimension(600, 550));
 		this.setLayout(new GridBagLayout());
-		Model m = new Model();
+		ModelARenomer m = new ModelARenomer();
 		PictureVisualView pic = new PictureVisualView(m);
 		this.add(pic);
 	}

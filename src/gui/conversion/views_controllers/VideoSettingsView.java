@@ -16,19 +16,43 @@ public final class VideoSettingsView extends SettingsView{
 
 	
 	private JTextField bitrateText, fpsText;
-	private JComboBox<String> codecsComboBox, resolutionsComboBox;
+	private JComboBox<String> formatComboBox, codecsComboBox, resolutionsComboBox;
 	
 	
 	//=======================================================================================================================
 	//=======================================================================================================================
 
-	
+	private void updateVideoCodecs() {
+			if(model.getCurrentFile() != null && isChange == true && formatComboBox.getSelectedItem() != null) {
+				String videoFormat = formatComboBox.getSelectedItem().toString();
+				model.modify(SettingType.VIDEO_FORMAT, videoFormat);
+				Map<String,String> codecs = CodecConstants.CORRESPONDING_EXTENSION.get(videoFormat);
+				String[] videoCodecs = Arrays.copyOf(codecs.keySet().toArray(), codecs.keySet().toArray().length, String[].class);
+				codecsComboBox.removeAllItems();
+				codecsComboBox.setModel(new DefaultComboBoxModel(videoCodecs));
+				codecsComboBox.setSelectedIndex(0);
+			}
+		
+	}
 	
 	public VideoSettingsView(ConversionModel model) {
 		super(model);
-
-
+		formatComboBox = new JComboBox<String>(CodecConstants.ALL_EXTENSIONS);
+		
 		codecsComboBox = new JComboBox<String>(CodecConstants.ALL_SUPPORTED_VIDEO_CODECS);
+		StylizedJPanel formatPanel = new StylizedJPanel();
+		formatPanel.add(new JLabel("Format de sortie : "), BorderLayout.WEST);
+		formatPanel.add(formatComboBox,BorderLayout.EAST);
+		formatComboBox.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				updateVideoCodecs();		
+			}
+			
+		});
+		formatComboBox.setSelectedIndex(0);
+		updateVideoCodecs();
 		StylizedJPanel codecPanel = new StylizedJPanel();
 		codecPanel.add(new JLabel("Codec video : "), BorderLayout.WEST);
 		codecPanel.add(codecsComboBox, BorderLayout.EAST);
@@ -37,12 +61,12 @@ public final class VideoSettingsView extends SettingsView{
 			public void actionPerformed(ActionEvent e) {
 				if(model.getCurrentFile() != null) {
 					if(isChange == true)
-						model.modify(SettingType.VIDEO_CODEC, ((JComboBox) e.getSource()).getSelectedItem().toString());
+						if(((JComboBox) e.getSource()).getSelectedItem() != null)
+							model.modify(SettingType.VIDEO_CODEC, ((JComboBox) e.getSource()).getSelectedItem().toString());
 				}
 			}
 		});
 
-		
 		bitrateText = new JTextField();
 		StylizedJPanel bitratePanel = new StylizedJPanel();
 		bitratePanel.add(new JLabel("Bitrate (kb/s) : "), BorderLayout.WEST);
@@ -89,13 +113,13 @@ public final class VideoSettingsView extends SettingsView{
 			}
 		});
 		
-		
+		add(formatPanel);
 		add(codecPanel);
 		add(bitratePanel);
 		add(resolutionPanel);
 		add(fpsTextPanel);
 		
-		
+	
 		setSize(new Dimension(300, 400));
 	}
 
@@ -122,6 +146,7 @@ public final class VideoSettingsView extends SettingsView{
 			 fpsText.setText("");
 		}
 		isChange = true;
+		updateVideoCodecs();
 	}
 	
 

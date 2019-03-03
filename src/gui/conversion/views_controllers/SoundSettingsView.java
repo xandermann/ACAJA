@@ -25,6 +25,23 @@ public final class SoundSettingsView extends SettingsView{
 	//=======================================================================================================================
 
 	
+	private void updateAudioCodecs() {
+		if(model.getCurrentFile() != null && isChange == true) {
+			String videoFormat = model.getCurrentFile().getSettings().get(SettingType.VIDEO_FORMAT);
+			if(videoFormat != null) {
+				Map<String,String> codecs = CodecConstants.CORRESPONDING_EXTENSION.get(videoFormat);
+				ArrayList<String> codecsAudio = new ArrayList<String>();
+				for(String codecVideo : codecs.keySet()) {
+					codecsAudio.add(codecs.get(codecVideo));
+				}
+				String[] codecsArray = Arrays.copyOf(codecsAudio.toArray(), codecsAudio.size(), String[].class);
+				codecsComboBox.removeAllItems();
+				codecsComboBox.setModel(new DefaultComboBoxModel(codecsArray));
+				codecsComboBox.setSelectedIndex(0);
+			}		
+		}
+	}
+	
 	
 	public SoundSettingsView(ConversionModel model) {
 		super(model);
@@ -37,8 +54,8 @@ public final class SoundSettingsView extends SettingsView{
 		codecsComboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(model.getCurrentFile() != null) {
-					if(isChange == true)
-						model.modify(SettingType.AUDIO_CODEC, ((JComboBox) e.getSource()).getSelectedItem().toString());
+					//if(isChange == true)
+						//model.modify(SettingType.AUDIO_CODEC, ((JComboBox) e.getSource()).getSelectedItem().toString());
 				}
 			}
 		});
@@ -121,6 +138,7 @@ public final class SoundSettingsView extends SettingsView{
 			channelsText.setText("");
 		}
 		isChange = true;
+		//updateAudioCodecs();
 	}
 	
 	

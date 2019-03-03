@@ -24,7 +24,7 @@
     </display>  
   </class>  
   <class id="3" language="java" name="java.lang.Exception" project="s3b_s22_chevrier_dasilvacarmo_hublau_palmieri" 
-    file="C:/Program Files/Java/jdk1.8.0_191/jre/lib/rt.jar" binary="true" corner="BOTTOM_RIGHT">    
+    file="C:/Program Files/Java/jre-10.0.2/lib/jrt-fs.jar" binary="true" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="-46" y="-315"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -177,7 +177,7 @@
     </display>  
   </class>  
   <class id="18" language="java" name="java.util.Observable" project="s3b_s22_chevrier_dasilvacarmo_hublau_palmieri" 
-    file="C:/Program Files/Java/jdk1.8.0_191/jre/lib/rt.jar" binary="true" corner="BOTTOM_RIGHT">    
+    file="C:/Program Files/Java/jre-10.0.2/lib/jrt-fs.jar" binary="true" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1795" y="-435"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -196,7 +196,7 @@
     </display>  
   </class>  
   <class id="20" language="java" name="javax.swing.JPanel" project="s3b_s22_chevrier_dasilvacarmo_hublau_palmieri" 
-    file="C:/Program Files/Java/jdk1.8.0_191/jre/lib/rt.jar" binary="true" corner="BOTTOM_RIGHT">    
+    file="C:/Program Files/Java/jre-10.0.2/lib/jrt-fs.jar" binary="true" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="3223" y="46"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -226,7 +226,7 @@
     </display>  
   </class>  
   <class id="23" language="java" name="javax.swing.JFrame" project="s3b_s22_chevrier_dasilvacarmo_hublau_palmieri" 
-    file="C:/Program Files/Java/jdk1.8.0_191/jre/lib/rt.jar" binary="true" corner="BOTTOM_RIGHT">    
+    file="C:/Program Files/Java/jre-10.0.2/lib/jrt-fs.jar" binary="true" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="2801" y="-361"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -235,7 +235,7 @@
     </display>  
   </class>  
   <interface id="24" language="java" name="java.awt.event.WindowListener" 
-    project="s3b_s22_chevrier_dasilvacarmo_hublau_palmieri" file="C:/Program Files/Java/jdk1.8.0_191/jre/lib/rt.jar" 
+    project="s3b_s22_chevrier_dasilvacarmo_hublau_palmieri" file="C:/Program Files/Java/jre-10.0.2/lib/jrt-fs.jar" 
     binary="true" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1224" y="2"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -333,7 +333,7 @@
     </display>  
   </class>  
   <class id="33" language="java" name="javax.swing.JTabbedPane" project="s3b_s22_chevrier_dasilvacarmo_hublau_palmieri" 
-    file="C:/Program Files/Java/jdk1.8.0_191/jre/lib/rt.jar" binary="true" corner="BOTTOM_RIGHT">    
+    file="C:/Program Files/Java/jre-10.0.2/lib/jrt-fs.jar" binary="true" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="2477" y="426"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -342,7 +342,7 @@
     </display>  
   </class>  
   <interface id="34" language="java" name="java.awt.event.KeyListener" 
-    project="s3b_s22_chevrier_dasilvacarmo_hublau_palmieri" file="C:/Program Files/Java/jdk1.8.0_191/jre/lib/rt.jar" 
+    project="s3b_s22_chevrier_dasilvacarmo_hublau_palmieri" file="C:/Program Files/Java/jre-10.0.2/lib/jrt-fs.jar" 
     binary="true" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="2372" y="693"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -352,7 +352,7 @@
     </display>  
   </interface>  
   <class id="35" language="java" name="javax.swing.JList" project="s3b_s22_chevrier_dasilvacarmo_hublau_palmieri" 
-    file="C:/Program Files/Java/jdk1.8.0_191/jre/lib/rt.jar" binary="true" corner="BOTTOM_RIGHT">    
+    file="C:/Program Files/Java/jre-10.0.2/lib/jrt-fs.jar" binary="true" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="2497" y="648"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -361,7 +361,7 @@
     </display>  
   </class>  
   <interface id="36" language="java" name="java.util.Observer" project="s3b_s22_chevrier_dasilvacarmo_hublau_palmieri" 
-    file="C:/Program Files/Java/jdk1.8.0_191/jre/lib/rt.jar" binary="true" corner="BOTTOM_RIGHT">    
+    file="C:/Program Files/Java/jre-10.0.2/lib/jrt-fs.jar" binary="true" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1967" y="273"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -370,7 +370,7 @@
     </display>  
   </interface>  
   <interface id="37" language="java" name="java.awt.event.MouseListener" 
-    project="s3b_s22_chevrier_dasilvacarmo_hublau_palmieri" file="C:/Program Files/Java/jdk1.8.0_191/jre/lib/rt.jar" 
+    project="s3b_s22_chevrier_dasilvacarmo_hublau_palmieri" file="C:/Program Files/Java/jre-10.0.2/lib/jrt-fs.jar" 
     binary="true" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="2630" y="684"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -575,7 +575,7 @@
     </display>  
   </class>  
   <interface id="56" language="java" name="java.util.Iterator" project="s3b_s22_chevrier_dasilvacarmo_hublau_palmieri" 
-    file="C:/Program Files/Java/jdk1.8.0_191/jre/lib/rt.jar" binary="true" corner="BOTTOM_RIGHT">    
+    file="C:/Program Files/Java/jre-10.0.2/lib/jrt-fs.jar" binary="true" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="4600" y="-16"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -584,7 +584,7 @@
     </display>  
   </interface>  
   <interface id="57" language="java" name="java.lang.Iterable" project="s3b_s22_chevrier_dasilvacarmo_hublau_palmieri" 
-    file="C:/Program Files/Java/jdk1.8.0_191/jre/lib/rt.jar" binary="true" corner="BOTTOM_RIGHT">    
+    file="C:/Program Files/Java/jre-10.0.2/lib/jrt-fs.jar" binary="true" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="4294" y="-18"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -756,7 +756,7 @@
     </display>  
   </class>  
   <class id="73" language="java" name="javax.swing.JMenu" project="s3b_s22_chevrier_dasilvacarmo_hublau_palmieri" 
-    file="C:/Program Files/Java/jdk1.8.0_191/jre/lib/rt.jar" binary="true" corner="BOTTOM_RIGHT">    
+    file="C:/Program Files/Java/jre-10.0.2/lib/jrt-fs.jar" binary="true" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="3396" y="-369"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -765,7 +765,7 @@
     </display>  
   </class>  
   <class id="74" language="java" name="javax.swing.JButton" project="s3b_s22_chevrier_dasilvacarmo_hublau_palmieri" 
-    file="C:/Program Files/Java/jdk1.8.0_191/jre/lib/rt.jar" binary="true" corner="BOTTOM_RIGHT">    
+    file="C:/Program Files/Java/jre-10.0.2/lib/jrt-fs.jar" binary="true" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="2911" y="-695"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -774,7 +774,7 @@
     </display>  
   </class>  
   <class id="75" language="java" name="javax.swing.JMenuBar" project="s3b_s22_chevrier_dasilvacarmo_hublau_palmieri" 
-    file="C:/Program Files/Java/jdk1.8.0_191/jre/lib/rt.jar" binary="true" corner="BOTTOM_RIGHT">    
+    file="C:/Program Files/Java/jre-10.0.2/lib/jrt-fs.jar" binary="true" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="3164" y="-431"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -783,7 +783,7 @@
     </display>  
   </class>  
   <class id="76" language="java" name="javax.swing.JMenuItem" project="s3b_s22_chevrier_dasilvacarmo_hublau_palmieri" 
-    file="C:/Program Files/Java/jdk1.8.0_191/jre/lib/rt.jar" binary="true" corner="BOTTOM_RIGHT">    
+    file="C:/Program Files/Java/jre-10.0.2/lib/jrt-fs.jar" binary="true" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="3400" y="-501"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -791,8 +791,8 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="77" language="java" name="gui.processing.ImageView" project="s3b_s22_chevrier_dasilvacarmo_hublau_palmieri" 
-    file="/s3b_s22_chevrier_dasilvacarmo_hublau_palmieri/src/gui/processing/ImageView.java" binary="false" 
+  <class id="77" language="java" name="gui.processing.ImagePan" project="s3b_s22_chevrier_dasilvacarmo_hublau_palmieri" 
+    file="/s3b_s22_chevrier_dasilvacarmo_hublau_palmieri/src/gui/processing/ImagePan.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="3347" y="525"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -812,9 +812,9 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="79" language="java" name="gui.processing.PictureView" 
+  <class id="79" language="java" name="gui.processing.PicturePan" 
     project="s3b_s22_chevrier_dasilvacarmo_hublau_palmieri" 
-    file="/s3b_s22_chevrier_dasilvacarmo_hublau_palmieri/src/gui/processing/PictureView.java" binary="false" 
+    file="/s3b_s22_chevrier_dasilvacarmo_hublau_palmieri/src/gui/processing/PicturePan.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="3566" y="270"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -834,9 +834,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="81" language="java" name="gui.processing.ButtonView" 
-    project="s3b_s22_chevrier_dasilvacarmo_hublau_palmieri" 
-    file="/s3b_s22_chevrier_dasilvacarmo_hublau_palmieri/src/gui/processing/ButtonView.java" binary="false" 
+  <class id="81" language="java" name="gui.processing.ButtonPan" project="s3b_s22_chevrier_dasilvacarmo_hublau_palmieri" 
+    file="/s3b_s22_chevrier_dasilvacarmo_hublau_palmieri/src/gui/processing/ButtonPan.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="3531" y="156"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -856,9 +855,9 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="83" language="java" name="gui.processing.ProcessingView" 
+  <class id="83" language="java" name="gui.processing.ProcessingPan" 
     project="s3b_s22_chevrier_dasilvacarmo_hublau_palmieri" 
-    file="/s3b_s22_chevrier_dasilvacarmo_hublau_palmieri/src/gui/processing/ProcessingView.java" binary="false" 
+    file="/s3b_s22_chevrier_dasilvacarmo_hublau_palmieri/src/gui/processing/ProcessingPan.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="3123" y="503"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -878,177 +877,178 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <association id="85">    
-    <end type="SOURCE" refId="18" navigable="false">      
-      <attribute id="86" name="obs">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="87" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="36" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="88">    
-    <end type="SOURCE" refId="19"/>    
+  <realization id="85">    
+    <end type="SOURCE" refId="72"/>    
     <end type="TARGET" refId="70"/>  
   </realization>  
-  <generalization id="89">    
-    <end type="SOURCE" refId="28"/>    
-    <end type="TARGET" refId="26"/>  
+  <generalization id="86">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="19"/>  
   </generalization>  
-  <association id="90">    
-    <end type="SOURCE" refId="25" navigable="false">      
-      <attribute id="91" name="oldImportedFiles">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="92" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="93">    
-    <end type="SOURCE" refId="19"/>    
-    <end type="TARGET" refId="20"/>  
-  </generalization>  
-  <realization id="94">    
-    <end type="SOURCE" refId="55"/>    
-    <end type="TARGET" refId="56"/>  
-  </realization>  
-  <generalization id="95">    
-    <end type="SOURCE" refId="29"/>    
-    <end type="TARGET" refId="26"/>  
-  </generalization>  
-  <generalization id="96">    
-    <end type="SOURCE" refId="31"/>    
-    <end type="TARGET" refId="35"/>  
-  </generalization>  
-  <generalization id="97">    
-    <end type="SOURCE" refId="77"/>    
-    <end type="TARGET" refId="20"/>  
-  </generalization>  
-  <generalization id="98">    
-    <end type="SOURCE" refId="69"/>    
-    <end type="TARGET" refId="75"/>  
-  </generalization>  
-  <realization id="99">    
-    <end type="SOURCE" refId="66"/>    
-    <end type="TARGET" refId="60"/>  
-  </realization>  
-  <realization id="100">    
-    <end type="SOURCE" refId="61"/>    
-    <end type="TARGET" refId="60"/>  
-  </realization>  
-  <realization id="101">    
-    <end type="SOURCE" refId="65"/>    
-    <end type="TARGET" refId="64"/>  
-  </realization>  
-  <generalization id="102">    
-    <end type="SOURCE" refId="16"/>    
-    <end type="TARGET" refId="18"/>  
-  </generalization>  
-  <generalization id="103">    
-    <end type="SOURCE" refId="83"/>    
-    <end type="TARGET" refId="20"/>  
-  </generalization>  
-  <realization id="104">    
-    <end type="SOURCE" refId="30"/>    
-    <end type="TARGET" refId="36"/>  
-  </realization>  
-  <realization id="105">    
-    <end type="SOURCE" refId="54"/>    
-    <end type="TARGET" refId="57"/>  
-  </realization>  
-  <generalization id="106">    
-    <end type="SOURCE" refId="67"/>    
-    <end type="TARGET" refId="74"/>  
-  </generalization>  
-  <realization id="107">    
-    <end type="SOURCE" refId="68"/>    
-    <end type="TARGET" refId="70"/>  
-  </realization>  
-  <generalization id="108">    
-    <end type="SOURCE" refId="27"/>    
-    <end type="TARGET" refId="33"/>  
-  </generalization>  
-  <realization id="109">    
-    <end type="SOURCE" refId="62"/>    
-    <end type="TARGET" refId="60"/>  
-  </realization>  
-  <generalization id="110">    
-    <end type="SOURCE" refId="53"/>    
-    <end type="TARGET" refId="55"/>  
-  </generalization>  
-  <generalization id="111">    
-    <end type="SOURCE" refId="73"/>    
-    <end type="TARGET" refId="76"/>  
-  </generalization>  
-  <generalization id="112">    
+  <generalization id="87">    
     <end type="SOURCE" refId="30"/>    
     <end type="TARGET" refId="19"/>  
   </generalization>  
-  <realization id="113">    
-    <end type="SOURCE" refId="69"/>    
-    <end type="TARGET" refId="70"/>  
+  <generalization id="88">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="3"/>  
+  </generalization>  
+  <generalization id="89">    
+    <end type="SOURCE" refId="60"/>    
+    <end type="TARGET" refId="58"/>  
+  </generalization>  
+  <generalization id="90">    
+    <end type="SOURCE" refId="52"/>    
+    <end type="TARGET" refId="55"/>  
+  </generalization>  
+  <generalization id="91">    
+    <end type="SOURCE" refId="73"/>    
+    <end type="TARGET" refId="76"/>  
+  </generalization>  
+  <realization id="92">    
+    <end type="SOURCE" refId="66"/>    
+    <end type="TARGET" refId="60"/>  
   </realization>  
-  <realization id="114">    
+  <realization id="93">    
     <end type="SOURCE" refId="31"/>    
     <end type="TARGET" refId="34"/>  
   </realization>  
-  <generalization id="115">    
-    <end type="SOURCE" refId="79"/>    
-    <end type="TARGET" refId="20"/>  
-  </generalization>  
-  <realization id="116">    
-    <end type="SOURCE" refId="10"/>    
-    <end type="TARGET" refId="9"/>  
-  </realization>  
-  <generalization id="117">    
-    <end type="SOURCE" refId="22"/>    
-    <end type="TARGET" refId="23"/>  
-  </generalization>  
-  <association id="118">    
+  <association id="94">    
     <bendpoint x="1276" y="676"/>    
     <end type="SOURCE" refId="25" navigable="false">      
-      <attribute id="119" name="currentFile">        
+      <attribute id="95" name="currentFile">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="120" minimum="0" maximum="1">        
+      <multiplicity id="96" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="12" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="121">    
-    <end type="SOURCE" refId="64"/>    
-    <end type="TARGET" refId="58"/>  
+  <association id="97">    
+    <end type="SOURCE" refId="43" navigable="false">      
+      <attribute id="98" name="waitWindow">        
+        <position height="18" width="69" x="2620" y="-376"/>      
+      </attribute>      
+      <multiplicity id="99" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="100">    
+    <end type="SOURCE" refId="69"/>    
+    <end type="TARGET" refId="75"/>  
   </generalization>  
-  <realization id="122">    
-    <end type="SOURCE" refId="12"/>    
-    <end type="TARGET" refId="9"/>  
-  </realization>  
-  <generalization id="123">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="3"/>  
-  </generalization>  
-  <generalization id="124">    
-    <end type="SOURCE" refId="12"/>    
-    <end type="TARGET" refId="11"/>  
-  </generalization>  
-  <generalization id="125">    
-    <end type="SOURCE" refId="52"/>    
-    <end type="TARGET" refId="55"/>  
-  </generalization>  
-  <realization id="126">    
+  <association id="101">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="102" name="typeFile">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="103" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="104">    
     <end type="SOURCE" refId="5"/>    
     <end type="TARGET" refId="8"/>  
   </realization>  
+  <realization id="105">    
+    <end type="SOURCE" refId="69"/>    
+    <end type="TARGET" refId="70"/>  
+  </realization>  
+  <association id="106">    
+    <bendpoint x="1028" y="624"/>    
+    <end type="SOURCE" refId="25" navigable="false">      
+      <attribute id="107" name="files">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="108" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="109">    
+    <end type="SOURCE" refId="67"/>    
+    <end type="TARGET" refId="70"/>  
+  </realization>  
+  <generalization id="110">    
+    <end type="SOURCE" refId="25"/>    
+    <end type="TARGET" refId="16"/>  
+  </generalization>  
+  <generalization id="111">    
+    <end type="SOURCE" refId="53"/>    
+    <end type="TARGET" refId="55"/>  
+  </generalization>  
+  <realization id="112">    
+    <end type="SOURCE" refId="63"/>    
+    <end type="TARGET" refId="64"/>  
+  </realization>  
+  <generalization id="113">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="11"/>  
+  </generalization>  
+  <generalization id="114">    
+    <end type="SOURCE" refId="68"/>    
+    <end type="TARGET" refId="73"/>  
+  </generalization>  
+  <association id="115">    
+    <end type="SOURCE" refId="18" navigable="false">      
+      <attribute id="116" name="obs">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="117" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="36" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="118">    
+    <end type="SOURCE" refId="55"/>    
+    <end type="TARGET" refId="56"/>  
+  </realization>  
+  <generalization id="119">    
+    <end type="SOURCE" refId="80"/>    
+    <end type="TARGET" refId="23"/>  
+  </generalization>  
+  <realization id="120">    
+    <end type="SOURCE" refId="61"/>    
+    <end type="TARGET" refId="60"/>  
+  </realization>  
+  <generalization id="121">    
+    <end type="SOURCE" refId="67"/>    
+    <end type="TARGET" refId="74"/>  
+  </generalization>  
+  <generalization id="122">    
+    <end type="SOURCE" refId="29"/>    
+    <end type="TARGET" refId="26"/>  
+  </generalization>  
+  <association id="123">    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="124" name="model">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="125" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="126">    
+    <end type="SOURCE" refId="62"/>    
+    <end type="TARGET" refId="60"/>  
+  </realization>  
   <association id="127">    
-    <end type="SOURCE" refId="44" navigable="false">      
+    <end type="SOURCE" refId="26" navigable="false">      
       <attribute id="128" name="model">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
@@ -1056,182 +1056,181 @@
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="16" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="130">    
-    <end type="SOURCE" refId="30" navigable="false">      
-      <attribute id="131" name="model">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="132" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
     <end type="TARGET" refId="25" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="133">    
-    <end type="SOURCE" refId="82"/>    
-    <end type="TARGET" refId="20"/>  
+  <generalization id="130">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="18"/>  
   </generalization>  
-  <realization id="134">    
+  <realization id="131">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="9"/>  
+  </realization>  
+  <realization id="132">    
     <end type="SOURCE" refId="26"/>    
     <end type="TARGET" refId="36"/>  
   </realization>  
-  <generalization id="135">    
-    <end type="SOURCE" refId="26"/>    
-    <end type="TARGET" refId="19"/>  
-  </generalization>  
-  <realization id="136">    
-    <end type="SOURCE" refId="72"/>    
-    <end type="TARGET" refId="70"/>  
-  </realization>  
-  <generalization id="137">    
-    <end type="SOURCE" refId="60"/>    
-    <end type="TARGET" refId="58"/>  
-  </generalization>  
-  <association id="138">    
-    <end type="SOURCE" refId="43" navigable="false">      
-      <attribute id="139" name="waitWindow">        
-        <position height="18" width="69" x="2620" y="-376"/>      
-      </attribute>      
-      <multiplicity id="140" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="23" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="141">    
-    <end type="SOURCE" refId="80"/>    
-    <end type="TARGET" refId="23"/>  
-  </generalization>  
-  <realization id="142">    
-    <end type="SOURCE" refId="67"/>    
-    <end type="TARGET" refId="70"/>  
-  </realization>  
-  <generalization id="143">    
-    <end type="SOURCE" refId="81"/>    
+  <generalization id="133">    
+    <end type="SOURCE" refId="19"/>    
     <end type="TARGET" refId="20"/>  
   </generalization>  
-  <generalization id="144">    
+  <generalization id="134">    
     <end type="SOURCE" refId="1"/>    
     <end type="TARGET" refId="3"/>  
   </generalization>  
-  <association id="145">    
-    <end type="SOURCE" refId="31" navigable="false">      
-      <attribute id="146" name="model">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="147" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="25" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="148">    
-    <end type="SOURCE" refId="25"/>    
-    <end type="TARGET" refId="16"/>  
-  </generalization>  
-  <generalization id="149">    
-    <end type="SOURCE" refId="21"/>    
-    <end type="TARGET" refId="22"/>  
-  </generalization>  
-  <generalization id="150">    
-    <end type="SOURCE" refId="13"/>    
-    <end type="TARGET" refId="19"/>  
-  </generalization>  
-  <generalization id="151">    
-    <end type="SOURCE" refId="10"/>    
-    <end type="TARGET" refId="11"/>  
-  </generalization>  
-  <association id="152">    
-    <end type="SOURCE" refId="26" navigable="false">      
-      <attribute id="153" name="model">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="154" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="25" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="155">    
+  <generalization id="135">    
     <end type="SOURCE" refId="78"/>    
     <end type="TARGET" refId="20"/>  
   </generalization>  
-  <realization id="156">    
-    <end type="SOURCE" refId="22"/>    
-    <end type="TARGET" refId="70"/>  
-  </realization>  
-  <realization id="157">    
+  <generalization id="136">    
     <end type="SOURCE" refId="31"/>    
-    <end type="TARGET" refId="37"/>  
+    <end type="TARGET" refId="35"/>  
+  </generalization>  
+  <realization id="137">    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="36"/>  
   </realization>  
-  <realization id="158">    
-    <end type="SOURCE" refId="63"/>    
-    <end type="TARGET" refId="64"/>  
-  </realization>  
-  <association id="159">    
-    <end type="SOURCE" refId="11" navigable="false">      
-      <attribute id="160" name="typeFile">        
+  <generalization id="138">    
+    <end type="SOURCE" refId="83"/>    
+    <end type="TARGET" refId="20"/>  
+  </generalization>  
+  <association id="139">    
+    <end type="SOURCE" refId="31" navigable="false">      
+      <attribute id="140" name="model">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="161" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="7" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="162">    
-    <end type="SOURCE" refId="21" navigable="false">      
-      <attribute id="163" name="model">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="164" minimum="0" maximum="1">        
+      <multiplicity id="141" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="25" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="165">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="8"/>  
+  <realization id="142">    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="37"/>  
   </realization>  
-  <association id="166">    
-    <bendpoint x="1028" y="624"/>    
-    <end type="SOURCE" refId="25" navigable="false">      
-      <attribute id="167" name="files">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="168" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="12" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="169">    
+  <generalization id="143">    
+    <end type="SOURCE" refId="77"/>    
+    <end type="TARGET" refId="20"/>  
+  </generalization>  
+  <realization id="144">    
+    <end type="SOURCE" refId="54"/>    
+    <end type="TARGET" refId="57"/>  
+  </realization>  
+  <generalization id="145">    
+    <end type="SOURCE" refId="21"/>    
+    <end type="TARGET" refId="22"/>  
+  </generalization>  
+  <generalization id="146">    
     <end type="SOURCE" refId="59"/>    
     <end type="TARGET" refId="66"/>  
   </generalization>  
-  <generalization id="170">    
-    <end type="SOURCE" refId="68"/>    
-    <end type="TARGET" refId="73"/>  
+  <generalization id="147">    
+    <end type="SOURCE" refId="28"/>    
+    <end type="TARGET" refId="26"/>  
   </generalization>  
-  <realization id="171">    
-    <end type="SOURCE" refId="31"/>    
+  <association id="148">    
+    <end type="SOURCE" refId="44" navigable="false">      
+      <attribute id="149" name="model">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="150" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="151">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="70"/>  
+  </realization>  
+  <generalization id="152">    
+    <end type="SOURCE" refId="82"/>    
+    <end type="TARGET" refId="20"/>  
+  </generalization>  
+  <generalization id="153">    
+    <end type="SOURCE" refId="64"/>    
+    <end type="TARGET" refId="58"/>  
+  </generalization>  
+  <realization id="154">    
+    <end type="SOURCE" refId="30"/>    
     <end type="TARGET" refId="36"/>  
   </realization>  
-  <generalization id="172">    
+  <realization id="155">    
+    <end type="SOURCE" refId="65"/>    
+    <end type="TARGET" refId="64"/>  
+  </realization>  
+  <generalization id="156">    
+    <end type="SOURCE" refId="27"/>    
+    <end type="TARGET" refId="33"/>  
+  </generalization>  
+  <realization id="157">    
+    <end type="SOURCE" refId="68"/>    
+    <end type="TARGET" refId="70"/>  
+  </realization>  
+  <generalization id="158">    
     <end type="SOURCE" refId="72"/>    
     <end type="TARGET" refId="76"/>  
   </generalization>  
+  <association id="159">    
+    <end type="SOURCE" refId="25" navigable="false">      
+      <attribute id="160" name="oldImportedFiles">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="161" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="162">    
+    <end type="SOURCE" refId="81"/>    
+    <end type="TARGET" refId="20"/>  
+  </generalization>  
+  <realization id="163">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="9"/>  
+  </realization>  
+  <generalization id="164">    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="23"/>  
+  </generalization>  
+  <generalization id="165">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="11"/>  
+  </generalization>  
+  <realization id="166">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="8"/>  
+  </realization>  
+  <realization id="167">    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="70"/>  
+  </realization>  
+  <generalization id="168">    
+    <end type="SOURCE" refId="26"/>    
+    <end type="TARGET" refId="19"/>  
+  </generalization>  
+  <generalization id="169">    
+    <end type="SOURCE" refId="79"/>    
+    <end type="TARGET" refId="20"/>  
+  </generalization>  
+  <association id="170">    
+    <end type="SOURCE" refId="30" navigable="false">      
+      <attribute id="171" name="model">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="172" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    

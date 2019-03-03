@@ -1,5 +1,6 @@
 package gui.processing;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridBagLayout;
@@ -10,11 +11,12 @@ import javax.swing.JPanel;
 
 import resources.ResourceConstants;
 
-public class PictureView extends JPanel {
-	public PictureView() {
+public class PicturePan extends JPanel {
+	public PicturePan() {
 		this.setPreferredSize(new Dimension(600, 550));
 		this.setLayout(new GridBagLayout());
-		PictureVisualView pic = new PictureVisualView();
+		ModelARenomer m = new ModelARenomer();
+		PictureVisualView pic = new PictureVisualView(m);
 		this.add(pic);
 	}
 

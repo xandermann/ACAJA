@@ -12,20 +12,21 @@ public class ProcessingWindow extends JFrame {
 
 	
 	private ProcessingWindow() {
+		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.createJMenu();
 		this.setBackground(Color.lightGray);
-		//this.setLocationRelativeTo(null);
 		WindowTools.showLogo(this);
 		this.setTitle("Traitement d'une vidéo");
 		WindowTools.executeWindow(this);
 
-		ProcessingView p = new ProcessingView();
-
 		this.setSize(1000, 625);
+		this.setLocationRelativeTo(null);
+		ProcessingPan p = new ProcessingPan();
+
 		this.setResizable(false);
 		this.add(p);
-		this.repaint();
+		
 	}
 
 	
@@ -47,8 +48,5 @@ public class ProcessingWindow extends JFrame {
 	}
 
 	
-	public static void main(String[] args) {
-		ProcessingWindow f = new ProcessingWindow();
-		f.repaint();
-	}
+	
 }

@@ -8,8 +8,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class ImageView extends JPanel {
-	public ImageView() {
+public class ImagePan extends JPanel {
+	public ImagePan() {
 		this.setPreferredSize(new Dimension(600, 550));
 		this.add(new JLabel("Video a editer"));
 	}

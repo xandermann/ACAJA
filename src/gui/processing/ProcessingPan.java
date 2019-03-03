@@ -5,18 +5,17 @@ import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
-public class ProcessingView extends JPanel {
+public class ProcessingPan extends JPanel {
 
-	public ProcessingView() {
+	public ProcessingPan() {
 		this.setBackground(Color.GRAY);
 
 		LibraryView pb = new LibraryView();
-		ButtonView pm = new ButtonView();
-		PictureView pi = new PictureView();
+		ButtonPan pm = new ButtonPan();
+		PicturePan pi = new PicturePan();
 		this.add(pb);
 		this.add(pm);
 		this.add(pi);
-
 	}
 
 	@Override

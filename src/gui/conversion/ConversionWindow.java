@@ -103,6 +103,7 @@ public final class ConversionWindow extends StylizedJFrame {
 						model.setCurrentFile(f.getName());
 					} catch (Exception e) {
 						JOptionPane.showMessageDialog(null, e.getMessage());
+						System.out.println(e.getClass());
 					}
 			}
 		});
@@ -142,6 +143,7 @@ public final class ConversionWindow extends StylizedJFrame {
 							model.setCurrentFile(file.getName());
 						} catch(Exception e) {
 								JOptionPane.showMessageDialog(null, e.getMessage());
+								System.out.println(e.getMessage());
 						}
 							
 					}
@@ -281,9 +283,15 @@ public final class ConversionWindow extends StylizedJFrame {
 			JPanel title = new JPanel(new BorderLayout());
 			JPanel outputPanel = new JPanel(new BorderLayout());
 			JLabel info = new JLabel("<html><br>Choisissez le repertoire et la qualite en sortie : </html>",JLabel.CENTER);
-			JLabel outputFolderLabel = new JLabel("<html><br>Repertoire de sortie : </html>", JLabel.CENTER);
+			JLabel  outputFolderChoice = new JLabel("<html><br>Repertoire de sortie : </html>", JLabel.CENTER);
 			title.add(info,BorderLayout.CENTER);
 			StylizedJButton outputFolderButton = new StylizedJButton("Parcourir");
+			JLabel outputFolder;
+			if(model.getDestinationFolder() != null)
+				outputFolder = new JLabel(model.getDestinationFolder().getAbsolutePath(), JLabel.CENTER);
+			else
+				outputFolder = new JLabel("Auncun reperoire de sortie selectionne.", JLabel.CENTER);
+			
 			outputFolderButton.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent ae) {
@@ -299,7 +307,8 @@ public final class ConversionWindow extends StylizedJFrame {
 			browse.add(outputFolderButton,BorderLayout.CENTER);
 			browse.setPreferredSize(new Dimension(100,60));
 			outputPanel.add(title,BorderLayout.NORTH);
-			outputPanel.add(outputFolderLabel,BorderLayout.CENTER);
+			outputPanel.add(outputFolder,BorderLayout.CENTER);
+			outputPanel.add(outputFolderChoice,BorderLayout.CENTER);
 			outputPanel.add(browse,BorderLayout.SOUTH);
 			window.add(outputPanel,BorderLayout.NORTH);
 			

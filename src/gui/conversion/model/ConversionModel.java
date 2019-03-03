@@ -371,6 +371,17 @@ public final class ConversionModel extends Model {
 	}
 	
 	
+	/**
+	 * [ GETTER - OBTENIR LE REPERTOIRE DE DESTINATION. ]
+	 * 
+	 * Methode pour obtenir le repertoire de destination.
+	 */
+	public File getDestinationFolder() {
+		return destinationFolder;
+	}
+	
+	
+	
 	//=======================================================================================================================
 	//=======================================================================================================================
 }

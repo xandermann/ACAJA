@@ -262,10 +262,15 @@ public final class ConversionModel extends Model {
 	 * [ LE MODELE CONTIENT-IL DES FICHIERS QUI ON ETE MODIFIES ? ]
 	 */
 	public boolean isModified() {
+		boolean isModified = false;
 		for(SettingsFile sf : files) {
-			if(sf.isModified()) return true;
+			if(sf.isModified()) {
+				isModified = true;
+				if(sf.getDestinationFileName().equals("") || sf.getDestinationFileName().startsWith(".")) 
+					return false;
+			}
 		}
-		return false;
+		return isModified;
 	}
 	
 	

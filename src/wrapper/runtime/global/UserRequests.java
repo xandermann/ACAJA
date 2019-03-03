@@ -96,9 +96,18 @@ public final class UserRequests{
 		for(ProcessingType requestKey : ffmpegRequests.keySet()) {
 			String newValue = ffmpegRequests.get(requestKey);
 			switch(requestKey) {
-			case QUALITY :
-				request.quality(newValue);
-				break;
+				case QUALITY :
+					request.quality(newValue);
+					break;
+				case CROPED :
+					//request.crop(newValue);
+					break;
+				case CUT :
+					//request.cut(newValue);
+					break;
+				case BLURRED :
+					//request.(newValue);
+					break;
 			}
 		}
 		

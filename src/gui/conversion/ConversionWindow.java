@@ -288,7 +288,7 @@ public final class ConversionWindow extends StylizedJFrame {
 			JPanel browse = new JPanel();
 			browse.setPreferredSize(new Dimension(100,60));
 			
-			title.add(new JLabel("<html><br> REPERTOIRE DE SORTIE ET LA QUALITE ? </html>",JLabel.CENTER),BorderLayout.CENTER);
+			title.add(new JLabel("<html><br> REPERTOIRE DE SORTIE ET QUALITE ? </html>",JLabel.CENTER),BorderLayout.CENTER);
 			
 			JLabel outputFolder = model.getDestinationFolder() != null ?
 			new JLabel(model.getDestinationFolder().getAbsolutePath(), JLabel.CENTER)

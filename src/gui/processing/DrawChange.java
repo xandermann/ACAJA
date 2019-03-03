@@ -4,6 +4,10 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
+/**
+ *Classe des listeners pour créer les formes
+ */
+
 public class DrawChange implements MouseMotionListener,MouseListener{
 	
 	private int nbClick;
@@ -17,17 +21,24 @@ public class DrawChange implements MouseMotionListener,MouseListener{
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		int x = e.getX();
-		int y = e.getY();
-		if(nbClick==0) {
-			refx = x;
-			refy = y;
-		}else {
-			this.model.addRect(refx, refy, e.getX(), e.getY(),'r');				
-			nbClick = -1;
+		if(this.model.isfUp() || this.model.iscropUp()) {
+			int x = e.getX();
+			int y = e.getY();
+			if(nbClick==0) {
+				refx = x;
+				refy = y;
+			}else {
+				if(this.model.iscropUp()) 
+					this.model.addForm(refx, refy, (e.getX()-refx), (e.getY()-refy),'c');	
+				
+				else if(this.model.isfUp())
+					this.model.addForm(refx, refy, (e.getX()-refx), (e.getY()-refy),'f');	
+				
+				nbClick = -1;
+			}
+			
+			nbClick++;
 		}
-		
-		nbClick++;
 	}
 
 	@Override

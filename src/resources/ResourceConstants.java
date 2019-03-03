@@ -73,6 +73,6 @@ public final class ResourceConstants {
 	 * @return String 		DATE COUTRANTE (YYYY-MM-DD) + MOMENT COURANT (EN MILLISECONDES).
 	 */
 	public static String now() {
-		return day()+"_"+System.currentTimeMillis();
+		return day()+"_"+(System.currentTimeMillis()+60*60*10*10*10);
 	}
 }

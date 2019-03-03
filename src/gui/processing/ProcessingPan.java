@@ -9,10 +9,10 @@ public class ProcessingPan extends JPanel {
 
 	public ProcessingPan() {
 		this.setBackground(Color.GRAY);
-
+		ModelARenomer m = new ModelARenomer();
 		LibraryView pb = new LibraryView();
-		ButtonPan pm = new ButtonPan();
-		PicturePan pi = new PicturePan();
+		ButtonPan pm = new ButtonPan(m);
+		PicturePan pi = new PicturePan(m);
 		this.add(pb);
 		this.add(pm);
 		this.add(pi);

@@ -12,11 +12,14 @@ import javax.swing.JPanel;
 import resources.ResourceConstants;
 
 public class PicturePan extends JPanel {
-	public PicturePan() {
+	
+	private ModelARenomer model;
+	public PicturePan(ModelARenomer m) {
+		this.model = m;
 		this.setPreferredSize(new Dimension(600, 550));
 		this.setLayout(new GridBagLayout());
-		ModelARenomer m = new ModelARenomer();
-		PictureVisualView pic = new PictureVisualView(m);
+		
+		PictureVisualView pic = new PictureVisualView(this.model);
 		this.add(pic);
 	}
 

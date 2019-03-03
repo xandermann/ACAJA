@@ -133,6 +133,7 @@ public final class SystemRequests{
 	 * [ OBTENIR UNE FRAME D'UNE VIDEO A INSTANT PRECIS. ]
 	 * 
 	 * @param file		La video.
+	 * 
 	 * @param time		L'instant precis ou extraire la frame. 
 	 * 
 	 * @return	La frame. 
@@ -158,6 +159,7 @@ public final class SystemRequests{
 	 * [ OBTENIR UNE FRAME D'UNE VIDEO A INSTANT PRECIS ET LA REDIMMENSIONNER. ]
 	 * 
 	 * @param file		La video.
+	 * 
 	 * @param time		L'instant precis ou extraire la frame. 
 	 * 
 	 * @return	La frame redimensionnee. 

@@ -80,17 +80,18 @@ public final class ConversionModel extends Model {
 	public void saveImports() throws UnfindableResourceException {
 		ResourcesManager.secureConversionImports();
 		for(int i = 0 ; i < oldImportedFiles.length ; i ++) {
+			try {
 			File f = new File(ResourceConstants.CONVERSION_OLD_IMPORTS_PATH + oldImportedFiles[i].getFileName() + ".acaja");
 			if(!f.exists()) {
-				try {
 					FileOutputStream fos = new FileOutputStream(f);
 					ObjectOutputStream oos = new ObjectOutputStream(fos);
 					oos.writeObject(oldImportedFiles[i]);
 					oos.close();
-					fos.close();
-				} catch (FileNotFoundException fde) {
-				} catch (IOException ioe) {}
-			}
+					fos.close();	
+				}
+			} catch (FileNotFoundException fde) {
+			} catch (IOException ioe) {	
+			} catch(Exception e) {}
 		}
 	}
 
@@ -261,10 +262,15 @@ public final class ConversionModel extends Model {
 	 * [ LE MODELE CONTIENT-IL DES FICHIERS QUI ON ETE MODIFIES ? ]
 	 */
 	public boolean isModified() {
+		boolean isModified = false;
 		for(SettingsFile sf : files) {
-			if(sf.isModified()) return true;
+			if(sf.isModified()) {
+				isModified = true;
+				if(sf.getDestinationFileName().equals("") || sf.getDestinationFileName().startsWith(".")) 
+					return false;
+			}
 		}
-		return false;
+		return isModified;
 	}
 	
 	
@@ -369,6 +375,17 @@ public final class ConversionModel extends Model {
 			f.setDestinationPath(destinationFolder.getPath());
 		}
 	}
+	
+	
+	/**
+	 * [ GETTER - OBTENIR LE REPERTOIRE DE DESTINATION. ]
+	 * 
+	 * Methode pour obtenir le repertoire de destination.
+	 */
+	public File getDestinationFolder() {
+		return destinationFolder;
+	}
+	
 	
 	
 	//=======================================================================================================================

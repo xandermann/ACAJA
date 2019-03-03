@@ -10,5 +10,17 @@ public enum ProcessingType implements OperationType {
 	/**
 	 * Parametre du type de qualite. 
 	 */
-	QUALITY
+	QUALITY,
+	/**
+	 * Parametre du type rogne. 
+	 */
+	CROPED,
+	/**
+	 * Parametre du type coupe. 
+	 */
+	CUT,
+	/**
+	 * Parametre du type floute. 
+	 */
+	BLURRED
 }

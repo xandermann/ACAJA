@@ -1,6 +1,7 @@
 package gui.conversion.views_controllers;
 
 import java.awt.*;
+import java.util.List;
 import java.awt.event.*;
 import java.util.*;
 import javax.swing.*;
@@ -25,20 +26,21 @@ public final class SoundSettingsView extends SettingsView{
 	//=======================================================================================================================
 
 	
-	private void updateAudioCodecs() {
-		if(model.getCurrentFile() != null && isChange == true) {
-			String videoFormat = model.getCurrentFile().getSettings().get(SettingType.VIDEO_FORMAT);
-			if(videoFormat != null) {
-				Map<String,String> codecs = CodecConstants.CORRESPONDING_EXTENSION.get(videoFormat);
-				ArrayList<String> codecsAudio = new ArrayList<String>();
-				for(String codecVideo : codecs.keySet()) {
-					codecsAudio.add(codecs.get(codecVideo));
+	public void updateAudioCodecs() {
+		if(isChange == true) {
+			String videoFormat = model.getCurrentFile().recent(SettingType.VIDEO_FORMAT);
+			String codecFormat = model.getCurrentFile().recent(SettingType.VIDEO_CODEC);
+			if(videoFormat != null && codecFormat != null) {
+				Map<String,List<String>> codecs = CodecConstants.CORRESPONDING_EXTENSION.get(videoFormat);
+				List<String> codecsAudio = new ArrayList<String>();
+				codecsAudio = codecs.get(codecFormat);
+				if(codecsAudio != null) {
+					String[] codecsArray = Arrays.copyOf(codecsAudio.toArray(), codecsAudio.size(), String[].class);
+					codecsComboBox.removeAllItems();
+					codecsComboBox.setModel(new DefaultComboBoxModel(codecsArray));
+					codecsComboBox.setSelectedIndex(0);
 				}
-				String[] codecsArray = Arrays.copyOf(codecsAudio.toArray(), codecsAudio.size(), String[].class);
-				codecsComboBox.removeAllItems();
-				codecsComboBox.setModel(new DefaultComboBoxModel(codecsArray));
-				codecsComboBox.setSelectedIndex(0);
-			}		
+			}
 		}
 	}
 	
@@ -138,7 +140,7 @@ public final class SoundSettingsView extends SettingsView{
 			channelsText.setText("");
 		}
 		isChange = true;
-		//updateAudioCodecs();
+		// if(model.getCurrentFile() != null)	updateAudioCodecs();
 	}
 	
 	

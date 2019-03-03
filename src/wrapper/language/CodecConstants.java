@@ -1,8 +1,11 @@
 package wrapper.language;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.List;
 
 import wrapper.runtime.global.SystemRequests;
 
@@ -23,170 +26,203 @@ public final class CodecConstants {
 	// TODO : check if "multi" formats (avi, mkv &  asf) are really compatible with all codecs
 	
 	// List who associates file extensions (key) with an hashmap containing compatible audio/video codecs
-	public final static Map<String, Map<String,String>> CORRESPONDING_EXTENSION;
+	public final static Map<String, Map<String,List<String>>> CORRESPONDING_EXTENSION;
 	static {
 		
 		
-		Map<String, Map<String,String>> initialize_extensions = new HashMap<String,Map<String,String>>();
-		Map<String, String> compatible_codecs = new HashMap<String,String>();
+		Map<String, Map<String,List<String>>> initialize_extensions = new HashMap<String,Map<String,List<String>>>();
+		Map<String,List<String>> compatible_codecs = new HashMap<String,List<String>>();
+		List<String> audioCodecList = new ArrayList<String>();
 		for(String extension : ALL_EXTENSIONS) {
 			switch(extension){
 			case ".3g2":
-				//mpeg4 
-				compatible_codecs.put("mpeg4","aac");
-				compatible_codecs.put("mpeg4","amr_nb");
-				compatible_codecs.put("mpeg4","amr_wb");
-				compatible_codecs.put("mpeg4","evrc");
-				compatible_codecs.put("mpeg4","smv");
-				//h263
-				compatible_codecs.put("h263", "aac");
-				compatible_codecs.put("h263", "amr_nb");
-				compatible_codecs.put("h263", "amr_wb");
-				compatible_codecs.put("h263", "evrc");
-				compatible_codecs.put("h263", "smv");
+				//audio
+				audioCodecList.add("aac");
+				audioCodecList.add("amr_nb");
+				audioCodecList.add("amr_wb");
+				audioCodecList.add("evrc");
+				audioCodecList.add("smv");
 				
+				//mpeg4 
+				compatible_codecs.put("mpeg4",audioCodecList);
+				//h263
+				compatible_codecs.put("h263", audioCodecList);
 				//h264
-				compatible_codecs.put("h264", "aac");
-				compatible_codecs.put("h264", "amr_nb");
-				compatible_codecs.put("h264", "amr_wb");
-				compatible_codecs.put("h264", "evrc");
-				compatible_codecs.put("h264", "smv");
+				compatible_codecs.put("h264", audioCodecList);
 				break;
 			case ".3gp":
+				//audio
+				audioCodecList.add("aac");
+				audioCodecList.add("amr_nb");
+				audioCodecList.add("amr_wb");
+				
 				//mpeg4 
-				compatible_codecs.put("mpeg4","aac");
-				compatible_codecs.put("mpeg4","amr_nb");
-				compatible_codecs.put("mpeg4","amr_wb");
+				compatible_codecs.put("mpeg4",audioCodecList);
 				//h263
-				compatible_codecs.put("h263", "aac");
-				compatible_codecs.put("h263", "amr_nb");
-				compatible_codecs.put("h263", "amr_wb");
+				compatible_codecs.put("h263", audioCodecList);
 				//h264
-				compatible_codecs.put("h264", "aac");
-				compatible_codecs.put("h264", "amr_nb");
-				compatible_codecs.put("h264", "amr_wb");
+				compatible_codecs.put("h264", audioCodecList);
 				break;
 			//case ".aaf": break;
 			case ".asf":
-				//multi = compatible with all codecs 
+				//multi
+				audioCodecList.addAll(Arrays.asList(ALL_SUPPORTED_AUDIO_CODECS));
 				for(String videoCodec : ALL_SUPPORTED_VIDEO_CODECS)
-					for(String audioCodec : ALL_SUPPORTED_AUDIO_CODECS)
-						compatible_codecs.put(videoCodec, audioCodec);
+						compatible_codecs.put(videoCodec, audioCodecList);
 				break;
 			case ".avi":
-				//multi = compatible with all codecs
+				//multi
+				audioCodecList.addAll(Arrays.asList(ALL_SUPPORTED_AUDIO_CODECS));
 				for(String videoCodec : ALL_SUPPORTED_VIDEO_CODECS)
-					for(String audioCodec : ALL_SUPPORTED_AUDIO_CODECS)
-						compatible_codecs.put(videoCodec, audioCodec);
+						compatible_codecs.put(videoCodec, audioCodecList);
 				break;
 			case ".flv":
+				//audio
+				audioCodecList.add("aac");
+				audioCodecList.add("mp3");
+				
 				//h264
-				compatible_codecs.put("h264", "aac");
-				compatible_codecs.put("h264", "mp3");
+				compatible_codecs.put("h264", audioCodecList);
 				break;
 			case ".m4v":
 				//Try others audio, multiple unknown (1)
+				//audio
+				audioCodecList.add("aac");
+				audioCodecList.add("mp3");
+				
 				//h264
-				compatible_codecs.put("h264","aac");
-				compatible_codecs.put("h264","mp3");
+				compatible_codecs.put("h264",audioCodecList);
 				//mpeg4
-				compatible_codecs.put("mpeg4","aac");
-				compatible_codecs.put("mpeg4","mp3");
+				compatible_codecs.put("mpeg4",audioCodecList);
 				//mpeg2
-				compatible_codecs.put("mpeg2video","aac");
-				compatible_codecs.put("mpeg2video","mp3");
+				compatible_codecs.put("mpeg2video",audioCodecList);
 				//mpeg1
-				compatible_codecs.put("mpeg1video","aac");
-				compatible_codecs.put("mpeg1video","mp3");
+				compatible_codecs.put("mpeg1video",audioCodecList);
 				break;
 			case ".mov":
+				//audio
+				audioCodecList.add("aac");
+				audioCodecList.add("mp3");
+				
 				//mjpeg
-				compatible_codecs.put("mjpeg","aac");
-				compatible_codecs.put("mjpeg","mp3");
+				compatible_codecs.put("mjpeg",audioCodecList);
 				//mpeg1video
-				compatible_codecs.put("mpeg1video","aac");
-				compatible_codecs.put("mpeg1video","mp3");
+				compatible_codecs.put("mpeg1video",audioCodecList);
 				break;
 			case ".mkv":
-				//multi = compatible with all codecs
+				//multi
+				audioCodecList.addAll(Arrays.asList(ALL_SUPPORTED_AUDIO_CODECS));
 				for(String videoCodec : ALL_SUPPORTED_VIDEO_CODECS)
-					for(String audioCodec : ALL_SUPPORTED_AUDIO_CODECS)
-						compatible_codecs.put(videoCodec, audioCodec);
+						//compatible_codecs.put(videoCodec, audioCodecList);
 				break;
 			case ".mp2":
+				//audio
+				audioCodecList.add("mp1");
+				audioCodecList.add("mp2");
+				audioCodecList.add("mp3");
+				
 				//mpeg1
-				compatible_codecs.put("mpeg1video","mp1");
-				compatible_codecs.put("mpeg1video","mp2");
-				compatible_codecs.put("mpeg1video","mp3");
+				compatible_codecs.put("mpeg1video",audioCodecList);
 				break;
 			case ".mp4":
 				//Try others audio, multiple unknown (2)
+				//audio
+				audioCodecList.add("aac");
+				audioCodecList.add("mp3");
+				
+				
 				//h264
-				compatible_codecs.put("h264","aac");
-				compatible_codecs.put("h264","mp3");
+				compatible_codecs.put("h264",audioCodecList);
+
 				//mpeg4
-				compatible_codecs.put("mpeg4","aac");
-				compatible_codecs.put("mpeg4","mp3");
+				compatible_codecs.put("mpeg4",audioCodecList);
+
 				//mpeg2
-				compatible_codecs.put("mpeg2video","aac");
-				compatible_codecs.put("mpeg2video","mp3");
+				compatible_codecs.put("mpeg2video",audioCodecList);
+
 				//mpeg1
-				compatible_codecs.put("mpeg1video","aac");
-				compatible_codecs.put("mpeg1video","mp3");
+				compatible_codecs.put("mpeg1video",audioCodecList);
 				break;
 			case ".mpeg":
+				//audio
+				audioCodecList.add("mp1");
+				audioCodecList.add("mp2");
+				audioCodecList.add("mp3");
+				audioCodecList.add("aac");
+				
 				//mpeg1
-				compatible_codecs.put("mpeg1video","mp1");
-				compatible_codecs.put("mpeg1video","mp2");
-				compatible_codecs.put("mpeg1video","mp3");
-				compatible_codecs.put("mpeg1video","aac");	
+				compatible_codecs.put("mpeg1video",audioCodecList);
 				break;
 			case ".mpg":
+				//audio
+				audioCodecList.add("mp1");
+				audioCodecList.add("mp2");
+				audioCodecList.add("mp3");
+				
 				//mpeg1
-				compatible_codecs.put("mpeg1video","mp1");
-				compatible_codecs.put("mpeg1video","mp2");
-				compatible_codecs.put("mpeg1video","mp3");
+				compatible_codecs.put("mpeg1video",audioCodecList);
 				break;
 			case ".ogg":
+				//audio
+				audioCodecList.add("flac");
+				audioCodecList.add("vorbis");
+				
 				//theora
-				compatible_codecs.put("theora","flac");
-				compatible_codecs.put("theora","vorbis");
+				compatible_codecs.put("theora",audioCodecList);
 				//dirac
-				compatible_codecs.put("dirac","flac");
-				compatible_codecs.put("dirac","vorbis");
+				compatible_codecs.put("dirac",audioCodecList);
 				break;
 			//case ".svi": break;
 			case ".webm":
+				//audio
+				audioCodecList.add("opus");
+				audioCodecList.add("vorbis");
+				
 				//vp8
-				compatible_codecs.put("vp8","vorbis");
-				compatible_codecs.put("vp8","opus");
+				compatible_codecs.put("vp8",audioCodecList);
 				//vp9
-				compatible_codecs.put("vp9","vorbis");
-				compatible_codecs.put("vp9","opus");
+				compatible_codecs.put("vp9",audioCodecList);
 				//av1
-				compatible_codecs.put("av1","vorbis");
-				compatible_codecs.put("av1","opus");
+				compatible_codecs.put("av1",audioCodecList);
 				break;
 			case ".wmv":
+				//audio
+				audioCodecList.add("wmav1");
+				audioCodecList.add("wmav2");
+				
 				//wmv1
-				compatible_codecs.put("wmv1","wmav1");
-				compatible_codecs.put("wmv1","wmav2");
+				compatible_codecs.put("wmv1",audioCodecList);
 				//wmv2
-				compatible_codecs.put("wmv2","wmav1");
-				compatible_codecs.put("wmv2","wmav2");
+				compatible_codecs.put("wmv2",audioCodecList);
 				//wmv3
-				compatible_codecs.put("wmv3","wmav1");
-				compatible_codecs.put("wmv3","wmav2");
+				compatible_codecs.put("wmv3",audioCodecList);
 				//wmv3image
-				compatible_codecs.put("wmv3image","wmav1");
-				compatible_codecs.put("wmv3image","wmav2");
+				compatible_codecs.put("wmv3image",audioCodecList);
 				break;
 				
 			}
 			initialize_extensions.put(extension,compatible_codecs);
-			compatible_codecs = new HashMap<String,String>();
+			compatible_codecs = new HashMap<String,List<String>>();
+			audioCodecList = new ArrayList<String>();
+			audioCodecList.clear();
 		}
 		CORRESPONDING_EXTENSION = Collections.unmodifiableMap(initialize_extensions);
+		/*for(String ext : initialize_extensions.keySet()) {
+			System.out.println("_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _");
+			System.out.println("_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _");
+			System.out.println("POUR L'EXTENSION : " + ext);
+			System.out.println("_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _");
+			System.out.println("_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _");
+			for(String vidcod : CORRESPONDING_EXTENSION.get(ext).keySet()) {
+				System.out.println("------------");
+				System.out.println("__ codec VID : " + vidcod);
+				System.out.println("------------");
+				List<String> audiocodlist = CORRESPONDING_EXTENSION.get(ext).get(vidcod);
+				for(String audcod : audiocodlist) {
+					System.out.println(" ______ codec AUD : " + audcod);
+				}
+			}
+		}*/
 	}
 }
 

@@ -11,6 +11,7 @@ import files.enumerations.SettingType;
 import files.files.SettingsFile;
 import gui.JFileChooserManager;
 import gui.WindowTools;
+import gui.answers.AnswersWindow;
 import gui.conversion.model.ConversionModel;
 import gui.conversion.views_controllers.*;
 import gui.processing.ProcessingWindow;
@@ -142,6 +143,7 @@ public final class ConversionWindow extends StylizedJFrame {
 							model.setCurrentFile(file.getName());
 						} catch(Exception e) {
 								JOptionPane.showMessageDialog(null, e.getMessage());
+								System.out.println(e.getMessage());
 						}
 							
 					}
@@ -215,8 +217,17 @@ public final class ConversionWindow extends StylizedJFrame {
 			}
 		});
 
+		StylizedJMenuItem answsers = new StylizedJMenuItem("Etudier les reponses de ffmpeg");
+		answsers.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent ae) {			
+				new AnswersWindow();
+			}
+		});
+		
 		optionsMenu.add(exportFolder);
 		optionsMenu.add(switchMode);
+		optionsMenu.add(answsers);
 
 		return optionsMenu;
 	}
@@ -277,34 +288,49 @@ public final class ConversionWindow extends StylizedJFrame {
 			outputWindow.setLocationRelativeTo(null);
 			outputWindow.setBackground(StyleTheme.BACKGROUND_COLOR);
 			
-			JPanel window = new JPanel(new BorderLayout());		
-			JPanel title = new JPanel(new BorderLayout());
+			JPanel window = new JPanel(new BorderLayout());	
+			
 			JPanel outputPanel = new JPanel(new BorderLayout());
-			JLabel info = new JLabel("<html><br>Choisissez le repertoire et la qualite en sortie : </html>",JLabel.CENTER);
-			JLabel outputFolderLabel = new JLabel("<html><br>Repertoire de sortie : </html>", JLabel.CENTER);
-			title.add(info,BorderLayout.CENTER);
+			
+			JPanel title = new JPanel(new BorderLayout());
+			JPanel output = new JPanel(new BorderLayout());
+			output.setPreferredSize(new Dimension(100,60));
+			JPanel browse = new JPanel();
+			browse.setPreferredSize(new Dimension(100,60));
+			
+			title.add(new JLabel("<html><br> REPERTOIRE DE SORTIE ET QUALITE ? </html>",JLabel.CENTER),BorderLayout.CENTER);
+			
+			JLabel outputFolder = model.getDestinationFolder() != null ?
+			new JLabel(model.getDestinationFolder().getAbsolutePath(), JLabel.CENTER)
+			: new JLabel("Auncun reperoire de sortie selectionne.", JLabel.CENTER);
+			
+			JPanel folder  = new JPanel(new BorderLayout());
+			output.add(new JLabel("<html><br>REPERTOIRE DE SORTIE : </html>", JLabel.CENTER),BorderLayout.NORTH);
+			output.add(outputFolder,BorderLayout.CENTER);
+			
+			
 			StylizedJButton outputFolderButton = new StylizedJButton("Parcourir");
+			browse.add(outputFolderButton,BorderLayout.CENTER);
 			outputFolderButton.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent ae) {
 					try {
 						model.setDestinationFolder(JFileChooserManager.chooseDirectory());
+						outputFolder.setText(model.getDestinationFolder().getAbsolutePath());
 					} catch (ImportationException ie) {
 						JOptionPane.showMessageDialog(null, ie.getMessage());
 					}
 				}
 			});
 			
-			JPanel browse = new JPanel();
-			browse.add(outputFolderButton,BorderLayout.CENTER);
-			browse.setPreferredSize(new Dimension(100,60));
 			outputPanel.add(title,BorderLayout.NORTH);
-			outputPanel.add(outputFolderLabel,BorderLayout.CENTER);
+			outputPanel.add(output,BorderLayout.CENTER);
 			outputPanel.add(browse,BorderLayout.SOUTH);
+			
 			window.add(outputPanel,BorderLayout.NORTH);
 			
 			
-			JLabel quality = new JLabel("<html>Qualite : </html>", JLabel.CENTER);
+			JLabel quality = new JLabel("<html>QUALITE : </html>", JLabel.CENTER);
 			ButtonGroup qualityChoice = new ButtonGroup();
 			JRadioButton qualityBad = new JRadioButton("basse");
 			JRadioButton qualityMedium = new JRadioButton("moyenne");
@@ -335,8 +361,10 @@ public final class ConversionWindow extends StylizedJFrame {
 			StylizedJButton buttonConvert = new StylizedJButton("Convertir");
 			buttonConvert.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					outputWindow.dispose();
-					convert();
+					if(model.getDestinationFolder() != null) {
+						outputWindow.dispose();
+						convert();
+					}
 				}
 			});
 

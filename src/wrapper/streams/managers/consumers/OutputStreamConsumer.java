@@ -2,6 +2,8 @@ package wrapper.streams.managers.consumers;
 
 import java.io.*;
 
+import javax.swing.JOptionPane;
+
 import exceptions.UnfindableResourceException;
 import resources.NamesSpaceManager;
 import resources.ResourceConstants;
@@ -41,6 +43,8 @@ public final class OutputStreamConsumer implements StreamsConsumer {
 				while(consumer.hasNext()) saver.write(consumer.next()+"\n");
 				saver.close();
 			}
-		} catch (IOException e) {}
+		} catch (IOException ioe) {
+			JOptionPane.showMessageDialog(null, ioe.getMessage());
+		}
 	}
 }

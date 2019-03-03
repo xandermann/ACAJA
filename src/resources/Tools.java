@@ -1,26 +1,46 @@
 package resources;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.TimeZone;
+import java.util.concurrent.TimeUnit;
+
+import javax.swing.JOptionPane;
+
 public class Tools {
-	public static String convertTimeToString(int time) {
-		String stTime;
+	public static String millisecondsToTime(long millis) {
+		String time = "";
 		
-		if(time/3600>9)
-			stTime = ""+(time/3600);
-		else
-			stTime = "0"+(time/3600);
+	    millis -= TimeUnit.DAYS.toMillis(TimeUnit.MILLISECONDS.toDays(millis));
+	    
+	    long hours = TimeUnit.MILLISECONDS.toHours(millis);
+	    millis -= TimeUnit.HOURS.toMillis(hours);
+		time += hours>9 ? hours+":" : "0"+hours+":";
+
+				
+        long minutes = TimeUnit.MILLISECONDS.toMinutes(millis);
+        millis -= TimeUnit.MINUTES.toMillis(minutes);
+        time += minutes>9 ? minutes+":" : "0"+minutes+":";
+        
+        
+        long seconds = TimeUnit.MILLISECONDS.toSeconds(millis);
+        millis -= TimeUnit.SECONDS.toMillis(seconds);
+        time +=  seconds>9 ? seconds+"." : "0"+seconds+".";
 		
-		time%=3600;		
-		if(time/60>9)
-			stTime += ":"+(time/60);
-		else
-			stTime += ":0"+(time/60);
+        time +=  millis>9 ? millis : "0"+millis;
+		
+		return time;
+	}
 	
-		time%=60;		
-		if(time>9)
-			stTime += ":"+time;
-		else
-			stTime += ":0"+time;
-		
-		return stTime;
+	
+	public static long timeToMiliseconds(String time) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+        sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
+        try {
+			return sdf.parse("1970-01-01 "+time).getTime();
+		} catch (ParseException pe) {
+			JOptionPane.showMessageDialog(null, pe.getMessage());
+			return -1;
+		}
 	}
 }

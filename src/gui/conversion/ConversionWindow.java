@@ -143,7 +143,6 @@ public final class ConversionWindow extends StylizedJFrame {
 							model.setCurrentFile(file.getName());
 						} catch(Exception e) {
 								JOptionPane.showMessageDialog(null, e.getMessage());
-								System.out.println(e.getMessage());
 						}
 							
 					}

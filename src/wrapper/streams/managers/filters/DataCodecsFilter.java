@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.*;
 
+import javax.swing.JOptionPane;
+
 import exceptions.UnfindableResourceException;
 import resources.NamesSpaceManager;
 import resources.ResourceConstants;
@@ -69,7 +71,9 @@ public final class DataCodecsFilter implements DataStreamsFilter {
 				}
 			}
 			saver.close();
-		} catch (IOException e) {}
+		} catch (IOException ioe) {
+			JOptionPane.showMessageDialog(null, ioe.getMessage());
+		}
 
 		ErrorStreamConsumer.consume(processToStudy);
 		return dataCodecs.toArray(new String[dataCodecs.size()]);

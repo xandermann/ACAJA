@@ -5,6 +5,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 
+import javax.swing.JOptionPane;
+
 import exceptions.UnfindableResourceException;
 import resources.NamesSpaceManager;
 import resources.ResourceConstants;
@@ -151,7 +153,9 @@ public final class MetadataFilter implements DataStreamsFilter {
 				if(keepData == true) metadata += data + " ";
 			}
 			saver.close();
-		} catch (IOException e) {}
+		} catch (IOException ioe) {
+			JOptionPane.showMessageDialog(null, ioe.getMessage());
+		}
 		
 		OutputStreamConsumer.consume(processToStudy);
 		return metadata;

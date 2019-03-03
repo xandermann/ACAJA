@@ -15,8 +15,9 @@ public final class AnswerView extends JPanel{
 			BufferedReader reader = new BufferedReader(new FileReader(new File(support)));
 			String line = null;
 			while((line=reader.readLine()) != null) text.setText(text.getText()+"\n"+line);
-		} catch (FileNotFoundException e) {
-		} catch (IOException e) {}
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e.getMessage());
+		} 
 		
 		
 		setSize(new Dimension(500, 500));

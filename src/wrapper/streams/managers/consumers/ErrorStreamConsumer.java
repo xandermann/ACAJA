@@ -2,6 +2,8 @@ package wrapper.streams.managers.consumers;
 
 import java.io.*;
 
+import javax.swing.JOptionPane;
+
 import exceptions.UnfindableResourceException;
 import resources.*;
 import wrapper.streams.iterators.*;
@@ -39,6 +41,8 @@ public final class ErrorStreamConsumer implements StreamsConsumer {
 				while(consumer.hasNext()) saver.write(consumer.next()+"\n");
 				saver.close();
 			}
-		} catch (IOException e) {}
+		} catch (IOException ioe) {
+			JOptionPane.showMessageDialog(null, ioe.getMessage());
+		}
 	}
 }

@@ -9,13 +9,39 @@ import java.awt.*;
 import java.awt.event.*;
 import resources.*;
 
+/**
+ * [ CLASSE VUE DES REPONSES. ]
+ * 
+ * Cette classe affiche dans un GridLayout les fichiers de 
+ * sauvegarde des flux.
+ * 
+ * Les fichiers sont disposes dans l'affichage dans l'ordre 
+ * du plus recent au plus ancien.
+ * 
+ * Ceci est une classe concrete "sterile", c-a-d qu'aucune classe ne peut 
+ * en heriter ( d'ou la presence du final devant class).
+ * 
+ * Auteurs du projet : 
+ * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
+ */
 public final class AnswersView extends JPanel {
+	/**
+	 * [ CONSTRUCTEUR VIDE. ]
+	 */
 	public AnswersView() {
+		/**
+		 * REUNION DES FICHIERS.
+		 */
 		File[] filesErr =  ResourceConstants.STDERR_ANSWERS.listFiles();
 		File[] filesOut = ResourceConstants.STDOUT_ANSWERS.listFiles();
 		List<File> files = new ArrayList<File>();
 		for(File f : filesErr) files.add(f);
 		for(File f : filesOut) files.add(f);
+		
+	
+		/**
+		 * TRI DU PLUS RECENT AU PLUS ANCIEN.
+		 */
 		files.sort(new Comparator<File>(){
 			public int compare(File f1, File f2) {
 				String timeMillis1 = f1.getName().split("_")[f1.getName().split("_").length-1];
@@ -27,6 +53,9 @@ public final class AnswersView extends JPanel {
 		});
 		
 		
+		/**
+		 * DISPOSITION.
+		 */
 		setLayout(new GridLayout(files.size(), 1));
 		setSize(new Dimension(400, (30*files.size())<500 ? (30*files.size()) : 500));
 		
@@ -48,7 +77,6 @@ public final class AnswersView extends JPanel {
 			});
 			add(j);
 		}
-		
 		
 		new JScrollPane(this);
 	}

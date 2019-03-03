@@ -5,11 +5,28 @@ import java.awt.*;
 import javax.swing.*;
 import resources.TimeTools;
 
+/**
+ * [ CLASSE VUE D'UNE REPONSE. ]
+ * 
+ * Cette vue affiche le contenu d'un fichier de sauvegarde d'un flux. 
+ * 
+ * Ceci est une classe concrete "sterile", c-a-d qu'aucune classe ne peut 
+ * en heriter ( d'ou la presence du final devant class).
+ * 
+ * Auteurs du projet : 
+ * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
+ */
 public final class AnswerView extends JPanel{
+	/**
+	 * [ CONSTRUCTEUR VIDE. ]
+	 */
 	public AnswerView(String support) {
 		if(support == null) throw new NullPointerException("Support null !");
 		
 		
+		/**
+		 * CONTENU DU FICHIER.
+		 */
 		JTextArea text = new JTextArea();
 		text.setEditable(false);
 		try {
@@ -22,8 +39,10 @@ public final class AnswerView extends JPanel{
 		} 
 		
 		
+		/**
+		 * DISPOSITION DES COMPOSANTS.
+		 */
 		setSize(new Dimension(500, 500));
-		
 		
 		setLayout(new BorderLayout());
 		JPanel name = new JPanel(new BorderLayout());
@@ -37,7 +56,6 @@ public final class AnswerView extends JPanel{
 		JPanel area = new JPanel(new BorderLayout());
 		name.setSize(new Dimension(500, 750));
 		area.add(new JScrollPane(text));
-		
 		
 		add(name, BorderLayout.NORTH);
 		add(area, BorderLayout.CENTER);

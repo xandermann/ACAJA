@@ -4,14 +4,14 @@ import java.io.*;
 import java.time.Instant;
 
 /**
- * [ CLASSE POUR LE STOCKAGE DES RESSOURCES DU LOGICIEL. ]
+ * [ INTERFACE POUR LE STOCKAGE DES RESSOURCES DU LOGICIEL. ]
  * 
  * Auteurs du projet :
  * 
  * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et
  *         CHEVRIER Jean-christophe.
  */
-public final class ResourceConstants {
+public interface ResourceConstants {
 	/**
 	 * LOGO DU LOGICIEL.
 	 */

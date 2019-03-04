@@ -13,7 +13,7 @@ import exceptions.UnfindableResourceException;
  * Auteurs du projet : 
  * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
  */
-public final class NamesSpaceManager {
+public final class NamesSpaceManager implements ResourceConstants{
 	//=======================================================================================================================
 	//=======================================================================================================================
 	
@@ -36,7 +36,7 @@ public final class NamesSpaceManager {
 	 */
 	public static String _temporary() throws UnfindableResourceException {
 		ResourcesManager.secureTemporaryFiles();
-		return ResourceConstants.TEMPORARY_FILES_PREFIX+ResourceConstants.now()+JPG;
+		return TEMPORARY_FILES_PREFIX+ResourceConstants.now()+JPG;
 	}
 	
 	/**
@@ -49,7 +49,7 @@ public final class NamesSpaceManager {
 	public static String _err() throws UnfindableResourceException {
 		ResourcesManager.secureAnswers();
 		ResourcesManager.secureErr();
-		return ResourceConstants.STDERR_ANSWER_PREFIX+ResourceConstants.now()+TEXT;
+		return STDERR_ANSWER_PREFIX+ResourceConstants.now()+TEXT;
 	}
 	
 	/**
@@ -62,7 +62,7 @@ public final class NamesSpaceManager {
 	public static String _out() throws UnfindableResourceException {
 		ResourcesManager.secureAnswers();
 		ResourcesManager.secureOut();
-		return ResourceConstants.STDOUT_ANSWER_PREFIX+ResourceConstants.now()+TEXT;
+		return STDOUT_ANSWER_PREFIX+ResourceConstants.now()+TEXT;
 	}
 	
 	

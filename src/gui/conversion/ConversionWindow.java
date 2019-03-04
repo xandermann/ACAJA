@@ -280,109 +280,107 @@ public final class ConversionWindow extends StylizedJFrame {
 	 * [ METHODE INTERNE POUR LA COSNTRUCTION DE LA FENETRE DE FINALISATION. ]
 	 */
 	private void drawConvertWindow() {
-		if(RuntimeSpaceManager.manage() && model.isModified()) {
-			StylizedJFrame outputWindow = new StylizedJFrame("Demarrer la conversion");
-			outputWindow.setResizable(false);
-			outputWindow.setSize(new Dimension(400, 280));
-			outputWindow.setLocationRelativeTo(null);
-			outputWindow.setBackground(StyleTheme.BACKGROUND_COLOR);
-			
-			JPanel window = new JPanel(new BorderLayout());	
-			
-			JPanel outputPanel = new JPanel(new BorderLayout());
-			
-			JPanel title = new JPanel(new BorderLayout());
-			JPanel output = new JPanel(new BorderLayout());
-			output.setPreferredSize(new Dimension(100,60));
-			JPanel browse = new JPanel();
-			browse.setPreferredSize(new Dimension(100,60));
-			
-			title.add(new JLabel("<html><br> REPERTOIRE DE SORTIE ET QUALITE ? </html>",JLabel.CENTER),BorderLayout.CENTER);
-			
-			JLabel outputFolder = model.getDestinationFolder() != null ?
-			new JLabel(model.getDestinationFolder().getAbsolutePath(), JLabel.CENTER)
-			: new JLabel("Auncun reperoire de sortie selectionne.", JLabel.CENTER);
-			
-			JPanel folder  = new JPanel(new BorderLayout());
-			output.add(new JLabel("<html><br>REPERTOIRE DE SORTIE : </html>", JLabel.CENTER),BorderLayout.NORTH);
-			output.add(outputFolder,BorderLayout.CENTER);
-			
-			
-			StylizedJButton outputFolderButton = new StylizedJButton("Parcourir");
-			browse.add(outputFolderButton,BorderLayout.CENTER);
-			outputFolderButton.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent ae) {
-					try {
-						model.setDestinationFolder(JFileChooserManager.chooseDirectory());
-						outputFolder.setText(model.getDestinationFolder().getAbsolutePath());
-					} catch (ImportationException ie) {
-						JOptionPane.showMessageDialog(null, ie.getMessage());
-					}
+		StylizedJFrame outputWindow = new StylizedJFrame("Demarrer la conversion");
+		outputWindow.setResizable(false);
+		outputWindow.setSize(new Dimension(400, 280));
+		outputWindow.setLocationRelativeTo(null);
+		outputWindow.setBackground(StyleTheme.BACKGROUND_COLOR);
+		
+		JPanel window = new JPanel(new BorderLayout());	
+		
+		JPanel outputPanel = new JPanel(new BorderLayout());
+		
+		JPanel title = new JPanel(new BorderLayout());
+		JPanel output = new JPanel(new BorderLayout());
+		output.setPreferredSize(new Dimension(100,60));
+		JPanel browse = new JPanel();
+		browse.setPreferredSize(new Dimension(100,60));
+		
+		title.add(new JLabel("<html><br> REPERTOIRE DE SORTIE ET QUALITE ? </html>",JLabel.CENTER),BorderLayout.CENTER);
+		
+		JLabel outputFolder = model.getDestinationFolder() != null ?
+		new JLabel(model.getDestinationFolder().getAbsolutePath(), JLabel.CENTER)
+		: new JLabel("Auncun reperoire de sortie selectionne.", JLabel.CENTER);
+		
+		JPanel folder  = new JPanel(new BorderLayout());
+		output.add(new JLabel("<html><br>REPERTOIRE DE SORTIE : </html>", JLabel.CENTER),BorderLayout.NORTH);
+		output.add(outputFolder,BorderLayout.CENTER);
+		
+		
+		StylizedJButton outputFolderButton = new StylizedJButton("Parcourir");
+		browse.add(outputFolderButton,BorderLayout.CENTER);
+		outputFolderButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent ae) {
+				try {
+					model.setDestinationFolder(JFileChooserManager.chooseDirectory());
+					outputFolder.setText(model.getDestinationFolder().getAbsolutePath());
+				} catch (ImportationException ie) {
+					JOptionPane.showMessageDialog(null, ie.getMessage());
 				}
-			});
-			
-			outputPanel.add(title,BorderLayout.NORTH);
-			outputPanel.add(output,BorderLayout.CENTER);
-			outputPanel.add(browse,BorderLayout.SOUTH);
-			
-			window.add(outputPanel,BorderLayout.NORTH);
-			
-			
-			JLabel quality = new JLabel("<html>QUALITE : </html>", JLabel.CENTER);
-			ButtonGroup qualityChoice = new ButtonGroup();
-			JRadioButton qualityBad = new JRadioButton("basse");
-			JRadioButton qualityMedium = new JRadioButton("moyenne");
-			JRadioButton qualityHigh = new JRadioButton("optimale");
-			qualityChoice.add(qualityBad);
-			qualityChoice.add(qualityHigh);
-			qualityChoice.add(qualityMedium);
-			qualityBad.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					for(SettingsFile f : model.getFiles()) f.modify(SettingType.QUALITY, ValueConstants.WORSE_QUALITY);
-				}
-			});
-			qualityMedium.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					for(SettingsFile f : model.getFiles()) f.modify(SettingType.QUALITY, ValueConstants.AVERAGE_QUALITY);
-				}
-			});
-			qualityHigh.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					for(SettingsFile f : model.getFiles()) f.modify(SettingType.QUALITY, ValueConstants.BEST_QUALITY);
-				}
-			});
-			qualityMedium.setSelected(true);
-			for(SettingsFile f : model.getFiles()) f.modify(SettingType.QUALITY, ValueConstants.AVERAGE_QUALITY);
-			
+			}
+		});
+		
+		outputPanel.add(title,BorderLayout.NORTH);
+		outputPanel.add(output,BorderLayout.CENTER);
+		outputPanel.add(browse,BorderLayout.SOUTH);
+		
+		window.add(outputPanel,BorderLayout.NORTH);
+		
+		
+		JLabel quality = new JLabel("<html>QUALITE : </html>", JLabel.CENTER);
+		ButtonGroup qualityChoice = new ButtonGroup();
+		JRadioButton qualityBad = new JRadioButton("basse");
+		JRadioButton qualityMedium = new JRadioButton("moyenne");
+		JRadioButton qualityHigh = new JRadioButton("optimale");
+		qualityChoice.add(qualityBad);
+		qualityChoice.add(qualityHigh);
+		qualityChoice.add(qualityMedium);
+		qualityBad.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				for(SettingsFile f : model.getFiles()) f.modify(SettingType.QUALITY, ValueConstants.WORSE_QUALITY);
+			}
+		});
+		qualityMedium.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				for(SettingsFile f : model.getFiles()) f.modify(SettingType.QUALITY, ValueConstants.AVERAGE_QUALITY);
+			}
+		});
+		qualityHigh.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				for(SettingsFile f : model.getFiles()) f.modify(SettingType.QUALITY, ValueConstants.BEST_QUALITY);
+			}
+		});
+		qualityMedium.setSelected(true);
+		for(SettingsFile f : model.getFiles()) f.modify(SettingType.QUALITY, ValueConstants.AVERAGE_QUALITY);
+		
 
-			
-			StylizedJButton buttonConvert = new StylizedJButton("Convertir");
-			buttonConvert.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					if(model.getDestinationFolder() != null) {
-						outputWindow.dispose();
-						convert();
-					}
+		
+		StylizedJButton buttonConvert = new StylizedJButton("Convertir");
+		buttonConvert.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(model.getDestinationFolder() != null) {
+					outputWindow.dispose();
+					convert();
 				}
-			});
+			}
+		});
 
-			JPanel qualityPanel = new JPanel(new BorderLayout());
-			qualityPanel.setSize(new Dimension(400,40));
-			qualityPanel.add(quality, BorderLayout.NORTH);
-			JPanel qualityTypesPanel = new JPanel();
-			qualityTypesPanel.add(qualityBad);
-			qualityTypesPanel.add(qualityMedium);
-			qualityTypesPanel.add(qualityHigh);
-			qualityPanel.add(qualityTypesPanel, BorderLayout.CENTER);
-			JPanel convert = new JPanel();
-			convert.add(buttonConvert);
-			convert.setPreferredSize(new Dimension(100,60));
-			window.add(qualityPanel,BorderLayout.CENTER);
-			window.add(convert,BorderLayout.SOUTH);
-			outputWindow.add(window);
-			WindowTools.executeWindow(outputWindow);
-		}
+		JPanel qualityPanel = new JPanel(new BorderLayout());
+		qualityPanel.setSize(new Dimension(400,40));
+		qualityPanel.add(quality, BorderLayout.NORTH);
+		JPanel qualityTypesPanel = new JPanel();
+		qualityTypesPanel.add(qualityBad);
+		qualityTypesPanel.add(qualityMedium);
+		qualityTypesPanel.add(qualityHigh);
+		qualityPanel.add(qualityTypesPanel, BorderLayout.CENTER);
+		JPanel convert = new JPanel();
+		convert.add(buttonConvert);
+		convert.setPreferredSize(new Dimension(100,60));
+		window.add(qualityPanel,BorderLayout.CENTER);
+		window.add(convert,BorderLayout.SOUTH);
+		outputWindow.add(window);
+		WindowTools.executeWindow(outputWindow);
 	}
 	
 	
@@ -400,7 +398,7 @@ public final class ConversionWindow extends StylizedJFrame {
 		convertItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				drawConvertWindow();
+				if(RuntimeSpaceManager.manage() && model.isModified()) drawConvertWindow();
 			}
 		});
 		return convert;

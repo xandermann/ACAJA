@@ -13,7 +13,7 @@ import exceptions.UnfindableResourceException;
  * Auteurs du projet : 
  * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
  */
-public final class ResourcesManager {
+public final class ResourcesManager implements ResourceConstants{
 	//=======================================================================================================================
 	//=======================================================================================================================
 	
@@ -34,7 +34,7 @@ public final class ResourcesManager {
 	 * @return boolean		Vaut true si le repertoire existe ou a reussi a etre recreer. 
 	 */
 	public static boolean checkImports() {
-		return checkDirectory(ResourceConstants.OLD_IMPORTS);
+		return checkDirectory(OLD_IMPORTS);
 	}
 	
 	/**
@@ -43,7 +43,7 @@ public final class ResourcesManager {
 	 * @return boolean		Vaut true si le repertoire existe ou a reussi a etre recreer. 
 	 */
 	public static boolean checkConversionImports() {
-		return checkImports() && checkDirectory(ResourceConstants.CONVERSION_OLD_IMPORTS);
+		return checkImports() && checkDirectory(CONVERSION_OLD_IMPORTS);
 	}
 
 	/**
@@ -52,7 +52,7 @@ public final class ResourcesManager {
 	 * @return boolean		Vaut true si le repertoire existe ou a reussi a etre recreer. 
 	 */
 	public static boolean checkProcessingImports() {
-		return checkImports() && checkDirectory(ResourceConstants.PROCESSING_OLD_IMPORTS);
+		return checkImports() && checkDirectory(PROCESSING_OLD_IMPORTS);
 	}
 	
 	/**
@@ -61,7 +61,7 @@ public final class ResourcesManager {
 	 * @return boolean		Vaut true si le repertoire existe ou a reussi a etre recreer. 
 	 */
 	public static boolean checkTemporaryFiles() {
-		return checkDirectory(ResourceConstants.TEMPORARY_FILES);
+		return checkDirectory(TEMPORARY_FILES);
 	}
 	
 	/**
@@ -70,7 +70,7 @@ public final class ResourcesManager {
 	 * @return boolean		Vaut true si le repertoire existe ou a reussi a etre recreer. 
 	 */
 	public static boolean checkAnswers() {
-		return checkDirectory(ResourceConstants.ANSWERS);
+		return checkDirectory(ANSWERS);
 	}
 	
 	/**
@@ -79,7 +79,7 @@ public final class ResourcesManager {
 	 * @return boolean		Vaut true si le repertoire existe ou a reussi a etre recreer. 
 	 */
 	public static boolean checkErr() {
-		return checkAnswers() && checkDirectory(ResourceConstants.STDERR_ANSWERS);
+		return checkAnswers() && checkDirectory(STDERR_ANSWERS);
 	}
 
 	/**
@@ -88,7 +88,7 @@ public final class ResourcesManager {
 	 * @return boolean		Vaut true si le repertoire existe ou a reussi a etre recreer. 
 	 */
 	public static boolean checkOut() {
-		return checkAnswers() && checkDirectory(ResourceConstants.STDOUT_ANSWERS);
+		return checkAnswers() && checkDirectory(STDOUT_ANSWERS);
 	}
 	
 	
@@ -123,7 +123,7 @@ public final class ResourcesManager {
 	 * 						Et vaut false si un seul element n'a pas pu etre supprime. 
 	 */
 	public static boolean clearTemporaryFiles() {
-		return clearDirectory(ResourceConstants.TEMPORARY_FILES);
+		return clearDirectory(TEMPORARY_FILES);
 	}
 	
 	
@@ -134,7 +134,7 @@ public final class ResourcesManager {
 	 * 						Et vaut false si un seul element n'a pas pu etre supprime. 
 	 */
 	public static boolean clearErr() {
-		return clearDirectory(ResourceConstants.STDOUT_ANSWERS);
+		return clearDirectory(STDERR_ANSWERS);
 	}
 	
 	
@@ -145,7 +145,7 @@ public final class ResourcesManager {
 	 * 						Et vaut false si un seul element n'a pas pu etre supprime. 
 	 */
 	public static boolean clearOut() {
-		return clearDirectory(ResourceConstants.STDERR_ANSWERS);
+		return clearDirectory(STDOUT_ANSWERS);
 	}
 	
 	

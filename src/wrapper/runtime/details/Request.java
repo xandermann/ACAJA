@@ -70,7 +70,7 @@ public final class Request {
 	 * @param input			Le nom complet ( chemin + nom ) du fichier d'entree. 
 	 */
 	public Request(String input) {
-		request = new ArrayList<String>();
+		this();
 		from(input);
 	}
 	
@@ -84,8 +84,7 @@ public final class Request {
 	 * @param output		Le nom complet ( chemin + nom ) du fichier de sortie. 
 	 */
 	public Request(String input, String output) {
-		request = new ArrayList<String>();
-		from(input);
+		this(input);
 		to(output);
 	}
 	

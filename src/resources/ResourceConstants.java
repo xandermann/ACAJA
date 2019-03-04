@@ -36,12 +36,11 @@ public interface ResourceConstants {
 	 */
 	public final static String TEMPORARY_FILES_PATH = "temporary_files/";
 	public final static File TEMPORARY_FILES = new File(TEMPORARY_FILES_PATH);
-	public final static String TEMPORARY_FILES_FULL_PATH = TEMPORARY_FILES.getAbsolutePath();
-	public final static String TEMPORARY_FILES_PREFIX = TEMPORARY_FILES_FULL_PATH + "temporary_";
+	public final static String TEMPORARY_FILES_FULL_PATH = TEMPORARY_FILES.getAbsolutePath()+File.separator;
+	public final static String TEMPORARY_FILES_PREFIX = TEMPORARY_FILES_FULL_PATH+"temporary_";
 
 	
 	/**
-	 * FICHIERS DE SAUVEGARDES DES PRECEDENTS IMPORTS SUR LE LOGICIEL.
 	 */
 	public final static String OLD_IMPORTS_PATH = "imports/";
 	public final static String CONVERSION_OLD_IMPORTS_PATH = OLD_IMPORTS_PATH + "conversion/";

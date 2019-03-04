@@ -20,7 +20,7 @@ public final class AnswerView extends JPanel{
 	/**
 	 * [ CONSTRUCTEUR VIDE. ]
 	 */
-	public AnswerView(String support) {
+	public AnswerView(File support) {
 		if(support == null) throw new NullPointerException("Support null !");
 		
 		
@@ -30,7 +30,7 @@ public final class AnswerView extends JPanel{
 		JTextArea text = new JTextArea();
 		text.setEditable(false);
 		try {
-			BufferedReader reader = new BufferedReader(new FileReader(new File(support)));
+			BufferedReader reader = new BufferedReader(new FileReader(support));
 			String line = null;
 			if((line=reader.readLine()) != null) text.setText(line);
 			while((line=reader.readLine()) != null) text.setText(text.getText()+"\n"+line);
@@ -48,7 +48,7 @@ public final class AnswerView extends JPanel{
 		JPanel name = new JPanel(new BorderLayout());
 		name.setSize(new Dimension(500, 50));
 		
-		String n = (new File(support)).getName();
+		String n = support.getName();
 		name.add(new JLabel(
 				"Rapport du "+n.substring(n.indexOf("_")+1, n.lastIndexOf("_")) + " a " +
 				TimeTools.millisToTime(Long.parseLong(n.substring(n.lastIndexOf("_")+1, n.indexOf(".")))), 

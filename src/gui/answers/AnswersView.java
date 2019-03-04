@@ -31,7 +31,7 @@ public final class AnswersView extends JPanel {
 		/**
 		 * REUNION DES FICHIERS.
 		 */
-		File[] filesErr =  ResourceConstants.STDERR_ANSWERS.listFiles();
+		File[] filesErr = ResourceConstants.STDERR_ANSWERS.listFiles();
 		File[] filesOut = ResourceConstants.STDOUT_ANSWERS.listFiles();
 		List<File> files = new ArrayList<File>();
 		for(File f : filesErr) files.add(f);
@@ -69,7 +69,7 @@ public final class AnswersView extends JPanel {
 				public void actionPerformed(ActionEvent e) {
 					JFrame window = new JFrame("Affichage de la reponse : "+f.getName()+".");
 					window.setResizable(false);
-					AnswerView av = new AnswerView(f.getAbsolutePath());
+					AnswerView av = new AnswerView(f);
 					window.setContentPane(av);
 					window.setSize(new Dimension(av.getWidth(), av.getHeight()));
 					window.setLocationRelativeTo(null);

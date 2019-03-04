@@ -292,6 +292,14 @@ public final class ConversionModel extends Model {
 		currentFile.setDestinationName(destinationFile);
 	}
 	
+	/**
+	 *  [ MODIFIER L'EXTENSION DU FICHIER COURANT ]
+	 *  
+	 * @param extensionFile extension du fichier
+	 */
+	public void setExtension(String extensionFile) {
+		currentFile.setFileExtension(extensionFile);
+	}
 	
 	/**
 	 * [ CONVERTIR LES FICHIERS MODIFIES. ]

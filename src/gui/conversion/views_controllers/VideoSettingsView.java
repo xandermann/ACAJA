@@ -40,7 +40,9 @@ public final class VideoSettingsView extends SettingsView{
 				codecsComboBox.removeAllItems();
 				codecsComboBox.setModel(new DefaultComboBoxModel(videoCodecs));
 				codecsComboBox.setSelectedIndex(0);
+				model.getCurrentFile().modify(SettingType.VIDEO_CODEC, codecsComboBox.getSelectedItem().toString());
 				ssp.updateAudioCodecs();
+				model.setExtension(videoFormat);
 			}
 			
 	}

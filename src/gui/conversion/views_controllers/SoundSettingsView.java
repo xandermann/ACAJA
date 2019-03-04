@@ -56,8 +56,8 @@ public final class SoundSettingsView extends SettingsView{
 		codecsComboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(model.getCurrentFile() != null) {
-					//if(isChange == true)
-						//model.modify(SettingType.AUDIO_CODEC, ((JComboBox) e.getSource()).getSelectedItem().toString());
+					if(isChange == true && ((JComboBox) e.getSource()).getSelectedItem() != null)
+						model.modify(SettingType.AUDIO_CODEC, ((JComboBox) e.getSource()).getSelectedItem().toString());
 				}
 			}
 		});

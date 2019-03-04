@@ -34,6 +34,7 @@ public final class AnswerView extends JPanel{
 			String line = null;
 			if((line=reader.readLine()) != null) text.setText(line);
 			while((line=reader.readLine()) != null) text.setText(text.getText()+"\n"+line);
+			reader.close();
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e.getMessage());
 		} 

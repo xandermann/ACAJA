@@ -15,8 +15,8 @@ public interface ResourceConstants {
 	/**
 	 * LOGO DU LOGICIEL.
 	 */
-	public final static String ACAJA_LOGO_PATH = "img/LogoAcaja.png";
-	public final static String ACAJA_LOGO_OPACITY_PATH = "img/LogoAcaja_opacity.png";
+	public final static String ACAJA_LOGO_PATH = "img/logoAcaja.png";
+	public final static String ACAJA_LOGO_OPACITY_PATH = "img/logoAcaja_opacity.png";
 	public final static File ACAJA_LOGO = new File(ACAJA_LOGO_PATH);
 
 	
@@ -27,6 +27,8 @@ public interface ResourceConstants {
 	public final static String BLURRED = "img/flou.png";
 	public final static String RIGHT_ARROW = "img/flecheDroite.png";
 	public final static String LEFT_ARROW = "img/flecheGauche.png";
+	public final static String REFRESH_PATH = "img/refresh.jpg";
+	public final static File REFRESH = new File(REFRESH_PATH);
 
 	
 	/**

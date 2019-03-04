@@ -1,8 +1,11 @@
 package gui.answers;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.*;
 import java.util.List;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import gui.WindowTools;
 import java.awt.*;
@@ -25,9 +28,62 @@ import resources.*;
  */
 public final class AnswersView extends JPanel {
 	/**
+	 * LISTE DES REPONSES DANS UN JPANEL GRIDLAYOUT. 
+	 */
+	private JPanel main;
+	/**
+	 * LISTE DES REPONSES. 
+	 */
+	private List<File> files;
+	
+	
+	/**
 	 * [ CONSTRUCTEUR VIDE. ]
 	 */
 	public AnswersView() {
+		/**
+		 * HISTORIQUE.
+		 */
+		setLayout(new BorderLayout());
+		setSize(new Dimension(400, 250));
+		main = new JPanel();
+		displayAnswers();
+		
+		
+		/**
+		 * RAFRAICHIR.
+		 */
+		JPanel head = new JPanel(new BorderLayout());
+		head.setSize(new Dimension(400, 50));
+		head.add(new JLabel("HISTORIQUE DES RAPPORTS", JLabel.CENTER), BorderLayout.CENTER);
+		JButton refresh = null;
+		try {
+			refresh = new JButton(new ImageIcon(ImageIO.read(ResourceConstants.REFRESH)));
+		} catch (IOException ioe) {
+			JOptionPane.showMessageDialog(null, ioe.getMessage());
+		}
+		refresh.setPreferredSize(new Dimension(30, 30));
+		refresh.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				main.removeAll();
+		        displayAnswers();
+				main.revalidate();
+			}
+		});
+		head.add(refresh, BorderLayout.EAST);
+		
+
+		add(head, BorderLayout.NORTH);
+		add(new JScrollPane(main, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER), BorderLayout.CENTER);
+	}
+	
+	
+	
+	
+	/**
+	 * [ CONSTRUIRE L'HISTORIQUE EN LISTANT LES REPONSES. ]
+	 */
+	private void displayAnswers() {
 		/**
 		 * REUNION DES FICHIERS.
 		 */
@@ -53,18 +109,16 @@ public final class AnswersView extends JPanel {
 		
 		
 		/**
-		 * DISPOSITION.
+		 * HISTORIQUE. 
 		 */
-		setLayout(new BorderLayout());
-		setSize(new Dimension(400, 200));
-		JPanel main = new JPanel(new GridLayout(files.size(), 1));
+		main.setLayout(new GridLayout(files.size(), 1));
 		main.setSize(new Dimension(400, 200));
 		for(File f : files) {
 			String n = f.getName();            
 			JButton j = new JButton(
 					"Rapport du "+n.substring(n.indexOf("_")+1, n.lastIndexOf("_")) + " a " +
 					TimeTools.millisToTime(Long.parseLong(n.substring(n.lastIndexOf("_")+1, n.indexOf(".")))));
-			j.setSize(new Dimension(400, 30));
+			j.setPreferredSize(new Dimension(400, 40));
 			j.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					JFrame window = new JFrame("Affichage de la reponse : "+f.getName()+".");
@@ -78,6 +132,5 @@ public final class AnswersView extends JPanel {
 			});
 			main.add(j);
 		}		
-		add(new JScrollPane(main, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER), BorderLayout.CENTER);
 	}
 }

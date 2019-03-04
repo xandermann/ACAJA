@@ -1,11 +1,15 @@
 package gui.processing;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
@@ -24,18 +28,30 @@ public class PictureVisualView extends JPanel implements Observer{
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
+		Image pic = null;
+		
+		if(this.model.getCurentFile() != null) {
+			try {
+				pic = ImageIO.read(this.model.getMinia());
+				g.drawImage(pic, 0,0,this.getWidth(),this.getHeight(), this);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 		g.drawRect(0, 0, this.size().width - 1, this.size().height - 1);
 		Image monImage =null;
 		
 		for (int i = 0; i < this.model.getListRect().size(); i++) {
 			int[] tab = this.model.getTabInt(i);
-			g.drawRect(tab[0],tab[1],tab[2],tab[3]);
+			
 				
 			switch (this.model.getType(i)) {
 			case 'c':
+				g.setColor(Color.BLUE);
 				monImage =new ImageIcon("img/test.png").getImage();
 				break;
 			case 'f':
+				g.setColor(Color.GREEN);
 				monImage =new ImageIcon("img/test.png").getImage();
 				break;
 
@@ -43,7 +59,7 @@ public class PictureVisualView extends JPanel implements Observer{
 				break;
 			}
 			
-			
+			g.drawRect(tab[0],tab[1],tab[2],tab[3]);
 			g.drawImage(monImage, tab[0],tab[1],tab[2],tab[3], this);
 		}
 		this.repaint();

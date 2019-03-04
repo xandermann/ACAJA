@@ -21,10 +21,13 @@ import gui.style.StylizedJMenuItem;
 import wrapper.runtime.global.SystemRequests;
 
 public class ProcessingWindow extends JFrame {
+	
+	private ModelARenomer model;
 
 	
 	private ProcessingWindow() {
 		
+		this.model = new ModelARenomer();
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.createJMenu();
 		this.setBackground(Color.lightGray);
@@ -34,7 +37,7 @@ public class ProcessingWindow extends JFrame {
 
 		this.setSize(1000, 625);
 		this.setLocationRelativeTo(null);
-		ProcessingPan p = new ProcessingPan();
+		ProcessingPan p = new ProcessingPan(model);
 
 		this.setResizable(false);
 		this.add(p);
@@ -58,11 +61,8 @@ public class ProcessingWindow extends JFrame {
 				try {
 					File f = JFileChooserManager.chooseFile();
 					SelectableFile sf = new SelectableFile(f);
-					File frame = SystemRequests.askFrame(sf, "00 : 00 : 10 . 00");
+					model.setCurentFile(sf);
 				} catch (IncorrectFileException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (UnfindableResourceException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (ImportationException e) {

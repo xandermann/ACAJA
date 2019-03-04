@@ -1,14 +1,23 @@
 package gui.processing;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Observable;
 
 import javax.management.ListenerNotFoundException;
 
+import exceptions.IncorrectFileException;
+import exceptions.UnfindableResourceException;
+import files.files.SelectableFile;
+import wrapper.runtime.global.SystemRequests;
+
 public class ModelARenomer extends Observable{
 	
 	private ArrayList<Form> listRect;
 	private boolean fUp,cropUp;
+	private SelectableFile curentFile;
+	private File minia;
+	
 	
 	public ModelARenomer() {
 		this.fUp = false;
@@ -18,6 +27,12 @@ public class ModelARenomer extends Observable{
 
 	
 	
+	public File getMinia() {
+		return minia;
+	}
+	public void setMinia(File minia) {
+		this.minia = minia;
+	}
 	public boolean isfUp() {
 		return fUp;
 	}
@@ -39,6 +54,13 @@ public class ModelARenomer extends Observable{
 	public int[] getTabInt(int pos) {
 		return listRect.get(pos).getTab();
 	}
+	public SelectableFile getCurentFile() {
+		return curentFile;
+	}
+	public void setCurentFile(SelectableFile curentFile) {
+		this.curentFile = curentFile;
+		this.setMinia(this.curentFile.getMiniature());
+	}
 
 	public void addForm(int a,int b,int c,int d,char type) {
 		int[] tab = new int[4];
@@ -58,6 +80,10 @@ public class ModelARenomer extends Observable{
 		if(!this.listRect.isEmpty())
 			this.listRect.remove(this.listRect.size()-1);
 	}
+
+
+
+	
 
 
 }

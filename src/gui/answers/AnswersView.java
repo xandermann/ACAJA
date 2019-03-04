@@ -31,7 +31,7 @@ public final class AnswersView extends JPanel {
 		/**
 		 * REUNION DES FICHIERS.
 		 */
-		File[] filesErr =  ResourceConstants.STDERR_ANSWERS.listFiles();
+		File[] filesErr = ResourceConstants.STDERR_ANSWERS.listFiles();
 		File[] filesOut = ResourceConstants.STDOUT_ANSWERS.listFiles();
 		List<File> files = new ArrayList<File>();
 		for(File f : filesErr) files.add(f);
@@ -55,26 +55,29 @@ public final class AnswersView extends JPanel {
 		/**
 		 * DISPOSITION.
 		 */
-		setLayout(new GridLayout(files.size(), 1));
-		setSize(new Dimension(400, (30*files.size())<500 ? (30*files.size()) : 500));
+		setLayout(new BorderLayout());
+		setSize(new Dimension(400, 200));
+		JPanel main = new JPanel(new GridLayout(files.size(), 1));
+		main.setSize(new Dimension(400, 200));
 		for(File f : files) {
 			String n = f.getName();            
 			JButton j = new JButton(
 					"Rapport du "+n.substring(n.indexOf("_")+1, n.lastIndexOf("_")) + " a " +
 					TimeTools.millisToTime(Long.parseLong(n.substring(n.lastIndexOf("_")+1, n.indexOf(".")))));
+			j.setSize(new Dimension(400, 30));
 			j.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					JFrame window = new JFrame("Affichage de la reponse : "+f.getName()+".");
 					window.setResizable(false);
-					AnswerView av = new AnswerView(f.getAbsolutePath());
+					AnswerView av = new AnswerView(f);
 					window.setContentPane(av);
 					window.setSize(new Dimension(av.getWidth(), av.getHeight()));
 					window.setLocationRelativeTo(null);
 					WindowTools.executeWindow(window);
 				}
 			});
-			add(j);
+			main.add(j);
 		}		
-		new JScrollPane(this);
+		add(new JScrollPane(main, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER), BorderLayout.CENTER);
 	}
 }

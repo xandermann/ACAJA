@@ -68,7 +68,7 @@ public class SelectableFile {
 		if((this.sourceFile = sourceFile) == null)
 			throw new NullPointerException("Le fichier source recu en parametre est null !");
 		isSelected = false;
-		destinationFile = new String[]{"", ""};
+		destinationFile = new String[]{"", "", ""};
 		whoAmI();
 	}
 
@@ -239,6 +239,9 @@ public class SelectableFile {
 		this.destinationFile[1] = destinationName;
 	}
 	
+	public void setFileExtension(String fileExtension) {
+		this.destinationFile[2] = fileExtension;
+	}
 	/**
 	 * [ METHODE ACCESSEUR - GETTER. ]
 	 * 
@@ -302,7 +305,7 @@ public class SelectableFile {
 	 * @return String 	Le nom complet du fichier source.
 	 */
 	public String getDestinationFileFullName() {
-		return destinationFile[0].equals("") && destinationFile[1].equals("") ? "" : destinationFile[0]+File.separator+destinationFile[1];
+		return destinationFile[0].equals("") && destinationFile[1].equals("") && destinationFile[2].equals("") ? "" : destinationFile[0]+File.separator+destinationFile[1]+destinationFile[2];
 	}
 	
 	

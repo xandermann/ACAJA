@@ -113,7 +113,7 @@ public final class CodecConstants {
 				//multi
 				audioCodecList.addAll(Arrays.asList(ALL_SUPPORTED_AUDIO_CODECS));
 				for(String videoCodec : ALL_SUPPORTED_VIDEO_CODECS)
-						//compatible_codecs.put(videoCodec, audioCodecList);
+						compatible_codecs.put(videoCodec, audioCodecList);
 				break;
 			case ".mp2":
 				//audio

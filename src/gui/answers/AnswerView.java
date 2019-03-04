@@ -55,7 +55,7 @@ public final class AnswerView extends JPanel{
 				JLabel.CENTER));
 		JPanel area = new JPanel(new BorderLayout());
 		name.setSize(new Dimension(500, 450));
-		area.add(new JScrollPane(text));
+		area.add(new JScrollPane(text, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS));
 		
 		add(name, BorderLayout.NORTH);
 		add(area, BorderLayout.CENTER);

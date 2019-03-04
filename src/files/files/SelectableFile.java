@@ -3,7 +3,9 @@ package files.files;
 import java.io.File;
 
 import exceptions.IncorrectFileException;
+import exceptions.UnfindableResourceException;
 import files.enumerations.MediaFileType;
+import wrapper.runtime.global.SystemRequests;
 
 /**
  * TODO comentaire a faire.
@@ -48,6 +50,8 @@ public class SelectableFile {
 	 */
 	private String[] destinationFile;
 	
+	private File miniature;
+	
 	
 	
 	//=======================================================================================================================
@@ -77,7 +81,23 @@ public class SelectableFile {
 	//=======================================================================================================================
 	//=======================================================================================================================
 	
-	
+	/**
+	 * Methode qui renvoie la miniature de la video
+	 * @return l'image de la miniature
+	 */
+	public File getMiniature() {
+		File frame = null;
+		try {
+			frame = SystemRequests.askFrame(this, "00:00:10.00");
+		} catch (IncorrectFileException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnfindableResourceException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return frame;
+	}
 	
 	/**
 	 * [ METHODE - ROLE PRIMITIF. ]

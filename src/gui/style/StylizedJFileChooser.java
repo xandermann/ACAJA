@@ -9,6 +9,12 @@ public class StylizedJFileChooser extends JFileChooser implements StylizedCompon
 		
 		this.stylize();
 	}
+	
+	public StylizedJFileChooser(String title) {
+		super(title);
+		
+		this.stylize();
+	}
 
 	@Override
 	public void stylize() {

@@ -3,9 +3,8 @@ package gui;
 import java.io.File;
 import java.util.ArrayList;
 
-import javax.swing.JFileChooser;
-
 import exceptions.ImportationException;
+import gui.style.StylizedJFileChooser;
 
 public final class JFileChooserManager {
 	//=======================================================================================================================
@@ -13,11 +12,11 @@ public final class JFileChooserManager {
 
 	
 	public static File chooseFile() throws ImportationException {
-		JFileChooser jfc = new JFileChooser("Parcourir");
+		StylizedJFileChooser jfc = new StylizedJFileChooser("Parcourir");
 		int chooserStatus = jfc.showOpenDialog(null);
 		
 		File importFile = jfc.getSelectedFile();
-		if(importFile == null || chooserStatus != JFileChooser.APPROVE_OPTION) 
+		if(importFile == null || chooserStatus != StylizedJFileChooser.APPROVE_OPTION) 
 			throw new ImportationException(ImportationException.ABSENT_FILE);
 		
 		return importFile;
@@ -31,8 +30,8 @@ public final class JFileChooserManager {
 	
 	
 	public static File chooseDirectory() throws ImportationException {
-		JFileChooser jdc = new JFileChooser("Parcourir");
-		jdc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+		StylizedJFileChooser jdc = new StylizedJFileChooser("Parcourir");
+		jdc.setFileSelectionMode(StylizedJFileChooser.DIRECTORIES_ONLY);
 		jdc.showOpenDialog(null);
 
 		File importDirectory = jdc.getSelectedFile();

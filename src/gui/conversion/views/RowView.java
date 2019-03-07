@@ -20,7 +20,7 @@ public final class RowView extends JPanel{
 	public RowView(SettingsFile file, boolean special) {
 		if(file == null) throw new NullPointerException("Le text recu en parametre est null !");
 		setLayout(new BorderLayout());
-		setPreferredSize(new Dimension(270, 150));
+		setPreferredSize(new Dimension(270, 140));
 		JPanel content = new JPanel(new BorderLayout());
 		content.setBackground(special ? StyleTheme.BACKGROUND_COLOR_SECONDARY : Color.WHITE);
 		content.add(new JLabel(file.getSourceFileName().toUpperCase(), JLabel.CENTER), BorderLayout.NORTH);

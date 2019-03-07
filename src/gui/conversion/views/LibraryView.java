@@ -24,7 +24,7 @@ public final class LibraryView extends StylizedJPanel implements Observer {
 		
 		ArrayList<SettingsFile> files = model.getFiles();
 		JPanel all = new JPanel();
-		all.setPreferredSize(new Dimension(270, files.size()*150<=540 ? 540 : files.size()*150));
+		all.setPreferredSize(new Dimension(270, files.size()*150<=540 ? 540 : files.size()*140));
 		JPanel content = new JPanel();
 		content.setLayout(new GridLayout(files.size(), 1));
 		content.setPreferredSize(new Dimension(270, files.size()*140));
@@ -51,14 +51,13 @@ public final class LibraryView extends StylizedJPanel implements Observer {
 		setLayout(new BorderLayout());
 		all.add(content, BorderLayout.CENTER);
 		
-		if(files.size()*150 < 540) {
+		if(files.size()*140 < 540) {
 			JPanel nothing = new JPanel();
-			nothing.setPreferredSize(new Dimension(270, 540-files.size()*150));
+			nothing.setPreferredSize(new Dimension(270, 540-files.size()*140));
 			all.add(nothing, BorderLayout.SOUTH);
 		}
 		
-		JScrollPane scroll = new JScrollPane(all, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		add(scroll);
+		add(new JScrollPane(all, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER));
 		
 		repaint();
 		revalidate();

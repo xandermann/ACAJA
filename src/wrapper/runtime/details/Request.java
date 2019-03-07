@@ -26,7 +26,7 @@ import wrapper.streams.managers.consumers.WatchedConsumer;
  * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
  *
  */
-public final class Request {
+public final class Request implements FlagConstants, ValueConstants{
 	//=======================================================================================================================
 	//=======================================================================================================================
 	
@@ -152,7 +152,7 @@ public final class Request {
 	 * @return La requete this. 
 	 */
 	public Request codecs() {
-		askSomethingElse(new String[]{FlagConstants.FLAG_SUPPORTED_CODECS});
+		askSomethingElse(new String[]{FLAG_SUPPORTED_CODECS});
 		return this;
 	}
 	
@@ -171,7 +171,7 @@ public final class Request {
 	 */
 	public Request videoCodec(String videoCodec) {
 		if(videoCodec==null) throw new NullPointerException("VideoCodec null !");
-		askSomethingElse(new String[]{FlagConstants.FLAG_VIDEO_CODEC, videoCodec});
+		askSomethingElse(new String[]{FLAG_VIDEO_CODEC, videoCodec});
 		return this;
 	}
 	
@@ -185,7 +185,7 @@ public final class Request {
 	public Request videoBitrate(String videoBitrate) {
 		if(videoBitrate==null) throw new NullPointerException("VideoBitrate null !");
 		if(Integer.parseInt(videoBitrate)<=0) throw new IllegalArgumentException("VideoBitrate negatif ou nul !");
-		askSomethingElse(new String[]{FlagConstants.FLAG_VIDEO_BITRATE, videoBitrate});
+		askSomethingElse(new String[]{FLAG_VIDEO_BITRATE, videoBitrate});
 		return this;
 	}
 
@@ -198,7 +198,7 @@ public final class Request {
 	 */
 	public Request resolution(String resolution) {
 		if(resolution==null) throw new NullPointerException("Resolution null !");
-		askSomethingElse(new String[]{FlagConstants.FLAG_RESOLUTION, resolution});
+		askSomethingElse(new String[]{FLAG_RESOLUTION, resolution});
 		return this;
 	}
 	
@@ -212,7 +212,7 @@ public final class Request {
 	public Request framerate(String framerate) {
 		if(framerate==null) throw new NullPointerException("Framerate null !");
 		if(Integer.parseInt(framerate)<=0) throw new IllegalArgumentException("Framerate negatif ou nul !");
-		askSomethingElse(new String[]{FlagConstants.FLAG_FRAMERATE, framerate});
+		askSomethingElse(new String[]{FLAG_FRAMERATE, framerate});
 		return this;
 	}
 	
@@ -231,7 +231,7 @@ public final class Request {
 	 */
 	public Request audioCodec(String audioCodec) {
 		if(audioCodec==null) throw new NullPointerException("AudioCodec null !");
-		askSomethingElse(new String[]{FlagConstants.FLAG_AUDIO_CODEC, audioCodec});
+		askSomethingElse(new String[]{FLAG_AUDIO_CODEC, audioCodec});
 		return this;
 	}
 	
@@ -245,7 +245,7 @@ public final class Request {
 	public Request audioBitrate(String audioBitrate) {
 		if(audioBitrate==null) throw new NullPointerException("AudioBitrate null !");
 		if(Integer.parseInt(audioBitrate)<=0) throw new IllegalArgumentException("AudioBitrate negatif ou nul !");
-		askSomethingElse(new String[]{FlagConstants.FLAG_AUDIO_BITRATE, audioBitrate});
+		askSomethingElse(new String[]{FLAG_AUDIO_BITRATE, audioBitrate});
 		return this;
 	}
 	
@@ -259,7 +259,7 @@ public final class Request {
 	public Request samplingRate(String samplingRate) {
 		if(samplingRate==null) throw new NullPointerException("SamplingRate null !");
 		if(Integer.parseInt(samplingRate)<=0) throw new IllegalArgumentException("SamplingRate negative ou nulle !");
-		askSomethingElse(new String[]{FlagConstants.FLAG_SAMPLING_RATE, samplingRate});
+		askSomethingElse(new String[]{FLAG_SAMPLING_RATE, samplingRate});
 		return this;
 	}
 
@@ -273,7 +273,7 @@ public final class Request {
 	public Request numberAudioChannels(String numberAudioChannels) {
 		if(numberAudioChannels==null) throw new NullPointerException("NumberAudioChannels null !");
 		if(Integer.parseInt(numberAudioChannels)<=0) throw new IllegalArgumentException("NumberAudioChannels negative ou nulle !");
-		askSomethingElse(new String[]{FlagConstants.FLAG_NUMBER_AUDIO_CHANNELS, numberAudioChannels});
+		askSomethingElse(new String[]{FLAG_NUMBER_AUDIO_CHANNELS, numberAudioChannels});
 		return this;
 	}
 
@@ -314,10 +314,8 @@ public final class Request {
 		if(Integer.parseInt(width)<=0) throw new IllegalArgumentException("Width negative ou nulle !");
 		if(Integer.parseInt(height)<=0) throw new IllegalArgumentException("Height negative ou nulle !");
 		
-		String s = FlagConstants.FLAG_CROP[2];
-		askSomethingElse(new String[]{
-				FlagConstants.FLAG_CROP[0], 
-				FlagConstants.FLAG_CROP[1]+width+s+height+s+xCorner+s+yCorner+FlagConstants.FLAG_CROP[3]});
+		String s = FLAG_CROP[2];
+		askSomethingElse(new String[]{FLAG_CROP[0], FLAG_CROP[1]+width+s+height+s+xCorner+s+yCorner+FLAG_CROP[3]});
 		return this;
 	}
 
@@ -338,7 +336,7 @@ public final class Request {
 	public Request cut(String time, String period) {
 		if(time==null) throw new NullPointerException("Time null !");
 		if(period==null) throw new NullPointerException("Period null !");
-		askSomethingElse(new String[]{FlagConstants.FLAG_PERIOD[0], time, FlagConstants.FLAG_PERIOD[1], period});
+		askSomethingElse(new String[]{FLAG_PERIOD[0], time, FLAG_PERIOD[1], period});
 		return this;
 	}
 	
@@ -348,7 +346,7 @@ public final class Request {
 	 * @return La requete this. 
 	 */
 	public Request rotate() {
-		askSomethingElse(FlagConstants.FLAG_ROTATE);
+		askSomethingElse(FLAG_ROTATE);
 		return this;
 	}
 	
@@ -367,8 +365,7 @@ public final class Request {
 		if(Integer.parseInt(width)<=0) throw new IllegalArgumentException("Width negative ou nulle !");
 		if(Integer.parseInt(height)<=0) throw new IllegalArgumentException("Height negative ou nulle !");
 		
-		askSomethingElse(new String[]{FlagConstants.FLAG_RESIZE[0],
-						FlagConstants.FLAG_RESIZE[1]+width+FlagConstants.FLAG_RESIZE[2]+height});
+		askSomethingElse(new String[]{FLAG_RESIZE[0],FLAG_RESIZE[1]+width+FLAG_RESIZE[2]+height});
 		return this;
 	}
 	
@@ -387,7 +384,7 @@ public final class Request {
 	 */
 	public Request frame(String time) {
 		if(time==null) throw new NullPointerException("Time null !");
-		cut(time, ValueConstants.ONE_SECOND);
+		cut(time, ONE_SECOND);
 		framerate("1");
 		return this;
 	}
@@ -407,7 +404,7 @@ public final class Request {
 	 */
 	public Request quality(String quality) {
 		if(quality==null) throw new NullPointerException("Quality null !");
-		askSomethingElse(new String[]{FlagConstants.FLAG_QUALITY, quality});
+		askSomethingElse(new String[]{FLAG_QUALITY, quality});
 		return this;
 	}
 	

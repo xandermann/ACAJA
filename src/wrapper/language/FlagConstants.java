@@ -9,7 +9,7 @@ package wrapper.language;
  * Auteurs du projet : 
  * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
  */
-public final class FlagConstants {
+public interface FlagConstants {
 	public final static String FLAG_SUPPORTED_CODECS = "-codecs";
 	
 	public final static String FLAG_QUALITY = "-crf";

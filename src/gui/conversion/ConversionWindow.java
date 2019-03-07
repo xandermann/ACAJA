@@ -13,7 +13,7 @@ import gui.JFileChooserManager;
 import gui.WindowTools;
 import gui.answers.AnswersWindow;
 import gui.conversion.model.ConversionModel;
-import gui.conversion.views_controllers.*;
+import gui.conversion.views.*;
 import gui.processing.ProcessingWindow;
 import gui.style.*;
 import resources.ResourcesManager;
@@ -68,12 +68,15 @@ public final class ConversionWindow extends StylizedJFrame {
 		dataView.setLayout(new BoxLayout(dataView, BoxLayout.Y_AXIS));
 		SummaryView sv = new SummaryView(model);
 		TabsView tv = new TabsView(model);
+		LibraryView lv = new LibraryView(model);
 		dataView.add(sv);
 		dataView.add(tv);
 		sv.setBackground(Color.LIGHT_GRAY);
 		dataView.setBackground(Color.LIGHT_GRAY);
+		add(lv, BorderLayout.WEST);
 		add(dataView, BorderLayout.EAST);
 		model.addObserver(sv);
+		model.addObserver(lv);
 		empty_workspace.setVisible(false);
 	}
 	
@@ -101,7 +104,7 @@ public final class ConversionWindow extends StylizedJFrame {
 						File f = JFileChooserManager.chooseFile();
 						model.add(f);
 						if (model.getCurrentFile() == null) redrawFirstTime();
-						model.setCurrentFile(f.getName());
+						model.setCurrentFile(model.getFiles().get(model.getFiles().size()-1));
 					} catch (Exception e) {
 						JOptionPane.showMessageDialog(null, e.getMessage());
 					}
@@ -118,7 +121,7 @@ public final class ConversionWindow extends StylizedJFrame {
 					for (File f : files) {
 						model.add(f);
 						if(model.getCurrentFile() == null) redrawFirstTime();
-						model.setCurrentFile(f.getName());
+						model.setCurrentFile(model.getFiles().get(model.getFiles().size()-1));
 					}
 				} catch (Exception e) {
 					JOptionPane.showMessageDialog(null, e.getMessage());
@@ -140,7 +143,7 @@ public final class ConversionWindow extends StylizedJFrame {
 							File file = new File(f.getPath());
 							model.add(file);
 							if (model.getCurrentFile() == null) redrawFirstTime();
-							model.setCurrentFile(file.getName());
+							model.setCurrentFile(model.getFiles().get(model.getFiles().size()-1));
 						} catch(Exception e) {
 								JOptionPane.showMessageDialog(null, e.getMessage());
 						}
@@ -437,10 +440,6 @@ public final class ConversionWindow extends StylizedJFrame {
 		WindowTools.showLogo(conversionWindow);
 
 		
-		LibraryViewController lv = new LibraryViewController(conversionWindow.model, conversionWindow.model.getFilenames());
-		TabsView tv = new TabsView(conversionWindow.model);
-
-		
 		StylizedJPanel p = new StylizedJPanel();
 		p.setLayout(new BorderLayout());
 		StylizedJMenuBar menu = new StylizedJMenuBar();
@@ -452,11 +451,9 @@ public final class ConversionWindow extends StylizedJFrame {
 
 		
 		conversionWindow.setJMenuBar(menu);
-		conversionWindow.model.addObserver(lv);
-		p.add(tv, BorderLayout.CENTER);
+		
 		p.add(conversionWindow.empty_workspace);
 		conversionWindow.setLayout(new BorderLayout());
-		conversionWindow.add(lv, BorderLayout.WEST);
 		conversionWindow.add(p, BorderLayout.CENTER);
 
 		

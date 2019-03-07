@@ -421,6 +421,8 @@ public final class Request implements FlagConstants, ValueConstants{
 	 */
 	public ProcessManager result() {
 		if(output!=null) askSomethingElse(new String[]{output});
+		System.out.println();
+		for(String r : request) System.out.print(r+" ");
 		return FFmpegRuntime.execute(request);
 	}
 	

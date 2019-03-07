@@ -81,7 +81,7 @@ public class SelectableFile {
 		destinationFile = new String[]{"", "", ""};
 		whoAmI();
 		if(isVideo())
-			thumbail = SystemRequests.askFrame(this, "00:00:00.01", 20, 60);
+			thumbail = SystemRequests.askFrame(this, "00:00:01.00", 200, 100);
 	}
 
 	

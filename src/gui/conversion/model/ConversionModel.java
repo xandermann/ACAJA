@@ -9,7 +9,7 @@ import files.*;
 import files.enumerations.SettingType;
 import files.files.SettingsFile;
 import gui.Model;
-import gui.conversion.views_controllers.RowView;
+import gui.conversion.views.RowView;
 import messages.MessageConstants;
 import resources.ResourceConstants;
 import resources.ResourcesManager;
@@ -140,29 +140,6 @@ public final class ConversionModel extends Model {
 			}
 		}
 	}
-
-	
-	
-	//=======================================================================================================================
-	//=======================================================================================================================
-	
-	
-
-	/**
-	 * [ METHODE POUR AFFICHER LES FILES. ]
-	 * 
-	 * Methode pour recuperer les noms des fichiers sous la forme
-	 * d'une DefaultListModel afin de l'afficher dans la liste du ConversionPanel. 
-	 * 
-	 * @return DefaultListModel<ListEntry>		La liste des noms des fichiers. 
-	 */
-	public DefaultListModel<RowView> getFilenames() {
-		DefaultListModel<RowView> filenameList = new DefaultListModel<RowView>();
-		for (SettingsFile f : files) filenameList.addElement(new RowView(f.getSourceFileName(), f.getThumbail()));
-		return filenameList;
-	}
-
-	
 	
 	
 	//=======================================================================================================================
@@ -339,13 +316,9 @@ public final class ConversionModel extends Model {
 	 * 
 	 * Methode pour modifier le fichier actuellement 
 	 * selectionne par l'utilisateur
-	 * 
-	 * @param currentFile 		Le nom du fichier maintenant selectionne par l'utilisateur
 	 */
-	public void setCurrentFile(String fileName) {
-		for (SettingsFile f : this.getFiles()) {
-			if (f.getSourceFileName().equals(fileName)) currentFile = f;
-		}
+	public void setCurrentFile(SettingsFile file) {
+		currentFile = file;
 		sendChanges();
 	}
 	

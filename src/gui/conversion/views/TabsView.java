@@ -1,4 +1,4 @@
-package gui.conversion.views_controllers;
+package gui.conversion.views;
 
 import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;

@@ -1,4 +1,4 @@
-package gui.conversion.views_controllers;
+package gui.conversion.views;
 
 import java.awt.*;
 import java.awt.event.*;

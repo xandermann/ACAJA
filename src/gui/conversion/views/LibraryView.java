@@ -1,38 +1,74 @@
-package gui.conversion.views_controllers;
+package gui.conversion.views;
 
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.util.Observable;
-import java.util.Observer;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.*;
 
-import javax.swing.DefaultListModel;
-import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
+import files.files.SettingsFile;
 import gui.conversion.model.ConversionModel;
+import gui.style.StylizedJPanel;
 
-public final class LibraryViewController extends JList<RowView> implements Observer, MouseListener, KeyListener {
+public final class LibraryView extends StylizedJPanel implements Observer {
 	//=======================================================================================================================
 	//=======================================================================================================================
 	
 	
 	private ConversionModel model;
-
-	
-	//=======================================================================================================================
-	//=======================================================================================================================
 	
 	
-	public LibraryViewController(ConversionModel model, DefaultListModel<RowView> listModel) {
-		super(listModel);
-		if((this.model = model) == null) throw new NullPointerException("ConversionModel null !");
-		setFixedCellWidth(270);
-		setVisible(true);
-		addMouseListener(this);
-		addKeyListener(this);
+	private void drawLibrary() {
+		removeAll();
+		
+		ArrayList<SettingsFile> files = model.getFiles();
+		JPanel all = new JPanel();
+		all.setPreferredSize(new Dimension(270, files.size()*150<=540 ? 540 : files.size()*150));
+		JPanel content = new JPanel();
+		content.setLayout(new GridLayout(files.size(), 1));
+		content.setPreferredSize(new Dimension(270, files.size()*140));
+		for(SettingsFile file : files) {
+			RowView row = new RowView(file, file==model.getCurrentFile());
+			row.addMouseListener(new MouseListener() {
+				public void mouseClicked(MouseEvent e) {}
+				public void mousePressed(MouseEvent e) {
+					model.setCurrentFile(file);
+				}
+				public void mouseReleased(MouseEvent e) {}
+				public void mouseEntered(MouseEvent e) {}
+				public void mouseExited(MouseEvent e) {}
+			});
+			row.addKeyListener(new KeyListener() {
+				public void keyPressed(KeyEvent e) {
+					 if(e.getKeyCode()==KeyEvent.VK_DELETE) model.remove(file);	 
+				}
+				public void keyReleased(KeyEvent e) {}
+				public void keyTyped(KeyEvent e) {}		
+			});
+			row.requestFocus();
+			content.add(row);
+		}
+		setLayout(new BorderLayout());
+		all.add(content, BorderLayout.CENTER);
+		
+		if(files.size()*150 < 540) {
+			JPanel nothing = new JPanel();
+			nothing.setPreferredSize(new Dimension(270, 540-files.size()*150));
+			all.add(nothing, BorderLayout.SOUTH);
+		}
+		
+		add(new JScrollPane(all, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER));
+		
+		revalidate();
 	}
-
+	
+	
+	public LibraryView(ConversionModel model) {
+		if((this.model = model) == null) throw new NullPointerException("ConversionModel null !");
+		drawLibrary();
+	}
+	
 	
 	//=======================================================================================================================
 	//=======================================================================================================================
@@ -40,50 +76,9 @@ public final class LibraryViewController extends JList<RowView> implements Obser
 	
 	@Override
 	public void update(Observable o, Object arg) {
-		setModel(model.getFilenames());
+		requestFocus();
+		drawLibrary();
 	}
-	
-	
-	//=======================================================================================================================
-	//=======================================================================================================================
-	
-	
-	
-	@Override
-	public void mousePressed(MouseEvent e) {
-		model.setCurrentFile(getSelectedValue().toString());
-	}
-	
-	@Override
-	public void mouseClicked(MouseEvent e) {}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {}
-
-	@Override
-	public void mouseExited(MouseEvent e) {}
-	
-	
-	
-	//=======================================================================================================================
-	//=======================================================================================================================
-	
-	
-	
-	@Override
-	public void keyPressed(KeyEvent e) {
-		 if(e.getKeyCode()==KeyEvent.VK_DELETE) model.remove(model.getCurrentFile());	 
-	}
-
-	@Override
-	public void keyReleased(KeyEvent e) {}
-
-	@Override
-	public void keyTyped(KeyEvent e) {}
-	
 	
 
 	//=======================================================================================================================

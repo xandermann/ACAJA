@@ -13,8 +13,8 @@ import resources.ResourceConstants;
 
 public class PicturePan extends JPanel {
 	
-	private ModelARenomer model;
-	public PicturePan(ModelARenomer m) {
+	private ProcessingModel model;
+	public PicturePan(ProcessingModel m) {
 		this.model = m;
 		this.setPreferredSize(new Dimension(600, 550));
 		this.setLayout(new GridBagLayout());

@@ -100,7 +100,8 @@ public final class UserRequests{
 					request.quality(newValue);
 					break;
 				case CROPED :
-					//request.crop(newValue);
+					String[] tab = newValue.split(" ");
+					request.crop(tab[0],tab[1],tab[2],tab[3]);
 					break;
 				case CUT :
 					//request.cut(newValue);

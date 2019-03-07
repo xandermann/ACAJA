@@ -7,7 +7,7 @@ import javax.swing.JPanel;
 
 public class ProcessingPan extends JPanel {
 
-	public ProcessingPan(ModelARenomer m) {
+	public ProcessingPan(ProcessingModel m) {
 		this.setBackground(Color.GRAY);
 		LibraryView pb = new LibraryView();
 		ButtonPan pm = new ButtonPan(m);

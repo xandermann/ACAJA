@@ -14,10 +14,8 @@ public final class RowView extends JPanel{
 	//=======================================================================================================================
 	
 	
-	/** Constructeur d'une entree de liste avec du texte et une icone
-	 * 
-	 * @param text 		String texte a afficher dans la liste
-	 * @param thumbail	ImageIcon icone a afficher dans la liste
+	/** 
+	 * Constructeur d'une entree de liste avec du texte et une icone
 	 */
 	public RowView(SettingsFile file, boolean special) {
 		if(file == null) throw new NullPointerException("Le text recu en parametre est null !");

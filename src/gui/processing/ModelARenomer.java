@@ -59,7 +59,7 @@ public class ModelARenomer extends Observable{
 	}
 	public void setCurentFile(SelectableFile curentFile) {
 		this.curentFile = curentFile;
-		this.setMinia(this.curentFile.getMiniature());
+		this.setMinia(this.curentFile.getThumbail());
 	}
 
 	public void addForm(int a,int b,int c,int d,char type) {

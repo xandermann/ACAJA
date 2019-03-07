@@ -60,7 +60,10 @@ public class ProcessingWindow extends JFrame {
 			public void actionPerformed(ActionEvent ae) {
 				try {
 					File f = JFileChooserManager.chooseFile();
-					SelectableFile sf = new SelectableFile(f);
+					SelectableFile sf = null;
+					try {
+						sf = new SelectableFile(f);
+					} catch (UnfindableResourceException e) {}
 					model.setCurentFile(sf);
 				} catch (IncorrectFileException e) {
 					// TODO Auto-generated catch block

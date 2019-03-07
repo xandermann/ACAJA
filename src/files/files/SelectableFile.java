@@ -5,6 +5,7 @@ import java.io.File;
 import exceptions.IncorrectFileException;
 import exceptions.UnfindableResourceException;
 import files.enumerations.MediaFileType;
+import resources.TimeTools;
 import wrapper.runtime.global.SystemRequests;
 
 /**
@@ -50,7 +51,10 @@ public class SelectableFile {
 	 */
 	private String[] destinationFile;
 	
-	private File miniature;
+	/**
+	 * Miniature de la video. 
+	 */
+	protected File thumbail;
 	
 	
 	
@@ -67,37 +71,24 @@ public class SelectableFile {
 	 * @param sourceFile	Le fichier source.
 	 * 
 	 * @throws IncorrectFileException 
+	 * 
+	 * @throws UnfindableResourceException 
 	 */
-	public SelectableFile(File sourceFile) throws IncorrectFileException {
+	public SelectableFile(File sourceFile) throws IncorrectFileException, UnfindableResourceException {
 		if((this.sourceFile = sourceFile) == null)
 			throw new NullPointerException("Le fichier source recu en parametre est null !");
 		isSelected = false;
 		destinationFile = new String[]{"", "", ""};
 		whoAmI();
+		if(isVideo())
+			thumbail = SystemRequests.askFrame(this, "00:00:00.01", 20, 60);
 	}
 
 	
 	
 	//=======================================================================================================================
 	//=======================================================================================================================
-	
-	/**
-	 * Methode qui renvoie la miniature de la video
-	 * @return l'image de la miniature
-	 */
-	public File getMiniature() {
-		File frame = null;
-		try {
-			frame = SystemRequests.askFrame(this, "00:00:10.00");
-		} catch (IncorrectFileException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (UnfindableResourceException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return frame;
-	}
+
 	
 	/**
 	 * [ METHODE - ROLE PRIMITIF. ]
@@ -326,6 +317,12 @@ public class SelectableFile {
 	 */
 	public String getDestinationFileFullName() {
 		return destinationFile[0].equals("") && destinationFile[1].equals("") && destinationFile[2].equals("") ? "" : destinationFile[0]+File.separator+destinationFile[1]+destinationFile[2];
+	}
+
+
+
+	public File getThumbail() {
+		return thumbail;
 	}
 	
 	

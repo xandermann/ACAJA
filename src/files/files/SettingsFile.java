@@ -51,7 +51,7 @@ public final class SettingsFile extends SelectableFile implements Modifiable {
 		 * INITIALISATION DES ATTRIBUTS HETITES DE LA CLASSE SELECTABLEFILE.
 		 */
 		super(file);
-
+		
 		/**
 		 * Si le type de fichier n'est pas accepté, alors on renvoie une exception.
 		 */

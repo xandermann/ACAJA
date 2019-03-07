@@ -9,7 +9,7 @@ import files.*;
 import files.enumerations.SettingType;
 import files.files.SettingsFile;
 import gui.Model;
-import gui.conversion.views_controllers.EntryView;
+import gui.conversion.views_controllers.RowView;
 import messages.MessageConstants;
 import resources.ResourceConstants;
 import resources.ResourcesManager;
@@ -156,9 +156,9 @@ public final class ConversionModel extends Model {
 	 * 
 	 * @return DefaultListModel<ListEntry>		La liste des noms des fichiers. 
 	 */
-	public DefaultListModel<EntryView> getFilenames() {
-		DefaultListModel<EntryView> filenameList = new DefaultListModel<EntryView>();
-		for (SettingsFile f : files) filenameList.addElement(new EntryView(f.getSourceFileName()));
+	public DefaultListModel<RowView> getFilenames() {
+		DefaultListModel<RowView> filenameList = new DefaultListModel<RowView>();
+		for (SettingsFile f : files) filenameList.addElement(new RowView(f.getSourceFileName(), f.getThumbail()));
 		return filenameList;
 	}
 

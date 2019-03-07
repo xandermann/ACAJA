@@ -1,8 +1,13 @@
 package gui.conversion.views_controllers;
 
-import javax.swing.ImageIcon;
+import java.io.*;
+import java.awt.*;
+import javax.imageio.ImageIO;
+import javax.swing.*;
 
-public final class EntryView {
+import resources.ResourceConstants;
+
+public final class RowView extends JPanel{
 	//=======================================================================================================================
 	//=======================================================================================================================
 	
@@ -14,39 +19,35 @@ public final class EntryView {
 	//=======================================================================================================================
 	
 	
-	/** Constructeur d'une entree de liste avec du texte uniquement
-	 * 
-	 * @param text String texte a afficher dans la liste
-	 */
-	public EntryView(String text) {
-		this.text = text;
-	}
-	
 	/** Constructeur d'une entree de liste avec du texte et une icone
 	 * 
-	 * @param text String texte a afficher dans la liste
-	 * @param icon ImageIcon icone a afficher dans la liste
+	 * @param text 		String texte a afficher dans la liste
+	 * @param thumbail	ImageIcon icone a afficher dans la liste
 	 */
-	public EntryView(String text, ImageIcon icon) {
-		this.text = text;
-		this.icon = icon;
+	public RowView(String text, File icon) {
+		if((this.text = text) == null)
+			throw new NullPointerException("Le text recu en parametre est null !");
+		if(icon == null)
+			throw new NullPointerException("L'icon recu en parametre est null !");
+		try {
+			this.icon = new ImageIcon(ImageIO.read(icon));
+		} catch (IOException e) {}
 	}
-	
 	
 	//=======================================================================================================================
 	//=======================================================================================================================
 	
 	
 	public String getText() {
-		return this.text;
+		return text;
 	}
 	
 	public ImageIcon getIcon() {
-		return this.icon;
+		return icon;
 	}
 	
 	public String toString() {
-		return this.text;
+		return text;
 	}
 	
 

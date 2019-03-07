@@ -8,6 +8,7 @@ import java.io.File;
 import org.junit.Test;
 
 import exceptions.IncorrectFileException;
+import exceptions.UnfindableResourceException;
 import files.enumerations.MediaFileType;
 import files.files.SelectableFile;
 
@@ -23,9 +24,11 @@ public final class SelectaleFileTest {
 	 * Les 3 fichiers sont crées correctement
 	 * 
 	 * @throws IncorrectFileException 
+	 * 
+	 * @throws UnfindableResourceException 
 	 */
 	@Test
-	public void constructeurOkTest() throws IncorrectFileException {
+	public void constructeurOkTest() throws IncorrectFileException, UnfindableResourceException {
 		SelectableFile file = new SelectableFile(new File("Test.mp4"));
 		SelectableFile file2 = new SelectableFile(new File("Test.mp3"));
 		SelectableFile file3 = new SelectableFile(new File("Test.jpeg"));
@@ -33,10 +36,13 @@ public final class SelectaleFileTest {
 
 	/**
 	 * Renvoie une erreur car l'extension est invalide
+	 * 
 	 * @throws IncorrectFileException 
+	 * 
+	 * @throws UnfindableResourceException 
 	 */
 	@Test(expected = IncorrectFileException.class)
-	public void constructeurErreurTest() throws IncorrectFileException {
+	public void constructeurErreurTest() throws IncorrectFileException, UnfindableResourceException {
 		SelectableFile file = new SelectableFile(new File("Test.superExtension"));
 	}
 
@@ -50,9 +56,11 @@ public final class SelectaleFileTest {
 	 * Test avec video et audio
 	 * 
 	 * @throws IncorrectFileException 
+	 * 
+	 * @throws UnfindableResourceException 
 	 */
 	@Test
-	public void isGoodFileOKTest() throws IncorrectFileException {
+	public void isGoodFileOKTest() throws IncorrectFileException, UnfindableResourceException {
 		SelectableFile selectableFileVideo = new SelectableFile(new File("Test.mp4"));
 		SelectableFile selectableFileAudio = new SelectableFile(new File("Test.mp3"));
 
@@ -65,10 +73,12 @@ public final class SelectaleFileTest {
 	 * rejetés dans le constructeur
 	 * 
 	 * @throws IncorrectFileException 
+	 * 
+	 * @throws UnfindableResourceException 
 	 */
 
 	@Test
-	public void isGoodFileTest() throws IncorrectFileException {
+	public void isGoodFileTest() throws IncorrectFileException, UnfindableResourceException {
 		SelectableFile selectableFileImage = new SelectableFile(new File("Test.png"));
 
 		assertFalse("Devrait ne pas être accepté", selectableFileImage.containsAudio());

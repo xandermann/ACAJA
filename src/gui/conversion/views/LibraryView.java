@@ -12,7 +12,7 @@ import javax.swing.JList;
 
 import gui.conversion.model.ConversionModel;
 
-public final class LibraryViewController extends JList implements Observer, MouseListener, KeyListener {
+public final class LibraryViewController extends JList<RowView> implements Observer, MouseListener, KeyListener {
 	//=======================================================================================================================
 	//=======================================================================================================================
 	
@@ -24,7 +24,7 @@ public final class LibraryViewController extends JList implements Observer, Mous
 	//=======================================================================================================================
 	
 	
-	public LibraryViewController(ConversionModel model, DefaultListModel listModel) {
+	public LibraryViewController(ConversionModel model, DefaultListModel<RowView> listModel) {
 		super(listModel);
 		if((this.model = model) == null) throw new NullPointerException("ConversionModel null !");
 		setFixedCellWidth(270);

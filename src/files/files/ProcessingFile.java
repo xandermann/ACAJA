@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.HashMap;
 
 import exceptions.IncorrectFileException;
+import exceptions.UnfindableResourceException;
 import files.enumerations.OperationType;
 import files.enumerations.ProcessingType;
 
@@ -39,9 +40,12 @@ public final class ProcessingFile extends SelectableFile implements Modifiable{
 	 * [ CONSTRUCTEUR. ]
 	 * 
 	 * @param sourceFile				Le fichier source.
+	 * 
 	 * @throws IncorrectFileException 	L'exception sur les fichiers de type incorrect.
+	 * 
+	 * @throws UnfindableResourceException
 	 */
-	public ProcessingFile(File sourceFile) throws IncorrectFileException {
+	public ProcessingFile(File sourceFile) throws IncorrectFileException, UnfindableResourceException {
 		/**
 		 * INITIALISATION DES ATTRIBUTS HETITES DE LA CLASSE SELECTABLEFILE.
 		 */

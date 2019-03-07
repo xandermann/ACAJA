@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 import exceptions.ImportationException;
 import exceptions.IncorrectFileException;
 import exceptions.UnfindableResourceException;
+import files.files.ProcessingFile;
 import files.files.SelectableFile;
 import gui.JFileChooserManager;
 import gui.WindowTools;
@@ -26,7 +27,7 @@ import wrapper.runtime.global.SystemRequests;
 
 public class ProcessingWindow extends JFrame {
 	
-	private ModelARenomer model;
+	private ProcessingModel model;
 
 	
 	private ProcessingWindow() {
@@ -42,7 +43,7 @@ public class ProcessingWindow extends JFrame {
 			public void windowActivated(WindowEvent e) {}
 			public void windowDeactivated(WindowEvent e) {}
 		});
-		this.model = new ModelARenomer();
+		this.model = new ProcessingModel();
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.createJMenu();
 		this.setBackground(Color.lightGray);
@@ -84,7 +85,12 @@ public class ProcessingWindow extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				
+				try {
+					model.save();
+				} catch (UnfindableResourceException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 		
@@ -103,7 +109,7 @@ public class ProcessingWindow extends JFrame {
 			public void actionPerformed(ActionEvent ae) {
 				try {
 					File f = JFileChooserManager.chooseFile();
-					SelectableFile sf = new SelectableFile(f);
+					ProcessingFile sf = new ProcessingFile(f);
 					model.setCurentFile(sf);
 				} catch (IncorrectFileException e) {
 					// TODO Auto-generated catch block

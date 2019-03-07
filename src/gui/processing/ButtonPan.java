@@ -14,13 +14,13 @@ public class ButtonPan extends JPanel {
 	
 	private JToggleButton flouButton;
 	private JToggleButton rectangle;
-	private ModelARenomer model;
+	private ProcessingModel model;
 	
 	/**
 	 * constructeur du panel de bouton central
 	 * @param m
 	 */
-	public ButtonPan(ModelARenomer m) {
+	public ButtonPan(ProcessingModel m) {
 		this.model = m;
 		this.setLayout(new GridLayout(3, 2, 1, 1));
 		rectangle = new JToggleButton(new ImageIcon(resources.ResourceConstants.BUTTON_RECT));

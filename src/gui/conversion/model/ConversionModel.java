@@ -6,6 +6,7 @@ import javax.swing.*;
 import exceptions.IncorrectFileException;
 import exceptions.UnfindableResourceException;
 import files.*;
+import files.enumerations.OperationType;
 import files.enumerations.SettingType;
 import files.files.SettingsFile;
 import gui.Model;
@@ -280,7 +281,7 @@ public final class ConversionModel extends Model {
 	 * Methode qui permet de modifier un parametre du fichier
 	 * actuellement selectionne
 	 */
-	public void modify(SettingType typeSetting, String setting) {
+	public void modify(OperationType typeSetting, String setting) {
 		currentFile.modify(typeSetting, setting);
 	}
 	

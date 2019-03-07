@@ -12,9 +12,9 @@ public class DrawChange implements MouseMotionListener,MouseListener{
 	
 	private int nbClick;
 	private int refx,refy;
-	private ModelARenomer model;
+	private ProcessingModel model;
 	
-	public DrawChange(ModelARenomer m) {
+	public DrawChange(ProcessingModel m) {
 		this.model = m;
 		nbClick = 0;
 	}

@@ -80,11 +80,21 @@ public class ProcessingWindow extends JFrame {
 			}
 		});
 		StylizedJMenuItem convertir = new StylizedJMenuItem("Traiter");
+		convertir.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+		});
+		
 		StylizedJMenuItem quit = new StylizedJMenuItem("Quitter");
 		quit.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				dispose();
+				ResourcesManager.clearResources();
+				System.exit(0);
+				
 			}
 		});
 		StylizedJMenuItem importFile = new StylizedJMenuItem("Importer un fichier");

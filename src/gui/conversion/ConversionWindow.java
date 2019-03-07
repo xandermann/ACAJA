@@ -65,16 +65,21 @@ public final class ConversionWindow extends StylizedJFrame {
 	
 	private void redrawFirstTime() {
 		StylizedJPanel dataView = new StylizedJPanel();
+		dataView.requestFocus();
 		dataView.setLayout(new BoxLayout(dataView, BoxLayout.Y_AXIS));
+		
 		SummaryView sv = new SummaryView(model);
 		TabsView tv = new TabsView(model);
 		LibraryView lv = new LibraryView(model);
+		
 		dataView.add(sv);
 		dataView.add(tv);
+		
 		sv.setBackground(Color.LIGHT_GRAY);
 		dataView.setBackground(Color.LIGHT_GRAY);
 		add(lv, BorderLayout.WEST);
 		add(dataView, BorderLayout.EAST);
+		
 		model.addObserver(sv);
 		model.addObserver(lv);
 		empty_workspace.setVisible(false);

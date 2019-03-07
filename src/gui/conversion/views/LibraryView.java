@@ -46,7 +46,6 @@ public final class LibraryView extends StylizedJPanel implements Observer {
 				public void keyReleased(KeyEvent e) {}
 				public void keyTyped(KeyEvent e) {}		
 			});
-			row.requestFocus();
 			content.add(row);
 		}
 		setLayout(new BorderLayout());
@@ -58,8 +57,10 @@ public final class LibraryView extends StylizedJPanel implements Observer {
 			all.add(nothing, BorderLayout.SOUTH);
 		}
 		
-		add(new JScrollPane(all, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER));
+		JScrollPane scroll = new JScrollPane(all, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		add(scroll);
 		
+		repaint();
 		revalidate();
 	}
 	
@@ -76,7 +77,6 @@ public final class LibraryView extends StylizedJPanel implements Observer {
 	
 	@Override
 	public void update(Observable o, Object arg) {
-		requestFocus();
 		drawLibrary();
 	}
 	

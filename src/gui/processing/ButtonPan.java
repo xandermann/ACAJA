@@ -59,10 +59,10 @@ public class ButtonPan extends JPanel {
 		pivoteD1.setPreferredSize(new Dimension(35, 35));
 		pivoteG1.setPreferredSize(new Dimension(35, 35));
 		undo.setPreferredSize(new Dimension(35, 35));
-
+/*
 		pivoteD1.setEnabled(false);
 		pivoteG1.setEnabled(false);
-		
+		*/
 		this.add(rectangle);
 		this.add(flouButton);
 		this.add(pivoteD1);

@@ -7,6 +7,7 @@ import exceptions.IncorrectFileException;
 import exceptions.UnfindableResourceException;
 import files.enumerations.OperationType;
 import files.enumerations.ProcessingType;
+import wrapper.runtime.global.SystemRequests;
 
 /**
  * TODO comentaire a faire. 
@@ -55,6 +56,9 @@ public final class ProcessingFile extends SelectableFile implements Modifiable{
 		 * INITIALISATION DE LA TABLE DES TRAITEMENTS EN ATTENTE SUR THIS. 
 		 */
 		performedProcessings = new HashMap<ProcessingType, String>();
+		
+		if(isVideo())
+			thumbail = SystemRequests.askFrame(this, "00:00:01.00");
 	}
 
 	

@@ -80,8 +80,7 @@ public class SelectableFile {
 		isSelected = false;
 		destinationFile = new String[]{"", "", ""};
 		whoAmI();
-		if(isVideo())
-			thumbail = SystemRequests.askFrame(this, "00:00:01.00", 200, 100);
+		
 	}
 
 	

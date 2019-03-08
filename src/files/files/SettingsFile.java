@@ -67,6 +67,9 @@ public final class SettingsFile extends SelectableFile implements Modifiable {
 
 		//Initialisation des autres parametres.
 		SystemRequests.askMetadata(this);
+		
+		if(isVideo())
+			thumbail = SystemRequests.askFrame(this, "00:00:01.00", 200, 100);
 	}
 
 	

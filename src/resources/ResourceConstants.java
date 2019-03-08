@@ -41,6 +41,7 @@ public interface ResourceConstants {
 
 	
 	/**
+	 * ANCIENS IMPORTS. 
 	 */
 	public final static String OLD_IMPORTS_PATH = "imports/";
 	public final static String CONVERSION_OLD_IMPORTS_PATH = OLD_IMPORTS_PATH + "conversion/";

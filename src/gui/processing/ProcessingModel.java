@@ -29,6 +29,7 @@ public class ProcessingModel extends Model{
 		this.fUp = false;
 		this.cropUp = false;
 		listRect = new ArrayList<>();
+		
 	}
 
 	
@@ -69,6 +70,9 @@ public class ProcessingModel extends Model{
 	public void setCurentFile(ProcessingFile curentFile) {
 		this.curentFile = curentFile;
 		this.setMinia(this.curentFile.getThumbail());
+		this.curentFile.setDestinationPath(".\\sorti_temporaire");
+		this.curentFile.setDestinationName("traitement");
+		this.curentFile.setFileExtension(".avi");
 		sendChanges();
 	}
 

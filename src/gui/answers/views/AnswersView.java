@@ -8,6 +8,8 @@ import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import gui.WindowTools;
+import gui.answers.AnswerWindow;
+
 import java.awt.*;
 import java.awt.event.*;
 import resources.*;
@@ -121,13 +123,7 @@ public final class AnswersView extends JPanel {
 			j.setPreferredSize(new Dimension(400, 40));
 			j.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					JFrame window = new JFrame("Affichage de la reponse : "+f.getName()+".");
-					window.setResizable(false);
-					AnswerView av = new AnswerView(f);
-					window.setContentPane(av);
-					window.setSize(new Dimension(av.getWidth(), av.getHeight()));
-					window.setLocationRelativeTo(null);
-					WindowTools.executeWindow(window);
+					new AnswerWindow(f);
 				}
 			});
 			main.add(j);

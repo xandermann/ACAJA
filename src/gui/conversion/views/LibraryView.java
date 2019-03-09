@@ -20,7 +20,7 @@ public final class LibraryView extends StylizedJPanel implements Observer{
 	private ConversionModel model;
 	
 	
-	private void drawLibrary() {
+	private void displayLibrary() {
 		removeAll();
 		
 		ArrayList<SettingsFile> files = model.getFiles();
@@ -67,7 +67,7 @@ public final class LibraryView extends StylizedJPanel implements Observer{
 	public LibraryView(ConversionModel model) {
 		super(new BorderLayout());
 		if((this.model = model) == null) throw new NullPointerException("ConversionModel null !");
-		drawLibrary();
+		displayLibrary();
 	}
 	
 	
@@ -79,7 +79,7 @@ public final class LibraryView extends StylizedJPanel implements Observer{
 	
 	@Override
 	public void update(Observable o, Object arg) {
-		drawLibrary();
+		displayLibrary();
 	}
 	
 	

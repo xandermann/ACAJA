@@ -11,15 +11,26 @@ import files.files.SettingsFile;
 import gui.conversion.model.ConversionModel;
 import gui.style.StylizedJPanel;
 
+/**
+ * [ CLASSE POUR L'AFFICHAGE DE LA BIBLIOTHEQUE. ]
+ * 
+ * @author Jean-christophe
+ *
+ */
 public final class LibraryView extends StylizedJPanel implements Observer{
 	//=======================================================================================================================
 	//=======================================================================================================================
 	
 	
-	
+	/**
+	 * [ MODELE. ]
+	 */
 	private ConversionModel model;
 	
 	
+	/**
+	 * [ METHODE INTERNE POUR (RE-)DESSINER LA BIBLIOTHEQUE. ]
+	 */
 	private void displayLibrary() {
 		removeAll();
 		
@@ -64,6 +75,11 @@ public final class LibraryView extends StylizedJPanel implements Observer{
 	
 	
 	
+	/**
+	 * [ CONSTRUCTEUR AVEC PARAMETRES.]
+	 * 
+	 * @param model		Le modele.
+	 */
 	public LibraryView(ConversionModel model) {
 		super(new BorderLayout());
 		if((this.model = model) == null) throw new NullPointerException("ConversionModel null !");

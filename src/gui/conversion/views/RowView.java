@@ -4,18 +4,25 @@ import java.io.*;
 import java.awt.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;
-
 import files.files.SettingsFile;
 import gui.style.StyleTheme;
-import resources.ResourceConstants;
 
+/**
+ * [ CLASSE VUE D'UNE LIGNE DANS LA BIBLIOTHEQUE. ]
+ * 
+ * Ceci est une classe concrete "sterile", c-a-d qu'aucune classe ne peut 
+ * en heriter ( d'ou la presence du final devant class).
+ * 
+ * Auteurs du projet : 
+ * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
+ */
 public final class RowView extends JPanel{
 	//=======================================================================================================================
 	//=======================================================================================================================
 	
 	
 	/** 
-	 * Constructeur d'une entree de liste avec du texte et une icone
+	 * [ CONSTRUCTEUR D'UNE LIGNE DANS LA BIBLIOTHEQUE. ]
 	 */
 	public RowView(SettingsFile file, boolean special) {
 		super(new BorderLayout());

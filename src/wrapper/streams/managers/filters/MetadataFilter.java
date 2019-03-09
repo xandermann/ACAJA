@@ -46,6 +46,21 @@ public final class MetadataFilter implements DataStreamsFilter {
 	}
 	
 	
+	/**
+	 * [ METHODE INTERNE RECURSIVE POUR COMPTER LE NOMBRE D'OCCURENCES D'UNE PATTERN. ]
+	 * 
+	 * @param metadata		Les metadonnees.
+	 * @param pattern		La pattern en question.
+	 * @param start			L'indice de debut dans la chaine.
+	 * @param end			L'indice de fin dans la chaine.
+	 * @return				Le nombre d'occurences de la pattern dans la chaine entre les indices.
+	 */
+	private static int countOccurences(String metadata, char pattern, int start, int end) {
+		start = metadata.indexOf(pattern, start);
+		System.out.println(start);
+		return start<0 || start > end ? 0 : countOccurences(metadata, pattern, start + 1, end) + 1;
+	}
+	
 
 	/**
 	 * [ METHODE INTERNE DE CLASSE. ]
@@ -63,9 +78,10 @@ public final class MetadataFilter implements DataStreamsFilter {
 			int indexEvolve = indexStart;
 			
 			for(int i=0; i<indexMetadata; i++) {
-				if(metadata.indexOf('(', indexEvolve) < (indexEvolve=metadata.indexOf(',', indexEvolve)+1))
+				if(countOccurences(metadata, '(', indexEvolve, metadata.indexOf(',', indexEvolve))
+				   != countOccurences(metadata, ')', indexEvolve, indexEvolve=(metadata.indexOf(',', indexEvolve)+1)))
 					indexEvolve = metadata.indexOf(',', indexEvolve)+1;
-			}		
+			}
 			
 			indexEvolve++;
 			

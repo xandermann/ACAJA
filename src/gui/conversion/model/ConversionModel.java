@@ -225,6 +225,7 @@ public final class ConversionModel extends Model {
 	 * Methode qui vide la bibliotheque. 
 	 */
 	public void clear() {
+		currentFile = null;
 		files.clear();
 		sendChanges();
 	}

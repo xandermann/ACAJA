@@ -88,8 +88,11 @@ public final class SummaryView extends StylizedJPanel implements Observer {
 			inputFileLabel.setText(model.getCurrentFile().getSourceFileName());
 			videoLabel.setText(model.getCurrentFile().getSettings().get(SettingType.VIDEO_CODEC));
 			soundLabel.setText(model.getCurrentFile().getSettings().get(SettingType.AUDIO_CODEC));
-			durationLabel.setText(this.model.getCurrentFile().getDuration());
-			outputFileText.setText(this.model.getCurrentFile().getDestinationFileName());
+			durationLabel.setText(model.getCurrentFile().getDuration());
+			if(model.getCurrentFile().getDestinationFileName() == "")
+				outputFileText.setText(model.getCurrentFile().getSourceFileNameWithoutExtension());
+			else
+				outputFileText.setText(model.getCurrentFile().getDestinationFileName());
 		} else {
 			inputFileLabel.setText("NA");
 			videoLabel.setText("NA");

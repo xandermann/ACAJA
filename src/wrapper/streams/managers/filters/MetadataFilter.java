@@ -47,6 +47,21 @@ public final class MetadataFilter implements DataStreamsFilter {
 	
 	
 	/**
+	 * [ METHODE INTERNE RECURSIVE POUR COMPTER LE NOMBRE D'OCCURENCES D'UNE PATTERN. ]
+	 * 
+	 * @param metadata		Les metadonnees.
+	 * @param pattern		La pattern en question.
+	 * @param start			L'indice de debut dans la chaine.
+	 * @param end			L'indice de fin dans la chaine.
+	 * @return				Le nombre d'occurences de la pattern dans la chaine entre les indices.
+	 */
+	private static int countOccurences(String metadata, char pattern, int start, int end) {
+		start = metadata.indexOf(pattern, start);
+		return start==-1 || start > end ? 0 : countOccurences(metadata, pattern, start + 1, end) + 1;
+	}
+	
+
+	/**
 	 * [ METHODE INTERNE DE CLASSE. ]
 	 * 
 	 * Cette methode permet d'extraire une des metadonnees d'un  fichier video ou audio 
@@ -61,8 +76,11 @@ public final class MetadataFilter implements DataStreamsFilter {
 		if(indexMetadata != 0) {
 			int indexEvolve = indexStart;
 			
-			for(int i=0; i<indexMetadata; i++) 
-				indexEvolve = metadata.indexOf(',', indexEvolve)+1;
+			for(int i=0; i<indexMetadata; i++) {
+				if(countOccurences(metadata, '(', indexEvolve, metadata.indexOf(',', indexEvolve))
+				   != countOccurences(metadata, ')', indexEvolve, indexEvolve=(metadata.indexOf(',', indexEvolve)+1)))
+					indexEvolve = metadata.indexOf(',', indexEvolve)+1;
+			}
 			
 			indexEvolve++;
 			

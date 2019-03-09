@@ -39,7 +39,7 @@ public final class SystemRequests{
 	
 	public static String askResolution(ProcessingFile file) throws IncorrectFileException, UnfindableResourceException{
 		if(file==null) throw new NullPointerException("File null !");
-		if(!file.isVideo() && !file.isSound()) throw new IncorrectFileException(IncorrectFileException.REQUIRED_TYPE_VIDEO_OR_SOUND);
+		if(!file.isVideo()) throw new IncorrectFileException(IncorrectFileException.REQUIRED_TYPE_VIDEO);
 		/**
 		 * REQUETE A SOUMETRE A FFMPEG.
 		 */
@@ -77,7 +77,7 @@ public final class SystemRequests{
 	*/
 	public static void askMetadata(SettingsFile file) throws IncorrectFileException, UnfindableResourceException{
 		if(file==null) throw new NullPointerException("File null !");
-		if(!file.isVideo() && !file.isSound()) throw new IncorrectFileException(IncorrectFileException.REQUIRED_TYPE_VIDEO_OR_SOUND);
+		if(!file.containsAudio()) throw new IncorrectFileException(IncorrectFileException.REQUIRED_TYPE_VIDEO_OR_SOUND);
 		/**
 		 * REQUETE A SOUMETRE A FFMPEG.
 		 */

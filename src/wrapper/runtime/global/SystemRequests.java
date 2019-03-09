@@ -40,14 +40,7 @@ public final class SystemRequests{
 	public static String askResolution(ProcessingFile file) throws IncorrectFileException, UnfindableResourceException{
 		if(file==null) throw new NullPointerException("File null !");
 		if(!file.isVideo()) throw new IncorrectFileException(IncorrectFileException.REQUIRED_TYPE_VIDEO);
-		/**
-		 * EXTRACTION DES DONNEES.
-		 */
-		String metadata = MetadataFilter.findAllMetadata((new Request(file.getSourceFileFullName())).result());
-		/**
-		 * LA RESOLUTION.
-		 */
-		return MetadataFilter.findVideoMetadata(metadata, 2);	
+		return MetadataFilter.findVideoMetadata(MetadataFilter.findAllMetadata((new Request(file.getSourceFileFullName())).result()), 2);	
 	}
 	
 	

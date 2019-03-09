@@ -160,34 +160,32 @@ public class SelectableFile {
 	 */
 	private void whoAmI() throws IncorrectFileException {
 		String fileName = sourceFile.getName().toLowerCase();
-		String[] videoExtensions = {"3g2","3gp","asf","avi","flv","m4v","mov","mkv","mp2","mp4","mpeg","mpg","ogg","webm","wmv"};
-		String[] audioExtensions = {"mp3","wav", "ogg", "flac", "aac"};
-		String[] imageExtensions = {"png","jpg","jpeg","bmp"};
-		boolean containsExtension = false;
-		for(String vidExt : videoExtensions) {
-			if(fileName.endsWith(vidExt)) containsExtension = true;
-		}
-		if(containsExtension) {
-			typeFile = MediaFileType.MEDIA_FILE_VIDEO;
-			return;
-		}
-		for(String audExt : audioExtensions) {
-			if(fileName.endsWith(audExt)) containsExtension = true;
-		}
-		if(containsExtension) {
-			typeFile = MediaFileType.MEDIA_FILE_AUDIO;
-			return;
-		}	
-		for(String imgExt : imageExtensions) {
-			if(fileName.endsWith(imgExt)) containsExtension = true;	
-		}
-		if(containsExtension) {
-			typeFile = MediaFileType.MEDIA_FILE_IMAGE;
-			return;
-		} else 
-			throw new IncorrectFileException(IncorrectFileException.FORBIDDEN_FILE);
 		
-					
+		String[] videoExtensions = {"3g2","3gp","asf","avi","flv","m4v","mov","mkv","mp2","mp4","mpeg","mpg","ogg","webm","wmv"};
+		for(String vidExt : videoExtensions) {
+			if(fileName.endsWith(vidExt)) {
+				typeFile = MediaFileType.MEDIA_FILE_VIDEO;
+				return;
+			}
+		}
+		
+		String[] audioExtensions = {"mp3","wav", "ogg", "flac", "aac"};
+		for(String audExt : audioExtensions) {
+			if(fileName.endsWith(audExt)) {
+				typeFile = MediaFileType.MEDIA_FILE_AUDIO;
+				return;
+			}
+		}
+		
+		String[] imageExtensions = {"png","jpg","jpeg","bmp"};
+		for(String imgExt : imageExtensions) {
+			if(fileName.endsWith(imgExt)) {
+				typeFile = MediaFileType.MEDIA_FILE_IMAGE;
+				return;
+			}
+		}
+		
+		throw new IncorrectFileException(IncorrectFileException.FORBIDDEN_FILE);			
 	}
 
 	

@@ -18,8 +18,8 @@ public final class RowView extends JPanel{
 	 * Constructeur d'une entree de liste avec du texte et une icone
 	 */
 	public RowView(SettingsFile file, boolean special) {
+		super(new BorderLayout());
 		if(file == null) throw new NullPointerException("Le text recu en parametre est null !");
-		setLayout(new BorderLayout());
 		setPreferredSize(new Dimension(270, 140));
 		JPanel content = new JPanel(new BorderLayout());
 		content.setBackground(special ? StyleTheme.BACKGROUND_COLOR_SECONDARY : Color.WHITE);
@@ -28,7 +28,9 @@ public final class RowView extends JPanel{
 				public void paintComponent(Graphics g) {
 					try {
 						g.drawImage(ImageIO.read(file.getThumbail()), 35, 5, null);
-					} catch (IOException e) {}
+					} catch (IOException ioe) {
+						JOptionPane.showMessageDialog(null, ioe.getMessage());
+					}
 				}
 		}, BorderLayout.CENTER);
 		add(content, BorderLayout.CENTER);

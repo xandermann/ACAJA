@@ -16,6 +16,7 @@ public final class LibraryView extends StylizedJPanel implements Observer{
 	//=======================================================================================================================
 	
 	
+	
 	private ConversionModel model;
 	
 	
@@ -24,9 +25,10 @@ public final class LibraryView extends StylizedJPanel implements Observer{
 		
 		ArrayList<SettingsFile> files = model.getFiles();
 		JPanel all = new JPanel(new BorderLayout());
-		all.setPreferredSize(new Dimension(270, files.size()*150<=540 ? 540 : files.size()*140));
+		int size = files.size()*140;
+		all.setPreferredSize(new Dimension(270, files.size()*150<=540 ? 540 : size));
 		JPanel content = new JPanel(new GridLayout(files.size(), 1));
-		content.setPreferredSize(new Dimension(270, files.size()*140));
+		content.setPreferredSize(new Dimension(270, size));
 		for(SettingsFile file : files) {
 			RowView row = new RowView(file, file==model.getCurrentFile());
 			row.addMouseListener(new MouseListener() {
@@ -42,9 +44,9 @@ public final class LibraryView extends StylizedJPanel implements Observer{
 		}
 		all.add(content, BorderLayout.CENTER);
 		
-		if(files.size()*140 < 540) {
+		if(size < 540) {
 			JPanel nothing = new JPanel();
-			nothing.setPreferredSize(new Dimension(270, 540-files.size()*140));
+			nothing.setPreferredSize(new Dimension(270, 540-size));
 			all.add(nothing, BorderLayout.SOUTH);
 		}
 		
@@ -56,6 +58,12 @@ public final class LibraryView extends StylizedJPanel implements Observer{
 	}
 	
 	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
+	
 	public LibraryView(ConversionModel model) {
 		super(new BorderLayout());
 		if((this.model = model) == null) throw new NullPointerException("ConversionModel null !");
@@ -63,14 +71,17 @@ public final class LibraryView extends StylizedJPanel implements Observer{
 	}
 	
 	
+	
 	//=======================================================================================================================
 	//=======================================================================================================================
+	
 	
 	
 	@Override
 	public void update(Observable o, Object arg) {
 		drawLibrary();
 	}
+	
 	
 
 	//=======================================================================================================================

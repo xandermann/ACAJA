@@ -44,7 +44,7 @@ public final class AnswersView extends JPanel {
 		/**
 		 * HISTORIQUE.
 		 */
-		setLayout(new BorderLayout());
+		super(new BorderLayout());
 		setSize(new Dimension(400, 250));
 		main = new JPanel();
 		displayAnswers();

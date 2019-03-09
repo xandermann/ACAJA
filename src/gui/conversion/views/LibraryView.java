@@ -23,10 +23,9 @@ public final class LibraryView extends StylizedJPanel implements Observer{
 		removeAll();
 		
 		ArrayList<SettingsFile> files = model.getFiles();
-		JPanel all = new JPanel();
+		JPanel all = new JPanel(new BorderLayout());
 		all.setPreferredSize(new Dimension(270, files.size()*150<=540 ? 540 : files.size()*140));
-		JPanel content = new JPanel();
-		content.setLayout(new GridLayout(files.size(), 1));
+		JPanel content = new JPanel(new GridLayout(files.size(), 1));
 		content.setPreferredSize(new Dimension(270, files.size()*140));
 		for(SettingsFile file : files) {
 			RowView row = new RowView(file, file==model.getCurrentFile());
@@ -41,7 +40,6 @@ public final class LibraryView extends StylizedJPanel implements Observer{
 			});
 			content.add(row);
 		}
-		setLayout(new BorderLayout());
 		all.add(content, BorderLayout.CENTER);
 		
 		if(files.size()*140 < 540) {
@@ -50,7 +48,8 @@ public final class LibraryView extends StylizedJPanel implements Observer{
 			all.add(nothing, BorderLayout.SOUTH);
 		}
 		
-		add(new JScrollPane(all, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER));
+		add(new JScrollPane(all, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER), 
+			BorderLayout.CENTER);
 		
 		repaint();
 		revalidate();
@@ -58,6 +57,7 @@ public final class LibraryView extends StylizedJPanel implements Observer{
 	
 	
 	public LibraryView(ConversionModel model) {
+		super(new BorderLayout());
 		if((this.model = model) == null) throw new NullPointerException("ConversionModel null !");
 		drawLibrary();
 	}

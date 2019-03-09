@@ -304,7 +304,7 @@ public class SelectableFile {
 		return sourceFile.getName();
 	}
 
-	private String removeExtension (String fileName) {
+	private String removeExtension(String fileName) {
         if (fileName == "") return "";
         int pos = fileName.lastIndexOf(".");
         if (pos == -1) return fileName;
@@ -314,6 +314,7 @@ public class SelectableFile {
 	public String getSourceFileNameWithoutExtension() {
 		return removeExtension(sourceFile.getName());
 	}
+	
 	/**
 	 * [ METHODE ACCESSEUR - GETTER. ]
 	 * 
@@ -344,7 +345,8 @@ public class SelectableFile {
 	 * @return String 	Le nom complet du fichier source.
 	 */
 	public String getDestinationFileFullName() {
-		return destinationFile[0].equals("") && destinationFile[1].equals("") && destinationFile[2].equals("") ? "" : destinationFile[0]+File.separator+destinationFile[1]+destinationFile[2];
+		return destinationFile[0].equals("") && destinationFile[1].equals("") 
+			   && destinationFile[2].equals("") ? "" : destinationFile[0]+File.separator+destinationFile[1]+destinationFile[2];
 	}
 
 

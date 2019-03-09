@@ -30,7 +30,7 @@ public final class ProcessingFile extends SelectableFile implements Modifiable{
 	 */
 	private HashMap<ProcessingType, String> performedProcessings;
 
-	
+	private String resolution;
 	
 	//=======================================================================================================================
 	//=======================================================================================================================
@@ -57,8 +57,13 @@ public final class ProcessingFile extends SelectableFile implements Modifiable{
 		 */
 		performedProcessings = new HashMap<ProcessingType, String>();
 		
-		if(isVideo())
+		/**
+		 * Initialisation de la miniature et de la resolution.
+		 */
+		if(isVideo()) {
 			thumbail = SystemRequests.askFrame(this, "00:00:01.00");
+			resolution = SystemRequests.askResolution(this);
+		}
 	}
 
 	
@@ -105,6 +110,17 @@ public final class ProcessingFile extends SelectableFile implements Modifiable{
 		return performedProcessings;
 	}
 
+
+	/**
+	 * [ METHODE ACCESSEUR - GETTER. ]
+	 * 
+	 * @return la resolution.
+	 */
+	public String getResolution() {
+		return resolution;
+	}
+
+	
 	
 	//=======================================================================================================================
 	//=======================================================================================================================

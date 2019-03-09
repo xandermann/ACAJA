@@ -11,23 +11,35 @@ import files.files.SettingsFile;
 import gui.conversion.model.ConversionModel;
 import gui.style.StylizedJPanel;
 
-public final class LibraryView extends StylizedJPanel implements Observer {
+/**
+ * [ CLASSE POUR L'AFFICHAGE DE LA BIBLIOTHEQUE. ]
+ * 
+ * @author Jean-christophe
+ *
+ */
+public final class LibraryView extends StylizedJPanel implements Observer{
 	//=======================================================================================================================
 	//=======================================================================================================================
 	
 	
+	/**
+	 * [ MODELE. ]
+	 */
 	private ConversionModel model;
 	
 	
-	private void drawLibrary() {
+	/**
+	 * [ METHODE INTERNE POUR (RE-)DESSINER LA BIBLIOTHEQUE. ]
+	 */
+	private void displayLibrary() {
 		removeAll();
 		
 		ArrayList<SettingsFile> files = model.getFiles();
-		JPanel all = new JPanel();
-		all.setPreferredSize(new Dimension(270, files.size()*150<=540 ? 540 : files.size()*140));
-		JPanel content = new JPanel();
-		content.setLayout(new GridLayout(files.size(), 1));
-		content.setPreferredSize(new Dimension(270, files.size()*140));
+		JPanel all = new JPanel(new BorderLayout());
+		int size = files.size()*140;
+		all.setPreferredSize(new Dimension(270, files.size()*150<=540 ? 540 : size));
+		JPanel content = new JPanel(new GridLayout(files.size(), 1));
+		content.setPreferredSize(new Dimension(270, size));
 		for(SettingsFile file : files) {
 			RowView row = new RowView(file, file==model.getCurrentFile());
 			row.addMouseListener(new MouseListener() {
@@ -39,45 +51,53 @@ public final class LibraryView extends StylizedJPanel implements Observer {
 				public void mouseEntered(MouseEvent e) {}
 				public void mouseExited(MouseEvent e) {}
 			});
-			row.addKeyListener(new KeyListener() {
-				public void keyPressed(KeyEvent e) {
-					 if(e.getKeyCode()==KeyEvent.VK_DELETE) model.remove(file);	 
-				}
-				public void keyReleased(KeyEvent e) {}
-				public void keyTyped(KeyEvent e) {}		
-			});
 			content.add(row);
 		}
-		setLayout(new BorderLayout());
 		all.add(content, BorderLayout.CENTER);
 		
-		if(files.size()*140 < 540) {
+		if(size < 540) {
 			JPanel nothing = new JPanel();
-			nothing.setPreferredSize(new Dimension(270, 540-files.size()*140));
+			nothing.setPreferredSize(new Dimension(270, 540-size));
 			all.add(nothing, BorderLayout.SOUTH);
 		}
 		
-		add(new JScrollPane(all, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER));
+		add(new JScrollPane(all, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER), 
+			BorderLayout.CENTER);
 		
 		repaint();
 		revalidate();
 	}
 	
 	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
+	
+	/**
+	 * [ CONSTRUCTEUR AVEC PARAMETRES.]
+	 * 
+	 * @param model		Le modele.
+	 */
 	public LibraryView(ConversionModel model) {
+		super(new BorderLayout());
 		if((this.model = model) == null) throw new NullPointerException("ConversionModel null !");
-		drawLibrary();
+		displayLibrary();
 	}
 	
 	
+	
 	//=======================================================================================================================
 	//=======================================================================================================================
+	
 	
 	
 	@Override
 	public void update(Observable o, Object arg) {
-		drawLibrary();
+		displayLibrary();
 	}
+	
 	
 
 	//=======================================================================================================================

@@ -22,5 +22,9 @@ public enum ProcessingType implements OperationType {
 	/**
 	 * Parametre du type floute. 
 	 */
-	BLURRED
+	BLURRED,
+	/**
+	 * Parametre du type concatene.
+	 */
+	ADDED
 }

@@ -26,7 +26,7 @@ import wrapper.runtime.global.UserRequests;
  * Auteurs du projet : 
  * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
  */
-public final class ConversionModel extends Model {
+public final class ConversionModel extends Model{
 	//=======================================================================================================================
 	//=======================================================================================================================
 	
@@ -225,6 +225,7 @@ public final class ConversionModel extends Model {
 	 * Methode qui vide la bibliotheque. 
 	 */
 	public void clear() {
+		currentFile = null;
 		files.clear();
 		sendChanges();
 	}

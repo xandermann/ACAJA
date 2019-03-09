@@ -1,4 +1,4 @@
-package gui.answers;
+package gui.answers.views;
 
 import java.io.*;
 import java.awt.*;
@@ -21,6 +21,7 @@ public final class AnswerView extends JPanel{
 	 * [ CONSTRUCTEUR VIDE. ]
 	 */
 	public AnswerView(File support) {
+		super(new BorderLayout());
 		if(support == null) throw new NullPointerException("Support null !");
 		
 		
@@ -44,8 +45,6 @@ public final class AnswerView extends JPanel{
 		 * DISPOSITION DES COMPOSANTS.
 		 */
 		setSize(new Dimension(500, 500));
-		
-		setLayout(new BorderLayout());
 		JPanel name = new JPanel(new BorderLayout());
 		name.setSize(new Dimension(500, 50));
 		

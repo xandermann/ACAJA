@@ -11,7 +11,7 @@ import gui.Model;
  * Auteurs du projet : 
  * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
  */
-public class ThreadForSave extends Thread{
+public final class ThreadForSave extends Thread{
 	/**
 	 * [ ATTRIBUT D'INSTANCE - MODELE. ]
 	 */

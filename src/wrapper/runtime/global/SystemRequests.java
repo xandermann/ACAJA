@@ -9,6 +9,7 @@ import exceptions.IncorrectFileException;
 import exceptions.UnfindableResourceException;
 import files.*;
 import files.enumerations.SettingType;
+import files.files.ProcessingFile;
 import files.files.SelectableFile;
 import files.files.SettingsFile;
 import messages.MessageConstants;
@@ -36,6 +37,23 @@ public final class SystemRequests{
 	//=======================================================================================================================
 	
 	
+	public static String askResolution(ProcessingFile file) throws IncorrectFileException, UnfindableResourceException{
+		if(file==null) throw new NullPointerException("File null !");
+		if(!file.isVideo()) throw new IncorrectFileException(IncorrectFileException.REQUIRED_TYPE_VIDEO);
+		/**
+		 * REQUETE A SOUMETRE A FFMPEG.
+		 */
+		ProcessManager processManager = (new Request(file.getSourceFileFullName())).result();
+		/**
+		 * EXTRACTION DES DONNEES.
+		 */
+		String metadata = MetadataFilter.findAllMetadata(processManager);
+		/**
+		 * LA RESOLUTION.
+		 */
+		return MetadataFilter.findVideoMetadata(metadata, 2);	
+	}
+	
 	
 	/**
 	 * [ METHODE DE CLASSE POUR LE RENSEIGNEMENT DES METADONNEES D'UNE VIDEO OU D'UN SON. ]
@@ -59,7 +77,7 @@ public final class SystemRequests{
 	*/
 	public static void askMetadata(SettingsFile file) throws IncorrectFileException, UnfindableResourceException{
 		if(file==null) throw new NullPointerException("File null !");
-		if(!file.isVideo()) throw new IncorrectFileException(IncorrectFileException.REQUIRED_TYPE_VIDEO);
+		if(!file.containsAudio()) throw new IncorrectFileException(IncorrectFileException.REQUIRED_TYPE_VIDEO_OR_SOUND);
 		/**
 		 * REQUETE A SOUMETRE A FFMPEG.
 		 */

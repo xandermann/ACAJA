@@ -10,7 +10,7 @@ import wrapper.streams.managers.consumers.WatchedConsumer;
  * Auteurs du projet : 
  * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
  */
-public class ThreadForWaitWindow extends Thread{
+public final class ThreadForWaitWindow extends Thread{
 	/**
 	 * [ ATTRIBUT D'INSTANCE - LA FENETRE D'ATTENTE. ]
 	 */

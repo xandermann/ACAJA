@@ -1,8 +1,12 @@
 package wrapper.runtime.details;
 
+import java.io.*;
 import java.util.*;
 
+import javax.swing.JOptionPane;
+
 import exceptions.UnfindableResourceException;
+import resources.ResourceConstants;
 import wrapper.language.*;
 import wrapper.streams.iterators.ProcessManager;
 import wrapper.streams.managers.consumers.WatchedConsumer;
@@ -10,10 +14,10 @@ import wrapper.streams.managers.consumers.WatchedConsumer;
 /**
  * [ CLASSE POUR LA CONSTITUTION DES REQUETES FFMPEG. ]
  * 
- * Cette classe comporte une majorit� de methodes publiques 
- * retourant this. Cela permet d'enchainer en une meme instruction 
+ * Cette classe comporte une majorite de methodes publiques 
+ * retournant this. Cela permet d'enchainer en une meme instruction 
  * un nombre "infini" d'operations, de la memme maniere qu'on le ferait
- * en saisissant une multituide de flags dans une commande FFmpeg dans un SHELL. 
+ * en saisissant une multitude de flags dans une commande FFmpeg dans un SHELL. 
  * Cela est tres pratique et tres intuitif. 
  * 
  * C'est une classe cle dans cet interfacage de FFmpeg 
@@ -62,7 +66,7 @@ public final class Request implements FlagConstants, ValueConstants{
 	}
 	
 	/**
-	 * [ CONSTRUCTEUR AVEC PARAMETRE. ]
+	 * [ CONSTRUCTEUR AVEC PARAMETRES. ]
 	 * 
 	 * Ce constructeur sert a realiser des requetes qui ne necessitent
 	 * que le fichier d'entree. 
@@ -309,13 +313,12 @@ public final class Request implements FlagConstants, ValueConstants{
 		if(height==null) throw new NullPointerException("height null !");
 		
 		
-		if(Integer.parseInt(xCorner)<=0) throw new IllegalArgumentException("xCorner negatif ou nul !");
-		if(Integer.parseInt(yCorner)<=0) throw new IllegalArgumentException("yCorner negatif ou nul !");
+		if(Integer.parseInt(xCorner)<0) throw new IllegalArgumentException("xCorner negatif !");
+		if(Integer.parseInt(yCorner)<0) throw new IllegalArgumentException("yCorner negatif !");
 		if(Integer.parseInt(width)<=0) throw new IllegalArgumentException("Width negative ou nulle !");
 		if(Integer.parseInt(height)<=0) throw new IllegalArgumentException("Height negative ou nulle !");
 		
-		String s = FLAG_CROP[2];
-		askSomethingElse(new String[]{FLAG_CROP[0], FLAG_CROP[1]+width+s+height+s+xCorner+s+yCorner+FLAG_CROP[3]});
+		askSomethingElse(new String[]{FLAG_CROP[0], FLAG_CROP[1]+width+":"+height+":"+xCorner+":"+yCorner+FLAG_CROP[2]});
 		return this;
 	}
 
@@ -365,11 +368,53 @@ public final class Request implements FlagConstants, ValueConstants{
 		if(Integer.parseInt(width)<=0) throw new IllegalArgumentException("Width negative ou nulle !");
 		if(Integer.parseInt(height)<=0) throw new IllegalArgumentException("Height negative ou nulle !");
 		
-		askSomethingElse(new String[]{FLAG_RESIZE[0],FLAG_RESIZE[1]+width+FLAG_RESIZE[2]+height});
+		askSomethingElse(new String[]{FLAG_RESIZE[0],FLAG_RESIZE[1]+width+":"+height});
 		return this;
 	}
 	
-	
+	/**
+	 * [ FLOUTER / PIXELISER. ]
+	 * 
+	 * 
+	 * 			xCorner
+	 * 	yCorner + < -------------------- > 
+	 * 		   ^	        width
+	 *		   |				  
+	 * 		   |
+	 * 		   | height
+	 * 		   |
+	 * 		   v 
+	 * 
+	 * @param xCorner	Abscisse du coin gauche. 
+	 * @param yCorner	Ordonnee du coin gauche. 
+	 * @param width		La largeur. 
+	 * @param height	La hauteur. 
+	 * 
+	 * @return La requete this. 
+	 */
+	public Request blur(String xCorner, String yCorner, String width, String height) {
+		if(xCorner==null) throw new NullPointerException("xCorner null !");
+		if(yCorner==null) throw new NullPointerException("yCorner null !");
+		if(width==null) throw new NullPointerException("Width null !");
+		if(height==null) throw new NullPointerException("height null !");
+		
+		
+		if(Integer.parseInt(xCorner)<0) throw new IllegalArgumentException("xCorner negatif !");
+		if(Integer.parseInt(yCorner)<0) throw new IllegalArgumentException("yCorner negatif !");
+		if(Integer.parseInt(width)<=0) throw new IllegalArgumentException("Width negative ou nulle !");
+		if(Integer.parseInt(height)<=0) throw new IllegalArgumentException("Height negative ou nulle !");
+		
+		askSomethingElse(new String[]{FLAG_BLUR[0], 
+				FLAG_BLUR[1]+width+":"+height+":"+xCorner+":"+yCorner+FLAG_BLUR[2]+xCorner+":"+yCorner+FLAG_BLUR[3]});
+		
+		String[] tmp = new String[FLAG_BLUR.length-4];
+		for(int i=4; i<FLAG_BLUR.length; i++) {
+			tmp[i-4] = FLAG_BLUR[i];
+		}
+		askSomethingElse(tmp);
+				
+		return this;
+	}
 	
 	//=======================================================================================================================
 	
@@ -389,6 +434,39 @@ public final class Request implements FlagConstants, ValueConstants{
 		return this;
 	}
 	
+	
+	
+	//=======================================================================================================================
+	
+	
+	/**
+	 * [ CONCATENER. ]
+	 * 
+	 * @param inputs	Les videos en entree a concatener
+	 * 					avec la video en entree precisee dans le constructeur. 
+	 * 
+	 * @return La requete this. 
+	 */
+	public Request concat(String[] inputs) {	
+		for(String tmp : inputs)  {
+			if(tmp==null) throw new NullPointerException("Un des inputs est null !");
+		}
+		
+		try {
+			File inputsFile = new File(ResourceConstants.TEMPORARY_FILES_FULL_PATH + "inputs.txt");
+			Writer writer = new BufferedWriter(new FileWriter(inputsFile));
+			if(input != null) writer.write(input+"\n");
+			for(String tmp : inputs) writer.write(tmp+"\n");
+			writer.close();
+			
+			request.clear();
+			askSomethingElse(new String[] {FLAG_ADD[0], FLAG_ADD[1], FLAG_ADD[2], inputsFile.getAbsolutePath(), FLAG_ADD[3]});
+		} catch (IOException ioe) {
+			JOptionPane.showMessageDialog(null, ioe.getMessage());
+		}
+		
+		return this;
+	}
 	
 	
 	//=======================================================================================================================

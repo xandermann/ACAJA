@@ -61,8 +61,18 @@ public final class MetadataFilter implements DataStreamsFilter {
 		if(indexMetadata != 0) {
 			int indexEvolve = indexStart;
 			
-			for(int i=0; i<indexMetadata; i++) 
+			for(int i=0; i<indexMetadata; i++) {
+				int parenthesisOpened = metadata.indexOf('(', indexEvolve);
+				if(parenthesisOpened != -1 && parenthesisOpened < metadata.indexOf(',', indexEvolve)) {
+					int elseParenthesisOpened = metadata.indexOf('(', parenthesisOpened);
+					if( (elseParenthesisOpened == -1 || elseParenthesisOpened > metadata.indexOf(',', indexEvolve))
+					&& metadata.indexOf(')', indexEvolve) > metadata.indexOf(',', indexEvolve)) {
+						i--;
+					}
+				}
 				indexEvolve = metadata.indexOf(',', indexEvolve)+1;
+			}
+				
 			
 			indexEvolve++;
 			

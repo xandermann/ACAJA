@@ -8,6 +8,7 @@ import files.enumerations.MediaFileType;
 import resources.TimeTools;
 import wrapper.runtime.global.SystemRequests;
 
+
 /**
  * TODO comentaire a faire.
  * 
@@ -159,14 +160,34 @@ public class SelectableFile {
 	 */
 	private void whoAmI() throws IncorrectFileException {
 		String fileName = sourceFile.getName().toLowerCase();
-		if (fileName.endsWith("mp4") || fileName.endsWith("avi") || fileName.endsWith("flv"))
+		String[] videoExtensions = {"3g2","3gp","asf","avi","flv","m4v","mov","mkv","mp2","mp4","mpeg","mpg","ogg","webm","wmv"};
+		String[] audioExtensions = {"mp3","wav", "ogg", "flac", "aac"};
+		String[] imageExtensions = {"png","jpg","jpeg","bmp"};
+		boolean containsExtension = false;
+		for(String vidExt : videoExtensions) {
+			if(fileName.endsWith(vidExt)) containsExtension = true;
+		}
+		if(containsExtension) {
 			typeFile = MediaFileType.MEDIA_FILE_VIDEO;
-		else if (fileName.endsWith("mp3") || fileName.endsWith("wav") || fileName.endsWith("ogg"))
-				typeFile = MediaFileType.MEDIA_FILE_AUDIO;
-			else if (fileName.endsWith("png") || fileName.endsWith("jpg") || fileName.endsWith("jpeg"))
-					typeFile = MediaFileType.MEDIA_FILE_IMAGE;
-				else
-					throw new IncorrectFileException(IncorrectFileException.FORBIDDEN_FILE);
+			return;
+		}
+		for(String audExt : audioExtensions) {
+			if(fileName.endsWith(audExt)) containsExtension = true;
+		}
+		if(containsExtension) {
+			typeFile = MediaFileType.MEDIA_FILE_AUDIO;
+			return;
+		}	
+		for(String imgExt : imageExtensions) {
+			if(fileName.endsWith(imgExt)) containsExtension = true;	
+		}
+		if(containsExtension) {
+			typeFile = MediaFileType.MEDIA_FILE_IMAGE;
+			return;
+		} else 
+			throw new IncorrectFileException(IncorrectFileException.FORBIDDEN_FILE);
+		
+					
 	}
 
 	
@@ -284,7 +305,17 @@ public class SelectableFile {
 	public String getSourceFileName() {
 		return sourceFile.getName();
 	}
+
+	private String removeExtension (String fileName) {
+        if (fileName == "") return "";
+        int pos = fileName.lastIndexOf(".");
+        if (pos == -1) return fileName;
+        return fileName.substring(0, pos);
+    }
 	
+	public String getSourceFileNameWithoutExtension() {
+		return removeExtension(sourceFile.getName());
+	}
 	/**
 	 * [ METHODE ACCESSEUR - GETTER. ]
 	 * 

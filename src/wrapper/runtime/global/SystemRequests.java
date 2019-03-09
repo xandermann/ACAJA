@@ -40,18 +40,7 @@ public final class SystemRequests{
 	public static String askResolution(ProcessingFile file) throws IncorrectFileException, UnfindableResourceException{
 		if(file==null) throw new NullPointerException("File null !");
 		if(!file.isVideo()) throw new IncorrectFileException(IncorrectFileException.REQUIRED_TYPE_VIDEO);
-		/**
-		 * REQUETE A SOUMETRE A FFMPEG.
-		 */
-		ProcessManager processManager = (new Request(file.getSourceFileFullName())).result();
-		/**
-		 * EXTRACTION DES DONNEES.
-		 */
-		String metadata = MetadataFilter.findAllMetadata(processManager);
-		/**
-		 * LA RESOLUTION.
-		 */
-		return MetadataFilter.findVideoMetadata(metadata, 2);	
+		return MetadataFilter.findVideoMetadata(MetadataFilter.findAllMetadata((new Request(file.getSourceFileFullName())).result()), 2);	
 	}
 	
 	
@@ -79,13 +68,9 @@ public final class SystemRequests{
 		if(file==null) throw new NullPointerException("File null !");
 		if(!file.containsAudio()) throw new IncorrectFileException(IncorrectFileException.REQUIRED_TYPE_VIDEO_OR_SOUND);
 		/**
-		 * REQUETE A SOUMETRE A FFMPEG.
-		 */
-		ProcessManager processManager = (new Request(file.getSourceFileFullName())).result();
-		/**
 		 * EXTRACTION DES DONNEES.
 		 */
-		String metadata = MetadataFilter.findAllMetadata(processManager);
+		String metadata = MetadataFilter.findAllMetadata((new Request(file.getSourceFileFullName())).result());
 		/**
 		 * INITIALISATION DES SETTINGS DU FICHEIR A PARTIR DES METADONNEES.
 		 */

@@ -107,7 +107,8 @@ public final class UserRequests{
 					//request.cut(newValue);
 					break;
 				case BLURRED :
-					//request.(newValue);
+					String[] tab2 = newValue.split(" ");
+					request.blur(tab2[0],tab2[1],tab2[2],tab2[3]);
 					break;
 			}
 		}

@@ -57,8 +57,7 @@ public final class MetadataFilter implements DataStreamsFilter {
 	 */
 	private static int countOccurences(String metadata, char pattern, int start, int end) {
 		start = metadata.indexOf(pattern, start);
-		System.out.println(start);
-		return start<0 || start > end ? 0 : countOccurences(metadata, pattern, start + 1, end) + 1;
+		return start==-1 || start > end ? 0 : countOccurences(metadata, pattern, start + 1, end) + 1;
 	}
 	
 

@@ -87,7 +87,19 @@ public class ProcessingModel extends Model{
 		listRect.add(f);
 		System.out.println(a+"-"+b+"-"+c+"-"+d+"-t:"+type);
 		sendChanges();
-		this.modify(ProcessingType.CROPED,a+" "+b+" "+c+" "+d );
+		switch (type) {
+		case 'c':
+			this.modify(ProcessingType.CROPED,a+" "+b+" "+c+" "+d );
+			break;
+		case 'f':
+			this.modify(ProcessingType.BLURRED,a+" "+b+" "+c+" "+d );
+			break;
+
+		default:
+			System.out.println("Non implementé");
+			break;
+		}
+		
 	}
 	
 	public void suppLastForm() {

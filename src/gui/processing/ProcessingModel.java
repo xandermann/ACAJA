@@ -111,6 +111,14 @@ public class ProcessingModel extends Model{
 
 
 
+	@Override
+	public boolean isModified() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+
 	
 
 

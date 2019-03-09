@@ -1,8 +1,8 @@
 package gui;
 
 import java.util.Observable;
-
 import exceptions.UnfindableResourceException;
+import files.files.Modifiable;
 import wrapper.streams.managers.consumers.WatchedConsumer;
 
 /**
@@ -14,7 +14,7 @@ import wrapper.streams.managers.consumers.WatchedConsumer;
  * Auteurs du projet : 
  * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
  */
-public abstract class Model extends Observable{
+public abstract class Model extends Observable implements Modifiable{
 	//=======================================================================================================================
 	//=======================================================================================================================
 	

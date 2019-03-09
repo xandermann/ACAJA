@@ -17,7 +17,12 @@ public final class KeyboardController implements KeyListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		if(e.getKeyCode()==KeyEvent.VK_DELETE) model.remove(model.getCurrentFile()); 
+		if(e.getKeyCode()==KeyEvent.VK_DELETE) 
+			model.remove(model.getCurrentFile()); 
+		else {
+			if(e.getKeyCode()==KeyEvent.VK_ESCAPE)
+				System.exit(0);
+		}
 	}
 
 	@Override

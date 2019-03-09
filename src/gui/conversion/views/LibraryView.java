@@ -11,7 +11,7 @@ import files.files.SettingsFile;
 import gui.conversion.model.ConversionModel;
 import gui.style.StylizedJPanel;
 
-public final class LibraryView extends StylizedJPanel implements Observer {
+public final class LibraryView extends StylizedJPanel implements Observer{
 	//=======================================================================================================================
 	//=======================================================================================================================
 	
@@ -38,13 +38,6 @@ public final class LibraryView extends StylizedJPanel implements Observer {
 				public void mouseReleased(MouseEvent e) {}
 				public void mouseEntered(MouseEvent e) {}
 				public void mouseExited(MouseEvent e) {}
-			});
-			row.addKeyListener(new KeyListener() {
-				public void keyPressed(KeyEvent e) {
-					 if(e.getKeyCode()==KeyEvent.VK_DELETE) model.remove(file);	 
-				}
-				public void keyReleased(KeyEvent e) {}
-				public void keyTyped(KeyEvent e) {}		
 			});
 			content.add(row);
 		}

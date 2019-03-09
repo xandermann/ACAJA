@@ -12,6 +12,7 @@ import files.files.SettingsFile;
 import gui.JFileChooserManager;
 import gui.WindowTools;
 import gui.answers.AnswersWindow;
+import gui.conversion.controllers.KeyboardController;
 import gui.conversion.model.ConversionModel;
 import gui.conversion.views.*;
 import gui.processing.ProcessingWindow;
@@ -460,7 +461,7 @@ public final class ConversionWindow extends StylizedJFrame {
 		p.add(conversionWindow.empty_workspace);
 		conversionWindow.setLayout(new BorderLayout());
 		conversionWindow.add(p, BorderLayout.CENTER);
-
+		conversionWindow.addKeyListener(new KeyboardController(conversionWindow.model));
 		
 		WindowTools.executeWindow(conversionWindow);
 	}

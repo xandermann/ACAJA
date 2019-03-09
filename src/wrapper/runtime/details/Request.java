@@ -66,7 +66,7 @@ public final class Request implements FlagConstants, ValueConstants{
 	}
 	
 	/**
-	 * [ CONSTRUCTEUR AVEC PARAMETRE. ]
+	 * [ CONSTRUCTEUR AVEC PARAMETRES. ]
 	 * 
 	 * Ce constructeur sert a realiser des requetes qui ne necessitent
 	 * que le fichier d'entree. 

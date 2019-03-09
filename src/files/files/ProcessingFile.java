@@ -112,7 +112,7 @@ public final class ProcessingFile extends SelectableFile implements Modifiable{
 
 
 	/**
-	 * [ GETTER DE LA RESOLTUION. ]
+	 * [ METHODE ACCESSEUR - GETTER. ]
 	 * 
 	 * @return la resolution.
 	 */

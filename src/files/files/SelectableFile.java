@@ -345,7 +345,8 @@ public class SelectableFile {
 	 * @return String 	Le nom complet du fichier source.
 	 */
 	public String getDestinationFileFullName() {
-		return destinationFile[0].equals("") && destinationFile[1].equals("") && destinationFile[2].equals("") ? "" : destinationFile[0]+File.separator+destinationFile[1]+destinationFile[2];
+		return destinationFile[0].equals("") && destinationFile[1].equals("") 
+			   && destinationFile[2].equals("") ? "" : destinationFile[0]+File.separator+destinationFile[1]+destinationFile[2];
 	}
 
 

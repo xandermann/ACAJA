@@ -24,8 +24,14 @@ public interface FlagConstants {
 	public final static String FLAG_SAMPLING_RATE =  "-ar";
 	public final static String FLAG_NUMBER_AUDIO_CHANNELS = "-ac";
 	
-	public final static String[] FLAG_RESIZE = {"-vf", "scale=", ":"};
-	public final static String[] FLAG_CROP = {"-filter:v", "\"crop=", ":", "\""};
+	public final static String[] FLAG_RESIZE = {"-vf", "scale="};
+	public final static String[] FLAG_CROP = {"-filter:v", "\"crop=", "\""};
 	public final static String[] FLAG_PERIOD = {"-ss", "-t"};
 	public final static String[] FLAG_ROTATE = {"-vf", "transpose=1"};
+	public final static String[] FLAG_BLUR = {"-filter_complex", 
+											  "\"[0:v]crop=", ",boxblur=10[fg];[0:v][fg]overlay=", "[v]\"",
+										      "-map", "\"[v]\"", "-map", "0:a", 
+										      "-c:v", "libx264", "-c:a", "copy", "-movflags", "+faststart"};
+	
+	public final static String[] FLAG_ADD = {"-f", "concat", "-i", "-c:copy"};
 }

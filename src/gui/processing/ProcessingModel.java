@@ -64,7 +64,7 @@ public class ProcessingModel extends Model{
 	public int[] getTabInt(int pos) {
 		return listRect.get(pos).getTab();
 	}
-	public SelectableFile getCurentFile() {
+	public ProcessingFile getCurentFile() {
 		return curentFile;
 	}
 	public void setCurentFile(ProcessingFile curentFile) {
@@ -86,6 +86,9 @@ public class ProcessingModel extends Model{
 		Form f = new Form(tab,type);
 		listRect.add(f);
 		System.out.println(a+"-"+b+"-"+c+"-"+d+"-t:"+type);
+		System.out.println(this.getCurentFile().getResolution());
+		/*String[] res = this.getCurentFile().getResolution().split("x");
+		System.out.println(res[0]+"x"+res[1]);*/
 		sendChanges();
 		switch (type) {
 		case 'c':

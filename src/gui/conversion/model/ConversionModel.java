@@ -210,9 +210,10 @@ public final class ConversionModel extends Model{
 	 * @param file SettingsFile Le fichier a supprimer de la bibliotheque.
 	 */
 	public void remove(SettingsFile file) {
-		if(this.files.contains(file)) {
+		if(files.contains(file)) {
 			files.remove(file);
 			currentFile = null;
+			if(!files.isEmpty()) currentFile = files.get(0);
 			sendChanges();
 		}else
 			JOptionPane.showMessageDialog(null, MessageConstants.ERROR_UNFINDABLE_FILE_TO_REMOVE);

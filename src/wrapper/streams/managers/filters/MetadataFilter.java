@@ -46,6 +46,7 @@ public final class MetadataFilter implements DataStreamsFilter {
 	}
 	
 	
+
 	/**
 	 * [ METHODE INTERNE DE CLASSE. ]
 	 * 
@@ -62,17 +63,9 @@ public final class MetadataFilter implements DataStreamsFilter {
 			int indexEvolve = indexStart;
 			
 			for(int i=0; i<indexMetadata; i++) {
-				int parenthesisOpened = metadata.indexOf('(', indexEvolve);
-				if(parenthesisOpened != -1 && parenthesisOpened < metadata.indexOf(',', indexEvolve)) {
-					int elseParenthesisOpened = metadata.indexOf('(', parenthesisOpened);
-					if( (elseParenthesisOpened == -1 || elseParenthesisOpened > metadata.indexOf(',', indexEvolve))
-					&& metadata.indexOf(')', indexEvolve) > metadata.indexOf(',', indexEvolve)) {
-						i--;
-					}
-				}
-				indexEvolve = metadata.indexOf(',', indexEvolve)+1;
-			}
-				
+				if(metadata.indexOf('(', indexEvolve) < (indexEvolve=metadata.indexOf(',', indexEvolve)+1))
+					indexEvolve = metadata.indexOf(',', indexEvolve)+1;
+			}		
 			
 			indexEvolve++;
 			

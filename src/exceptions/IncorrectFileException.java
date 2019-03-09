@@ -21,6 +21,7 @@ public final class IncorrectFileException extends Exception {
 	public final static String FORBIDDEN_FILE = "Extension du fichier non conforme !";
 	public final static String BAD_TYPE_FILE = "Seuls les fichiers audio et video sont acceptes !";
 	public final static String REQUIRED_TYPE_VIDEO = "Le fichier devrait etre un fichier video !";
+	public final static String REQUIRED_TYPE_VIDEO_OR_SOUND = "Le fichier devrait etre un fichier video ou audio !";
 	
 	/**
 	 * [ CONSTRUCTEUR. ]

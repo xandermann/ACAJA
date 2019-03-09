@@ -6,7 +6,9 @@ import wrapper.streams.managers.consumers.WatchedConsumer;
 
 /**
  * [ CLASSE POUR LA GESTION DE L'ESPACE D'EXECUTION POUR LES THREADS. 
- *	
+ * 
+ * Auteurs du projet : 
+ * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
  */
 public final class RuntimeSpaceManager {
 	/**

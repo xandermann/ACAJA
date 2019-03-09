@@ -14,10 +14,10 @@ import wrapper.streams.managers.consumers.WatchedConsumer;
 /**
  * [ CLASSE POUR LA CONSTITUTION DES REQUETES FFMPEG. ]
  * 
- * Cette classe comporte une majorit� de methodes publiques 
- * retourant this. Cela permet d'enchainer en une meme instruction 
+ * Cette classe comporte une majorite de methodes publiques 
+ * retournant this. Cela permet d'enchainer en une meme instruction 
  * un nombre "infini" d'operations, de la memme maniere qu'on le ferait
- * en saisissant une multituide de flags dans une commande FFmpeg dans un SHELL. 
+ * en saisissant une multitude de flags dans une commande FFmpeg dans un SHELL. 
  * Cela est tres pratique et tres intuitif. 
  * 
  * C'est une classe cle dans cet interfacage de FFmpeg 
@@ -440,7 +440,7 @@ public final class Request implements FlagConstants, ValueConstants{
 	
 	
 	/**
-	 * [ CONCATENER DES VIDEOS. ]
+	 * [ CONCATENER. ]
 	 * 
 	 * @param inputs	Les videos en entree a concatener
 	 * 					avec la video en entree precisee dans le constructeur. 

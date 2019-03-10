@@ -10,6 +10,8 @@ package wrapper.language;
  * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
  */
 public interface FlagConstants {
+	public final static String FLAG_INPUT = "-i";
+	
 	public final static String FLAG_SUPPORTED_CODECS = "-codecs";
 	
 	public final static String FLAG_QUALITY = "-crf";
@@ -33,5 +35,5 @@ public interface FlagConstants {
 										      "-map", "\"[v]\"", "-map", "0:a", 
 										      "-c:v", "libx264", "-c:a", "copy", "-movflags", "+faststart"};
 	
-	public final static String[] FLAG_ADD = {"-f", "concat", "-i", "-c:copy"};
+	public final static String[] FLAG_ADD = {"-f", "concat", FLAG_INPUT, "-c:copy"};
 }

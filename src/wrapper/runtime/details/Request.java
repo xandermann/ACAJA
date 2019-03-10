@@ -110,7 +110,7 @@ public final class Request implements FlagConstants, ValueConstants{
 		if(this.input != null) 
 			request.set(1, this.input = input);
 		else{
-			request.add(0, "-i");
+			request.add(0, FLAG_INPUT);
 			request.add(1, this.input = input);
 		}
 		return this;
@@ -407,11 +407,7 @@ public final class Request implements FlagConstants, ValueConstants{
 		askSomethingElse(new String[]{FLAG_BLUR[0], 
 				FLAG_BLUR[1]+width+":"+height+":"+xCorner+":"+yCorner+FLAG_BLUR[2]+xCorner+":"+yCorner+FLAG_BLUR[3]});
 		
-		String[] tmp = new String[FLAG_BLUR.length-4];
-		for(int i=4; i<FLAG_BLUR.length; i++) {
-			tmp[i-4] = FLAG_BLUR[i];
-		}
-		askSomethingElse(tmp);
+		for(int i=4; i<FLAG_BLUR.length; i++) askSomethingElse(new String[]{FLAG_BLUR[i]});
 				
 		return this;
 	}
@@ -460,7 +456,7 @@ public final class Request implements FlagConstants, ValueConstants{
 			writer.close();
 			
 			request.clear();
-			askSomethingElse(new String[] {FLAG_ADD[0], FLAG_ADD[1], FLAG_ADD[2], inputsFile.getAbsolutePath(), FLAG_ADD[3]});
+			askSomethingElse(new String[]{FLAG_ADD[0], FLAG_ADD[1], FLAG_ADD[2], inputsFile.getAbsolutePath(), FLAG_ADD[3]});
 		} catch (IOException ioe) {
 			JOptionPane.showMessageDialog(null, ioe.getMessage());
 		}

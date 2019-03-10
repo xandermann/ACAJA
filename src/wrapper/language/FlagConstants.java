@@ -12,6 +12,9 @@ package wrapper.language;
 public interface FlagConstants {
 	public final static String FLAG_INPUT = "-i";
 	
+	public final static String FLAG_SEPARATOR = ":";
+	public final static String S = FLAG_SEPARATOR;
+	
 	public final static String FLAG_SUPPORTED_CODECS = "-codecs";
 	
 	public final static String FLAG_QUALITY = "-crf";

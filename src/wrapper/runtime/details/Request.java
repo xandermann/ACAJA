@@ -318,7 +318,7 @@ public final class Request implements FlagConstants, ValueConstants{
 		if(Integer.parseInt(width)<=0) throw new IllegalArgumentException("Width negative ou nulle !");
 		if(Integer.parseInt(height)<=0) throw new IllegalArgumentException("Height negative ou nulle !");
 		
-		askSomethingElse(new String[]{FLAG_CROP[0], FLAG_CROP[1]+width+":"+height+":"+xCorner+":"+yCorner+FLAG_CROP[2]});
+		askSomethingElse(new String[]{FLAG_CROP[0], FLAG_CROP[1]+width+S+height+S+xCorner+S+yCorner+FLAG_CROP[2]});
 		return this;
 	}
 
@@ -368,7 +368,7 @@ public final class Request implements FlagConstants, ValueConstants{
 		if(Integer.parseInt(width)<=0) throw new IllegalArgumentException("Width negative ou nulle !");
 		if(Integer.parseInt(height)<=0) throw new IllegalArgumentException("Height negative ou nulle !");
 		
-		askSomethingElse(new String[]{FLAG_RESIZE[0],FLAG_RESIZE[1]+width+":"+height});
+		askSomethingElse(new String[]{FLAG_RESIZE[0],FLAG_RESIZE[1]+width+S+height});
 		return this;
 	}
 	
@@ -405,7 +405,7 @@ public final class Request implements FlagConstants, ValueConstants{
 		if(Integer.parseInt(height)<=0) throw new IllegalArgumentException("Height negative ou nulle !");
 		
 		askSomethingElse(new String[]{FLAG_BLUR[0], 
-				FLAG_BLUR[1]+width+":"+height+":"+xCorner+":"+yCorner+FLAG_BLUR[2]+xCorner+":"+yCorner+FLAG_BLUR[3]});
+				FLAG_BLUR[1]+width+S+height+S+xCorner+S+yCorner+FLAG_BLUR[2]+xCorner+S+yCorner+FLAG_BLUR[3]});
 		
 		for(int i=4; i<FLAG_BLUR.length; i++) askSomethingElse(new String[]{FLAG_BLUR[i]});
 				

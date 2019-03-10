@@ -441,7 +441,7 @@ public final class Request implements FlagConstants, ValueConstants{
 	/**
 	 * [ CONCATENER. ]
 	 * 
-	 * @param inputs	Les videos en entree a concatener
+	 * @param inputs	Les videos en entree (chemin absolu/complet) a concatener
 	 * 					avec la video en entree precisee dans le constructeur. 
 	 * 
 	 * @return La requete this. 

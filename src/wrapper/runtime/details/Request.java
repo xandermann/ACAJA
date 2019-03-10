@@ -140,8 +140,11 @@ public final class Request implements FlagConstants, ValueConstants{
 	 * @param somethingElse		Les arguemnts a ajouter. 
 	 */
 	private void askSomethingElse(String[] somethingElse) {
-		if(somethingElse == null) throw new NullPointerException("Argument a ajouter dans la requete null !");		
-		for(String element : somethingElse) request.add(element);
+		if(somethingElse == null) throw new NullPointerException("Arguments null !");		
+		for(String element : somethingElse) {
+			if(element == null) throw new NullPointerException("Argument null !");		
+			request.add(element);
+		}
 	}
 
 

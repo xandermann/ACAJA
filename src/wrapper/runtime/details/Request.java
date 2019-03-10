@@ -441,8 +441,14 @@ public final class Request implements FlagConstants, ValueConstants{
 	/**
 	 * [ CONCATENER. ]
 	 * 
-	 * @param inputs	Les videos en entree (chemin absolu/complet) a concatener
-	 * 					avec la video en entree precisee dans le constructeur. 
+	 * @param inputs	Les videos/sons en entree (chemin absolu/complet) a concatener.
+	 * 					
+	 * 					Optionnelement, on peut preciser une video/son en entree dans le 
+	 * 					constructeur a concatener en plus des autres vidoes fournies 
+	 * 					deja a concatener. 
+	 * 
+	 * 					Il est possibles de concatener des videos qu'avec des videos,
+	 * 					de meme pour les sons.
 	 * 
 	 * @return La requete this. 
 	 */

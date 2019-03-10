@@ -82,7 +82,7 @@ public final class Request implements FlagConstants, ValueConstants{
 	 * [ CONSTRUCTEUR AVEC PARAMETRES. ]
 	 * 
 	 * Ce constructeur sert a realiser des requetes qui necessitent
-	 * un fichier d'entree et un ficheir de sortie. 
+	 * un fichier d'entree et un fichier de sortie. 
 	 * 
 	 * @param input			Le nom complet ( chemin + nom ) du fichier d'entree. 
 	 * @param output		Le nom complet ( chemin + nom ) du fichier de sortie. 

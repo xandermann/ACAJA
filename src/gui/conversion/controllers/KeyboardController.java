@@ -1,9 +1,10 @@
-package gui.conversion.controllers;
+ package gui.conversion.controllers;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import gui.conversion.model.ConversionModel;
+import resources.ResourcesManager;
 
 public final class KeyboardController implements KeyListener {
 	private ConversionModel model;
@@ -20,8 +21,10 @@ public final class KeyboardController implements KeyListener {
 		if(e.getKeyCode()==KeyEvent.VK_DELETE) 
 			model.remove(model.getCurrentFile()); 
 		else {
-			if(e.getKeyCode()==KeyEvent.VK_ESCAPE)
+			if(e.getKeyCode()==KeyEvent.VK_ESCAPE) {
+				ResourcesManager.clearResources();
 				System.exit(0);
+			}
 		}
 	}
 

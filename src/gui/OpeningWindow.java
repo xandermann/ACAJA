@@ -13,6 +13,7 @@ import gui.processing.ProcessingWindow;
 import gui.style.StyleTheme;
 import gui.style.StylizedJButton;
 import gui.style.StylizedJPanel;
+import resources.ResourcesManager;
 
 /**
  * [ CLASSE POUR LE LANCEMENT DES FENETRES D'OUVERTURE DU LOGICIEL. ]
@@ -49,6 +50,8 @@ public final class OpeningWindow {
 	 * Cette methode permet de generer la fenetre de presentation du logiciel.
 	 */
 	private static void generateLoadingWindow() {
+		ResourcesManager.clearResources();
+		
 		JFrame presentationWindow = new JFrame("Acaja - un logiciel a la portee de tous.");
 
 		presentationWindow.setSize(new Dimension(WIDTH, HEIGHT));

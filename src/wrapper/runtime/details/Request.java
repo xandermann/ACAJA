@@ -441,7 +441,7 @@ public final class Request implements FlagConstants, ValueConstants{
 	/**
 	 * [ CONCATENER. ]
 	 * 
-	 * @param inputs	Les videos/sons en entree (chemin absolu/complet) a concatener.
+	 * @param inputs	Les videos/sons en entree a concatener.
 	 * 					
 	 * 					Optionnelement, on peut preciser une video/son en entree dans le 
 	 * 					constructeur a concatener en plus des autres vidoes fournies 
@@ -452,8 +452,8 @@ public final class Request implements FlagConstants, ValueConstants{
 	 * 
 	 * @return La requete this. 
 	 */
-	public Request concat(String[] inputs) {	
-		for(String tmp : inputs)  {
+	public Request concat(File[] inputs) {	
+		for(File tmp : inputs)  {
 			if(tmp==null) throw new NullPointerException("Un des inputs est null !");
 		}
 		
@@ -461,7 +461,7 @@ public final class Request implements FlagConstants, ValueConstants{
 			File inputsFile = new File(ResourceConstants.TEMPORARY_FILES_FULL_PATH + "inputs.txt");
 			Writer writer = new BufferedWriter(new FileWriter(inputsFile));
 			if(input != null) writer.write(input+"\n");
-			for(String tmp : inputs) writer.write(tmp+"\n");
+			for(File tmp : inputs) writer.write(tmp.getAbsolutePath()+"\n");
 			writer.close();
 			
 			request.clear();

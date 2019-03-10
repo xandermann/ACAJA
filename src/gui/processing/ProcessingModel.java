@@ -64,7 +64,7 @@ public class ProcessingModel extends Model{
 	public int[] getTabInt(int pos) {
 		return listRect.get(pos).getTab();
 	}
-	public SelectableFile getCurentFile() {
+	public ProcessingFile getCurentFile() {
 		return curentFile;
 	}
 	public void setCurentFile(ProcessingFile curentFile) {
@@ -83,11 +83,38 @@ public class ProcessingModel extends Model{
 		tab[2] = c;
 		tab[3] = d;
 		
+		
+		
 		Form f = new Form(tab,type);
 		listRect.add(f);
 		System.out.println(a+"-"+b+"-"+c+"-"+d+"-t:"+type);
+		String[] res = this.getCurentFile().getResolution().split("x");
+		
+		double coeffWidth = ((double)Integer.parseInt(res[0]))/500;
+		double coeffHeight = ((double)Integer.parseInt(res[1]))/350;
+		System.out.println(coeffWidth+" "+coeffHeight);
+		
+		int a1 = (int) (a*coeffWidth);
+		int b1 = (int) (b*coeffHeight);
+		
+		int c1 = (int) (c*coeffWidth);
+		int d1 = (int) (d*coeffHeight);
+		
+		System.out.println(a1+"-"+b1+"-"+c1+"-"+d1);
 		sendChanges();
-		this.modify(ProcessingType.CROPED,a+" "+b+" "+c+" "+d );
+		switch (type) {
+		case 'c':
+			this.modify(ProcessingType.CROPED,a1+" "+b1+" "+c1+" "+d1 );
+			break;
+		case 'f':
+			this.modify(ProcessingType.BLURRED,a1+" "+b1+" "+c1+" "+d1 );
+			break;
+
+		default:
+			System.out.println("Non implementé");
+			break;
+		}
+		
 	}
 	
 	public void suppLastForm() {

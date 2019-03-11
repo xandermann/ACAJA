@@ -50,10 +50,9 @@ public interface FlagConstants {
 										      FLAG_FILTER_VIDEO, "libx264", FLAG_FILTER_AUDIO, FLAG_COPY, 
 										      "-movflags", "+faststart"};
 	
-	public final static String[] FLAG_ADD = {"-f", "concat", FLAG_INPUT, FLAG_FILTER_ALL_COPY};
+	
+	public final static String[] FLAG_CONCAT = {"-f", "concat", FLAG_INPUT, FLAG_FILTER_ALL_COPY};
 	
 	public final static String[] FLAG_REMOVE_SOUND = {FLAG_FILTER, FLAG_COPY, "-an"};
-	
 	public final static String[] FLAG_ADD_SOUND = {FLAG_INPUT, FLAG_FILTER, FLAG_COPY, FLAG_MAP, "0"+S+"0", FLAG_MAP, "0"+S+"1"};
-
 }

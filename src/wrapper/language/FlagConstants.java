@@ -18,10 +18,10 @@ public interface FlagConstants {
 	public final static String FLAG_MAP = "-map";
 	
 	public final static String FLAG_FILTER = "-c";
-	public final static String FLAG_FILTER_AUDIO = FLAG_FILTER+S+"v";
-	public final static String FLAG_FILTER_VIDEO = FLAG_FILTER+S+"a";
+	public final static String FLAG_FILTER_AUDIO = FLAG_FILTER+FLAG_SEPARATOR+"v";
+	public final static String FLAG_FILTER_VIDEO = FLAG_FILTER+FLAG_SEPARATOR+"a";
 	public final static String FLAG_COPY = "copy";
-	public final static String FLAG_FILTER_ALL_COPY = FLAG_FILTER+S+FLAG_COPY;
+	public final static String FLAG_FILTER_ALL_COPY = FLAG_FILTER+FLAG_SEPARATOR+FLAG_COPY;
 	
 	public final static String FLAG_SUPPORTED_CODECS = "-codecs";
 	
@@ -29,12 +29,12 @@ public interface FlagConstants {
 	public final static String FLAG_SAME_QUALITY = "-qscale";
 	
 	public final static String FLAG_VIDEO_CODEC = "-vcodec";
-	public final static String FLAG_VIDEO_BITRATE = "-b"+S+"v";
+	public final static String FLAG_VIDEO_BITRATE = "-b"+FLAG_SEPARATOR+"v";
 	public final static String FLAG_FRAMERATE = "-r";
 	public final static String FLAG_RESOLUTION = "-s";
 	
 	public final static String FLAG_AUDIO_CODEC = "-acodec";
-	public final static String FLAG_AUDIO_BITRATE = "-b"+S+"a";
+	public final static String FLAG_AUDIO_BITRATE = "-b"+FLAG_SEPARATOR+"a";
 	public final static String FLAG_SAMPLING_RATE =  "-ar";
 	public final static String FLAG_NUMBER_AUDIO_CHANNELS = "-ac";
 	

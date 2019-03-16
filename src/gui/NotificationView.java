@@ -1,8 +1,9 @@
 package gui;
-import java.awt.BorderLayout;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
+
+import java.awt.*;
+import javax.swing.*;
+
+import gui.style.StyleTheme;
 import gui.style.StylizedJFrame;
 import messages.NotificationConstants;
 /**
@@ -28,12 +29,28 @@ public final class NotificationView extends StylizedJFrame implements Notificati
 		setSize(300, 150);
 		setResizable(false);
 		setLocationRelativeTo(null);
-		add(new JLabel("<html>" + 
-						"<body>" + 
-						content +
-						"</body>" + 
-						"</html>", JLabel.CENTER),
-			BorderLayout.CENTER);
+		
+		Color theme = 
+				title.equals(FAILURE) ? Color.RED : 
+					(title.equals(SUCCESS) ? new Color(0,128,0)  : StyleTheme.BACKGROUND_COLOR_SECONDARY);
+		
+		setContentPane(new JPanel() {
+			public void paintComponent(Graphics g) {
+				g.setColor(theme);
+				g.drawRect(15, 10, 265, 100); 
+			}
+		
+		});
+		
+		JLabel notification = new JLabel("<html>" + 
+				"<body>" + 
+		        "<br><<br><br>" + 
+				content +
+				"</body>" + 
+				"</html>", JLabel.CENTER);
+		notification.setForeground(theme);
+		add(notification, BorderLayout.CENTER);
+		
 		WindowTools.showLogo(this);
 	}
 	

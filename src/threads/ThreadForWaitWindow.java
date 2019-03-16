@@ -1,6 +1,9 @@
 package threads;
 
 import java.io.File;
+
+import javax.swing.JOptionPane;
+
 import gui.NotificationView;
 import gui.WindowTools;
 import resources.ResourceConstants;
@@ -38,14 +41,28 @@ public final class ThreadForWaitWindow extends Thread{
 	 * [ DEROULEMENT DU THREAD. ]
 	 */
     public void run() {
+    	/**
+    	 * ATTENTE.
+    	 */
     	WindowTools.executeWindow(waitWindow);
 		while(WatchedConsumer.hand.took());
 		waitWindow.dispose();
+		/**
+		 * FEEDBACK
+		 */
 		File[] filesErr = ResourceConstants.STDERR_ANSWERS.listFiles();
 		if(FilterForFeedback.successed(filesErr[filesErr.length-1], concernedFile))
 			NotificationView.alert(NotificationView.SUCCESS, "L'operation a ete realisee avec succes !", 6000);
 		else
 			NotificationView.alert(NotificationView.FAILURE, "L'operation en cours a echouee !", 6000);
+		/**
+		 * RENDRE LA MAIN.
+		 */
+		try {
+			Thread.sleep(7000);
+		} catch (InterruptedException ie) {
+			JOptionPane.showMessageDialog(null, ie.getMessage());
+		}
 		RuntimeSpaceManager.hand.render();
     }
     

@@ -297,24 +297,29 @@ public final class ConversionModel extends Model{
 	public void save() throws UnfindableResourceException {
 		for(SettingsFile sf : files) {
 			if(sf.isModified()) {
-				while(RuntimeSpaceManager.hand.took());
-				/**
-				 * DEBUT DE LA CONVERSION.
-				 */
-				RuntimeSpaceManager.hand.take();
-				startSave();
-				/**
-				 * LANCEMENT DE LA CONVERSION DANS UN AUTRE PROCESSUS.
-				 */
-				ThreadForSave.saveInNewThread(sf);
-				/**
-				 * LANCEMENT ET GESTION DE LA FENETRE D'ATTENTE DANS UN AUTRE PROCESSUS.
-				 */
-				ThreadForWaitWindow.waitInNewThread(
-						new NotificationView(
-								"Conversion en evolution.",
-								"Conversion du fichier "+sf.getSourceFileName()+"<br>Veuillez patientez..."),
-						sf.getSourceFile());
+				new Thread() {
+					public void run (){
+						while(RuntimeSpaceManager.hand.took());
+						/**
+						 * DEBUT DE LA CONVERSION.
+						 */
+						RuntimeSpaceManager.hand.take();
+						startSave();
+						System.out.println("\n"+1);
+						/**
+						 * LANCEMENT DE LA CONVERSION DANS UN AUTRE PROCESSUS.
+						 */
+						ThreadForSave.saveInNewThread(sf);
+						/**
+						 * LANCEMENT ET GESTION DE LA FENETRE D'ATTENTE DANS UN AUTRE PROCESSUS.
+						 */
+						ThreadForWaitWindow.waitInNewThread(
+								new NotificationView(
+										"Conversion en evolution.",
+										"Conversion du fichier "+sf.getSourceFileName()+"<br>Veuillez patientez..."),
+								sf.getSourceFile());
+					}
+				}.start();
 			}
 		}
 	}

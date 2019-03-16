@@ -129,7 +129,7 @@ public final class UserRequests{
 	 * 
 	 * @throws UnfindableResourceException		Exception sur les ressources introuvables. 
 	 */
-	public static synchronized void execute(SelectableFile file) throws UnfindableResourceException {
+	public static void execute(SelectableFile file) throws UnfindableResourceException {
 		if(file == null) throw new NullPointerException("SelectableFile null!");
 		if(file instanceof SettingsFile)
 			executeSettingsFile((SettingsFile) file);

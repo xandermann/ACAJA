@@ -155,9 +155,8 @@ public final class ConversionWindow extends StylizedJFrame {
 							model.setCurrentFile(model.getFiles().get(model.getFiles().size()-1));
 							NotificationView.alert(NotificationView.SUCCESS, "Import realise avec succes.");
 						} catch(Exception e) {
-								JOptionPane.showMessageDialog(null, e.getMessage());
+							JOptionPane.showMessageDialog(null, e.getMessage());
 						}
-							
 					}
 				});
 			}	

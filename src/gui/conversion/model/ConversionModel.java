@@ -299,13 +299,18 @@ public final class ConversionModel extends Model{
 			if(sf.isModified()) {
 				new Thread() {
 					public void run (){
+						/**
+						 * ATTENDRE QU'ON ME RENDE LA MAIN.
+						 */
 						while(RuntimeSpaceManager.hand.took());
 						/**
-						 * DEBUT DE LA CONVERSION.
+						 * DEBUT DE LA CONVERSION :
+						 * 
+						 * Prendre la main sur l'espace d'execution.
+						 * Prendre la main sur ffmpeg.
 						 */
 						RuntimeSpaceManager.hand.take();
 						startSave();
-						System.out.println("\n"+1);
 						/**
 						 * LANCEMENT DE LA CONVERSION DANS UN AUTRE PROCESSUS.
 						 */

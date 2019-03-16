@@ -73,6 +73,8 @@ public final class NamesSpaceManager implements ResourceConstants{
 	/**
 	 * [ GENERER UN FICHIER STDERR. ]
 	 * 
+	 * @see #_err
+	 * 
 	 * @return	Le fichier.
 	 * 
 	 * @throws UnfindableResourceException		Exception sur les ressources introuvables. 
@@ -83,6 +85,8 @@ public final class NamesSpaceManager implements ResourceConstants{
 	
 	/**
 	 * [ GENERER UN FICHIER STDOUT. ]
+	 * 
+	 * @see #_out
 	 * 
 	 * @return	Le fichier.
 	 * 
@@ -95,6 +99,8 @@ public final class NamesSpaceManager implements ResourceConstants{
 	/**
 	 * [ GENERER UN FICHIER TEMPORAIRE. ]
 	 * 
+	 * @see #_temporary
+	 *  
 	 * @return	Le fichier.
 	 * 
 	 * @throws UnfindableResourceException		Exception sur les ressources introuvables. 

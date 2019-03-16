@@ -3,7 +3,7 @@ package resources;
 /**
  * [ MAIN / VERROU / PRIVATISEUR DE RESSOURCE. ]
  * 
- * Une main sur une ressource peut etre prise et rendu
+ * Une main sur une ressource peut etre prise et rendue
  * depuis l'interieur comme depuis l'exterieur de la classe.
  * Une main est un genre de verrou, pris en compte par tous 
  * les processus du fil d'execution du logiciel. D'ou 

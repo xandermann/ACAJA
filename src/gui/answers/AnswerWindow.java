@@ -28,6 +28,7 @@ public final class AnswerWindow extends JFrame{
 		setContentPane(av);
 		setSize(new Dimension(av.getWidth(), av.getHeight()));
 		setLocationRelativeTo(null);
+		WindowTools.showLogo(this);
 		WindowTools.executeWindow(this);
 	}
 }

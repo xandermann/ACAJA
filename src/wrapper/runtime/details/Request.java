@@ -514,7 +514,7 @@ public final class Request implements FlagConstants, ValueConstants{
 	 * 
 	 * @return La requete this. 
 	 * 
-	 * @throws UnfindableResourceException		Exception sur les ressources introuvables.
+	 * @throws UnfindableResourceException 	Exception sur les ressources introuvables.
 	 */
 	public Request make() throws UnfindableResourceException {
 		WatchedConsumer.consume(result());

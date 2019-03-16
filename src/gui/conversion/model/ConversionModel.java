@@ -9,6 +9,7 @@ import files.*;
 import files.enumerations.OperationType;
 import files.enumerations.SettingType;
 import files.files.SettingsFile;
+import gui.NotificationView;
 import gui.Model;
 import gui.conversion.views.RowView;
 import messages.MessageConstants;
@@ -215,6 +216,7 @@ public final class ConversionModel extends Model{
 			currentFile = null;
 			if(!files.isEmpty()) currentFile = files.get(0);
 			sendChanges();
+			NotificationView.alert(NotificationView.SUCCESS, "Suppression du fichier "+file.getSourceFileName()+" reussie.");
 		}else
 			JOptionPane.showMessageDialog(null, MessageConstants.ERROR_UNFINDABLE_FILE_TO_REMOVE);
 	}

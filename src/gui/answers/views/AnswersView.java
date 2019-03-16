@@ -7,6 +7,8 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+
+import gui.NotificationView;
 import gui.WindowTools;
 import gui.answers.AnswerWindow;
 
@@ -68,7 +70,12 @@ public final class AnswersView extends JPanel {
 		refresh.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				main.removeAll();
+				int countOldFiles = files==null ? 0 : files.size();
 		        displayAnswers();
+		        NotificationView.alert("Notes.",
+							files.size()-countOldFiles == 0 ? 
+							"Aucun nouveau rapport trouve." : 
+							files.size()-countOldFiles + " nouveaux rapports.");
 				main.revalidate();
 			}
 		});
@@ -91,7 +98,7 @@ public final class AnswersView extends JPanel {
 		 */
 		File[] filesErr = ResourceConstants.STDERR_ANSWERS.listFiles();
 		File[] filesOut = ResourceConstants.STDOUT_ANSWERS.listFiles();
-		List<File> files = new ArrayList<File>();
+		files = new ArrayList<File>();
 		for(File f : filesErr) files.add(f);
 		for(File f : filesOut) files.add(f);
 		

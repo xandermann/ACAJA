@@ -9,6 +9,7 @@ import exceptions.*;
 import files.FileInformation;
 import files.enumerations.SettingType;
 import files.files.SettingsFile;
+import gui.NotificationView;
 import gui.JFileChooserManager;
 import gui.WindowTools;
 import gui.answers.AnswersWindow;
@@ -111,6 +112,7 @@ public final class ConversionWindow extends StylizedJFrame {
 						model.add(f);
 						if (model.getCurrentFile() == null) redrawFirstTime();
 						model.setCurrentFile(model.getFiles().get(model.getFiles().size()-1));
+						NotificationView.alert(NotificationView.SUCCESS, "Import realise avec succes.");
 					} catch (Exception e) {
 						JOptionPane.showMessageDialog(null, e.getMessage());
 					}
@@ -128,6 +130,7 @@ public final class ConversionWindow extends StylizedJFrame {
 						model.add(f);
 						if(model.getCurrentFile() == null) redrawFirstTime();
 						model.setCurrentFile(model.getFiles().get(model.getFiles().size()-1));
+						NotificationView.alert(NotificationView.SUCCESS, "Import realise avec succes.");
 					}
 				} catch (Exception e) {
 					JOptionPane.showMessageDialog(null, e.getMessage());
@@ -150,6 +153,7 @@ public final class ConversionWindow extends StylizedJFrame {
 							model.add(file);
 							if (model.getCurrentFile() == null) redrawFirstTime();
 							model.setCurrentFile(model.getFiles().get(model.getFiles().size()-1));
+							NotificationView.alert(NotificationView.SUCCESS, "Import realise avec succes.");
 						} catch(Exception e) {
 								JOptionPane.showMessageDialog(null, e.getMessage());
 						}
@@ -165,6 +169,7 @@ public final class ConversionWindow extends StylizedJFrame {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
 				model.clear();
+				NotificationView.alert(NotificationView.SUCCESS, "Bibliotheque videe avec succes.");
 			}
 		});
 
@@ -209,6 +214,7 @@ public final class ConversionWindow extends StylizedJFrame {
 			public void actionPerformed(ActionEvent ae) {
 				try {
 					model.setDestinationFolder(JFileChooserManager.chooseDirectory());
+					NotificationView.alert(NotificationView.SUCCESS, "Chemin de destination des fichiers <br>enregistre.");
 				} catch (ImportationException ie) {
 					JOptionPane.showMessageDialog(null, ie.getMessage());
 				}
@@ -221,6 +227,7 @@ public final class ConversionWindow extends StylizedJFrame {
 			@Override
 			public void actionPerformed(ActionEvent ae) {			
 				ProcessingWindow.generateProcessingWindow();
+				NotificationView.alert(NotificationView.SUCCESS, "Changement de mode realise <br>avec succes.");
 				dispose();
 			}
 		});
@@ -252,24 +259,6 @@ public final class ConversionWindow extends StylizedJFrame {
 	 */
 	private void convert() {
 		/**
-		 * FENETRE D'ATTENTE. 
-		 */
-		StylizedJFrame waitWindow = new StylizedJFrame("Conversion de votre fichier");
-		waitWindow.setLayout(new BorderLayout());
-		waitWindow.setSize(400, 150);
-		waitWindow.setResizable(false);
-		waitWindow.setLocationRelativeTo(null);
-		waitWindow.add(
-				new JLabel("<html>" + 
-							"<body>" + 
-							"		Conversion du ou des fichier(s)." +
-							"		<br>" +
-							"		Veuillez patientez..." + 
-							"</body>" + 
-							"</html>", JLabel.CENTER),
-				BorderLayout.CENTER);
-		WindowTools.showLogo(waitWindow);
-		/**
 		 * DEBUT DE LA CONVERSION.
 		 */
 		model.startSave();
@@ -280,7 +269,9 @@ public final class ConversionWindow extends StylizedJFrame {
 		/**
 		 * LANCEMENT ET GESTION DE LA FENETRE D'ATTENTE DANS UN AUTRE PROCESSUS.
 		 */
-		ThreadForWaitWindow.waitInNewThread(waitWindow);
+		ThreadForWaitWindow.waitInNewThread(
+		new NotificationView("Conversion en evolution.", "Conversion du ou des fichier(s).<br>Veuillez patientez..."),
+		model.getFiles().get(0).getSourceFile());
 	}
 	
 	

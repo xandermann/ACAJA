@@ -215,8 +215,8 @@ public final class ConversionWindow extends StylizedJFrame {
 				try {
 					model.setDestinationFolder(JFileChooserManager.chooseDirectory());
 					NotificationView.alert(NotificationView.SUCCESS, "Chemin de destination des fichiers <br>enregistre.");
-				} catch (ImportationException ie) {
-					JOptionPane.showMessageDialog(null, ie.getMessage());
+				} catch (IllegalArgumentException iae) {
+					JOptionPane.showMessageDialog(null, iae.getMessage());
 				}
 			}
 		});
@@ -251,29 +251,6 @@ public final class ConversionWindow extends StylizedJFrame {
 	
 	//=======================================================================================================================
 	//=======================================================================================================================
-	
-	
-
-	/**
-	 * [ METHODE INTERNE POUR LA GESTION DE LA CONVERSION. ]
-	 */
-	private void convert() {
-		/**
-		 * DEBUT DE LA CONVERSION.
-		 */
-		model.startSave();
-		/**
-		 * LANCEMENT DE LA CONVERSION DANS UN AUTRE PROCESSUS.
-		 */
-		ThreadForSave.saveInNewThread(model);
-		/**
-		 * LANCEMENT ET GESTION DE LA FENETRE D'ATTENTE DANS UN AUTRE PROCESSUS.
-		 */
-		ThreadForWaitWindow.waitInNewThread(
-		new NotificationView("Conversion en evolution.", "Conversion du ou des fichier(s).<br>Veuillez patientez..."),
-		model.getFiles().get(0).getSourceFile());
-	}
-	
 	
 	
 	/**
@@ -315,8 +292,8 @@ public final class ConversionWindow extends StylizedJFrame {
 				try {
 					model.setDestinationFolder(JFileChooserManager.chooseDirectory());
 					outputFolder.setText(model.getDestinationFolder().getAbsolutePath());
-				} catch (ImportationException ie) {
-					JOptionPane.showMessageDialog(null, ie.getMessage());
+				} catch (IllegalArgumentException iae) {
+					JOptionPane.showMessageDialog(null, iae.getMessage());
 				}
 			}
 		});
@@ -361,7 +338,11 @@ public final class ConversionWindow extends StylizedJFrame {
 			public void actionPerformed(ActionEvent e) {
 				if(model.getDestinationFolder() != null) {
 					outputWindow.dispose();
-					convert();
+					try {
+						model.save();
+					} catch (UnfindableResourceException ure) {
+						JOptionPane.showMessageDialog(null, ure.getMessage());
+					}
 				}
 			}
 		});

@@ -38,8 +38,7 @@ public final class NotificationView extends StylizedJFrame implements Notificati
 			public void paintComponent(Graphics g) {
 				g.setColor(theme);
 				g.drawRect(15, 10, 265, 100); 
-			}
-		
+			}	
 		});
 		
 		JLabel notification = new JLabel("<html>" + 

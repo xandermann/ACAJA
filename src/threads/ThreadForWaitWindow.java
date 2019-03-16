@@ -39,13 +39,14 @@ public final class ThreadForWaitWindow extends Thread{
 	 */
     public void run() {
     	WindowTools.executeWindow(waitWindow);
-		while(WatchedConsumer.workIsOnGoing());
+		while(WatchedConsumer.hand.took());
 		waitWindow.dispose();
 		File[] filesErr = ResourceConstants.STDERR_ANSWERS.listFiles();
 		if(FilterForFeedback.successed(filesErr[filesErr.length-1], concernedFile))
 			NotificationView.alert(NotificationView.SUCCESS, "L'operation a ete realisee avec succes !", 6000);
 		else
 			NotificationView.alert(NotificationView.FAILURE, "L'operation en cours a echouee !", 6000);
+		RuntimeSpaceManager.hand.render();
     }
     
     

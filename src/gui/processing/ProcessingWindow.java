@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JOptionPane;
-import exceptions.ImportationException;
 import exceptions.IncorrectFileException;
 import exceptions.UnfindableResourceException;
 import files.files.ProcessingFile;
@@ -110,9 +109,6 @@ public class ProcessingWindow extends JFrame {
 					ProcessingFile sf = new ProcessingFile(f);
 					model.setCurentFile(sf);
 				} catch (IncorrectFileException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (ImportationException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (UnfindableResourceException e) {

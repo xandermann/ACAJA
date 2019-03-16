@@ -30,9 +30,8 @@ public final class NotificationView extends StylizedJFrame implements Notificati
 		setResizable(false);
 		setLocationRelativeTo(null);
 		
-		Color theme = 
-				title.equals(FAILURE) ? Color.RED : 
-					(title.equals(SUCCESS) ? new Color(0,128,0)  : StyleTheme.BACKGROUND_COLOR_SECONDARY);
+		Color theme = title.equals(FAILURE) ? Color.RED : 
+				   	  (title.equals(SUCCESS) ? new Color(0,128,0) : StyleTheme.BACKGROUND_COLOR_SECONDARY);
 		
 		setContentPane(new JPanel() {
 			public void paintComponent(Graphics g) {

@@ -27,6 +27,8 @@ public final class WatchedConsumer extends AllStreamsConsumer {
 	 * depuis l'interieur comme depuis l'exterieur de la classe.
 	 * Une main est un genre de verrou, pris en compte par tous 
 	 * les processus du fil d'execution du logiciel.
+	 * 
+	 * Cette main permet de modeliser les 3 etats de la consommation.
 	 */
 	public static Hand hand = new Hand();
 	

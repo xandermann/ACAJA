@@ -72,7 +72,7 @@ public final class AnswersView extends JPanel {
 				main.removeAll();
 				int countOldFiles = files==null ? 0 : files.size();
 		        displayAnswers();
-		        NotificationView.alert(NotificationView.INFO,
+		        NotificationView.shortAlert(NotificationView.INFO,
 							files.size()-countOldFiles == 0 ? 
 							"Aucun nouveau rapport trouve." : 
 							files.size()-countOldFiles + " nouveaux rapports.");

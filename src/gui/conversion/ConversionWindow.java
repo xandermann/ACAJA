@@ -112,7 +112,7 @@ public final class ConversionWindow extends StylizedJFrame {
 						model.add(f);
 						if (model.getCurrentFile() == null) redrawFirstTime();
 						model.setCurrentFile(model.getFiles().get(model.getFiles().size()-1));
-						NotificationView.alert(NotificationView.SUCCESS, "Import realise avec succes.");
+						NotificationView.shortAlert(NotificationView.SUCCESS, "Import realise avec succes.");
 					} catch (Exception e) {
 						JOptionPane.showMessageDialog(null, e.getMessage());
 					}
@@ -130,7 +130,7 @@ public final class ConversionWindow extends StylizedJFrame {
 						model.add(f);
 						if(model.getCurrentFile() == null) redrawFirstTime();
 						model.setCurrentFile(model.getFiles().get(model.getFiles().size()-1));
-						NotificationView.alert(NotificationView.SUCCESS, "Import realise avec succes.");
+						NotificationView.shortAlert(NotificationView.SUCCESS, "Import realise avec succes.");
 					}
 				} catch (Exception e) {
 					JOptionPane.showMessageDialog(null, e.getMessage());
@@ -153,7 +153,7 @@ public final class ConversionWindow extends StylizedJFrame {
 							model.add(file);
 							if (model.getCurrentFile() == null) redrawFirstTime();
 							model.setCurrentFile(model.getFiles().get(model.getFiles().size()-1));
-							NotificationView.alert(NotificationView.SUCCESS, "Import realise avec succes.");
+							NotificationView.shortAlert(NotificationView.SUCCESS, "Import realise avec succes.");
 						} catch(Exception e) {
 							JOptionPane.showMessageDialog(null, e.getMessage());
 						}
@@ -168,7 +168,7 @@ public final class ConversionWindow extends StylizedJFrame {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
 				model.clear();
-				NotificationView.alert(NotificationView.SUCCESS, "Bibliotheque videe avec succes.");
+				NotificationView.shortAlert(NotificationView.SUCCESS, "Bibliotheque videe avec succes.");
 			}
 		});
 
@@ -178,6 +178,7 @@ public final class ConversionWindow extends StylizedJFrame {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
 				ResourcesManager.clearResources();
+				NotificationView.shortAlert(NotificationView.INFO, "Fin de session.");
 				System.exit(0);		
 			}
 		});
@@ -213,7 +214,7 @@ public final class ConversionWindow extends StylizedJFrame {
 			public void actionPerformed(ActionEvent ae) {
 				try {
 					model.setDestinationFolder(JFileChooserManager.chooseDirectory());
-					NotificationView.alert(NotificationView.SUCCESS, "Chemin de destination des fichiers <br>enregistre.");
+					NotificationView.shortAlert(NotificationView.SUCCESS, "Chemin de destination des fichiers <br>enregistre.");
 				} catch (IllegalArgumentException iae) {
 					JOptionPane.showMessageDialog(null, iae.getMessage());
 				}
@@ -226,7 +227,7 @@ public final class ConversionWindow extends StylizedJFrame {
 			@Override
 			public void actionPerformed(ActionEvent ae) {			
 				ProcessingWindow.generateProcessingWindow();
-				NotificationView.alert(NotificationView.SUCCESS, "Changement de mode realise <br>avec succes.");
+				NotificationView.shortAlert(NotificationView.SUCCESS, "Changement de mode realise <br>avec succes.");
 				dispose();
 			}
 		});
@@ -234,8 +235,9 @@ public final class ConversionWindow extends StylizedJFrame {
 		StylizedJMenuItem answsers = new StylizedJMenuItem("Etudier les reponses de ffmpeg");
 		answsers.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent ae) {			
+			public void actionPerformed(ActionEvent ae) {		
 				new AnswersWindow();
+				NotificationView.longAlert(NotificationView.INFO, "Ceci est l'historique des reponses <br>de FFmpeg.");
 			}
 		});
 		
@@ -378,7 +380,15 @@ public final class ConversionWindow extends StylizedJFrame {
 		convertItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(RuntimeSpaceManager.manage() && model.isModified()) drawConvertWindow();
+				if(RuntimeSpaceManager.manage() && model.isModified()) {
+					drawConvertWindow();
+					NotificationView.longAlert(
+							NotificationView.INFO, 
+							"Ceci est la fenetre de choix des parametres<br>d'export des fichiers à convertir.");
+				}else
+					NotificationView.longAlert(
+							NotificationView.FAILURE, 
+							"Aucun fichier modifie a convertir trouves<br>OU autre conversion deja en cours !");
 			}
 		});
 		return convert;

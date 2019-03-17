@@ -41,8 +41,11 @@ public final class NotificationView extends StylizedJFrame implements Notificati
 		});
 		
 		JLabel notification = new JLabel("<html>" + 
-				"<body>" + 
-		        "<br><<br><br>" + 
+				"<head>" +
+				"<style> body { text-align: center; } </style>" +
+				"</head>" +
+				"<body>" +
+		        "<br><br><br>" + 
 				content +
 				"</body>" + 
 				"</html>", JLabel.CENTER);
@@ -84,7 +87,7 @@ public final class NotificationView extends StylizedJFrame implements Notificati
 	 * 
 	 * @see #alert
 	 */
-	public static void alert(String title, String content, int timeOut) {
+	public static void alefrt(String title, String content, int timeOut) {
 		new NotificationView(title, content).alert(timeOut);
 	}
 	
@@ -94,17 +97,37 @@ public final class NotificationView extends StylizedJFrame implements Notificati
 	 * 
 	 * @see #alert
 	 */
-	public void alert() {
-		alert(3000);
+	public void shortAlert() {
+		alert(SHORT);
 	}
 	
 	
 	/**
 	 * [ ALERTER L'UTILISATEUR PENDANT 3 SECONDES. ]
 	 * 
+	 * @see #shortAlert
+	 */
+	public static void shortAlert(String title, String content) {
+		new NotificationView(title, content).shortAlert();
+	}
+	
+	
+	/**
+	 * [ ALERTER L'UTILISATEUR PENDANT 6 SECONDES. ]
+	 * 
 	 * @see #alert
 	 */
-	public static void alert(String title, String content) {
-		new NotificationView(title, content).alert();
+	public void longAlert() {
+		alert(LONG);
+	}
+	
+	
+	/**
+	 * [ ALERTER L'UTILISATEUR PENDANT 6 SECONDES. ]
+	 * 
+	 * @see #long
+	 */
+	public static void longAlert(String title, String content) {
+		new NotificationView(title, content).longAlert();
 	}
 }

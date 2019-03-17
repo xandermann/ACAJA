@@ -9,16 +9,22 @@ package messages;
  * Auteurs du projet : 
  * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
  */
-public interface NotificationConstants {
-	static final String _INFO = "(i) information";
+public interface NotificationConstants {	
+	final static String _INFO = "(i) information";
 	
-	static final String _FAILURE = "echec";
+	final static String _FAILURE = "echec";
 
-	static final String _SUCCESS = "reussite";
-
-	public static final String INFO = _INFO+".";
+	final static String _SUCCESS = "reussite";
 	
-	public static final String FAILURE = _INFO+" - "+_FAILURE+".";
 	
-	public static final String SUCCESS = _INFO+" - "+_SUCCESS+".";
+	public final static String INFO = _INFO+".";
+	
+	public final static String FAILURE = _INFO+" - "+_FAILURE+".";
+	
+	public final static String SUCCESS = _INFO+" - "+_SUCCESS+".";
+	
+	
+	public static int SHORT = 3000;
+	
+	public static int LONG = 5000;
 }

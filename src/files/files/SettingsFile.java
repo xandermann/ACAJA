@@ -55,8 +55,7 @@ public final class SettingsFile extends SelectableFile implements Modifiable {
 		/**
 		 * Si le type de fichier n'est pas accepté, alors on renvoie une exception.
 		 */
-		if (!this.containsAudio())
-			throw new IncorrectFileException(IncorrectFileException.BAD_TYPE_FILE);
+		if (!this.containsAudio()) throw new IncorrectFileException(IncorrectFileException.BAD_TYPE_FILE);
 
 		/**
 		 * INITIALISATION DES PARAMETRES DE LA VIDEO.
@@ -68,8 +67,7 @@ public final class SettingsFile extends SelectableFile implements Modifiable {
 		//Initialisation des autres parametres.
 		SystemRequests.askMetadata(this);
 		
-		if(isVideo())
-			thumbail = SystemRequests.askFrame(this, "00:00:01.00", 200, 100);
+		if(isVideo()) thumbail = SystemRequests.askFrame(this, "00:00:01.00", 200, 100);
 	}
 
 	

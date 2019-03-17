@@ -2,8 +2,6 @@ package gui;
 
 import java.io.File;
 import java.util.ArrayList;
-
-import exceptions.ImportationException;
 import gui.style.StylizedJFileChooser;
 
 public final class JFileChooserManager {
@@ -11,14 +9,10 @@ public final class JFileChooserManager {
 	//=======================================================================================================================
 
 	
-	public static File chooseFile() throws ImportationException {
+	public static File chooseFile() {
 		StylizedJFileChooser jfc = new StylizedJFileChooser("Parcourir");
 		int chooserStatus = jfc.showOpenDialog(null);
-		
 		File importFile = jfc.getSelectedFile();
-		if(importFile == null || chooserStatus != StylizedJFileChooser.APPROVE_OPTION) 
-			throw new ImportationException(ImportationException.ABSENT_FILE);
-		
 		return importFile;
 	}
 	
@@ -29,17 +23,13 @@ public final class JFileChooserManager {
 	
 	
 	
-	public static File chooseDirectory() throws ImportationException {
+	public static File chooseDirectory() {
 		StylizedJFileChooser jdc = new StylizedJFileChooser("Parcourir");
 		jdc.setFileSelectionMode(StylizedJFileChooser.DIRECTORIES_ONLY);
 		jdc.showOpenDialog(null);
-
 		File importDirectory = jdc.getSelectedFile();
-		if(importDirectory == null || !importDirectory.isDirectory()) {
-			throw new ImportationException(ImportationException.ABSENT_DIRECTORY);
-		}
-			
-		
+		if(!importDirectory.isDirectory()) 
+			throw new IllegalArgumentException("Il etait attendu un repertoire !");
 		return importDirectory;
 	}
 	
@@ -50,7 +40,7 @@ public final class JFileChooserManager {
 	
 	
 	
-	public static ArrayList<File> chooseDirectoryAndListSonFiles() throws ImportationException {
+	public static ArrayList<File> chooseDirectoryAndListSonFiles() {
 		ArrayList<File> sonFiles = new ArrayList<File>();	
 		File importDirectory = JFileChooserManager.chooseDirectory();
 		for(File f : importDirectory.listFiles()) sonFiles.add(f);	

@@ -115,6 +115,9 @@ public final class OpeningWindow {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				ConversionWindow.generateConversionWindow();
+				NotificationView.longAlert(
+						NotificationView.INFO, 
+						"Ceci est la fenetre pour realiser<br>des conversions.");
 				openingWindow.dispose();
 			}
 		});
@@ -125,6 +128,9 @@ public final class OpeningWindow {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				ProcessingWindow.generateProcessingWindow();
+				NotificationView.longAlert(
+						NotificationView.INFO, 
+						"Ceci est la fenetre pour realiser<br>des traitements.");
 				openingWindow.dispose();
 			}
 		});
@@ -163,6 +169,10 @@ public final class OpeningWindow {
 		westPanel.setBackground(StyleTheme.BACKGROUND_COLOR);
 
 		WindowTools.executeWindow(openingWindow);
+		
+		NotificationView.longAlert(
+				NotificationView.INFO, 
+				"Bienvenue dans ACAJA.<br>Ici vous pouvez choisir un mode de travail.");
 	}
 
 	

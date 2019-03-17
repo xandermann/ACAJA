@@ -1,18 +1,18 @@
 package messages;
 
 /**
- * [ CLASSE POUR LES MESSAGES. ]
+ * [ INTERFACE POUR LES MESSAGES. ]
  * 
- * Cette classe a pour but de repertorier les messages
- * a la maniere d'un dictionanire. 
+ * Cette interface a pour but de repertorier les messages
+ * a la maniere d'un dictionnaire. 
  * 
  * Auteurs du projet : 
  * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
  */
-public final class MessageConstants {
-	private static final String ERROR_PREFIX = "ERREUR ";
+public interface MessageConstants {
+	static final String ERROR_PREFIX = "ERREUR ";
 
-	private static final String INTERNAL_ERROR_PREFIX = ERROR_PREFIX + "EN INTERNE !";
+	static final String INTERNAL_ERROR_PREFIX = ERROR_PREFIX + "EN INTERNE !";
 
 	public static final String ERROR_UNFINDABLE_STREAMS = 
 			INTERNAL_ERROR_PREFIX

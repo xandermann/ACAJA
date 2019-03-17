@@ -47,12 +47,12 @@ public abstract class Model extends Observable implements Modifiable{
 	 * 
 	 * Cette methode a pour but d'eviter des imprecisions (du a
 	 * un Thread ayant commence en retard ou en avance son travail).
-	 * Le booleen WatchedConsumer.workIsOnGoing ne doit pas souffrir de ses 
+	 * Le booleen WatchedConsumer.hand.took ne doit pas souffrir de ses 
 	 * imprecisions, ce pourquoi avec cette methode on peut repreciser 
 	 * la valeur du booleen. 
 	 */
 	public void startSave() {
-		WatchedConsumer.startToWork();
+		WatchedConsumer.hand.take();
 	}
 	
 	

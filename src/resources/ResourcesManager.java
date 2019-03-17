@@ -31,6 +31,8 @@ public final class ResourcesManager implements ResourceConstants{
 	/**
 	 * [ VERIFIER L'EXISTENCE DU REPERTOIRE PARENT DES REPERTOIRES D'IMPORTS. ]
 	 * 
+	 * @see #checkDirectory
+	 * 
 	 * @return boolean		Vaut true si le repertoire existe ou a reussi a etre recreer. 
 	 */
 	public static boolean checkImports() {
@@ -39,6 +41,9 @@ public final class ResourcesManager implements ResourceConstants{
 	
 	/**
 	 * [ VERIFIER L'EXISTENCE DU REPERTOIRE DES IMPORTS POUR LA CONVERSION. ]
+	 * 
+	 * @see #checkDirectory
+	 * @see #checkImports
 	 * 
 	 * @return boolean		Vaut true si le repertoire existe ou a reussi a etre recreer. 
 	 */
@@ -49,6 +54,9 @@ public final class ResourcesManager implements ResourceConstants{
 	/**
 	 * [ VERIFIER L'EXISTENCE DU REPERTOIRE DES IMPORTS POUR LE TRAITEMENT. ]
 	 * 
+	 * @see #checkDirectory 
+	 * @see #checkImports
+	 * 
 	 * @return boolean		Vaut true si le repertoire existe ou a reussi a etre recreer. 
 	 */
 	public static boolean checkProcessingImports() {
@@ -57,6 +65,8 @@ public final class ResourcesManager implements ResourceConstants{
 	
 	/**
 	 * [ VERIFIER L'EXISTENCE DU REPERTOIRE DES FICHIERS TEMPORAIRES. ]
+	 * 
+	 * @see #checkDirectory 
 	 * 
 	 * @return boolean		Vaut true si le repertoire existe ou a reussi a etre recreer. 
 	 */
@@ -67,6 +77,8 @@ public final class ResourcesManager implements ResourceConstants{
 	/**
 	 * [ VERIFIER L'EXISTENCE DU REPERTOIRE PARENT DES REPERTOIRES DE SAUVEGARDES DES FLUX. ]
 	 * 
+	 * @see #checkDirectory 
+	 * 
 	 * @return boolean		Vaut true si le repertoire existe ou a reussi a etre recreer. 
 	 */
 	public static boolean checkAnswers() {
@@ -76,6 +88,9 @@ public final class ResourcesManager implements ResourceConstants{
 	/**
 	 * [ VERIFIER L'EXISTENCE DU REPERTOIRE DES SAUVEGARDES DE STDERR. ]
 	 * 
+	 * @see #checkDirectory 
+	 * @see #checkAnswers
+	 * 
 	 * @return boolean		Vaut true si le repertoire existe ou a reussi a etre recreer. 
 	 */
 	public static boolean checkErr() {
@@ -84,6 +99,9 @@ public final class ResourcesManager implements ResourceConstants{
 
 	/**
 	 * [ VERIFIER L'EXISTENCE DU REPERTOIRE DES SAUVEGARDES DE STDOUT. ]
+	 * 
+	 * @see #checkDirectory 
+	 * @see #checkAnswers
 	 * 
 	 * @return boolean		Vaut true si le repertoire existe ou a reussi a etre recreer. 
 	 */
@@ -119,6 +137,8 @@ public final class ResourcesManager implements ResourceConstants{
 	/**
 	 * [ NETTOYER LE REPERTOIRE DES FICHIERS TEMPORAIRES. ]
 	 * 
+	 * @see #clearDirectory
+	 * 
 	 * @return boolean		Vaut true si le contenu du repertoire a pu etre supprime dans sa totalite. 
 	 * 						Et vaut false si un seul element n'a pas pu etre supprime. 
 	 */
@@ -129,6 +149,8 @@ public final class ResourcesManager implements ResourceConstants{
 	
 	/**
 	 * [ NETTOYER LE REPERTOIRE DES SAUVEGARDES DE STDERR. ]
+	 * 
+	 * @see #clearDirectory
 	 * 
 	 * @return boolean		Vaut true si le contenu du repertoire a pu etre supprime dans sa totalite. 
 	 * 						Et vaut false si un seul element n'a pas pu etre supprime. 
@@ -141,6 +163,8 @@ public final class ResourcesManager implements ResourceConstants{
 	/**
 	 * [ NETTOYER LE REPERTOIRE DES SAUVEGARDES DE STDOUT ]
 	 * 
+	 * @see #clearDirectory
+	 * 
 	 * @return boolean		Vaut true si le contenu du repertoire a pu etre supprime dans sa totalite. 
 	 * 						Et vaut false si un seul element n'a pas pu etre supprime. 
 	 */
@@ -151,6 +175,8 @@ public final class ResourcesManager implements ResourceConstants{
 	
 	/**
 	 * [ NETTOYER TOUTES LES RESSOURCES. ]
+	 * 
+	 * @see #clearDirectory
 	 * 
 	 * @return boolean		Vaut true si le contenu des repertoires a pu etre supprime dans sa totalite. 
 	 * 						Et vaut false si un seul element n'a pas pu etre supprime. 
@@ -170,6 +196,8 @@ public final class ResourcesManager implements ResourceConstants{
 	/**
 	 * [ LEVE UNE EXCEPTION SI ABSENCE DU REPERTOIRE IMPORTS\. ]
 	 * 
+	 * @see #checkImports
+	 * 
 	 * @throws UnfindableResourceException		Exception sur les ressources introuvables. 
 	 */
 	public static void secureImports() throws UnfindableResourceException {
@@ -180,6 +208,8 @@ public final class ResourcesManager implements ResourceConstants{
 	
 	/**
 	 * [ LEVE UNE EXCEPTION SI ABSENCE DU REPERTOIRE IMPORTS\CONVERSION\. ]
+	 * 
+	 * @see #checkConversionImports
 	 * 
 	 * @throws UnfindableResourceException		Exception sur les ressources introuvables. 
 	 */
@@ -192,6 +222,8 @@ public final class ResourcesManager implements ResourceConstants{
 	/**
 	 * [ LEVE UNE EXCEPTION SI ABSENCE DU REPERTOIRE IMPORTS\CONVERSION\. ]
 	 * 
+	 * @see #checkConversionImports
+	 * 
 	 * @throws UnfindableResourceException		Exception sur les ressources introuvables. 
 	 */
 	public static void secureProcessingImports() throws UnfindableResourceException {
@@ -202,6 +234,8 @@ public final class ResourcesManager implements ResourceConstants{
 	
 	/**
 	 * [ LEVE UNE EXCEPTION SI ABSENCE DU REPERTOIRE ANSWERS\. ]
+	 * 
+	 * @see #checkAnswers
 	 * 
 	 * @throws UnfindableResourceException		Exception sur les ressources introuvables. 
 	 */
@@ -214,6 +248,8 @@ public final class ResourcesManager implements ResourceConstants{
 	/**
 	 * [ LEVE UNE EXCEPTION SI ABSENCE DU REPERTOIRE ANSWERS\STDERR\. ]
 	 * 
+	 * @see #checkErr
+	 * 
 	 * @throws UnfindableResourceException		Exception sur les ressources introuvables. 
 	 */
 	public static void secureErr() throws UnfindableResourceException {
@@ -225,6 +261,8 @@ public final class ResourcesManager implements ResourceConstants{
 	/**
 	 * [ LEVE UNE EXCEPTION SI ABSENCE DU REPERTOIRE ANSWERS\STDOUT\. ]
 	 * 
+	 * @see #checkOut
+	 * 
 	 * @throws UnfindableResourceException		Exception sur les ressources introuvables. 
 	 */
 	public static void secureOut() throws UnfindableResourceException {
@@ -235,6 +273,8 @@ public final class ResourcesManager implements ResourceConstants{
 	
 	/**
 	 * [ LEVE UNE EXCEPTION SI ABSENCE DU REPERTOIRE TEMPORARY_FILES\. ] 
+	 * 
+	 * @see #checkTemporaryFiles
 	 * 
 	 * @throws UnfindableResourceException		Exception sur les ressources introuvables. 
 	 */

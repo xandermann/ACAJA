@@ -9,12 +9,17 @@ import files.*;
 import files.enumerations.OperationType;
 import files.enumerations.SettingType;
 import files.files.SettingsFile;
+import gui.NotificationView;
 import gui.Model;
 import gui.conversion.views.RowView;
 import messages.MessageConstants;
 import resources.ResourceConstants;
 import resources.ResourcesManager;
+import threads.RuntimeSpaceManager;
+import threads.ThreadForSave;
+import threads.ThreadForWaitWindow;
 import wrapper.runtime.global.UserRequests;
+import wrapper.streams.managers.consumers.WatchedConsumer;
 
 
 /**
@@ -215,6 +220,7 @@ public final class ConversionModel extends Model{
 			currentFile = null;
 			if(!files.isEmpty()) currentFile = files.get(0);
 			sendChanges();
+			NotificationView.shortAlert(NotificationView.SUCCESS, "Suppression du fichier "+file.getSourceFileName()+" reussie.");
 		}else
 			JOptionPane.showMessageDialog(null, MessageConstants.ERROR_UNFINDABLE_FILE_TO_REMOVE);
 	}
@@ -290,7 +296,36 @@ public final class ConversionModel extends Model{
 	 */
 	public void save() throws UnfindableResourceException {
 		for(SettingsFile sf : files) {
-			if(sf.isModified()) UserRequests.execute(sf);		
+			if(sf.isModified()) {
+				new Thread() {
+					public void run (){
+						/**
+						 * ATTENDRE QU'ON ME RENDE LA MAIN.
+						 */
+						while(RuntimeSpaceManager.hand.took());
+						/**
+						 * DEBUT DE LA CONVERSION :
+						 * 
+						 * Prendre la main sur l'espace d'execution.
+						 * Prendre la main sur ffmpeg.
+						 */
+						RuntimeSpaceManager.hand.take();
+						startSave();
+						/**
+						 * LANCEMENT DE LA CONVERSION DANS UN AUTRE PROCESSUS.
+						 */
+						ThreadForSave.saveInNewThread(sf);
+						/**
+						 * LANCEMENT ET GESTION DE LA FENETRE D'ATTENTE DANS UN AUTRE PROCESSUS.
+						 */
+						ThreadForWaitWindow.waitInNewThread(
+								new NotificationView(
+										"Conversion en evolution.",
+										"Conversion du fichier "+sf.getSourceFileName()+"<br>Veuillez patientez..."),
+								sf.getSourceFile());
+					}
+				}.start();
+			}
 		}
 	}
 

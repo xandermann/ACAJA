@@ -3,7 +3,8 @@ package threads;
 import javax.swing.JOptionPane;
 
 import exceptions.UnfindableResourceException;
-import gui.Model;
+import files.files.SettingsFile;
+import wrapper.runtime.global.UserRequests;
 
 /**
  * [ CLASSE THREAD POUR LANCER LA SAUVEGARDE VIA FFMPEG. ]
@@ -13,19 +14,18 @@ import gui.Model;
  */
 public final class ThreadForSave extends Thread{
 	/**
-	 * [ ATTRIBUT D'INSTANCE - MODELE. ]
+	 * [ ATTRIBUT D'INSTANCE. ]
 	 */
-	private Model model;
-	
+	private SettingsFile file;
 	
 	/**
 	 * [ CONSTRUCTEUR INTERNE - ENCAPSULE ]
 	 * 
-	 * @param model		Le modele. 
+	 * @param file		Le fichier a traiter. 
 	 */
-	private ThreadForSave(Model model) {
-		if((this.model = model) == null)
-			throw new NullPointerException("Le modele recu en parametre est null !");
+	private ThreadForSave(SettingsFile file) {
+		if((this.file = file) == null)
+			throw new NullPointerException("Le file recu en parametre est null !");
 	}
 	
 	
@@ -34,7 +34,7 @@ public final class ThreadForSave extends Thread{
 	 */
     public void run() {
     	try {
-			model.save();
+    		UserRequests.execute(file);
 		} catch (UnfindableResourceException ure) {
 			JOptionPane.showMessageDialog(null, ure.getMessage());
 		}
@@ -44,9 +44,9 @@ public final class ThreadForSave extends Thread{
     /**
      * [ METHODE POUR LANCER LE THREAD DE LA SAUVEGARDE VIA FFMPEG. ]
      * 
-     * @param model		Le modele. 
+     * @param file		Le fichier a traiter.  
      */
-    public static void saveInNewThread(Model model) {
-    	(new ThreadForSave(model)).start();
+    public static void saveInNewThread(SettingsFile file) {
+    	(new ThreadForSave(file)).start();
     }
 }

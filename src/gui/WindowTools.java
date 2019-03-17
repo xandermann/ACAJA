@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 import resources.ResourceConstants;
@@ -32,7 +33,9 @@ public final class WindowTools {
 	public static void showLogo(JFrame window) {
 		try {
 			window.setIconImage(ImageIO.read(ResourceConstants.ACAJA_LOGO));
-		} catch (IOException ioe) {}
+		} catch (IOException ioe) {
+			JOptionPane.showMessageDialog(null, ioe.getMessage());
+		}
 	}
 	
 	
@@ -48,9 +51,8 @@ public final class WindowTools {
 	 * 
 	 * @param window		La fenetre a lancer.
 	 */
-	public static void executeWindow(JFrame window) {
+	public static synchronized void executeWindow(JFrame window) {
 		SwingUtilities.invokeLater(new Runnable() {
-		    @Override
 		    public void run() {
 		        window.setVisible(true);
 		    }

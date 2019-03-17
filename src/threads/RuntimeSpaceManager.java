@@ -24,7 +24,6 @@ public final class RuntimeSpaceManager {
 	 * @return	Vaut true si aucunne operation de conversion n'est deja en cours. 
 	 */
 	public static boolean manage() {
-		//JOptionPane.showMessageDialog(null, MessageConstants.ERROR_OPERATION_IS_ALREADY_ON_GOING);
 		return !hand.took();
 	}
 }

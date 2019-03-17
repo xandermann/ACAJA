@@ -95,7 +95,7 @@ public final class NotificationView extends StylizedJFrame implements Notificati
 	
 	
 	/**
-	 * [ ALERTER L'UTILISATEUR PENDANT 3 SECONDES. ]
+	 * [ ALERTER L'UTILISATEUR PENDANT "SHORT" SECONDES. ]
 	 * 
 	 * @see #alert
 	 * @see #SORT
@@ -130,7 +130,7 @@ public final class NotificationView extends StylizedJFrame implements Notificati
 	
 	
 	/**
-	 * [ ALERTER L'UTILISATEUR PENDANT 6 SECONDES. ]
+	 * [ ALERTER L'UTILISATEUR PENDANT "LONG" SECONDES. ]
 	 * 
 	 * @param title				Titre / resume de la notification.
 	 * @param content			Details de la notification.

@@ -1,9 +1,5 @@
 package threads;
-
-import javax.swing.JOptionPane;
-import messages.MessageConstants;
 import resources.Hand;
-import wrapper.streams.managers.consumers.WatchedConsumer;
 
 /**
  * [ CLASSE POUR LA GESTION DE L'ESPACE D'EXECUTION POUR LES THREADS. ]
@@ -28,10 +24,7 @@ public final class RuntimeSpaceManager {
 	 * @return	Vaut true si aucunne operation de conversion n'est deja en cours. 
 	 */
 	public static boolean manage() {
-		if(hand.took()) {
-			JOptionPane.showMessageDialog(null, MessageConstants.ERROR_OPERATION_IS_ALREADY_ON_GOING);
-			return false;
-		}
-		return true;
+		//JOptionPane.showMessageDialog(null, MessageConstants.ERROR_OPERATION_IS_ALREADY_ON_GOING);
+		return !hand.took();
 	}
 }

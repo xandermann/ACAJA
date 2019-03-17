@@ -178,7 +178,7 @@ public final class ConversionWindow extends StylizedJFrame {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
 				ResourcesManager.clearResources();
-				NotificationView.shortAlert(NotificationView.INFO, "Fin de session.");
+				//NotificationView.shortAlert(NotificationView.INFO, "Fin de session.");
 				System.exit(0);		
 			}
 		});

@@ -19,7 +19,6 @@ public final class NotificationView extends StylizedJFrame implements Notificati
 	 * [ CONSTRUIT UNE NOTIFICATION. ]
 	 * 
 	 * @param title				Titre / resume de la notification.
-	 * 
 	 * @param content			Details de la notification.
 	 */
 	public NotificationView(String title, String content) {
@@ -85,9 +84,12 @@ public final class NotificationView extends StylizedJFrame implements Notificati
 	/**
 	 * [ ALERTER L'UTILISATEUR PENDANT UN TEMPS. ]
 	 * 
+	 * @param title				Titre / resume de la notification.
+	 * @param content			Details de la notification.
+	 * 
 	 * @see #alert
 	 */
-	public static void alefrt(String title, String content, int timeOut) {
+	public static void alert(String title, String content, int timeOut) {
 		new NotificationView(title, content).alert(timeOut);
 	}
 	
@@ -96,6 +98,7 @@ public final class NotificationView extends StylizedJFrame implements Notificati
 	 * [ ALERTER L'UTILISATEUR PENDANT 3 SECONDES. ]
 	 * 
 	 * @see #alert
+	 * @see #SORT
 	 */
 	public void shortAlert() {
 		alert(SHORT);
@@ -103,7 +106,10 @@ public final class NotificationView extends StylizedJFrame implements Notificati
 	
 	
 	/**
-	 * [ ALERTER L'UTILISATEUR PENDANT 3 SECONDES. ]
+	 * [ ALERTER L'UTILISATEUR PENDANT "SHORT" SECONDES. ]
+	 * 
+	 * @param title				Titre / resume de la notification.
+	 * @param content			Details de la notification.
 	 * 
 	 * @see #shortAlert
 	 */
@@ -113,9 +119,10 @@ public final class NotificationView extends StylizedJFrame implements Notificati
 	
 	
 	/**
-	 * [ ALERTER L'UTILISATEUR PENDANT 6 SECONDES. ]
+	 * [ ALERTER L'UTILISATEUR PENDANT "LONG" SECONDES. ]
 	 * 
 	 * @see #alert
+	 * @see #LONG
 	 */
 	public void longAlert() {
 		alert(LONG);
@@ -125,7 +132,10 @@ public final class NotificationView extends StylizedJFrame implements Notificati
 	/**
 	 * [ ALERTER L'UTILISATEUR PENDANT 6 SECONDES. ]
 	 * 
-	 * @see #long
+	 * @param title				Titre / resume de la notification.
+	 * @param content			Details de la notification.
+	 * 
+	 * @see #longAlert
 	 */
 	public static void longAlert(String title, String content) {
 		new NotificationView(title, content).longAlert();

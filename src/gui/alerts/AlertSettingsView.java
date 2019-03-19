@@ -73,7 +73,7 @@ public final class AlertSettingsView extends StylizedJPanel {
 		jr1.setSelected(AlertManager.INTERRUPTOR);
 		jr1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AlertManager.activate();
+				AlertManager.INTERRUPTOR = true;
 				js1.setEnabled(true);
 				js2.setEnabled(true);
 				_jp1.setEnabled(true);
@@ -86,7 +86,7 @@ public final class AlertSettingsView extends StylizedJPanel {
 		jr2.setSelected(!AlertManager.INTERRUPTOR);
 		jr2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AlertManager.disactivate();
+				AlertManager.INTERRUPTOR = false;
 				js1.setEnabled(false);
 				js2.setEnabled(false);
 				_jp1.setEnabled(false);

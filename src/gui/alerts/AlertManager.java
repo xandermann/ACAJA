@@ -16,18 +16,4 @@ public class AlertManager implements AlertConstants {
 	 * [ INTERRUPTEUR. ]
 	 */
 	public static boolean INTERRUPTOR = true;
-	
-	/**
-	 * [ ACTIVER. ]
-	 */
-	public static void activate() {
-		INTERRUPTOR = true;
-	}
-	
-	/**
-	 * [ DESACTIVATER. ]
-	 */
-	public static void disactivate() {
-		INTERRUPTOR = false;
-	}
 }

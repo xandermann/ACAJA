@@ -47,7 +47,7 @@ public final class AlertSettingsView extends StylizedJPanel {
 			public void mouseClicked(MouseEvent e) {}
 			public void mousePressed(MouseEvent e) {}
 			public void mouseReleased(MouseEvent e) {
-				AlertManager.LONG = js1.getValue()*1000;
+				AlertManager.LONG = js2.getValue()*1000;
 			}
 			public void mouseEntered(MouseEvent e) {}
 			public void mouseExited(MouseEvent e) {}

@@ -30,7 +30,7 @@ public final class WatchedConsumer extends AllStreamsConsumer {
 	 * 
 	 * Cette main permet de modeliser les 3 etats de la consommation.
 	 */
-	public static Hand hand = new Hand();
+	public final static Hand hand = new Hand();
 	
 
 	/**

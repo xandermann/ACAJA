@@ -16,7 +16,7 @@ public final class RuntimeSpaceManager {
 	 * Une main est un genre de verrou, pris en compte par tous 
 	 * les processus du fil d'execution du logiciel.
 	 */
-	public static Hand hand = new Hand();
+	public final static Hand hand = new Hand();
 
 	/**
 	 * [ GESTIONNAIRE DE L'ESPACE D'EXECUTION. ]

@@ -115,6 +115,7 @@ public final class AlertSettingsView extends StylizedJPanel {
 
 
 		//=======================================================================================================
+	
 		
 		StylizedJPanel _jp5 = new StylizedJPanel(new BorderLayout());
 		StylizedJPanel _jp6 = new StylizedJPanel();

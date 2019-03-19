@@ -4,8 +4,9 @@ import java.io.File;
 
 import javax.swing.JOptionPane;
 
-import gui.NotificationView;
 import gui.WindowTools;
+import gui.alerts.Alert;
+import gui.alerts.AlertWindow;
 import resources.ResourceConstants;
 import wrapper.streams.managers.consumers.WatchedConsumer;
 import wrapper.streams.managers.filters.FilterForFeedback;
@@ -20,7 +21,7 @@ public final class ThreadForWaitWindow extends Thread{
 	/**
 	 * [ ATTRIBUTS D'INSTANCE - LES FENETRES D'ATTENTE ET DE FIN D'ATTENTE. ]
 	 */
-	private NotificationView waitWindow;
+	private AlertWindow waitWindow;
 	private File concernedFile;
 	
 	
@@ -29,7 +30,7 @@ public final class ThreadForWaitWindow extends Thread{
 	 * 
 	 * @param waitWindow	La fenetre d'attente. 
 	 */
-	private ThreadForWaitWindow(NotificationView waitWindow, File concernedFile) {
+	private ThreadForWaitWindow(AlertWindow waitWindow, File concernedFile) {
 		if((this.waitWindow = waitWindow) == null)
 			throw new NullPointerException("La fenetre d'attente recue en parametre est null !");
 		if((this.concernedFile = concernedFile) == null)
@@ -52,14 +53,14 @@ public final class ThreadForWaitWindow extends Thread{
 		 */
 		File[] filesErr = ResourceConstants.STDERR_ANSWERS.listFiles();
 		if(FilterForFeedback.successed(filesErr[filesErr.length-1], concernedFile))
-			NotificationView.longAlert(NotificationView.SUCCESS, "L'operation a ete realisee avec succes !");
+			Alert.longAlert(Alert.SUCCESS, "L'operation a ete realisee avec succes !");
 		else
-			NotificationView.shortAlert(NotificationView.FAILURE, "L'operation en cours a echouee !");
+			Alert.shortAlert(Alert.FAILURE, "L'operation en cours a echouee !");
 		/**
 		 * RENDRE LA MAIN.
 		 */
 		try {
-			Thread.sleep(NotificationView.LONG+1000);
+			Thread.sleep(Alert.LONG+1000);
 		} catch (InterruptedException ie) {
 			JOptionPane.showMessageDialog(null, ie.getMessage());
 		}
@@ -72,7 +73,7 @@ public final class ThreadForWaitWindow extends Thread{
      * 
      * @param model		Le modele. 
      */
-    public static void waitInNewThread(NotificationView waitWindow, File concernedFile) {
+    public static void waitInNewThread(AlertWindow waitWindow, File concernedFile) {
     	new ThreadForWaitWindow(waitWindow, concernedFile).start();
     }
 }

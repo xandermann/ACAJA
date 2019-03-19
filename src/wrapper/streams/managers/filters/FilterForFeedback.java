@@ -6,8 +6,8 @@ import java.io.FileReader;
 
 import javax.swing.JOptionPane;
 
-import gui.NotificationView;
-import messages.NotificationConstants;
+import gui.alerts.AlertConstants;
+import gui.alerts.Alert;
 
 /**
  * [ CLASSE POUR LE FILTRAGE DES DONNEES EN REPONSE DES COMMANDES DE L'UTILISATEUR. ]

@@ -8,8 +8,8 @@ import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-import gui.NotificationView;
 import gui.WindowTools;
+import gui.alerts.Alert;
 import gui.answers.AnswerWindow;
 
 import java.awt.*;
@@ -72,7 +72,7 @@ public final class AnswersView extends JPanel {
 				main.removeAll();
 				int countOldFiles = files==null ? 0 : files.size();
 		        displayAnswers();
-		        NotificationView.shortAlert(NotificationView.INFO,
+		        Alert.shortAlert(Alert.INFO,
 							files.size()-countOldFiles == 0 ? 
 							"Aucun nouveau rapport trouve." : 
 							files.size()-countOldFiles + " nouveaux rapports.");

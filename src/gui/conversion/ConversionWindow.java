@@ -9,9 +9,10 @@ import exceptions.*;
 import files.FileInformation;
 import files.enumerations.SettingType;
 import files.files.SettingsFile;
-import gui.NotificationView;
 import gui.JFileChooserManager;
 import gui.WindowTools;
+import gui.alerts.Alert;
+import gui.alerts.AlertSettingsWindow;
 import gui.answers.AnswersWindow;
 import gui.conversion.controllers.KeyboardController;
 import gui.conversion.model.ConversionModel;
@@ -105,14 +106,13 @@ public final class ConversionWindow extends StylizedJFrame {
 		
 		StylizedJMenuItem importFile = new StylizedJMenuItem("Importer un fichier");
 		importFile.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent ae) {
 					try {
 						File f = JFileChooserManager.chooseFile();
 						model.add(f);
 						if (model.getCurrentFile() == null) redrawFirstTime();
 						model.setCurrentFile(model.getFiles().get(model.getFiles().size()-1));
-						NotificationView.shortAlert(NotificationView.SUCCESS, "Import realise avec succes.");
+						Alert.shortAlert(Alert.SUCCESS, "Import realise avec succes.");
 					} catch (Exception e) {
 						JOptionPane.showMessageDialog(null, e.getMessage());
 					}
@@ -122,7 +122,6 @@ public final class ConversionWindow extends StylizedJFrame {
 
 		StylizedJMenuItem importFolder = new StylizedJMenuItem("Importer un dossier");
 		importFolder.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent ae) {
 				try {
 					ArrayList<File> files = JFileChooserManager.chooseDirectoryAndListSonFiles();
@@ -130,7 +129,7 @@ public final class ConversionWindow extends StylizedJFrame {
 						model.add(f);
 						if(model.getCurrentFile() == null) redrawFirstTime();
 						model.setCurrentFile(model.getFiles().get(model.getFiles().size()-1));
-						NotificationView.shortAlert(NotificationView.SUCCESS, "Import realise avec succes.");
+						Alert.shortAlert(Alert.SUCCESS, "Import realise avec succes.");
 					}
 				} catch (Exception e) {
 					JOptionPane.showMessageDialog(null, e.getMessage());
@@ -153,7 +152,7 @@ public final class ConversionWindow extends StylizedJFrame {
 							model.add(file);
 							if (model.getCurrentFile() == null) redrawFirstTime();
 							model.setCurrentFile(model.getFiles().get(model.getFiles().size()-1));
-							NotificationView.shortAlert(NotificationView.SUCCESS, "Import realise avec succes.");
+							Alert.shortAlert(Alert.SUCCESS, "Import realise avec succes.");
 						} catch(Exception e) {
 							JOptionPane.showMessageDialog(null, e.getMessage());
 						}
@@ -165,20 +164,17 @@ public final class ConversionWindow extends StylizedJFrame {
 			
 		StylizedJMenuItem clearLibrary = new StylizedJMenuItem("Vider la bibliotheque");
 		clearLibrary.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent ae) {
 				model.clear();
-				NotificationView.shortAlert(NotificationView.SUCCESS, "Bibliotheque videe avec succes.");
+				Alert.shortAlert(Alert.SUCCESS, "Bibliotheque videe avec succes.");
 			}
 		});
 
 		
 		StylizedJMenuItem quit = new StylizedJMenuItem("Quitter");
 		quit.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent ae) {
 				ResourcesManager.clearResources();
-				//NotificationView.shortAlert(NotificationView.INFO, "Fin de session.");
 				System.exit(0);		
 			}
 		});
@@ -214,7 +210,7 @@ public final class ConversionWindow extends StylizedJFrame {
 			public void actionPerformed(ActionEvent ae) {
 				try {
 					model.setDestinationFolder(JFileChooserManager.chooseDirectory());
-					NotificationView.shortAlert(NotificationView.SUCCESS, "Chemin de destination des fichiers <br>enregistre.");
+					Alert.shortAlert(Alert.SUCCESS, "Chemin de destination des fichiers <br>enregistre.");
 				} catch (IllegalArgumentException iae) {
 					JOptionPane.showMessageDialog(null, iae.getMessage());
 				}
@@ -224,26 +220,34 @@ public final class ConversionWindow extends StylizedJFrame {
 		
 		StylizedJMenuItem switchMode = new StylizedJMenuItem("Passer en mode traitement");
 		switchMode.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent ae) {			
 				ProcessingWindow.generateProcessingWindow();
-				NotificationView.shortAlert(NotificationView.SUCCESS, "Changement de mode realise <br>avec succes.");
+				Alert.shortAlert(Alert.SUCCESS, "Changement de mode realise <br>avec succes.");
 				dispose();
 			}
 		});
 
 		StylizedJMenuItem answsers = new StylizedJMenuItem("Etudier les reponses de ffmpeg");
 		answsers.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent ae) {		
 				new AnswersWindow();
-				NotificationView.longAlert(NotificationView.INFO, "Ceci est l'historique des reponses <br>de FFmpeg.");
+				Alert.longAlert(Alert.INFO, "Ceci est l'historique des reponses <br>de FFmpeg.");
+			}
+		});
+		
+		
+		StylizedJMenuItem settings = new StylizedJMenuItem("Gerer les parametres des notifications");
+		settings.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) {		
+				new AlertSettingsWindow();
+				Alert.longAlert(Alert.INFO, "Ceci est la fenetre de <br>gestion des parametres.");
 			}
 		});
 		
 		optionsMenu.add(exportFolder);
 		optionsMenu.add(switchMode);
 		optionsMenu.add(answsers);
+		optionsMenu.add(settings);
 
 		return optionsMenu;
 	}
@@ -382,12 +386,12 @@ public final class ConversionWindow extends StylizedJFrame {
 			public void actionPerformed(ActionEvent e) {
 				if(RuntimeSpaceManager.manage() && model.isModified()) {
 					drawConvertWindow();
-					NotificationView.longAlert(
-							NotificationView.INFO, 
+					Alert.longAlert(
+							Alert.INFO, 
 							"Ceci est la fenetre de choix des parametres<br>d'export des fichiers à convertir.");
 				}else
-					NotificationView.longAlert(
-							NotificationView.FAILURE, 
+					Alert.longAlert(
+							Alert.FAILURE, 
 							"Aucun fichier modifie a convertir trouves<br>OU autre conversion deja en cours !");
 			}
 		});

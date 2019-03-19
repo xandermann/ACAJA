@@ -9,8 +9,9 @@ import files.*;
 import files.enumerations.OperationType;
 import files.enumerations.SettingType;
 import files.files.SettingsFile;
-import gui.NotificationView;
 import gui.Model;
+import gui.alerts.Alert;
+import gui.alerts.AlertWindow;
 import gui.conversion.views.RowView;
 import messages.MessageConstants;
 import resources.ResourceConstants;
@@ -220,7 +221,7 @@ public final class ConversionModel extends Model{
 			currentFile = null;
 			if(!files.isEmpty()) currentFile = files.get(0);
 			sendChanges();
-			NotificationView.shortAlert(NotificationView.SUCCESS, "Suppression du fichier "+file.getSourceFileName()+" reussie.");
+			Alert.shortAlert(Alert.SUCCESS, "Suppression du fichier "+file.getSourceFileName()+" reussie.");
 		}else
 			JOptionPane.showMessageDialog(null, MessageConstants.ERROR_UNFINDABLE_FILE_TO_REMOVE);
 	}
@@ -319,7 +320,7 @@ public final class ConversionModel extends Model{
 						 * LANCEMENT ET GESTION DE LA FENETRE D'ATTENTE DANS UN AUTRE PROCESSUS.
 						 */
 						ThreadForWaitWindow.waitInNewThread(
-								new NotificationView(
+								new AlertWindow(
 										"Conversion en evolution.",
 										"Conversion du fichier "+sf.getSourceFileName()+"<br>Veuillez patientez..."),
 								sf.getSourceFile());

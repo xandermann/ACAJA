@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 
+import gui.alerts.Alert;
 import gui.conversion.ConversionWindow;
 import gui.processing.ProcessingWindow;
 import gui.style.StyleTheme;
@@ -115,8 +116,8 @@ public final class OpeningWindow {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				ConversionWindow.generateConversionWindow();
-				NotificationView.longAlert(
-						NotificationView.INFO, 
+				Alert.longAlert(
+						Alert.INFO, 
 						"Ceci est la fenetre pour realiser<br>des conversions.");
 				openingWindow.dispose();
 			}
@@ -128,8 +129,8 @@ public final class OpeningWindow {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				ProcessingWindow.generateProcessingWindow();
-				NotificationView.longAlert(
-						NotificationView.INFO, 
+				Alert.longAlert(
+						Alert.INFO, 
 						"Ceci est la fenetre pour realiser<br>des traitements.");
 				openingWindow.dispose();
 			}
@@ -170,8 +171,8 @@ public final class OpeningWindow {
 
 		WindowTools.executeWindow(openingWindow);
 		
-		NotificationView.longAlert(
-				NotificationView.INFO, 
+		Alert.longAlert(
+				Alert.INFO, 
 				"Bienvenue dans ACAJA.<br>Ici vous pouvez choisir un mode de travail.");
 	}
 

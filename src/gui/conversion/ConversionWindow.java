@@ -53,8 +53,37 @@ public final class ConversionWindow extends StylizedJFrame {
 		} catch (UnfindableResourceException ure) {
 			JOptionPane.showMessageDialog(null, ure.getMessage());
 		}
-		empty_workspace = new JLabel("Pour commencer, ajoutez un fichier audio ou video via le menu.");
-		empty_workspace.setHorizontalAlignment(JLabel.CENTER);
+		empty_workspace = new JLabel(
+				"<html>" + 
+					"<head>" +
+						"<style>" +
+							"#content{" +
+								"text-align: center; " +
+								"font-family: Verdana;"+
+							"}" +
+							".0 {" +
+								"font-size: 10px;" +
+							"}" +
+							".1 {" +
+								"color: #0000FF;" +
+								"font-size: 20px;" +
+							"}" +
+						"</style>" +
+					"</head>" +
+					"<body>" +
+						"<div id=content>" +
+							"<p class=0>" + 
+								"Pour commencer,"+
+								"<br>"+
+								"ajoutez un fichier audio ou video via le menu." +
+							"</p>" +
+							"<p class=1>" + 
+								"<br>"+
+								"CTRL + A." +
+							"</p>" + 
+						"</div>"+
+					"</body>" + 
+				"</html>", JLabel.CENTER);
 	}
 
 	

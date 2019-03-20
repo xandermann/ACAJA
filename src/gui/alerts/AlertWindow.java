@@ -41,15 +41,22 @@ public final class AlertWindow extends StylizedJFrame implements ATConstants{
 			}	
 		});
 		
-		JLabel notification = new JLabel("<html>" + 
-				"<head>" +
-				"<style> body { text-align: center; } </style>" +
-				"</head>" +
-				"<body>" +
-		        "<br><br><br>" + 
-				content +
-				"</body>" + 
-				"</html>", JLabel.CENTER);
+		JLabel notification = new JLabel(
+				"<html>" + 
+						"<head>" +
+							"<style>"+
+								"body { "+
+									"text-align: center; "+
+								"}"+
+							"</style>" +
+						"</head>" +
+						"<body>" + 
+							"<br>"+
+							"<br>"+
+							"<br>"+
+							content +
+						"</body>" + 
+					"</html>", JLabel.CENTER);
 		notification.setForeground(theme);
 		add(notification, BorderLayout.CENTER);
 		

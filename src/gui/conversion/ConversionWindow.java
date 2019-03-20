@@ -208,9 +208,7 @@ public final class ConversionWindow extends StylizedJFrame {
 				try {
 					model.setDestinationFolder(JFileChooserManager.chooseDirectory());
 					Alert.shortAlert(Alert.SUCCESS, "Chemin de destination des fichiers <br>enregistre.");
-				} catch (IllegalArgumentException iae) {
-					JOptionPane.showMessageDialog(null, iae.getMessage());
-				}
+				} catch (IllegalArgumentException iae) {}
 			}
 		});
 		
@@ -294,9 +292,7 @@ public final class ConversionWindow extends StylizedJFrame {
 				try {
 					model.setDestinationFolder(JFileChooserManager.chooseDirectory());
 					outputFolder.setText(model.getDestinationFolder().getAbsolutePath());
-				} catch (IllegalArgumentException iae) {
-					JOptionPane.showMessageDialog(null, iae.getMessage());
-				}
+				} catch (IllegalArgumentException iae) {}
 			}
 		});
 		
@@ -343,7 +339,7 @@ public final class ConversionWindow extends StylizedJFrame {
 					try {
 						model.save();
 					} catch (UnfindableResourceException ure) {
-						JOptionPane.showMessageDialog(null, ure.getMessage());
+						Alert.longAlert(Alert.FAILURE, ure.getMessage());
 					}
 				}
 			}

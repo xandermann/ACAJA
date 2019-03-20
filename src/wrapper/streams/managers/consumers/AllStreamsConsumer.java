@@ -1,11 +1,8 @@
 package wrapper.streams.managers.consumers;
 
-import javax.swing.JOptionPane;
-
 import exceptions.UnfindableResourceException;
-import gui.alerts.AlertMessageConstants;
+import gui.alerts.Alert;
 import wrapper.streams.iterators.*;
-
 
 /**
  * [ CLASSE POUR LA "CONSOMMATION" DES FLUX DE REPONSES DE FFMPEG. ]
@@ -68,7 +65,10 @@ public class AllStreamsConsumer implements StreamsConsumer {
 			  */
 			 processToBeConsume.getManagedProcess().waitFor();
 		} catch (InterruptedException e) {
-			 JOptionPane.showMessageDialog(null, AlertMessageConstants.ERROR_ACTIVE_WAIT_FOR);
+			/**
+			 * EXCEPTIONS, PAS DE FLUX TROUVES. 
+			 */
+			Alert.longAlert(Alert.FAILURE, Alert.ERROR_ACTIVE_WAIT_FOR);
 		}
 	}
 	

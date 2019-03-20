@@ -2,9 +2,7 @@ package wrapper.streams.iterators;
 
 import java.io.*;
 import java.util.Iterator;
-import javax.swing.JOptionPane;
-
-import gui.alerts.AlertMessageConstants;
+import gui.alerts.Alert;
 
 
 /**
@@ -56,7 +54,7 @@ public abstract class StreamIterator implements Iterator<String>{
 			/**
 			 * EXCEPTIONS, PAS DE FLUX TROUVES. 
 			 */
-			JOptionPane.showMessageDialog(null, AlertMessageConstants.ERROR_UNFINDABLE_STREAMS);
+			Alert.longAlert(Alert.FAILURE, Alert.ERROR_UNFINDABLE_STREAMS);
 		}
 	}
 	

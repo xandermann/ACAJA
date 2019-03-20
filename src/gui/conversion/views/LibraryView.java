@@ -2,6 +2,7 @@ package gui.conversion.views;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.List;
 import java.util.*;
 
 import javax.swing.JPanel;
@@ -34,7 +35,7 @@ public final class LibraryView extends StylizedJPanel implements Observer{
 	private void displayLibrary() {
 		removeAll();
 		
-		ArrayList<SettingsFile> files = model.getFiles();
+		List<SettingsFile> files = model.getFiles();
 		JPanel all = new JPanel(new BorderLayout());
 		int size = files.size()*140;
 		all.setPreferredSize(new Dimension(270, files.size()*150<=540 ? 540 : size));

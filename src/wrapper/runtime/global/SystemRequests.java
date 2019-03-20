@@ -2,21 +2,15 @@ package wrapper.runtime.global;
 
 import java.io.File;
 import java.util.HashMap;
-
 import javax.swing.JOptionPane;
-
 import exceptions.IncorrectFileException;
 import exceptions.UnfindableResourceException;
-import files.*;
 import files.enumerations.SettingType;
 import files.files.ProcessingFile;
 import files.files.SelectableFile;
 import files.files.SettingsFile;
-import gui.alerts.AlertMessageConstants;
 import resources.NamesSpaceManager;
-import resources.ResourceConstants;
 import wrapper.runtime.details.*;
-import wrapper.streams.iterators.ProcessManager;
 import wrapper.streams.managers.filters.*;
 
 /**

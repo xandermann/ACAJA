@@ -82,7 +82,6 @@ public final class ASView extends StylizedJPanel {
 		_jp2.add(__jp4, BorderLayout.CENTER);
 		_jp2.add(__jp6, BorderLayout.EAST);
 		
-		
 		StylizedJPanel jp2 = new StylizedJPanel(new BorderLayout());
 		jp2.add(new JLabel("CHOIX DES TEMPS DE NOTIFICATIONS", JLabel.CENTER), BorderLayout.NORTH);
 		jp2.add(_jp1, BorderLayout.CENTER);

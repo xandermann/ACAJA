@@ -7,20 +7,16 @@ import exceptions.IncorrectFileException;
 import exceptions.UnfindableResourceException;
 import files.*;
 import files.enumerations.OperationType;
-import files.enumerations.SettingType;
 import files.files.SettingsFile;
+import gui.alerts.AMConstants;
 import gui.alerts.Alert;
 import gui.alerts.AlertWindow;
-import gui.alerts.AlertMessageConstants;
-import gui.conversion.views.RowView;
 import gui.general.GeneralModel;
 import resources.ResourceConstants;
 import resources.ResourcesManager;
 import threads.RuntimeSpaceManager;
 import threads.ThreadForSave;
 import threads.ThreadForWaitWindow;
-import wrapper.runtime.global.UserRequests;
-import wrapper.streams.managers.consumers.WatchedConsumer;
 
 
 /**
@@ -45,7 +41,7 @@ public final class ConversionModel extends GeneralModel{
 	//Fichier courant. 
 	private SettingsFile currentFile;
 	//Liste des fichiers siur lesquels on travaille. 
-	private ArrayList<SettingsFile> files;
+	private List<SettingsFile> files;
 	//Tableau des fichiers precedemment importes.
 	private FileInformation[] oldImportedFiles;
 	//Repertoire de destination des fichiers exportes.
@@ -63,8 +59,7 @@ public final class ConversionModel extends GeneralModel{
 	 */
 	public ConversionModel() {
 		files = new ArrayList<SettingsFile>();
-		// maximum 10 last files
-		oldImportedFiles = new FileInformation[10];
+		oldImportedFiles = new FileInformation[10]; // maximum 10 last files
 		destinationFolder = null;
 	}
 
@@ -88,8 +83,8 @@ public final class ConversionModel extends GeneralModel{
 		ResourcesManager.secureConversionImports();
 		for(int i = 0 ; i < oldImportedFiles.length ; i ++) {
 			try {
-			File f = new File(ResourceConstants.CONVERSION_OLD_IMPORTS_PATH + oldImportedFiles[i].getFileName() + ".acaja");
-			if(!f.exists()) {
+				File f = new File(ResourcesManager.CONVERSION_OLD_IMPORTS_PATH + oldImportedFiles[i].getFileName() + ".acaja");
+				if(!f.exists()) {
 					FileOutputStream fos = new FileOutputStream(f);
 					ObjectOutputStream oos = new ObjectOutputStream(fos);
 					oos.writeObject(oldImportedFiles[i]);
@@ -114,7 +109,7 @@ public final class ConversionModel extends GeneralModel{
 	 */
 	public void loadOldImports() throws UnfindableResourceException {
 		ResourcesManager.secureConversionImports();
-		File[] files = ResourceConstants.CONVERSION_OLD_IMPORTS.listFiles();	
+		File[] files = ResourcesManager.CONVERSION_OLD_IMPORTS.listFiles();	
 		// tri des fichiers par date
 		if(files != null) {
 			Arrays.sort(files, new Comparator<File>(){
@@ -131,16 +126,16 @@ public final class ConversionModel extends GeneralModel{
 						ois.close();
 						fis.close();
 					}  catch(SecurityException se) {
-						JOptionPane.showMessageDialog(null, 
-								"Vous n'avez pas les permissions pour lire le fichier d'import acaja " 
+							Alert.longAlert(Alert.FAILURE, 
+								"Vous n'avez pas les permissions pour lire<br>le fichier d'import acaja " 
 								 + files[i].getName() + " !");
 					} catch(IOException ioe) {
-						JOptionPane.showMessageDialog(null, 
+							Alert.longAlert(Alert.FAILURE, 
 								"Impossible d'acceder au fichier " + files[i].getName() 
-								 + " : erreur d'entree/sortie !");
+								 + " :<br>erreur d'entree/sortie !");
 					} catch(Exception e) {
-							JOptionPane.showMessageDialog(null, 
-								"Erreur lors de l'acces aux fichiers precedemment importes : " 
+							Alert.longAlert(Alert.FAILURE,  
+								"Erreur lors de l'acces aux fichiers<br>precedemment importes : " 
 							     + e.getMessage() + " !");
 					}
 				}
@@ -159,7 +154,7 @@ public final class ConversionModel extends GeneralModel{
 	 */
 	private boolean removeOldImport(String fileName) {
 		try {
-			File f = new File(ResourceConstants.CONVERSION_OLD_IMPORTS_PATH + fileName + ".acaja");
+			File f = new File(ResourcesManager.CONVERSION_OLD_IMPORTS_PATH + fileName + ".acaja");
 			if(!(f.exists())) return true;
 			return f.delete();
 		} catch(Exception e) {
@@ -204,7 +199,7 @@ public final class ConversionModel extends GeneralModel{
 			    }
 			}
 		}else 
-			JOptionPane.showMessageDialog(null, AlertMessageConstants.ERROR_ABSENT_SELECTED_FILE);
+			Alert.longAlert(Alert.FAILURE, Alert.ERROR_ABSENT_SELECTED_FILE);
 	}
 
 	
@@ -223,7 +218,7 @@ public final class ConversionModel extends GeneralModel{
 			sendChanges();
 			Alert.shortAlert(Alert.SUCCESS, "Suppression du fichier "+file.getSourceFileName()+" reussie.");
 		}else
-			Alert.longAlert(Alert.SUCCESS, AlertMessageConstants.ERROR_UNFINDABLE_FILE_TO_REMOVE);
+			Alert.longAlert(Alert.FAILURE, Alert.ERROR_UNFINDABLE_FILE_TO_REMOVE);
 	}
 	
 	
@@ -368,7 +363,7 @@ public final class ConversionModel extends GeneralModel{
 	 * 
 	 * Methode qui retourne la liste des fichiers actuellement dans la bibliotheque.
 	 */
-	public ArrayList<SettingsFile> getFiles() {
+	public List<SettingsFile> getFiles() {
 		return files;
 	}
 	

@@ -12,11 +12,13 @@ public class Errors {
 	
 	
 	private static String normalize(String toBeNormalize) {
+		if(toBeNormalize==null) throw new NullPointerException("toBeNormalize null !");
 		return toBeNormalize.toLowerCase().replace(" ","");
 	}
 	
 	
 	public static boolean track(String tracked) {
+		if(tracked==null) throw new NullPointerException("tracked null !");
 		tracked = normalize(tracked);
 		for(String error : errors) {
 			if(tracked.contains(error)) 

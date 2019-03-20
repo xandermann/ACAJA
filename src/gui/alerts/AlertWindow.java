@@ -51,10 +51,12 @@ public final class AlertWindow extends StylizedJFrame implements ATConstants{
 							"</style>" +
 						"</head>" +
 						"<body>" + 
-							"<br>"+
-							"<br>"+
-							"<br>"+
-							content +
+							"<p>" +
+								"<br>" +
+								"<br>" +
+								"<br>" +
+								content +
+							"</p>" +
 						"</body>" + 
 					"</html>", JLabel.CENTER);
 		notification.setForeground(theme);

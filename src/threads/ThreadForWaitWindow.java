@@ -52,15 +52,19 @@ public final class ThreadForWaitWindow extends Thread{
 		 * FEEDBACK
 		 */
 		File[] filesErr = ResourceConstants.STDERR_ANSWERS.listFiles();
-		if(FilterForFeedback.successed(filesErr[filesErr.length-1], concernedFile))
+		long time = 1000;
+		if(FilterForFeedback.successed(filesErr[filesErr.length-1], concernedFile)) {
 			Alert.longAlert(Alert.SUCCESS, "L'operation a ete realisee avec succes !");
-		else
+			time += Alert.LONG;
+		}else{
 			Alert.shortAlert(Alert.FAILURE, "L'operation en cours a echouee !");
+			time += Alert.SHORT;
+		}
 		/**
 		 * RENDRE LA MAIN.
 		 */
 		try {
-			Thread.sleep(Alert.LONG+1000);
+			Thread.sleep(time);
 		} catch (InterruptedException ie) {
 			JOptionPane.showMessageDialog(null, ie.getMessage());
 		}

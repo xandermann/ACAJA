@@ -7,7 +7,7 @@ import javax.swing.*;
  * Auteurs du projet : 
  * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
  */
-public final class Alert extends AlertManager implements AlertTypeConstants, AlertMessageConstants{
+public final class Alert extends AlertManager implements ATConstants, AMConstants{
 	/**
 	 * [ VUE DE L'ALERTE. ]
 	 */

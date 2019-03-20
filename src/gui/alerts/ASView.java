@@ -6,17 +6,19 @@ import java.awt.event.*;
 /**
  * [ CLASSE VUE DE CHOIX DES PARAMETRES DES ALERTES. ]
  *
+ * AS = AlertSettings.
+ *
  * Ceci est une classe concrete "sterile", c-a-d qu'aucune classe ne peut 
  * en heriter ( d'ou la presence du final devant class).
  * 
  * Auteurs du projet : 
  * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
  */
-public final class AlertSettingsView extends StylizedJPanel {
+public final class ASView extends StylizedJPanel {
 	/**
 	 * [ CONSTRUCTEUR VIDE. ]
 	 */
-	public AlertSettingsView() {
+	public ASView() {
 		super(new BorderLayout());
 		setSize(new Dimension(350, 200));
 		

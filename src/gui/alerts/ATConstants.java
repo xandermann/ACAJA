@@ -3,13 +3,15 @@ package gui.alerts;
 /**
  * [ INTERFACE POUR LES NOTIFICATIONS / FEEDBACKS. ]
  * 
+ * AT = AlertType.
+ * 
  * Cette interface a pour but de repertorier les
  * cosntantes des alertes. 
  * 
  * Auteurs du projet : 
  * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
  */
-public interface AlertTypeConstants {	
+public interface ATConstants {	
 	final static String _INFO = "(i) information";
 	
 	final static String _FAILURE = "echec";

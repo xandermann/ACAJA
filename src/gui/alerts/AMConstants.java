@@ -3,13 +3,16 @@ package gui.alerts;
 /**
  * [ INTERFACE POUR LES MESSAGES. ]
  * 
+ * AM = AlertMessage.
+ * 
  * Cette interface a pour but de repertorier les messages
  * a la maniere d'un dictionnaire. 
  * 
  * Auteurs du projet : 
  * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
  */
-public interface AlertMessageConstants {
+public interface AMConstants {
+	
 	static final String ERROR_PREFIX = "ERREUR ";
 
 	static final String INTERNAL_ERROR_PREFIX = ERROR_PREFIX + "EN INTERNE !";

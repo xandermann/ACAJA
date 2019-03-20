@@ -6,7 +6,7 @@ import java.io.FileReader;
 
 import javax.swing.JOptionPane;
 
-import gui.alerts.AlertTypeConstants;
+import gui.alerts.ATConstants;
 import gui.alerts.Alert;
 
 /**

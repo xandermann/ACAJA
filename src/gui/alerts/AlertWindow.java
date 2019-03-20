@@ -11,7 +11,7 @@ import gui.WindowTools;
 import gui.style.StyleTheme;
 import gui.style.StylizedJFrame;
 
-public final class AlertWindow extends StylizedJFrame implements AlertTypeConstants{
+public final class AlertWindow extends StylizedJFrame implements ATConstants{
 	/**
 	 * [ CONSTRUIT UNE FENETRE D'ALERTE. ]
 	 * 

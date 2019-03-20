@@ -12,7 +12,7 @@ import files.files.SettingsFile;
 import gui.JFileChooserManager;
 import gui.WindowTools;
 import gui.alerts.Alert;
-import gui.alerts.AlertSettingsWindow;
+import gui.alerts.ASWindow;
 import gui.answers.AnswersWindow;
 import gui.conversion.views.*;
 import gui.processing.ProcessingWindow;
@@ -236,7 +236,7 @@ public final class ConversionWindow extends StylizedJFrame {
 		StylizedJMenuItem settings = new StylizedJMenuItem("Gerer les parametres des notifications");
 		settings.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {		
-				new AlertSettingsWindow();
+				new ASWindow();
 				Alert.longAlert(Alert.INFO, "Ceci est la fenetre de <br>gestion des parametres.");
 			}
 		});

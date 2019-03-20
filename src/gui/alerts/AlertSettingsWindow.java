@@ -1,12 +1,5 @@
 package gui.alerts;
-
-import java.awt.*;
-import java.io.File;
-
-import javax.swing.*;
-import gui.WindowTools;
-import gui.answers.views.AnswerView;
-
+import gui.general.GeneralWindow;
 /**
  * [ CLASSE FENETRE DE LA VUE DE CHOIX DES PARAMETRES DES ALERTES. ]
  * 
@@ -16,18 +9,11 @@ import gui.answers.views.AnswerView;
  * Auteurs du projet : 
  * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
  */
-public final class AlertSettingsWindow extends JFrame{
+public final class AlertSettingsWindow extends GeneralWindow{
 	/**
-	 * [ CONSTRUCTEUR AVEC PARAMETRES. ]
+	 * [ CONSTRUCTEUR VIDE. ]
 	 */
 	public AlertSettingsWindow(){
-		setTitle("Choix des parametres des notifications.");
-		setResizable(false);
-		AlertSettingsView asv = new AlertSettingsView();
-		setContentPane(asv);
-		setSize(new Dimension(asv.getWidth(), asv.getHeight()));
-		setLocationRelativeTo(null);
-		WindowTools.showLogo(this);
-		WindowTools.executeWindow(this);
+		super("Choix des parametres des notifications.", new AlertSettingsView());
 	}
 }

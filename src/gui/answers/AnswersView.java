@@ -1,4 +1,4 @@
-package gui.answers.views;
+package gui.answers;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,7 +10,6 @@ import javax.swing.*;
 
 import gui.WindowTools;
 import gui.alerts.Alert;
-import gui.answers.AnswerWindow;
 
 import java.awt.*;
 import java.awt.event.*;

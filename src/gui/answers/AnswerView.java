@@ -1,4 +1,4 @@
-package gui.answers.views;
+package gui.answers;
 
 import java.io.*;
 import java.awt.*;

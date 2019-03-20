@@ -22,9 +22,6 @@ public final class Alert extends AlertManager implements AlertTypeConstants, Ale
 	 */
 	public Alert(String title, String content) {
 		if(INTERRUPTOR) {
-			if(!title.equals(INFO) && !title.equals(SUCCESS) && !title.equals(FAILURE))
-				throw new IllegalArgumentException("Type de notification inconnu !");
-			
 			view = new AlertWindow(title, content);
 			
 			view.addMouseListener(new MouseListener(){

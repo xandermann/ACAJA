@@ -20,7 +20,12 @@ public final class AlertWindow extends StylizedJFrame implements AlertTypeConsta
 	 */
 	public AlertWindow(String title, String content) {
 		super(title);
+		
+		if(!title.equals(INFO) && !title.equals(SUCCESS) && !title.equals(FAILURE))
+			throw new IllegalArgumentException("Type de notification inconnu !");
+		
 		if(content==null) throw new NullPointerException("Content null !");
+		
 		setLayout(new BorderLayout());
 		setSize(300, 150);
 		setResizable(false);

@@ -49,11 +49,38 @@ public final class AlertSettingsView extends StylizedJPanel {
 		});
 		
 		StylizedJPanel _jp1 = new StylizedJPanel(new BorderLayout());
+		_jp1.setSize(new Dimension(350, 30));
 		_jp1.add(new JLabel("temps des notifications courtes : ", JLabel.CENTER), BorderLayout.NORTH);
-		_jp1.add(js1, BorderLayout.CENTER);
+		StylizedJPanel __jp1 = new StylizedJPanel(new BorderLayout());
+		__jp1.setPreferredSize(new Dimension(290, 20));
+		__jp1.add(new JLabel("0", JLabel.CENTER), BorderLayout.WEST);
+		__jp1.add(js1, BorderLayout.CENTER);
+		__jp1.add(new JLabel("10", JLabel.CENTER), BorderLayout.EAST);
+		StylizedJPanel __jp2 = new StylizedJPanel();
+		__jp2.setPreferredSize(new Dimension(30, 20));
+		StylizedJPanel __jp3 = new StylizedJPanel();
+		__jp3.setPreferredSize(new Dimension(30, 20));
+		_jp1.add(__jp2, BorderLayout.WEST);
+		_jp1.add(__jp1, BorderLayout.CENTER);
+		_jp1.add(__jp3, BorderLayout.EAST);
+		
 		StylizedJPanel _jp2 = new StylizedJPanel(new BorderLayout());
+		_jp2.setSize(new Dimension(350, 30));
 		_jp2.add(new JLabel("temps des notifications longues : ", JLabel.CENTER), BorderLayout.NORTH);
-		_jp2.add(js2, BorderLayout.CENTER);
+		StylizedJPanel __jp4 = new StylizedJPanel(new BorderLayout());
+		__jp4.setPreferredSize(new Dimension(290, 20));
+		__jp4.add(new JLabel("0", JLabel.CENTER), BorderLayout.WEST);
+		__jp4.add(js2, BorderLayout.CENTER);
+		__jp4.add(new JLabel("10", JLabel.CENTER), BorderLayout.EAST);
+		StylizedJPanel __jp5 = new StylizedJPanel();
+		__jp5.setPreferredSize(new Dimension(30, 20));
+		StylizedJPanel __jp6 = new StylizedJPanel();
+		__jp6.setPreferredSize(new Dimension(30, 20));
+		_jp2.add(__jp5, BorderLayout.WEST);
+		_jp2.add(__jp4, BorderLayout.CENTER);
+		_jp2.add(__jp6, BorderLayout.EAST);
+		
+		
 		StylizedJPanel jp2 = new StylizedJPanel(new BorderLayout());
 		jp2.add(new JLabel("CHOIX DES TEMPS DE NOTIFICATIONS", JLabel.CENTER), BorderLayout.NORTH);
 		jp2.add(_jp1, BorderLayout.CENTER);

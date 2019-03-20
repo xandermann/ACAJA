@@ -1,13 +1,8 @@
 package gui.alerts;
-
 import javax.swing.*;
-
-import gui.style.StylizedJButton;
 import gui.style.StylizedJPanel;
-
 import java.awt.*;
 import java.awt.event.*;
-
 /**
  * [ CLASSE VUE DE CHOIX DES PARAMETRES DES ALERTES. ]
  *

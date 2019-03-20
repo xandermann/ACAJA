@@ -3,6 +3,7 @@
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import gui.alerts.AlertManager;
 import gui.conversion.model.ConversionModel;
 import resources.ResourcesManager;
 
@@ -18,13 +19,24 @@ public final class KeyboardController implements KeyListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		if(e.getKeyCode()==KeyEvent.VK_DELETE) 
-			model.remove(model.getCurrentFile()); 
-		else {
-			if(e.getKeyCode()==KeyEvent.VK_ESCAPE) {
+		switch(e.getKeyCode()) {
+			case KeyEvent.VK_DELETE :
+				model.remove(model.getCurrentFile()); 
+			break;
+			case KeyEvent.VK_ESCAPE :
 				ResourcesManager.clearResources();
 				System.exit(0);
-			}
+			break;
+			//CTRL + SHIFT + A
+			case KeyEvent.VK_A :
+				if((e.getModifiers() & KeyEvent.CTRL_MASK) != 0 && (e.getModifiers() & KeyEvent.SHIFT_MASK) != 0)
+					AlertManager.INTERRUPTOR = true;
+			break;
+			//CTRL + SHIFT + D
+			case KeyEvent.VK_D :
+				if((e.getModifiers() & KeyEvent.CTRL_MASK) != 0 && (e.getModifiers() & KeyEvent.SHIFT_MASK) != 0)
+					AlertManager.INTERRUPTOR = false;
+			break;
 		}
 	}
 

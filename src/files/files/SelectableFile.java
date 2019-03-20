@@ -5,9 +5,6 @@ import java.io.File;
 import exceptions.IncorrectFileException;
 import exceptions.UnfindableResourceException;
 import files.enumerations.MediaFileType;
-import resources.TimeTools;
-import wrapper.runtime.global.SystemRequests;
-
 
 /**
  * TODO comentaire a faire.
@@ -18,15 +15,13 @@ import wrapper.runtime.global.SystemRequests;
  *         CHEVRIER Jean-christophe.
  */
 public class SelectableFile {
-	//=======================================================================================================================
-	//=======================================================================================================================
+	// =======================================================================================================================
+	// =======================================================================================================================
 
-	
-	
 	/**
 	 * [ ATTRIBUTS D'INSTANCE DE LA CLASSE. ]
 	 */
-	
+
 	/**
 	 * La duree de la video.
 	 */
@@ -51,45 +46,38 @@ public class SelectableFile {
 	 * Le nom complet (chemin+nom) du fichier de sortie.
 	 */
 	private String[] destinationFile;
-	
+
 	/**
-	 * Miniature de la video. 
+	 * Miniature de la video.
 	 */
 	protected File thumbail;
-	
-	
-	
-	//=======================================================================================================================
-	//=======================================================================================================================
-	
-	
-	
+
+	// =======================================================================================================================
+	// =======================================================================================================================
+
 	/**
 	 * [ CONSTRUCTEUR. ]
 	 * 
 	 * Ce constructeur intialise les attributs.
 	 * 
-	 * @param sourceFile	Le fichier source.
+	 * @param sourceFile Le fichier source.
 	 * 
-	 * @throws IncorrectFileException 
+	 * @throws IncorrectFileException
 	 * 
-	 * @throws UnfindableResourceException 
+	 * @throws UnfindableResourceException
 	 */
 	public SelectableFile(File sourceFile) throws IncorrectFileException, UnfindableResourceException {
-		if((this.sourceFile = sourceFile) == null)
+		if ((this.sourceFile = sourceFile) == null)
 			throw new NullPointerException("Le fichier source recu en parametre est null !");
 		isSelected = false;
-		destinationFile = new String[]{"", "", ""};
+		destinationFile = new String[] { "", "", "" };
 		whoAmI();
-		
+
 	}
 
-	
-	
-	//=======================================================================================================================
-	//=======================================================================================================================
+	// =======================================================================================================================
+	// =======================================================================================================================
 
-	
 	/**
 	 * [ METHODE - ROLE PRIMITIF. ]
 	 * 
@@ -137,64 +125,55 @@ public class SelectableFile {
 	public boolean containsAudio() {
 		return (isVideo() || isSound());
 	}
-	
-	
-	
-	//=======================================================================================================================
-	//=======================================================================================================================
 
-	
-	
+	// =======================================================================================================================
+	// =======================================================================================================================
+
 	/**
 	 * [ METHODE POUR RENSEIGNER LE TYPE DE FICHIER. ]
 	 * 
 	 * Cette methode permet de savoir si le fichier source est une video, ou un son,
 	 * ou meme une image.
 	 * 
-	 * 3 valeurs possiblement accordable a typeFile : 
-	 * - MEDIA_FILE_VIDEO ; 
-	 * - MEDIA_FILE_AUDIO ; 
-	 * - MEDIA_FILE_IMAGE.
+	 * 3 valeurs possiblement accordable a typeFile : - MEDIA_FILE_VIDEO ; -
+	 * MEDIA_FILE_AUDIO ; - MEDIA_FILE_IMAGE.
 	 * 
-	 * @throws IncorrectFileException 	Exception sur les fichiers non conformes. 
+	 * @throws IncorrectFileException Exception sur les fichiers non conformes.
 	 */
 	private void whoAmI() throws IncorrectFileException {
 		String fileName = sourceFile.getName().toLowerCase();
-		
-		String[] videoExtensions = {"3g2","3gp","asf","avi","flv","m4v","mov","mkv","mp2","mp4","mpeg","mpg","ogg","webm","wmv"};
-		for(String vidExt : videoExtensions) {
-			if(fileName.endsWith(vidExt)) {
+
+		String[] videoExtensions = { "3g2", "3gp", "asf", "avi", "flv", "m4v", "mov", "mkv", "mp2", "mp4", "mpeg",
+				"mpg", "ogg", "webm", "wmv" };
+		for (String vidExt : videoExtensions) {
+			if (fileName.endsWith(vidExt)) {
 				typeFile = MediaFileType.MEDIA_FILE_VIDEO;
 				return;
 			}
 		}
-		
-		String[] audioExtensions = {"mp3","wav", "ogg", "flac", "aac"};
-		for(String audExt : audioExtensions) {
-			if(fileName.endsWith(audExt)) {
+
+		String[] audioExtensions = { "mp3", "wav", "ogg", "flac", "aac" };
+		for (String audExt : audioExtensions) {
+			if (fileName.endsWith(audExt)) {
 				typeFile = MediaFileType.MEDIA_FILE_AUDIO;
 				return;
 			}
 		}
-		
-		String[] imageExtensions = {"png","jpg","jpeg","bmp"};
-		for(String imgExt : imageExtensions) {
-			if(fileName.endsWith(imgExt)) {
+
+		String[] imageExtensions = { "png", "jpg", "jpeg", "bmp" };
+		for (String imgExt : imageExtensions) {
+			if (fileName.endsWith(imgExt)) {
 				typeFile = MediaFileType.MEDIA_FILE_IMAGE;
 				return;
 			}
 		}
-		
-		throw new IncorrectFileException(IncorrectFileException.FORBIDDEN_FILE);			
+
+		throw new IncorrectFileException(IncorrectFileException.FORBIDDEN_FILE);
 	}
 
-	
-	
-	//=======================================================================================================================
-	//=======================================================================================================================
-	
-	
-	
+	// =======================================================================================================================
+	// =======================================================================================================================
+
 	/**
 	 * [ METHODE ACCESSEUR - GETTER. ]
 	 * 
@@ -229,7 +208,7 @@ public class SelectableFile {
 	 * 
 	 * Methode pour recuperer la duree d'une video.
 	 * 
-	 * @return  
+	 * @return
 	 */
 	public String getDuration() {
 		return duration;
@@ -256,7 +235,7 @@ public class SelectableFile {
 	public void setDestinationPath(String destinationFolder) {
 		this.destinationFile[0] = destinationFolder;
 	}
-	
+
 	/**
 	 * [ METHODE ACCESSEUR - SETTER. ]
 	 * 
@@ -267,16 +246,17 @@ public class SelectableFile {
 	public void setDestinationName(String destinationName) {
 		this.destinationFile[1] = destinationName;
 	}
-	
+
 	public void setFileExtension(String fileExtension) {
 		this.destinationFile[2] = fileExtension;
 	}
+
 	/**
 	 * [ METHODE ACCESSEUR - GETTER. ]
 	 * 
 	 * Methode pour recuperer le type du fichier.
 	 * 
-	 * @return MediaFileType	 Le type du fichier.
+	 * @return MediaFileType Le type du fichier.
 	 */
 	public MediaFileType getTypeFile() {
 		return typeFile;
@@ -298,65 +278,63 @@ public class SelectableFile {
 	 * 
 	 * Methode pour recuperer le nom du fichier.
 	 * 
-	 * @return String 	Le nom du fichier source.
+	 * @return String Le nom du fichier source.
 	 */
 	public String getSourceFileName() {
 		return sourceFile.getName();
 	}
 
 	private String removeExtension(String fileName) {
-        if (fileName == "") return "";
-        int pos = fileName.lastIndexOf(".");
-        if (pos == -1) return fileName;
-        return fileName.substring(0, pos);
-    }
-	
+		if (fileName == "")
+			return "";
+		int pos = fileName.lastIndexOf(".");
+		if (pos == -1)
+			return fileName;
+		return fileName.substring(0, pos);
+	}
+
 	public String getSourceFileNameWithoutExtension() {
 		return removeExtension(sourceFile.getName());
 	}
-	
+
 	/**
 	 * [ METHODE ACCESSEUR - GETTER. ]
 	 * 
 	 * Methode pour recuperer le nom complet du fichier.
 	 * 
-	 * @return String 	Le nom complet du fichier source.
+	 * @return String Le nom complet du fichier source.
 	 */
 	public String getSourceFileFullName() {
 		return sourceFile.getAbsolutePath();
 	}
-	
+
 	/**
 	 * [ METHODE ACCESSEUR - GETTER. ]
 	 * 
 	 * Methode pour recuperer le nom du fichier de destiation.
 	 * 
-	 * @return String 	Le nom du fichier source.
+	 * @return String Le nom du fichier source.
 	 */
 	public String getDestinationFileName() {
 		return destinationFile[1];
-	}	
-	
+	}
+
 	/**
 	 * [ METHODE ACCESSEUR - GETTER. ]
 	 * 
 	 * Methode pour recuperer le nom complet (chemin+nom) du fichier.
 	 * 
-	 * @return String 	Le nom complet du fichier source.
+	 * @return String Le nom complet du fichier source.
 	 */
 	public String getDestinationFileFullName() {
-		return destinationFile[0].equals("") && destinationFile[1].equals("") 
-			   && destinationFile[2].equals("") ? "" : destinationFile[0]+File.separator+destinationFile[1]+destinationFile[2];
+		return destinationFile[0].equals("") && destinationFile[1].equals("") && destinationFile[2].equals("") ? ""
+				: destinationFile[0] + File.separator + destinationFile[1] + destinationFile[2];
 	}
-
-
 
 	public File getThumbail() {
 		return thumbail;
 	}
-	
-	
-	
-	//=======================================================================================================================
-	//=======================================================================================================================
+
+	// =======================================================================================================================
+	// =======================================================================================================================
 }

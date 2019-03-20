@@ -3,12 +3,14 @@ package files.enumerations;
 /**
  * [ ENUMERATION DES TYPES DE PARAMETRES. ]
  * 
- * Auteurs du projet : 
- * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
+ * Auteurs du projet :
+ * 
+ * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et
+ *         CHEVRIER Jean-christophe.
  */
 public enum SettingType implements OperationType {
 	/**
-	 * Parametre du type de qualite. 
+	 * Parametre du type de qualite.
 	 */
 	QUALITY,
 	/**
@@ -34,17 +36,17 @@ public enum SettingType implements OperationType {
 	 * Parametre du type de resolution video.
 	 */
 	RESOLUTION,
-	
+
 	/**
 	 * Parametre du type de codec audio.
 	 */
 	AUDIO_CODEC,
-	
+
 	/**
 	 * Parametre du type de taux d'echantillonage.
 	 */
 	SAMPLING_RATE,
-	
+
 	/**
 	 * Parametre du type de nombre de canaux audio.
 	 */

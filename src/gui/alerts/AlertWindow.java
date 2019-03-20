@@ -45,13 +45,13 @@ public final class AlertWindow extends StylizedJFrame implements ATConstants{
 				"<html>" + 
 						"<head>" +
 							"<style>"+
-								"body { "+
+								"#content { "+
 									"text-align: center; "+
 								"}"+
 							"</style>" +
 						"</head>" +
 						"<body>" + 
-							"<p>" +
+							"<p id=content>" +
 								"<br>" +
 								"<br>" +
 								"<br>" +

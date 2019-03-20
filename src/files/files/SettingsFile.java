@@ -17,9 +17,8 @@ import wrapper.runtime.global.SystemRequests;
  *         CHEVRIER Jean-christophe.
  */
 public final class SettingsFile extends SelectableFile implements Modifiable {
-	//=======================================================================================================================
-	//=======================================================================================================================
-	
+	// =======================================================================================================================
+	// =======================================================================================================================
 
 	/**
 	 * Les requetes soumises par l'utilisateur.
@@ -31,31 +30,31 @@ public final class SettingsFile extends SelectableFile implements Modifiable {
 	 */
 	private HashMap<SettingType, String> settings;
 
-	
-	
-	//=======================================================================================================================
-	//=======================================================================================================================
+	// =======================================================================================================================
+	// =======================================================================================================================
 
-	
 	/**
 	 * [ CONSTRUCTEUR. ]
 	 * 
-	 * @param file 								Le fichier source.
+	 * @param file Le fichier source.
 	 * 
-	 * @throws IncorrectFileException			L'exception sur les fichiers de type incorrect. 
+	 * @throws IncorrectFileException      L'exception sur les fichiers de type
+	 *                                     incorrect.
 	 * 
-	 * @throws UnfindableResourceException		Exception sur les ressources introuvables. 
+	 * @throws UnfindableResourceException Exception sur les ressources
+	 *                                     introuvables.
 	 */
 	public SettingsFile(File file) throws IncorrectFileException, UnfindableResourceException {
 		/**
 		 * INITIALISATION DES ATTRIBUTS HETITES DE LA CLASSE SELECTABLEFILE.
 		 */
 		super(file);
-		
+
 		/**
 		 * Si le type de fichier n'est pas accepté, alors on renvoie une exception.
 		 */
-		if (!this.containsAudio()) throw new IncorrectFileException(IncorrectFileException.BAD_TYPE_FILE);
+		if (!this.containsAudio())
+			throw new IncorrectFileException(IncorrectFileException.BAD_TYPE_FILE);
 
 		/**
 		 * INITIALISATION DES PARAMETRES DE LA VIDEO.
@@ -64,29 +63,26 @@ public final class SettingsFile extends SelectableFile implements Modifiable {
 		requests = new HashMap<SettingType, String>();
 		settings = new HashMap<SettingType, String>();
 
-		//Initialisation des autres parametres.
+		// Initialisation des autres parametres.
 		SystemRequests.askMetadata(this);
-		
-		if(isVideo()) thumbail = SystemRequests.askFrame(this, "00:00:01.00", 200, 100);
+
+		if (isVideo())
+			thumbail = SystemRequests.askFrame(this, "00:00:01.00", 200, 100);
 	}
 
-	
-	
-	//=======================================================================================================================
-	//=======================================================================================================================
+	// =======================================================================================================================
+	// =======================================================================================================================
 
-	
-	
 	@Override
 	public void modify(OperationType typeSetting, String setting) {
 		requests.put((SettingType) typeSetting, setting);
 	}
-	
+
 	@Override
 	public boolean isModified() {
 		return !requests.equals(new HashMap<SettingType, String>());
 	}
-	
+
 	public String recent(OperationType typeSetting) {
 		return requests.containsKey(typeSetting) ? requests.get(typeSetting) : settings.get(typeSetting);
 	}
@@ -94,16 +90,13 @@ public final class SettingsFile extends SelectableFile implements Modifiable {
 	public String old(OperationType typeSetting) {
 		return settings.get(typeSetting);
 	}
-	
-		
-	//=======================================================================================================================
-	//=======================================================================================================================
 
-	
-	
+	// =======================================================================================================================
+	// =======================================================================================================================
+
 	/**
-	 * [ METHODE ACCESSEUR - GETTER. ]
-	 * 	 * Methode pour recuperer les parametres du fichier.
+	 * [ METHODE ACCESSEUR - GETTER. ] * Methode pour recuperer les parametres du
+	 * fichier.
 	 * 
 	 * @return HashMap<String, String> Les parametres du fichier.
 	 */
@@ -122,8 +115,6 @@ public final class SettingsFile extends SelectableFile implements Modifiable {
 		return requests;
 	}
 
-
-	
-	//=======================================================================================================================
-	//=======================================================================================================================
+	// =======================================================================================================================
+	// =======================================================================================================================
 }

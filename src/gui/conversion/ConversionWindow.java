@@ -14,8 +14,6 @@ import gui.WindowTools;
 import gui.alerts.Alert;
 import gui.alerts.AlertSettingsWindow;
 import gui.answers.AnswersWindow;
-import gui.conversion.controllers.KeyboardController;
-import gui.conversion.model.ConversionModel;
 import gui.conversion.views.*;
 import gui.processing.ProcessingWindow;
 import gui.style.*;
@@ -114,7 +112,7 @@ public final class ConversionWindow extends StylizedJFrame {
 						model.setCurrentFile(model.getFiles().get(model.getFiles().size()-1));
 						Alert.shortAlert(Alert.SUCCESS, "Import realise avec succes.");
 					} catch (Exception e) {
-						JOptionPane.showMessageDialog(null, e.getMessage());
+						Alert.shortAlert(Alert.FAILURE, "Echec de l'import.");
 					}
 			}
 		});
@@ -129,10 +127,10 @@ public final class ConversionWindow extends StylizedJFrame {
 						model.add(f);
 						if(model.getCurrentFile() == null) redrawFirstTime();
 						model.setCurrentFile(model.getFiles().get(model.getFiles().size()-1));
-						Alert.shortAlert(Alert.SUCCESS, "Import realise avec succes.");
 					}
+					Alert.shortAlert(Alert.SUCCESS, "Import realise avec succes.");
 				} catch (Exception e) {
-					JOptionPane.showMessageDialog(null, e.getMessage());
+					Alert.shortAlert(Alert.FAILURE, "Echec de l'import.");
 				}
 			}
 		});
@@ -154,7 +152,7 @@ public final class ConversionWindow extends StylizedJFrame {
 							model.setCurrentFile(model.getFiles().get(model.getFiles().size()-1));
 							Alert.shortAlert(Alert.SUCCESS, "Import realise avec succes.");
 						} catch(Exception e) {
-							JOptionPane.showMessageDialog(null, e.getMessage());
+							Alert.shortAlert(Alert.FAILURE, "Echec de l'import.");
 						}
 					}
 				});
@@ -166,7 +164,6 @@ public final class ConversionWindow extends StylizedJFrame {
 		clearLibrary.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				model.clear();
-				Alert.shortAlert(Alert.SUCCESS, "Bibliotheque videe avec succes.");
 			}
 		});
 
@@ -446,7 +443,7 @@ public final class ConversionWindow extends StylizedJFrame {
 		p.add(conversionWindow.empty_workspace);
 		conversionWindow.setLayout(new BorderLayout());
 		conversionWindow.add(p, BorderLayout.CENTER);
-		conversionWindow.addKeyListener(new KeyboardController(conversionWindow.model));
+		conversionWindow.addKeyListener(new ConversionKeyboardController(conversionWindow.model));
 		
 		WindowTools.executeWindow(conversionWindow);
 	}

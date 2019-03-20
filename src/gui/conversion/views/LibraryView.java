@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import files.files.SettingsFile;
-import gui.conversion.model.ConversionModel;
+import gui.conversion.ConversionModel;
 import gui.style.StylizedJPanel;
 
 /**

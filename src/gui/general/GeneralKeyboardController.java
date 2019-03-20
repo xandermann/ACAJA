@@ -1,28 +1,23 @@
- package gui.conversion.controllers;
+ package gui.general;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import gui.alerts.AlertManager;
-import gui.conversion.model.ConversionModel;
+import gui.conversion.ConversionModel;
 import resources.ResourcesManager;
 
-public final class KeyboardController implements KeyListener {
-	private ConversionModel model;
-	
-	public KeyboardController(ConversionModel model) {
-		if((this.model = model) == null) throw new NullPointerException("ConversionModel null !");
-	}
-	
+public abstract class GeneralKeyboardController implements KeyListener {
 	@Override
 	public void keyTyped(KeyEvent e) {}
 
 	@Override
-	public void keyPressed(KeyEvent e) {
+	public void keyPressed(KeyEvent e) {}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
 		switch(e.getKeyCode()) {
-			case KeyEvent.VK_DELETE :
-				model.remove(model.getCurrentFile()); 
-			break;
+			//ECHAP
 			case KeyEvent.VK_ESCAPE :
 				ResourcesManager.clearResources();
 				System.exit(0);
@@ -39,7 +34,4 @@ public final class KeyboardController implements KeyListener {
 			break;
 		}
 	}
-
-	@Override
-	public void keyReleased(KeyEvent e) {}
 }

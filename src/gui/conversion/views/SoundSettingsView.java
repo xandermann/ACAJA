@@ -7,7 +7,7 @@ import java.util.*;
 import javax.swing.*;
 import files.enumerations.SettingType;
 import files.files.SettingsFile;
-import gui.conversion.model.ConversionModel;
+import gui.conversion.ConversionModel;
 import gui.style.StylizedJPanel;
 import wrapper.language.CodecConstants;
 

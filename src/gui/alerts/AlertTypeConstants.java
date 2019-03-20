@@ -9,7 +9,7 @@ package gui.alerts;
  * Auteurs du projet : 
  * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
  */
-public interface AlertConstants {	
+public interface AlertTypeConstants {	
 	final static String _INFO = "(i) information";
 	
 	final static String _FAILURE = "echec";

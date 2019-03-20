@@ -13,11 +13,11 @@ import files.enumerations.ProcessingType;
 import files.enumerations.SettingType;
 import files.files.ProcessingFile;
 import files.files.SelectableFile;
-import gui.Model;
+import gui.general.GeneralModel;
 import wrapper.runtime.global.SystemRequests;
 import wrapper.runtime.global.UserRequests;
 
-public class ProcessingModel extends Model{
+public class ProcessingModel extends GeneralModel{
 	
 	private ArrayList<Form> listRect;
 	private boolean fUp,cropUp;

@@ -6,7 +6,7 @@ package gui.alerts;
  * Auteurs du projet : 
  * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
  */
-public class AlertManager implements AlertConstants {
+public class AlertManager{
 	/**
 	 * [ TEMPS. ]
 	 */

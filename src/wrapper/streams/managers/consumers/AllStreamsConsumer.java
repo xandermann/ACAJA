@@ -3,7 +3,7 @@ package wrapper.streams.managers.consumers;
 import javax.swing.JOptionPane;
 
 import exceptions.UnfindableResourceException;
-import messages.MessageConstants;
+import gui.alerts.AlertMessageConstants;
 import wrapper.streams.iterators.*;
 
 
@@ -68,7 +68,7 @@ public class AllStreamsConsumer implements StreamsConsumer {
 			  */
 			 processToBeConsume.getManagedProcess().waitFor();
 		} catch (InterruptedException e) {
-			 JOptionPane.showMessageDialog(null, MessageConstants.ERROR_ACTIVE_WAIT_FOR);
+			 JOptionPane.showMessageDialog(null, AlertMessageConstants.ERROR_ACTIVE_WAIT_FOR);
 		}
 	}
 	

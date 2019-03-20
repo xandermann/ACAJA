@@ -9,7 +9,7 @@ import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import gui.conversion.model.ConversionModel;
+import gui.conversion.ConversionModel;
 import gui.style.StyleTheme;
 import gui.style.StylizedJPanel;
 

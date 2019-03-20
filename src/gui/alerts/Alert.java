@@ -7,7 +7,7 @@ import javax.swing.*;
  * Auteurs du projet : 
  * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
  */
-public final class Alert extends AlertManager{
+public final class Alert extends AlertManager implements AlertTypeConstants, AlertMessageConstants{
 	/**
 	 * [ VUE DE L'ALERTE. ]
 	 */
@@ -22,7 +22,11 @@ public final class Alert extends AlertManager{
 	 */
 	public Alert(String title, String content) {
 		if(INTERRUPTOR) {
+			if(!title.equals(INFO) && !title.equals(SUCCESS) && !title.equals(FAILURE))
+				throw new IllegalArgumentException("Type de notification inconnu !");
+			
 			view = new AlertWindow(title, content);
+			
 			view.addMouseListener(new MouseListener(){
 				public void mouseClicked(MouseEvent e) {}
 				public void mousePressed(MouseEvent e) {
@@ -32,6 +36,7 @@ public final class Alert extends AlertManager{
 				public void mouseEntered(MouseEvent e) {}
 				public void mouseExited(MouseEvent e) {}
 			});
+			
 			view.addKeyListener(new KeyListener() {
 				public void keyTyped(KeyEvent e) {}
 				public void keyPressed(KeyEvent e) {}

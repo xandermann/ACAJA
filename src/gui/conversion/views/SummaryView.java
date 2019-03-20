@@ -7,7 +7,7 @@ import java.util.*;
 import javax.swing.*;
 
 import files.enumerations.SettingType;
-import gui.conversion.model.ConversionModel;
+import gui.conversion.ConversionModel;
 import gui.style.StyleTheme;
 import gui.style.StylizedJPanel;
 

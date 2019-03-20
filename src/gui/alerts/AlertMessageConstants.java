@@ -1,4 +1,4 @@
-package messages;
+package gui.alerts;
 
 /**
  * [ INTERFACE POUR LES MESSAGES. ]
@@ -9,7 +9,7 @@ package messages;
  * Auteurs du projet : 
  * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
  */
-public interface MessageConstants {
+public interface AlertMessageConstants {
 	static final String ERROR_PREFIX = "ERREUR ";
 
 	static final String INTERNAL_ERROR_PREFIX = ERROR_PREFIX + "EN INTERNE !";

@@ -1,4 +1,4 @@
-package gui.conversion.model;
+package gui.conversion;
 
 import java.io.*;
 import java.util.*;
@@ -9,11 +9,11 @@ import files.*;
 import files.enumerations.OperationType;
 import files.enumerations.SettingType;
 import files.files.SettingsFile;
-import gui.Model;
 import gui.alerts.Alert;
 import gui.alerts.AlertWindow;
+import gui.alerts.AlertMessageConstants;
 import gui.conversion.views.RowView;
-import messages.MessageConstants;
+import gui.general.GeneralModel;
 import resources.ResourceConstants;
 import resources.ResourcesManager;
 import threads.RuntimeSpaceManager;
@@ -32,7 +32,7 @@ import wrapper.streams.managers.consumers.WatchedConsumer;
  * Auteurs du projet : 
  * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
  */
-public final class ConversionModel extends Model{
+public final class ConversionModel extends GeneralModel{
 	//=======================================================================================================================
 	//=======================================================================================================================
 	
@@ -204,7 +204,7 @@ public final class ConversionModel extends Model{
 			    }
 			}
 		}else 
-			JOptionPane.showMessageDialog(null, MessageConstants.ERROR_ABSENT_SELECTED_FILE);
+			JOptionPane.showMessageDialog(null, AlertMessageConstants.ERROR_ABSENT_SELECTED_FILE);
 	}
 
 	
@@ -223,7 +223,7 @@ public final class ConversionModel extends Model{
 			sendChanges();
 			Alert.shortAlert(Alert.SUCCESS, "Suppression du fichier "+file.getSourceFileName()+" reussie.");
 		}else
-			JOptionPane.showMessageDialog(null, MessageConstants.ERROR_UNFINDABLE_FILE_TO_REMOVE);
+			Alert.longAlert(Alert.SUCCESS, AlertMessageConstants.ERROR_UNFINDABLE_FILE_TO_REMOVE);
 	}
 	
 	
@@ -236,6 +236,7 @@ public final class ConversionModel extends Model{
 		currentFile = null;
 		files.clear();
 		sendChanges();
+		Alert.shortAlert(Alert.SUCCESS, "Bibliotheque videe avec succes.");
 	}
 
 	

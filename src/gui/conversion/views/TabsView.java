@@ -3,7 +3,7 @@ package gui.conversion.views;
 import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
 
-import gui.conversion.model.ConversionModel;
+import gui.conversion.ConversionModel;
 
 public final class TabsView extends JTabbedPane{
 	//private SoundSettingsView ssp;

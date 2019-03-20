@@ -12,7 +12,7 @@ import files.enumerations.SettingType;
 import files.files.ProcessingFile;
 import files.files.SelectableFile;
 import files.files.SettingsFile;
-import messages.MessageConstants;
+import gui.alerts.AlertMessageConstants;
 import resources.NamesSpaceManager;
 import resources.ResourceConstants;
 import wrapper.runtime.details.*;

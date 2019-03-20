@@ -22,6 +22,13 @@ public abstract class GeneralKeyboardController implements KeyListener {
 				ResourcesManager.clearResources();
 				System.exit(0);
 			break;
+			//CTRL + Q
+			case KeyEvent.VK_Q :
+				if((e.getModifiers() & KeyEvent.CTRL_MASK) != 0) {
+					ResourcesManager.clearResources();
+					System.exit(0);
+				}
+			break;
 			//CTRL + SHIFT + A
 			case KeyEvent.VK_A :
 				if((e.getModifiers() & KeyEvent.CTRL_MASK) != 0 && (e.getModifiers() & KeyEvent.SHIFT_MASK) != 0)

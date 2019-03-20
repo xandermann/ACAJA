@@ -18,7 +18,7 @@ import gui.alerts.Alert;
  * Auteurs du projet : 
  * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
  */
-public final class FilterForFeedback implements DataStreamsFilter {
+public final class FilterForFeedback extends Errors implements DataStreamsFilter {
 	public static boolean successed(File asFilter, File concerned) {
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(asFilter));
@@ -28,7 +28,7 @@ public final class FilterForFeedback implements DataStreamsFilter {
 				if(line.contains(concerned.getAbsolutePath()))	
 					isConcerned = true;
 				else {
-					if(isConcerned && line.contains("Conversion failed!")) {
+					if(isConcerned && !track(line)) {
 						reader.close();
 						return false;
 					}

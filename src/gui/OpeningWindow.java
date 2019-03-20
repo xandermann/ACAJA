@@ -116,9 +116,7 @@ public final class OpeningWindow {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				ConversionWindow.generateConversionWindow();
-				Alert.longAlert(
-						Alert.INFO, 
-						"Ceci est la fenetre pour realiser<br>des conversions.");
+				Alert.longAlert(Alert.INFO, "Ceci est la fenetre pour realiser<br>des conversions.");
 				openingWindow.dispose();
 			}
 		});
@@ -129,9 +127,7 @@ public final class OpeningWindow {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				ProcessingWindow.generateProcessingWindow();
-				Alert.longAlert(
-						Alert.INFO, 
-						"Ceci est la fenetre pour realiser<br>des traitements.");
+				Alert.longAlert(Alert.INFO, "Ceci est la fenetre pour realiser<br>des traitements.");
 				openingWindow.dispose();
 			}
 		});
@@ -171,9 +167,7 @@ public final class OpeningWindow {
 
 		WindowTools.executeWindow(openingWindow);
 		
-		Alert.longAlert(
-				Alert.INFO, 
-				"Bienvenue dans ACAJA.<br>Ici vous pouvez choisir un mode de travail.");
+		Alert.longAlert(Alert.INFO, "Bienvenue dans ACAJA.<br>Ici vous pouvez choisir un mode de travail.");
 	}
 
 	

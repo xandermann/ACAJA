@@ -59,12 +59,11 @@ public final class ConversionWindow extends StylizedJFrame {
 						"<style>" +
 							"#content{" +
 								"text-align: center; " +
-								"font-family: Verdana;"+
 							"}" +
-							".0 {" +
+							"#0 {" +
 								"font-size: 10px;" +
 							"}" +
-							".1 {" +
+							"#1 {" +
 								"color: #0000FF;" +
 								"font-size: 20px;" +
 							"}" +
@@ -72,12 +71,12 @@ public final class ConversionWindow extends StylizedJFrame {
 					"</head>" +
 					"<body>" +
 						"<div id=content>" +
-							"<p class=0>" + 
+							"<p id=0>" + 
 								"Pour commencer,"+
 								"<br>"+
 								"ajoutez un fichier audio ou video via le menu." +
 							"</p>" +
-							"<p class=1>" + 
+							"<p id=1>" + 
 								"<br>"+
 								"CTRL + A." +
 							"</p>" + 

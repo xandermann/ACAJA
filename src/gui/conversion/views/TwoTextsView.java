@@ -7,7 +7,13 @@ import javax.swing.JLabel;
  * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
  */
 public final class TwoTextsView extends JLabel {
+	/**
+	 * [ TEXTES INJECTES. ]
+	 */
 	private String first, two;
+	/**
+	 * [ POLICES DES TEXTES. ]
+	 */
 	private int sizeFirst, sizeTwo;
 	
 	

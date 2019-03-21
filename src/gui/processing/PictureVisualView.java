@@ -30,7 +30,7 @@ public class PictureVisualView extends JPanel implements Observer{
 		super.paintComponent(g);
 		Image pic = null;
 		
-		if(this.model.getCurentFile() != null) {
+		if(this.model.getCurrentFile() != null) {
 			try {
 				pic = ImageIO.read(this.model.getMinia());
 				g.drawImage(pic, 0,0,this.getWidth(),this.getHeight(), this);

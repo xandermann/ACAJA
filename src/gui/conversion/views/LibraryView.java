@@ -8,6 +8,7 @@ import java.util.*;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import files.files.SelectableFile;
 import files.files.SettingsFile;
 import gui.conversion.ConversionModel;
 import gui.style.StylizedJPanel;
@@ -35,14 +36,14 @@ public final class LibraryView extends StylizedJPanel implements Observer{
 	private void displayLibrary() {
 		removeAll();
 		
-		List<SettingsFile> files = model.getFiles();
+		List<SelectableFile> files = model.getFiles();
 		JPanel all = new JPanel(new BorderLayout());
 		int size = files.size()*140;
 		all.setPreferredSize(new Dimension(270, files.size()*150<=540 ? 540 : size));
 		JPanel content = new JPanel(new GridLayout(files.size(), 1));
 		content.setPreferredSize(new Dimension(270, size));
-		for(SettingsFile file : files) {
-			RowView row = new RowView(file, file==model.getCurrentFile());
+		for(SelectableFile file : files) {
+			RowView row = new RowView((SettingsFile) file, file==model.getCurrentFile());
 			row.addMouseListener(new MouseListener() {
 				public void mouseClicked(MouseEvent e) {}
 				public void mousePressed(MouseEvent e) {

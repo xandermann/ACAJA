@@ -1,8 +1,13 @@
 package gui.general;
 
+import java.io.File;
+import java.util.List;
 import java.util.Observable;
+
+import exceptions.IncorrectFileException;
 import exceptions.UnfindableResourceException;
 import files.files.Modifiable;
+import files.files.SelectableFile;
 import wrapper.streams.managers.consumers.WatchedConsumer;
 
 /**
@@ -69,6 +74,33 @@ public abstract class GeneralModel extends Observable implements Modifiable{
 	 * @throws UnfindableResourceException		Exception sur les ressources introuvables. 
 	 */
 	public abstract void save() throws UnfindableResourceException;
+
+	
+	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
+	
+	
+	public abstract void add(File file)  throws IncorrectFileException, UnfindableResourceException;
+	
+	
+	public abstract void remove(SelectableFile file);
+	
+	
+	public abstract void clear();
+	
+	
+	public abstract SelectableFile getCurrentFile();
+	
+	
+	public abstract void setCurrentFile(SelectableFile file);
+	
+	
+	public abstract List<SelectableFile> getFiles();
+	
 	
 	
 	

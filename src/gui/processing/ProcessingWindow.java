@@ -106,8 +106,7 @@ public class ProcessingWindow extends JFrame {
 			public void actionPerformed(ActionEvent ae) {
 				try {
 					File f = JFileChooserManager.chooseFile();
-					ProcessingFile sf = new ProcessingFile(f);
-					model.setCurentFile(sf);
+					model.setCurrentFile(new ProcessingFile(f));
 				} catch (IncorrectFileException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

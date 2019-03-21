@@ -2,6 +2,7 @@ package gui.processing;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 
 import javax.management.ListenerNotFoundException;
@@ -19,9 +20,9 @@ import wrapper.runtime.global.UserRequests;
 
 public class ProcessingModel extends GeneralModel{
 	
-	private ArrayList<Form> listRect;
+	private List<Form> listRect;
 	private boolean fUp,cropUp;
-	private ProcessingFile curentFile;
+	private ProcessingFile currentFile;
 	private File minia;
 	
 	
@@ -55,7 +56,7 @@ public class ProcessingModel extends GeneralModel{
 		this.cropUp = rectUp;
 		sendChanges();
 	}
-	public ArrayList<Form> getListRect() {
+	public List<Form> getListRect() {
 		return listRect;
 	}
 	public char getType(int pos) {
@@ -64,15 +65,15 @@ public class ProcessingModel extends GeneralModel{
 	public int[] getTabInt(int pos) {
 		return listRect.get(pos).getTab();
 	}
-	public ProcessingFile getCurentFile() {
-		return curentFile;
+	public SelectableFile getCurrentFile() {
+		return currentFile;
 	}
-	public void setCurentFile(ProcessingFile curentFile) {
-		this.curentFile = curentFile;
-		this.setMinia(this.curentFile.getThumbail());
-		this.curentFile.setDestinationPath("."+File.separator+"sorti_temporaire");
-		this.curentFile.setDestinationName("traitement");
-		this.curentFile.setFileExtension(".avi");
+	public void setCurrentFile(SelectableFile currentFile) {
+		this.currentFile = (ProcessingFile) currentFile;
+		this.setMinia(this.currentFile.getThumbail());
+		this.currentFile.setDestinationPath("."+File.separator+"sortie_temporaire");
+		this.currentFile.setDestinationName("traitement");
+		this.currentFile.setFileExtension(".avi");
 		sendChanges();
 	}
 
@@ -88,7 +89,7 @@ public class ProcessingModel extends GeneralModel{
 		Form f = new Form(tab,type);
 		listRect.add(f);
 		System.out.println(a+"-"+b+"-"+c+"-"+d+"-t:"+type);
-		String[] res = this.getCurentFile().getResolution().split("x");
+		String[] res = currentFile.getResolution().split("x");
 		
 		double coeffWidth = ((double)Integer.parseInt(res[0]))/500;
 		double coeffHeight = ((double)Integer.parseInt(res[1]))/350;
@@ -127,13 +128,13 @@ public class ProcessingModel extends GeneralModel{
 
 	@Override
 	public void save() throws UnfindableResourceException {
-		//if(this.curentFile.isModified()) {
-			UserRequests.execute(curentFile);
+		//if(this.currentFile.isModified()) {
+			UserRequests.execute(currentFile);
 		//}
 	}
 	
 	public void modify(OperationType typeSetting, String setting) {
-		this.curentFile.modify(typeSetting, setting);
+		this.currentFile.modify(typeSetting, setting);
 	}
 
 
@@ -146,7 +147,33 @@ public class ProcessingModel extends GeneralModel{
 
 
 
-	
+	@Override
+	public void add(File file) throws IncorrectFileException, UnfindableResourceException {
+		// TODO Auto-generated method stub
+		
+	}
 
 
+
+	@Override
+	public void remove(SelectableFile file) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void clear() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public List<SelectableFile> getFiles() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

@@ -1,10 +1,10 @@
  package gui.general;
 
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-
-import gui.alerts.AlertManager;
-import gui.conversion.ConversionModel;
+import java.awt.event.*;
+import java.io.File;
+import gui.JFileChooserManager;
+import gui.alerts.*;
+import gui.conversion.*;
 import resources.ResourcesManager;
 
 public abstract class GeneralKeyboardController implements KeyListener {
@@ -22,6 +22,8 @@ public abstract class GeneralKeyboardController implements KeyListener {
 				ResourcesManager.clearResources();
 				System.exit(0);
 			break;
+			
+			
 			//CTRL + Q
 			case KeyEvent.VK_Q :
 				if((e.getModifiers() & KeyEvent.CTRL_MASK) != 0) {
@@ -29,15 +31,47 @@ public abstract class GeneralKeyboardController implements KeyListener {
 					System.exit(0);
 				}
 			break;
-			//CTRL + SHIFT + A
+			
+			
 			case KeyEvent.VK_A :
-				if((e.getModifiers() & KeyEvent.CTRL_MASK) != 0 && (e.getModifiers() & KeyEvent.SHIFT_MASK) != 0)
-					AlertManager.INTERRUPTOR = true;
+				if((e.getModifiers() & KeyEvent.CTRL_MASK) != 0 ) {
+					//CTRL + SHIFT + A
+					if((e.getModifiers() & KeyEvent.SHIFT_MASK) != 0) 
+ 						AlertManager.INTERRUPTOR = true;
+ 					else {
+						//CTRL + A
+						if((e.getModifiers() & KeyEvent.CTRL_MASK) != 0) {
+							try {
+								   File f = JFileChooserManager.chooseFile();
+								   GeneralContext.MODEL.add(f);
+									if(GeneralContext.MODEL instanceof ConversionModel && GeneralContext.MODEL.getCurrentFile() == null)
+										((ConversionWindow) GeneralContext.WINDOW).redrawFirstTime();
+								   GeneralContext.MODEL.setCurrentFile(
+										   GeneralContext.MODEL.getFiles().get(GeneralContext.MODEL.getFiles().size()-1));
+									Alert.shortAlert(Alert.SUCCESS, "Import realise avec succes.");
+								} catch (Exception exc) {
+									Alert.shortAlert(Alert.FAILURE, "Echec de l'import.");
+								}
+						}
+					}
+				}
 			break;
+			
+			
 			//CTRL + SHIFT + D
 			case KeyEvent.VK_D :
 				if((e.getModifiers() & KeyEvent.CTRL_MASK) != 0 && (e.getModifiers() & KeyEvent.SHIFT_MASK) != 0)
 					AlertManager.INTERRUPTOR = false;
+			break;
+			
+			
+			case KeyEvent.VK_DELETE :
+				//CTRL + SUPPR
+				if((e.getModifiers() & KeyEvent.CTRL_MASK) != 0)
+					GeneralContext.MODEL.clear();
+				//SUPPR
+				else
+					GeneralContext.MODEL.remove(GeneralContext.MODEL.getCurrentFile()); 
 			break;
 		}
 	}

@@ -1,9 +1,8 @@
 package threads;
 
 import javax.swing.JOptionPane;
-
 import exceptions.UnfindableResourceException;
-import files.files.SettingsFile;
+import files.files.SelectableFile;
 import wrapper.runtime.global.UserRequests;
 
 /**
@@ -16,14 +15,15 @@ public final class ThreadForSave extends Thread{
 	/**
 	 * [ ATTRIBUT D'INSTANCE. ]
 	 */
-	private SettingsFile file;
+	private SelectableFile file;
+	
 	
 	/**
 	 * [ CONSTRUCTEUR INTERNE - ENCAPSULE ]
 	 * 
 	 * @param file		Le fichier a traiter. 
 	 */
-	private ThreadForSave(SettingsFile file) {
+	private ThreadForSave(SelectableFile file) {
 		if((this.file = file) == null)
 			throw new NullPointerException("Le file recu en parametre est null !");
 	}
@@ -46,7 +46,7 @@ public final class ThreadForSave extends Thread{
      * 
      * @param file		Le fichier a traiter.  
      */
-    public static void saveInNewThread(SettingsFile file) {
+    public static void saveInNewThread(SelectableFile file) {
     	(new ThreadForSave(file)).start();
     }
 }

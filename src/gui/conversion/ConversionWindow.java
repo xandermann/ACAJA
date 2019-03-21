@@ -8,7 +8,7 @@ import javax.swing.*;
 import exceptions.*;
 import files.FileInformation;
 import files.enumerations.SettingType;
-import files.files.SettingsFile;
+import files.files.*;
 import gui.JFileChooserManager;
 import gui.WindowTools;
 import gui.alerts.Alert;
@@ -33,7 +33,7 @@ public final class ConversionWindow extends StylizedJFrame {
 	 * [ ATTRRIBUTS D'INSTANCE. ]
 	 */
 	private ConversionModel model;
-	private JLabel EMPTY;
+	private JLabel empty;
 	
 	
 	
@@ -57,7 +57,7 @@ public final class ConversionWindow extends StylizedJFrame {
 			Alert.longAlert(Alert.FAILURE, ure.getMessage());
 		}
 		
-		EMPTY = new JLabel(
+		empty = new JLabel(
 				"<html>" + 
 					"<head>" +
 						"<style>" +
@@ -120,10 +120,10 @@ public final class ConversionWindow extends StylizedJFrame {
 		
 		setJMenuBar(menu);
 		
-		p.add(EMPTY);
+		p.add(empty);
 		setLayout(new BorderLayout());
 		add(p, BorderLayout.CENTER);
-		addKeyListener(new ConversionKeyboardController(model));
+		addKeyListener(new ConversionKeyboardController());
 		
 		WindowTools.executeWindow(this);
 	}
@@ -143,15 +143,15 @@ public final class ConversionWindow extends StylizedJFrame {
 			remove(ConversionContext.CONCERNED_FILE_VIEW);
 		}
 		
-		add(EMPTY);
+		add(empty);
 		
 		revalidate();
 	}
 	
 	
 	
-	private void redrawFirstTime() {
-		remove(EMPTY);
+	public void redrawFirstTime() {
+		remove(empty);
 		
 		JPanel fileConcernedView = ConversionContext.CONCERNED_FILE_VIEW = new StylizedJPanel();
 		fileConcernedView.setLayout(new BoxLayout(fileConcernedView, BoxLayout.Y_AXIS));
@@ -410,21 +410,21 @@ public final class ConversionWindow extends StylizedJFrame {
 		qualityChoice.add(qualityMedium);
 		qualityBad.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				for(SettingsFile f : model.getFiles()) f.modify(SettingType.QUALITY, ValueConstants.WORSE_QUALITY);
+				for(SelectableFile f : model.getFiles()) ((SettingsFile) f).modify(SettingType.QUALITY, ValueConstants.WORSE_QUALITY);
 			}
 		});
 		qualityMedium.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				for(SettingsFile f : model.getFiles()) f.modify(SettingType.QUALITY, ValueConstants.AVERAGE_QUALITY);
+				for(SelectableFile f : model.getFiles()) ((SettingsFile) f).modify(SettingType.QUALITY, ValueConstants.AVERAGE_QUALITY);
 			}
 		});
 		qualityHigh.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				for(SettingsFile f : model.getFiles()) f.modify(SettingType.QUALITY, ValueConstants.BEST_QUALITY);
+				for(SelectableFile f : model.getFiles()) ((SettingsFile) f).modify(SettingType.QUALITY, ValueConstants.BEST_QUALITY);
 			}
 		});
 		qualityMedium.setSelected(true);
-		for(SettingsFile f : model.getFiles()) f.modify(SettingType.QUALITY, ValueConstants.AVERAGE_QUALITY);
+		for(SelectableFile f : model.getFiles()) ((SettingsFile) f).modify(SettingType.QUALITY, ValueConstants.AVERAGE_QUALITY);
 		
 
 		

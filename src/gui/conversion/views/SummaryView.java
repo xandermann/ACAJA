@@ -5,7 +5,7 @@ import java.awt.event.*;
 import java.io.File;
 import java.util.*;
 import javax.swing.*;
-
+import files.files.SettingsFile;
 import files.enumerations.SettingType;
 import gui.conversion.ConversionModel;
 import gui.style.StyleTheme;
@@ -86,8 +86,8 @@ public final class SummaryView extends StylizedJPanel implements Observer {
 	public void update(Observable o, Object arg) {
 		if (model.getCurrentFile() != null) {
 			inputFileLabel.setText(model.getCurrentFile().getSourceFileName());
-			videoLabel.setText(model.getCurrentFile().getSettings().get(SettingType.VIDEO_CODEC));
-			soundLabel.setText(model.getCurrentFile().getSettings().get(SettingType.AUDIO_CODEC));
+			videoLabel.setText(((SettingsFile) model.getCurrentFile()).getSettings().get(SettingType.VIDEO_CODEC));
+			soundLabel.setText(((SettingsFile) model.getCurrentFile()).getSettings().get(SettingType.AUDIO_CODEC));
 			durationLabel.setText(model.getCurrentFile().getDuration());
 			if(model.getCurrentFile().getDestinationFileName() == "")
 				outputFileText.setText(model.getCurrentFile().getSourceFileNameWithoutExtension());

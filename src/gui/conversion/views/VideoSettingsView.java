@@ -7,7 +7,7 @@ import java.util.List;
 
 import javax.swing.*;
 import files.enumerations.SettingType;
-import files.files.SettingsFile;
+import files.files.*;
 import gui.conversion.ConversionModel;
 import gui.style.StylizedJPanel;
 import wrapper.language.*;
@@ -34,13 +34,13 @@ public final class VideoSettingsView extends SettingsView{
 				
 			if(model.getCurrentFile() != null) {
 				String videoFormat = formatComboBox.getSelectedItem().toString();
-				model.getCurrentFile().modify(SettingType.VIDEO_FORMAT, videoFormat);
+				((Modifiable) model.getCurrentFile()).modify(SettingType.VIDEO_FORMAT, videoFormat);
 				Map<String,List<String>> codecs = CodecConstants.CORRESPONDING_EXTENSION.get(videoFormat);
 				String[] videoCodecs = Arrays.copyOf(codecs.keySet().toArray(), codecs.keySet().toArray().length, String[].class);
 				codecsComboBox.removeAllItems();
 				codecsComboBox.setModel(new DefaultComboBoxModel(videoCodecs));
 				codecsComboBox.setSelectedIndex(0);
-				model.getCurrentFile().modify(SettingType.VIDEO_CODEC, codecsComboBox.getSelectedItem().toString());
+				((Modifiable) model.getCurrentFile()).modify(SettingType.VIDEO_CODEC, codecsComboBox.getSelectedItem().toString());
 				ssp.updateAudioCodecs();
 				model.setExtension(videoFormat);
 			}
@@ -144,7 +144,7 @@ public final class VideoSettingsView extends SettingsView{
 	public void update(Observable o, Object arg) {
 		isChange = false;
 		if(model.getCurrentFile() != null){
-		     SettingsFile settings = model.getCurrentFile();
+		     SettingsFile settings = (SettingsFile) model.getCurrentFile();
 		     formatComboBox.setSelectedItem(settings.recent(SettingType.VIDEO_FORMAT));
 		     codecsComboBox.setSelectedItem(settings.recent(SettingType.VIDEO_CODEC));
 		     resolutionsComboBox.setSelectedItem(settings.recent(SettingType.RESOLUTION));

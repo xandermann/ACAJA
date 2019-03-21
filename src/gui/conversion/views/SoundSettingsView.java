@@ -28,8 +28,8 @@ public final class SoundSettingsView extends SettingsView{
 	
 	public void updateAudioCodecs() {
 		if(isChange == true) {
-			String videoFormat = model.getCurrentFile().recent(SettingType.VIDEO_FORMAT);
-			String codecFormat = model.getCurrentFile().recent(SettingType.VIDEO_CODEC);
+			String videoFormat = ((SettingsFile) model.getCurrentFile()).recent(SettingType.VIDEO_FORMAT);
+			String codecFormat = ((SettingsFile) model.getCurrentFile()).recent(SettingType.VIDEO_CODEC);
 			if(videoFormat != null && codecFormat != null) {
 				Map<String,List<String>> codecs = CodecConstants.CORRESPONDING_EXTENSION.get(videoFormat);
 				List<String> codecsAudio = new ArrayList<String>();
@@ -128,7 +128,7 @@ public final class SoundSettingsView extends SettingsView{
 	public void update(Observable o, Object arg) {
 		isChange = false;
 		if(model.getCurrentFile() != null){
-			SettingsFile settings = model.getCurrentFile();
+			SettingsFile settings = (SettingsFile) model.getCurrentFile();
 			codecsComboBox.setSelectedItem(settings.recent(SettingType.AUDIO_CODEC));
 			bitrateText.setText(settings.recent(SettingType.AUDIO_BITRATE));
 			samplingRateText.setText(settings.recent(SettingType.SAMPLING_RATE));

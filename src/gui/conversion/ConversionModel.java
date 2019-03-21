@@ -3,20 +3,14 @@ package gui.conversion;
 import java.io.*;
 import java.util.*;
 import javax.swing.*;
-import exceptions.IncorrectFileException;
-import exceptions.UnfindableResourceException;
+import exceptions.*;
 import files.*;
 import files.enumerations.OperationType;
-import files.files.SettingsFile;
-import gui.alerts.AMConstants;
-import gui.alerts.Alert;
-import gui.alerts.AlertWindow;
+import files.files.*;
+import gui.alerts.*;
 import gui.general.GeneralModel;
-import resources.ResourceConstants;
-import resources.ResourcesManager;
-import threads.RuntimeSpaceManager;
-import threads.ThreadForSave;
-import threads.ThreadForWaitWindow;
+import resources.*;
+import threads.*;
 
 
 /**
@@ -39,9 +33,9 @@ public final class ConversionModel extends GeneralModel{
 	 */
 	
 	//Fichier courant. 
-	private SettingsFile currentFile;
+	private SelectableFile currentFile;
 	//Liste des fichiers siur lesquels on travaille. 
-	private List<SettingsFile> files;
+	private List<SelectableFile> files;
 	//Tableau des fichiers precedemment importes.
 	private FileInformation[] oldImportedFiles;
 	//Repertoire de destination des fichiers exportes.
@@ -58,7 +52,7 @@ public final class ConversionModel extends GeneralModel{
 	 * [ CONSTRUCTEUR. ]
 	 */
 	public ConversionModel() {
-		files = new ArrayList<SettingsFile>();
+		files = new ArrayList<SelectableFile>();
 		oldImportedFiles = new FileInformation[10]; // maximum 10 last files
 		destinationFolder = null;
 	}
@@ -208,11 +202,11 @@ public final class ConversionModel extends GeneralModel{
 	 * 
 	 * Methode pour supprimer un fichier de la bibliotheque. 
 	 * 
-	 * @param file SettingsFile Le fichier a supprimer de la bibliotheque.
+	 * @param file Le fichier a supprimer de la bibliotheque.
 	 */
-	public void remove(SettingsFile file) {
+	public void remove(SelectableFile file) {
 		if(files.contains(file)) {
-			files.remove(file);
+			files.remove(file); 
 			currentFile = null;
 			
 			if(files.isEmpty()) 
@@ -252,10 +246,10 @@ public final class ConversionModel extends GeneralModel{
 	 */
 	public boolean isModified() {
 		boolean isModified = false;
-		for(SettingsFile sf : files) {
-			if(sf.isModified()) {
+		for(SelectableFile f : files) {
+			if(((Modifiable) f).isModified()) {
 				isModified = true;
-				if(sf.getDestinationFileName().equals("") || sf.getDestinationFileName().startsWith(".")) 
+				if(f.getDestinationFileName().equals("") || f.getDestinationFileName().startsWith(".")) 
 					return false;
 			}
 		}
@@ -270,7 +264,7 @@ public final class ConversionModel extends GeneralModel{
 	 * actuellement selectionne
 	 */
 	public void modify(OperationType typeSetting, String setting) {
-		currentFile.modify(typeSetting, setting);
+		((Modifiable) currentFile).modify(typeSetting, setting);
 	}
 	
 	
@@ -298,8 +292,8 @@ public final class ConversionModel extends GeneralModel{
 	 * @throws UnfindableResourceException 		Exception sur les ressources introuvables. 
 	 */
 	public void save() throws UnfindableResourceException {
-		for(SettingsFile sf : files) {
-			if(sf.isModified()) {
+		for(SelectableFile f : files) {
+			if(((Modifiable) f).isModified()) {
 				new Thread() {
 					public void run (){
 						/**
@@ -317,15 +311,15 @@ public final class ConversionModel extends GeneralModel{
 						/**
 						 * LANCEMENT DE LA CONVERSION DANS UN AUTRE PROCESSUS.
 						 */
-						ThreadForSave.saveInNewThread(sf);
+						ThreadForSave.saveInNewThread(f);
 						/**
 						 * LANCEMENT ET GESTION DE LA FENETRE D'ATTENTE DANS UN AUTRE PROCESSUS.
 						 */
 						ThreadForWaitWindow.waitInNewThread(
 								new AlertWindow(
 										"Conversion en evolution.",
-										"Conversion du fichier "+sf.getSourceFileName()+"<br>Veuillez patientez..."),
-								sf.getSourceFile());
+										"Conversion du fichier "+f.getSourceFileName()+"<br>Veuillez patientez..."),
+								f.getSourceFile());
 					}
 				}.start();
 			}
@@ -344,10 +338,10 @@ public final class ConversionModel extends GeneralModel{
 	 * 
 	 * Methode qui retourne le fichier actuellement selectionne par l'utilisateur
 	 * 
-	 * @return currentFile SettingsFile : fichier actuellement selectionne pour la
+	 * @return currentFile : fichier actuellement selectionne pour la
 	 *         modification par l'utilisateur
 	 */
-	public SettingsFile getCurrentFile() {
+	public SelectableFile getCurrentFile() {
 		return currentFile;
 	}
 
@@ -358,8 +352,8 @@ public final class ConversionModel extends GeneralModel{
 	 * Methode pour modifier le fichier actuellement 
 	 * selectionne par l'utilisateur
 	 */
-	public void setCurrentFile(SettingsFile file) {
-		currentFile = file;
+	public void setCurrentFile(SelectableFile file) {
+		currentFile = (SettingsFile) file;
 		sendChanges();
 	}
 	
@@ -369,7 +363,7 @@ public final class ConversionModel extends GeneralModel{
 	 * 
 	 * Methode qui retourne la liste des fichiers actuellement dans la bibliotheque.
 	 */
-	public List<SettingsFile> getFiles() {
+	public List<SelectableFile> getFiles() {
 		return files;
 	}
 	
@@ -393,7 +387,7 @@ public final class ConversionModel extends GeneralModel{
 	 */
 	public void setDestinationFolder(File destinationFolder) {
 		this.destinationFolder = destinationFolder;
-		for(SettingsFile f : files) {
+		for(SelectableFile f : files) {
 			f.setDestinationPath(destinationFolder.getPath());
 		}
 	}

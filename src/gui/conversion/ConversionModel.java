@@ -323,7 +323,7 @@ public final class ConversionModel extends GeneralModel{
 						 */
 						ThreadForWaitWindow.waitInNewThread(
 								new AlertWindow(
-										"Conversion en evolution.",
+										AlertWindow.INFO,
 										"Conversion du fichier "+f.getSourceFileName()+"<br>Veuillez patientez..."),
 								f.getSourceFile());
 					}

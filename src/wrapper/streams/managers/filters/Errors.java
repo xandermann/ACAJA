@@ -6,8 +6,8 @@ public class Errors {
 	
 	static {
 		errors = new ArrayList<String>();
-		errors.add("conversionfailed!");
-		errors.add("unkownencoder");
+		errors.add("conversionfailed");
+		errors.add("unknownencoder");
 	}
 	
 	

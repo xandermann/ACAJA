@@ -44,7 +44,7 @@ public class GeneralKeyboardController implements KeyListener {
 				if((e.getModifiers() & KeyEvent.CTRL_MASK) != 0 ) {
 					//CTRL + SHIFT + A
 					if((e.getModifiers() & KeyEvent.SHIFT_MASK) != 0) 
- 						AlertManager.INTERRUPTOR = true;
+ 						AlertSettings.INTERRUPTOR = true;
 					//CTRL + A
  					else
 						GeneralActions.input();
@@ -56,7 +56,7 @@ public class GeneralKeyboardController implements KeyListener {
 				if((e.getModifiers() & KeyEvent.CTRL_MASK) != 0 ) {
 					//CTRL + SHIFT + D
 					if((e.getModifiers() & KeyEvent.SHIFT_MASK) != 0) 
-						AlertManager.INTERRUPTOR = false;
+						AlertSettings.INTERRUPTOR = false;
 					//CTRL + D
  					else 
 						GeneralActions.inputs();

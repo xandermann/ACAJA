@@ -3,7 +3,7 @@
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import gui.alerts.AlertManager;
+import gui.alerts.AlertSettings;
 import gui.general.GeneralKeyboardController;
 import resources.ResourcesManager;
 

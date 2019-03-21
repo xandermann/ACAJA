@@ -27,24 +27,24 @@ public final class ASView extends StylizedJPanel {
 		
 		
 		JSlider js1 = new JSlider(0,10);
-		js1.setValue(AlertManager.SHORT/1000);
+		js1.setValue(AlertSettings.SHORT/1000);
 		js1.addMouseListener(new MouseListener() {
 			public void mouseClicked(MouseEvent e) {}
 			public void mousePressed(MouseEvent e) {}
 			public void mouseReleased(MouseEvent e) {
-				AlertManager.SHORT = js1.getValue()*1000;
+				AlertSettings.SHORT = js1.getValue()*1000;
 			}
 			public void mouseEntered(MouseEvent e) {}
 			public void mouseExited(MouseEvent e) {}
 		});
 		
 		JSlider js2 =  new JSlider(0,10);
-		js2.setValue(AlertManager.LONG/1000);
+		js2.setValue(AlertSettings.LONG/1000);
 		js2.addMouseListener(new MouseListener() {
 			public void mouseClicked(MouseEvent e) {}
 			public void mousePressed(MouseEvent e) {}
 			public void mouseReleased(MouseEvent e) {
-				AlertManager.LONG = js2.getValue()*1000;
+				AlertSettings.LONG = js2.getValue()*1000;
 			}
 			public void mouseEntered(MouseEvent e) {}
 			public void mouseExited(MouseEvent e) {}
@@ -93,27 +93,27 @@ public final class ASView extends StylizedJPanel {
 		
 		ButtonGroup bg = new ButtonGroup();
 		JRadioButton jr1 = new JRadioButton("oui");
-		jr1.setSelected(AlertManager.INTERRUPTOR);
+		jr1.setSelected(AlertSettings.INTERRUPTOR);
 		jr1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AlertManager.INTERRUPTOR = true;
+				AlertSettings.INTERRUPTOR = true;
 				js1.setEnabled(true);
 				js2.setEnabled(true);
 			}
 		});
 		
 		JRadioButton jr2 = new JRadioButton("non");
-		jr2.setSelected(!AlertManager.INTERRUPTOR);
+		jr2.setSelected(!AlertSettings.INTERRUPTOR);
 		jr2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AlertManager.INTERRUPTOR = false;
+				AlertSettings.INTERRUPTOR = false;
 				js1.setEnabled(false);
 				js2.setEnabled(false);
 			}
 		});
 		
-		js1.setEnabled(AlertManager.INTERRUPTOR);
-		js2.setEnabled(AlertManager.INTERRUPTOR);
+		js1.setEnabled(AlertSettings.INTERRUPTOR);
+		js2.setEnabled(AlertSettings.INTERRUPTOR);
 		
 		bg.add(jr1);
 		bg.add(jr2);

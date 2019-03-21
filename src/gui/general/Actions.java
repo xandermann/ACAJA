@@ -20,10 +20,10 @@ public final class Actions {
 	public static void input() {
 		try {
 			   File f = JFileChooserManager.chooseFile();
-			   GeneralContext.$M.add(f);
-				if(GeneralContext.$M instanceof ConversionModel && GeneralContext.$M.getCurrentFile() == null)
-					((ConversionWindow) GeneralContext.$W).redrawFirstTime();
-			   GeneralContext.$M.setCurrentFile(GeneralContext.$M.getFiles().get(GeneralContext.$M.getFiles().size()-1));
+			   Context.$M.add(f);
+				if(Context.$M instanceof ConversionModel && Context.$M.getCurrentFile() == null)
+					((ConversionWindow) Context.$W).redrawFirstTime();
+			   Context.$M.setCurrentFile(Context.$M.getFiles().get(Context.$M.getFiles().size()-1));
 				Alert.shortAlert(Alert.SUCCESS, "Import realise avec succes.");
 	    } catch (Exception e) {
 				Alert.shortAlert(Alert.FAILURE, "Echec de l'import.");
@@ -38,10 +38,10 @@ public final class Actions {
 		try {
 			ArrayList<File> files = JFileChooserManager.chooseDirectoryAndListSonFiles();
 			for (File f : files) {
-				GeneralContext.$M.add(f);
-				if(GeneralContext.$M instanceof ConversionModel && GeneralContext.$M.getCurrentFile() == null)
-					((ConversionWindow) GeneralContext.$W).redrawFirstTime();
-				GeneralContext.$M.setCurrentFile(GeneralContext.$M.getFiles().get(GeneralContext.$M.getFiles().size()-1));
+				Context.$M.add(f);
+				if(Context.$M instanceof ConversionModel && Context.$M.getCurrentFile() == null)
+					((ConversionWindow) Context.$W).redrawFirstTime();
+				Context.$M.setCurrentFile(Context.$M.getFiles().get(Context.$M.getFiles().size()-1));
 			}
 			Alert.shortAlert(Alert.SUCCESS, "Import realise avec succes.");
 		} catch (Exception e) {

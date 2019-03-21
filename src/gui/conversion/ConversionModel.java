@@ -8,6 +8,7 @@ import files.*;
 import files.enumerations.OperationType;
 import files.files.*;
 import gui.alerts.*;
+import gui.general.Context;
 import gui.general.GeneralModel;
 import resources.*;
 import threads.*;
@@ -52,7 +53,7 @@ public final class ConversionModel extends GeneralModel{
 	 * [ CONSTRUCTEUR. ]
 	 */
 	public ConversionModel() {
-		ConversionContext.$M = this;
+		Context.$M = this;
 		files = new ArrayList<SelectableFile>();
 		/**
 		 * MAXIMUM DE 10 FICHIERS ANTERIEURS.
@@ -215,7 +216,7 @@ public final class ConversionModel extends GeneralModel{
 			currentFile = null;
 			
 			if(files.isEmpty()) 
-				((ConversionWindow) ConversionContext.$W).redrawEmpty();
+				((ConversionWindow) Context.$W).redrawEmpty();
 			else
 				currentFile = files.get(0);
 			
@@ -235,7 +236,7 @@ public final class ConversionModel extends GeneralModel{
 		currentFile = null;
 		files.clear();
 		sendChanges();
-		((ConversionWindow) ConversionContext.$W).redrawEmpty();
+		((ConversionWindow) Context.$W).redrawEmpty();
 		Alert.shortAlert(Alert.SUCCESS, "Bibliotheque videe avec succes.");
 	}
 

@@ -17,6 +17,7 @@ public final class TwoTextsView extends JLabel {
 	private int sizeFirst, sizeTwo;
 	
 	
+	
 	/**
 	 *  [ CONSTRUIT UN TEXTE PROPRE ET FORMATE. ]
 	 *  
@@ -26,9 +27,15 @@ public final class TwoTextsView extends JLabel {
 	 * @param sizeTwo			Police du second texte (en px). 
 	 */
 	public TwoTextsView(String first, int sizeFirst, String two, int sizeTwo) {
-		setText(firstText(first, sizeFirst, two, sizeTwo));
+		if((this.first=first)==null) throw new NullPointerException("Premier texte null !");
+		if((this.two=two)==null) throw new NullPointerException("Second texte null !");
+		if((this.sizeFirst=sizeFirst)<=0) throw new IllegalArgumentException("Police incorrecte !");
+		if((this.sizeTwo=sizeTwo)<=0) throw new IllegalArgumentException("Police incorrecte  !");
+		
+		setText(text());
 		setHorizontalAlignment(JLabel.CENTER);
 	}
+	
 	
 	
 	/**
@@ -66,26 +73,6 @@ public final class TwoTextsView extends JLabel {
 		"</html>";
 	}
 	
-	
-	
-	/**
-	 * [ GENERE LE CODE HTML/CSS. ]
-	 * 
-	 * @param first				Premier texte a injecter. 
-	 * @param sizeFirst			Police du premier texte (en px). 
-	 * @param two				Second texte a injecter. 
-	 * @param sizeTwo			Police du second texte (en px). 
-	 * 
-	 * @return	Le code HTML/CSS constiuant la vue. 
-	 */
-	private String firstText(String first, int sizeFirst, String two, int sizeTwo) {
-		if((this.first=first)==null) throw new NullPointerException("Premier texte null !");
-		if((this.two=two)==null) throw new NullPointerException("Second texte null !");
-		if((this.sizeFirst=sizeFirst)<=0) throw new IllegalArgumentException("Police incorrecte !");
-		if((this.sizeTwo=sizeTwo)<=0) throw new IllegalArgumentException("Police incorrecte  !");
-		return text();
-	}
-
 	
 	
 	/**

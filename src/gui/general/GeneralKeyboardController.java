@@ -67,10 +67,10 @@ public class GeneralKeyboardController implements KeyListener {
 			case KeyEvent.VK_DELETE :
 				//CTRL + SUPPR
 				if((e.getModifiers() & KeyEvent.CTRL_MASK) != 0)
-					GeneralContext.$M.clear();
+					Context.$M.clear();
 				//SUPPR
 				else
-					GeneralContext.$M.remove(GeneralContext.$M.getCurrentFile()); 
+					Context.$M.remove(Context.$M.getCurrentFile()); 
 			break;
 		}
 	}

@@ -1,11 +1,7 @@
 package gui.conversion.views;
 
 import javax.swing.JTabbedPane;
-import javax.swing.event.ChangeEvent;
-
-import gui.conversion.ConversionContext;
-import gui.conversion.ConversionModel;
-import gui.general.GeneralContext;
+import gui.general.Context;
 
 public final class TabsView extends JTabbedPane{
 	public TabsView() {
@@ -14,7 +10,7 @@ public final class TabsView extends JTabbedPane{
 		VideoSettingsView vsp = new VideoSettingsView(ssp);
 		add("Video",vsp);
 		add("Son",ssp);
-		ConversionContext.$M.addObserver(vsp);
-		ConversionContext.$M.addObserver(ssp);
+		Context.$M.addObserver(vsp);
+		Context.$M.addObserver(ssp);
 	}
 }

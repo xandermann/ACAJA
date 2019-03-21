@@ -2,15 +2,13 @@ package gui.conversion.views;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.io.File;
 import java.util.*;
 import javax.swing.*;
 import files.files.SettingsFile;
 import files.enumerations.SettingType;
-import gui.conversion.ConversionContext;
-import gui.conversion.ConversionModel;
-import gui.style.StyleTheme;
+import gui.general.Context;
 import gui.style.StylizedJPanel;
+import gui.conversion.ConversionModel;
 
 public final class SummaryView extends StylizedJPanel implements Observer {
 	//=======================================================================================================================
@@ -60,8 +58,8 @@ public final class SummaryView extends StylizedJPanel implements Observer {
 			public void keyPressed(KeyEvent e) {}
 			public void keyTyped(KeyEvent e) {}
 			public void keyReleased(KeyEvent e) {
-				if(ConversionContext.$M.getCurrentFile() != null) 
-					((ConversionModel) ConversionContext.$M).setDestination(outputFileText.getText());
+				if(Context.$M.getCurrentFile() != null) 
+					((ConversionModel) Context.$M).setDestination(outputFileText.getText());
 			}
 		});
 		
@@ -80,15 +78,15 @@ public final class SummaryView extends StylizedJPanel implements Observer {
 	
 	@Override
 	public void update(Observable o, Object arg) {
-		if (ConversionContext.$M.getCurrentFile() != null) {
-			inputFileLabel.$(ConversionContext.$M.getCurrentFile().getSourceFileName());
-			videoLabel.$(((SettingsFile) ConversionContext.$M.getCurrentFile()).getSettings().get(SettingType.VIDEO_CODEC));
-			soundLabel.$(((SettingsFile) ConversionContext.$M.getCurrentFile()).getSettings().get(SettingType.AUDIO_CODEC));
-			durationLabel.$(ConversionContext.$M.getCurrentFile().getDuration());
-			if(ConversionContext.$M.getCurrentFile().getDestinationFileName() == "")
-				outputFileText.setText(ConversionContext.$M.getCurrentFile().getSourceFileNameWithoutExtension());
+		if (Context.$M.getCurrentFile() != null) {
+			inputFileLabel.$(Context.$M.getCurrentFile().getSourceFileName());
+			videoLabel.$(((SettingsFile) Context.$M.getCurrentFile()).getSettings().get(SettingType.VIDEO_CODEC));
+			soundLabel.$(((SettingsFile) Context.$M.getCurrentFile()).getSettings().get(SettingType.AUDIO_CODEC));
+			durationLabel.$(Context.$M.getCurrentFile().getDuration());
+			if(Context.$M.getCurrentFile().getDestinationFileName() == "")
+				outputFileText.setText(Context.$M.getCurrentFile().getSourceFileNameWithoutExtension());
 			else
-				outputFileText.setText(ConversionContext.$M.getCurrentFile().getDestinationFileName());
+				outputFileText.setText(Context.$M.getCurrentFile().getDestinationFileName());
 		} else {
 			inputFileLabel.setText("NA");
 			videoLabel.setText("NA");

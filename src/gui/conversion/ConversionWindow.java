@@ -16,6 +16,7 @@ import gui.alerts.ASWindow;
 import gui.answers.AnswersWindow;
 import gui.conversion.views.*;
 import gui.general.Actions;
+import gui.general.Context;
 import gui.processing.ProcessingWindow;
 import gui.style.*;
 import resources.ResourcesManager;
@@ -34,6 +35,8 @@ public final class ConversionWindow extends StylizedJFrame {
 	 * [ ATTRIBUTS D'INSTANCE. ]
 	 */
 	private JLabel empty;
+	private LibraryView libraryView;
+	private JPanel concernedFileView;
 	
 	
 	
@@ -48,11 +51,11 @@ public final class ConversionWindow extends StylizedJFrame {
 	public ConversionWindow() {
 		super();
 		
-		ConversionContext.$W = this;
+		Context.$W = this;
 		new ConversionModel();
 		
 		try {
-			((ConversionModel) ConversionContext.$M).loadOldImports();
+			((ConversionModel) Context.$M).loadOldImports();
 		} catch (UnfindableResourceException ure) {
 			Alert.longAlert(Alert.FAILURE, ure.getMessage());
 		}
@@ -109,9 +112,9 @@ public final class ConversionWindow extends StylizedJFrame {
 	
 	
 	public void redrawEmpty() {
-		if(ConversionContext.LIBRARY != null) {
-			remove(ConversionContext.LIBRARY);
-			remove(ConversionContext.CONCERNED_FILE_VIEW);
+		if(libraryView != null) {
+			remove(libraryView);
+			remove(concernedFileView);
 			add(empty);
 			revalidate();
 		}
@@ -122,23 +125,23 @@ public final class ConversionWindow extends StylizedJFrame {
 	public void redrawFirstTime() {
 		remove(empty);
 		
-		JPanel fileConcernedView = ConversionContext.CONCERNED_FILE_VIEW = new StylizedJPanel();
-		fileConcernedView.setLayout(new BoxLayout(fileConcernedView, BoxLayout.Y_AXIS));
+		concernedFileView = new StylizedJPanel();
+		concernedFileView.setLayout(new BoxLayout(concernedFileView, BoxLayout.Y_AXIS));
 		
 		SummaryView sv = new SummaryView();
 		TabsView tv = new TabsView();
-		fileConcernedView.add(sv);
-		fileConcernedView.add(tv);
+		concernedFileView.add(sv);
+		concernedFileView.add(tv);
 		
-		LibraryView lv = ConversionContext.LIBRARY = new LibraryView();
+		libraryView = new LibraryView();
 		
 		sv.setBackground(Color.LIGHT_GRAY);
-		fileConcernedView.setBackground(Color.LIGHT_GRAY);
-		add(lv, BorderLayout.WEST);
-		add(fileConcernedView, BorderLayout.EAST);
+		concernedFileView.setBackground(Color.LIGHT_GRAY);
+		add(libraryView, BorderLayout.WEST);
+		add(concernedFileView, BorderLayout.EAST);
 		
-		ConversionContext.$M.addObserver(sv);
-		ConversionContext.$M.addObserver(lv);
+		Context.$M.addObserver(sv);
+		Context.$M.addObserver(libraryView);
 		
 		revalidate();
 	}
@@ -176,7 +179,7 @@ public final class ConversionWindow extends StylizedJFrame {
 		
 		
 		JMenu recentFiles = new JMenu("Fichiers recemments importes");
-		FileInformation[] files = ((ConversionModel) ConversionContext.$M).getOldImports();
+		FileInformation[] files = ((ConversionModel) Context.$M).getOldImports();
 		for(FileInformation f : files) {
 			if(f != null) {
 				StylizedJMenuItem itemFile = new StylizedJMenuItem(f.getFileName());
@@ -186,11 +189,11 @@ public final class ConversionWindow extends StylizedJFrame {
 					public void actionPerformed(ActionEvent ae) {
 						try {
 							File file = new File(f.getPath());
-							ConversionContext.$M.add(file);
+							Context.$M.add(file);
 							System.out.println(1);
-							if (ConversionContext.$M.getCurrentFile() == null) redrawFirstTime();
+							if (Context.$M.getCurrentFile() == null) redrawFirstTime();
 							System.out.println(2);
-							ConversionContext.$M.setCurrentFile(ConversionContext.$M.getFiles().get(ConversionContext.$M.getFiles().size()-1));
+							Context.$M.setCurrentFile(Context.$M.getFiles().get(Context.$M.getFiles().size()-1));
 							System.out.println(3);
 							Alert.shortAlert(Alert.SUCCESS, "Import realise avec succes.");
 						} catch(Exception e) {
@@ -205,7 +208,7 @@ public final class ConversionWindow extends StylizedJFrame {
 		StylizedJMenuItem clearLibrary = new StylizedJMenuItem("Vider la bibliotheque");
 		clearLibrary.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
-				ConversionContext.$M.clear();
+				Context.$M.clear();
 			}
 		});
 
@@ -252,7 +255,7 @@ public final class ConversionWindow extends StylizedJFrame {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
 				try {
-					((ConversionModel) ConversionContext.$M).setDestinationFolder(JFileChooserManager.chooseDirectory());
+					((ConversionModel) Context.$M).setDestinationFolder(JFileChooserManager.chooseDirectory());
 					Alert.shortAlert(Alert.SUCCESS, "Chemin de destination des fichiers <br>enregistre.");
 				} catch (IllegalArgumentException iae) {}
 			}
@@ -326,8 +329,8 @@ public final class ConversionWindow extends StylizedJFrame {
 		
 		title.add(new JLabel("<html><br> REPERTOIRE DE SORTIE ET QUALITE ? </html>",JLabel.CENTER),BorderLayout.CENTER);
 		
-		JLabel outputFolder = ((ConversionModel) ConversionContext.$M).getDestinationFolder() != null ?
-		new JLabel(((ConversionModel) ConversionContext.$M).getDestinationFolder().getAbsolutePath(), JLabel.CENTER)
+		JLabel outputFolder = ((ConversionModel) Context.$M).getDestinationFolder() != null ?
+		new JLabel(((ConversionModel) Context.$M).getDestinationFolder().getAbsolutePath(), JLabel.CENTER)
 		: new JLabel("Auncun reperoire de sortie selectionne.", JLabel.CENTER);
 		
 		JPanel folder  = new JPanel(new BorderLayout());
@@ -341,8 +344,8 @@ public final class ConversionWindow extends StylizedJFrame {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
 				try {
-					((ConversionModel) ConversionContext.$M).setDestinationFolder(JFileChooserManager.chooseDirectory());
-					outputFolder.setText(((ConversionModel) ConversionContext.$M).getDestinationFolder().getAbsolutePath());
+					((ConversionModel) Context.$M).setDestinationFolder(JFileChooserManager.chooseDirectory());
+					outputFolder.setText(((ConversionModel) Context.$M).getDestinationFolder().getAbsolutePath());
 				} catch (IllegalArgumentException iae) {}
 			}
 		});
@@ -364,31 +367,31 @@ public final class ConversionWindow extends StylizedJFrame {
 		qualityChoice.add(qualityMedium);
 		qualityBad.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				for(SelectableFile f : ConversionContext.$M.getFiles()) ((SettingsFile) f).modify(SettingType.QUALITY, ValueConstants.WORSE_QUALITY);
+				for(SelectableFile f : Context.$M.getFiles()) ((SettingsFile) f).modify(SettingType.QUALITY, ValueConstants.WORSE_QUALITY);
 			}
 		});
 		qualityMedium.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				for(SelectableFile f : ConversionContext.$M.getFiles()) ((SettingsFile) f).modify(SettingType.QUALITY, ValueConstants.AVERAGE_QUALITY);
+				for(SelectableFile f : Context.$M.getFiles()) ((SettingsFile) f).modify(SettingType.QUALITY, ValueConstants.AVERAGE_QUALITY);
 			}
 		});
 		qualityHigh.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				for(SelectableFile f : ConversionContext.$M.getFiles()) ((SettingsFile) f).modify(SettingType.QUALITY, ValueConstants.BEST_QUALITY);
+				for(SelectableFile f : Context.$M.getFiles()) ((SettingsFile) f).modify(SettingType.QUALITY, ValueConstants.BEST_QUALITY);
 			}
 		});
 		qualityMedium.setSelected(true);
-		for(SelectableFile f : ConversionContext.$M.getFiles()) ((SettingsFile) f).modify(SettingType.QUALITY, ValueConstants.AVERAGE_QUALITY);
+		for(SelectableFile f : Context.$M.getFiles()) ((SettingsFile) f).modify(SettingType.QUALITY, ValueConstants.AVERAGE_QUALITY);
 		
 
 		
 		StylizedJButton buttonConvert = new StylizedJButton("Convertir");
 		buttonConvert.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(((ConversionModel) ConversionContext.$M).getDestinationFolder() != null) {
+				if(((ConversionModel) Context.$M).getDestinationFolder() != null) {
 					outputWindow.dispose();
 					try {
-						ConversionContext.$M.save();
+						Context.$M.save();
 					} catch (UnfindableResourceException ure) {
 						Alert.longAlert(Alert.FAILURE, ure.getMessage());
 					}
@@ -430,7 +433,7 @@ public final class ConversionWindow extends StylizedJFrame {
 		convertItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(RuntimeSpaceManager.manage() && ConversionContext.$M.isModified()) {
+				if(RuntimeSpaceManager.manage() && Context.$M.isModified()) {
 					drawConvertWindow();
 					Alert.longAlert(
 							Alert.INFO, 

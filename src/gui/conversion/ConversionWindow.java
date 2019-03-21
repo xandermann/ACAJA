@@ -33,7 +33,7 @@ public final class ConversionWindow extends StylizedJFrame {
 	 * [ ATTRRIBUTS D'INSTANCE. ]
 	 */
 	private ConversionModel model;
-	private JLabel empty_workspace;
+	private JLabel EMPTY;
 	
 	
 	
@@ -45,15 +45,19 @@ public final class ConversionWindow extends StylizedJFrame {
 	/**
 	 * [ CONSTRUCTEUR INTERNE - ENCAPSULE. ]
 	 */
-	private ConversionWindow() {
+	public ConversionWindow() {
 		super();
-		model = new ConversionModel();
+		
+		ConversionContext.WINDOW = this;
+		ConversionContext.MODEL = model = new ConversionModel();
+		
 		try {
 			model.loadOldImports();
 		} catch (UnfindableResourceException ure) {
-			JOptionPane.showMessageDialog(null, ure.getMessage());
+			Alert.longAlert(Alert.FAILURE, ure.getMessage());
 		}
-		empty_workspace = new JLabel(
+		
+		EMPTY = new JLabel(
 				"<html>" + 
 					"<head>" +
 						"<style>" +
@@ -83,35 +87,91 @@ public final class ConversionWindow extends StylizedJFrame {
 						"</div>"+
 					"</body>" + 
 				"</html>", JLabel.CENTER);
+		
+		
+		addWindowListener(new WindowListener() {
+			public void windowOpened(WindowEvent e) {}
+			public void windowClosing(WindowEvent e) {
+				ResourcesManager.clearResources();
+			}
+			public void windowClosed(WindowEvent e) {}
+			public void windowIconified(WindowEvent e) {}
+			public void windowDeiconified(WindowEvent e) {}
+			public void windowActivated(WindowEvent e) {}
+			public void windowDeactivated(WindowEvent e) {}
+		});
+		
+		
+		setResizable(false);
+		setTitle("Acaja - Mode Conversion");
+		setSize(new Dimension(600, 600));
+		setLocationRelativeTo(null);
+		setDefaultCloseOperation(StylizedJFrame.EXIT_ON_CLOSE);
+
+		WindowTools.showLogo(this);
+		
+		StylizedJPanel p = new StylizedJPanel();
+		p.setLayout(new BorderLayout());
+		StylizedJMenuBar menu = new StylizedJMenuBar();
+		
+		menu.add(drawFileMenu());
+		menu.add(drawOptionsMenu());
+		menu.add(drawConvertMenu());
+		
+		setJMenuBar(menu);
+		
+		p.add(EMPTY);
+		setLayout(new BorderLayout());
+		add(p, BorderLayout.CENTER);
+		addKeyListener(new ConversionKeyboardController(model));
+		
+		WindowTools.executeWindow(this);
 	}
 
 	
 	
+	
 	//=======================================================================================================================
 	//=======================================================================================================================
 
 	
 	
+	
+	public void redrawEmpty() {
+		if(ConversionContext.LIBRARY != null) {
+			remove(ConversionContext.LIBRARY);
+			remove(ConversionContext.CONCERNED_FILE_VIEW);
+		}
+		
+		add(EMPTY);
+		
+		revalidate();
+	}
+	
+	
+	
 	private void redrawFirstTime() {
-		StylizedJPanel dataView = new StylizedJPanel();
-		dataView.requestFocus();
-		dataView.setLayout(new BoxLayout(dataView, BoxLayout.Y_AXIS));
+		remove(EMPTY);
+		
+		JPanel fileConcernedView = ConversionContext.CONCERNED_FILE_VIEW = new StylizedJPanel();
+		fileConcernedView.setLayout(new BoxLayout(fileConcernedView, BoxLayout.Y_AXIS));
 		
 		SummaryView sv = new SummaryView(model);
 		TabsView tv = new TabsView(model);
-		LibraryView lv = new LibraryView(model);
+		fileConcernedView.add(sv);
+		fileConcernedView.add(tv);
 		
-		dataView.add(sv);
-		dataView.add(tv);
+		LibraryView lv = ConversionContext.LIBRARY = new LibraryView(model);
 		
 		sv.setBackground(Color.LIGHT_GRAY);
-		dataView.setBackground(Color.LIGHT_GRAY);
+		fileConcernedView.setBackground(Color.LIGHT_GRAY);
 		add(lv, BorderLayout.WEST);
-		add(dataView, BorderLayout.EAST);
+		add(fileConcernedView, BorderLayout.EAST);
 		
 		model.addObserver(sv);
 		model.addObserver(lv);
-		empty_workspace.setVisible(false);
+		
+		revalidate();
 	}
 	
 	
@@ -214,11 +274,15 @@ public final class ConversionWindow extends StylizedJFrame {
 		return filesMenu;
 	}
 
+	
 
+	
 	
 	//=======================================================================================================================
 	//=======================================================================================================================
 
+	
+	
 	
 	
 	/**
@@ -244,7 +308,7 @@ public final class ConversionWindow extends StylizedJFrame {
 		StylizedJMenuItem switchMode = new StylizedJMenuItem("Passer en mode traitement");
 		switchMode.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {			
-				ProcessingWindow.generateProcessingWindow();
+				new ConversionModel();
 				Alert.shortAlert(Alert.SUCCESS, "Changement de mode realise <br>avec succes.");
 				dispose();
 			}
@@ -277,8 +341,13 @@ public final class ConversionWindow extends StylizedJFrame {
 
 	
 	
+	
+	
 	//=======================================================================================================================
 	//=======================================================================================================================
+	
+	
+	
 	
 	
 	/**
@@ -393,6 +462,8 @@ public final class ConversionWindow extends StylizedJFrame {
 	
 	
 	
+	
+	
 	/**
 	 * [ METHODE INTERNE POUR LA CONSTRUCTION DU MENU DE CONVERSION. ]
 	 * 
@@ -420,58 +491,6 @@ public final class ConversionWindow extends StylizedJFrame {
 	}
 
 	
-	
-	//=======================================================================================================================
-	//=======================================================================================================================
-
-	
-	
-	/**
-	 * [ METHODE DE CLASSE DE CONSTRUCTION ET DE GENERATION DE LA FENETRE DE CONVERSION. ]
-	 */
-	public static void generateConversionWindow() {
-		ConversionWindow conversionWindow = new ConversionWindow();
-		
-		conversionWindow.addWindowListener(new WindowListener() {
-			public void windowOpened(WindowEvent e) {}
-			public void windowClosing(WindowEvent e) {
-				ResourcesManager.clearResources();
-			}
-			public void windowClosed(WindowEvent e) {}
-			public void windowIconified(WindowEvent e) {}
-			public void windowDeiconified(WindowEvent e) {}
-			public void windowActivated(WindowEvent e) {}
-			public void windowDeactivated(WindowEvent e) {}
-		});
-		conversionWindow.setResizable(false);
-		conversionWindow.setTitle("Acaja - Mode Conversion");
-		conversionWindow.setSize(new Dimension(600, 600));
-		conversionWindow.setLocationRelativeTo(null);
-		conversionWindow.setDefaultCloseOperation(StylizedJFrame.EXIT_ON_CLOSE);
-
-		WindowTools.showLogo(conversionWindow);
-
-		
-		StylizedJPanel p = new StylizedJPanel();
-		p.setLayout(new BorderLayout());
-		StylizedJMenuBar menu = new StylizedJMenuBar();
-		
-		
-		menu.add(conversionWindow.drawFileMenu());
-		menu.add(conversionWindow.drawOptionsMenu());
-		menu.add(conversionWindow.drawConvertMenu());
-
-		
-		conversionWindow.setJMenuBar(menu);
-		
-		p.add(conversionWindow.empty_workspace);
-		conversionWindow.setLayout(new BorderLayout());
-		conversionWindow.add(p, BorderLayout.CENTER);
-		conversionWindow.addKeyListener(new ConversionKeyboardController(conversionWindow.model));
-		
-		WindowTools.executeWindow(conversionWindow);
-	}
-
 	
 	
 	//=======================================================================================================================

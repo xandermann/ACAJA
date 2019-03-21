@@ -115,7 +115,7 @@ public final class OpeningWindow {
 		convertbutton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				ConversionWindow.generateConversionWindow();
+				new ConversionWindow();
 				Alert.longAlert(Alert.INFO, "Ceci est la fenetre pour realiser<br>des conversions.");
 				openingWindow.dispose();
 			}
@@ -126,7 +126,7 @@ public final class OpeningWindow {
 		processingButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				ProcessingWindow.generateProcessingWindow();
+				new ProcessingWindow();
 				Alert.longAlert(Alert.INFO, "Ceci est la fenetre pour realiser<br>des traitements.");
 				openingWindow.dispose();
 			}

@@ -214,7 +214,12 @@ public final class ConversionModel extends GeneralModel{
 		if(files.contains(file)) {
 			files.remove(file);
 			currentFile = null;
-			if(!files.isEmpty()) currentFile = files.get(0);
+			
+			if(files.isEmpty()) 
+				((ConversionWindow) ConversionContext.WINDOW).redrawEmpty();
+			else
+				currentFile = files.get(0);
+			
 			sendChanges();
 			Alert.shortAlert(Alert.SUCCESS, "Suppression du fichier "+file.getSourceFileName()+" reussie.");
 		}else
@@ -231,6 +236,7 @@ public final class ConversionModel extends GeneralModel{
 		currentFile = null;
 		files.clear();
 		sendChanges();
+		((ConversionWindow) ConversionContext.WINDOW).redrawEmpty();
 		Alert.shortAlert(Alert.SUCCESS, "Bibliotheque videe avec succes.");
 	}
 

@@ -27,7 +27,7 @@ public class ProcessingWindow extends JFrame {
 	private ProcessingModel model;
 
 	
-	private ProcessingWindow() {
+	public ProcessingWindow() {
 		
 		this.addWindowListener(new WindowListener() {
 			public void windowOpened(WindowEvent e) {}
@@ -73,7 +73,7 @@ public class ProcessingWindow extends JFrame {
 		procToConv.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				ConversionWindow.generateConversionWindow();
+				new ConversionWindow();
 				dispose();
 			}
 		});
@@ -127,12 +127,4 @@ public class ProcessingWindow extends JFrame {
 		this.setJMenuBar(jm);
 
 	}
-	
-	
-	public static void generateProcessingWindow() {
-		new ProcessingWindow();
-	}
-
-	
-	
 }

@@ -10,7 +10,9 @@ import javax.swing.JScrollPane;
 
 import files.files.SelectableFile;
 import files.files.SettingsFile;
+import gui.conversion.ConversionContext;
 import gui.conversion.ConversionModel;
+import gui.general.GeneralContext;
 import gui.style.StylizedJPanel;
 
 /**
@@ -25,29 +27,24 @@ public final class LibraryView extends StylizedJPanel implements Observer{
 	
 	
 	/**
-	 * [ MODELE. ]
-	 */
-	private ConversionModel model;
-	
-	
-	/**
 	 * [ METHODE INTERNE POUR (RE-)DESSINER LA BIBLIOTHEQUE. ]
 	 */
 	private void displayLibrary() {
 		removeAll();
 		
-		List<SelectableFile> files = model.getFiles();
+		List<SelectableFile> files = ConversionContext.$M.getFiles();
 		JPanel all = new JPanel(new BorderLayout());
 		int size = files.size()*140;
 		all.setPreferredSize(new Dimension(270, files.size()*150<=540 ? 540 : size));
+		
 		JPanel content = new JPanel(new GridLayout(files.size(), 1));
 		content.setPreferredSize(new Dimension(270, size));
 		for(SelectableFile file : files) {
-			RowView row = new RowView((SettingsFile) file, file==model.getCurrentFile());
+			RowView row = new RowView((SettingsFile) file, file==ConversionContext.$M.getCurrentFile());
 			row.addMouseListener(new MouseListener() {
 				public void mouseClicked(MouseEvent e) {}
 				public void mousePressed(MouseEvent e) {
-					model.setCurrentFile(file);
+					 ConversionContext.$M.setCurrentFile(file);
 				}
 				public void mouseReleased(MouseEvent e) {}
 				public void mouseEntered(MouseEvent e) {}
@@ -79,12 +76,9 @@ public final class LibraryView extends StylizedJPanel implements Observer{
 	
 	/**
 	 * [ CONSTRUCTEUR AVEC PARAMETRES.]
-	 * 
-	 * @param model		Le modele.
 	 */
-	public LibraryView(ConversionModel model) {
+	public LibraryView() {
 		super(new BorderLayout());
-		if((this.model = model) == null) throw new NullPointerException("ConversionModel null !");
 		displayLibrary();
 	}
 	

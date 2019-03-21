@@ -210,7 +210,7 @@ public final class ConversionModel extends GeneralModel{
 			currentFile = null;
 			
 			if(files.isEmpty()) 
-				((ConversionWindow) ConversionContext.WINDOW).redrawEmpty();
+				((ConversionWindow) ConversionContext.$W).redrawEmpty();
 			else
 				currentFile = files.get(0);
 			
@@ -230,7 +230,7 @@ public final class ConversionModel extends GeneralModel{
 		currentFile = null;
 		files.clear();
 		sendChanges();
-		((ConversionWindow) ConversionContext.WINDOW).redrawEmpty();
+		((ConversionWindow) ConversionContext.$W).redrawEmpty();
 		Alert.shortAlert(Alert.SUCCESS, "Bibliotheque videe avec succes.");
 	}
 

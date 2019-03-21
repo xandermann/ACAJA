@@ -24,22 +24,15 @@ import gui.style.StylizedJPanel;
  */
 public abstract class SettingsView extends StylizedJPanel implements Observer {
 	/**
-	 * [ MODELE. ]
-	 */
-	protected ConversionModel model;
-	/**
 	 * Indique si un changement est en cours. 
 	 */
 	protected boolean isChange;
 	
 	/**
 	 * [ CONSTRUCTEUR AVEC PARAMETRES. ]
-	 * 
-	 * @param model		Le modele.
 	 */
-	public SettingsView(ConversionModel model) {
+	public SettingsView() {
 		super();
-		if((this.model = model) == null) throw new NullPointerException("ConversionModel null !");
 		isChange = true;
 		setSize(new Dimension(300, 400));
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));

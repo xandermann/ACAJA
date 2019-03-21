@@ -8,7 +8,9 @@ import java.util.List;
 import javax.swing.*;
 import files.enumerations.SettingType;
 import files.files.*;
+import gui.conversion.ConversionContext;
 import gui.conversion.ConversionModel;
+import gui.general.GeneralContext;
 import gui.style.StylizedJPanel;
 import wrapper.language.*;
 
@@ -32,23 +34,22 @@ public final class VideoSettingsView extends SettingsView{
 				}
 			}
 				
-			if(model.getCurrentFile() != null) {
+			if(ConversionContext.$M.getCurrentFile() != null) {
 				String videoFormat = formatComboBox.getSelectedItem().toString();
-				((Modifiable) model.getCurrentFile()).modify(SettingType.VIDEO_FORMAT, videoFormat);
+				((Modifiable) ConversionContext.$M.getCurrentFile()).modify(SettingType.VIDEO_FORMAT, videoFormat);
 				Map<String,List<String>> codecs = CodecConstants.CORRESPONDING_EXTENSION.get(videoFormat);
 				String[] videoCodecs = Arrays.copyOf(codecs.keySet().toArray(), codecs.keySet().toArray().length, String[].class);
 				codecsComboBox.removeAllItems();
 				codecsComboBox.setModel(new DefaultComboBoxModel(videoCodecs));
 				codecsComboBox.setSelectedIndex(0);
-				((Modifiable) model.getCurrentFile()).modify(SettingType.VIDEO_CODEC, codecsComboBox.getSelectedItem().toString());
+				((Modifiable) ConversionContext.$M.getCurrentFile()).modify(SettingType.VIDEO_CODEC, codecsComboBox.getSelectedItem().toString());
 				ssp.updateAudioCodecs();
-				model.setExtension(videoFormat);
+				((SettingsFile) ConversionContext.$M.getCurrentFile()).setFileExtension(videoFormat);
 			}
 			
 	}
 	
-	public VideoSettingsView(ConversionModel model, SoundSettingsView setssp) {
-		super(model);
+	public VideoSettingsView(SoundSettingsView setssp) {
 		formatComboBox = new JComboBox<String>(CodecConstants.ALL_EXTENSIONS);
 		ssp = setssp;
 		codecsComboBox = new JComboBox<String>(CodecConstants.ALL_SUPPORTED_VIDEO_CODECS);
@@ -69,10 +70,11 @@ public final class VideoSettingsView extends SettingsView{
 		codecsComboBox.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(model.getCurrentFile() != null) {
+				if(ConversionContext.$M.getCurrentFile() != null) {
 					if(isChange == true)
 						if(((JComboBox) e.getSource()).getSelectedItem() != null)
-							model.modify(SettingType.VIDEO_CODEC, ((JComboBox) e.getSource()).getSelectedItem().toString());
+							ConversionContext.$M.modify(SettingType.VIDEO_CODEC, 
+									((JComboBox) e.getSource()).getSelectedItem().toString());
 				}
 			}
 		});
@@ -86,8 +88,9 @@ public final class VideoSettingsView extends SettingsView{
 			public void keyTyped(KeyEvent e) {}
 			public void keyPressed(KeyEvent e) {}
 			public void keyReleased(KeyEvent e) {
-				if(model.getCurrentFile() != null) {
-					if(isChange == true) model.modify(SettingType.VIDEO_BITRATE, bitrateText.getText());
+				if(ConversionContext.$M.getCurrentFile() != null) {
+					if(isChange == true)
+						ConversionContext.$M.modify(SettingType.VIDEO_BITRATE, bitrateText.getText());
 				}
 			}
 		});
@@ -100,9 +103,9 @@ public final class VideoSettingsView extends SettingsView{
 		resolutionsComboBox.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(model.getCurrentFile() != null) {
+				if(ConversionContext.$M.getCurrentFile() != null) {
 					if(isChange == true)
-						model.modify(SettingType.RESOLUTION, ((JComboBox) e.getSource()).getSelectedItem().toString());
+						ConversionContext.$M.modify(SettingType.RESOLUTION, ((JComboBox) e.getSource()).getSelectedItem().toString());
 				}
 			}
 		});
@@ -117,8 +120,9 @@ public final class VideoSettingsView extends SettingsView{
 			public void keyTyped(KeyEvent e) {}
 			public void keyPressed(KeyEvent e) {}
 			public void keyReleased(KeyEvent e) {
-				if(model.getCurrentFile() != null) {
-					if(isChange == true) model.modify(SettingType.FRAMERATE, fpsText.getText());
+				if(ConversionContext.$M.getCurrentFile() != null) {
+					if(isChange == true) 
+						ConversionContext.$M.modify(SettingType.FRAMERATE, fpsText.getText());
 				}
 			}
 		});
@@ -128,8 +132,6 @@ public final class VideoSettingsView extends SettingsView{
 		add(bitratePanel);
 		add(resolutionPanel);
 		add(fpsTextPanel);
-		//updateVideoCodecs();
-	
 		setSize(new Dimension(300, 400));
 	}
 
@@ -143,8 +145,8 @@ public final class VideoSettingsView extends SettingsView{
 	@Override
 	public void update(Observable o, Object arg) {
 		isChange = false;
-		if(model.getCurrentFile() != null){
-		     SettingsFile settings = (SettingsFile) model.getCurrentFile();
+		if(ConversionContext.$M.getCurrentFile() != null){
+		     SettingsFile settings = (SettingsFile) ConversionContext.$M.getCurrentFile();
 		     formatComboBox.setSelectedItem(settings.recent(SettingType.VIDEO_FORMAT));
 		     codecsComboBox.setSelectedItem(settings.recent(SettingType.VIDEO_CODEC));
 		     resolutionsComboBox.setSelectedItem(settings.recent(SettingType.RESOLUTION));

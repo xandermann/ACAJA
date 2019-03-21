@@ -7,7 +7,9 @@ import java.util.*;
 import javax.swing.*;
 import files.enumerations.SettingType;
 import files.files.SettingsFile;
+import gui.conversion.ConversionContext;
 import gui.conversion.ConversionModel;
+import gui.general.GeneralContext;
 import gui.style.StylizedJPanel;
 import wrapper.language.CodecConstants;
 
@@ -28,8 +30,8 @@ public final class SoundSettingsView extends SettingsView{
 	
 	public void updateAudioCodecs() {
 		if(isChange == true) {
-			String videoFormat = ((SettingsFile) model.getCurrentFile()).recent(SettingType.VIDEO_FORMAT);
-			String codecFormat = ((SettingsFile) model.getCurrentFile()).recent(SettingType.VIDEO_CODEC);
+			String videoFormat = ((SettingsFile) ConversionContext.$M.getCurrentFile()).recent(SettingType.VIDEO_FORMAT);
+			String codecFormat = ((SettingsFile) ConversionContext.$M.getCurrentFile()).recent(SettingType.VIDEO_CODEC);
 			if(videoFormat != null && codecFormat != null) {
 				Map<String,List<String>> codecs = CodecConstants.CORRESPONDING_EXTENSION.get(videoFormat);
 				List<String> codecsAudio = new ArrayList<String>();
@@ -45,19 +47,17 @@ public final class SoundSettingsView extends SettingsView{
 	}
 	
 	
-	public SoundSettingsView(ConversionModel model) {
-		super(model);
-
-
+	public SoundSettingsView() {
 		StylizedJPanel codecPanel = new StylizedJPanel();
 		codecPanel.add(new JLabel("Codec audio : "), BorderLayout.WEST);
 		codecsComboBox = new JComboBox<String>(CodecConstants.ALL_SUPPORTED_AUDIO_CODECS);
 		codecPanel.add(codecsComboBox, BorderLayout.EAST);
 		codecsComboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(model.getCurrentFile() != null) {
+				if(ConversionContext.$M.getCurrentFile() != null) {
 					if(isChange == true && ((JComboBox) e.getSource()).getSelectedItem() != null)
-						model.modify(SettingType.AUDIO_CODEC, ((JComboBox) e.getSource()).getSelectedItem().toString());
+						 ConversionContext.$M.modify(SettingType.AUDIO_CODEC, 
+								 ((JComboBox) e.getSource()).getSelectedItem().toString());
 				}
 			}
 		});
@@ -72,8 +72,9 @@ public final class SoundSettingsView extends SettingsView{
 			public void keyTyped(KeyEvent e) {}
 			public void keyPressed(KeyEvent e) {}
 			public void keyReleased(KeyEvent e) {
-				if(model.getCurrentFile() != null) {
-					if(isChange == true) model.modify(SettingType.AUDIO_BITRATE, bitrateText.getText());
+				if(ConversionContext.$M.getCurrentFile() != null) {
+					if(isChange == true) 
+						ConversionContext.$M.modify(SettingType.AUDIO_BITRATE, bitrateText.getText());
 				}
 			}
 		});
@@ -88,8 +89,9 @@ public final class SoundSettingsView extends SettingsView{
 			public void keyTyped(KeyEvent e) {}
 			public void keyPressed(KeyEvent e) {}
 			public void keyReleased(KeyEvent e) {
-				if(model.getCurrentFile() != null) {
-					if(isChange == true) model.modify(SettingType.SAMPLING_RATE, samplingRateText.getText());
+				if(ConversionContext.$M.getCurrentFile() != null) {
+					if(isChange == true) 
+						ConversionContext.$M.modify(SettingType.SAMPLING_RATE, samplingRateText.getText());
 				}
 			}
 		});
@@ -104,8 +106,9 @@ public final class SoundSettingsView extends SettingsView{
 			public void keyTyped(KeyEvent e) {}
 			public void keyPressed(KeyEvent e) {}
 			public void keyReleased(KeyEvent e) {
-				if(model.getCurrentFile() != null) {
-					if(isChange == true) model.modify(SettingType.NUMBER_AUDIO_CHANNELS, channelsText.getText());
+				if(ConversionContext.$M.getCurrentFile() != null) {
+					if(isChange == true) 
+						ConversionContext.$M.modify(SettingType.NUMBER_AUDIO_CHANNELS, channelsText.getText());
 				}
 			}
 		});
@@ -127,8 +130,8 @@ public final class SoundSettingsView extends SettingsView{
 	@Override
 	public void update(Observable o, Object arg) {
 		isChange = false;
-		if(model.getCurrentFile() != null){
-			SettingsFile settings = (SettingsFile) model.getCurrentFile();
+		if(ConversionContext.$M.getCurrentFile() != null){
+			SettingsFile settings = (SettingsFile) ConversionContext.$M.getCurrentFile();
 			codecsComboBox.setSelectedItem(settings.recent(SettingType.AUDIO_CODEC));
 			bitrateText.setText(settings.recent(SettingType.AUDIO_BITRATE));
 			samplingRateText.setText(settings.recent(SettingType.SAMPLING_RATE));

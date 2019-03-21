@@ -1,9 +1,17 @@
 package gui.general;
 
 import javax.swing.JFrame;
-
+/**
+ * [ CONTEXTE GRAPHIQUE GENERAL ABSTARIT. ]
+ */
 public abstract class GeneralContext {
-	public static JFrame WINDOW;
-	public static GeneralModel MODEL;
+	/**
+	 * FENETRE PRINCIPALE DU CONTEXTE GRAPHIQUE COURANT.
+	 */
+	public static JFrame $W;
+	/**
+	 * MODELE DU CONTEXTE GRAPHIQUE COURANT.
+	 */
+	public static GeneralModel $M;
 }
 

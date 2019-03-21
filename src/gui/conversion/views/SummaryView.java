@@ -7,6 +7,7 @@ import java.util.*;
 import javax.swing.*;
 import files.files.SettingsFile;
 import files.enumerations.SettingType;
+import gui.conversion.ConversionContext;
 import gui.conversion.ConversionModel;
 import gui.style.StyleTheme;
 import gui.style.StylizedJPanel;
@@ -16,7 +17,6 @@ public final class SummaryView extends StylizedJPanel implements Observer {
 	//=======================================================================================================================
 
 	
-	private ConversionModel model;
 	private JLabel inputFileLabel, videoLabel, soundLabel, durationLabel;
 	private JTextField outputFileText;
 
@@ -25,9 +25,8 @@ public final class SummaryView extends StylizedJPanel implements Observer {
 	//=======================================================================================================================
 
 	
-	public SummaryView(ConversionModel model) {
+	public SummaryView() {
 		super();
-		if((this.model = model) == null) throw new NullPointerException("ConversionModel null !");
 		setSize(new Dimension(300, 100));
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
@@ -65,7 +64,8 @@ public final class SummaryView extends StylizedJPanel implements Observer {
 			public void keyPressed(KeyEvent e) {}
 			public void keyTyped(KeyEvent e) {}
 			public void keyReleased(KeyEvent e) {
-				if(model.getCurrentFile() != null) model.setDestination(outputFileText.getText());
+				if(ConversionContext.$M.getCurrentFile() != null) 
+					((ConversionModel) ConversionContext.$M).setDestination(outputFileText.getText());
 			}
 		});
 		
@@ -84,15 +84,15 @@ public final class SummaryView extends StylizedJPanel implements Observer {
 	
 	@Override
 	public void update(Observable o, Object arg) {
-		if (model.getCurrentFile() != null) {
-			inputFileLabel.setText(model.getCurrentFile().getSourceFileName());
-			videoLabel.setText(((SettingsFile) model.getCurrentFile()).getSettings().get(SettingType.VIDEO_CODEC));
-			soundLabel.setText(((SettingsFile) model.getCurrentFile()).getSettings().get(SettingType.AUDIO_CODEC));
-			durationLabel.setText(model.getCurrentFile().getDuration());
-			if(model.getCurrentFile().getDestinationFileName() == "")
-				outputFileText.setText(model.getCurrentFile().getSourceFileNameWithoutExtension());
+		if (ConversionContext.$M.getCurrentFile() != null) {
+			inputFileLabel.setText(ConversionContext.$M.getCurrentFile().getSourceFileName());
+			videoLabel.setText(((SettingsFile) ConversionContext.$M.getCurrentFile()).getSettings().get(SettingType.VIDEO_CODEC));
+			soundLabel.setText(((SettingsFile) ConversionContext.$M.getCurrentFile()).getSettings().get(SettingType.AUDIO_CODEC));
+			durationLabel.setText(ConversionContext.$M.getCurrentFile().getDuration());
+			if(ConversionContext.$M.getCurrentFile().getDestinationFileName() == "")
+				outputFileText.setText(ConversionContext.$M.getCurrentFile().getSourceFileNameWithoutExtension());
 			else
-				outputFileText.setText(model.getCurrentFile().getDestinationFileName());
+				outputFileText.setText(ConversionContext.$M.getCurrentFile().getDestinationFileName());
 		} else {
 			inputFileLabel.setText("NA");
 			videoLabel.setText("NA");

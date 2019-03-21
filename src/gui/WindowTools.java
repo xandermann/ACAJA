@@ -14,21 +14,22 @@ import resources.ResourceConstants;
  * 
  * Cette classe implemente des methodes communes aux fenetres.
  * 
- * Auteurs du projet : 
- * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
+ * Auteurs du projet :
+ * 
+ * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et
+ *         CHEVRIER Jean-christophe.
  */
 public final class WindowTools {
-	//=======================================================================================================================
-	//=======================================================================================================================
-	
-	
+	// =======================================================================================================================
+	// =======================================================================================================================
+
 	/**
 	 * [ METHODE DE CLASSE POUR MONTRER LE LOGO DU LOGICIEL. ]
 	 * 
-	 * Cette methode permet de montrer le logo du logiciel en tant qu'icone 
-	 * de la fenetre en parametre de la methode.
+	 * Cette methode permet de montrer le logo du logiciel en tant qu'icone de la
+	 * fenetre en parametre de la methode.
 	 * 
-	 * @param window 		La fenetre a laquelle ajouter le logo en icone.
+	 * @param window La fenetre a laquelle ajouter le logo en icone.
 	 */
 	public static void showLogo(JFrame window) {
 		try {
@@ -37,29 +38,26 @@ public final class WindowTools {
 			JOptionPane.showMessageDialog(null, ioe.getMessage());
 		}
 	}
-	
-	
-	//=======================================================================================================================
-	//=======================================================================================================================
 
-	
+	// =======================================================================================================================
+	// =======================================================================================================================
+
 	/**
 	 * [ METHODE DE CLASSE POUR LANCER UNE FENETRE. ]
 	 * 
-	 * Cette methode permet de lancer/demarrer une fenetre dans un
-	 * nouveau processus ( = Thread / Runnable ). 
+	 * Cette methode permet de lancer/demarrer une fenetre dans un nouveau processus
+	 * ( = Thread / Runnable ).
 	 * 
-	 * @param window		La fenetre a lancer.
+	 * @param window La fenetre a lancer.
 	 */
 	public static synchronized void executeWindow(JFrame window) {
 		SwingUtilities.invokeLater(new Runnable() {
-		    public void run() {
-		        window.setVisible(true);
-		    }
+			public void run() {
+				window.setVisible(true);
+			}
 		});
 	}
-	
-	
-	//=======================================================================================================================
-	//=======================================================================================================================
+
+	// =======================================================================================================================
+	// =======================================================================================================================
 }

@@ -4,8 +4,7 @@ import java.io.*;
 import java.awt.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import files.files.SelectableFile;
-import files.files.SettingsFile;
+import files.files.*;
 import gui.style.StyleTheme;
 
 /**
@@ -18,22 +17,24 @@ import gui.style.StyleTheme;
  * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
  */
 public final class RowView extends JPanel{
-	//=======================================================================================================================
-	//=======================================================================================================================
-	
-	
+	/**
+	 * FICHIER CONCERNE.
+	 */
 	private SelectableFile file;
-	private boolean special;
+	/**
+	 * EST-CE LE FICHIER COURANT ?
+	 */
+	private boolean isCurrentFile;
 
 	
 	
 	/** 
 	 * [ CONSTRUCTEUR D'UNE LIGNE DANS LA BIBLIOTHEQUE. ]
 	 */
-	public RowView(SettingsFile file, boolean special) {
+	public RowView(SettingsFile file, boolean isCurrentFile) {
 		super(new BorderLayout());
 		if((this.file=file) == null) throw new NullPointerException("Le text recu en parametre est null !");
-		this.special=special;
+		this.isCurrentFile=isCurrentFile;
 		setPreferredSize(new Dimension(270, 140));
 	}
 	
@@ -41,7 +42,7 @@ public final class RowView extends JPanel{
 	
 	@Override
 	public void paintComponent(Graphics g) {
-		g.setColor(special ? StyleTheme.BACKGROUND_COLOR_SECONDARY : Color.WHITE);
+		g.setColor(isCurrentFile ? StyleTheme.BACKGROUND_COLOR_SECONDARY : Color.WHITE);
 		g.fillRect(0, 0, 270, 140);
 		
 		g.setColor(Color.BLACK);
@@ -60,8 +61,4 @@ public final class RowView extends JPanel{
 		g.drawRect(41, 41, 188, 78);
 		g.drawRect(42, 42, 186, 76);
 	}
-
-
-	//=======================================================================================================================
-	//=======================================================================================================================
 }

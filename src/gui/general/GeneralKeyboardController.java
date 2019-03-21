@@ -8,8 +8,13 @@ import gui.JFileChooserManager;
 import gui.alerts.*;
 import gui.conversion.*;
 import resources.ResourcesManager;
-
-public abstract class GeneralKeyboardController implements KeyListener {
+/**
+ * [ CLASSE POUR REALISER DES RACCOURCIS CLAVIER GENERIQUES. ]
+ * 
+ * Auteurs du projet : 
+ * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
+ */
+public class GeneralKeyboardController implements KeyListener {
 	@Override
 	public void keyTyped(KeyEvent e) {}
 

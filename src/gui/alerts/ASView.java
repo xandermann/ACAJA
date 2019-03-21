@@ -99,9 +99,6 @@ public final class ASView extends StylizedJPanel {
 				AlertManager.INTERRUPTOR = true;
 				js1.setEnabled(true);
 				js2.setEnabled(true);
-				_jp1.setEnabled(true);
-				_jp2.setEnabled(true);
-				jp2.setEnabled(true);
 			}
 		});
 		
@@ -112,17 +109,11 @@ public final class ASView extends StylizedJPanel {
 				AlertManager.INTERRUPTOR = false;
 				js1.setEnabled(false);
 				js2.setEnabled(false);
-				_jp1.setEnabled(false);
-				_jp2.setEnabled(false);
-				jp2.setEnabled(false);
 			}
 		});
 		
 		js1.setEnabled(AlertManager.INTERRUPTOR);
 		js2.setEnabled(AlertManager.INTERRUPTOR);
-		_jp1.setEnabled(AlertManager.INTERRUPTOR);
-		_jp2.setEnabled(AlertManager.INTERRUPTOR);
-		jp2.setEnabled(AlertManager.INTERRUPTOR);
 		
 		bg.add(jr1);
 		bg.add(jr2);

@@ -9,6 +9,9 @@ import gui.conversion.ConversionWindow;
 
 /**
  * [ REALISER DES ACTIONS GENERIQUES. ]
+ * 
+ * Auteurs du projet : 
+ * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
  */
 public final class GeneralActions {
 	/**

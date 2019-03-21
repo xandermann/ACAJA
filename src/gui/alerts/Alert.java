@@ -43,6 +43,8 @@ public final class Alert extends AlertSettings implements ATConstants, AMConstan
 						view.dispose();
 				}
 			});
+			
+			view.requestFocus();
 		}
 	}
 	

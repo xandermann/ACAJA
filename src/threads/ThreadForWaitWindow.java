@@ -46,7 +46,7 @@ public final class ThreadForWaitWindow extends Thread{
     	 * ATTENTE.
     	 */
     	WindowTools.executeWindow(waitWindow);
-		while(WatchedConsumer.hand.took());
+		while(WatchedConsumer.hand.took()) Thread.yield();
 		waitWindow.dispose();
 		/**
 		 * FEEDBACK

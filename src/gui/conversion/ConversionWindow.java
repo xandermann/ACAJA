@@ -99,6 +99,8 @@ public final class ConversionWindow extends StylizedJFrame {
 		add(p, BorderLayout.CENTER);
 		addKeyListener(new ConversionKeyboardController());
 		
+		requestFocus();
+		
 		WindowTools.executeWindow(this);
 	}
 

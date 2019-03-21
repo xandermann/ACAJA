@@ -115,7 +115,10 @@ public final class ConversionWindow extends StylizedJFrame {
 		if(libraryView != null) {
 			remove(libraryView);
 			remove(concernedFileView);
+			
 			add(empty);
+			
+			repaint();
 			revalidate();
 		}
 	}
@@ -143,6 +146,7 @@ public final class ConversionWindow extends StylizedJFrame {
 		Context.$M.addObserver(sv);
 		Context.$M.addObserver(libraryView);
 		
+		repaint();
 		revalidate();
 	}
 	

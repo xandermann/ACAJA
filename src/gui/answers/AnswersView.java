@@ -68,14 +68,12 @@ public final class AnswersView extends JPanel {
 		refresh.setPreferredSize(new Dimension(30, 30));
 		refresh.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				main.removeAll();
 				int countOldFiles = files==null ? 0 : files.size();
 		        displayAnswers();
 		        Alert.shortAlert(Alert.INFO,
 							files.size()-countOldFiles == 0 ? 
 							"Aucun nouveau rapport trouve." : 
 							files.size()-countOldFiles + " nouveaux rapports.");
-				main.revalidate();
 			}
 		});
 		head.add(refresh, BorderLayout.EAST);
@@ -92,6 +90,9 @@ public final class AnswersView extends JPanel {
 	 * [ CONSTRUIRE L'HISTORIQUE EN LISTANT LES REPONSES. ]
 	 */
 	private void displayAnswers() {
+		main.removeAll();
+		
+		
 		/**
 		 * REUNION DES FICHIERS.
 		 */
@@ -133,6 +134,10 @@ public final class AnswersView extends JPanel {
 				}
 			});
 			main.add(j);
-		}		
+		}	
+
+		
+		main.repaint();
+		main.revalidate();
 	}
 }

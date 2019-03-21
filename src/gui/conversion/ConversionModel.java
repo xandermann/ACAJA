@@ -167,8 +167,9 @@ public final class ConversionModel extends GeneralModel{
 	 * @throws IncorrectFileException 			Exception levee pour les fichers incorrects. 
 	 * 
 	 * @throws UnfindableResourceException 		Exception sur les fichiers introuvables.
+	 * @throws FileNotFoundException 
 	 */
-	public void add(File file) throws IncorrectFileException, UnfindableResourceException {
+	public void add(File file) throws IncorrectFileException, UnfindableResourceException, FileNotFoundException {
 		if(file.exists()) {
 			files.add(new SettingsFile(file));
 			sendChanges();
@@ -193,7 +194,7 @@ public final class ConversionModel extends GeneralModel{
 			    }
 			}
 		}else 
-			Alert.longAlert(Alert.FAILURE, Alert.ERROR_ABSENT_SELECTED_FILE);
+			throw new FileNotFoundException(Alert.ERROR_ABSENT_SELECTED_FILE);
 	}
 
 	

@@ -1,6 +1,7 @@
 package gui.general;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Observable;
 
@@ -84,7 +85,7 @@ public abstract class GeneralModel extends Observable implements Modifiable{
 	
 	
 	
-	public abstract void add(File file)  throws IncorrectFileException, UnfindableResourceException;
+	public abstract void add(File file)  throws IncorrectFileException, UnfindableResourceException, FileNotFoundException;
 	
 	
 	public abstract void remove(SelectableFile file);

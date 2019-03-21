@@ -141,11 +141,9 @@ public final class ConversionWindow extends StylizedJFrame {
 		if(ConversionContext.LIBRARY != null) {
 			remove(ConversionContext.LIBRARY);
 			remove(ConversionContext.CONCERNED_FILE_VIEW);
+			add(empty);
+			revalidate();
 		}
-		
-		add(empty);
-		
-		revalidate();
 	}
 	
 	
@@ -218,8 +216,11 @@ public final class ConversionWindow extends StylizedJFrame {
 						try {
 							File file = new File(f.getPath());
 							ConversionContext.$M.add(file);
+							System.out.println(1);
 							if (ConversionContext.$M.getCurrentFile() == null) redrawFirstTime();
+							System.out.println(2);
 							ConversionContext.$M.setCurrentFile(ConversionContext.$M.getFiles().get(ConversionContext.$M.getFiles().size()-1));
+							System.out.println(3);
 							Alert.shortAlert(Alert.SUCCESS, "Import realise avec succes.");
 						} catch(Exception e) {
 							Alert.shortAlert(Alert.FAILURE, "Echec de l'import.");

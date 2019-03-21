@@ -221,7 +221,7 @@ public final class ConversionModel extends GeneralModel{
 				currentFile = files.get(0);
 			
 			sendChanges();
-			Alert.shortAlert(Alert.SUCCESS, "Suppression du fichier "+file.getSourceFileName()+" reussie.");
+			Alert.shortAlert(Alert.SUCCESS, "Suppression du fichier<br>"+file.getSourceFileName()+" reussie.");
 		}else
 			Alert.longAlert(Alert.FAILURE, Alert.ERROR_UNFINDABLE_FILE_TO_REMOVE);
 	}

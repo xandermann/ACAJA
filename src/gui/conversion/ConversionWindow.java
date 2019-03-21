@@ -60,7 +60,7 @@ public final class ConversionWindow extends StylizedJFrame {
 			Alert.longAlert(Alert.FAILURE, ure.getMessage());
 		}
 		
-		empty = new TwoTextsView("Pour commencer,<br>ajoutez un fichier audio ou video via le menu.", 10, "CTRL + A.", 20);
+		empty = new TwoTextsView("Pour commencer,<br>ajoutez un fichier audio ou video via le menu.", 10, "ctrl + a.", 20);
 		
 		
 		addWindowListener(new WindowListener() {

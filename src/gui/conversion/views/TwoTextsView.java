@@ -45,32 +45,32 @@ public final class TwoTextsView extends JLabel {
 	 */
 	private String text() {
 		return "<html>" + 
-				"<head>" +
-				"<style>" +
-					"#both{" +
-						"text-align: center; " +
-					"}" +
-					"#first {" +
-						"font-size: "+sizeFirst+"px;" +
-					"}" +
-					"#two {" +
-						"color: #0000FF;" +
-						"font-size: "+sizeTwo+"px;" +
-					"}" +
-				"</style>" +
-			"</head>" +
-			"<body>" +
-				"<div id=both>" +
-					"<p id=first>" + 
-						first +
-					"</p>" +
-					"<br>"+
-					"<p id=two>" + 
-						two.toUpperCase() +
-					"</p>" + 
-				"</div>"+
-			"</body>" + 
-		"</html>";
+					"<head>" +
+						"<style>" +
+							"#both{" +
+								"text-align: center; " +
+							"}" +
+							"#first {" +
+								"font-size: "+sizeFirst+"px;" +
+							"}" +
+							"#two {" +
+								"color: #0000FF;" +
+								"font-size: "+sizeTwo+"px;" +
+							"}" +
+						"</style>" +
+				   "</head>" +
+				   "<body>" +
+				   		"<div id=both>" +
+				   			"<p id=first>" + 
+				   				first +
+				   			"</p>" +
+				   			"<br>"+
+				   			"<p id=two>" + 
+				   				two.toUpperCase() +
+				   			"</p>" + 
+				   	   "</div>"+
+				  "</body>" + 
+		     "</html>";
 	}
 	
 	

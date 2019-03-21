@@ -1,12 +1,12 @@
 package gui.alerts;
 
 /**
- * [ GESTIONNAIRE DES TEMPS D'ALERTES ET DES ALERTES. ] 
+ * [ PARAMETRES DES TEMPS D'ALERTES ET DES ALERTES. ] 
  * 
  * Auteurs du projet : 
  * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
  */
-public class AlertManager{
+public class AlertSettings{
 	/**
 	 * [ TEMPS. ]
 	 */

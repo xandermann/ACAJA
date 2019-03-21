@@ -47,7 +47,7 @@ public class GeneralKeyboardController implements KeyListener {
  						AlertSettings.INTERRUPTOR = true;
 					//CTRL + A
  					else
-						GeneralActions.input();
+						Actions.input();
 				}
 			break;
 			
@@ -59,7 +59,7 @@ public class GeneralKeyboardController implements KeyListener {
 						AlertSettings.INTERRUPTOR = false;
 					//CTRL + D
  					else 
-						GeneralActions.inputs();
+						Actions.inputs();
 				}
 			break;
 			

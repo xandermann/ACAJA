@@ -15,7 +15,7 @@ import gui.alerts.Alert;
 import gui.alerts.ASWindow;
 import gui.answers.AnswersWindow;
 import gui.conversion.views.*;
-import gui.general.GeneralActions;
+import gui.general.Actions;
 import gui.processing.ProcessingWindow;
 import gui.style.*;
 import resources.ResourcesManager;
@@ -49,6 +49,7 @@ public final class ConversionWindow extends StylizedJFrame {
 		super();
 		
 		ConversionContext.$W = this;
+		new ConversionModel();
 		
 		try {
 			((ConversionModel) ConversionContext.$M).loadOldImports();
@@ -56,36 +57,7 @@ public final class ConversionWindow extends StylizedJFrame {
 			Alert.longAlert(Alert.FAILURE, ure.getMessage());
 		}
 		
-		empty = new JLabel(
-				"<html>" + 
-					"<head>" +
-						"<style>" +
-							"#content{" +
-								"text-align: center; " +
-							"}" +
-							"#0 {" +
-								"font-size: 10px;" +
-							"}" +
-							"#1 {" +
-								"color: #0000FF;" +
-								"font-size: 20px;" +
-							"}" +
-						"</style>" +
-					"</head>" +
-					"<body>" +
-						"<div id=content>" +
-							"<p id=0>" + 
-								"Pour commencer,"+
-								"<br>"+
-								"ajoutez un fichier audio ou video via le menu." +
-							"</p>" +
-							"<p id=1>" + 
-								"<br>"+
-								"CTRL + A." +
-							"</p>" + 
-						"</div>"+
-					"</body>" + 
-				"</html>", JLabel.CENTER);
+		empty = new TwoTextsView("Pour commencer,<br>ajoutez un fichier audio ou video via le menu.", 10, "CTRL + A.", 20);
 		
 		
 		addWindowListener(new WindowListener() {
@@ -190,7 +162,7 @@ public final class ConversionWindow extends StylizedJFrame {
 		StylizedJMenuItem importFile = new StylizedJMenuItem("Importer un fichier");
 		importFile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
-				GeneralActions.input();
+				Actions.input();
 			}
 		});
 		
@@ -198,7 +170,7 @@ public final class ConversionWindow extends StylizedJFrame {
 		StylizedJMenuItem importFolder = new StylizedJMenuItem("Importer un dossier");
 		importFolder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
-				GeneralActions.inputs();
+				Actions.inputs();
 			}
 		});
 		

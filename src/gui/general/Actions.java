@@ -13,7 +13,7 @@ import gui.conversion.ConversionWindow;
  * Auteurs du projet : 
  * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
  */
-public final class GeneralActions {
+public final class Actions {
 	/**
 	 * [ IMPORTER 1 FICHIER. ]
 	 */

@@ -17,7 +17,7 @@ public final class SummaryView extends StylizedJPanel implements Observer {
 	//=======================================================================================================================
 
 	
-	private JLabel inputFileLabel, videoLabel, soundLabel, durationLabel;
+	private TwoTextsView inputFileLabel, videoLabel, soundLabel, durationLabel;
 	private JTextField outputFileText;
 
 	
@@ -33,26 +33,22 @@ public final class SummaryView extends StylizedJPanel implements Observer {
 		
 		StylizedJPanel inputFilePanel = new StylizedJPanel();
 		inputFilePanel.setBackground(Color.LIGHT_GRAY);
-		inputFilePanel.add(new JLabel("Fichier selectionne : "), BorderLayout.EAST);
-		inputFilePanel.add(inputFileLabel = new JLabel("NA"), BorderLayout.WEST);
+		inputFilePanel.add(inputFileLabel = new TwoTextsView("Fichier selectionne :", 8, "NA", 12));
 		
 		
 		StylizedJPanel videoPanel = new StylizedJPanel();
 		videoPanel.setBackground(Color.LIGHT_GRAY);
-		videoPanel.add(new JLabel("Codec video actuel : "), BorderLayout.EAST);
-		videoPanel.add(videoLabel = new JLabel("NA"), BorderLayout.WEST);
+		videoPanel.add(videoLabel = new TwoTextsView("Codec video actuel : ", 8, "NA", 12));
 		
 		
 		StylizedJPanel audioPanel = new StylizedJPanel();
 		audioPanel.setBackground(Color.LIGHT_GRAY);
-		audioPanel.add(new JLabel("Codec audio actuel : "), BorderLayout.EAST);
-		audioPanel.add(soundLabel = new JLabel("NA"), BorderLayout.WEST);
+		audioPanel.add(soundLabel = new TwoTextsView("Codec audio actuel : ", 8, "NA", 12));
 		
 		
 		StylizedJPanel durationLabelPanel = new StylizedJPanel();
 		durationLabelPanel.setBackground(Color.LIGHT_GRAY);
-		durationLabelPanel.add(new JLabel("Duree : "), BorderLayout.EAST);
-		durationLabelPanel.add(durationLabel = new JLabel("NA"),BorderLayout.WEST);
+		durationLabelPanel.add(durationLabel = new TwoTextsView("Duree : ", 8, "NA", 12));
 
 		
 		StylizedJPanel outputFilePanel = new StylizedJPanel();
@@ -85,10 +81,10 @@ public final class SummaryView extends StylizedJPanel implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		if (ConversionContext.$M.getCurrentFile() != null) {
-			inputFileLabel.setText(ConversionContext.$M.getCurrentFile().getSourceFileName());
-			videoLabel.setText(((SettingsFile) ConversionContext.$M.getCurrentFile()).getSettings().get(SettingType.VIDEO_CODEC));
-			soundLabel.setText(((SettingsFile) ConversionContext.$M.getCurrentFile()).getSettings().get(SettingType.AUDIO_CODEC));
-			durationLabel.setText(ConversionContext.$M.getCurrentFile().getDuration());
+			inputFileLabel.$(ConversionContext.$M.getCurrentFile().getSourceFileName());
+			videoLabel.$(((SettingsFile) ConversionContext.$M.getCurrentFile()).getSettings().get(SettingType.VIDEO_CODEC));
+			soundLabel.$(((SettingsFile) ConversionContext.$M.getCurrentFile()).getSettings().get(SettingType.AUDIO_CODEC));
+			durationLabel.$(ConversionContext.$M.getCurrentFile().getDuration());
 			if(ConversionContext.$M.getCurrentFile().getDestinationFileName() == "")
 				outputFileText.setText(ConversionContext.$M.getCurrentFile().getSourceFileNameWithoutExtension());
 			else

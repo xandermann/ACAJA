@@ -31,7 +31,7 @@ public final class ConversionWindow extends StylizedJFrame {
 	
 	
 	/**
-	 * [ ATTRRIBUTS D'INSTANCE. ]
+	 * [ ATTRIBUTS D'INSTANCE. ]
 	 */
 	private JLabel empty;
 	
@@ -49,7 +49,6 @@ public final class ConversionWindow extends StylizedJFrame {
 		super();
 		
 		ConversionContext.$W = this;
-		ConversionContext.$M = new ConversionModel();
 		
 		try {
 			((ConversionModel) ConversionContext.$M).loadOldImports();

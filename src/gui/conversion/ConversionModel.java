@@ -52,8 +52,12 @@ public final class ConversionModel extends GeneralModel{
 	 * [ CONSTRUCTEUR. ]
 	 */
 	public ConversionModel() {
+		ConversionContext.$M = this;
 		files = new ArrayList<SelectableFile>();
-		oldImportedFiles = new FileInformation[10]; // maximum 10 last files
+		/**
+		 * MAXIMUM DE 10 FICHIERS ANTERIEURS.
+		 */
+		oldImportedFiles = new FileInformation[10]; 
 		destinationFolder = null;
 	}
 

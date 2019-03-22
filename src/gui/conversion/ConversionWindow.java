@@ -52,6 +52,7 @@ public final class ConversionWindow extends StylizedJFrame {
 	public ConversionWindow() {
 		super();
 		
+		Context.$();
 		Context.$W = this;
 		new ConversionModel();
 		

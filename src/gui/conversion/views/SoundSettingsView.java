@@ -92,9 +92,13 @@ public final class SoundSettingsView extends SettingsView{
 			public void keyTyped(KeyEvent e) {}
 			public void keyPressed(KeyEvent e) {}
 			public void keyReleased(KeyEvent e) {
-				if(Context.$M.getCurrentFile() != null) {
-					if(isChange == true) 
-						Context.$M.modify(SettingType.SAMPLING_RATE, samplingRateText.getText());
+				if(e.getKeyCode() == KeyEvent.VK_ENTER)
+					Context.$W.requestFocus();
+				else {
+					if(Context.$M.getCurrentFile() != null) {
+						if(isChange == true) 
+							Context.$M.modify(SettingType.SAMPLING_RATE, samplingRateText.getText());
+					}
 				}
 			}
 		});

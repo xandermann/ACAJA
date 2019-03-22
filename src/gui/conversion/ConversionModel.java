@@ -199,7 +199,7 @@ public final class ConversionModel extends GeneralModel{
 			    }
 			}
 		}else 
-			throw new FileNotFoundException(Alert.ERROR_ABSENT_SELECTED_FILE);
+			throw new FileNotFoundException("Le fichier selectionne n'existe pas !");
 	}
 
 	
@@ -223,7 +223,7 @@ public final class ConversionModel extends GeneralModel{
 			sendChanges();
 			Alert.shortAlert(Alert.SUCCESS, "Suppression du fichier<br>"+file.getSourceFileName()+" reussie.");
 		}else
-			Alert.longAlert(Alert.FAILURE, Alert.ERROR_UNFINDABLE_FILE_TO_REMOVE);
+			Alert.longAlert(Alert.INFO, "Aucun fichier a supprimer trouve.");
 	}
 	
 	
@@ -233,11 +233,15 @@ public final class ConversionModel extends GeneralModel{
 	 * Methode qui vide la bibliotheque. 
 	 */
 	public void clear() {
-		currentFile = null;
-		files.clear();
-		sendChanges();
-		((ConversionWindow) Context.$W).redrawEmpty();
-		Alert.shortAlert(Alert.SUCCESS, "Bibliotheque videe avec succes.");
+		if(files.isEmpty()) 
+			Alert.shortAlert(Alert.INFO, "La bibliotheque est deja vide.");
+		else {
+			currentFile = null;
+			files.clear();
+			sendChanges();
+			((ConversionWindow) Context.$W).redrawEmpty();
+			Alert.shortAlert(Alert.SUCCESS, "Bibliotheque videe avec succes.");
+		}
 	}
 
 	

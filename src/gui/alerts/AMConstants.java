@@ -35,12 +35,4 @@ public interface AMConstants {
 			INTERNAL_ERROR_PREFIX
 			+ "Impossible de creer les dossiers de sauvegarde des imports ! "
 			+ "Merci de verifier les permissions du repertoire d'installation d'acaja.";
-	
-	public static final String ERROR_UNFINDABLE_FILE_TO_REMOVE = 
-			INTERNAL_ERROR_PREFIX
-			+ "Le fichier a supprimer n'est pas present dans la bibliotheque !";
-	
-	public static final String ERROR_ABSENT_SELECTED_FILE = 
-			ERROR_PREFIX
-			+ "! Le fichier selectionne n'existe pas !";
 }

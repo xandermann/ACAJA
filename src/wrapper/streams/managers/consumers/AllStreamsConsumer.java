@@ -58,7 +58,7 @@ public class AllStreamsConsumer implements StreamsConsumer {
 		OutputStreamConsumer.consume(processToBeConsume);
 		
 		
-		 try {
+		try {
 			 /**
 			  * PAR SIMPLE DEONTOLOGIE ON OBLIGE JAVA 
 			  * A ATTENDRE LA MORT DU PROCESSUS FILS : FFMPEG.

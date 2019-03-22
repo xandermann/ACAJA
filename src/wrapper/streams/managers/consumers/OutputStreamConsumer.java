@@ -43,8 +43,6 @@ public final class OutputStreamConsumer implements StreamsConsumer {
 				while(consumer.hasNext()) saver.write(consumer.next()+"\n");
 				saver.close();
 			}
-		} catch (IOException ioe) {
-			JOptionPane.showMessageDialog(null, ioe.getMessage());
-		}
+		} catch (IOException ioe) {}
 	}
 }

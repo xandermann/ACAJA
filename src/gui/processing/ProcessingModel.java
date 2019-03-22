@@ -14,6 +14,7 @@ import files.enumerations.ProcessingType;
 import files.enumerations.SettingType;
 import files.files.ProcessingFile;
 import files.files.SelectableFile;
+import gui.general.Context;
 import gui.general.GeneralModel;
 import wrapper.runtime.global.SystemRequests;
 import wrapper.runtime.global.UserRequests;
@@ -27,10 +28,10 @@ public class ProcessingModel extends GeneralModel{
 	
 	
 	public ProcessingModel() {
+		Context.$M = this;
 		this.fUp = false;
 		this.cropUp = false;
 		listRect = new ArrayList<>();
-		
 	}
 
 	

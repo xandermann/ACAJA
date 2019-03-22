@@ -71,9 +71,13 @@ public final class SoundSettingsView extends SettingsView{
 			public void keyTyped(KeyEvent e) {}
 			public void keyPressed(KeyEvent e) {}
 			public void keyReleased(KeyEvent e) {
-				if(Context.$M.getCurrentFile() != null) {
-					if(isChange == true) 
-						Context.$M.modify(SettingType.AUDIO_BITRATE, bitrateText.getText());
+				if(e.getKeyCode() == KeyEvent.VK_ENTER)
+					Context.$W.requestFocus();
+				else {
+					if(Context.$M.getCurrentFile() != null) {
+						if(isChange == true) 
+							Context.$M.modify(SettingType.AUDIO_BITRATE, bitrateText.getText());
+					}
 				}
 			}
 		});
@@ -105,9 +109,13 @@ public final class SoundSettingsView extends SettingsView{
 			public void keyTyped(KeyEvent e) {}
 			public void keyPressed(KeyEvent e) {}
 			public void keyReleased(KeyEvent e) {
-				if(Context.$M.getCurrentFile() != null) {
-					if(isChange == true) 
-						Context.$M.modify(SettingType.NUMBER_AUDIO_CHANNELS, channelsText.getText());
+				if(e.getKeyCode() == KeyEvent.VK_ENTER)
+					Context.$W.requestFocus();
+				else {
+					if(Context.$M.getCurrentFile() != null) {
+						if(isChange == true) 
+							Context.$M.modify(SettingType.NUMBER_AUDIO_CHANNELS, channelsText.getText());
+					}
 				}
 			}
 		});
@@ -142,7 +150,6 @@ public final class SoundSettingsView extends SettingsView{
 			channelsText.setText("");
 		}
 		isChange = true;
-		// if(model.getCurrentFile() != null)	updateAudioCodecs();
 	}
 	
 	

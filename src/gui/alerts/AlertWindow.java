@@ -3,6 +3,10 @@ package gui.alerts;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -61,6 +65,28 @@ public final class AlertWindow extends StylizedJFrame implements ATConstants{
 					"</html>", JLabel.CENTER);
 		notification.setForeground(theme);
 		add(notification, BorderLayout.CENTER);
+		
+		addKeyListener(new KeyListener() {
+			public void keyTyped(KeyEvent e) {}
+			public void keyPressed(KeyEvent e) {}
+			public void keyReleased(KeyEvent e) {
+				if(e.getKeyCode()==KeyEvent.VK_DELETE || e.getKeyCode()==KeyEvent.VK_ESCAPE 
+				|| e.getKeyCode()==KeyEvent.VK_ENTER) 
+					dispose();
+			}
+		});
+		setFocusable(true);
+		requestFocus();
+		
+		addMouseListener(new MouseListener(){
+			public void mouseClicked(MouseEvent e) {}
+			public void mousePressed(MouseEvent e) {
+				dispose();
+			}
+			public void mouseReleased(MouseEvent e) {}
+			public void mouseEntered(MouseEvent e) {}
+			public void mouseExited(MouseEvent e) {}
+		});
 		
 		WindowTools.showLogo(this);
 	}

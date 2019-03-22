@@ -7,6 +7,7 @@ import java.util.List;
 import javax.swing.*;
 import files.enumerations.SettingType;
 import files.files.*;
+import gui.conversion.ConversionModel;
 import gui.general.Context;
 import gui.style.StylizedJPanel;
 import wrapper.language.*;
@@ -93,9 +94,13 @@ public final class VideoSettingsView extends SettingsView{
 			public void keyTyped(KeyEvent e) {}
 			public void keyPressed(KeyEvent e) {}
 			public void keyReleased(KeyEvent e) {
-				if(Context.$M.getCurrentFile() != null) {
-					if(isChange == true)
-						Context.$M.modify(SettingType.VIDEO_BITRATE, bitrateText.getText());
+				if(e.getKeyCode() == KeyEvent.VK_ENTER)
+					Context.$W.requestFocus();
+				else {
+					if(Context.$M.getCurrentFile() != null) {
+						if(isChange == true)
+							Context.$M.modify(SettingType.VIDEO_BITRATE, bitrateText.getText());
+					}
 				}
 			}
 		});
@@ -126,9 +131,13 @@ public final class VideoSettingsView extends SettingsView{
 			public void keyTyped(KeyEvent e) {}
 			public void keyPressed(KeyEvent e) {}
 			public void keyReleased(KeyEvent e) {
-				if(Context.$M.getCurrentFile() != null) {
-					if(isChange == true) 
-						Context.$M.modify(SettingType.FRAMERATE, fpsText.getText());
+				if(e.getKeyCode() == KeyEvent.VK_ENTER)
+					Context.$W.requestFocus();
+				else {
+					if(Context.$M.getCurrentFile() != null) {
+						if(isChange == true) 
+							Context.$M.modify(SettingType.FRAMERATE, fpsText.getText());
+					}
 				}
 			}
 		});

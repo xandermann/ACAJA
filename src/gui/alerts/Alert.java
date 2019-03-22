@@ -21,31 +21,7 @@ public final class Alert extends AlertSettings implements ATConstants, AMConstan
 	 * @param content			Details de la notification.
 	 */
 	public Alert(String title, String content) {
-		if(INTERRUPTOR) {
-			view = new AlertWindow(title, content);
-			
-			view.addMouseListener(new MouseListener(){
-				public void mouseClicked(MouseEvent e) {}
-				public void mousePressed(MouseEvent e) {
-					view.dispose();
-				}
-				public void mouseReleased(MouseEvent e) {}
-				public void mouseEntered(MouseEvent e) {}
-				public void mouseExited(MouseEvent e) {}
-			});
-			
-			view.addKeyListener(new KeyListener() {
-				public void keyTyped(KeyEvent e) {}
-				public void keyPressed(KeyEvent e) {}
-				public void keyReleased(KeyEvent e) {
-					if(e.getKeyCode()==KeyEvent.VK_DELETE || e.getKeyCode()==KeyEvent.VK_ESCAPE 
-					|| e.getKeyCode()==KeyEvent.VK_ENTER) 
-						view.dispose();
-				}
-			});
-			
-			view.requestFocus();
-		}
+		if(INTERRUPTOR) view = new AlertWindow(title, content);
 	}
 	
 	

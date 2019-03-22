@@ -1,6 +1,9 @@
 package gui.general;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
 import javax.swing.*;
 import gui.WindowTools;
 import gui.style.StylizedJFrame;
@@ -21,10 +24,24 @@ public abstract class GeneralWindow extends StylizedJFrame{
 	public GeneralWindow(String title, JPanel view){
 		super(title);
 		if(view == null) throw new NullPointerException("view null !");
+		
 		setResizable(false);
 		setContentPane(view);
 		setSize(new Dimension(view.getWidth(), view.getHeight()));
 		setLocationRelativeTo(null);
+		
+		addKeyListener(new KeyListener() {
+			public void keyTyped(KeyEvent e) {}
+			public void keyPressed(KeyEvent e) {}
+			public void keyReleased(KeyEvent e) {
+				if(e.getKeyCode()==KeyEvent.VK_DELETE || e.getKeyCode()==KeyEvent.VK_ESCAPE 
+				|| e.getKeyCode()==KeyEvent.VK_ENTER) 
+					dispose();
+			}
+		});
+		setFocusable(true);
+		requestFocus();
+		
 		WindowTools.showLogo(this);
 		WindowTools.executeWindow(this);
 	}

@@ -24,22 +24,6 @@ public class GeneralKeyboardController implements KeyListener {
 	@Override
 	public void keyReleased(KeyEvent e) {
 		switch(e.getKeyCode()) {
-			//ECHAP
-			case KeyEvent.VK_ESCAPE :
-				ResourcesManager.clearResources();
-				System.exit(0);
-			break;
-			
-			
-			//CTRL + Q
-			case KeyEvent.VK_Q :
-				if((e.getModifiers() & KeyEvent.CTRL_MASK) != 0) {
-					ResourcesManager.clearResources();
-					System.exit(0);
-				}
-			break;
-			
-			
 			case KeyEvent.VK_A :
 				if((e.getModifiers() & KeyEvent.CTRL_MASK) != 0 ) {
 					//CTRL + SHIFT + A
@@ -49,6 +33,12 @@ public class GeneralKeyboardController implements KeyListener {
  					else
 						Actions.input();
 				}
+			break;
+			
+			
+			case KeyEvent.VK_C :
+				if((e.getModifiers() & KeyEvent.CTRL_MASK) != 0 ) 
+					Actions.switchMode();
 			break;
 			
 			
@@ -63,7 +53,48 @@ public class GeneralKeyboardController implements KeyListener {
 				}
 			break;
 			
-
+			
+			//CTRL + I
+			case KeyEvent.VK_I :
+				if((e.getModifiers() & KeyEvent.CTRL_MASK) != 0 ) 
+					Actions.inspect();
+			break;
+			
+			
+			//CTRL + P
+			case KeyEvent.VK_P :
+				if((e.getModifiers() & KeyEvent.CTRL_MASK) != 0 ) 
+					Actions.set();
+			break;
+			
+			
+			//CTRL + Q
+			case KeyEvent.VK_Q :
+				if((e.getModifiers() & KeyEvent.CTRL_MASK) != 0) 
+					Actions.quit();
+			break;
+			
+			
+			//CTRL + R
+			case KeyEvent.VK_R :
+				if((e.getModifiers() & KeyEvent.CTRL_MASK) != 0 ) 
+						Actions.output();
+			break;
+			
+			
+			//CTRL + S
+			case KeyEvent.VK_S :
+				if((e.getModifiers() & KeyEvent.CTRL_MASK) != 0 ) 
+						Actions.save();
+			break;
+			
+			
+			//ECHAP
+			case KeyEvent.VK_ESCAPE :
+				Actions.quit();
+			break;
+			
+			
 			case KeyEvent.VK_DELETE :
 				//CTRL + SUPPR
 				if((e.getModifiers() & KeyEvent.CTRL_MASK) != 0)

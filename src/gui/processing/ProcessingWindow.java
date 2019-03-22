@@ -17,6 +17,7 @@ import files.files.SelectableFile;
 import gui.JFileChooserManager;
 import gui.WindowTools;
 import gui.conversion.ConversionWindow;
+import gui.general.Context;
 import gui.style.StylizedJMenuBar;
 import gui.style.StylizedJMenuItem;
 import resources.ResourcesManager;
@@ -28,6 +29,8 @@ public class ProcessingWindow extends JFrame {
 
 	
 	public ProcessingWindow() {
+		Context.$W = this;
+		
 		this.addWindowListener(new WindowListener() {
 			public void windowOpened(WindowEvent e) {}
 			public void windowClosing(WindowEvent e) {

@@ -58,8 +58,12 @@ public final class SummaryView extends StylizedJPanel implements Observer {
 			public void keyPressed(KeyEvent e) {}
 			public void keyTyped(KeyEvent e) {}
 			public void keyReleased(KeyEvent e) {
-				if(Context.$M.getCurrentFile() != null) 
-					((ConversionModel) Context.$M).setDestination(outputFileText.getText());
+				if(e.getKeyCode() == KeyEvent.VK_ENTER)
+					Context.$W.requestFocus();
+				else {
+					if(Context.$M.getCurrentFile() != null) 
+						((ConversionModel) Context.$M).setDestination(outputFileText.getText());
+				}
 			}
 		});
 		

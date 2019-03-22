@@ -23,8 +23,8 @@ public final class JFileChooserManager {
 		jdc.setFileSelectionMode(StylizedJFileChooser.DIRECTORIES_ONLY);
 		jdc.showOpenDialog(null);
 		File importDirectory = jdc.getSelectedFile();
-		if (!importDirectory.isDirectory())
-			throw new IllegalArgumentException("Il etait attendu un repertoire !");
+		if (importDirectory==null || !importDirectory.isDirectory())
+			throw new IllegalArgumentException("Attendu un repertoire !");
 		return importDirectory;
 	}
 

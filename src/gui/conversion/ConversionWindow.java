@@ -17,6 +17,7 @@ import gui.answers.AnswersWindow;
 import gui.conversion.views.*;
 import gui.general.Actions;
 import gui.general.Context;
+import gui.general.GeneralKeyboardController;
 import gui.processing.ProcessingWindow;
 import gui.style.*;
 import resources.ResourcesManager;
@@ -62,7 +63,6 @@ public final class ConversionWindow extends StylizedJFrame {
 		
 		empty = new TwoTextsView("Pour commencer,<br>ajoutez un fichier audio ou video via le menu.", 10, "ctrl + a.", 20);
 		
-		
 		addWindowListener(new WindowListener() {
 			public void windowOpened(WindowEvent e) {}
 			public void windowClosing(WindowEvent e) {
@@ -75,32 +75,30 @@ public final class ConversionWindow extends StylizedJFrame {
 			public void windowDeactivated(WindowEvent e) {}
 		});
 		
-		
 		setResizable(false);
 		setTitle("Acaja - Mode Conversion");
 		setSize(new Dimension(600, 600));
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(StylizedJFrame.EXIT_ON_CLOSE);
-
-		WindowTools.showLogo(this);
 		
 		StylizedJPanel p = new StylizedJPanel();
 		p.setLayout(new BorderLayout());
-		StylizedJMenuBar menu = new StylizedJMenuBar();
 		
+		StylizedJMenuBar menu = new StylizedJMenuBar();
 		menu.add(drawFileMenu());
 		menu.add(drawOptionsMenu());
 		menu.add(drawConvertMenu());
-		
 		setJMenuBar(menu);
 		
 		p.add(empty);
 		setLayout(new BorderLayout());
 		add(p, BorderLayout.CENTER);
-		addKeyListener(new ConversionKeyboardController());
 		
+		addKeyListener(new GeneralKeyboardController());
+		setFocusable(true);
 		requestFocus();
 		
+		WindowTools.showLogo(this);
 		WindowTools.executeWindow(this);
 	}
 
@@ -169,6 +167,7 @@ public final class ConversionWindow extends StylizedJFrame {
 
 		
 		StylizedJMenuItem importFile = new StylizedJMenuItem("Importer un fichier");
+		importFile.setToolTipText("CTRL + A");
 		importFile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				Actions.input();
@@ -177,6 +176,7 @@ public final class ConversionWindow extends StylizedJFrame {
 		
 
 		StylizedJMenuItem importFolder = new StylizedJMenuItem("Importer un dossier");
+		importFolder.setToolTipText("CTRL + D");
 		importFolder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				Actions.inputs();
@@ -210,20 +210,30 @@ public final class ConversionWindow extends StylizedJFrame {
 			}	
 	    }
 		
-			
+													     
+		StylizedJMenuItem remove = new StylizedJMenuItem("Supprimer le fichier selectionne");
+		remove.setToolTipText("SUPPR");
+		remove.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) {
+				Context.$M.remove(Context.$M.getCurrentFile());
+			}
+		});
+		
+													  		   
 		StylizedJMenuItem clearLibrary = new StylizedJMenuItem("Vider la bibliotheque");
-		clearLibrary.addActionListener(new ActionListener() {
+		clearLibrary.setToolTipText("CTRL + SUPPR");
+        clearLibrary.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				Context.$M.clear();
 			}
 		});
 
-		
-		StylizedJMenuItem quit = new StylizedJMenuItem("Quitter");
+													
+        StylizedJMenuItem quit = new StylizedJMenuItem("Quitter");
+		quit.setToolTipText("ECHAP / CTRL + Q");
 		quit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
-				ResourcesManager.clearResources();
-				System.exit(0);		
+				Actions.quit();	
 			}
 		});
 
@@ -231,6 +241,7 @@ public final class ConversionWindow extends StylizedJFrame {
 		filesMenu.add(importFile);
 		filesMenu.add(importFolder);
 		filesMenu.add(recentFiles);
+		filesMenu.add(remove);
 		filesMenu.add(clearLibrary);
 		filesMenu.add(quit);
 
@@ -257,46 +268,43 @@ public final class ConversionWindow extends StylizedJFrame {
 		JMenu optionsMenu = new JMenu("Options");
 
 		StylizedJMenuItem exportFolder = new StylizedJMenuItem("Choisir le repertoire de sortie");
+		exportFolder.setToolTipText("CTRL + R");
 		exportFolder.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
-				try {
-					((ConversionModel) Context.$M).setDestinationFolder(JFileChooserManager.chooseDirectory());
-					Alert.shortAlert(Alert.SUCCESS, "Chemin de destination des fichiers <br>enregistre.");
-				} catch (IllegalArgumentException iae) {}
+				Actions.output();
 			}
 		});
 		
-		
+															 
 		StylizedJMenuItem switchMode = new StylizedJMenuItem("Passer en mode traitement");
+		switchMode.setToolTipText("CTRL + C");
 		switchMode.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent ae) {			
-				new ProcessingWindow();
-				Alert.shortAlert(Alert.SUCCESS, "Changement de mode realise <br>avec succes.");
-				dispose();
+			public void actionPerformed(ActionEvent ae) {	
+				Actions.switchMode();
 			}
 		});
-
-		StylizedJMenuItem answsers = new StylizedJMenuItem("Etudier les reponses de ffmpeg");
-		answsers.addActionListener(new ActionListener() {
+														  
+		StylizedJMenuItem answers = new StylizedJMenuItem("Inspecter les reponses de ffmpeg");
+		answers.setToolTipText("CTRL + I");
+		answers.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {		
-				new AnswersWindow();
-				Alert.longAlert(Alert.INFO, "Ceci est l'historique des reponses <br>de FFmpeg.");
-			}
+				Actions.inspect();
+;			}
 		});
 		
-		
+													
 		StylizedJMenuItem settings = new StylizedJMenuItem("Gerer les parametres des notifications");
+		settings.setToolTipText("CTRL + P");
 		settings.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {		
-				new ASWindow();
-				Alert.longAlert(Alert.INFO, "Ceci est la fenetre de <br>gestion des parametres.");
+				Actions.set();
 			}
 		});
 		
 		optionsMenu.add(exportFolder);
 		optionsMenu.add(switchMode);
-		optionsMenu.add(answsers);
+		optionsMenu.add(answers);
 		optionsMenu.add(settings);
 
 		return optionsMenu;
@@ -314,9 +322,9 @@ public final class ConversionWindow extends StylizedJFrame {
 	
 	
 	/**
-	 * [ METHODE INTERNE POUR LA COSNTRUCTION DE LA FENETRE DE FINALISATION. ]
+	 * [ METHODE POUR LA COSNTRUCTION DE LA FENETRE DE FINALISATION. ]
 	 */
-	private void drawConvertWindow() {
+	public void drawConvertWindow() {
 		StylizedJFrame outputWindow = new StylizedJFrame("Demarrer la conversion");
 		outputWindow.setResizable(false);
 		outputWindow.setSize(new Dimension(400, 280));
@@ -352,7 +360,7 @@ public final class ConversionWindow extends StylizedJFrame {
 				try {
 					((ConversionModel) Context.$M).setDestinationFolder(JFileChooserManager.chooseDirectory());
 					outputFolder.setText(((ConversionModel) Context.$M).getDestinationFolder().getAbsolutePath());
-				} catch (IllegalArgumentException iae) {}
+				}catch(IllegalArgumentException iae){}
 			}
 		});
 		
@@ -435,19 +443,12 @@ public final class ConversionWindow extends StylizedJFrame {
 	private JMenu drawConvertMenu() {
 		JMenu convert = new JMenu("Convertir");
 		StylizedJMenuItem convertItem = new StylizedJMenuItem("Convertir les fichiers");
+		convertItem.setToolTipText("CTRL + S");
 		convert.add(convertItem);
 		convertItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(RuntimeSpaceManager.manage() && Context.$M.isModified()) {
-					drawConvertWindow();
-					Alert.longAlert(
-							Alert.INFO, 
-							"Ceci est la fenetre de choix des parametres<br>d'export des fichiers à convertir.");
-				}else
-					Alert.longAlert(
-							Alert.FAILURE, 
-							"Aucun fichier modifie a convertir trouves<br>OU autre conversion deja en cours !");
+				Actions.save();
 			}
 		});
 		return convert;

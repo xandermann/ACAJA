@@ -29,9 +29,9 @@ public final class Actions {
 				if(Context.$M instanceof ConversionModel && Context.$M.getCurrentFile() == null)
 					((ConversionWindow) Context.$W).redrawFirstTime();
 			   Context.$M.setCurrentFile(Context.$M.getFiles().get(Context.$M.getFiles().size()-1));
-				Alert.shortAlert(Alert.SUCCESS, "Import realise avec succes.");
+			   Alert.shortAlert(Alert.SUCCESS, "Import realise avec succes.");
 	    } catch (Exception e) {
-				Alert.shortAlert(Alert.FAILURE, "Echec de l'import.");
+			   Alert.shortAlert(Alert.FAILURE, "Echec de l'import.");
 	    }
 	}
 	
@@ -72,9 +72,9 @@ public final class Actions {
 	 * [ CHANGER DE MODE. ]
 	 */
 	public static void switchMode() {
+		Context.$W.dispose();
 		if(Context.$W instanceof ConversionWindow) new ProcessingWindow(); else new ConversionWindow();
 		Alert.shortAlert(Alert.SUCCESS, "Changement de mode realise <br>avec succes.");
-		Context.$W.dispose();
 	}
 	
 	

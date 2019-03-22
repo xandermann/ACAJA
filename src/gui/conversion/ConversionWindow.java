@@ -197,11 +197,8 @@ public final class ConversionWindow extends StylizedJFrame {
 						try {
 							File file = new File(f.getPath());
 							Context.$M.add(file);
-							System.out.println(1);
 							if (Context.$M.getCurrentFile() == null) redrawFirstTime();
-							System.out.println(2);
 							Context.$M.setCurrentFile(Context.$M.getFiles().get(Context.$M.getFiles().size()-1));
-							System.out.println(3);
 							Alert.shortAlert(Alert.SUCCESS, "Import realise avec succes.");
 						} catch(Exception e) {
 							Alert.shortAlert(Alert.FAILURE, "Echec de l'import.");

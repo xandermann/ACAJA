@@ -16,7 +16,7 @@ public final class Context{
 	 */
 	public static GeneralModel $M;
 	/**
-	 * TABLEAU DE DIVERS COMPOSANTS GRAPHIQUES. 
+	 * LISTE DE DIVERS COMPOSANTS GRAPHIQUES. 
 	 */
 	public static List<JComponent> $ = new ArrayList<JComponent>();
 	/**

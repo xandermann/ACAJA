@@ -1,13 +1,11 @@
 package resources;
 
-import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
-import javax.swing.JOptionPane;
 
-public class TimeTools {
+public final class TimeTools {
 	public static String millisToTime(long millis) {
 		String time = "";
 		
@@ -39,7 +37,6 @@ public class TimeTools {
         try {
 			return sdf.parse("1970-01-01 "+time).getTime();
 		} catch (ParseException pe) {
-			JOptionPane.showMessageDialog(null, pe.getMessage());
 			return -1;
 		}
 	}

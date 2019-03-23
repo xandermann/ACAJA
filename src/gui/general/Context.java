@@ -54,7 +54,7 @@ public final class Context{
 	
 	/**
 	 * INITIALISATEUR.
-	 * 0 = (-re)initialiser le contexte graphique.
+	 * 0 = (re-)initialiser le contexte graphique.
 	 */
 	public static void $0() {
 		$W = null;

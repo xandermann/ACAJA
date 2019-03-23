@@ -29,23 +29,18 @@ public final class Context{
 	 * C = Context.
 	 */
 	public static int SIZE = 10;
-	private static Component[] $C = new Component[SIZE];
+	public static Component[] $C = new Component[SIZE];
 	
 	
 	/**
 	 * AJOUTER/MODIFIER/SUPPRIMER UN ELEMENT DU TABLEAU.
 	 * 
-	 * Si val = null => suppresion de l'element d'indice id.
+	 * Si val = null <=> suppresion de l'element d'indice id.
 	 */
 	public static void $C(int id, Component val) {
-		if(val==null) {
-			if(id<$C.length)
-				$C[id] = null;
-		} else {
-			if(id<0 || id>=SIZE) 
-				throw new IndexOutOfBoundsException("id hors du tableau !");
-			$C[id] = val;
-		}	
+		if(id<0 || id>=SIZE) 
+			throw new IndexOutOfBoundsException("id hors du tableau !");
+		$C[id] = val;
 	}
 	
 	

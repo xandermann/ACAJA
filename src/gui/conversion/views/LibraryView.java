@@ -29,12 +29,23 @@ public final class LibraryView extends StylizedJPanel implements Observer{
 		removeAll();
 		
 		List<SelectableFile> files = Context.$M.getFiles();
+		
+		System.out.println();
+		int width = files.size() < 4 ? 320 : 300;
+		for(int i=1; i<=5; i++){
+			Component view = Context.$C(i);
+			view.setPreferredSize(new Dimension(width, view.getHeight()));
+			view.revalidate();
+			view.repaint();
+		}
+	  	   
 		JPanel all = new JPanel(new BorderLayout());
-		int size = files.size()*140;
-		all.setPreferredSize(new Dimension(270, files.size()*150<=540 ? 540 : size));
+		width = files.size() >= 4 ? 290 : 270;
+		int height = files.size()*140;
+		all.setPreferredSize(new Dimension(width, files.size()*150<=540 ? 540 : height));
 		
 		JPanel content = new JPanel(new GridLayout(files.size(), 1));
-		content.setPreferredSize(new Dimension(270, size));
+		content.setPreferredSize(new Dimension(width, height));
 		for(SelectableFile file : files) {
 			RowView row = new RowView((SettingsFile) file, file==Context.$M.getCurrentFile());
 			row.addMouseListener(new MouseListener() {
@@ -50,9 +61,9 @@ public final class LibraryView extends StylizedJPanel implements Observer{
 		}
 		all.add(content, BorderLayout.CENTER);
 		
-		if(size < 540) {
+		if(height < 540) {
 			JPanel nothing = new JPanel();
-			nothing.setPreferredSize(new Dimension(270, 540-size));
+			nothing.setPreferredSize(new Dimension(width, 540-height));
 			all.add(nothing, BorderLayout.SOUTH);
 		}
 		
@@ -61,6 +72,10 @@ public final class LibraryView extends StylizedJPanel implements Observer{
 		
 		repaint();
 		revalidate();
+		Context.$C(1).repaint();
+		Context.$C(1).revalidate();
+		Context.$W.repaint();
+		Context.$W.revalidate();
 	}
 	
 	

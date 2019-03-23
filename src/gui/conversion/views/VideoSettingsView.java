@@ -56,6 +56,8 @@ public final class VideoSettingsView extends SettingsView{
 	
 	
 	public VideoSettingsView(SoundSettingsView setssp) {
+		Context.$C(4, this);
+		
 		formatComboBox = new JComboBox<String>(CodecConstants.ALL_EXTENSIONS);
 		ssp = setssp;
 		codecsComboBox = new JComboBox<String>(CodecConstants.ALL_SUPPORTED_VIDEO_CODECS);

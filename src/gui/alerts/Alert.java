@@ -26,10 +26,16 @@ public final class Alert extends AlertSettings implements ATConstants, AMConstan
 		if(INTERRUPTOR) {
 			view = new AlertWindow(title, content);
 			
+			/**
+			 * UNE ALERTE PEUT DISPARAITRE AVEC UN CLIC.
+			 */
 			view.addMouseListener(new MouseListener(){
 				public void mouseClicked(MouseEvent e) {}
 				public void mousePressed(MouseEvent e) {
 					view.dispose();
+					/**
+					 * RENDRE LE FOCUS A L'EVENEMENT PARENT.
+					 */
 					if(Context.$C(0) != null) 
 						Context.$C(0).requestFocus();
 					else {

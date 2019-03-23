@@ -1,5 +1,4 @@
 package gui.answers;
-import gui.general.Context;
 import gui.general.GeneralWindow;
 /**
  * [ CLASSE FENETRE DE LA VUE DES REPONSES. ]
@@ -16,6 +15,5 @@ public final class AnswersWindow extends GeneralWindow{
 	 */
 	public AnswersWindow(){
 		super("Historique des reponses de FFmpeg.", new AnswersView());
-		Context.$C(0, this);
 	}
 }

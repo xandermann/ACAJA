@@ -16,46 +16,46 @@ import javax.swing.*;
 public final class Context{
 	/**
 	 * FENETRE PRINCIPALE DU CONTEXTE GRAPHIQUE COURANT.
+	 * W = Window / fenetre principale.
 	 */
 	public static JFrame $W;
 	/**
 	 * MODELE DU CONTEXTE GRAPHIQUE COURANT.
+	 * M = Model.
 	 */
 	public static GeneralModel $M;
 	/**
-	 * LISTE DE DIVERS COMPOSANTS GRAPHIQUES. 
+	 * TABELAU DE DIVERS COMPOSANTS GRAPHIQUES. 
 	 * C = Context.
 	 */
-	public static List<Component> $C = new ArrayList<Component>();
+	public static int SIZE = 10;
+	private static Component[] $C = new Component[SIZE];
 	
 	
 	/**
-	 * AJOUTER/MODIFIER/SUPPRIMER UN ELEMENT DE LA LISTE.
+	 * AJOUTER/MODIFIER/SUPPRIMER UN ELEMENT DU TABLEAU.
 	 * 
 	 * Si val = null => suppresion de l'element d'indice id.
 	 */
 	public static void $C(int id, Component val) {
 		if(val==null) {
-			if(id<$C.size())
-				$C.remove(id);
+			if(id<$C.length)
+				$C[id] = null;
 		} else {
-			if(id<0) 
-				throw new IllegalArgumentException("id negatif !");
-			if(id<$C.size())
-				$C.set(id, val);
-			else
-				$C.add(id, val);
+			if(id<0 || id>=SIZE) 
+				throw new IndexOutOfBoundsException("id hors du tableau !");
+			$C[id] = val;
 		}	
 	}
 	
 	
 	/**
-	 * RECUPERER UN ELEMENT DE LA LISTE.
+	 * RECUPERER UN ELEMENT DU TABLEAU.
 	 */
 	public static Component $C(int id) {
-		if(id<0) 
-			throw new IllegalArgumentException("id negatif !");
-		return id<$C.size() ? $C.get(id) : null;
+		if(id<0 || id>=SIZE) 
+			throw new IndexOutOfBoundsException("id hors du tableau !");
+		return $C[id];
 	}
 	
 	
@@ -66,6 +66,6 @@ public final class Context{
 	public static void $0() {
 		$W = null;
 		$M = null;
-		$C = new ArrayList<Component>();
+		$C = new Component[SIZE];
 	}
 }

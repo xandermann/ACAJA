@@ -1,7 +1,10 @@
 package gui.general;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import exceptions.IncorrectFileException;
+import exceptions.UnfindableResourceException;
 import gui.JFileChooserManager;
 import gui.alerts.ASWindow;
 import gui.alerts.Alert;
@@ -24,15 +27,19 @@ public final class Actions {
 	 */
 	public static void input() {
 		try {
-			   File f = JFileChooserManager.chooseFile();
-			   Context.$M.add(f);
-				if(Context.$M instanceof ConversionModel && Context.$M.getCurrentFile() == null)
-					((ConversionWindow) Context.$W).redrawFirstTime();
-			   Context.$M.setCurrentFile(Context.$M.getFiles().get(Context.$M.getFiles().size()-1));
-			   Alert.shortAlert(Alert.SUCCESS, "Import realise avec succes.");
-	    } catch (Exception e) {
-			   Alert.shortAlert(Alert.FAILURE, "Echec de l'import.");
-	    }
+		    File f = JFileChooserManager.chooseFile();
+			
+			Context.$M.add(f);
+		   
+			if(Context.$M instanceof ConversionModel && Context.$M.getCurrentFile() == null)
+				((ConversionWindow) Context.$W).redrawFirstTime();
+			
+		   Context.$M.setCurrentFile(Context.$M.getFiles().get(Context.$M.getFiles().size()-1));
+			
+		   Alert.shortAlert(Alert.SUCCESS, "Import realise avec succes.");
+		} catch (Exception e) {
+			Alert.shortAlert(Alert.FAILURE, "Echec de l'import.");
+		}	    
 	}
 	
 	
@@ -42,12 +49,16 @@ public final class Actions {
 	public static void inputs() {
 		try {
 			ArrayList<File> files = JFileChooserManager.chooseDirectoryAndListSonFiles();
+			
 			for (File f : files) {
 				Context.$M.add(f);
+				
 				if(Context.$M instanceof ConversionModel && Context.$M.getCurrentFile() == null)
 					((ConversionWindow) Context.$W).redrawFirstTime();
+				
 				Context.$M.setCurrentFile(Context.$M.getFiles().get(Context.$M.getFiles().size()-1));
 			}
+			
 			Alert.shortAlert(Alert.SUCCESS, "Import realise avec succes.");
 		} catch (Exception e) {
 			Alert.shortAlert(Alert.FAILURE, "Echec de l'import.");

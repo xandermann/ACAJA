@@ -34,7 +34,7 @@ public abstract class SettingsView extends StylizedJPanel implements Observer {
 	public SettingsView() {
 		super();
 		isChange = true;
-		setSize(new Dimension(300, 400));
+		setSize(new Dimension(320, 200));
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 	}
 

@@ -47,6 +47,8 @@ public final class SoundSettingsView extends SettingsView{
 	
 	
 	public SoundSettingsView() {
+		Context.$C(5, this);
+		
 		StylizedJPanel codecPanel = new StylizedJPanel();
 		codecPanel.add(new JLabel("Codec audio : "), BorderLayout.WEST);
 		codecsComboBox = new JComboBox<String>(CodecConstants.ALL_SUPPORTED_AUDIO_CODECS);
@@ -105,7 +107,7 @@ public final class SoundSettingsView extends SettingsView{
 		
 
 		StylizedJPanel channelsPanel = new StylizedJPanel();
-		channelsPanel.add(new JLabel("Nombre de canaux audio en sortie : "), BorderLayout.WEST);
+		channelsPanel.add(new JLabel("Nombre de canaux audio : "), BorderLayout.WEST);
 		channelsText = new JTextField();
 		channelsText.setPreferredSize(new Dimension(100, 20));
 		channelsPanel.add(channelsText, BorderLayout.EAST);

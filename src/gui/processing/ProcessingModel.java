@@ -72,9 +72,9 @@ public class ProcessingModel extends GeneralModel{
 	public void setCurrentFile(SelectableFile currentFile) {
 		this.currentFile = (ProcessingFile) currentFile;
 		this.setMinia(this.currentFile.getThumbail());
-		this.currentFile.setDestinationPath("."+File.separator+"sortie_temporaire");
+		this.currentFile.setDestinationPath(".");
 		this.currentFile.setDestinationName("traitement");
-		this.currentFile.setFileExtension(".avi");
+		this.currentFile.setFileExtension(".mp4");
 		sendChanges();
 	}
 

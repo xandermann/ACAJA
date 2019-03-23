@@ -1,4 +1,4 @@
-package gui;
+package gui.start;
 
 import java.awt.Graphics;
 import java.io.IOException;
@@ -9,7 +9,7 @@ import gui.style.StyleTheme;
 import gui.style.StylizedJPanel;
 import resources.ResourceConstants;
 
-public class LoadingView extends StylizedJPanel {
+public final class LoadingView extends StylizedJPanel {
 
 	private int[] pointsLoadingBar;
 	/**
@@ -23,7 +23,7 @@ public class LoadingView extends StylizedJPanel {
 	 * Recuperer la largeur de la barre de chargement (120 = les marges a gauche et
 	 * a droite)
 	 */
-	private final int WIDTH = OpeningWindow.WIDTH - 120;
+	private final int WIDTH = 280;
 
 	/**
 	 * Constructeur sans parametre, ajoute 4 points pour la barre de chargement
@@ -62,21 +62,14 @@ public class LoadingView extends StylizedJPanel {
 	 * @return Le pourcentage de la fenetre
 	 */
 	public int getCalcultatedWidth() {
-		// 0 % - 0 px
-
-		// 100 % - this.WIDTH px
-		// this.percentage % - z px
-
-		// Donc
 		return (this.percentage * this.WIDTH) / 100;
 	}
 
 	@Override
 	public void paintComponent(Graphics g) {
-
 		// Ces 2 lignes de code corrigent un bug (barre noire a droite)
 		g.setColor(StyleTheme.BACKGROUND_COLOR);
-		g.fillRect(0, 0, OpeningWindow.WIDTH, OpeningWindow.HEIGHT);
+		g.fillRect(0, 0, 400, 400);
 
 		// Ajout du logo
 		try {
@@ -88,13 +81,8 @@ public class LoadingView extends StylizedJPanel {
 		g.setColor(StyleTheme.BACKGROUND_COLOR);
 		g.fillRect(50, 330, 280, 25);
 
-		// g.setColor(Color.BLACK);
-		// g.drawString("Imaginez que la barre existe", 55, 340);
-		// g.drawString("TODO: Barre de chargement -> Alexandre H", 55, 355);
-
 		g.setColor(StyleTheme.BACKGROUND_COLOR_SECONDARY);
 		g.fillRect(50, 330, this.getCalcultatedWidth(), 25);
 
 	}
-
 }

@@ -1,6 +1,6 @@
 package runtime;
 
-import gui.OpeningWindow;
+import gui.start.OpeningWindow;
 
 /**
  * [ PROGRAMME EXECUTEUR. ]

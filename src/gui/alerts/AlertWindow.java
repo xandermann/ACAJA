@@ -80,24 +80,17 @@ public final class AlertWindow extends StylizedJFrame implements ATConstants{
 				if(e.getKeyCode()==KeyEvent.VK_DELETE || e.getKeyCode()==KeyEvent.VK_ESCAPE 
 				|| e.getKeyCode()==KeyEvent.VK_ENTER) {
 					dispose();
-					if(Context.$W != null) Context.$W.requestFocus();
+					if(Context.$C(0) != null) 
+						Context.$C(0).requestFocus();
+					else {
+						if(Context.$W != null) 
+							Context.$W.requestFocus();
+					}
 				}
 			}
 		});
 		setFocusable(true);
 		requestFocus();
-		
-		
-		addMouseListener(new MouseListener(){
-			public void mouseClicked(MouseEvent e) {}
-			public void mousePressed(MouseEvent e) {
-				dispose();
-				if(Context.$W != null) Context.$W.requestFocus();
-			}
-			public void mouseReleased(MouseEvent e) {}
-			public void mouseEntered(MouseEvent e) {}
-			public void mouseExited(MouseEvent e) {}
-		});
 		
 
 		WindowTools.showLogo(this);

@@ -466,9 +466,7 @@ public final class Request implements FlagConstants, ValueConstants{
 			
 			request.clear();
 			askSomethingElse(new String[]{FLAG_CONCAT[0], FLAG_CONCAT[1], FLAG_CONCAT[2], inputsFile.getAbsolutePath(), FLAG_CONCAT[3]});
-		} catch (IOException ioe) {
-			JOptionPane.showMessageDialog(null, ioe.getMessage());
-		}
+		} catch (IOException ioe) {}
 		
 		return this;
 	}
@@ -510,7 +508,7 @@ public final class Request implements FlagConstants, ValueConstants{
 	}
 	
 	/**
-	 * [ EXECUTER LA REQUETE ET CONSOMMER EN INTRENE TOUS LES FLUX DE SORTIE DE FFMPEG. ]
+	 * [ EXECUTER LA REQUETE ET CONSOMMER EN INTERNE TOUS LES FLUX DE SORTIE DE FFMPEG. ]
 	 * 
 	 * @return La requete this. 
 	 * 

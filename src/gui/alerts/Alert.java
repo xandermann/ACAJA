@@ -1,6 +1,8 @@
 package gui.alerts;
 import java.awt.event.*;
 import javax.swing.*;
+
+import gui.general.Context;
 /**
  * [ ALERTES ( = NOTIFICATIONS TEMPORAIRES ). ]
  * 
@@ -21,7 +23,25 @@ public final class Alert extends AlertSettings implements ATConstants, AMConstan
 	 * @param content			Details de la notification.
 	 */
 	public Alert(String title, String content) {
-		if(INTERRUPTOR) view = new AlertWindow(title, content);
+		if(INTERRUPTOR) {
+			view = new AlertWindow(title, content);
+			
+			view.addMouseListener(new MouseListener(){
+				public void mouseClicked(MouseEvent e) {}
+				public void mousePressed(MouseEvent e) {
+					view.dispose();
+					if(Context.$C(0) != null) 
+						Context.$C(0).requestFocus();
+					else {
+						if(Context.$W != null) 
+							Context.$W.requestFocus();
+					}
+				}
+				public void mouseReleased(MouseEvent e) {}
+				public void mouseEntered(MouseEvent e) {}
+				public void mouseExited(MouseEvent e) {}
+			});
+		}
 	}
 	
 	

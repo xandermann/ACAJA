@@ -30,7 +30,6 @@ public final class LibraryView extends StylizedJPanel implements Observer{
 		
 		List<SelectableFile> files = Context.$M.getFiles();
 		
-		System.out.println();
 		int width = files.size() < 4 ? 320 : 300;
 		for(int i=1; i<=5; i++){
 			Component view = Context.$C(i);

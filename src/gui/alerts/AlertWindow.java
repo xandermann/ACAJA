@@ -26,18 +26,22 @@ public final class AlertWindow extends StylizedJFrame implements ATConstants{
 	public AlertWindow(String title, String content) {
 		super(title);
 		
+		
 		if(!title.equals(INFO) && !title.equals(SUCCESS) && !title.equals(FAILURE))
 			throw new IllegalArgumentException("Type de notification inconnu !");
 		
 		if(content==null) throw new NullPointerException("Content null !");
+		
 		
 		setLayout(new BorderLayout());
 		setSize(300, 150);
 		setResizable(false);
 		setLocationRelativeTo(null);
 		
+		
 		Color theme = title.equals(FAILURE) ? Color.RED : 
 				   	  (title.equals(SUCCESS) ? new Color(0,128,0) : StyleTheme.BACKGROUND_COLOR_SECONDARY);
+		
 		
 		setContentPane(new JPanel() {
 			public void paintComponent(Graphics g) {
@@ -45,6 +49,7 @@ public final class AlertWindow extends StylizedJFrame implements ATConstants{
 				g.drawRect(15, 10, 265, 100); 
 			}	
 		});
+		
 		
 		JLabel notification = new JLabel(
 				"<html>" + 
@@ -67,6 +72,7 @@ public final class AlertWindow extends StylizedJFrame implements ATConstants{
 		notification.setForeground(theme);
 		add(notification, BorderLayout.CENTER);
 		
+		
 		addKeyListener(new KeyListener() {
 			public void keyTyped(KeyEvent e) {}
 			public void keyPressed(KeyEvent e) {}
@@ -81,6 +87,7 @@ public final class AlertWindow extends StylizedJFrame implements ATConstants{
 		setFocusable(true);
 		requestFocus();
 		
+		
 		addMouseListener(new MouseListener(){
 			public void mouseClicked(MouseEvent e) {}
 			public void mousePressed(MouseEvent e) {
@@ -92,6 +99,7 @@ public final class AlertWindow extends StylizedJFrame implements ATConstants{
 			public void mouseExited(MouseEvent e) {}
 		});
 		
+
 		WindowTools.showLogo(this);
 	}
 }

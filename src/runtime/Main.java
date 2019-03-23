@@ -15,6 +15,6 @@ public final class Main {
 		/**
 		 * DEMARAGE DE LA FENETRE D'OUVERTURE DU LOGICIEL.
 		 */
-		OpeningWindow.generateOpeningWindow();
+		new OpeningWindow();
 	}
 }

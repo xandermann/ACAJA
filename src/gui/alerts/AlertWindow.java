@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import gui.WindowTools;
+import gui.general.Context;
 import gui.style.StyleTheme;
 import gui.style.StylizedJFrame;
 
@@ -71,8 +72,10 @@ public final class AlertWindow extends StylizedJFrame implements ATConstants{
 			public void keyPressed(KeyEvent e) {}
 			public void keyReleased(KeyEvent e) {
 				if(e.getKeyCode()==KeyEvent.VK_DELETE || e.getKeyCode()==KeyEvent.VK_ESCAPE 
-				|| e.getKeyCode()==KeyEvent.VK_ENTER) 
+				|| e.getKeyCode()==KeyEvent.VK_ENTER) {
 					dispose();
+					if(Context.$W != null) Context.$W.requestFocus();
+				}
 			}
 		});
 		setFocusable(true);
@@ -82,6 +85,7 @@ public final class AlertWindow extends StylizedJFrame implements ATConstants{
 			public void mouseClicked(MouseEvent e) {}
 			public void mousePressed(MouseEvent e) {
 				dispose();
+				if(Context.$W != null) Context.$W.requestFocus();
 			}
 			public void mouseReleased(MouseEvent e) {}
 			public void mouseEntered(MouseEvent e) {}

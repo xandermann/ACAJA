@@ -34,7 +34,7 @@ public final class Actions {
 			if(Context.$M instanceof ConversionModel && Context.$M.getCurrentFile() == null)
 				((ConversionWindow) Context.$W).redrawFirstTime();
 			
-		   Context.$M.setCurrentFile(Context.$M.getFiles().get(Context.$M.getFiles().size()-1));
+		    Context.$M.setCurrentFile(Context.$M.getFiles().get(Context.$M.getFiles().size()-1));
 			
 		   Alert.shortAlert(Alert.SUCCESS, "Import realise avec succes.");
 		} catch (Exception e) {

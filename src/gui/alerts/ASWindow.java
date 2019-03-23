@@ -1,4 +1,5 @@
 package gui.alerts;
+import gui.general.Context;
 import gui.general.GeneralWindow;
 /**
  * [ CLASSE FENETRE DE LA VUE DE CHOIX DES PARAMETRES DES ALERTES. ]
@@ -17,5 +18,9 @@ public final class ASWindow extends GeneralWindow{
 	 */
 	public ASWindow(){
 		super("Choix des parametres des notifications.", new ASView());
+		/**
+		 * THIS DETIENT LE FOCUS.
+		 */
+		Context.$C(0, this);
 	}
 }

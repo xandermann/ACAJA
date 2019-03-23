@@ -81,7 +81,7 @@ public final class AlertWindow extends StylizedJFrame implements ATConstants{
 				|| e.getKeyCode()==KeyEvent.VK_ENTER) {
 					dispose();
 					/**
-					 * RENDRE LE FOCUS A L'EVENEMENT PARENT.
+					 * RENDRE LE FOCUS AU COMPONENT PARENT.
 					 */
 					if(Context.$C(0) != null) 
 						Context.$C(0).requestFocus();

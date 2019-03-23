@@ -19,7 +19,7 @@ public final class ASWindow extends GeneralWindow{
 	public ASWindow(){
 		super("Choix des parametres des notifications.", new ASView());
 		/**
-		 * THIS DETIENT LE FOCUS.
+		 * THIS DETIENT LE FOCUS ET SERA UN COMPONENT PARENT.
 		 */
 		Context.$C(0, this);
 	}

@@ -34,7 +34,7 @@ public final class Alert extends AlertSettings implements ATConstants, AMConstan
 				public void mousePressed(MouseEvent e) {
 					view.dispose();
 					/**
-					 * RENDRE LE FOCUS A L'EVENEMENT PARENT.
+					 * RENDRE LE FOCUS AU COMPONENT PARENT.
 					 */
 					if(Context.$C(0) != null) 
 						Context.$C(0).requestFocus();

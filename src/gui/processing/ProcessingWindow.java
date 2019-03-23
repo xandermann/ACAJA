@@ -29,8 +29,9 @@ public class ProcessingWindow extends JFrame {
 
 	
 	public ProcessingWindow() {
-		Context.$();
+		Context.$0();
 		Context.$W = this;
+		new ProcessingModel();
 		
 		this.addWindowListener(new WindowListener() {
 			public void windowOpened(WindowEvent e) {}

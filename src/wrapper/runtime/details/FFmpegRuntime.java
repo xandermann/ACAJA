@@ -48,11 +48,7 @@ public final class FFmpegRuntime {
 	 * 
 	 * Cette methode a un role primitif ( ou primaire, selon la 
 	 * maniere dont on le dis... ). Cette methode a pour seul role 
-	 * d'intialiser le chemin vers le fichier executable de FFMPEG.
-	 * 
-	 * TODO il faudra recuperer depuis l'interface graphique le chemin,
-	 * en le demandant a l'utilisateur ( cf. respect des droits de 
-	 * l'utilisateur vu avec M. OUNI. ).
+	 * d'initialiser le chemin vers le fichier executable de FFMPEG.
 	 */
 	private static void install(){
 		String os = System.getProperty("os.name");

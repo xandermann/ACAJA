@@ -62,9 +62,7 @@ public final class AnswersView extends JPanel {
 		JButton refresh = null;
 		try {
 			refresh = new JButton(new ImageIcon(ImageIO.read(ResourceConstants.REFRESH)));
-		} catch (IOException ioe) {
-			JOptionPane.showMessageDialog(null, ioe.getMessage());
-		}
+		} catch (IOException ioe) {}
 		refresh.setPreferredSize(new Dimension(30, 30));
 		refresh.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

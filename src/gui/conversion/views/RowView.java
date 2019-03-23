@@ -33,8 +33,10 @@ public final class RowView extends JPanel{
 	 */
 	public RowView(SettingsFile file, boolean isCurrentFile) {
 		super(new BorderLayout());
+		
 		if((this.file=file) == null) throw new NullPointerException("Le text recu en parametre est null !");
 		this.isCurrentFile=isCurrentFile;
+		
 		setPreferredSize(new Dimension(270, 140));
 	}
 	

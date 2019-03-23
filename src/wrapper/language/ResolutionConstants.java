@@ -5,12 +5,12 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * [ INTERFACE POUR ACCEDER AUX RESOLUTIONS DE VIDEO LES PLUS UTILISEES. ]
+ * [ CLASSE POUR ACCEDER AUX RESOLUTIONS DE VIDEO LES PLUS UTILISEES. ]
  * 
  * Auteurs du projet : 
  * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
  */
-public interface ResolutionConstants {
+public final class ResolutionConstants {
 	public final static String[] CIF_RESOLUTIONS = {"128x96", "176x144", "352x288", "704x576", "1408x1152"};
 	
 	public final static String[] VGA_RESOLUTIONS = {"160x120", "320x240", "640x480", "800x600", "852x480"};
@@ -22,16 +22,16 @@ public interface ResolutionConstants {
 	
 	public final static String[] HD_RESOLUTIONS = {"852x480", "1280x720", "1920x1080"};
 	
-	public final static String[] ALL_RESOLUTIONS = getAllResolutions();
+	public final static String[] ALL_RESOLUTIONS;
 	
-	public static String[] getAllResolutions() {
+	static {
 		List<String> allResolutions = new ArrayList<String>();
 		allResolutions.addAll(Arrays.asList(CIF_RESOLUTIONS));
 		allResolutions.addAll(Arrays.asList(VGA_RESOLUTIONS));
 		allResolutions.addAll(Arrays.asList(GA_RESOLUTIONS));
 		allResolutions.addAll(Arrays.asList(CGA_AND_EGA_RESOLUTIONS));
 		allResolutions.addAll(Arrays.asList(HD_RESOLUTIONS));
-		return allResolutions.toArray(new String[allResolutions.size()]);
+		ALL_RESOLUTIONS = allResolutions.toArray(new String[allResolutions.size()]);
 	}
 }
  

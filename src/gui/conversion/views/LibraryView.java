@@ -28,6 +28,7 @@ public final class LibraryView extends StylizedJPanel implements Observer{
 	private void displayLibrary() {
 		removeAll();
 		
+		
 		List<SelectableFile> files = Context.$M.getFiles();
 		
 		

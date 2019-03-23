@@ -44,7 +44,8 @@ public abstract class GeneralWindow extends StylizedJFrame{
 					if(Context.$C(0) != null) {
 						if(Context.$C(0) == GeneralWindow.this) {
 							Context.$C(0, null);
-							Context.$W.requestFocus();
+							if(Context.$W != null) 
+								Context.$W.requestFocus();
 						} else
 							Context.$C(0).requestFocus();
 					} else {

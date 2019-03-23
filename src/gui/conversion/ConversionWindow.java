@@ -133,8 +133,6 @@ public final class ConversionWindow extends StylizedJFrame {
 		concernedFileView.setLayout(new BoxLayout(concernedFileView, BoxLayout.Y_AXIS));
 		concernedFileView.setPreferredSize(new Dimension(320, 600));
 		Context.$C(1, concernedFileView);
-		
-		
 	
 		SummaryView sv = new SummaryView();
 		TabsView tv = new TabsView();

@@ -1,6 +1,4 @@
 package gui.general;
-import java.util.ArrayList;
-import java.util.List;
 import java.awt.*;
 import javax.swing.*;
 /**
@@ -56,7 +54,7 @@ public final class Context{
 	
 	/**
 	 * INITIALISATEUR.
-	 * 0 = reinitialiser le contexte graphique.
+	 * 0 = (-re)initialiser le contexte graphique.
 	 */
 	public static void $0() {
 		$W = null;

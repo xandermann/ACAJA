@@ -172,7 +172,7 @@ public final class ConversionWindow extends StylizedJFrame {
 
 		
 		StylizedJMenuItem importFile = new StylizedJMenuItem("Importer un fichier");
-		importFile.setToolTipText("CTRL + A");
+		importFile.setToolTipText("Ici vous pouvez ajouter un fichier dans la bibliothèque (CTRL + A).");
 		importFile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				Actions.input();
@@ -181,7 +181,7 @@ public final class ConversionWindow extends StylizedJFrame {
 		
 
 		StylizedJMenuItem importFolder = new StylizedJMenuItem("Importer un dossier");
-		importFolder.setToolTipText("CTRL + D");
+		importFolder.setToolTipText("Ici vous pouvez ajouter plusieurs fichiers dans la bibliothèque (CTRL + D).");
 		importFolder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				Actions.inputs();
@@ -189,7 +189,8 @@ public final class ConversionWindow extends StylizedJFrame {
 		});
 		
 		
-		JMenu recentFiles = new JMenu("Fichiers recemments importes");
+		JMenu recentFiles = new JMenu("Fichiers recemment importes");
+		recentFiles.setToolTipText("Ici vous pouvez acceder aux fichiers recemment ouverts.");
 		FileInformation[] files = ((ConversionModel) Context.$M).getOldImports();
 		for(FileInformation f : files) {
 			if(f != null) {
@@ -214,7 +215,7 @@ public final class ConversionWindow extends StylizedJFrame {
 		
 													     
 		StylizedJMenuItem remove = new StylizedJMenuItem("Supprimer le fichier selectionne");
-		remove.setToolTipText("SUPPR");
+		remove.setToolTipText("Ici vous pouvez supprimer le fichier actuellement selectionne (SUPPR).");
 		remove.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				Context.$M.remove(Context.$M.getCurrentFile());
@@ -223,7 +224,7 @@ public final class ConversionWindow extends StylizedJFrame {
 		
 													  		   
 		StylizedJMenuItem clearLibrary = new StylizedJMenuItem("Vider la bibliotheque");
-		clearLibrary.setToolTipText("CTRL + SUPPR");
+		clearLibrary.setToolTipText("Ici vous pouvez vider la bibliotheque (CTRL + SUPPR).");
         clearLibrary.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				Context.$M.clear();
@@ -232,7 +233,7 @@ public final class ConversionWindow extends StylizedJFrame {
 
 													
         StylizedJMenuItem quit = new StylizedJMenuItem("Quitter");
-		quit.setToolTipText("ECHAP / CTRL + Q");
+		quit.setToolTipText("Ici vous pouvez quitter le logiciel (ECHAP / CTRL + Q).");
 		quit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				Actions.quit();	
@@ -270,7 +271,7 @@ public final class ConversionWindow extends StylizedJFrame {
 		JMenu optionsMenu = new JMenu("Options");
 
 		StylizedJMenuItem exportFolder = new StylizedJMenuItem("Choisir le repertoire de sortie");
-		exportFolder.setToolTipText("CTRL + R");
+		exportFolder.setToolTipText("Ici vous pouvez choisir le repertoire de sortie (CTRL + R).");
 		exportFolder.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
@@ -280,7 +281,7 @@ public final class ConversionWindow extends StylizedJFrame {
 		
 															 
 		StylizedJMenuItem switchMode = new StylizedJMenuItem("Passer en mode traitement");
-		switchMode.setToolTipText("CTRL + C");
+		switchMode.setToolTipText("Ici vous pouvez choisir de passer en mode traitement (CTRL + C).");
 		switchMode.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {	
 				Actions.switchMode();
@@ -288,7 +289,7 @@ public final class ConversionWindow extends StylizedJFrame {
 		});
 														  
 		StylizedJMenuItem answers = new StylizedJMenuItem("Inspecter les reponses de ffmpeg");
-		answers.setToolTipText("CTRL + I");
+		answers.setToolTipText("Ici vous pouvez inspecter les reponses de ffmpeg (CTRL + I).");
 		answers.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {		
 				Actions.inspect();
@@ -297,7 +298,7 @@ public final class ConversionWindow extends StylizedJFrame {
 		
 													
 		StylizedJMenuItem settings = new StylizedJMenuItem("Gerer les parametres des notifications");
-		settings.setToolTipText("CTRL + P");
+		settings.setToolTipText("Ici vous pouvez gerer les parametres des notifications (CTRL + P).");
 		settings.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {		
 				Actions.set();
@@ -445,7 +446,7 @@ public final class ConversionWindow extends StylizedJFrame {
 	private JMenu drawConvertMenu() {
 		JMenu convert = new JMenu("Convertir");
 		StylizedJMenuItem convertItem = new StylizedJMenuItem("Convertir les fichiers");
-		convertItem.setToolTipText("CTRL + S");
+		convertItem.setToolTipText("Ici vous pouvez demarer la conversion des fichiers (CTRL + S).");
 		convert.add(convertItem);
 		convertItem.addActionListener(new ActionListener() {
 			@Override

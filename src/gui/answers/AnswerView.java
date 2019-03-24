@@ -90,7 +90,7 @@ public final class AnswerView extends JPanel{
 									 ".lib, .metadata {" +
 										"color: black;" +
 								     "}" +
-									 ".io, .error, .config, .conversion{" +
+									 ".io, .error, .config, .conversion {" +
 										"color: white;" +
 								     "}" +
 							   "</style>" +

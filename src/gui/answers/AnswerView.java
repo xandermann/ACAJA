@@ -27,30 +27,39 @@ public final class AnswerView extends JPanel{
 		
 		
 		/**
-		 * CONTENU DU FICHIER.
+		 * CONTENU DU FICHIER. ----------------------------------------------------------------------------------
 		 */
 		JEditorPane text = new JEditorPane();
 		text.setContentType("text/html");
 		text.setEditable(false);
+		
 		String content = "";
+		
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(support));
 			String line = null;
-			if((line=reader.readLine()) != null) content += "<span>"+getDown(line)+"</span>";
-			while((line=reader.readLine()) != null) {
-				content += "<br><span" + 
+			
+			while((line=reader.readLine()) != null) 
+				content += "<span" + 
 								(!Errors.track(line) ? " class=error" : 
-									(line.contains("Input") || line.contains("Output") ? " class=io" : ""))+
-							">"+getDown(line)+"</span>";
-			}
+									(line.contains("Input") || line.contains("Output") ? " class=io" : 
+										(line.contains("configuration") ? " class=config" : 
+											(line.contains("lib") ? " class=lib" : 
+												(line.contains("frame=") ? " class=conversion" : 
+													(line.contains("Stream #") || line.contains("Duration") ? " class=metadata" :
+														(line.contains("ffmpeg") ||line.contains("GCC") ) ? " class=start" : 
+															")"))))))+">" +
+									getDown(line) +
+							"</span>" +
+							"<br>";
+			
 			
 			reader.close();
 		} catch (Exception e) {} 
 		
 		
-		
 		/**
-		 * DISPOSITION ET COLORISATION DU CODE. 
+		 * DISPOSITION ET COLORISATION DU CODE.  ---------------------------------------------------------------------
 		 */
 		String start = "<html>" + 
 							"<head>" +
@@ -58,11 +67,32 @@ public final class AnswerView extends JPanel{
 									"span {" +
 										"white-space: nowrap;" +
 									"}" +
+									".start {" +
+										"background-color: black;" +
+									 "}" +
 									".io {" +
-										"color: #0000FF;" +
+										"background-color: blue;" +
 								     "}" +
 									 ".error {" +
-										"color: #FF0000;" +
+										"background-color: red;" +
+								     "}" +
+									 ".config {" +
+										"background-color: gray;" +
+								     "}" +
+									 ".lib {" +
+										"background-color: yellow;" +
+								     "}" +
+									 ".conversion {" +
+										"background-color: green;" +
+								     "}" +
+									 ".metadata {" +
+										"background-color: #77b5fe;" +
+								     "}" +
+									 ".lib, .metadata {" +
+										"color: black;" +
+								     "}" +
+									 ".io, .error, .config, .conversion, .start {" +
+										"color: white;" +
 								     "}" +
 							   "</style>" +
 							"</head>" +
@@ -73,7 +103,7 @@ public final class AnswerView extends JPanel{
 		
 		
 		/**
-		 * DISPOSITION DES COMPOSANTS.
+		 * DISPOSITION DES COMPOSANTS. --------------------------------------------------------------------------------
 		 */
 		setSize(new Dimension(500, 500));
 		JPanel name = new JPanel(new BorderLayout());
@@ -86,11 +116,12 @@ public final class AnswerView extends JPanel{
 				JLabel.CENTER));
 		JPanel area = new JPanel(new BorderLayout());
 		name.setSize(new Dimension(500, 450));
-		area.add(new JScrollPane(text, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER));
+		area.add(new JScrollPane(text, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
 		
 		add(name, BorderLayout.NORTH);
 		add(area, BorderLayout.CENTER);
 	}
+	
 	
 	
 	/**
@@ -100,6 +131,6 @@ public final class AnswerView extends JPanel{
 	 * @return			la ligne formatee.
 	 */
 	private String getDown(String line) {
-		return line.length()<=73 ? line : (line.substring(0, 73)+"<br>"+getDown(line.substring(73, line.length())));
+		return line.length()<=80 ? line : (line.substring(0, 80)+"<br>"+getDown(line.substring(80, line.length())));
 	}
 }

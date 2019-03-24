@@ -41,7 +41,7 @@ public interface FlagConstants {
 	public final static String FLAG_MODIFY  = "-vf";
 	
 	public final static String[] FLAG_RESIZE = {FLAG_MODIFY, "scale="};
-	public final static String[] FLAG_CROP = {"-filter:v", "\"crop=", "\""};
+	public final static String[] FLAG_CROP = {"-filter:v","crop="};
 	public final static String[] FLAG_PERIOD = {"-ss", "-t"};
 	public final static String[] FLAG_ROTATE = {FLAG_MODIFY, "\"transpose=1\""};
 	public final static String[] FLAG_BLUR = {"-filter_complex", 

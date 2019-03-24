@@ -71,7 +71,7 @@ public final class AnswersView extends JPanel {
 		        Alert.shortAlert(Alert.INFO,
 							files.size()-countOldFiles == 0 ? 
 							"Aucun nouveau rapport trouve." : 
-							files.size()-countOldFiles + " nouveaux rapports.");
+							files.size()-countOldFiles + " nouveau(x) rapport(s).");
 			}
 		});
 		head.add(refresh, BorderLayout.EAST);

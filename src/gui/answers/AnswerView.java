@@ -4,6 +4,7 @@ import java.io.*;
 import java.awt.*;
 import javax.swing.*;
 import resources.TimeTools;
+import wrapper.streams.managers.filters.Errors;
 
 /**
  * [ CLASSE VUE D'UNE REPONSE. ]
@@ -28,15 +29,47 @@ public final class AnswerView extends JPanel{
 		/**
 		 * CONTENU DU FICHIER.
 		 */
-		JTextArea text = new JTextArea();
+		JEditorPane text = new JEditorPane();
+		text.setContentType("text/html");
 		text.setEditable(false);
+		String content = "";
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(support));
 			String line = null;
-			if((line=reader.readLine()) != null) text.setText(line);
-			while((line=reader.readLine()) != null) text.setText(text.getText()+"\n"+line);
+			if((line=reader.readLine()) != null) content += "<span>"+getDown(line)+"</span>";
+			while((line=reader.readLine()) != null) {
+				content += "<br><span" + 
+								(!Errors.track(line) ? " class=error" : 
+									(line.contains("Input") || line.contains("Output") ? " class=io" : ""))+
+							">"+getDown(line)+"</span>";
+			}
+			
 			reader.close();
 		} catch (Exception e) {} 
+		
+		
+		
+		/**
+		 * DISPOSITION ET COLORISATION DU CODE. 
+		 */
+		String start = "<html>" + 
+							"<head>" +
+								"<style>" +
+									"span {" +
+										"white-space: nowrap;" +
+									"}" +
+									".io {" +
+										"color: #0000FF;" +
+								     "}" +
+									 ".error {" +
+										"color: #FF0000;" +
+								     "}" +
+							   "</style>" +
+							"</head>" +
+							"<body>";
+		String end = 		"</body>" +
+					"</html>";
+		text.setText(start+content+end);
 		
 		
 		/**
@@ -44,7 +77,7 @@ public final class AnswerView extends JPanel{
 		 */
 		setSize(new Dimension(500, 500));
 		JPanel name = new JPanel(new BorderLayout());
-		name.setSize(new Dimension(500, 50));
+		name.setPreferredSize(new Dimension(500, 30));
 		
 		String n = support.getName();
 		name.add(new JLabel(
@@ -53,9 +86,20 @@ public final class AnswerView extends JPanel{
 				JLabel.CENTER));
 		JPanel area = new JPanel(new BorderLayout());
 		name.setSize(new Dimension(500, 450));
-		area.add(new JScrollPane(text, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS));
+		area.add(new JScrollPane(text, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER));
 		
 		add(name, BorderLayout.NORTH);
 		add(area, BorderLayout.CENTER);
+	}
+	
+	
+	/**
+	 * [ FORMATER UNE LIGNE. ]
+	 * 
+	 * @param line		La ligne a formater.
+	 * @return			la ligne formatee.
+	 */
+	private String getDown(String line) {
+		return line.length()<=73 ? line : (line.substring(0, 73)+"<br>"+getDown(line.substring(73, line.length()-1)));
 	}
 }

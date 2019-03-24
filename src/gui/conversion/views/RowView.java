@@ -44,23 +44,26 @@ public final class RowView extends JPanel{
 	
 	@Override
 	public void paintComponent(Graphics g) {
+		int w = 270;
+		int h = 140;
+				
 		g.setColor(isCurrentFile ? StyleTheme.BACKGROUND_COLOR_SECONDARY : Color.WHITE);
-		g.fillRect(0, 0, 270, 140);
+		g.fillRect(0, 0, w, h);
 		
 		g.setColor(Color.BLACK);
-		g.drawRect(10, 10, 250, 120); 
-		g.drawRect(11, 11, 248, 118);
-		g.drawRect(12, 12, 246, 116);
+		g.drawRect(10, 10, w-20, h-20); 
+		g.drawRect(11, 11, w-22, h-22);
+		g.drawRect(12, 12, w-24, h-24);
 		
 		g.setFont(new Font(Font.SERIF, Font.BOLD, 14));
-		g.drawString(file.getSourceFileName().toUpperCase(), (270-8*file.getSourceFileName().length())/2, 30);
+		g.drawString(file.getSourceFileName().toUpperCase(), (w-8*file.getSourceFileName().length())/2, 30);
 		
 		try {
 			g.drawImage(ImageIO.read(file.getThumbail()), 40, 40, null);
 		} catch (IOException ioe) {}
 		
-		g.drawRect(40, 40, 190, 80); 
-		g.drawRect(41, 41, 188, 78);
-		g.drawRect(42, 42, 186, 76);
+		g.drawRect(40, 40, w-80, h-60); 
+		g.drawRect(41, 41, w-82, h-62);
+		g.drawRect(42, 42, w-84, h-64);
 	}
 }

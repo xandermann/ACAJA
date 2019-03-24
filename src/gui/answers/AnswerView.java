@@ -27,22 +27,28 @@ public final class AnswerView extends JPanel{
 		
 		
 		/**
-		 * CONTENU DU FICHIER.
+		 * CONTENU DU FICHIER. ----------------------------------------------------------------------------------
 		 */
 		JEditorPane text = new JEditorPane();
 		text.setContentType("text/html");
 		text.setEditable(false);
+		
 		String content = "";
+		
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(support));
 			String line = null;
-			if((line=reader.readLine()) != null) content += "<span>"+getDown(line)+"</span>";
-			while((line=reader.readLine()) != null) {
-				content += "<br><span" + 
+			
+			if((line=reader.readLine()) != null) 
+				content += "<span>"+getDown(line)+"</span>";
+			
+			while((line=reader.readLine()) != null) 
+				content += "<br>" +
+						   "<span" + 
 								(!Errors.track(line) ? " class=error" : 
 									(line.contains("Input") || line.contains("Output") ? " class=io" : ""))+
 							">"+getDown(line)+"</span>";
-			}
+			
 			
 			reader.close();
 		} catch (Exception e) {} 
@@ -50,7 +56,7 @@ public final class AnswerView extends JPanel{
 		
 		
 		/**
-		 * DISPOSITION ET COLORISATION DU CODE. 
+		 * DISPOSITION ET COLORISATION DU CODE.  ---------------------------------------------------------------------
 		 */
 		String start = "<html>" + 
 							"<head>" +
@@ -59,10 +65,13 @@ public final class AnswerView extends JPanel{
 										"white-space: nowrap;" +
 									"}" +
 									".io {" +
-										"color: #0000FF;" +
+										"background-color: #0000FF;" +
 								     "}" +
 									 ".error {" +
-										"color: #FF0000;" +
+										"background-color: #FF0000;" +
+								     "}" +
+									 ".io, .error {" +
+										"color: white;" +
 								     "}" +
 							   "</style>" +
 							"</head>" +
@@ -73,7 +82,7 @@ public final class AnswerView extends JPanel{
 		
 		
 		/**
-		 * DISPOSITION DES COMPOSANTS.
+		 * DISPOSITION DES COMPOSANTS. --------------------------------------------------------------------------------
 		 */
 		setSize(new Dimension(500, 500));
 		JPanel name = new JPanel(new BorderLayout());
@@ -91,6 +100,7 @@ public final class AnswerView extends JPanel{
 		add(name, BorderLayout.NORTH);
 		add(area, BorderLayout.CENTER);
 	}
+	
 	
 	
 	/**

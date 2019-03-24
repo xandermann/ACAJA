@@ -100,6 +100,6 @@ public final class AnswerView extends JPanel{
 	 * @return			la ligne formatee.
 	 */
 	private String getDown(String line) {
-		return line.length()<=73 ? line : (line.substring(0, 73)+"<br>"+getDown(line.substring(73, line.length()-1)));
+		return line.length()<=73 ? line : (line.substring(0, 73)+"<br>"+getDown(line.substring(73, line.length())));
 	}
 }

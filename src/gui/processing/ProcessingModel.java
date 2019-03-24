@@ -103,7 +103,7 @@ public class ProcessingModel extends GeneralModel{
 		int d1 = (int) (d*coeffHeight);
 		
 		System.out.println(a1+"-"+b1+"-"+c1+"-"+d1);
-		sendChanges();
+		
 		switch (type) {
 		case 'c':
 			this.modify(ProcessingType.CROPED,a1+" "+b1+" "+c1+" "+d1 );
@@ -116,6 +116,7 @@ public class ProcessingModel extends GeneralModel{
 			System.out.println("Non implementé");
 			break;
 		}
+		sendChanges();
 		
 	}
 	
@@ -131,11 +132,13 @@ public class ProcessingModel extends GeneralModel{
 	public void save() throws UnfindableResourceException {
 		//if(this.currentFile.isModified()) {
 			UserRequests.execute(currentFile);
+			sendChanges();
 		//}
 	}
 	
 	public void modify(OperationType typeSetting, String setting) {
 		this.currentFile.modify(typeSetting, setting);
+		sendChanges();
 	}
 
 

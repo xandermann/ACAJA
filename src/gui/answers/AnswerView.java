@@ -46,13 +46,18 @@ public final class AnswerView extends JPanel{
 				content += "<br>" +
 						   "<span" + 
 								(!Errors.track(line) ? " class=error" : 
-									(line.contains("Input") || line.contains("Output") ? " class=io" : ""))+
-							">"+getDown(line)+"</span>";
+									(line.contains("Input") || line.contains("Output") ? " class=io" : 
+										(line.contains("configuration") ? " class=config" : 
+											(line.contains("lib") ? " class=lib" : 
+												(line.contains("frame=") ? " class=conversion" : 
+													(line.contains("Stream #") || line.contains("Duration") ? " class=metadata" :
+														""))))))+">"+
+									getDown(line)+
+							"</span>";
 			
 			
 			reader.close();
 		} catch (Exception e) {} 
-		
 		
 		
 		/**
@@ -65,12 +70,27 @@ public final class AnswerView extends JPanel{
 										"white-space: nowrap;" +
 									"}" +
 									".io {" +
-										"background-color: #0000FF;" +
+										"background-color: blue;" +
 								     "}" +
 									 ".error {" +
-										"background-color: #FF0000;" +
+										"background-color: red;" +
 								     "}" +
-									 ".io, .error {" +
+									 ".config {" +
+										"background-color: gray;" +
+								     "}" +
+									 ".lib {" +
+										"background-color: yellow;" +
+								     "}" +
+									 ".conversion {" +
+										"background-color: green;" +
+								     "}" +
+									 ".metadata {" +
+										"background-color: #77b5fe;" +
+								     "}" +
+									 ".lib, .metadata {" +
+										"color: black;" +
+								     "}" +
+									 ".io, .error, .config, .conversion{" +
 										"color: white;" +
 								     "}" +
 							   "</style>" +
@@ -95,7 +115,7 @@ public final class AnswerView extends JPanel{
 				JLabel.CENTER));
 		JPanel area = new JPanel(new BorderLayout());
 		name.setSize(new Dimension(500, 450));
-		area.add(new JScrollPane(text, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER));
+		area.add(new JScrollPane(text, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
 		
 		add(name, BorderLayout.NORTH);
 		add(area, BorderLayout.CENTER);
@@ -110,6 +130,6 @@ public final class AnswerView extends JPanel{
 	 * @return			la ligne formatee.
 	 */
 	private String getDown(String line) {
-		return line.length()<=73 ? line : (line.substring(0, 73)+"<br>"+getDown(line.substring(73, line.length())));
+		return line.length()<=80 ? line : (line.substring(0, 80)+"<br>"+getDown(line.substring(80, line.length())));
 	}
 }

@@ -39,21 +39,19 @@ public final class AnswerView extends JPanel{
 			BufferedReader reader = new BufferedReader(new FileReader(support));
 			String line = null;
 			
-			if((line=reader.readLine()) != null) 
-				content += "<span>"+getDown(line)+"</span>";
-			
 			while((line=reader.readLine()) != null) 
-				content += "<br>" +
-						   "<span" + 
+				content += "<span" + 
 								(!Errors.track(line) ? " class=error" : 
 									(line.contains("Input") || line.contains("Output") ? " class=io" : 
 										(line.contains("configuration") ? " class=config" : 
 											(line.contains("lib") ? " class=lib" : 
 												(line.contains("frame=") ? " class=conversion" : 
 													(line.contains("Stream #") || line.contains("Duration") ? " class=metadata" :
-														""))))))+">"+
-									getDown(line)+
-							"</span>";
+														(line.contains("ffmpeg") ||line.contains("GCC") ) ? " class=start" : 
+															")"))))))+">" +
+									getDown(line) +
+							"</span>" +
+							"<br>";
 			
 			
 			reader.close();
@@ -69,6 +67,9 @@ public final class AnswerView extends JPanel{
 									"span {" +
 										"white-space: nowrap;" +
 									"}" +
+									".start {" +
+										"background-color: black;" +
+									 "}" +
 									".io {" +
 										"background-color: blue;" +
 								     "}" +
@@ -90,7 +91,7 @@ public final class AnswerView extends JPanel{
 									 ".lib, .metadata {" +
 										"color: black;" +
 								     "}" +
-									 ".io, .error, .config, .conversion {" +
+									 ".io, .error, .config, .conversion, .start {" +
 										"color: white;" +
 								     "}" +
 							   "</style>" +

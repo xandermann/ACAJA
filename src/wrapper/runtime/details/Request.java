@@ -321,7 +321,7 @@ public final class Request implements FlagConstants, ValueConstants{
 		if(Integer.parseInt(width)<=0) throw new IllegalArgumentException("Width negative ou nulle !");
 		if(Integer.parseInt(height)<=0) throw new IllegalArgumentException("Height negative ou nulle !");
 		
-		askSomethingElse(new String[]{FLAG_CROP[0], FLAG_CROP[1]+width+S+height+S+xCorner+S+yCorner+FLAG_CROP[2]});
+		askSomethingElse(new String[]{FLAG_CROP[0], FLAG_CROP[1]+width+S+height+S+xCorner+S+yCorner});
 		return this;
 	}
 

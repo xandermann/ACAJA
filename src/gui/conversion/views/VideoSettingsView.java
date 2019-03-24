@@ -62,6 +62,7 @@ public final class VideoSettingsView extends SettingsView{
 		ssp = setssp;
 		codecsComboBox = new JComboBox<String>(CodecConstants.ALL_SUPPORTED_VIDEO_CODECS);
 		StylizedJPanel formatPanel = new StylizedJPanel();
+		formatPanel.setToolTipText("Le format de sortie du fichier de sortie.");
 		formatPanel.add(new JLabel("Format de sortie : "), BorderLayout.WEST);
 		formatPanel.add(formatComboBox,BorderLayout.EAST);
 		formatComboBox.addActionListener(new ActionListener() {
@@ -74,6 +75,7 @@ public final class VideoSettingsView extends SettingsView{
 		
 		StylizedJPanel codecPanel = new StylizedJPanel();
 		codecPanel.add(new JLabel("Codec video : "), BorderLayout.WEST);
+		codecPanel.setToolTipText("Le codec video du fichier de sortie.");
 		codecPanel.add(codecsComboBox, BorderLayout.EAST);
 		codecsComboBox.addActionListener(new ActionListener() {
 			@Override
@@ -89,6 +91,7 @@ public final class VideoSettingsView extends SettingsView{
 
 		bitrateText = new JTextField();
 		StylizedJPanel bitratePanel = new StylizedJPanel();
+		bitratePanel.setToolTipText("Le taux de bits par seconde de la partie video du fichier en cours d'utilisation.");
 		bitratePanel.add(new JLabel("Bitrate (kb/s) : "), BorderLayout.WEST);
 		bitrateText.setPreferredSize(new Dimension(100, 20));
 		bitratePanel.add(bitrateText, BorderLayout.EAST);
@@ -111,6 +114,7 @@ public final class VideoSettingsView extends SettingsView{
 		resolutionsComboBox = new JComboBox<String>(ResolutionConstants.ALL_RESOLUTIONS);
 		StylizedJPanel resolutionPanel = new StylizedJPanel();
 		resolutionPanel.add(new JLabel("Resolution : "), BorderLayout.WEST);
+		resolutionPanel.setToolTipText("La resolution du fichier en cours d'utilisation.");
 		resolutionPanel.add(resolutionsComboBox, BorderLayout.EAST);
 		resolutionsComboBox.addActionListener(new ActionListener() {
 			@Override
@@ -125,10 +129,11 @@ public final class VideoSettingsView extends SettingsView{
 
 		
 		fpsText = new JTextField();
-		StylizedJPanel fpsTextPanel= new StylizedJPanel();
-		fpsTextPanel.add(new JLabel("Images par seconde (fps) : "), BorderLayout.WEST);
+		StylizedJPanel fpsPanel= new StylizedJPanel();
+		fpsPanel.add(new JLabel("Images par seconde (fps) : "), BorderLayout.WEST);
 		fpsText.setPreferredSize(new Dimension(100, 20));
-		fpsTextPanel.add(fpsText, BorderLayout.EAST);
+		fpsPanel.setToolTipText("Le taux d'images par seconde du fichier en cours d'utilisation.");
+		fpsPanel.add(fpsText, BorderLayout.EAST);
 		fpsText.addKeyListener(new KeyListener() {
 			public void keyTyped(KeyEvent e) {}
 			public void keyPressed(KeyEvent e) {}
@@ -148,7 +153,7 @@ public final class VideoSettingsView extends SettingsView{
 		add(codecPanel);
 		add(bitratePanel);
 		add(resolutionPanel);
-		add(fpsTextPanel);
+		add(fpsPanel);
 		setSize(new Dimension(300, 400));
 	}
 

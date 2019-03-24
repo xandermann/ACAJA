@@ -52,6 +52,7 @@ public final class SoundSettingsView extends SettingsView{
 		StylizedJPanel codecPanel = new StylizedJPanel();
 		codecPanel.add(new JLabel("Codec audio : "), BorderLayout.WEST);
 		codecsComboBox = new JComboBox<String>(CodecConstants.ALL_SUPPORTED_AUDIO_CODECS);
+		codecPanel.setToolTipText("Le codec audio du fichier de sortie.");
 		codecPanel.add(codecsComboBox, BorderLayout.EAST);
 		codecsComboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -68,6 +69,7 @@ public final class SoundSettingsView extends SettingsView{
 		bitratePanel.add(new JLabel("Bitrate (kb/s) : "), BorderLayout.WEST);
 		bitrateText = new JTextField();
 		bitrateText.setPreferredSize(new Dimension(100, 20));
+		bitratePanel.setToolTipText("Le taux de bits par seconde de la partie audio du fichier en cours d'utilisation.");
 		bitratePanel.add(bitrateText, BorderLayout.EAST);
 		bitrateText.addKeyListener(new KeyListener() {
 			public void keyTyped(KeyEvent e) {}
@@ -89,6 +91,7 @@ public final class SoundSettingsView extends SettingsView{
 		samplingRatePanel.add(new JLabel("Taux d'echantillonnage (Hz) : "), BorderLayout.WEST);
 		samplingRateText = new JTextField();
 		samplingRateText.setPreferredSize(new Dimension(100, 20));
+		samplingRatePanel.setToolTipText("Le taux d'echantillonage du fichier en cours d'utilisation.");
 		samplingRatePanel.add(samplingRateText, BorderLayout.EAST);
 		samplingRateText.addKeyListener(new KeyListener() {
 			public void keyTyped(KeyEvent e) {}
@@ -110,6 +113,7 @@ public final class SoundSettingsView extends SettingsView{
 		channelsPanel.add(new JLabel("Nombre de canaux audio : "), BorderLayout.WEST);
 		channelsText = new JTextField();
 		channelsText.setPreferredSize(new Dimension(100, 20));
+		channelsPanel.setToolTipText("Le nombre de canaux audio du fichier en cours d'utilisation.");
 		channelsPanel.add(channelsText, BorderLayout.EAST);
 		channelsText.addKeyListener(new KeyListener() {
 			public void keyTyped(KeyEvent e) {}

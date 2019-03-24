@@ -34,26 +34,31 @@ public final class SummaryView extends StylizedJPanel implements Observer {
 		
 		StylizedJPanel inputFilePanel = new StylizedJPanel();
 		inputFilePanel.setBackground(Color.LIGHT_GRAY);
+		inputFilePanel.setToolTipText("Le nom du fichier en cours d'utilisation.");
 		inputFilePanel.add(inputFileLabel = new TwoTextsView("Fichier selectionne :", 8, "NA", 12));
 		
 		
 		StylizedJPanel videoPanel = new StylizedJPanel();
 		videoPanel.setBackground(Color.LIGHT_GRAY);
+		videoPanel.setToolTipText("Le codec video du fichier en cours d'utilisation.");
 		videoPanel.add(videoLabel = new TwoTextsView("Codec video actuel : ", 8, "NA", 12));
 		
 		
 		StylizedJPanel audioPanel = new StylizedJPanel();
 		audioPanel.setBackground(Color.LIGHT_GRAY);
+		audioPanel.setToolTipText("Le codec audio du fichier en cours d'utilisation.");
 		audioPanel.add(soundLabel = new TwoTextsView("Codec audio actuel : ", 8, "NA", 12));
 		
 		
-		StylizedJPanel durationLabelPanel = new StylizedJPanel();
-		durationLabelPanel.setBackground(Color.LIGHT_GRAY);
-		durationLabelPanel.add(durationLabel = new TwoTextsView("Duree : ", 8, "NA", 12));
+		StylizedJPanel durationPanel = new StylizedJPanel();
+		durationPanel.setBackground(Color.LIGHT_GRAY);
+		durationPanel.setToolTipText("La duree du fichier en cours d'utilisation.");
+		durationPanel.add(durationLabel = new TwoTextsView("Duree : ", 8, "NA", 12));
 
 		
 		StylizedJPanel outputFilePanel = new StylizedJPanel();
 		outputFilePanel.setBackground(Color.LIGHT_GRAY);
+		outputFilePanel.setToolTipText("La nom du fichier de sortie.");
 		outputFilePanel.add(new JLabel("Fichier de destination : "), BorderLayout.EAST);
 		outputFilePanel.add(outputFileText = new JTextField(""),BorderLayout.WEST);
 		outputFileText.setPreferredSize(new Dimension(100, 20));
@@ -74,7 +79,7 @@ public final class SummaryView extends StylizedJPanel implements Observer {
 		add(inputFilePanel);
 		add(videoPanel);
 		add(audioPanel);
-		add(durationLabelPanel);
+		add(durationPanel);
 		add(outputFilePanel);
 	}
 

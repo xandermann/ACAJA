@@ -83,10 +83,11 @@ public class ProcessingWindow extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				try {/*
-					model.getCurrentFile().setDestinationPath("sortie_temporaire");
-					model.getCurrentFile().setDestinationName("traitement");
-					model.getCurrentFile().setFileExtension(".avi");*/
+				try {
+					model.setDestinationFolder(JFileChooserManager.chooseDirectory());
+					model.getCurrentFile().setDestinationPath(model.getDestinationFolder());
+					model.getCurrentFile().setDestinationName("Traitement"+System.currentTimeMillis());
+					model.getCurrentFile().setFileExtension(".mp4");
 					model.save();
 					System.out.println("fait");
 				} catch (UnfindableResourceException e) {

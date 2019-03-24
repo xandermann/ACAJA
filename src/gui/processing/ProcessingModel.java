@@ -25,6 +25,7 @@ public class ProcessingModel extends GeneralModel{
 	private boolean fUp,cropUp;
 	private ProcessingFile currentFile;
 	private File minia;
+	private String destinationFolder;
 	
 	
 	public ProcessingModel() {
@@ -72,9 +73,6 @@ public class ProcessingModel extends GeneralModel{
 	public void setCurrentFile(SelectableFile currentFile) {
 		this.currentFile = (ProcessingFile) currentFile;
 		this.setMinia(this.currentFile.getThumbail());
-		this.currentFile.setDestinationPath(".");
-		this.currentFile.setDestinationName("traitement");
-		this.currentFile.setFileExtension(".mp4");
 		sendChanges();
 	}
 
@@ -124,6 +122,14 @@ public class ProcessingModel extends GeneralModel{
 		if(!this.listRect.isEmpty())
 			this.listRect.remove(this.listRect.size()-1);
 		sendChanges();
+	}
+	
+	public void setDestinationFolder(File destinationFolder) {
+		this.destinationFolder = destinationFolder.getPath();
+	}
+	
+	public String getDestinationFolder() {
+		return destinationFolder;
 	}
 
 

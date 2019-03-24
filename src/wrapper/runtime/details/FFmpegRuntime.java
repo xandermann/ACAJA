@@ -94,14 +94,8 @@ public final class FFmpegRuntime {
 	public static ProcessManager execute(List<String> ffmpegRequest){
 		
 		if(FFMPEG_PATH==null) install();
-		for(String s : FFMPEG_PATH) {
-			System.out.println(s);
-		}
 		try {
 			for(int i = 0; i < FFMPEG_PATH.length; i++) ffmpegRequest.add(i, FFMPEG_PATH[i]);
-			for(String s : ffmpegRequest) {
-				System.out.println(s);
-			}
 			return new ProcessManager(RUN.exec(ffmpegRequest.toArray(new String[ffmpegRequest.size()])));
 		} catch (IOException e) {
 			return null;

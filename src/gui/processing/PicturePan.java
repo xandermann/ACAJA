@@ -14,6 +14,7 @@ import resources.ResourceConstants;
 public class PicturePan extends JPanel {
 	
 	private ProcessingModel model;
+	
 	public PicturePan(ProcessingModel m) {
 		this.model = m;
 		this.setPreferredSize(new Dimension(600, 550));
@@ -30,5 +31,11 @@ public class PicturePan extends JPanel {
 		ImageIcon m = new ImageIcon(ResourceConstants.ACAJA_LOGO_OPACITY_PATH);
 		Image monImage = m.getImage();
 		g.drawImage(monImage, this.size().height / 2 - 130, this.size().width / 2 - 150, this);
+		g.drawRect(this.getSize().width/4, this.getSize().height-85, this.getSize().width/2, 75);
+		
+		
+		g.drawString(model.getMessage(), (this.getSize().width/4)+50, (this.getSize().height-85)+45);
+		this.repaint();
+		
 	}
 }

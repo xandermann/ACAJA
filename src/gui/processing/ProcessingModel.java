@@ -26,12 +26,14 @@ public class ProcessingModel extends GeneralModel{
 	private ProcessingFile currentFile;
 	private File minia;
 	private String destinationFolder;
+	private String message;
 	
 	
 	public ProcessingModel() {
 		Context.$M = this;
 		this.fUp = false;
 		this.cropUp = false;
+		setMessage("Veuillez importer votre premier fichier");
 		listRect = new ArrayList<>();
 	}
 
@@ -73,6 +75,7 @@ public class ProcessingModel extends GeneralModel{
 	public void setCurrentFile(SelectableFile currentFile) {
 		this.currentFile = (ProcessingFile) currentFile;
 		this.setMinia(this.currentFile.getThumbail());
+		setMessage("Fichier chargé avec succes !");
 		sendChanges();
 	}
 
@@ -184,5 +187,18 @@ public class ProcessingModel extends GeneralModel{
 	public List<SelectableFile> getFiles() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+
+
+	public String getMessage() {
+		return message;
+	}
+
+
+
+	public void setMessage(String message) {
+		this.message = message;
+		sendChanges();
 	}
 }

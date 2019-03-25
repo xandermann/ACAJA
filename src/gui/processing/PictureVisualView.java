@@ -62,6 +62,9 @@ public class PictureVisualView extends JPanel implements Observer{
 			g.drawRect(tab[0],tab[1],tab[2],tab[3]);
 			g.drawImage(monImage, tab[0],tab[1],tab[2],tab[3], this);
 		}
+		
+		
+		
 		this.repaint();
 		
 

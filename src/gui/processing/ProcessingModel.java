@@ -92,7 +92,6 @@ public class ProcessingModel extends GeneralModel{
 		
 		double coeffWidth = ((double)Integer.parseInt(res[0]))/500;
 		double coeffHeight = ((double)Integer.parseInt(res[1]))/350;
-		System.out.println(coeffWidth+" "+coeffHeight);
 		
 		int a1 = (int) (a*coeffWidth);
 		int b1 = (int) (b*coeffHeight);

@@ -11,7 +11,7 @@ import java.awt.event.MouseMotionListener;
 public class DrawChange implements MouseMotionListener,MouseListener{
 	
 	private int nbClick;
-	private int refx,refy;
+	private int refx,refy,xx,yy;
 	private ProcessingModel model;
 	
 	public DrawChange(ProcessingModel m) {
@@ -21,6 +21,8 @@ public class DrawChange implements MouseMotionListener,MouseListener{
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
+		
+		/*
 		if(this.model.isfUp() || this.model.iscropUp()) {
 			int x = e.getX();
 			int y = e.getY();
@@ -38,7 +40,7 @@ public class DrawChange implements MouseMotionListener,MouseListener{
 			}
 			
 			nbClick++;
-		}
+		}*/
 	}
 
 	@Override
@@ -54,19 +56,29 @@ public class DrawChange implements MouseMotionListener,MouseListener{
 	}
 
 	@Override
-	public void mousePressed(MouseEvent arg0) {
-		// TODO Auto-generated method stub
+	public void mousePressed(MouseEvent e) {
+		if(this.model.isfUp() || this.model.iscropUp()) {
+			refx = e.getX();
+			refy = e.getY();
+		}
 		
 	}
 
 	@Override
-	public void mouseReleased(MouseEvent arg0) {
-		// TODO Auto-generated method stub
+	public void mouseReleased(MouseEvent e) {
+		if(this.model.isfUp() || this.model.iscropUp()) {
+			
+			if(this.model.iscropUp()) 
+				this.model.addForm(refx, refy, (e.getX()-refx), (e.getY()-refy),'c');	
+				
+			else if(this.model.isfUp())
+				this.model.addForm(refx, refy, (e.getX()-refx), (e.getY()-refy),'f');	
+		}
 		
 	}
 
 	@Override
-	public void mouseDragged(MouseEvent arg0) {
+	public void mouseDragged(MouseEvent e) {
 		
 	}
 

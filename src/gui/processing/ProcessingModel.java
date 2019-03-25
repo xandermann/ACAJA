@@ -86,36 +86,10 @@ public class ProcessingModel extends GeneralModel{
 		tab[2] = c;
 		tab[3] = d;
 		
-		
-		
 		Form f = new Form(tab,type);
 		listRect.add(f);
 		System.out.println(a+"-"+b+"-"+c+"-"+d+"-t:"+type);
-		String[] res = currentFile.getResolution().split("x");
 		
-		double coeffWidth = ((double)Integer.parseInt(res[0]))/500;
-		double coeffHeight = ((double)Integer.parseInt(res[1]))/350;
-		
-		int a1 = (int) (a*coeffWidth);
-		int b1 = (int) (b*coeffHeight);
-		
-		int c1 = (int) (c*coeffWidth);
-		int d1 = (int) (d*coeffHeight);
-		
-		System.out.println(a1+"-"+b1+"-"+c1+"-"+d1);
-		
-		switch (type) {
-		case 'c':
-			this.modify(ProcessingType.CROPED,a1+" "+b1+" "+c1+" "+d1 );
-			break;
-		case 'f':
-			this.modify(ProcessingType.BLURRED,a1+" "+b1+" "+c1+" "+d1 );
-			break;
-
-		default:
-			System.out.println("Non implementé");
-			break;
-		}
 		sendChanges();
 		
 	}
@@ -138,14 +112,40 @@ public class ProcessingModel extends GeneralModel{
 
 	@Override
 	public void save() throws UnfindableResourceException {
-		//if(this.currentFile.isModified()) {
-			UserRequests.execute(currentFile);
-			sendChanges();
-		//}
+		Form actu = this.listRect.get(this.listRect.size()-1);
+		String[] res = currentFile.getResolution().split("x");
+		
+		double coeffWidth = ((double)Integer.parseInt(res[0]))/500;
+		double coeffHeight = ((double)Integer.parseInt(res[1]))/350;
+		
+		int a1 = (int) (actu.getTab()[0]*coeffWidth);
+		int b1 = (int) (actu.getTab()[1]*coeffHeight);
+		
+		int c1 = (int) (actu.getTab()[2]*coeffWidth);
+		int d1 = (int) (actu.getTab()[3]*coeffHeight);
+		
+		System.out.println(a1+"-"+b1+"-"+c1+"-"+d1);
+		
+		switch (actu.getTypeCommande()) {
+		case 'c':
+			this.modify(ProcessingType.CROPED,a1+" "+b1+" "+c1+" "+d1 );
+			break;
+		case 'f':
+			this.modify(ProcessingType.BLURRED,a1+" "+b1+" "+c1+" "+d1 );
+			break;
+
+		default:
+			System.out.println("Non implementé");
+			break;
+		}
+		
+		UserRequests.execute(currentFile);
+		sendChanges();
 	}
 	
 	public void modify(OperationType typeSetting, String setting) {
 		this.currentFile.modify(typeSetting, setting);
+		this.currentFile.deselect();
 		sendChanges();
 	}
 

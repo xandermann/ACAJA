@@ -29,7 +29,9 @@ public final class CodecConstants {
 	public final static Map<String, Map<String,List<String>>> CORRESPONDING_EXTENSION;
 	static {
 		
-		
+		ArrayList<String> fixedAudioCodecs = new ArrayList<String>();
+		fixedAudioCodecs.addAll(Arrays.asList(ALL_SUPPORTED_AUDIO_CODECS));
+		fixedAudioCodecs.remove("4gv");
 		Map<String, Map<String,List<String>>> initialize_extensions = new HashMap<String,Map<String,List<String>>>();
 		Map<String,List<String>> compatible_codecs = new HashMap<String,List<String>>();
 		List<String> audioCodecList = new ArrayList<String>();
@@ -66,13 +68,13 @@ public final class CodecConstants {
 			//case ".aaf": break;
 			case ".asf":
 				//multi
-				audioCodecList.addAll(Arrays.asList(ALL_SUPPORTED_AUDIO_CODECS));
+				audioCodecList.addAll(fixedAudioCodecs);
 				for(String videoCodec : ALL_SUPPORTED_VIDEO_CODECS)
 						compatible_codecs.put(videoCodec, audioCodecList);
 				break;
 			case ".avi":
 				//multi
-				audioCodecList.addAll(Arrays.asList(ALL_SUPPORTED_AUDIO_CODECS));
+				audioCodecList.addAll(fixedAudioCodecs);
 				for(String videoCodec : ALL_SUPPORTED_VIDEO_CODECS)
 						compatible_codecs.put(videoCodec, audioCodecList);
 				break;
@@ -111,7 +113,7 @@ public final class CodecConstants {
 				break;
 			case ".mkv":
 				//multi
-				audioCodecList.addAll(Arrays.asList(ALL_SUPPORTED_AUDIO_CODECS));
+				audioCodecList.addAll(fixedAudioCodecs);
 				for(String videoCodec : ALL_SUPPORTED_VIDEO_CODECS)
 						compatible_codecs.put(videoCodec, audioCodecList);
 				break;

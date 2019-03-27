@@ -31,7 +31,7 @@ public final class Actions {
 			
 			Context.$M.add(f);
 		   
-			if(Context.$M instanceof ConversionModel && Context.$M.getCurrentFile() == null)
+			if( Context.$M.getCurrentFile() == null)
 				((ConversionWindow) Context.$W).redrawFirstTime();
 			
 		    Context.$M.setCurrentFile(Context.$M.getFiles().get(Context.$M.getFiles().size()-1));
@@ -90,7 +90,7 @@ public final class Actions {
 	
 	
 	/**
-	 * [ INSPECTER LES REÖNSES DE FFMPEG. ]
+	 * [ INSPECTER LES REï¿½NSES DE FFMPEG. ]
 	 */
 	public static void inspect() {
 		new AnswersWindow();
@@ -125,7 +125,7 @@ public final class Actions {
 				((ConversionWindow) Context.$W).drawConvertWindow();
 				Alert.longAlert(
 						Alert.INFO, 
-						"Ceci est la fenetre de choix des parametres<br>d'export des fichiers à convertir.");
+						"Ceci est la fenetre de choix des parametres<br>d'export des fichiers ï¿½ convertir.");
 			}else
 				Alert.longAlert(
 						Alert.FAILURE, 

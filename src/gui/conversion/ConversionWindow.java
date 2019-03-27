@@ -117,7 +117,7 @@ public final class ConversionWindow extends StylizedJFrame {
 			remove(libraryView);
 			remove(concernedFileView);
 			
-			add(empty);
+			empty.setVisible(true);
 			
 			repaint();
 			revalidate();
@@ -127,8 +127,8 @@ public final class ConversionWindow extends StylizedJFrame {
 	
 	
 	public void redrawFirstTime() {
-		remove(empty);
-		
+		empty.setVisible(false);
+		System.out.println("First redraw appele");
 		concernedFileView = new StylizedJPanel();
 		concernedFileView.setLayout(new BoxLayout(concernedFileView, BoxLayout.Y_AXIS));
 		concernedFileView.setPreferredSize(new Dimension(320, 600));
@@ -147,7 +147,7 @@ public final class ConversionWindow extends StylizedJFrame {
 		add(concernedFileView, BorderLayout.EAST);
 		
 		Context.$M.addObserver(sv);
-		Context.$M.addObserver(libraryView);
+		Context.$M.addObserver(libraryView); 
 		
 		repaint();
 		revalidate();
@@ -172,7 +172,7 @@ public final class ConversionWindow extends StylizedJFrame {
 		StylizedJMenuItem importFile = new StylizedJMenuItem("Importer un fichier");
 		importFile.setToolTipText("Ici vous pouvez ajouter un fichier dans la biblioth�que (CTRL + A).");
 		importFile.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent ae) {
+			public void actionPerformed(ActionEvent ae) {				
 				Actions.input();
 			}
 		});
@@ -182,6 +182,7 @@ public final class ConversionWindow extends StylizedJFrame {
 		importFolder.setToolTipText("Ici vous pouvez ajouter plusieurs fichiers dans la biblioth�que (CTRL + D).");
 		importFolder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
+				if (Context.$M.getCurrentFile() == null) redrawFirstTime();
 				Actions.inputs();
 			}
 		});

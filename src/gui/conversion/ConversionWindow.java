@@ -170,7 +170,7 @@ public final class ConversionWindow extends StylizedJFrame {
 
 		
 		StylizedJMenuItem importFile = new StylizedJMenuItem("Importer un fichier");
-		importFile.setToolTipText("Ici vous pouvez ajouter un fichier dans la bibliothèque (CTRL + A).");
+		importFile.setToolTipText("Ici vous pouvez ajouter un fichier dans la bibliothï¿½que (CTRL + A).");
 		importFile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				Actions.input();
@@ -179,7 +179,7 @@ public final class ConversionWindow extends StylizedJFrame {
 		
 
 		StylizedJMenuItem importFolder = new StylizedJMenuItem("Importer un dossier");
-		importFolder.setToolTipText("Ici vous pouvez ajouter plusieurs fichiers dans la bibliothèque (CTRL + D).");
+		importFolder.setToolTipText("Ici vous pouvez ajouter plusieurs fichiers dans la bibliothï¿½que (CTRL + D).");
 		importFolder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				Actions.inputs();

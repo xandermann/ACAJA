@@ -135,9 +135,9 @@ public final class ConversionWindow extends StylizedJFrame {
 	
 		SummaryView sv = new SummaryView();
 		TabsView tv = new TabsView();
-		//TODO : customize values
-		sv.setSize(new Dimension(getWidth()/2,getHeight()/3));
-		tv.setSize(new Dimension(getWidth()/2,getHeight()-(getHeight()/3)));
+		
+		sv.setSize(new Dimension(getWidth()/2,(int)(getHeight() * 0.55)));
+		tv.setSize(new Dimension(getWidth()/2,(int)(getHeight()* 0.45)));
 		concernedFileView.add(sv);
 		concernedFileView.add(tv);
 		

@@ -10,15 +10,15 @@ public final class StyleTheme {
 	/**
 	 * Couleur primaire de l'application (ici blanc)
 	 */
-	public static final Color BACKGROUND_COLOR = new Color(255, 255, 255);
+	public static Color BACKGROUND_COLOR = new Color(255, 255, 255);
 
 	/**
 	 * Couleur secondaire (ici bleu)
 	 */
-	public static final Color BACKGROUND_COLOR_SECONDARY = new Color(59, 89, 182);
+	public static Color BACKGROUND_COLOR_SECONDARY = new Color(59, 89, 182);
 
 	/**
 	 * Couleur de danger / erreur
 	 */
-	public static final Color DANGER = new Color(255, 0, 0);
+	public static Color DANGER = new Color(255, 0, 0);
 }

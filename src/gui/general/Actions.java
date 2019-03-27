@@ -18,8 +18,10 @@ import threads.RuntimeSpaceManager;
 /**
  * [ REALISER DES ACTIONS GENERIQUES. ]
  * 
- * Auteurs du projet : 
- * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
+ * Auteurs du projet :
+ * 
+ * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et
+ *         CHEVRIER Jean-christophe.
  */
 public final class Actions {
 	/**
@@ -27,45 +29,43 @@ public final class Actions {
 	 */
 	public static void input() {
 		try {
-		    File f = JFileChooserManager.chooseFile();
-			
+			File f = JFileChooserManager.chooseFile();
+
 			Context.$M.add(f);
-		   
-			if( Context.$M.getCurrentFile() == null)
+
+			if (Context.$M.getCurrentFile() == null)
 				((ConversionWindow) Context.$W).redrawFirstTime();
-			
-		    Context.$M.setCurrentFile(Context.$M.getFiles().get(Context.$M.getFiles().size()-1));
-			
-		   Alert.shortAlert(Alert.SUCCESS, "Import realise avec succes.");
+
+			Context.$M.setCurrentFile(Context.$M.getFiles().get(Context.$M.getFiles().size() - 1));
+
+			Alert.shortAlert(Alert.SUCCESS, "Import realise avec succes.");
 		} catch (Exception e) {
 			Alert.shortAlert(Alert.FAILURE, "Echec de l'import.");
-		}	    
+		}
 	}
-	
-	
+
 	/**
 	 * [ IMPORTER 1 DOSSIER. ]
 	 */
 	public static void inputs() {
 		try {
 			ArrayList<File> files = JFileChooserManager.chooseDirectoryAndListSonFiles();
-			
+
 			for (File f : files) {
 				Context.$M.add(f);
-				
-				if(Context.$M instanceof ConversionModel && Context.$M.getCurrentFile() == null)
+
+				if (Context.$M instanceof ConversionModel && Context.$M.getCurrentFile() == null)
 					((ConversionWindow) Context.$W).redrawFirstTime();
-				
-				Context.$M.setCurrentFile(Context.$M.getFiles().get(Context.$M.getFiles().size()-1));
+
+				Context.$M.setCurrentFile(Context.$M.getFiles().get(Context.$M.getFiles().size() - 1));
 			}
-			
+
 			Alert.shortAlert(Alert.SUCCESS, "Import realise avec succes.");
 		} catch (Exception e) {
 			Alert.shortAlert(Alert.FAILURE, "Echec de l'import.");
 		}
 	}
-	
-	
+
 	/**
 	 * [ CHOISIR REPERTOIRE DE SORTIE. ]
 	 */
@@ -73,22 +73,23 @@ public final class Actions {
 		try {
 			((ConversionModel) Context.$M).setDestinationFolder(JFileChooserManager.chooseDirectory());
 			Alert.shortAlert(Alert.SUCCESS, "Chemin de destination des fichiers <br>enregistre.");
-		}catch(IllegalArgumentException iae){
+		} catch (IllegalArgumentException iae) {
 			Alert.shortAlert(Alert.FAILURE, "Echec du choix du repertoire de sortie.");
 		}
 	}
-	
-	
+
 	/**
 	 * [ CHANGER DE MODE. ]
 	 */
 	public static void switchMode() {
 		Context.$W.dispose();
-		if(Context.$W instanceof ConversionWindow) new ProcessingWindow(); else new ConversionWindow();
+		if (Context.$W instanceof ConversionWindow)
+			new ProcessingWindow();
+		else
+			new ConversionWindow();
 		Alert.shortAlert(Alert.SUCCESS, "Changement de mode realise <br>avec succes.");
 	}
-	
-	
+
 	/**
 	 * [ INSPECTER LES RE�NSES DE FFMPEG. ]
 	 */
@@ -96,8 +97,7 @@ public final class Actions {
 		new AnswersWindow();
 		Alert.longAlert(Alert.INFO, "Ceci est l'historique des reponses <br>de FFmpeg.");
 	}
-	
-	
+
 	/**
 	 * [ MODIFIER LES PARAMETRES DE NOTIFICATION. ]
 	 */
@@ -105,8 +105,7 @@ public final class Actions {
 		new ASWindow();
 		Alert.longAlert(Alert.INFO, "Ceci est la fenetre de <br>gestion des parametres.");
 	}
-	
-	
+
 	/**
 	 * [ QUITTER. ]
 	 */
@@ -114,21 +113,18 @@ public final class Actions {
 		ResourcesManager.clearResources();
 		System.exit(0);
 	}
-	
-	
+
 	/**
 	 * [ SAUVER / CONVERTIR / EXPORTER. ]
 	 */
 	public static void save() {
-		if(Context.$W instanceof ConversionWindow) {
-			if(RuntimeSpaceManager.manage() && Context.$M.isModified()) {
+		if (Context.$W instanceof ConversionWindow) {
+			if (RuntimeSpaceManager.manage() && Context.$M.isModified()) {
 				((ConversionWindow) Context.$W).drawConvertWindow();
-				Alert.longAlert(
-						Alert.INFO, 
-						"Ceci est la fenetre de choix des parametres<br>d'export des fichiers � convertir.");
-			}else
-				Alert.longAlert(
-						Alert.FAILURE, 
+				Alert.longAlert(Alert.INFO,
+						"Ceci est la fenetre de choix des parametres<br>d'export des fichiers a convertir.");
+			} else
+				Alert.longAlert(Alert.FAILURE,
 						"Aucun fichier modifie a convertir trouves<br>OU autre conversion deja en cours !");
 		}
 	}

@@ -128,19 +128,21 @@ public final class ConversionWindow extends StylizedJFrame {
 	
 	public void redrawFirstTime() {
 		empty.setVisible(false);
-		System.out.println("First redraw appele");
 		concernedFileView = new StylizedJPanel();
 		concernedFileView.setLayout(new BoxLayout(concernedFileView, BoxLayout.Y_AXIS));
-		concernedFileView.setPreferredSize(new Dimension(320, 600));
+		concernedFileView.setPreferredSize(new Dimension(getWidth()/2, getHeight()));
 		Context.$C(1, concernedFileView);
 	
 		SummaryView sv = new SummaryView();
 		TabsView tv = new TabsView();
+		//TODO : customize values
+		sv.setSize(new Dimension(getWidth()/2,getHeight()/3));
+		tv.setSize(new Dimension(getWidth()/2,getHeight()-(getHeight()/3)));
 		concernedFileView.add(sv);
 		concernedFileView.add(tv);
 		
 		libraryView = new LibraryView();
-		
+		libraryView.setSize(new Dimension(getWidth()/2,getHeight()));
 		sv.setBackground(Color.LIGHT_GRAY);
 		concernedFileView.setBackground(Color.LIGHT_GRAY);
 		add(libraryView, BorderLayout.WEST);

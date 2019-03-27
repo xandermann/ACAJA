@@ -28,7 +28,7 @@ public final class SummaryView extends StylizedJPanel implements Observer {
 		
 		Context.$C(2, this);
 		
-		setSize(new Dimension(320, 400));
+		//setSize(new Dimension(320, 400));
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
 		

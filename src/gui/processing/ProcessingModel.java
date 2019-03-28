@@ -88,7 +88,7 @@ public class ProcessingModel extends GeneralModel{
 		tab[2] = c;
 		tab[3] = d;
 		
-		
+		if(currentFile != null) {
 			boolean containForm = false;
 			for(Form form : listRect) {
 				if(form.getTypeCommande() == type) {
@@ -101,10 +101,13 @@ public class ProcessingModel extends GeneralModel{
 				Form f = new Form(tab,type);
 				listRect.add(f);
 			}
+			System.out.println(a+"-"+b+"-"+c+"-"+d+"-t:"+type);
+		}
+			
 				
 		
 		
-		System.out.println(a+"-"+b+"-"+c+"-"+d+"-t:"+type);
+		
 		
 		sendChanges();
 		

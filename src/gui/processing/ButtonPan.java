@@ -10,18 +10,17 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 
+import gui.general.Context;
+
 public class ButtonPan extends JPanel {
 	
 	private JToggleButton flouButton;
 	private JToggleButton rectangle;
-	private ProcessingModel model;
 	
 	/**
 	 * constructeur du panel de bouton central
-	 * @param m
 	 */
-	public ButtonPan(ProcessingModel m) {
-		this.model = m;
+	public ButtonPan() {
 		this.setLayout(new GridLayout(3, 2, 1, 1));
 		rectangle = new JToggleButton(new ImageIcon(resources.ResourceConstants.BUTTON_RECT));
 		flouButton = new JToggleButton(new ImageIcon(resources.ResourceConstants.BLURRED));
@@ -50,7 +49,7 @@ public class ButtonPan extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				model.suppLastForm();
+				((ProcessingModel)Context.$M).suppLastForm();
 			}
 		});
 
@@ -72,21 +71,21 @@ public class ButtonPan extends JPanel {
 	}
 	
 	public void cropIsSelected() {
-		model.setMessage("Fonction de Crop activée !");
+		((ProcessingModel)Context.$M).setMessage("Fonction de Crop activée !");
 		flouButton.setSelected(false);
-		model.setfUp(false);
-		model.setcropUp(false);
+		((ProcessingModel)Context.$M).setfUp(false);
+		((ProcessingModel)Context.$M).setcropUp(false);
 		if(rectangle.isSelected())
-			model.setcropUp(true);
+			((ProcessingModel)Context.$M).setcropUp(true);
 	}
 	
 	public void flouIsSelected() {
-		model.setMessage("Fonction de Floutage activée !");
+		((ProcessingModel)Context.$M).setMessage("Fonction de Floutage activée !");
 		rectangle.setSelected(false);
-		model.setcropUp(false);
-		model.setfUp(false);
+		((ProcessingModel)Context.$M).setcropUp(false);
+		((ProcessingModel)Context.$M).setfUp(false);
 		if(flouButton.isSelected())
-			model.setfUp(true);
+			((ProcessingModel)Context.$M).setfUp(true);
 	}
 	
 	

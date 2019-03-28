@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.io.File;
 import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
@@ -13,14 +12,13 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
-public class PictureVisualView extends JPanel implements Observer{
-	
-	private ProcessingModel model;
+import gui.general.Context;
 
-	public PictureVisualView(ProcessingModel m) {
-		model = m;
+public class PictureVisualView extends JPanel implements Observer{
+
+	public PictureVisualView() {
 		this.setPreferredSize(new Dimension(500, 350));
-		DrawChange d = new DrawChange(model);
+		DrawChange d = new DrawChange();
 		this.addMouseListener(d);
 		this.addMouseMotionListener(d);
 		this.setOpaque(false);
@@ -31,9 +29,9 @@ public class PictureVisualView extends JPanel implements Observer{
 		super.paintComponent(g);
 		Image pic = null;
 		
-		if(this.model.getCurrentFile() != null) {
+		if(Context.$M.getCurrentFile() != null) {
 			try {
-				pic = ImageIO.read(this.model.getMinia());
+				pic = ImageIO.read(((ProcessingModel)Context.$M).getMinia());
 				g.drawImage(pic, 0,0,this.getWidth(),this.getHeight(), this);
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -42,11 +40,11 @@ public class PictureVisualView extends JPanel implements Observer{
 		g.drawRect(0, 0, this.size().width - 1, this.size().height - 1);
 		Image monImage =null;
 		
-		for (int i = 0; i < this.model.getListRect().size(); i++) {
-			int[] tab = this.model.getTabInt(i);
+		for (int i = 0; i < ((ProcessingModel)Context.$M).getListRect().size(); i++) {
+			int[] tab = ((ProcessingModel)Context.$M).getTabInt(i);
 			
 				
-			switch (this.model.getType(i)) {
+			switch (((ProcessingModel)Context.$M).getType(i)) {
 			case 'c':
 				g.setColor(Color.BLUE);
 				monImage =new ImageIcon("img/test.png").getImage();

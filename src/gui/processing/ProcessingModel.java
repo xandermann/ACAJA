@@ -25,7 +25,7 @@ import wrapper.runtime.global.SystemRequests;
 import wrapper.runtime.global.UserRequests;
 
 public class ProcessingModel extends GeneralModel{
-	
+	private List<SelectableFile> images;
 	private List<Form> listRect;
 	private boolean fUp,cropUp;
 	private ProcessingFile currentFile;
@@ -34,51 +34,69 @@ public class ProcessingModel extends GeneralModel{
 	private String message;
 	//private Form f;
 	
-	
 	public ProcessingModel() {
 		Context.$M = this;
 		this.fUp = false;
 		this.cropUp = false;
 		setMessage("Veuillez importer votre premier fichier");
 		listRect = new ArrayList<>();
-		
+		images = new ArrayList<SelectableFile>();
 	}
 
-	
 	
 	public File getMinia() {
 		return minia;
 	}
+	
+	
 	public void setMinia(File minia) {
 		this.minia = minia;
 		sendChanges();
 	}
+	
+	
 	public boolean isfUp() {
 		return fUp;
 	}
+	
+	
 	public void setfUp(boolean fUp) {
 		this.fUp = fUp;
 		sendChanges();
 	}
+	
+	
 	public boolean iscropUp() {
 		return cropUp;
 	}
+	
+	
 	public void setcropUp(boolean rectUp) {
 		this.cropUp = rectUp;
 		sendChanges();
 	}
+	
+	
 	public List<Form> getListRect() {
 		return listRect;
 	}
+	
+	
 	public char getType(int pos) {
 		return listRect.get(pos).getTypeCommande();
 	}
+	
+	
 	public int[] getTabInt(int pos) {
 		return listRect.get(pos).getTab();
 	}
+	
+	
 	public SelectableFile getCurrentFile() {
 		return currentFile;
 	}
+	
+	
 	public void setCurrentFile(SelectableFile currentFile) {
 		this.currentFile = (ProcessingFile) currentFile;
 		this.setMinia(this.currentFile.getThumbnail());
@@ -86,6 +104,7 @@ public class ProcessingModel extends GeneralModel{
 		sendChanges();
 	}
 
+	
 	public void addForm(int a,int b,int c,int d,char type) {
 		int[] tab = new int[4];
 		tab[0] = a;
@@ -108,15 +127,12 @@ public class ProcessingModel extends GeneralModel{
 			}
 			System.out.println(a+"-"+b+"-"+c+"-"+d+"-t:"+type);
 		}
-			
 				
-		
-		
-		
-		
 		sendChanges();
 		
 	}
+	
+	
 	
 	public void suppLastForm() {
 		if(!this.listRect.isEmpty())
@@ -124,9 +140,13 @@ public class ProcessingModel extends GeneralModel{
 		sendChanges();
 	}
 	
+	
+	
 	public void setDestinationFolder(File destinationFolder) {
 		this.destinationFolder = destinationFolder.getPath();
 	}
+	
+	
 	
 	public String getDestinationFolder() {
 		return destinationFolder;
@@ -195,6 +215,7 @@ public class ProcessingModel extends GeneralModel{
 		}
 	}
 	
+	
 	public void modify(OperationType typeSetting, String setting) {
 		this.currentFile.modify(typeSetting, setting);
 		this.currentFile.deselect();
@@ -202,53 +223,41 @@ public class ProcessingModel extends GeneralModel{
 	}
 
 
-
 	@Override
 	public boolean isModified() {
-		// TODO Auto-generated method stub
-		return false;
+		return currentFile.isModified();
 	}
-
 
 
 	@Override
 	public void add(File file) throws IncorrectFileException, UnfindableResourceException {
-		// TODO Auto-generated method stub
-		
+		images.add(new SelectableFile(file));
 	}
 
-
-
+	
 	@Override
 	public void remove(SelectableFile file) {
-		// TODO Auto-generated method stub
-		
+		images.remove(file);
 	}
 
-
-
+	
 	@Override
 	public void clear() {
-		// TODO Auto-generated method stub
-		
+		images.clear();		
 	}
 
-
-
+	
 	@Override
 	public List<SelectableFile> getFiles() {
-		// TODO Auto-generated method stub
-		return null;
+		return images;
 	}
-
 
 
 	public String getMessage() {
 		return message;
 	}
 
-
-
+	
 	public void setMessage(String message) {
 		this.message = message;
 		sendChanges();

@@ -124,8 +124,8 @@ public class ProcessingModel extends GeneralModel{
 			if(!containForm) {
 				Form f = new Form(tab,type);
 				listRect.add(f);
+				System.out.println(a+"-"+b+"-"+c+"-"+d+"-t:"+type);
 			}
-			System.out.println(a+"-"+b+"-"+c+"-"+d+"-t:"+type);
 		}
 				
 		sendChanges();
@@ -135,8 +135,11 @@ public class ProcessingModel extends GeneralModel{
 	
 	
 	public void suppLastForm() {
-		if(!this.listRect.isEmpty())
-			this.listRect.remove(this.listRect.size()-1);
+		if(!this.listRect.isEmpty()) {
+			this.listRect.clear();;
+			this.currentFile.cancelAll();
+		}
+		
 		sendChanges();
 	}
 	

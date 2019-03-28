@@ -123,7 +123,7 @@ public class ProcessingWindow extends JFrame {
 			}
 		});
 		StylizedJMenuItem importImage = new StylizedJMenuItem("Importer une image");
-		importVideo.addActionListener(new ActionListener() {
+		importImage.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
 				try {

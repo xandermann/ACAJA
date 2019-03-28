@@ -60,7 +60,7 @@ public final class ProcessingFile extends SelectableFile implements Modifiable {
 		 * Initialisation de la miniature et de la resolution.
 		 */
 		if (isVideo()) {
-			thumbail = SystemRequests.askFrame(this, "00:00:01.00");
+			thumbnail = SystemRequests.askFrame(this, "00:00:01.00");
 			resolution = SystemRequests.askResolution(this);
 		}
 	}

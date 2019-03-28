@@ -73,7 +73,7 @@ public final class SettingsFile extends SelectableFile implements Modifiable {
 		SystemRequests.askMetadata(this);
 
 		if (isVideo())
-			thumbail = SystemRequests.askFrame(this, "00:00:01.00", 190, 80);
+			thumbnail = SystemRequests.askFrame(this, "00:00:01.00", 190, 90);
 	}
 
 	

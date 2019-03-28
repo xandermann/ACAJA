@@ -7,6 +7,7 @@ import javax.swing.*;
 import files.files.SettingsFile;
 import files.enumerations.SettingType;
 import gui.general.Context;
+import gui.style.StylizedJButton;
 import gui.style.StylizedJPanel;
 import gui.conversion.ConversionModel;
 
@@ -27,8 +28,7 @@ public final class SummaryView extends StylizedJPanel implements Observer {
 		super();
 		
 		Context.$C(2, this);
-		
-		//setSize(new Dimension(320, 400));
+				
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
 		
@@ -56,12 +56,19 @@ public final class SummaryView extends StylizedJPanel implements Observer {
 		durationPanel.add(durationLabel = new TwoTextsView("Duree : ", 8, "NA", 12));
 
 		
-		StylizedJPanel outputFilePanel = new StylizedJPanel();
+		StylizedJPanel outputFilePanel = new StylizedJPanel(new BorderLayout());
 		outputFilePanel.setBackground(Color.LIGHT_GRAY);
 		outputFilePanel.setToolTipText("La nom du fichier de sortie.");
-		outputFilePanel.add(new JLabel("Fichier de destination : "), BorderLayout.EAST);
-		outputFilePanel.add(outputFileText = new JTextField(""),BorderLayout.WEST);
-		outputFileText.setPreferredSize(new Dimension(100, 20));
+		JLabel outputLabel = new JLabel("<html> <head> <style> #first {font-size:8px; text-align:center; } </style> </head>" +
+				   "<body> <p id=first>Nom du fichier de destination :</p></body></html>");
+		outputLabel.setHorizontalAlignment(JLabel.CENTER);
+		outputFilePanel.add(outputLabel,BorderLayout.NORTH);
+		outputFileText = new JTextField("");
+		outputFileText.setHorizontalAlignment(JTextField.CENTER);
+		outputFilePanel.add(outputFileText,BorderLayout.CENTER);
+		StylizedJButton convertButton = new StylizedJButton("Convertir");
+		outputFilePanel.add(convertButton,BorderLayout.SOUTH);
+		
 		outputFileText.addKeyListener(new KeyListener() {
 			public void keyPressed(KeyEvent e) {}
 			public void keyTyped(KeyEvent e) {}
@@ -75,12 +82,15 @@ public final class SummaryView extends StylizedJPanel implements Observer {
 			}
 		});
 		
+	
+		
 		
 		add(inputFilePanel);
 		add(videoPanel);
 		add(audioPanel);
 		add(durationPanel);
 		add(outputFilePanel);
+		
 	}
 
 	

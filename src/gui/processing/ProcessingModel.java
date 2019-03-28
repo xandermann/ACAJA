@@ -12,10 +12,15 @@ import exceptions.UnfindableResourceException;
 import files.enumerations.OperationType;
 import files.enumerations.ProcessingType;
 import files.enumerations.SettingType;
+import files.files.Modifiable;
 import files.files.ProcessingFile;
 import files.files.SelectableFile;
+import gui.alerts.AlertWindow;
 import gui.general.Context;
 import gui.general.GeneralModel;
+import threads.RuntimeSpaceManager;
+import threads.ThreadForSave;
+import threads.ThreadForWaitWindow;
 import wrapper.runtime.global.SystemRequests;
 import wrapper.runtime.global.UserRequests;
 
@@ -154,12 +159,40 @@ public class ProcessingModel extends GeneralModel{
 			break;
 
 		default:
-			System.out.println("Non implementé");
+			System.out.println("Non implemente");
 			break;
 		}
 		
-		UserRequests.execute(currentFile);
-		sendChanges();
+		if(currentFile.isModified()) {
+			new Thread() {
+				public void run (){
+					/**
+					 * ATTENDRE QU'ON ME RENDE LA MAIN.
+					 */
+					while(RuntimeSpaceManager.hand.took());
+					/**
+					 * DEBUT DU TRAITEMENT :
+					 * 
+					 * Prendre la main sur l'espace d'execution.
+					 * Prendre la main sur ffmpeg.
+					 */
+					RuntimeSpaceManager.hand.take();
+					startSave();
+					/**
+					 * LANCEMENT DU TRAITEMENT DANS UN AUTRE PROCESSUS.
+					 */
+					ThreadForSave.saveInNewThread(currentFile);
+					/**
+					 * LANCEMENT ET GESTION DE LA FENETRE D'ATTENTE DANS UN AUTRE PROCESSUS.
+					 */
+					ThreadForWaitWindow.waitInNewThread(
+							new AlertWindow(
+									AlertWindow.INFO,
+									"Traitement du fichier "+currentFile.getSourceFileName()+"<br>Veuillez patientez..."),
+							currentFile.getSourceFile());
+				}
+			}.start();
+		}
 	}
 	
 	public void modify(OperationType typeSetting, String setting) {

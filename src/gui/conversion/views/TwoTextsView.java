@@ -54,7 +54,7 @@ public final class TwoTextsView extends JLabel {
 								"font-size: "+sizeFirst+"px;" +
 							"}" +
 							"#second {" +
-								"color: #0000FF;" +
+								"color: #3550a3;" +
 								"font-size: "+sizeSecond+"px;" +
 							"}" +
 						"</style>" +

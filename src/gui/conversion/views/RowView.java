@@ -53,8 +53,8 @@ public final class RowView extends JPanel{
 		g.setColor(Color.BLACK);
 		
 		
-		g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 14));
-		g.drawString(file.getSourceFileNameWithoutExtension(), (w-8*file.getSourceFileNameWithoutExtension().length())/2, 25);
+		g.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 24));
+		g.drawString(file.getSourceFileNameWithoutExtension(), (w-14*file.getSourceFileNameWithoutExtension().length())/2, 28);
 		
 		try {
 			g.drawImage(ImageIO.read(file.getThumbnail()), 40, 40, null);

@@ -101,6 +101,7 @@ public final class UserRequests{
 					break;
 				case CROPED :
 					String[] tab = newValue.split(" ");
+					System.out.println(tab[0]+ " "+ tab[1]);
 					request.crop(tab[0],tab[1],tab[2],tab[3]);
 					break;
 				case CUT :

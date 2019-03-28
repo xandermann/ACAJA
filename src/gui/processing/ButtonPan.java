@@ -72,6 +72,7 @@ public class ButtonPan extends JPanel {
 	}
 	
 	public void cropIsSelected() {
+		model.setMessage("Fonction de Crop activée !");
 		flouButton.setSelected(false);
 		model.setfUp(false);
 		model.setcropUp(false);
@@ -80,6 +81,7 @@ public class ButtonPan extends JPanel {
 	}
 	
 	public void flouIsSelected() {
+		model.setMessage("Fonction de Floutage activée !");
 		rectangle.setSelected(false);
 		model.setcropUp(false);
 		model.setfUp(false);

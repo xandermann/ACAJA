@@ -154,7 +154,7 @@ public final class VideoSettingsView extends SettingsView{
 		add(bitratePanel);
 		add(resolutionPanel);
 		add(fpsPanel);
-		setSize(new Dimension(300, 400));
+
 	}
 
 	

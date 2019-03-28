@@ -135,6 +135,7 @@ public final class SoundSettingsView extends SettingsView{
 		add(bitratePanel);
 		add(samplingRatePanel);
 		add(channelsPanel);
+		
 	}
 
 	

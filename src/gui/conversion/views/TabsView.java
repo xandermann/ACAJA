@@ -9,10 +9,12 @@ public final class TabsView extends JTabbedPane{
 	public TabsView() {
 		Context.$C(3, this);
 		
-		setSize(new Dimension(320, 200));
+		//setSize(new Dimension(320, 200));
 		
 		SoundSettingsView ssp = new SoundSettingsView();
+		ssp.setSize(new Dimension(getWidth(),getHeight()));
 		VideoSettingsView vsp = new VideoSettingsView(ssp);
+		vsp.setSize(new Dimension(getWidth(),getHeight()));
 		add("Video",vsp);
 		add("Son",ssp);
 		Context.$M.addObserver(vsp);

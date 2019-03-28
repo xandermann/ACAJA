@@ -54,21 +54,21 @@ public final class TwoTextsView extends JLabel {
 								"font-size: "+sizeFirst+"px;" +
 							"}" +
 							"#second {" +
-								"color: #0000FF;" +
+								"color: #3550a3;" +
 								"font-size: "+sizeSecond+"px;" +
 							"}" +
 						"</style>" +
 				   "</head>" +
 				   "<body>" +
 				   		"<div id=both>" +
-				   			"<p id=first>" + 
+				   			"<div id=first>" + 
 				   				first +
-				   			"</p>" +
-				   			"<br>"+
-				   			"<p id=second>" + 
+				   			"</div>" +
+				   			"<div id=second>" + 
 				   				second.toUpperCase() +
-				   			"</p>" + 
+				   			"</div>" + 
 				   	   "</div>"+
+				   	"<br>"+
 				  "</body>" + 
 		     "</html>";
 	}

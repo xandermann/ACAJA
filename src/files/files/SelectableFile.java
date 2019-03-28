@@ -53,7 +53,7 @@ public class SelectableFile {
 	/**
 	 * Miniature de la video.
 	 */
-	protected File thumbail;
+	protected File thumbnail;
 
 	
 	
@@ -359,8 +359,8 @@ public class SelectableFile {
 				: destinationFile[0] + File.separator + destinationFile[1] + destinationFile[2];
 	}
 
-	public File getThumbail() {
-		return thumbail;
+	public File getThumbnail() {
+		return thumbnail;
 	}
 
 	

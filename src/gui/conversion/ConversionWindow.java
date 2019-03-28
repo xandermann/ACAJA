@@ -117,7 +117,7 @@ public final class ConversionWindow extends StylizedJFrame {
 			remove(libraryView);
 			remove(concernedFileView);
 			
-			add(empty);
+			empty.setVisible(true);
 			
 			repaint();
 			revalidate();
@@ -127,27 +127,29 @@ public final class ConversionWindow extends StylizedJFrame {
 	
 	
 	public void redrawFirstTime() {
-		remove(empty);
-		
+		empty.setVisible(false);
 		concernedFileView = new StylizedJPanel();
 		concernedFileView.setLayout(new BoxLayout(concernedFileView, BoxLayout.Y_AXIS));
-		concernedFileView.setPreferredSize(new Dimension(320, 600));
+		concernedFileView.setPreferredSize(new Dimension(getWidth()/2, getHeight()));
 		Context.$C(1, concernedFileView);
 	
 		SummaryView sv = new SummaryView();
 		TabsView tv = new TabsView();
+		
+		sv.setSize(new Dimension(getWidth()/2,(int)(getHeight() * 0.55)));
+		tv.setSize(new Dimension(getWidth()/2,(int)(getHeight()* 0.45)));
 		concernedFileView.add(sv);
 		concernedFileView.add(tv);
 		
 		libraryView = new LibraryView();
-		
+		libraryView.setSize(new Dimension(getWidth()/2,getHeight()));
 		sv.setBackground(Color.LIGHT_GRAY);
 		concernedFileView.setBackground(Color.LIGHT_GRAY);
 		add(libraryView, BorderLayout.WEST);
 		add(concernedFileView, BorderLayout.EAST);
 		
 		Context.$M.addObserver(sv);
-		Context.$M.addObserver(libraryView);
+		Context.$M.addObserver(libraryView); 
 		
 		repaint();
 		revalidate();
@@ -170,18 +172,19 @@ public final class ConversionWindow extends StylizedJFrame {
 
 		
 		StylizedJMenuItem importFile = new StylizedJMenuItem("Importer un fichier");
-		importFile.setToolTipText("Ici vous pouvez ajouter un fichier dans la bibliothèque (CTRL + A).");
+		importFile.setToolTipText("Ici vous pouvez ajouter un fichier dans la bibliothï¿½que (CTRL + A).");
 		importFile.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent ae) {
+			public void actionPerformed(ActionEvent ae) {				
 				Actions.input();
 			}
 		});
 		
 
 		StylizedJMenuItem importFolder = new StylizedJMenuItem("Importer un dossier");
-		importFolder.setToolTipText("Ici vous pouvez ajouter plusieurs fichiers dans la bibliothèque (CTRL + D).");
+		importFolder.setToolTipText("Ici vous pouvez ajouter plusieurs fichiers dans la bibliothï¿½que (CTRL + D).");
 		importFolder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
+				if (Context.$M.getCurrentFile() == null) redrawFirstTime();
 				Actions.inputs();
 			}
 		});

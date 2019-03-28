@@ -1,5 +1,6 @@
 package wrapper.runtime.details;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import wrapper.streams.iterators.ProcessManager;
@@ -54,11 +55,11 @@ public final class FFmpegRuntime {
 		String os = System.getProperty("os.name");
 		if(os.contains("Linux")){
 			FFMPEG_PATH = new String[2];
-			FFMPEG_PATH[0] = "/bin/bash";
+			FFMPEG_PATH[0] = File.separator+"bin"+File.separator+"bash";
 			FFMPEG_PATH[1] = "ffmpeg";
 		}else{
 			if(os.contains("Mac")) 
-				FFMPEG_PATH = new String[]{"/usr/local/bin/ffmpeg"};
+				FFMPEG_PATH = new String[]{File.separator+"usr"+File.separator+"local"+File.separator+"bin"+File.separator+"ffmpeg"};
 			 else
 				FFMPEG_PATH = new String[]{"ffmpeg"};
 		}
@@ -91,6 +92,7 @@ public final class FFmpegRuntime {
 	 * 								commande RUN de type Runtime. 
 	 */
 	public static ProcessManager execute(List<String> ffmpegRequest){
+		
 		if(FFMPEG_PATH==null) install();
 		try {
 			for(int i = 0; i < FFMPEG_PATH.length; i++) ffmpegRequest.add(i, FFMPEG_PATH[i]);

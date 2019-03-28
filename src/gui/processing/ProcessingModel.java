@@ -92,7 +92,7 @@ public class ProcessingModel extends GeneralModel{
 	}
 	
 	
-	public SelectableFile getCurrentFile() {
+	public ProcessingFile getCurrentFile() {
 		return currentFile;
 	}
 	

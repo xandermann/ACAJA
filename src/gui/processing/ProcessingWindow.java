@@ -143,7 +143,7 @@ public class ProcessingWindow extends JFrame {
 		concat.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
-	
+				new ConcatWindow(model);
 			}
 		});
 		StylizedJMenuItem removeSound = new StylizedJMenuItem("Retirer la bande son de la video");

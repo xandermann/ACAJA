@@ -17,6 +17,7 @@ import files.files.SelectableFile;
 import gui.JFileChooserManager;
 import gui.WindowTools;
 import gui.conversion.ConversionWindow;
+import gui.general.Actions;
 import gui.general.Context;
 import gui.style.StylizedJMenuBar;
 import gui.style.StylizedJMenuItem;
@@ -70,6 +71,8 @@ public class ProcessingWindow extends JFrame {
 		JMenu videoMenu = new JMenu("Video");
 		jm.add(videoMenu);*/
 		
+		
+		
 		StylizedJMenuItem procToConv = new StylizedJMenuItem("Passer en mode conversion");
 		procToConv.addActionListener(new ActionListener() {
 			@Override
@@ -78,7 +81,10 @@ public class ProcessingWindow extends JFrame {
 				dispose();
 			}
 		});
-		StylizedJMenuItem convertir = new StylizedJMenuItem("Traiter");
+		
+		
+		
+		StylizedJMenuItem convertir = new StylizedJMenuItem("Demarrer le traitement");
 		convertir.addActionListener(new ActionListener() {
 			
 			@Override
@@ -99,17 +105,19 @@ public class ProcessingWindow extends JFrame {
 			}
 		});
 		
+		
+		
 		StylizedJMenuItem quit = new StylizedJMenuItem("Quitter");
 		quit.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				ResourcesManager.clearResources();
-				System.exit(0);
-				
+				Actions.quit();
 			}
 		});
-		StylizedJMenuItem importFile = new StylizedJMenuItem("Importer un fichier");
-		importFile.addActionListener(new ActionListener() {
+		
+		
+		StylizedJMenuItem importVideo = new StylizedJMenuItem("Importer la video");
+		importVideo.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
 				try {
@@ -125,8 +133,27 @@ public class ProcessingWindow extends JFrame {
 			}
 		});
 		
-		libraryMenu.add(importFile);
 		
+		StylizedJMenuItem importImage = new StylizedJMenuItem("Importer une image");
+		importVideo.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent ae) {
+				try {
+					model.add(JFileChooserManager.chooseFile());
+				} catch (IncorrectFileException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (UnfindableResourceException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+		
+		
+		libraryMenu.add(importVideo);
+		libraryMenu.add(importImage);
+
 		fileMenu.add(procToConv);
 		fileMenu.add(convertir);
 		fileMenu.add(quit);

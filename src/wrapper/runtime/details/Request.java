@@ -500,8 +500,7 @@ public final class Request implements FlagConstants, ValueConstants{
 		return this;
 	}
 	
-	public Request adSound() {
-		askSomethingElse(FLAG_REMOVE_SOUND);
+	public Request addSound() {
 		return this;
 	}
 	

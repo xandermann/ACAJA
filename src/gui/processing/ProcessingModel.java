@@ -27,6 +27,7 @@ public class ProcessingModel extends GeneralModel{
 	private File minia;
 	private String destinationFolder;
 	private String message;
+	//private Form f;
 	
 	
 	public ProcessingModel() {
@@ -35,6 +36,7 @@ public class ProcessingModel extends GeneralModel{
 		this.cropUp = false;
 		setMessage("Veuillez importer votre premier fichier");
 		listRect = new ArrayList<>();
+		
 	}
 
 	
@@ -86,8 +88,22 @@ public class ProcessingModel extends GeneralModel{
 		tab[2] = c;
 		tab[3] = d;
 		
-		Form f = new Form(tab,type);
-		listRect.add(f);
+		
+			boolean containForm = false;
+			for(Form form : listRect) {
+				if(form.getTypeCommande() == type) {
+					form.setForm(tab, type);
+					containForm = true;
+					break;
+				}
+			}	
+			if(!containForm) {
+				Form f = new Form(tab,type);
+				listRect.add(f);
+			}
+				
+		
+		
 		System.out.println(a+"-"+b+"-"+c+"-"+d+"-t:"+type);
 		
 		sendChanges();

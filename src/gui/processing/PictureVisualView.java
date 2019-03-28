@@ -22,6 +22,7 @@ public class PictureVisualView extends JPanel implements Observer{
 		this.setPreferredSize(new Dimension(500, 350));
 		DrawChange d = new DrawChange(model);
 		this.addMouseListener(d);
+		this.addMouseMotionListener(d);
 		this.setOpaque(false);
 	}
 

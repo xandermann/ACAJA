@@ -67,25 +67,18 @@ public class ProcessingWindow extends JFrame {
 		jm.add(fileMenu);
 		JMenu libraryMenu = new JMenu("Bibliotheque");
 		jm.add(libraryMenu);
+		JMenu processingMenu = new JMenu("Traitement");
+		jm.add(processingMenu);
+		JMenu optionsMenu = new JMenu("Options");
+		jm.add(optionsMenu);
 		/*
 		JMenu videoMenu = new JMenu("Video");
 		jm.add(videoMenu);*/
 		
 		
 		
-		StylizedJMenuItem procToConv = new StylizedJMenuItem("Passer en mode conversion");
-		procToConv.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				new ConversionWindow();
-				dispose();
-			}
-		});
-		
-		
-		
-		StylizedJMenuItem convertir = new StylizedJMenuItem("Demarrer le traitement");
-		convertir.addActionListener(new ActionListener() {
+		StylizedJMenuItem process = new StylizedJMenuItem("Demarrer le traitement");
+		process.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -104,9 +97,6 @@ public class ProcessingWindow extends JFrame {
 				}
 			}
 		});
-		
-		
-		
 		StylizedJMenuItem quit = new StylizedJMenuItem("Quitter");
 		quit.addActionListener(new ActionListener() {
 			@Override
@@ -116,7 +106,7 @@ public class ProcessingWindow extends JFrame {
 		});
 		
 		
-		StylizedJMenuItem importVideo = new StylizedJMenuItem("Importer la video");
+		StylizedJMenuItem importVideo = new StylizedJMenuItem("Importer une video");
 		importVideo.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
@@ -132,8 +122,6 @@ public class ProcessingWindow extends JFrame {
 				}
 			}
 		});
-		
-		
 		StylizedJMenuItem importImage = new StylizedJMenuItem("Importer une image");
 		importVideo.addActionListener(new ActionListener() {
 			@Override
@@ -151,14 +139,59 @@ public class ProcessingWindow extends JFrame {
 		});
 		
 		
+		StylizedJMenuItem concat = new StylizedJMenuItem("Concatener des videos  / sons");
+		concat.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent ae) {
+	
+			}
+		});
+		StylizedJMenuItem removeSound = new StylizedJMenuItem("Retirer la bande son de la video");
+		removeSound.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent ae) {
+	
+			}
+		});
+		StylizedJMenuItem addSound = new StylizedJMenuItem("Ajouter une bande son a la video");
+		addSound.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent ae) {
+	
+			}
+		});
+		
+		
+		
+		StylizedJMenuItem answers = new StylizedJMenuItem("Inspecter les reponses de ffmpeg");
+		answers.setToolTipText("Ici vous pouvez inspecter les reponses de ffmpeg (CTRL + I).");
+		answers.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) {		
+				Actions.inspect();
+;			}
+		});
+		StylizedJMenuItem procToConv = new StylizedJMenuItem("Passer en mode conversion");
+		procToConv.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				Actions.switchMode();
+			}
+		});
+		
+
+		fileMenu.add(process);
+		fileMenu.add(quit);	
+	
 		libraryMenu.add(importVideo);
 		libraryMenu.add(importImage);
-
-		fileMenu.add(procToConv);
-		fileMenu.add(convertir);
-		fileMenu.add(quit);
+		
+		optionsMenu.add(answers);
+		optionsMenu.add(procToConv);
+		
+		processingMenu.add(concat);
+		processingMenu.add(addSound);
+		processingMenu.add(removeSound);
 
 		this.setJMenuBar(jm);
-
 	}
 }

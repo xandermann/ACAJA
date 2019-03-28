@@ -164,7 +164,6 @@ public class ProcessingWindow extends JFrame {
 		
 		
 		StylizedJMenuItem answers = new StylizedJMenuItem("Inspecter les reponses de ffmpeg");
-		answers.setToolTipText("Ici vous pouvez inspecter les reponses de ffmpeg (CTRL + I).");
 		answers.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {		
 				Actions.inspect();

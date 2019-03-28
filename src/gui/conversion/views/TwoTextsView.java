@@ -61,14 +61,14 @@ public final class TwoTextsView extends JLabel {
 				   "</head>" +
 				   "<body>" +
 				   		"<div id=both>" +
-				   			"<p id=first>" + 
+				   			"<div id=first>" + 
 				   				first +
-				   			"</p>" +
-				   			"<br>"+
-				   			"<p id=second>" + 
+				   			"</div>" +
+				   			"<div id=second>" + 
 				   				second.toUpperCase() +
-				   			"</p>" + 
+				   			"</div>" + 
 				   	   "</div>"+
+				   	"<br>"+
 				  "</body>" + 
 		     "</html>";
 	}

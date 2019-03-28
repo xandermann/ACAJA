@@ -51,9 +51,7 @@ public final class RowView extends JPanel{
 		g.fillRect(0, 0, w, h);
 		
 		g.setColor(Color.BLACK);
-		/*g.drawRect(10, 10, w-20, h-20); 
-		g.drawRect(11, 11, w-22, h-22);
-		g.drawRect(12, 12, w-24, h-24);*/
+		
 		
 		g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 14));
 		g.drawString(file.getSourceFileNameWithoutExtension(), (w-8*file.getSourceFileNameWithoutExtension().length())/2, 25);

@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import gui.WindowTools;
 import gui.alerts.Alert;
 import gui.conversion.ConversionWindow;
+import gui.general.Context;
 import gui.processing.ProcessingWindow;
 import gui.style.StyleTheme;
 import gui.style.StylizedJButton;
@@ -22,7 +23,9 @@ public final class ChoiceModeWindow extends JFrame {
 	 */
 	public ChoiceModeWindow() {
 		super("Acaja");
-
+		
+		Context.$W = this;
+		
 		StylizedJButton convertbutton = new StylizedJButton("Conversion");
 		convertbutton.setPreferredSize(new Dimension(100, 40));
 		convertbutton.addActionListener(new ActionListener() {

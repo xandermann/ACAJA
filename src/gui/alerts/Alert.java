@@ -33,20 +33,39 @@ public final class Alert extends AlertSettings implements ATConstants, AMConstan
 				public void mouseClicked(MouseEvent e) {}
 				public void mousePressed(MouseEvent e) {
 					view.dispose();
-					/**
-					 * RENDRE LE FOCUS AU COMPONENT PARENT.
-					 */
-					if(Context.$C(0) != null) 
-						Context.$C(0).requestFocus();
-					else {
-						if(Context.$W != null) 
-							Context.$W.requestFocus();
-					}
+					renderFocus();
 				}
 				public void mouseReleased(MouseEvent e) {}
 				public void mouseEntered(MouseEvent e) {}
 				public void mouseExited(MouseEvent e) {}
 			});
+			/**
+			 * UNE ALERTE PASSE AU SECOND PLAN SI LA SOURIS BOUGE.
+			 */
+			view.addMouseMotionListener(new MouseMotionListener() {
+				public void mouseDragged(MouseEvent e) {}
+				public void mouseMoved(MouseEvent e) {
+					new JDialog(Context.$W).setModal(true);
+					renderFocus();
+				}
+				
+			});
+		}
+	}
+	
+	
+	/**
+	 * [ RENDRE LE FOCUS. ]
+	 */
+	private void renderFocus() {
+		/**
+		 * RENDRE LE FOCUS AU COMPONENT PARENT.
+		 */
+		if(Context.$C(0) != null) 
+			Context.$C(0).requestFocus();
+		else {
+			if(Context.$W != null) 
+				Context.$W.requestFocus();
 		}
 	}
 	

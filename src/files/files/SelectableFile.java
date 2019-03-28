@@ -172,8 +172,6 @@ public class SelectableFile {
 			}
 		}
 
-		/** PLUS NECESSAIRE.
-		
 		String[] audioExtensions = { "mp3", "wav", "ogg", "flac", "aac" };
 		for (String audExt : audioExtensions) {
 			if (fileName.endsWith(audExt)) {
@@ -189,8 +187,6 @@ public class SelectableFile {
 				return;
 			}
 		}
-		
-		 */
 		
 		throw new IncorrectFileException(IncorrectFileException.FORBIDDEN_FILE);
 	}

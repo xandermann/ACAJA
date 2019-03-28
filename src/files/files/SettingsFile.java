@@ -57,23 +57,22 @@ public final class SettingsFile extends SelectableFile implements Modifiable {
 		super(file);
 
 		/**
-		 * Si le type de fichier n'est pas accepté, alors on renvoie une exception.
+		 * Si le type de fichier n'est pas accepe, alors on renvoie une exception.
 		 */
-		if (!this.containsAudio())
+		if (!isVideo())
 			throw new IncorrectFileException(IncorrectFileException.BAD_TYPE_FILE);
 
 		/**
 		 * INITIALISATION DES PARAMETRES DE LA VIDEO.
 		 */
-		// Intiliasation des tables.
+		// Initialisation des tables.
 		requests = new HashMap<SettingType, String>();
 		settings = new HashMap<SettingType, String>();
 
 		// Initialisation des autres parametres.
 		SystemRequests.askMetadata(this);
 
-		if (isVideo())
-			thumbnail = SystemRequests.askFrame(this, "00:00:01.00", 190, 90);
+		thumbnail = SystemRequests.askFrame(this, "00:00:01.00", 190, 90);
 	}
 
 	

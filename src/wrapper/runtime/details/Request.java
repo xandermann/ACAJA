@@ -495,6 +495,21 @@ public final class Request implements FlagConstants, ValueConstants{
 	
 	
 	
+	public Request removeSound() {
+		askSomethingElse(FLAG_REMOVE_SOUND);
+		return this;
+	}
+	
+	public Request adSound() {
+		askSomethingElse(FLAG_REMOVE_SOUND);
+		return this;
+	}
+	
+	
+	
+	//=======================================================================================================================
+	
+	
 	/**
 	 * [ EXECUTER LA REQUETE ET OBTENIR LE RESULAT. ]
 	 * 

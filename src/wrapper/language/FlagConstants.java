@@ -46,7 +46,7 @@ public interface FlagConstants {
 	public final static String[] FLAG_ROTATE = {FLAG_MODIFY, "\"transpose=1\""};
 	public final static String[] FLAG_BLUR = {"-filter_complex", 
 											  "[0:v]crop=", ",boxblur=10[fg];[0:v][fg]overlay=", "[v]",
-										      "-map", "[v]", "-map", "0"+S+"a", 
+											  FLAG_MAP, "[v]", FLAG_MAP, "0"+S+"a", 
 										      FLAG_FILTER_VIDEO, "libx264", FLAG_FILTER_AUDIO, FLAG_COPY, 
 										      "-movflags", "+faststart"};
 	

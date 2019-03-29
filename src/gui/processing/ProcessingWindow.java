@@ -21,6 +21,7 @@ import gui.alerts.Alert;
 import gui.conversion.ConversionWindow;
 import gui.general.Actions;
 import gui.general.Context;
+import gui.general.GeneralKeyboardController;
 import gui.style.StylizedJMenuBar;
 import gui.style.StylizedJMenuItem;
 import resources.ResourcesManager;
@@ -34,7 +35,7 @@ public class ProcessingWindow extends JFrame {
 	public ProcessingWindow() {
 		Context.$0();
 		Context.$W = this;
-		new ProcessingModel();
+		this.model = new ProcessingModel();
 		
 		this.addWindowListener(new WindowListener() {
 			public void windowOpened(WindowEvent e) {}
@@ -47,7 +48,7 @@ public class ProcessingWindow extends JFrame {
 			public void windowActivated(WindowEvent e) {}
 			public void windowDeactivated(WindowEvent e) {}
 		});
-		this.model = new ProcessingModel();
+		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.createJMenu();
 		this.setBackground(Color.lightGray);
@@ -58,7 +59,7 @@ public class ProcessingWindow extends JFrame {
 		ProcessingPan p = new ProcessingPan();
 		this.setResizable(false);
 		this.add(p);
-		
+		addKeyListener(new GeneralKeyboardController());
 		WindowTools.executeWindow(this);
 	}
 
@@ -80,9 +81,8 @@ public class ProcessingWindow extends JFrame {
 		
 		
 		StylizedJMenuItem process = new StylizedJMenuItem("Demarrer le traitement");
+		process.setToolTipText("Ici vous pouvez demarer le traitement de vos fichiers.");
 		process.addActionListener(new ActionListener() {
-			
-			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					model.setMessage("Veuillez patienter ...");
@@ -91,7 +91,7 @@ public class ProcessingWindow extends JFrame {
 					model.getCurrentFile().setDestinationName("Traitement"+System.currentTimeMillis());
 					model.getCurrentFile().setFileExtension(".mp4");
 					model.save();
-					model.setMessage("Traitement terminé !");
+					model.setMessage("Traitement termine !");
 					System.out.println("fait");
 				} catch (UnfindableResourceException e) {
 					// TODO Auto-generated catch block
@@ -100,8 +100,8 @@ public class ProcessingWindow extends JFrame {
 			}
 		});
 		StylizedJMenuItem quit = new StylizedJMenuItem("Quitter");
+		quit.setToolTipText("Ici vous pouvez quitter le logiciel (ECHAP / CTRL + Q).");
 		quit.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				Actions.quit();
 			}
@@ -109,8 +109,8 @@ public class ProcessingWindow extends JFrame {
 		
 		
 		StylizedJMenuItem importVideo = new StylizedJMenuItem("Importer une video");
+		importVideo.setToolTipText("Ici vous pouvez importer une video.");
 		importVideo.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent ae) {
 				try {
 					File f = JFileChooserManager.chooseFile();
@@ -125,6 +125,7 @@ public class ProcessingWindow extends JFrame {
 			}
 		});
 		StylizedJMenuItem importImage = new StylizedJMenuItem("Importer une image");
+		importImage.setToolTipText("Ici vous pouvez importez une image.");
 		importImage.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
@@ -142,6 +143,7 @@ public class ProcessingWindow extends JFrame {
 		
 		
 		StylizedJMenuItem concat = new StylizedJMenuItem("Concatener des videos  / sons");
+		concat.setToolTipText("Ici vous pouvez concatener des videos ou des sons.");
 		concat.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
@@ -150,6 +152,7 @@ public class ProcessingWindow extends JFrame {
 			}
 		});
 		StylizedJMenuItem removeSound = new StylizedJMenuItem("Retirer la bande son de la video");
+		removeSound.setToolTipText("Ici vous pouvez retirer un son a la video en cours de traitement.");
 		removeSound.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
@@ -158,6 +161,7 @@ public class ProcessingWindow extends JFrame {
 			}
 		});
 		StylizedJMenuItem addSound = new StylizedJMenuItem("Ajouter une bande son a la video");
+		addSound.setToolTipText("Ici vous pouvez ajouter un son a la video en cours de traitement.");
 		addSound.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
@@ -168,16 +172,25 @@ public class ProcessingWindow extends JFrame {
 		
 		
 		StylizedJMenuItem answers = new StylizedJMenuItem("Inspecter les reponses de ffmpeg");
+		answers.setToolTipText("Ici vous pouvez inspecter les reponses de ffmpeg (CTRL + I).");
 		answers.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {		
 				Actions.inspect();
 ;			}
 		});
 		StylizedJMenuItem procToConv = new StylizedJMenuItem("Passer en mode conversion");
+		procToConv.setToolTipText("Ici vous pouvez choisir de passer en mode conversion (CTRL + C).");
 		procToConv.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				Actions.switchMode();
+			}
+		});
+		StylizedJMenuItem settings = new StylizedJMenuItem("Gerer les parametres des notifications");
+		settings.setToolTipText("Ici vous pouvez gerer les parametres des notifications (CTRL + P).");
+		settings.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) {		
+				Actions.set();
 			}
 		});
 		
@@ -188,12 +201,14 @@ public class ProcessingWindow extends JFrame {
 		libraryMenu.add(importVideo);
 		libraryMenu.add(importImage);
 		
-		optionsMenu.add(answers);
-		optionsMenu.add(procToConv);
-		
 		processingMenu.add(concat);
 		processingMenu.add(addSound);
 		processingMenu.add(removeSound);
+		
+		optionsMenu.add(answers);
+		optionsMenu.add(procToConv);
+		optionsMenu.add(settings);
+		
 
 		this.setJMenuBar(jm);
 	}

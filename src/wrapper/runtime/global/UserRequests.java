@@ -118,7 +118,9 @@ public final class UserRequests{
 						tabres[i-1] = tab3[i];
 					request.concat(tabres);
 					break;
-					
+				case REMOVE_SOUND :
+					request.removeSound();
+				break;
 			}
 		}
 		

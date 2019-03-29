@@ -8,6 +8,8 @@ public class Errors {
 		errors = new ArrayList<String>();
 		errors.add("conversionfailed");
 		errors.add("unknownencoder");
+		errors.add("unsafefile");
+		errors.add("operationnotpermitted");
 	}
 	
 	

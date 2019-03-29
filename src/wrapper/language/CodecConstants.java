@@ -20,7 +20,8 @@ import wrapper.runtime.global.SystemRequests;
  */
 public final class CodecConstants {
 	public final static String[] ALL_EXTENSIONS = {".3g2",".3gp",".asf",".avi",".flv",".m4v",".mov",".mkv",".mp2",".mp4",".mpeg",".mpg",".ogg",".webm",".wmv"};
-	public final static String[] ALL_SUPPORTED_VIDEO_CODECS =  { "av1","dirac" ,"flv1", "h263","h264","mjpeg", "mpeg1video", "mpeg2video", "mpeg4", "theora", "vp8", "vp9", "wmv1", "wmv2", "wmv3", "wmv3image"};
+	public final static String[] ALL_SUPPORTED_VIDEO_CODECS =  { "av1","dirac" ,"flv1", "h264","mjpeg", "mpeg1video", "mpeg2video", "mpeg4", "theora", "vp8", "vp9", "wmv1", "wmv2", "wmv3", "wmv3image"};
+	//"h263",
 	public final static String[] ALL_SUPPORTED_AUDIO_CODECS = { "aac", "ac3", "alac","amr_nb","amr_wb","evrc", "flac", "mp1", "mp2", "mp3", "opus", "smv","vorbis", "wavpack", "wmalossless", "wmapro", "wmav1", "wmav2"};
 	public final static Map<String, Map<String,List<String>>> CORRESPONDING_EXTENSION;
 	static {
@@ -40,7 +41,7 @@ public final class CodecConstants {
 				//mpeg4 
 				compatible_codecs.put("mpeg4",audioCodecList);
 				//h263
-				compatible_codecs.put("h263", audioCodecList);
+			//	compatible_codecs.put("h263", audioCodecList);
 				//h264
 				compatible_codecs.put("h264", audioCodecList);
 				break;
@@ -53,7 +54,7 @@ public final class CodecConstants {
 				//mpeg4 
 				compatible_codecs.put("mpeg4",audioCodecList);
 				//h263
-				compatible_codecs.put("h263", audioCodecList);
+		//		compatible_codecs.put("h263", audioCodecList);
 				//h264
 				compatible_codecs.put("h264", audioCodecList);
 				break;

@@ -240,7 +240,7 @@ public final class ConversionModel extends GeneralModel{
 			files.clear();
 			sendChanges();
 			((ConversionWindow) Context.$W).redrawEmpty();
-			Alert.shortAlert(Alert.SUCCESS, "Bibliotheque videe avec succes.");
+			Alert.longAlert(Alert.SUCCESS, "Bibliotheque videe avec succes.");
 		}
 	}
 

@@ -39,16 +39,6 @@ public final class Alert extends AlertSettings implements ATConstants, AMConstan
 				public void mouseEntered(MouseEvent e) {}
 				public void mouseExited(MouseEvent e) {}
 			});
-			/**
-			 * UNE ALERTE PASSE AU SECOND PLAN SI LA SOURIS BOUGE.
-			view.addMouseMotionListener(new MouseMotionListener() {
-				public void mouseDragged(MouseEvent e) {}
-				public void mouseMoved(MouseEvent e) {
-					new JDialog(Context.$W).setModal(true);
-					renderFocus();
-				}
-			});
-			 */
 		}
 	}
 	
@@ -74,25 +64,28 @@ public final class Alert extends AlertSettings implements ATConstants, AMConstan
 	 * 
 	 * @param timeOut		Temps d'affichage de la notification.
 	 */
-	public void alert(int timeOut) {
+	public void alert(long timeOut) {
 		if(INTERRUPTOR) {
-			if(timeOut<0) throw new IllegalArgumentException("timeOut negatif !");
-			SwingUtilities.invokeLater(new Runnable() {
-			    public void run() {
-			    	view.setVisible(true);
-			    	new Thread() {
-			    		 public void run() {
-			 				try {
-			 					while(!view.isVisible()) Thread.yield();
-								Thread.sleep(timeOut);
-							} catch (InterruptedException ie) {
-								JOptionPane.showMessageDialog(null, ie.getMessage());
-							}
-			 				view.dispose();
-			    		 }
-			    	}.start();
-			    }
-			});
+			if(timeOut<0) 
+				throw new IllegalArgumentException("timeOut negatif !");
+			if(timeOut != 0) {
+				SwingUtilities.invokeLater(new Runnable() {
+				    public void run() {
+				    	view.setVisible(true);
+				    	new Thread() {
+				    		 public void run() {
+				 				try {
+				 					while(!view.isVisible()) Thread.yield();
+									Thread.sleep(timeOut);
+								} catch (InterruptedException ie) {
+									JOptionPane.showMessageDialog(null, ie.getMessage());
+								}
+				 				view.dispose();
+				    		 }
+				    	}.start();
+				    }
+				});
+			}
 		}
 	}
 	

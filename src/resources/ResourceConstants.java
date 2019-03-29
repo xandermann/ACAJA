@@ -77,4 +77,13 @@ public interface ResourceConstants {
 	public static String now() {
 		return day()+"_"+(System.currentTimeMillis()+60*60*10*10*10);
 	}
+	
+	
+	/**
+	 * FICHIERS DE CONFIGURATION.
+	 */
+	public final static String SETTINGS_PATH = "settings/";
+	public final static File SETTINGS = new File(SETTINGS_PATH);
+	public final static String NOTIFICATION_SETTINGS_PATH = SETTINGS_PATH + "notification_settings.ini";
+	public final static File NOTIFICATION_SETTINGS = new File(NOTIFICATION_SETTINGS_PATH);
 }

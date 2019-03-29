@@ -22,7 +22,7 @@ public final class IniManager {
 			throw new IllegalArgumentException("Attendu : un fichier ini.");
 		
 		if(!ini.exists()) 
-			throw new NullPointerException("Fichier ini inexistant !");
+			throw new IllegalArgumentException("Fichier ini inexistant !");
 		
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(ini));
@@ -65,7 +65,7 @@ public final class IniManager {
 			throw new IllegalArgumentException("Attendu : un fichier ini.");
 		
 		if(!ini.exists()) 
-			throw new NullPointerException("Fichier ini inexistant !");
+			throw new IllegalArgumentException("Fichier ini inexistant !");
 		
 		try {
 			BufferedWriter writer = new BufferedWriter(new FileWriter(ini));

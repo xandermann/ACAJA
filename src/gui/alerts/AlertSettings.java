@@ -1,17 +1,9 @@
 package gui.alerts;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-
+import java.util.*;
 import exceptions.UnfindableResourceException;
-import resources.IniTools;
-import resources.ResourceConstants;
-import resources.ResourcesManager;
-import wrapper.streams.managers.filters.Errors;
+import resources.*;
+
 
 /**
  * [ PARAMETRES DES TEMPS D'ALERTES ET DES ALERTES. ] 

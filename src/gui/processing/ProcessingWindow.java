@@ -17,6 +17,7 @@ import files.files.ProcessingFile;
 import files.files.SelectableFile;
 import gui.JFileChooserManager;
 import gui.WindowTools;
+import gui.alerts.Alert;
 import gui.conversion.ConversionWindow;
 import gui.general.Actions;
 import gui.general.Context;
@@ -145,6 +146,7 @@ public class ProcessingWindow extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
 				new ConcatWindow(model);
+				Alert.longAlert(Alert.INFO, "Ceci est la fenetre pour concatener des videos.");
 			}
 		});
 		StylizedJMenuItem removeSound = new StylizedJMenuItem("Retirer la bande son de la video");
@@ -152,6 +154,7 @@ public class ProcessingWindow extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
 				model.modify(ProcessingType.REMOVE_SOUND, "");
+				Alert.shortAlert(Alert.INFO, "Suppression de la bande son de la video<br>prise en compte.");
 			}
 		});
 		StylizedJMenuItem addSound = new StylizedJMenuItem("Ajouter une bande son a la video");

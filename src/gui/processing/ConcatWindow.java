@@ -14,17 +14,25 @@ import javax.swing.JPanel;
 
 import exceptions.IncorrectFileException;
 import exceptions.UnfindableResourceException;
+import files.enumerations.OperationType;
+import files.enumerations.ProcessingType;
 import files.files.ProcessingFile;
 import gui.JFileChooserManager;
 import gui.WindowTools;
+import gui.alerts.AlertWindow;
 import gui.style.StylizedJMenuBar;
 import gui.style.StylizedJMenuItem;
+import threads.RuntimeSpaceManager;
+import threads.ThreadForSave;
+import threads.ThreadForWaitWindow;
 
 public class ConcatWindow extends JFrame {
 	
 	private static ArrayList<ProcessingFile> listOfFile;
+	private ProcessingModel model;
 
 	public ConcatWindow(ProcessingModel m) {
+		model = m;
 		listOfFile = new ArrayList<ProcessingFile>();
 		WindowTools.executeWindow(this);
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -96,9 +104,31 @@ public class ConcatWindow extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				
+				if(!listOfFile.isEmpty()) {
+					//model.getCurrentFile().cancelAll();
+					ProcessingFile f1 = listOfFile.get(0);
+					model.setCurrentFile(f1);
+					String s = "";
+					for(ProcessingFile f : listOfFile) {
+						s = s +" "+f.getSourceFileFullName();
+					}
+					model.getCurrentFile().modify(ProcessingType.ADDED, s);
+					
+					model.setDestinationFolder(JFileChooserManager.chooseDirectory());
+					model.getCurrentFile().setDestinationPath(model.getDestinationFolder());
+					model.getCurrentFile().setDestinationName("Concat"+System.currentTimeMillis());
+					model.getCurrentFile().setFileExtension(".mp4");
+					try {
+						model.save();
+					} catch (UnfindableResourceException e1) {
+						e1.printStackTrace();
+					}
+					System.out.println("fait");
+					
+				}
 			}
+				
+			
 		});
 		j.add(valider);
 		return j;

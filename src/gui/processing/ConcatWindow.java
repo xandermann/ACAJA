@@ -14,6 +14,8 @@ import javax.swing.JPanel;
 
 import exceptions.IncorrectFileException;
 import exceptions.UnfindableResourceException;
+import files.enumerations.OperationType;
+import files.enumerations.ProcessingType;
 import files.files.ProcessingFile;
 import gui.JFileChooserManager;
 import gui.WindowTools;
@@ -96,8 +98,14 @@ public class ConcatWindow extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				
+				if(!listOfFile.isEmpty()) {
+					ProcessingFile f1 = listOfFile.get(0);
+					String s = "";
+					for(ProcessingFile f : listOfFile) {
+						s = s +" "+f.getSourceFileFullName();
+					}
+					f1.modify(ProcessingType.ADDED, s);
+				}
 			}
 		});
 		j.add(valider);

@@ -120,6 +120,7 @@ public class ConcatWindow extends JFrame {
 					model.getCurrentFile().setFileExtension(".mp4");
 					try {
 						model.save();
+						model.getCurrentFile().cancelAll();
 					} catch (UnfindableResourceException e1) {
 						e1.printStackTrace();
 					}

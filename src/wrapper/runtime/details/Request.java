@@ -465,7 +465,7 @@ public final class Request implements FlagConstants, ValueConstants{
 			writer.close();
 			
 			request.clear();
-			askSomethingElse(new String[]{FLAG_CONCAT[0], FLAG_CONCAT[1], FLAG_CONCAT[2], inputsFile.getAbsolutePath(), FLAG_CONCAT[3]});
+			askSomethingElse(new String[]{FLAG_CONCAT[0], FLAG_CONCAT[1], FLAG_CONCAT[2], inputsFile.getAbsolutePath(), FLAG_CONCAT[3], FLAG_CONCAT[4]});
 		} catch (IOException ioe) {}
 		
 		return this;

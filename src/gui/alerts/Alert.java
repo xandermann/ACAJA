@@ -41,15 +41,14 @@ public final class Alert extends AlertSettings implements ATConstants, AMConstan
 			});
 			/**
 			 * UNE ALERTE PASSE AU SECOND PLAN SI LA SOURIS BOUGE.
-			 */
 			view.addMouseMotionListener(new MouseMotionListener() {
 				public void mouseDragged(MouseEvent e) {}
 				public void mouseMoved(MouseEvent e) {
 					new JDialog(Context.$W).setModal(true);
 					renderFocus();
 				}
-				
 			});
+			 */
 		}
 	}
 	

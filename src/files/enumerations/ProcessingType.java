@@ -28,5 +28,13 @@ public enum ProcessingType implements OperationType {
 	/**
 	 * Parametre du type concatene.
 	 */
-	ADDED
+	ADDED,
+	/**
+	 * Parametre du type suppression du son.
+	 */
+	REMOVE_SOUND, 
+	/**
+	 * Parametre du type ajout de son.
+	 */
+	ADD_SOUND
 }

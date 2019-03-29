@@ -455,13 +455,13 @@ public final class Request implements FlagConstants, ValueConstants{
 	public Request concat(String[] inputs) {	
 		for(String tmp : inputs)  {
 			if(tmp==null) throw new NullPointerException("Un des inputs est null !");
-		}
+		} 
 		
 		try {
 			File inputsFile = new File(ResourceConstants.TEMPORARY_FILES_FULL_PATH + "inputs.txt");
 			Writer writer = new BufferedWriter(new FileWriter(inputsFile));
-			if(input != null) writer.write(input+"\n");
-			for(String tmp : inputs) writer.write(tmp+"\n");
+			if(input != null) writer.write("file '"+input+"'\n");
+			for(String tmp : inputs) writer.write("file '"+tmp+"'\n");
 			writer.close();
 			
 			request.clear();

@@ -57,7 +57,7 @@ public final class IniManager {
 	public static boolean to(Map<String, String> toIni, File ini) {
 		if(toIni==null) 
 			throw new NullPointerException("toIni null !");
-		
+	
 		if(ini==null) 
 			throw new NullPointerException("ini null !");
 		

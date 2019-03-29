@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.Set;
 
 import exceptions.UnfindableResourceException;
-import resources.IniManager;
+import resources.IniTools;
 import resources.ResourceConstants;
 import resources.ResourcesManager;
 import wrapper.streams.managers.filters.Errors;
@@ -40,7 +40,7 @@ public class AlertSettings{
 			Alert.longAlert(Alert.FAILURE, e.getMessage());
 		}
 		
-		Map<String, String> settings = IniManager.from(ResourceConstants.NOTIFICATION_SETTINGS);
+		Map<String, String> settings = IniTools.iniToMap(ResourceConstants.NOTIFICATION_SETTINGS);
 		SHORT = Long.parseLong(settings.get("short"));
 		LONG = Long.parseLong(settings.get("long"));
 		INTERRUPTOR = Boolean.parseBoolean(settings.get("interruptor"));
@@ -64,7 +64,7 @@ public class AlertSettings{
 		settings.put("short", SHORT+"");
 		settings.put("long", LONG+"");
 		settings.put("interruptor", INTERRUPTOR+"");
-		return IniManager.to(settings, ResourceConstants.NOTIFICATION_SETTINGS);
+		return IniTools.mapToIni(settings, ResourceConstants.NOTIFICATION_SETTINGS);
 	}
 }
 

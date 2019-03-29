@@ -6,7 +6,7 @@ import java.util.*;
 /**
  * [ GERER DES FICHIERS .ini. ]  
  */
-public final class IniManager {
+public final class IniTools {
 	/**
 	 * [ INI VERS MAP. ]
 	 * 
@@ -14,7 +14,7 @@ public final class IniManager {
 	 * 
 	 * @return			Map issue de la conversion.
 	 */
-	public static Map<String, String> from(File ini) {
+	public static Map<String, String> iniToMap(File ini) {
 		if(ini==null) 
 			throw new NullPointerException("ini null !");
 		
@@ -54,7 +54,7 @@ public final class IniManager {
 	 * 
 	 * @return 			Vaut true si conversion reussie
 	 */
-	public static boolean to(Map<String, String> toIni, File ini) {
+	public static boolean mapToIni(Map<String, String> toIni, File ini) {
 		if(toIni==null) 
 			throw new NullPointerException("toIni null !");
 	

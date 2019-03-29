@@ -12,6 +12,7 @@ import javax.swing.JMenu;
 import javax.swing.JOptionPane;
 import exceptions.IncorrectFileException;
 import exceptions.UnfindableResourceException;
+import files.enumerations.ProcessingType;
 import files.files.ProcessingFile;
 import files.files.SelectableFile;
 import gui.JFileChooserManager;
@@ -150,7 +151,7 @@ public class ProcessingWindow extends JFrame {
 		removeSound.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
-	
+				model.modify(ProcessingType.REMOVE_SOUND, "");
 			}
 		});
 		StylizedJMenuItem addSound = new StylizedJMenuItem("Ajouter une bande son a la video");

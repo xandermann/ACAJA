@@ -111,6 +111,14 @@ public final class UserRequests{
 					String[] tab2 = newValue.split(" ");
 					request.blur(tab2[0],tab2[1],tab2[2],tab2[3]);
 					break;
+				case ADDED :
+					String[] tab3 = newValue.split(" ");
+					String[] tabres = new String[tab3.length-1];
+					for(int i = 1;i<tab3.length;i++)
+						tabres[i-1] = tab3[i];
+					request.concat(tabres);
+					break;
+					
 			}
 		}
 		

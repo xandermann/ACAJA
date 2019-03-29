@@ -159,34 +159,37 @@ public class ProcessingModel extends GeneralModel{
 
 	@Override
 	public void save() throws UnfindableResourceException {
-		Form actu = this.listRect.get(this.listRect.size()-1);
-		String[] res = currentFile.getResolution().split("x");
-		
-		double coeffWidth = ((double)Integer.parseInt(res[0]))/500;
-		double coeffHeight = ((double)Integer.parseInt(res[1]))/350;
-		
-		int a1 = (int) (actu.getTab()[0]*coeffWidth);
-		int b1 = (int) (actu.getTab()[1]*coeffHeight);
-		
-		int c1 = (int) (actu.getTab()[2]*coeffWidth);
-		int d1 = (int) (actu.getTab()[3]*coeffHeight);
-		
-		System.out.println(a1+"-"+b1+"-"+c1+"-"+d1);
-		
-		switch (actu.getTypeCommande()) {
-		case 'c':
-			this.modify(ProcessingType.CROPED,a1+" "+b1+" "+c1+" "+d1 );
-			break;
-		case 'f':
-			this.modify(ProcessingType.BLURRED,a1+" "+b1+" "+c1+" "+d1 );
-			break;
-
-		default:
-			System.out.println("Non implemente");
-			break;
+		if(!listRect.isEmpty()) {
+			Form actu = this.listRect.get(this.listRect.size()-1);
+			String[] res = currentFile.getResolution().split("x");
+			
+			double coeffWidth = ((double)Integer.parseInt(res[0]))/500;
+			double coeffHeight = ((double)Integer.parseInt(res[1]))/350;
+			
+			int a1 = (int) (actu.getTab()[0]*coeffWidth);
+			int b1 = (int) (actu.getTab()[1]*coeffHeight);
+			
+			int c1 = (int) (actu.getTab()[2]*coeffWidth);
+			int d1 = (int) (actu.getTab()[3]*coeffHeight);
+			
+			System.out.println(a1+"-"+b1+"-"+c1+"-"+d1);
+			
+			switch (actu.getTypeCommande()) {
+			case 'c':
+				this.modify(ProcessingType.CROPED,a1+" "+b1+" "+c1+" "+d1 );
+				break;
+			case 'f':
+				this.modify(ProcessingType.BLURRED,a1+" "+b1+" "+c1+" "+d1 );
+				break;
+	
+			default:
+				System.out.println("Non implemente");
+				break;
+			}
 		}
 		
 		if(currentFile.isModified()) {
+			System.out.println("REAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
 			new Thread() {
 				public void run (){
 					/**

@@ -14,6 +14,7 @@ public class ConcatPanel extends JPanel{
 
 	public ConcatPanel() {
 		setBackground(Color.black);
+		this.setSize(450,200);
 	}
 	
 	@Override

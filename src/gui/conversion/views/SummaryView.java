@@ -6,6 +6,7 @@ import java.util.*;
 import javax.swing.*;
 import files.files.SettingsFile;
 import files.enumerations.SettingType;
+import gui.general.Actions;
 import gui.general.Context;
 import gui.style.StylizedJButton;
 import gui.style.StylizedJPanel;
@@ -68,7 +69,16 @@ public final class SummaryView extends StylizedJPanel implements Observer {
 		outputFilePanel.add(outputFileText,BorderLayout.CENTER);
 		StylizedJButton convertButton = new StylizedJButton("Convertir");
 		outputFilePanel.add(convertButton,BorderLayout.SOUTH);
-		
+		convertButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				Actions.save();
+				
+			}
+			
+		});
 		outputFileText.addKeyListener(new KeyListener() {
 			public void keyPressed(KeyEvent e) {}
 			public void keyTyped(KeyEvent e) {}

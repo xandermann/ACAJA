@@ -53,13 +53,14 @@ public final class FFmpegRuntime {
 	 */
 	private static void install(){
 		String os = System.getProperty("os.name");
+		String S = File.separator;
 		if(os.contains("Linux")){
 			FFMPEG_PATH = new String[2];
-			FFMPEG_PATH[0] = File.separator+"bin"+File.separator+"bash";
+			FFMPEG_PATH[0] = S+"bin"+S+"bash";
 			FFMPEG_PATH[1] = "ffmpeg";
 		}else{
 			if(os.contains("Mac")) 
-				FFMPEG_PATH = new String[]{File.separator+"usr"+File.separator+"local"+File.separator+"bin"+File.separator+"ffmpeg"};
+				FFMPEG_PATH = new String[]{S+"usr"+S+"local"+S+"bin"+S+"ffmpeg"};
 			 else
 				FFMPEG_PATH = new String[]{"ffmpeg"};
 		}
@@ -92,10 +93,12 @@ public final class FFmpegRuntime {
 	 * 								commande RUN de type Runtime. 
 	 */
 	public static ProcessManager execute(List<String> ffmpegRequest){
-		
-		if(FFMPEG_PATH==null) install();
+		if(FFMPEG_PATH==null) 
+			install();
 		try {
-			for(int i = 0; i < FFMPEG_PATH.length; i++) ffmpegRequest.add(i, FFMPEG_PATH[i]);
+			for(int i = 0; i < FFMPEG_PATH.length; i++) 
+				ffmpegRequest.add(i, FFMPEG_PATH[i]);
+			
 			return new ProcessManager(RUN.exec(ffmpegRequest.toArray(new String[ffmpegRequest.size()])));
 		} catch (IOException e) {
 			return null;

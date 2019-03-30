@@ -507,13 +507,25 @@ public final class Request implements FlagConstants, ValueConstants{
 	//=======================================================================================================================
 	
 	
-	
+	/**
+	 * [ SUPPRIMER UN SON.]
+	 * 
+	 * @return La requete this. 
+	 */
 	public Request removeSound() {
 		askSomethingElse(FLAG_REMOVE_SOUND);
 		return this;
 	}
 	
-	public Request addSound() {
+	
+	/**
+	 * [ AJOUTER UN SON.]
+	 * 
+	 * @param inputSound		Le son a ajouter.
+	 * 
+	 * @return La requete this. 
+	 */
+	public Request addSound(String inputSound) {
 		return this;
 	}
 	

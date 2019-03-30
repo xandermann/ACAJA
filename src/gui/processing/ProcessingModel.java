@@ -192,11 +192,11 @@ public class ProcessingModel extends GeneralModel{
 		}
 
 		if(rotateLeft) {
-			this.modify(ProcessingType.ROTATE, "left");
+			this.modify(ProcessingType.ROTATED, "left");
 			
 		} 
 		if(rotateRight) {
-			this.modify(ProcessingType.ROTATE, "right");
+			this.modify(ProcessingType.ROTATED, "right");
 			
 		}
 		if(currentFile.isModified()) {

@@ -156,7 +156,7 @@ public class ProcessingWindow extends JFrame {
 		removeSound.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
-				model.modify(ProcessingType.REMOVE_SOUND, "");
+				model.modify(ProcessingType.REMOVED_SOUND, "");
 				Alert.shortAlert(Alert.INFO, "Suppression de la bande son de la video<br>prise en compte.");
 			}
 		});

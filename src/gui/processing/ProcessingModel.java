@@ -32,12 +32,14 @@ public class ProcessingModel extends GeneralModel{
 	private File minia;
 	private String destinationFolder;
 	private String message;
-	//private Form f;
+	private boolean rotateLeft, rotateRight;
 	
 	public ProcessingModel() {
 		Context.$M = this;
-		this.fUp = false;
-		this.cropUp = false;
+		fUp = false;
+		cropUp = false;
+		setRotateLeft(false);
+		setRotateRight(false);
 		setMessage("Veuillez importer votre premier fichier");
 		listRect = new ArrayList<>();
 		images = new ArrayList<SelectableFile>();
@@ -186,8 +188,17 @@ public class ProcessingModel extends GeneralModel{
 				System.out.println("Non implemente");
 				break;
 			}
+			
 		}
-		
+
+		if(rotateLeft) {
+			this.modify(ProcessingType.ROTATE, "left");
+			
+		} 
+		if(rotateRight) {
+			this.modify(ProcessingType.ROTATE, "right");
+			
+		}
 		if(currentFile.isModified()) {
 			System.out.println("REAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
 			new Thread() {
@@ -266,6 +277,28 @@ public class ProcessingModel extends GeneralModel{
 	
 	public void setMessage(String message) {
 		this.message = message;
+		sendChanges();
+	}
+
+
+	public boolean isRotateLeft() {
+		return rotateLeft;
+	}
+
+
+	public void setRotateLeft(boolean rotateLeft) {
+		this.rotateLeft = rotateLeft;
+		sendChanges();
+	}
+
+
+	public boolean isRotateRight() {
+		return rotateRight;
+	}
+
+
+	public void setRotateRight(boolean rotateRight) {
+		this.rotateRight = rotateRight;
 		sendChanges();
 	}
 }

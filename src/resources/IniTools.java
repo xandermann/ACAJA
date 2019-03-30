@@ -4,13 +4,13 @@ import java.io.*;
 import java.util.*;
 
 /**
- * [ GERER DES FICHIERS .ini. ]  
+ * [ GERER DES FICHIERS [---].ini. ]  
  */
 public final class IniTools {
 	/**
 	 * [ INI VERS MAP. ]
 	 * 
-	 * @param ini		Ini a convertir en map.
+	 * @param ini		[---].ini a convertir en map.
 	 * 
 	 * @return			Map issue de la conversion.
 	 */
@@ -19,10 +19,10 @@ public final class IniTools {
 			throw new NullPointerException("ini null !");
 		
 		if(!ini.getName().endsWith(".ini")) 
-			throw new IllegalArgumentException("Attendu : un fichier .ini.");
+			throw new IllegalArgumentException("Attendu : un fichier [---].ini.");
 		
 		if(!ini.exists()) 
-			throw new IllegalArgumentException("Fichier ini inexistant !");
+			throw new IllegalArgumentException("Fichier [---].ini inexistant !");
 		
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(ini));
@@ -50,7 +50,7 @@ public final class IniTools {
 	 * 
 	 * @param toIni		Map a convertir.
 	 * 
-	 * @param ini		Ini a creer.
+	 * @param ini		[---].ini a creer.
 	 * 
 	 * @return 			Vaut true si conversion reussie
 	 */
@@ -62,10 +62,10 @@ public final class IniTools {
 			throw new NullPointerException("ini null !");
 		
 		if(!ini.getName().endsWith(".ini")) 
-			throw new IllegalArgumentException("Attendu : un fichier .ini.");
+			throw new IllegalArgumentException("Attendu : un fichier [---].ini.");
 		
 		if(!ini.exists()) 
-			throw new IllegalArgumentException("Fichier ini inexistant !");
+			throw new IllegalArgumentException("Fichier [---].ini inexistant !");
 		
 		try {
 			BufferedWriter writer = new BufferedWriter(new FileWriter(ini));

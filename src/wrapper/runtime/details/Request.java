@@ -464,7 +464,10 @@ public final class Request implements FlagConstants, ValueConstants{
 	 */
 	public Request concat(String[] inputs) {	
 		for(String tmp : inputs)  {
-			if(tmp==null) throw new NullPointerException("Un des inputs est null !");
+			if(tmp==null) 
+				throw new NullPointerException("Un des inputs est null !");
+			if(!new File(tmp).exists())
+				throw new IllegalArgumentException("Un des inputs est inexistant !");
 		} 
 		
 		try {
@@ -478,7 +481,7 @@ public final class Request implements FlagConstants, ValueConstants{
 			
 			request.clear();
 			askSomethingElse(new String[]{FLAG_CONCAT[0], FLAG_CONCAT[1], FLAG_CONCAT[2], FLAG_CONCAT[3], FLAG_CONCAT[4],
-										inputsFile.getAbsolutePath(), FLAG_CONCAT[5], FLAG_CONCAT[6]});
+							inputsFile.getAbsolutePath(), FLAG_CONCAT[5], FLAG_CONCAT[6]});
 		} catch (IOException ioe) {}
 		
 		return this;
@@ -526,6 +529,14 @@ public final class Request implements FlagConstants, ValueConstants{
 	 * @return La requete this. 
 	 */
 	public Request addSound(String inputSound) {
+		if(inputSound==null) 
+			throw new NullPointerException("inputSound est null !");
+		
+		if(!new File(inputSound).exists())
+			throw new IllegalArgumentException("inputSound est inexistant !");
+		
+		askSomethingElse(new String[]{FLAG_ADD_SOUND[0], inputSound, FLAG_ADD_SOUND[1], FLAG_ADD_SOUND[2], 
+						FLAG_ADD_SOUND[3], FLAG_ADD_SOUND[4], FLAG_ADD_SOUND[5], FLAG_ADD_SOUND[6]});
 		return this;
 	}
 	

@@ -32,13 +32,13 @@ public enum ProcessingType implements OperationType {
 	/**
 	 * Parametre du type suppression du son.
 	 */
-	REMOVE_SOUND, 
+	REMOVED_SOUND, 
 	/**
 	 * Parametre du type ajout de son.
 	 */
-	ADD_SOUND,
+	ADDED_SOUND,
 	/**
 	 * Parametre pour rotation
 	 */
-	 ROTATE
+	 ROTATED
 }

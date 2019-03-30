@@ -121,6 +121,10 @@ public final class UserRequests{
 				case REMOVE_SOUND :
 					request.removeSound();
 				break;
+				case ROTATE :
+					if(newValue.equals("left"))	request.rotateLeft();
+					if(newValue.equals("right")) request.rotateRight();
+				break;
 			}
 		}
 		

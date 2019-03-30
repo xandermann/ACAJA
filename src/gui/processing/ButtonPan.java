@@ -16,6 +16,8 @@ public class ButtonPan extends JPanel {
 	
 	private JToggleButton flouButton;
 	private JToggleButton rectangle;
+	private JToggleButton pivoteG1;
+	private JToggleButton pivoteD1;
 	
 	/**
 	 * constructeur du panel de bouton central
@@ -24,13 +26,12 @@ public class ButtonPan extends JPanel {
 		this.setLayout(new GridLayout(3, 2, 1, 1));
 		rectangle = new JToggleButton(new ImageIcon(resources.ResourceConstants.BUTTON_RECT));
 		flouButton = new JToggleButton(new ImageIcon(resources.ResourceConstants.BLURRED));
-		JButton pivoteD1 = new JButton(new ImageIcon(resources.ResourceConstants.LEFT_ARROW));
-		JButton pivoteG1 = new JButton(new ImageIcon(resources.ResourceConstants.RIGHT_ARROW));
+		pivoteG1 = new JToggleButton(new ImageIcon(resources.ResourceConstants.LEFT_ARROW));
+		pivoteD1 = new JToggleButton(new ImageIcon(resources.ResourceConstants.RIGHT_ARROW));
 		
 		JButton undo = new JButton(new ImageIcon(resources.ResourceConstants.LEFT_ARROW));
 		
 		rectangle.addActionListener(new ActionListener() {
-			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				cropIsSelected();
@@ -38,15 +39,28 @@ public class ButtonPan extends JPanel {
 		});
 		
 		flouButton.addActionListener(new ActionListener() {
-			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				flouIsSelected();
 			}
 		});
 		
-		undo.addActionListener(new ActionListener() {
+		pivoteG1.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				rotateLeftActivated();
+			}
+		});
+		
+		pivoteD1.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				rotateRightActivated();
+			}
 			
+		});
+		
+		undo.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				((ProcessingModel)Context.$M).suppLastForm();
@@ -58,16 +72,42 @@ public class ButtonPan extends JPanel {
 		pivoteD1.setPreferredSize(new Dimension(35, 35));
 		pivoteG1.setPreferredSize(new Dimension(35, 35));
 		undo.setPreferredSize(new Dimension(35, 35));
-/*
-		pivoteD1.setEnabled(false);
-		pivoteG1.setEnabled(false);
-		*/
+
 		this.add(rectangle);
 		this.add(flouButton);
-		this.add(pivoteD1);
 		this.add(pivoteG1);
+		this.add(pivoteD1);
 		this.add(undo);
 		this.repaint();
+	}
+	
+	public void rotateLeftActivated() {
+		if(((ProcessingModel)Context.$M).getCurrentFile() != null) {
+		((ProcessingModel)Context.$M).setMessage("Pivoter a gauche");
+		if(!pivoteG1.isSelected()) {
+			// Annuler le pivot de la video
+			pivoteD1.setEnabled(true);
+			((ProcessingModel)Context.$M).setRotateLeft(false);
+		} else {
+			// Activer les actions pour faire pivoter la video
+			pivoteD1.setEnabled(false);
+			((ProcessingModel)Context.$M).setRotateLeft(true);
+		}
+		}else pivoteG1.setSelected(false);
+	}
+	
+	public void rotateRightActivated() {
+		if(((ProcessingModel)Context.$M).getCurrentFile() != null) {
+			if(!pivoteD1.isSelected()) {
+				// Annuler le pivot de la video
+				pivoteG1.setEnabled(true);
+				((ProcessingModel)Context.$M).setRotateRight(false);
+			} else {
+				// Activer les actions pour faire pivoter la video
+				pivoteG1.setEnabled(false);
+				((ProcessingModel)Context.$M).setRotateRight(true);
+			}
+		} else pivoteD1.setSelected(false);
 	}
 	
 	public void cropIsSelected() {

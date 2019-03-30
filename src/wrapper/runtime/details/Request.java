@@ -347,12 +347,22 @@ public final class Request implements FlagConstants, ValueConstants{
 	}
 	
 	/**
-	 * [ PRIVOTER DE 90 DEGRES. ]
+	 * [ PIVOTER DE 90 DEGRES A GAUCHE ]
 	 * 
 	 * @return La requete this. 
 	 */
-	public Request rotate() {
-		askSomethingElse(FLAG_ROTATE);
+	public Request rotateLeft() {
+		askSomethingElse(new String[] {FLAG_ROTATE[0], FLAG_ROTATE[2]});
+		return this;
+	}
+	
+	/**
+	 * [ PIVOTER DE 90 DEGRES A DROITE ]
+	 * 
+	 * @return La requete this. 
+	 */
+	public Request rotateRight() {
+		askSomethingElse(new String[] {FLAG_ROTATE[0], FLAG_ROTATE[1]});
 		return this;
 	}
 	

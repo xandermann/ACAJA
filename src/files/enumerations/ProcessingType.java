@@ -36,5 +36,9 @@ public enum ProcessingType implements OperationType {
 	/**
 	 * Parametre du type ajout de son.
 	 */
-	ADD_SOUND
+	ADD_SOUND,
+	/**
+	 * Parametre pour rotation
+	 */
+	 ROTATE
 }

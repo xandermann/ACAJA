@@ -14,7 +14,7 @@ public final class IniTools {
 	 * 
 	 * @return			Map issue de la conversion.
 	 */
-	public static Map<String, String> iniToMap(File ini) {
+	public static Map<String, String> toMap(File ini) {
 		if(ini==null) 
 			throw new NullPointerException("ini null !");
 		
@@ -54,7 +54,7 @@ public final class IniTools {
 	 * 
 	 * @return 			Vaut true si conversion reussie
 	 */
-	public static boolean mapToIni(Map<String, String> toIni, File ini) {
+	public static boolean toIni(Map<String, String> toIni, File ini) {
 		if(toIni==null) 
 			throw new NullPointerException("toIni null !");
 	

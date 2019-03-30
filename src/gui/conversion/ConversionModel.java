@@ -234,13 +234,13 @@ public final class ConversionModel extends GeneralModel{
 	 */
 	public void clear() {
 		if(files.isEmpty()) 
-			Alert.shortAlert(Alert.INFO, "La bibliotheque est deja vide.");
+			Alert.longAlert(Alert.INFO, "La bibliotheque est deja vide.");
 		else {
 			currentFile = null;
 			files.clear();
 			sendChanges();
 			((ConversionWindow) Context.$W).redrawEmpty();
-			Alert.longAlert(Alert.SUCCESS, "Bibliotheque videe avec succes.");
+			Alert.shortAlert(Alert.SUCCESS, "Bibliotheque videe avec succes.");
 		}
 	}
 

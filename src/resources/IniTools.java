@@ -30,9 +30,14 @@ public final class IniTools {
 			String line = null;
 			
 			while((line=reader.readLine()) != null) {
-				if(!line.contains("="))
-					throw new IllegalArgumentException("Fichier ini synthaxiquement incorrect.");
+				if(StringTools.countOccurences(line, '=') != 1)
+					throw new IllegalArgumentException("Fichier [---].ini synthaxiquement incorrect.");
+				
 				String[] extracted = line.split("=");
+				
+				if(extracted[0].equals(""))
+					throw new IllegalArgumentException("Fichier [---].ini synthaxiquement incorrect.");
+				
 				settings.put(extracted[0], extracted[1]);
 			}
 			

@@ -156,10 +156,14 @@ public final class SystemRequests{
 	 * @throws UnfindableResourceException		Exception sur les ressources introuvables.  
 	 */
 	public static File askFrame(SelectableFile file, String time) throws IncorrectFileException, UnfindableResourceException {
-		if(file==null) throw new NullPointerException("File null !");
-		if(!file.isVideo()) throw new IncorrectFileException(IncorrectFileException.REQUIRED_TYPE_VIDEO);
-		if(!file.isVideo()) throw new IllegalArgumentException("SelectableFile null !");
-		if(time==null) throw new NullPointerException("Time null !");
+		if(file==null) 
+			throw new NullPointerException("File null !");
+		if(!file.isVideo()) 
+			throw new IncorrectFileException(IncorrectFileException.REQUIRED_TYPE_VIDEO);
+		if(!file.isVideo()) 
+			throw new IllegalArgumentException("SelectableFile null !");
+		if(time==null)
+			throw new NullPointerException("Time null !");
 		
 		String output = NamesSpaceManager._temporary();
 		
@@ -184,11 +188,16 @@ public final class SystemRequests{
 	 * @throws UnfindableResourceException		Exception sur les ressources introuvables. 
 	 */
 	public static File askFrame(SelectableFile file, String time, int width, int height) throws IncorrectFileException, UnfindableResourceException {
-		if(file==null) throw new NullPointerException("File null !");
-		if(!file.isVideo()) throw new IncorrectFileException(IncorrectFileException.REQUIRED_TYPE_VIDEO);
-		if(time==null) throw new NullPointerException("Time null !");
-		if(width<=0) throw new IllegalArgumentException("Width negative ou nulle !");
-		if(height<=0) throw new IllegalArgumentException("Height negative ou nulle !");
+		if(file==null) 
+			throw new NullPointerException("File null !");
+		if(!file.isVideo()) 
+			throw new IncorrectFileException(IncorrectFileException.REQUIRED_TYPE_VIDEO);
+		if(time==null) 
+			throw new NullPointerException("Time null !");
+		if(width<=0) 
+			throw new IllegalArgumentException("Width negative ou nulle !");
+		if(height<=0) 
+			throw new IllegalArgumentException("Height negative ou nulle !");
 		
 		String output = NamesSpaceManager._temporary();
 		new Request(file.getSourceFileFullName(), output)

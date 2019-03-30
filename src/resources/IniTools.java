@@ -18,8 +18,8 @@ public final class IniTools {
 		if(ini==null) 
 			throw new NullPointerException("ini null !");
 		
-		if(!ini.getName().endsWith("ini")) 
-			throw new IllegalArgumentException("Attendu : un fichier ini.");
+		if(!ini.getName().endsWith(".ini")) 
+			throw new IllegalArgumentException("Attendu : un fichier .ini.");
 		
 		if(!ini.exists()) 
 			throw new IllegalArgumentException("Fichier ini inexistant !");
@@ -61,8 +61,8 @@ public final class IniTools {
 		if(ini==null) 
 			throw new NullPointerException("ini null !");
 		
-		if(!ini.getName().endsWith("ini")) 
-			throw new IllegalArgumentException("Attendu : un fichier ini.");
+		if(!ini.getName().endsWith(".ini")) 
+			throw new IllegalArgumentException("Attendu : un fichier .ini.");
 		
 		if(!ini.exists()) 
 			throw new IllegalArgumentException("Fichier ini inexistant !");

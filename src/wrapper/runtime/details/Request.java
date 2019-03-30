@@ -469,13 +469,16 @@ public final class Request implements FlagConstants, ValueConstants{
 		
 		try {
 			File inputsFile = new File(ResourceConstants.TEMPORARY_FILES_FULL_PATH + "inputs.txt");
+			if(inputsFile.exists()) inputsFile.delete();
+			
 			Writer writer = new BufferedWriter(new FileWriter(inputsFile));
 			if(input != null) writer.write("file '"+input+"'\n");
 			for(String tmp : inputs) writer.write("file '"+tmp+"'\n");
 			writer.close();
 			
 			request.clear();
-			askSomethingElse(new String[]{FLAG_CONCAT[0], FLAG_CONCAT[1], FLAG_CONCAT[2], inputsFile.getAbsolutePath(), FLAG_CONCAT[3], FLAG_CONCAT[4]});
+			askSomethingElse(new String[]{FLAG_CONCAT[0], FLAG_CONCAT[1], FLAG_CONCAT[2], FLAG_CONCAT[3], FLAG_CONCAT[4],
+										inputsFile.getAbsolutePath(), FLAG_CONCAT[5], FLAG_CONCAT[6]});
 		} catch (IOException ioe) {}
 		
 		return this;

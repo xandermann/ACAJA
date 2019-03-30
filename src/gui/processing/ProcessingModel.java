@@ -102,7 +102,7 @@ public class ProcessingModel extends GeneralModel{
 	public void setCurrentFile(SelectableFile currentFile) {
 		this.currentFile = (ProcessingFile) currentFile;
 		this.setMinia(this.currentFile.getThumbnail());
-		setMessage("Fichier chargé avec succes !");
+		setMessage("Fichier charge avec succes !");
 		sendChanges();
 	}
 

@@ -38,7 +38,7 @@ public class ConcatWindow extends JFrame {
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setBackground(Color.lightGray);
 		WindowTools.showLogo(this);
-		this.setTitle("Assembleur de vidéo");
+		this.setTitle("Assembleur de video");
 		this.setSize(450, 450);
 		this.setLocationRelativeTo(null);
 		//this.setResizable(false);
@@ -74,7 +74,7 @@ public class ConcatWindow extends JFrame {
 		
 		StylizedJMenuItem importFolder = new StylizedJMenuItem("Importer un dossier");
 		fileMenu.add(importFolder);
-		importFolder.setToolTipText("Ici vous pouvez ajouter plusieurs fichiers dans la biblioth�que.");
+		importFolder.setToolTipText("Ici vous pouvez ajouter plusieurs fichiers dans la bibliotheque.");
 		importFolder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				ArrayList<File> f = JFileChooserManager.chooseDirectoryAndListSonFiles();
@@ -98,15 +98,15 @@ public class ConcatWindow extends JFrame {
 	
 	public JPanel createJPanel() {
 		JPanel j = new JPanel();
-		JButton valider = new JButton("Assembler les vidéos");
+		JButton valider = new JButton("Assembler les videos");
 		valider.setSize(100, 50);
 		valider.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(!listOfFile.isEmpty()) {
-					//model.getCurrentFile().cancelAll();
 					ProcessingFile f1 = listOfFile.get(0);
+					listOfFile.remove(0);
 					model.setCurrentFile(f1);
 					String s = "";
 					for(ProcessingFile f : listOfFile) {
@@ -124,7 +124,6 @@ public class ConcatWindow extends JFrame {
 						e1.printStackTrace();
 					}
 					System.out.println("fait");
-					
 				}
 			}
 				

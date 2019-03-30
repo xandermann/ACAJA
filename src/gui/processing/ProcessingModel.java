@@ -288,7 +288,6 @@ public class ProcessingModel extends GeneralModel{
 
 	public void setRotateLeft(boolean rotateLeft) {
 		this.rotateLeft = rotateLeft;
-		sendChanges();
 	}
 
 
@@ -299,6 +298,5 @@ public class ProcessingModel extends GeneralModel{
 
 	public void setRotateRight(boolean rotateRight) {
 		this.rotateRight = rotateRight;
-		sendChanges();
 	}
 }

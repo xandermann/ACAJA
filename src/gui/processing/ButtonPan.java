@@ -32,7 +32,6 @@ public class ButtonPan extends JPanel {
 		JButton undo = new JButton(new ImageIcon(resources.ResourceConstants.LEFT_ARROW));
 		
 		rectangle.addActionListener(new ActionListener() {
-			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				cropIsSelected();
@@ -40,7 +39,6 @@ public class ButtonPan extends JPanel {
 		});
 		
 		flouButton.addActionListener(new ActionListener() {
-			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				flouIsSelected();
@@ -55,7 +53,6 @@ public class ButtonPan extends JPanel {
 		});
 		
 		pivoteD1.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				rotateRightActivated();
@@ -64,7 +61,6 @@ public class ButtonPan extends JPanel {
 		});
 		
 		undo.addActionListener(new ActionListener() {
-			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				((ProcessingModel)Context.$M).suppLastForm();
@@ -76,10 +72,7 @@ public class ButtonPan extends JPanel {
 		pivoteD1.setPreferredSize(new Dimension(35, 35));
 		pivoteG1.setPreferredSize(new Dimension(35, 35));
 		undo.setPreferredSize(new Dimension(35, 35));
-/*
-		pivoteD1.setEnabled(false);
-		pivoteG1.setEnabled(false);
-		*/
+
 		this.add(rectangle);
 		this.add(flouButton);
 		this.add(pivoteG1);
@@ -89,6 +82,7 @@ public class ButtonPan extends JPanel {
 	}
 	
 	public void rotateLeftActivated() {
+		if(((ProcessingModel)Context.$M).getCurrentFile() != null) {
 		((ProcessingModel)Context.$M).setMessage("Pivoter a gauche");
 		if(!pivoteG1.isSelected()) {
 			// Annuler le pivot de la video
@@ -99,22 +93,23 @@ public class ButtonPan extends JPanel {
 			pivoteD1.setEnabled(false);
 			((ProcessingModel)Context.$M).setRotateLeft(true);
 		}
-		System.out.println("Verification : rotateLeft("+((ProcessingModel)Context.$M).isRotateLeft()+") __ rotateRight("+((ProcessingModel)Context.$M).isRotateRight()+")");
+		}else pivoteG1.setSelected(false);
 	}
 	
 	public void rotateRightActivated() {
-		((ProcessingModel)Context.$M).setMessage("Pivoter a droite");
-		if(!pivoteD1.isSelected()) {
-			// Annuler le pivot de la video
-			pivoteG1.setEnabled(true);
-			((ProcessingModel)Context.$M).setRotateRight(false);
-		} else {
-			// Activer les actions pour faire pivoter la video
-			pivoteG1.setEnabled(false);
-			((ProcessingModel)Context.$M).setRotateRight(true);
-		}
-		System.out.println("Verification : rotateLeft("+((ProcessingModel)Context.$M).isRotateLeft()+") __ rotateRight("+((ProcessingModel)Context.$M).isRotateRight()+")");
+		if(((ProcessingModel)Context.$M).getCurrentFile() != null) {
+			if(!pivoteD1.isSelected()) {
+				// Annuler le pivot de la video
+				pivoteG1.setEnabled(true);
+				((ProcessingModel)Context.$M).setRotateRight(false);
+			} else {
+				// Activer les actions pour faire pivoter la video
+				pivoteG1.setEnabled(false);
+				((ProcessingModel)Context.$M).setRotateRight(true);
+			}
+		} else pivoteD1.setSelected(false);
 	}
+	
 	public void cropIsSelected() {
 		((ProcessingModel)Context.$M).setMessage("Fonction de Crop activée !");
 		flouButton.setSelected(false);

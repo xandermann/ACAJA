@@ -463,12 +463,8 @@ public final class Request implements FlagConstants, ValueConstants{
 	 * @return La requete this. 
 	 */
 	public Request concat(String[] inputs) {	
-		for(String tmp : inputs)  {
-			if(tmp==null) 
-				throw new NullPointerException("Un des inputs est null !");
-			if(!new File(tmp).exists())
-				throw new IllegalArgumentException("Un des inputs est inexistant !");
-		} 
+		if(inputs==null) 
+			throw new NullPointerException("inputs est null !");
 		
 		try {
 			File inputsFile = new File(ResourceConstants.TEMPORARY_FILES_FULL_PATH + "inputs.txt");
@@ -476,7 +472,15 @@ public final class Request implements FlagConstants, ValueConstants{
 			
 			Writer writer = new BufferedWriter(new FileWriter(inputsFile));
 			if(input != null) writer.write("file '"+input+"'\n");
-			for(String tmp : inputs) writer.write("file '"+tmp+"'\n");
+			for(String tmp : inputs) {
+				if(tmp==null) 
+					throw new NullPointerException("Un des inputs est null !");
+				
+				if(!new File(tmp).exists())
+					throw new IllegalArgumentException("Un des inputs est inexistant !");
+				
+				writer.write("file '"+tmp+"'\n");
+			}
 			writer.close();
 			
 			request.clear();

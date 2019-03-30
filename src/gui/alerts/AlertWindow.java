@@ -37,6 +37,7 @@ public final class AlertWindow extends StylizedJFrame implements ATConstants{
 		setSize(300, 120);
 		setResizable(false);
 		setLocationRelativeTo(null);
+		setUndecorated(true);
 		
 		
 		Color theme = title.equals(FAILURE) ? Color.RED : 
@@ -96,8 +97,7 @@ public final class AlertWindow extends StylizedJFrame implements ATConstants{
 		});
 		setFocusable(true);
 		requestFocus();
-
-		setUndecorated(true);
+		
 		
 		WindowTools.showLogo(this);
 	}

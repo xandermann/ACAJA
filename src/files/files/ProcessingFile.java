@@ -86,7 +86,12 @@ public final class ProcessingFile extends SelectableFile implements Modifiable {
 	 *               traitements.
 	 */
 	public void modify(OperationType typeProcess, String process) {
+		if(typeProcess==null)
+			throw new NullPointerException("Cle null !");
+		if(process==null)
+			throw new NullPointerException("Valeur null !");
 		performedProcessings.put((ProcessingType) typeProcess, process);
+		
 	}
 
 	/**
@@ -103,7 +108,19 @@ public final class ProcessingFile extends SelectableFile implements Modifiable {
 	
 	
 	/**
-	 * [ VIDER LA TABLE DES TRAITEMENTS. ]
+	 * [ ANNULER UN TRAITEMENT. ]
+	 */
+	public void cancel(ProcessingType typeProcess) {
+		if(typeProcess==null)
+			throw new NullPointerException("Cle null !");
+		if(!performedProcessings.containsKey(typeProcess))
+			throw new IllegalArgumentException("Cle inexistante dans la table !");
+		performedProcessings.remove(typeProcess);
+	}
+	
+	
+	/**
+	 * [ ANNULER TOUS LES TRAITEMENTS. ]
 	 */
 	public void cancelAll() {
 		performedProcessings.clear();

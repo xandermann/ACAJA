@@ -18,6 +18,8 @@ public final class UnfindableResourceException extends Exception {
 
 	public final static String UAITR_TEMPORARY_FILES = UAITR_PREFIX + "des fichiers temporaires" + UAITR_SUFFIX;
 
+	public final static String UAITR_SETTINGS = UAITR_PREFIX + "des fichiers parametres" + UAITR_SUFFIX;
+	
 	/**
 	 * [ CONSTRUCTEUR. ]
 	 * 

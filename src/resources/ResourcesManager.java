@@ -110,6 +110,19 @@ public final class ResourcesManager implements ResourceConstants{
 	}
 	
 	
+	/**
+	 * [ VERIFIER L'EXISTENCE DU REPERTOIRE PARENT DES PARAMETRES. ]
+	 * 
+	 * @see #checkDirectory 
+	 * 
+	 * @return boolean		Vaut true si le repertoire existe ou a reussi a etre recreer. 
+	 */
+	public static boolean checkSettings() {
+		return checkDirectory(SETTINGS);
+	}
+	
+	
+	
 	//=======================================================================================================================
 	//=======================================================================================================================
 	
@@ -283,6 +296,18 @@ public final class ResourcesManager implements ResourceConstants{
 			throw new UnfindableResourceException(UnfindableResourceException.UAITR_TEMPORARY_FILES);
 	}
 
+	
+	/**
+	 * [ LEVE UNE EXCEPTION SI ABSENCE DU REPERTOIRE SETTINGS\. ] 
+	 * 
+	 * @see #checkSettings
+	 * 
+	 * @throws UnfindableResourceException		Exception sur les ressources introuvables. 
+	 */
+	public static void secureSettings() throws UnfindableResourceException {
+		if(!checkSettings())
+			throw new UnfindableResourceException(UnfindableResourceException.UAITR_SETTINGS);
+	}
 	
 	//=======================================================================================================================
 	//=======================================================================================================================

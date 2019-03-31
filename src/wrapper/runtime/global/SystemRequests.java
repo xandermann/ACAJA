@@ -30,11 +30,24 @@ public final class SystemRequests{
 	//=======================================================================================================================
 	//=======================================================================================================================
 	
-	
+	/**
+	 * CONNAITRE LA RESOLUTION DE LA VIDEO.
+	 * 
+	 * @param file									Le fichier dont on souhaite connaitre la resolution.
+	 * 
+	 * @return										La resolution.
+	 * 
+	 * @throws IncorrectFileException 				Exception sur les ressources introuvables.  
+	 * 
+	 * @throws UnfindableResourceException			Exception sur les ressources introuvables.
+	 */
 	public static String askResolution(ProcessingFile file) throws IncorrectFileException, UnfindableResourceException{
-		if(file==null) throw new NullPointerException("File null !");
-		if(!file.isVideo()) throw new IncorrectFileException(IncorrectFileException.REQUIRED_TYPE_VIDEO);
-		return MetadataFilter.findVideoMetadata(MetadataFilter.findAllMetadata((new Request(file.getSourceFileFullName())).result()), 2);	
+		if(file==null) 
+			throw new NullPointerException("File null !");
+		if(!file.isVideo()) 
+			throw new IncorrectFileException(IncorrectFileException.REQUIRED_TYPE_VIDEO);
+		return MetadataFilter.findVideoMetadata(
+				MetadataFilter.findAllMetadata((new Request(file.getSourceFileFullName())).result()), 2);	
 	}
 	
 	
@@ -59,12 +72,15 @@ public final class SystemRequests{
 	 * @throws UnfindableResourceException			Exception sur les ressources introuvables.
 	*/
 	public static void askMetadata(SettingsFile file) throws IncorrectFileException, UnfindableResourceException{
-		if(file==null) throw new NullPointerException("File null !");
-		if(!file.containsAudio()) throw new IncorrectFileException(IncorrectFileException.REQUIRED_TYPE_VIDEO_OR_SOUND);
+		if(file==null) 
+			throw new NullPointerException("File null !");
+		if(!file.containsAudio()) 
+			throw new IncorrectFileException(IncorrectFileException.REQUIRED_TYPE_VIDEO_OR_SOUND);
 		/**
 		 * EXTRACTION DES DONNEES.
 		 */
-		String metadata = MetadataFilter.findAllMetadata((new Request(file.getSourceFileFullName())).result());
+		String metadata = 
+				MetadataFilter.findAllMetadata((new Request(file.getSourceFileFullName())).result());
 		/**
 		 * INITIALISATION DES SETTINGS DU FICHEIR A PARTIR DES METADONNEES.
 		 */
@@ -78,8 +94,8 @@ public final class SystemRequests{
 		}	
 	    fileMetadata.put(SettingType.AUDIO_CODEC, MetadataFilter.findAudioMetadata(metadata, 0));
 		fileMetadata.put(SettingType.SAMPLING_RATE, MetadataFilter.findAudioMetadata(metadata, 1));
-		String nbChannels = MetadataFilter.findAudioMetadata(metadata, 2).contains("mono") ? "1" : "2";
-		fileMetadata.put(SettingType.NUMBER_AUDIO_CHANNELS, nbChannels);
+		fileMetadata.put(SettingType.NUMBER_AUDIO_CHANNELS, 
+				MetadataFilter.findAudioMetadata(metadata, 2).contains("mono") ? "1" : "2");
 		fileMetadata.put(SettingType.AUDIO_BITRATE, MetadataFilter.findAudioMetadata(metadata, 4));
 		file.setDuration(MetadataFilter.findDuration(metadata));
 	}
@@ -140,16 +156,22 @@ public final class SystemRequests{
 	 * @throws UnfindableResourceException		Exception sur les ressources introuvables.  
 	 */
 	public static File askFrame(SelectableFile file, String time) throws IncorrectFileException, UnfindableResourceException {
-		if(file==null) throw new NullPointerException("File null !");
-		if(!file.isVideo()) throw new IncorrectFileException(IncorrectFileException.REQUIRED_TYPE_VIDEO);
-		if(!file.isVideo()) throw new IllegalArgumentException("SelectableFile null !");
-		if(time==null) throw new NullPointerException("Time null !");
+		if(file==null) 
+			throw new NullPointerException("File null !");
+		if(!file.isVideo()) 
+			throw new IncorrectFileException(IncorrectFileException.REQUIRED_TYPE_VIDEO);
+		if(!file.isVideo()) 
+			throw new IllegalArgumentException("SelectableFile null !");
+		if(time==null)
+			throw new NullPointerException("Time null !");
 		
-		String input = file.getSourceFileFullName();
 		String output = NamesSpaceManager._temporary();
-		(new Request(input, output)).frame(time).make();
 		
-		return (new File(output));
+		new Request(file.getSourceFileFullName(), output)
+		.frame(time)
+		.make();
+		
+		return new File(output);
 	}
 	
 	/**
@@ -166,17 +188,24 @@ public final class SystemRequests{
 	 * @throws UnfindableResourceException		Exception sur les ressources introuvables. 
 	 */
 	public static File askFrame(SelectableFile file, String time, int width, int height) throws IncorrectFileException, UnfindableResourceException {
-		if(file==null) throw new NullPointerException("File null !");
-		if(!file.isVideo()) throw new IncorrectFileException(IncorrectFileException.REQUIRED_TYPE_VIDEO);
-		if(time==null) throw new NullPointerException("Time null !");
-		if(width<=0) throw new IllegalArgumentException("Width negative ou nulle !");
-		if(height<=0) throw new IllegalArgumentException("Height negative ou nulle !");
+		if(file==null) 
+			throw new NullPointerException("File null !");
+		if(!file.isVideo()) 
+			throw new IncorrectFileException(IncorrectFileException.REQUIRED_TYPE_VIDEO);
+		if(time==null) 
+			throw new NullPointerException("Time null !");
+		if(width<=0) 
+			throw new IllegalArgumentException("Width negative ou nulle !");
+		if(height<=0) 
+			throw new IllegalArgumentException("Height negative ou nulle !");
 		
-		String input = file.getSourceFileFullName();
 		String output = NamesSpaceManager._temporary();
-		(new Request(input, output)).frame(time).resize(width+"", height+"").make();
+		new Request(file.getSourceFileFullName(), output)
+		.frame(time)
+		.resize(width+"", height+"")
+		.make();
 		
-		return (new File(output));
+		return new File(output);
 	}
 	
 	

@@ -34,9 +34,7 @@ public final class WindowTools {
 	public static void showLogo(JFrame window) {
 		try {
 			window.setIconImage(ImageIO.read(ResourceConstants.ACAJA_LOGO));
-		} catch (IOException ioe) {
-			JOptionPane.showMessageDialog(null, ioe.getMessage());
-		}
+		} catch (IOException ioe) {}
 	}
 
 	// =======================================================================================================================

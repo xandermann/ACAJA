@@ -12,6 +12,8 @@ package wrapper.language;
 public interface FlagConstants {
 	public final static String FLAG_INPUT = "-i";
 	
+	public final static String[] FLAG_ACCEPT_ABSOLUTE_PATH = {"-safe", "0"};
+	
 	public final static String FLAG_SEPARATOR = ":";
 	public final static String S = FLAG_SEPARATOR;
 	
@@ -43,7 +45,7 @@ public interface FlagConstants {
 	public final static String[] FLAG_RESIZE = {FLAG_MODIFY, "scale="};
 	public final static String[] FLAG_CROP = {"-filter:v","crop="};
 	public final static String[] FLAG_PERIOD = {"-ss", "-t"};
-	public final static String[] FLAG_ROTATE = {FLAG_MODIFY, "\"transpose=1\""};
+	public final static String[] FLAG_ROTATE = {FLAG_MODIFY, "transpose=1", "transpose=2"};
 	public final static String[] FLAG_BLUR = {"-filter_complex", 
 											  "[0:v]crop=", ",boxblur=10[fg];[0:v][fg]overlay=", "[v]",
 											  FLAG_MAP, "[v]", FLAG_MAP, "0"+S+"a", 
@@ -51,7 +53,8 @@ public interface FlagConstants {
 										      "-movflags", "+faststart"};
 	
 	
-	public final static String[] FLAG_CONCAT = {"-f", "concat", FLAG_INPUT, FLAG_FILTER, FLAG_COPY};
+	public final static String[] FLAG_CONCAT = {FLAG_ACCEPT_ABSOLUTE_PATH[0], FLAG_ACCEPT_ABSOLUTE_PATH[1],
+												"-f", "concat", FLAG_INPUT, FLAG_FILTER, FLAG_COPY};
 	
 	public final static String[] FLAG_REMOVE_SOUND = {FLAG_FILTER, FLAG_COPY, "-an"};
 	public final static String[] FLAG_ADD_SOUND = {FLAG_INPUT, FLAG_FILTER, FLAG_COPY, FLAG_MAP, "0"+S+"0", FLAG_MAP, "0"+S+"1"};

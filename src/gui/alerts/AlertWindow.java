@@ -34,9 +34,10 @@ public final class AlertWindow extends StylizedJFrame implements ATConstants{
 		
 		
 		setLayout(new BorderLayout());
-		setSize(300, 150);
+		setSize(300, 120);
 		setResizable(false);
 		setLocationRelativeTo(null);
+		setUndecorated(true);
 		
 		
 		Color theme = title.equals(FAILURE) ? Color.RED : 
@@ -46,7 +47,9 @@ public final class AlertWindow extends StylizedJFrame implements ATConstants{
 		setContentPane(new JPanel() {
 			public void paintComponent(Graphics g) {
 				g.setColor(theme);
-				g.drawRect(15, 10, 265, 100); 
+				g.drawRect(0, 0, 299, 119); 
+				g.drawRect(1, 1, 297, 117); 
+				g.drawRect(2, 2, 295, 115); 
 			}	
 		});
 		
@@ -95,7 +98,7 @@ public final class AlertWindow extends StylizedJFrame implements ATConstants{
 		setFocusable(true);
 		requestFocus();
 		
-
+		
 		WindowTools.showLogo(this);
 	}
 }

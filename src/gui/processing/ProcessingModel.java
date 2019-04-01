@@ -3,16 +3,11 @@ package gui.processing;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
-
-import javax.management.ListenerNotFoundException;
 
 import exceptions.IncorrectFileException;
 import exceptions.UnfindableResourceException;
 import files.enumerations.OperationType;
 import files.enumerations.ProcessingType;
-import files.enumerations.SettingType;
-import files.files.Modifiable;
 import files.files.ProcessingFile;
 import files.files.SelectableFile;
 import gui.alerts.AlertWindow;
@@ -21,8 +16,6 @@ import gui.general.GeneralModel;
 import threads.RuntimeSpaceManager;
 import threads.ThreadForSave;
 import threads.ThreadForWaitWindow;
-import wrapper.runtime.global.SystemRequests;
-import wrapper.runtime.global.UserRequests;
 
 public class ProcessingModel extends GeneralModel{
 	private List<SelectableFile> images;

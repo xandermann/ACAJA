@@ -49,7 +49,7 @@ public final class SoundSettingsView extends SettingsView{
 				if(codecsAudio != null) {
 					String[] codecsArray = Arrays.copyOf(codecsAudio.toArray(), codecsAudio.size(), String[].class);
 					codecsComboBox.removeAllItems();
-					codecsComboBox.setModel(new DefaultComboBoxModel(codecsArray));
+					codecsComboBox.setModel(new DefaultComboBoxModel<String>(codecsArray));
 					codecsComboBox.setSelectedIndex(0);
 				}
 			}
@@ -68,9 +68,9 @@ public final class SoundSettingsView extends SettingsView{
 		codecsComboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(Context.$M.getCurrentFile() != null) {
-					if(isChange == true && ((JComboBox) e.getSource()).getSelectedItem() != null)
+					if(isChange == true && ((JComboBox<?>) e.getSource()).getSelectedItem() != null)
 						 Context.$M.modify(SettingType.AUDIO_CODEC, 
-								 ((JComboBox) e.getSource()).getSelectedItem().toString());
+								 ((JComboBox<?>) e.getSource()).getSelectedItem().toString());
 				}
 			}
 		});

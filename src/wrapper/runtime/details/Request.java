@@ -1,13 +1,17 @@
 package wrapper.runtime.details;
 
-import java.io.*;
-import java.util.*;
-
-import javax.swing.JOptionPane;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
+import java.util.ArrayList;
+import java.util.List;
 
 import exceptions.UnfindableResourceException;
 import resources.ResourceConstants;
-import wrapper.language.*;
+import wrapper.language.FlagConstants;
+import wrapper.language.ValueConstants;
 import wrapper.streams.iterators.ProcessManager;
 import wrapper.streams.managers.consumers.WatchedConsumer;
 

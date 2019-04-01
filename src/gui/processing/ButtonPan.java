@@ -16,19 +16,26 @@ public class ButtonPan extends JPanel {
 	
 	private JToggleButton flouButton;
 	private JToggleButton rectangle;
-	private JToggleButton pivoteG1;
-	private JToggleButton pivoteD1;
+	private JToggleButton rotateL1;
+	private JToggleButton rotateR1;
+	private JToggleButton rotateInvertedL1;
+	private JToggleButton rotateInvertedR1;
+	private JToggleButton rotate180;
+	
 	
 	/**
 	 * constructeur du panel de bouton central
 	 */
 	public ButtonPan() {
-		this.setLayout(new GridLayout(3, 2, 1, 1));
+		this.setLayout(new GridLayout(4, 2, 1, 1));
 		rectangle = new JToggleButton(new ImageIcon(resources.ResourceConstants.BUTTON_RECT));
 		flouButton = new JToggleButton(new ImageIcon(resources.ResourceConstants.BLURRED));
-		pivoteG1 = new JToggleButton(new ImageIcon(resources.ResourceConstants.LEFT_ARROW));
-		pivoteD1 = new JToggleButton(new ImageIcon(resources.ResourceConstants.RIGHT_ARROW));
-		
+		rotateL1 = new JToggleButton(new ImageIcon(resources.ResourceConstants.LEFT_ARROW));
+		rotateR1 = new JToggleButton(new ImageIcon(resources.ResourceConstants.RIGHT_ARROW));
+		rotateInvertedL1 = new JToggleButton("L180");
+		rotateInvertedR1 = new JToggleButton("D180");
+		rotate180 = new JToggleButton("180");
+	
 		JButton undo = new JButton(new ImageIcon(resources.ResourceConstants.LEFT_ARROW));
 		
 		rectangle.addActionListener(new ActionListener() {
@@ -45,21 +52,41 @@ public class ButtonPan extends JPanel {
 			}
 		});
 		
-		pivoteG1.addActionListener(new ActionListener() {
+		rotateL1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				rotateLeftActivated();
 			}
 		});
 		
-		pivoteD1.addActionListener(new ActionListener() {
+		rotateR1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				rotateRightActivated();
 			}
 			
 		});
-		
+		rotateInvertedL1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				rotateLeft180Activated();
+				
+			}
+		});
+		rotateInvertedR1.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				rotateRight180Activated();
+				
+			}
+		});
+		rotate180.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				rotate180Activated();
+			}
+			
+		});
 		undo.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -69,44 +96,120 @@ public class ButtonPan extends JPanel {
 
 		rectangle.setPreferredSize(new Dimension(35, 35));
 		flouButton.setPreferredSize(new Dimension(35, 35));
-		pivoteD1.setPreferredSize(new Dimension(35, 35));
-		pivoteG1.setPreferredSize(new Dimension(35, 35));
+		rotateR1.setPreferredSize(new Dimension(35, 35));
+		rotateL1.setPreferredSize(new Dimension(35, 35));
+		rotateInvertedL1.setPreferredSize(new Dimension(35,35));
+		rotateInvertedR1.setPreferredSize(new Dimension(35,35));
+		rotate180.setPreferredSize(new Dimension(35,35));
 		undo.setPreferredSize(new Dimension(35, 35));
 
 		this.add(rectangle);
 		this.add(flouButton);
-		this.add(pivoteG1);
-		this.add(pivoteD1);
+		this.add(rotateL1);
+		this.add(rotateR1);
+		this.add(rotateInvertedL1);
+		this.add(rotateInvertedR1);
+		this.add(rotate180);
 		this.add(undo);
 		this.repaint();
 	}
 	
+	public void rotate180Activated() {
+		if(((ProcessingModel)Context.$M).getCurrentFile() != null) {
+			if(!rotate180.isSelected()) {
+				// Annuler le pivot de la video
+				rotateR1.setEnabled(true);
+				rotateInvertedR1.setEnabled(true);
+				rotateL1.setEnabled(true);
+				rotateInvertedL1.setEnabled(true);
+				((ProcessingModel)Context.$M).setRotate180(false);
+			} else {
+				// Activer les actions pour faire pivoter la video
+				rotateR1.setEnabled(false);
+				rotateInvertedR1.setEnabled(false);
+				rotateL1.setEnabled(false);
+				rotateInvertedL1.setEnabled(false);
+				((ProcessingModel)Context.$M).setRotate180(true);
+			}
+			}else rotate180.setSelected(false);
+	}
+	public void rotateLeft180Activated() {
+		if(((ProcessingModel)Context.$M).getCurrentFile() != null) {
+			if(!rotateInvertedL1.isSelected()) {
+				// Annuler le pivot de la video
+				rotateR1.setEnabled(true);
+				rotateInvertedR1.setEnabled(true);
+				rotateL1.setEnabled(true);
+				rotate180.setEnabled(true);
+				((ProcessingModel)Context.$M).setRotate180Left(false);
+			} else {
+				// Activer les actions pour faire pivoter la video
+				rotateR1.setEnabled(false);
+				rotateInvertedR1.setEnabled(false);
+				rotateL1.setEnabled(false);
+				rotate180.setEnabled(false);
+				((ProcessingModel)Context.$M).setRotate180Left(true);
+			}
+			}else rotateInvertedL1.setSelected(false);
+	}
+	
+	public void rotateRight180Activated() {
+		if(((ProcessingModel)Context.$M).getCurrentFile() != null) {
+			if(!rotateInvertedR1.isSelected()) {
+				// Annuler le pivot de la video
+				rotateL1.setEnabled(true);
+				rotateR1.setEnabled(true);
+				rotateInvertedL1.setEnabled(true);
+				rotate180.setEnabled(true);
+				((ProcessingModel)Context.$M).setRotate180Right(false);
+			} else {
+				// Activer les actions pour faire pivoter la video
+				rotateL1.setEnabled(false);
+				rotateR1.setEnabled(false);
+				rotateInvertedL1.setEnabled(false);
+				rotate180.setEnabled(false);
+				((ProcessingModel)Context.$M).setRotate180Right(true);
+			}
+		} else rotateInvertedR1.setSelected(false);
+	}
 	public void rotateLeftActivated() {
 		if(((ProcessingModel)Context.$M).getCurrentFile() != null) {
-		if(!pivoteG1.isSelected()) {
+		if(!rotateL1.isSelected()) {
 			// Annuler le pivot de la video
-			pivoteD1.setEnabled(true);
+			rotateR1.setEnabled(true);
+			rotateInvertedL1.setEnabled(true);
+			rotateInvertedR1.setEnabled(true);
+			rotate180.setEnabled(true);
 			((ProcessingModel)Context.$M).setRotateLeft(false);
 		} else {
 			// Activer les actions pour faire pivoter la video
-			pivoteD1.setEnabled(false);
+			rotateR1.setEnabled(false);
+			rotateInvertedL1.setEnabled(false);
+			rotateInvertedR1.setEnabled(false);
+			rotate180.setEnabled(false);
 			((ProcessingModel)Context.$M).setRotateLeft(true);
 		}
-		}else pivoteG1.setSelected(false);
+		}else rotateL1.setSelected(false);
 	}
 	
 	public void rotateRightActivated() {
 		if(((ProcessingModel)Context.$M).getCurrentFile() != null) {
-			if(!pivoteD1.isSelected()) {
+			if(!rotateR1.isSelected()) {
 				// Annuler le pivot de la video
-				pivoteG1.setEnabled(true);
+				rotateL1.setEnabled(true);
+				rotateInvertedL1.setEnabled(true);
+				rotateInvertedR1.setEnabled(true);
+				rotate180.setEnabled(true);
 				((ProcessingModel)Context.$M).setRotateRight(false);
 			} else {
 				// Activer les actions pour faire pivoter la video
-				pivoteG1.setEnabled(false);
+				rotateL1.setEnabled(false);
+				rotateInvertedL1.setEnabled(false);
+				rotateInvertedR1.setEnabled(false);
+				rotate180.setEnabled(false);
 				((ProcessingModel)Context.$M).setRotateRight(true);
 			}
-		} else pivoteD1.setSelected(false);
+		} else rotateR1.setSelected(false);
 	}
 	
 	public void cropIsSelected() {

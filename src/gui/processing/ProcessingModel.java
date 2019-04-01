@@ -24,7 +24,7 @@ public class ProcessingModel extends GeneralModel{
 	private ProcessingFile currentFile;
 	private File minia;
 	private String destinationFolder;
-	private boolean rotateLeft, rotateRight;
+	private boolean rotateLeft, rotateRight, rotate180Left, rotate180Right, rotate180;
 	private ArrayList<File> images;
 	
 	public ArrayList<File> getImages() {
@@ -41,8 +41,10 @@ public class ProcessingModel extends GeneralModel{
 		Context.$M = this;
 		fUp = false;
 		cropUp = false;
-		setRotateLeft(false);
-		setRotateRight(false);
+		rotateLeft = false;
+		rotateRight = false;
+		setRotate180Left(false);
+		setRotate180Right(false);
 		listRect = new ArrayList<>();
 		images = new ArrayList<File>();
 	}
@@ -200,6 +202,15 @@ public class ProcessingModel extends GeneralModel{
 			this.modify(ProcessingType.ROTATED, "right");
 			
 		}
+		if(rotate180Left) {
+			this.modify(ProcessingType.ROTATED, "180left");
+		}
+		if(rotate180Right) {
+			this.modify(ProcessingType.ROTATED, "180right");
+		}
+		if(rotate180) {
+			this.modify(ProcessingType.ROTATED, "180");
+		}
 		if(currentFile.isModified()) {
 			new Thread() {
 				public void run (){
@@ -295,5 +306,52 @@ public class ProcessingModel extends GeneralModel{
 	public List<SelectableFile> getFiles() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+
+	public boolean isRotate180Left() {
+		return rotate180Left;
+	}
+
+
+	public void setRotate180Left(boolean rotate180Left) {
+		this.rotate180Left = rotate180Left;
+	}
+
+
+	public boolean isRotate180Right() {
+		return rotate180Right;
+	}
+
+
+	public void setRotate180Right(boolean rotate180Right) {
+		this.rotate180Right = rotate180Right;
+	}
+	/*
+	public void updateRotations(String direction) {
+		switch(direction) {
+		case "left":
+			break;
+			
+		case "right":
+			break;
+			
+		case "left180":
+			break;
+			
+		case "right180":
+			break;
+			
+		}
+	}*/
+
+
+	public boolean isRotate180() {
+		return rotate180;
+	}
+
+
+	public void setRotate180(boolean rotate180) {
+		this.rotate180 = rotate180;
 	}
 }

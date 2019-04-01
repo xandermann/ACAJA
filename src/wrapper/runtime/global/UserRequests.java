@@ -141,6 +141,10 @@ public final class UserRequests{
 				case ROTATED :
 					if(newValue.equals("left"))	request.rotateLeft();
 					if(newValue.equals("right")) request.rotateRight();
+					if(newValue.equals("180right")) request.rotate180Right();			
+					if(newValue.equals("180left")) request.rotate180Left();
+					if(newValue.equals("180")) request.rotate180();
+			
 				break;
 			}
 		}

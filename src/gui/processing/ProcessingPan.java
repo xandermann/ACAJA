@@ -7,11 +7,11 @@ import javax.swing.JPanel;
 
 public class ProcessingPan extends JPanel {
 
-	public ProcessingPan(ProcessingModel m) {
+	public ProcessingPan() {
 		this.setBackground(Color.GRAY);
 		LibraryView pb = new LibraryView();
-		ButtonPan pm = new ButtonPan(m);
-		PicturePan pi = new PicturePan(m);
+		ButtonPan pm = new ButtonPan();
+		PicturePan pi = new PicturePan();
 		this.add(pb);
 		this.add(pm);
 		this.add(pi);

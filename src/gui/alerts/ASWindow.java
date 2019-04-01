@@ -1,4 +1,7 @@
 package gui.alerts;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+
 import gui.general.Context;
 import gui.general.GeneralWindow;
 /**
@@ -22,5 +25,19 @@ public final class ASWindow extends GeneralWindow{
 		 * THIS DETIENT LE FOCUS ET SERA UN COMPONENT PARENT.
 		 */
 		Context.$C(0, this);
+		/**
+		 * SE SOUVENIR DES MODIFICATIONS.
+		 */
+		addWindowListener(new WindowListener() {
+			public void windowOpened(WindowEvent e) {}
+			public void windowClosing(WindowEvent e) {
+				AlertSettings.toRemember();
+			}
+			public void windowClosed(WindowEvent e) {}
+			public void windowIconified(WindowEvent e) {}
+			public void windowDeiconified(WindowEvent e) {}
+			public void windowActivated(WindowEvent e) {}
+			public void windowDeactivated(WindowEvent e) {}
+		});
 	}
 }

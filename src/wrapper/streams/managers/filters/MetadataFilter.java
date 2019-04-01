@@ -9,8 +9,9 @@ import javax.swing.JOptionPane;
 
 import exceptions.UnfindableResourceException;
 import resources.NamesSpaceManager;
-import resources.ResourceConstants;
-import wrapper.streams.iterators.*;
+import resources.StringTools;
+import wrapper.streams.iterators.ProcessManager;
+import wrapper.streams.iterators.StreamIterator;
 import wrapper.streams.managers.consumers.OutputStreamConsumer;
 
 /**
@@ -43,23 +44,8 @@ public final class MetadataFilter implements DataStreamsFilter {
 		int indexSpace = metadata.indexOf(' ', fromIndex);
 		int indexComa = metadata.indexOf(',', fromIndex);
 		return indexSpace<indexComa || indexComa==-1 ? indexSpace : indexComa;	
-	}
-	
-	
-	/**
-	 * [ METHODE INTERNE RECURSIVE POUR COMPTER LE NOMBRE D'OCCURENCES D'UNE PATTERN. ]
-	 * 
-	 * @param metadata		Les metadonnees.
-	 * @param pattern		La pattern en question.
-	 * @param start			L'indice de debut dans la chaine.
-	 * @param end			L'indice de fin dans la chaine.
-	 * @return				Le nombre d'occurences de la pattern dans la chaine entre les indices.
-	 */
-	private static int countOccurences(String metadata, char pattern, int start, int end) {
-		start = metadata.indexOf(pattern, start);
-		return start==-1 || start > end ? 0 : countOccurences(metadata, pattern, start + 1, end) + 1;
-	}
-	
+	}	
+
 
 	/**
 	 * [ METHODE INTERNE DE CLASSE. ]
@@ -77,8 +63,8 @@ public final class MetadataFilter implements DataStreamsFilter {
 			int indexEvolve = indexStart;
 			
 			for(int i=0; i<indexMetadata; i++) {
-				if(countOccurences(metadata, '(', indexEvolve, metadata.indexOf(',', indexEvolve))
-				   != countOccurences(metadata, ')', indexEvolve, indexEvolve=(metadata.indexOf(',', indexEvolve)+1)))
+				if(StringTools.countOccurences(metadata, '(', indexEvolve, metadata.indexOf(',', indexEvolve))
+				   != StringTools.countOccurences(metadata, ')', indexEvolve, indexEvolve=(metadata.indexOf(',', indexEvolve)+1)))
 					indexEvolve = metadata.indexOf(',', indexEvolve)+1;
 			}
 			

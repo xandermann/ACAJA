@@ -1,13 +1,17 @@
 package wrapper.runtime.details;
 
-import java.io.*;
-import java.util.*;
-
-import javax.swing.JOptionPane;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
+import java.util.ArrayList;
+import java.util.List;
 
 import exceptions.UnfindableResourceException;
 import resources.ResourceConstants;
-import wrapper.language.*;
+import wrapper.language.FlagConstants;
+import wrapper.language.ValueConstants;
 import wrapper.streams.iterators.ProcessManager;
 import wrapper.streams.managers.consumers.WatchedConsumer;
 
@@ -347,12 +351,22 @@ public final class Request implements FlagConstants, ValueConstants{
 	}
 	
 	/**
-	 * [ PRIVOTER DE 90 DEGRES. ]
+	 * [ PIVOTER DE 90 DEGRES A GAUCHE ]
 	 * 
 	 * @return La requete this. 
 	 */
-	public Request rotate() {
-		askSomethingElse(FLAG_ROTATE);
+	public Request rotateLeft() {
+		askSomethingElse(new String[] {FLAG_ROTATE[0], FLAG_ROTATE[2]});
+		return this;
+	}
+	
+	/**
+	 * [ PIVOTER DE 90 DEGRES A DROITE ]
+	 * 
+	 * @return La requete this. 
+	 */
+	public Request rotateRight() {
+		askSomethingElse(new String[] {FLAG_ROTATE[0], FLAG_ROTATE[1]});
 		return this;
 	}
 	
@@ -452,20 +466,30 @@ public final class Request implements FlagConstants, ValueConstants{
 	 * 
 	 * @return La requete this. 
 	 */
-	public Request concat(File[] inputs) {	
-		for(File tmp : inputs)  {
-			if(tmp==null) throw new NullPointerException("Un des inputs est null !");
-		}
+	public Request concat(String[] inputs) {	
+		if(inputs==null) 
+			throw new NullPointerException("inputs est null !");
 		
 		try {
 			File inputsFile = new File(ResourceConstants.TEMPORARY_FILES_FULL_PATH + "inputs.txt");
+			if(inputsFile.exists()) inputsFile.delete();
+			
 			Writer writer = new BufferedWriter(new FileWriter(inputsFile));
-			if(input != null) writer.write(input+"\n");
-			for(File tmp : inputs) writer.write(tmp.getAbsolutePath()+"\n");
+			if(input != null) writer.write("file '"+input+"'\n");
+			for(String tmp : inputs) {
+				if(tmp==null) 
+					throw new NullPointerException("Un des inputs est null !");
+				
+				if(!new File(tmp).exists())
+					throw new IllegalArgumentException("Un des inputs est inexistant !");
+				
+				writer.write("file '"+tmp+"'\n");
+			}
 			writer.close();
 			
 			request.clear();
-			askSomethingElse(new String[]{FLAG_CONCAT[0], FLAG_CONCAT[1], FLAG_CONCAT[2], inputsFile.getAbsolutePath(), FLAG_CONCAT[3]});
+			askSomethingElse(new String[]{FLAG_CONCAT[0], FLAG_CONCAT[1], FLAG_CONCAT[2], FLAG_CONCAT[3], FLAG_CONCAT[4],
+							inputsFile.getAbsolutePath(), FLAG_CONCAT[5], FLAG_CONCAT[6]});
 		} catch (IOException ioe) {}
 		
 		return this;
@@ -494,6 +518,40 @@ public final class Request implements FlagConstants, ValueConstants{
 	//=======================================================================================================================
 	
 	
+	/**
+	 * [ SUPPRIMER UN SON.]
+	 * 
+	 * @return La requete this. 
+	 */
+	public Request removeSound() {
+		askSomethingElse(FLAG_REMOVE_SOUND);
+		return this;
+	}
+	
+	
+	/**
+	 * [ AJOUTER UN SON.]
+	 * 
+	 * @param inputSound		Le son a ajouter.
+	 * 
+	 * @return La requete this. 
+	 */
+	public Request addSound(String inputSound) {
+		if(inputSound==null) 
+			throw new NullPointerException("inputSound est null !");
+		
+		if(!new File(inputSound).exists())
+			throw new IllegalArgumentException("inputSound est inexistant !");
+		
+		askSomethingElse(new String[]{FLAG_ADD_SOUND[0], inputSound, FLAG_ADD_SOUND[1], FLAG_ADD_SOUND[2], 
+						FLAG_ADD_SOUND[3], FLAG_ADD_SOUND[4], FLAG_ADD_SOUND[5], FLAG_ADD_SOUND[6]});
+		return this;
+	}
+	
+	
+	
+	//=======================================================================================================================
+	
 	
 	/**
 	 * [ EXECUTER LA REQUETE ET OBTENIR LE RESULAT. ]
@@ -518,7 +576,6 @@ public final class Request implements FlagConstants, ValueConstants{
 		WatchedConsumer.consume(result());
 		return this;
 	}
-	
 	
 	
 	//=======================================================================================================================

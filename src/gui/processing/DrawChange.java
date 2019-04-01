@@ -4,6 +4,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
+import gui.general.Context;
+
 /**
  *Classe des listeners pour créer les formes
  */
@@ -12,16 +14,13 @@ public class DrawChange implements MouseMotionListener,MouseListener{
 	
 	private int nbClick;
 	private int refx,refy,xx,yy;
-	private ProcessingModel model;
 	
-	public DrawChange(ProcessingModel m) {
-		this.model = m;
+	public DrawChange() {
 		nbClick = 0;
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		
 		/*
 		if(this.model.isfUp() || this.model.iscropUp()) {
 			int x = e.getX();
@@ -44,48 +43,32 @@ public class DrawChange implements MouseMotionListener,MouseListener{
 	}
 
 	@Override
-	public void mouseEntered(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void mouseEntered(MouseEvent arg0) { }
 
 	@Override
-	public void mouseExited(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void mouseExited(MouseEvent arg0) {	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		if(this.model.isfUp() || this.model.iscropUp()) {
-			refx = e.getX();
-			refy = e.getY();
-		}
-		
+		refx = e.getX();
+		refy = e.getY();
 	}
 
 	@Override
-	public void mouseReleased(MouseEvent e) {
-		if(this.model.isfUp() || this.model.iscropUp()) {
-			
-			if(this.model.iscropUp()) 
-				this.model.addForm(refx, refy, (e.getX()-refx), (e.getY()-refy),'c');	
-				
-			else if(this.model.isfUp())
-				this.model.addForm(refx, refy, (e.getX()-refx), (e.getY()-refy),'f');	
-		}
-		
-	}
+	public void mouseReleased(MouseEvent e) {}
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		
+	if(((ProcessingModel)Context.$M).isfUp() || ((ProcessingModel)Context.$M).iscropUp()) {
+		if(((ProcessingModel)Context.$M).iscropUp() && refx != 0) 
+			((ProcessingModel)Context.$M).addForm(refx, refy, (e.getX()-refx), (e.getY()-refy),'c');	
+			
+		else if(((ProcessingModel)Context.$M).isfUp() && refx != 0)
+			((ProcessingModel)Context.$M).addForm(refx, refy, (e.getX()-refx), (e.getY()-refy),'f');
+		}
 	}
 
 	@Override
-	public void mouseMoved(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void mouseMoved(MouseEvent arg0) {	}
 
 }

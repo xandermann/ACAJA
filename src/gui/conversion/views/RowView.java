@@ -51,19 +51,17 @@ public final class RowView extends JPanel{
 		g.fillRect(0, 0, w, h);
 		
 		g.setColor(Color.BLACK);
-		g.drawRect(10, 10, w-20, h-20); 
-		g.drawRect(11, 11, w-22, h-22);
-		g.drawRect(12, 12, w-24, h-24);
 		
-		g.setFont(new Font(Font.SERIF, Font.BOLD, 14));
-		g.drawString(file.getSourceFileName().toUpperCase(), (w-8*file.getSourceFileName().length())/2, 30);
+		
+		g.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 24));
+		g.drawString(file.getSourceFileNameWithoutExtension(), (w-14*file.getSourceFileNameWithoutExtension().length())/2, 28);
 		
 		try {
-			g.drawImage(ImageIO.read(file.getThumbail()), 40, 40, null);
+			g.drawImage(ImageIO.read(file.getThumbnail()), 40, 40, null);
 		} catch (IOException ioe) {}
 		
-		g.drawRect(40, 40, w-80, h-60); 
-		g.drawRect(41, 41, w-82, h-62);
-		g.drawRect(42, 42, w-84, h-64);
+		g.drawRect(40, 40, w-80, h-50); 
+		g.drawRect(41, 41, w-82, h-52);
+		g.drawRect(42, 42, w-84, h-54);
 	}
 }

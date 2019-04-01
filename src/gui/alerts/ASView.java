@@ -27,7 +27,7 @@ public final class ASView extends StylizedJPanel {
 		
 		
 		JSlider js1 = new JSlider(0,10);
-		js1.setValue(AlertSettings.SHORT/1000);
+		js1.setValue((int) (AlertSettings.SHORT/1000));
 		js1.addMouseListener(new MouseListener() {
 			public void mouseClicked(MouseEvent e) {}
 			public void mousePressed(MouseEvent e) {}
@@ -39,7 +39,7 @@ public final class ASView extends StylizedJPanel {
 		});
 		
 		JSlider js2 =  new JSlider(0,10);
-		js2.setValue(AlertSettings.LONG/1000);
+		js2.setValue((int) (AlertSettings.LONG/1000));
 		js2.addMouseListener(new MouseListener() {
 			public void mouseClicked(MouseEvent e) {}
 			public void mousePressed(MouseEvent e) {}

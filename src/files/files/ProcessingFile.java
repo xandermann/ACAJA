@@ -18,9 +18,11 @@ import wrapper.runtime.global.SystemRequests;
  *         CHEVRIER Jean-christophe.
  */
 public final class ProcessingFile extends SelectableFile implements Modifiable {
-	// =======================================================================================================================
-	// =======================================================================================================================
+	//=======================================================================================================================
+	//=======================================================================================================================
 
+	
+	
 	/**
 	 * [ ATTRIBUT D'INSTANCE DE LA CLASSE. ]
 	 */
@@ -32,9 +34,13 @@ public final class ProcessingFile extends SelectableFile implements Modifiable {
 
 	private String resolution;
 
-	// =======================================================================================================================
-	// =======================================================================================================================
+	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
 
+	
+	
 	/**
 	 * [ CONSTRUCTEUR. ]
 	 * 
@@ -60,14 +66,18 @@ public final class ProcessingFile extends SelectableFile implements Modifiable {
 		 * Initialisation de la miniature et de la resolution.
 		 */
 		if (isVideo()) {
-			thumbail = SystemRequests.askFrame(this, "00:00:01.00");
+			thumbnail = SystemRequests.askFrame(this, "00:00:01.00");
 			resolution = SystemRequests.askResolution(this);
 		}
 	}
 
-	// =======================================================================================================================
-	// =======================================================================================================================
+	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
 
+	
+	
 	/**
 	 * [ METHODE POUR AJOUTER UN TRAITEMENT EN ATTENTE A THIS. ]
 	 * 
@@ -76,7 +86,12 @@ public final class ProcessingFile extends SelectableFile implements Modifiable {
 	 *               traitements.
 	 */
 	public void modify(OperationType typeProcess, String process) {
+		if(typeProcess==null)
+			throw new NullPointerException("Cle null !");
+		if(process==null)
+			throw new NullPointerException("Valeur null !");
 		performedProcessings.put((ProcessingType) typeProcess, process);
+		
 	}
 
 	/**
@@ -86,9 +101,37 @@ public final class ProcessingFile extends SelectableFile implements Modifiable {
 		return !performedProcessings.equals(new HashMap<ProcessingType, String>());
 	}
 
-	// =======================================================================================================================
-	// =======================================================================================================================
+	
 
+	//=======================================================================================================================
+	//=======================================================================================================================
+	
+	
+	/**
+	 * [ ANNULER UN TRAITEMENT. ]
+	 */
+	public void cancel(ProcessingType typeProcess) {
+		if(typeProcess==null)
+			throw new NullPointerException("Cle null !");
+		if(!performedProcessings.containsKey(typeProcess))
+			throw new IllegalArgumentException("Cle inexistante dans la table !");
+		performedProcessings.remove(typeProcess);
+	}
+	
+	
+	/**
+	 * [ ANNULER TOUS LES TRAITEMENTS. ]
+	 */
+	public void cancelAll() {
+		performedProcessings.clear();
+	}
+	
+	
+	//=======================================================================================================================
+	//=======================================================================================================================
+
+	
+	
 	/**
 	 * [ METHODE ACCESSEUR - GETTER. ]
 	 * 

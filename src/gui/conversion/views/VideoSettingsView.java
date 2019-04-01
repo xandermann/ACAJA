@@ -43,7 +43,7 @@ public final class VideoSettingsView extends SettingsView{
 				String[] videoCodecs = Arrays.copyOf(codecs.keySet().toArray(), 
 						codecs.keySet().toArray().length, String[].class);
 				codecsComboBox.removeAllItems();
-				codecsComboBox.setModel(new DefaultComboBoxModel(videoCodecs));
+				codecsComboBox.setModel(new DefaultComboBoxModel<String>(videoCodecs));
 				codecsComboBox.setSelectedIndex(0);
 				((Modifiable) Context.$M.getCurrentFile()).modify(SettingType.VIDEO_CODEC, 
 						codecsComboBox.getSelectedItem().toString());
@@ -82,9 +82,9 @@ public final class VideoSettingsView extends SettingsView{
 			public void actionPerformed(ActionEvent e) {
 				if(Context.$M.getCurrentFile() != null) {
 					if(isChange == true)
-						if(((JComboBox) e.getSource()).getSelectedItem() != null)
+						if(((JComboBox<?>) e.getSource()).getSelectedItem() != null)
 							Context.$M.modify(SettingType.VIDEO_CODEC, 
-									((JComboBox) e.getSource()).getSelectedItem().toString());
+									((JComboBox<?>) e.getSource()).getSelectedItem().toString());
 				}
 			}
 		});
@@ -122,7 +122,7 @@ public final class VideoSettingsView extends SettingsView{
 				if(Context.$M.getCurrentFile() != null) {
 					if(isChange == true)
 						Context.$M.modify(SettingType.RESOLUTION, 
-								((JComboBox) e.getSource()).getSelectedItem().toString());
+								((JComboBox<?>) e.getSource()).getSelectedItem().toString());
 				}
 			}
 		});

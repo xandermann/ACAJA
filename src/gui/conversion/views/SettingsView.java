@@ -5,12 +5,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.BoxLayout;
-import javax.swing.JComboBox;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
 
-import gui.conversion.ConversionModel;
-import gui.style.StyleTheme;
 import gui.style.StylizedJPanel;
 
 /**

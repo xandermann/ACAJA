@@ -1,9 +1,8 @@
 package wrapper.runtime.global;
 
-import java.util.*;
+import java.util.HashMap;
 
 import exceptions.UnfindableResourceException;
-import files.*;
 import files.enumerations.ProcessingType;
 import files.enumerations.SettingType;
 import files.files.ProcessingFile;
@@ -45,27 +44,35 @@ public final class UserRequests{
 				case QUALITY :
 					request.quality(newValue);
 					break;
+				
 				case VIDEO_CODEC :
 					request.videoCodec(newValue);
 					break;
+				
 				case VIDEO_BITRATE : 
 					request.videoBitrate(newValue);
 					break;
+				
 				case FRAMERATE :
 					request.framerate(newValue);
 					break;
+				
 				case RESOLUTION :
 					request.resolution(newValue);
 					break;
+				
 				case AUDIO_CODEC : 
 					request.audioCodec(newValue);
 					break;
+				
 				case AUDIO_BITRATE : 
 					request.audioBitrate(newValue);
 					break;
+				
 				case SAMPLING_RATE : 
 					request.samplingRate(newValue);
 					break;
+				
 				case NUMBER_AUDIO_CHANNELS : 
 					request.numberAudioChannels(newValue);
 					break;
@@ -99,18 +106,42 @@ public final class UserRequests{
 				case QUALITY :
 					request.quality(newValue);
 					break;
+				
 				case CROPED :
 					String[] tab = newValue.split(" ");
 					System.out.println(tab[0]+ " "+ tab[1]);
 					request.crop(tab[0],tab[1],tab[2],tab[3]);
 					break;
+				
 				case CUT :
 					//request.cut(newValue);
 					break;
+				
 				case BLURRED :
 					String[] tab2 = newValue.split(" ");
 					request.blur(tab2[0],tab2[1],tab2[2],tab2[3]);
 					break;
+				
+				case ADDED :
+					String[] tab3 = newValue.split(" ");
+					String[] tabres = new String[tab3.length-1];
+					for(int i = 1;i<tab3.length;i++)
+						tabres[i-1] = tab3[i];
+					request.concat(tabres);
+					break;
+				
+				case REMOVED_SOUND :
+					request.removeSound();
+				break;
+				
+				case ADDED_SOUND :
+					request.addSound(newValue);
+				break;
+				
+				case ROTATED :
+					if(newValue.equals("left"))	request.rotateLeft();
+					if(newValue.equals("right")) request.rotateRight();
+				break;
 			}
 		}
 		

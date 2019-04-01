@@ -1,6 +1,6 @@
 package gui.processing;
 
-import java.awt.Color;
+
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridBagLayout;
@@ -9,18 +9,17 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
+import gui.general.Context;
+
 import resources.ResourceConstants;
 
 public class PicturePan extends JPanel {
 	
-	private ProcessingModel model;
-	
-	public PicturePan(ProcessingModel m) {
-		this.model = m;
+	public PicturePan() {
 		this.setPreferredSize(new Dimension(600, 550));
 		this.setLayout(new GridBagLayout());
 		
-		PictureVisualView pic = new PictureVisualView(this.model);
+		PictureVisualView pic = new PictureVisualView();
 		this.add(pic);
 	}
 
@@ -34,7 +33,7 @@ public class PicturePan extends JPanel {
 		g.drawRect(this.getSize().width/4, this.getSize().height-85, this.getSize().width/2, 75);
 		
 		
-		g.drawString(model.getMessage(), (this.getSize().width/4)+50, (this.getSize().height-85)+45);
+		g.drawString(((ProcessingModel)Context.$M).getMessage(), (this.getSize().width/4)+50, (this.getSize().height-85)+45);
 		this.repaint();
 		
 	}

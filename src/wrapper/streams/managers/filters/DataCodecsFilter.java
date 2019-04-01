@@ -4,15 +4,16 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 
 import exceptions.UnfindableResourceException;
 import resources.NamesSpaceManager;
-import resources.ResourceConstants;
-import wrapper.streams.iterators.*;
-import wrapper.streams.managers.consumers.*;
+import wrapper.streams.iterators.ProcessManager;
+import wrapper.streams.iterators.StreamIterator;
+import wrapper.streams.managers.consumers.ErrorStreamConsumer;
 
 /**
  * [ CLASSE POUR LE FILTRAGE DES DONNEES SUR LES CODECS. ]

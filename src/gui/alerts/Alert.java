@@ -33,15 +33,7 @@ public final class Alert extends AlertSettings implements ATConstants, AMConstan
 				public void mouseClicked(MouseEvent e) {}
 				public void mousePressed(MouseEvent e) {
 					view.dispose();
-					/**
-					 * RENDRE LE FOCUS AU COMPONENT PARENT.
-					 */
-					if(Context.$C(0) != null) 
-						Context.$C(0).requestFocus();
-					else {
-						if(Context.$W != null) 
-							Context.$W.requestFocus();
-					}
+					renderFocus();
 				}
 				public void mouseReleased(MouseEvent e) {}
 				public void mouseEntered(MouseEvent e) {}
@@ -52,29 +44,48 @@ public final class Alert extends AlertSettings implements ATConstants, AMConstan
 	
 	
 	/**
+	 * [ RENDRE LE FOCUS. ]
+	 */
+	private void renderFocus() {
+		/**
+		 * RENDRE LE FOCUS AU COMPONENT PARENT.
+		 */
+		if(Context.$C(0) != null) 
+			Context.$C(0).requestFocus();
+		else {
+			if(Context.$W != null) 
+				Context.$W.requestFocus();
+		}
+	}
+	
+	
+	/**
 	 * [ ALERTER L'UTILISATEUR PENDANT UN TEMPS FIXE. ]
 	 * 
 	 * @param timeOut		Temps d'affichage de la notification.
 	 */
-	public void alert(int timeOut) {
+	public void alert(long timeOut) {
 		if(INTERRUPTOR) {
-			if(timeOut<0) throw new IllegalArgumentException("timeOut negatif !");
-			SwingUtilities.invokeLater(new Runnable() {
-			    public void run() {
-			    	view.setVisible(true);
-			    	new Thread() {
-			    		 public void run() {
-			 				try {
-			 					while(!view.isVisible()) Thread.yield();
-								Thread.sleep(timeOut);
-							} catch (InterruptedException ie) {
-								JOptionPane.showMessageDialog(null, ie.getMessage());
-							}
-			 				view.dispose();
-			    		 }
-			    	}.start();
-			    }
-			});
+			if(timeOut<0) 
+				throw new IllegalArgumentException("timeOut negatif !");
+			if(timeOut != 0) {
+				SwingUtilities.invokeLater(new Runnable() {
+				    public void run() {
+				    	view.setVisible(true);
+				    	new Thread() {
+				    		 public void run() {
+				 				try {
+				 					while(!view.isVisible()) Thread.yield();
+									Thread.sleep(timeOut);
+								} catch (InterruptedException ie) {
+									JOptionPane.showMessageDialog(null, ie.getMessage());
+								}
+				 				view.dispose();
+				    		 }
+				    	}.start();
+				    }
+				});
+			}
 		}
 	}
 	

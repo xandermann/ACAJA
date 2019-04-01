@@ -10,6 +10,10 @@ public class Form {
 		this.typeCommande = tyC;
 	}
 
+	public void setForm(int[] t, char tyC) {
+		tab = t;
+		typeCommande = tyC;
+	}
 	public int[] getTab() {
 		return tab;
 	}

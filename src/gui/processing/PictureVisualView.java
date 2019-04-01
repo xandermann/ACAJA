@@ -16,9 +16,9 @@ import gui.general.Context;
 
 public class PictureVisualView extends JPanel implements Observer{
 
-	public PictureVisualView() {
+	public PictureVisualView(ProcessingModel m) {
 		this.setPreferredSize(new Dimension(500, 350));
-		DrawChange d = new DrawChange();
+		DrawChange d = new DrawChange(m);
 		this.addMouseListener(d);
 		this.addMouseMotionListener(d);
 		this.setOpaque(false);
@@ -38,28 +38,29 @@ public class PictureVisualView extends JPanel implements Observer{
 			}
 		}
 		g.drawRect(0, 0, this.size().width - 1, this.size().height - 1);
-		Image monImage =null;
+		ImageIcon monImage =null;
 		
 		for (int i = 0; i < ((ProcessingModel)Context.$M).getListRect().size(); i++) {
 			int[] tab = ((ProcessingModel)Context.$M).getTabInt(i);
 			
 				
 			switch (((ProcessingModel)Context.$M).getType(i)) {
-			case 'c':
-				g.setColor(Color.BLUE);
-				monImage =new ImageIcon("img/test.png").getImage();
-				break;
-			case 'f':
-				g.setColor(Color.GREEN);
-				monImage =new ImageIcon("img/test.png").getImage();
-				break;
-
-			default:
-				break;
+				case 'c':
+					g.setColor(Color.BLUE);
+					monImage =new ImageIcon("img/test.png");
+					break;
+				case 'f':
+					g.setColor(Color.GREEN);
+					monImage =new ImageIcon("img/test.png");
+					break;
+				case 'i':
+					monImage = new ImageIcon(((ProcessingModel)Context.$M).getListRect().get(i).getImageA());
+				default:
+					break;
 			}
 			
 			g.drawRect(tab[0],tab[1],tab[2],tab[3]);
-			g.drawImage(monImage, tab[0],tab[1],tab[2],tab[3], this);
+			g.drawImage(monImage.getImage(), tab[0],tab[1],tab[2],tab[3], this);
 		}
 		
 		

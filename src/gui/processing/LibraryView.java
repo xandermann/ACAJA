@@ -17,19 +17,22 @@ import javax.swing.JPanel;
 public class LibraryView extends JPanel {
 	
 	private ProcessingModel model;
+	private Image image;
+	private static boolean actualiser;
 
 	public LibraryView(ProcessingModel m) {
 		this.model = m;
 		this.setPreferredSize(new Dimension(250, 550));
 		this.setLayout(new GridLayout(5,1));
-		createAll();
+		actualiser = false;
 		this.repaint();
 	}
 
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		createAll();
+		if(actualiser)
+			createAll();
 		ProcessingTools.drawDeco(g, this.getHeight(), this.getWidth());
 		
 	}
@@ -38,17 +41,30 @@ public class LibraryView extends JPanel {
 		removeAll();
 		
 		for(File i : model.getImages()) {
-			JPanel j = new JPanel() {
+			JPanel j =new JPanel() {
 				@Override
 				public void paintComponent(Graphics g) {
 					super.paintComponents(g);
-					Image image = null;
+					
 					try { image = ImageIO.read(i);} catch (IOException e) {e.printStackTrace();}
 				
 					g.drawImage(image,0,0,this.getWidth(),150,null);
 				}
 			};
-			j.addMouseListener(new MouseListener() {
+			
+			this.add(j);
+			
+			
+			if(model.getImages().size()<5) {
+				for(int id = 0;id< 5-model.getImages().size();id++) {
+					JPanel jd = new JPanel();
+					this.add(j);
+				}
+			}
+			
+			
+		}
+			this.addMouseListener(new MouseListener() {
 				
 				@Override
 				public void mouseReleased(MouseEvent e) {
@@ -56,7 +72,14 @@ public class LibraryView extends JPanel {
 				
 				@Override
 				public void mousePressed(MouseEvent e) {
-					model.addForm(10, 10, 200, 150, 'i');
+					int ind = e.getY()/(getHeight()/5);
+					
+					try {
+						model.addForm(10, 10, 200, 150, 'i',ImageIO.read(model.getImages().get(ind)));
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
+					repaint();
 				}
 				
 				@Override
@@ -71,15 +94,12 @@ public class LibraryView extends JPanel {
 				public void mouseClicked(MouseEvent e) {
 				}
 			});
-			this.add(j);
-		}
-		
-		if(model.getImages().size()<5) {
-			for(int i = 0;i< 5-model.getImages().size();i++) {
-				JPanel j = new JPanel();
-				this.add(j);
-			}
-		}
+			
 		revalidate();
+		setActualiser(false);
+	}
+
+	public static void setActualiser(boolean actu) {
+		actualiser = actu;
 	}
 }

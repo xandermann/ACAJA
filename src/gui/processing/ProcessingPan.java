@@ -11,7 +11,7 @@ public class ProcessingPan extends JPanel {
 		this.setBackground(Color.GRAY);
 		LibraryView pb = new LibraryView(m);
 		ButtonPan pm = new ButtonPan();
-		PicturePan pi = new PicturePan();
+		PicturePan pi = new PicturePan(m);
 		this.add(pb);
 		this.add(pm);
 		this.add(pi);

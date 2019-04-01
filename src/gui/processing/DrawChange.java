@@ -1,5 +1,6 @@
 package gui.processing;
 
+import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -12,34 +13,18 @@ import gui.general.Context;
 
 public class DrawChange implements MouseMotionListener,MouseListener{
 	
-	private int nbClick;
 	private int refx,refy,xx,yy;
+	private ProcessingModel model;
+	private Form form;
+	private Image im;
 	
-	public DrawChange() {
-		nbClick = 0;
+	public DrawChange(ProcessingModel m) {
+		this.model = m;
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		/*
-		if(this.model.isfUp() || this.model.iscropUp()) {
-			int x = e.getX();
-			int y = e.getY();
-			if(nbClick==0) {
-				refx = x;
-				refy = y;
-			}else {
-				if(this.model.iscropUp()) 
-					this.model.addForm(refx, refy, (e.getX()-refx), (e.getY()-refy),'c');	
-				
-				else if(this.model.isfUp())
-					this.model.addForm(refx, refy, (e.getX()-refx), (e.getY()-refy),'f');	
-				
-				nbClick = -1;
-			}
-			
-			nbClick++;
-		}*/
+		
 	}
 
 	@Override
@@ -52,6 +37,14 @@ public class DrawChange implements MouseMotionListener,MouseListener{
 	public void mousePressed(MouseEvent e) {
 		refx = e.getX();
 		refy = e.getY();
+		
+		int indice = 0;
+		for (int i = 0; i< model.getListRect().size();i++) {
+			if(model.getListRect().get(i).getTypeCommande() == 'i')
+				indice = i;
+		}
+		form = model.getListRect().get(indice);
+		im = form.getImageA();
 	}
 
 	@Override
@@ -59,12 +52,17 @@ public class DrawChange implements MouseMotionListener,MouseListener{
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
-	if(((ProcessingModel)Context.$M).isfUp() || ((ProcessingModel)Context.$M).iscropUp()) {
-		if(((ProcessingModel)Context.$M).iscropUp() && refx != 0) 
-			((ProcessingModel)Context.$M).addForm(refx, refy, (e.getX()-refx), (e.getY()-refy),'c');	
-			
-		else if(((ProcessingModel)Context.$M).isfUp() && refx != 0)
-			((ProcessingModel)Context.$M).addForm(refx, refy, (e.getX()-refx), (e.getY()-refy),'f');
+		if(((ProcessingModel)Context.$M).isfUp() || ((ProcessingModel)Context.$M).iscropUp()) {
+			if(((ProcessingModel)Context.$M).iscropUp() && refx != 0) 
+				((ProcessingModel)Context.$M).addForm(refx, refy, (e.getX()-refx), (e.getY()-refy),'c',null);	
+				
+			else if(((ProcessingModel)Context.$M).isfUp() && refx != 0)
+				((ProcessingModel)Context.$M).addForm(refx, refy, (e.getX()-refx), (e.getY()-refy),'f',null);
+			}
+		
+		
+		if(e.getX() > form.getTab()[0] && e.getX() < form.getTab()[0]+form.getTab()[2] && e.getY() > form.getTab()[1] && e.getY() < form.getTab()[0]+form.getTab()[3]) {
+			model.addForm(e.getX()-(form.getTab()[2]/2),e.getY()-(form.getTab()[3]/2), form.getTab()[2],form.getTab()[3], 'i', im);
 		}
 	}
 

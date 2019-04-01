@@ -1,5 +1,6 @@
 package gui.processing;
 
+import java.awt.Image;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -108,7 +109,7 @@ public class ProcessingModel extends GeneralModel{
 	}
 
 	
-	public void addForm(int a,int b,int c,int d,char type) {
+	public void addForm(int a,int b,int c,int d,char type,Image i) {
 		int[] tab = new int[4];
 		tab[0] = a;
 		tab[1] = b;
@@ -119,13 +120,22 @@ public class ProcessingModel extends GeneralModel{
 			boolean containForm = false;
 			for(Form form : listRect) {
 				if(form.getTypeCommande() == type) {
-					form.setForm(tab, type);
+					if(i != null) {
+						form.setForm(tab, type,i);
+					}
+					else
+						form.setForm(tab, type,null);
+					
 					containForm = true;
 					break;
 				}
 			}	
 			if(!containForm) {
-				Form f = new Form(tab,type);
+				Form f;
+				if(i != null)
+					f = new Form(tab,type,i);
+				else
+					f = new Form(tab,type,null);
 				listRect.add(f);
 				System.out.println(a+"-"+b+"-"+c+"-"+d+"-t:"+type);
 			}
@@ -278,7 +288,6 @@ public class ProcessingModel extends GeneralModel{
 	}
 	
 	public void addImage(File e) {
-		System.out.println(e.getAbsolutePath());
 		this.images.add(e);
 		sendChanges();
 	}

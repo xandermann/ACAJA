@@ -1,18 +1,14 @@
 package gui.processing;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
-
-import javax.management.ListenerNotFoundException;
 
 import exceptions.IncorrectFileException;
 import exceptions.UnfindableResourceException;
 import files.enumerations.OperationType;
 import files.enumerations.ProcessingType;
-import files.enumerations.SettingType;
-import files.files.Modifiable;
 import files.files.ProcessingFile;
 import files.files.SelectableFile;
 import gui.alerts.AlertWindow;
@@ -21,28 +17,34 @@ import gui.general.GeneralModel;
 import threads.RuntimeSpaceManager;
 import threads.ThreadForSave;
 import threads.ThreadForWaitWindow;
-import wrapper.runtime.global.SystemRequests;
-import wrapper.runtime.global.UserRequests;
 
 public class ProcessingModel extends GeneralModel{
-	private List<SelectableFile> images;
 	private List<Form> listRect;
 	private boolean fUp,cropUp;
 	private ProcessingFile currentFile;
 	private File minia;
 	private String destinationFolder;
-	private String message;
 	private boolean rotateLeft, rotateRight;
+	private ArrayList<File> images;
 	
+	public ArrayList<File> getImages() {
+		return images;
+	}
+
+
+	public void setImages(ArrayList<File> images) {
+		this.images = images;
+	}
+
+
 	public ProcessingModel() {
 		Context.$M = this;
 		fUp = false;
 		cropUp = false;
 		setRotateLeft(false);
 		setRotateRight(false);
-		setMessage("Veuillez importer votre premier fichier");
 		listRect = new ArrayList<>();
-		images = new ArrayList<SelectableFile>();
+		images = new ArrayList<File>();
 	}
 
 	
@@ -102,7 +104,6 @@ public class ProcessingModel extends GeneralModel{
 	public void setCurrentFile(SelectableFile currentFile) {
 		this.currentFile = (ProcessingFile) currentFile;
 		this.setMinia(this.currentFile.getThumbnail());
-		setMessage("Fichier charge avec succes !");
 		sendChanges();
 	}
 
@@ -200,7 +201,6 @@ public class ProcessingModel extends GeneralModel{
 			
 		}
 		if(currentFile.isModified()) {
-			System.out.println("REAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
 			new Thread() {
 				public void run (){
 					/**
@@ -245,12 +245,6 @@ public class ProcessingModel extends GeneralModel{
 		return currentFile.isModified();
 	}
 
-
-	@Override
-	public void add(File file) throws IncorrectFileException, UnfindableResourceException {
-		images.add(new SelectableFile(file));
-	}
-
 	
 	@Override
 	public void remove(SelectableFile file) {
@@ -261,23 +255,6 @@ public class ProcessingModel extends GeneralModel{
 	@Override
 	public void clear() {
 		images.clear();		
-	}
-
-	
-	@Override
-	public List<SelectableFile> getFiles() {
-		return images;
-	}
-
-
-	public String getMessage() {
-		return message;
-	}
-
-	
-	public void setMessage(String message) {
-		this.message = message;
-		sendChanges();
 	}
 
 
@@ -298,5 +275,25 @@ public class ProcessingModel extends GeneralModel{
 
 	public void setRotateRight(boolean rotateRight) {
 		this.rotateRight = rotateRight;
+	}
+	
+	public void addImage(File e) {
+		System.out.println(e.getAbsolutePath());
+		this.images.add(e);
+		sendChanges();
+	}
+
+
+	@Override
+	public void add(File file) throws IncorrectFileException, UnfindableResourceException, FileNotFoundException {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public List<SelectableFile> getFiles() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

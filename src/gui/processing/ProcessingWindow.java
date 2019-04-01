@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -56,7 +57,7 @@ public class ProcessingWindow extends JFrame {
 		this.setTitle("Traitement d'une video");
 		this.setSize(1000, 625);
 		this.setLocationRelativeTo(null);
-		ProcessingPan p = new ProcessingPan();
+		ProcessingPan p = new ProcessingPan(model);
 		this.setResizable(false);
 		this.add(p);
 		addKeyListener(new GeneralKeyboardController());
@@ -85,13 +86,11 @@ public class ProcessingWindow extends JFrame {
 		process.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					model.setMessage("Veuillez patienter ...");
 					model.setDestinationFolder(JFileChooserManager.chooseDirectory());
 					model.getCurrentFile().setDestinationPath(model.getDestinationFolder());
 					model.getCurrentFile().setDestinationName("Traitement"+System.currentTimeMillis());
 					model.getCurrentFile().setFileExtension(".mp4");
 					model.save();
-					model.setMessage("Traitement termine !");
 					System.out.println("fait");
 				} catch (UnfindableResourceException e) {
 					// TODO Auto-generated catch block
@@ -129,16 +128,11 @@ public class ProcessingWindow extends JFrame {
 		importImage.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
-				try {
-					model.add(JFileChooserManager.chooseFile());
-				} catch (IncorrectFileException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (UnfindableResourceException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				
+					model.addImage(JFileChooserManager.chooseFile());
+					repaint();
 			}
+			
 		});
 		
 		

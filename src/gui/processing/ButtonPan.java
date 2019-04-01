@@ -83,7 +83,6 @@ public class ButtonPan extends JPanel {
 	
 	public void rotateLeftActivated() {
 		if(((ProcessingModel)Context.$M).getCurrentFile() != null) {
-		((ProcessingModel)Context.$M).setMessage("Pivoter a gauche");
 		if(!pivoteG1.isSelected()) {
 			// Annuler le pivot de la video
 			pivoteD1.setEnabled(true);
@@ -111,7 +110,6 @@ public class ButtonPan extends JPanel {
 	}
 	
 	public void cropIsSelected() {
-		((ProcessingModel)Context.$M).setMessage("Fonction de Crop activée !");
 		flouButton.setSelected(false);
 		((ProcessingModel)Context.$M).setfUp(false);
 		((ProcessingModel)Context.$M).setcropUp(false);
@@ -120,7 +118,6 @@ public class ButtonPan extends JPanel {
 	}
 	
 	public void flouIsSelected() {
-		((ProcessingModel)Context.$M).setMessage("Fonction de Floutage activée !");
 		rectangle.setSelected(false);
 		((ProcessingModel)Context.$M).setcropUp(false);
 		((ProcessingModel)Context.$M).setfUp(false);

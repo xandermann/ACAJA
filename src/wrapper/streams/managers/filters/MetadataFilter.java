@@ -9,9 +9,9 @@ import javax.swing.JOptionPane;
 
 import exceptions.UnfindableResourceException;
 import resources.NamesSpaceManager;
-import resources.ResourceConstants;
 import resources.StringTools;
-import wrapper.streams.iterators.*;
+import wrapper.streams.iterators.ProcessManager;
+import wrapper.streams.iterators.StreamIterator;
 import wrapper.streams.managers.consumers.OutputStreamConsumer;
 
 /**

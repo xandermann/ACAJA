@@ -4,7 +4,6 @@ import java.awt.event.WindowListener;
 
 import gui.general.Context;
 import gui.general.GeneralWindow;
-import resources.ResourcesManager;
 /**
  * [ CLASSE FENETRE DE LA VUE DE CHOIX DES PARAMETRES DES ALERTES. ]
  * 

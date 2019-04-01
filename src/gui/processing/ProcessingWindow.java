@@ -6,26 +6,23 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.File;
-import java.util.ArrayList;
+
 import javax.swing.JFrame;
 import javax.swing.JMenu;
-import javax.swing.JOptionPane;
+
 import exceptions.IncorrectFileException;
 import exceptions.UnfindableResourceException;
 import files.enumerations.ProcessingType;
 import files.files.ProcessingFile;
-import files.files.SelectableFile;
 import gui.JFileChooserManager;
 import gui.WindowTools;
 import gui.alerts.Alert;
-import gui.conversion.ConversionWindow;
 import gui.general.Actions;
 import gui.general.Context;
 import gui.general.GeneralKeyboardController;
 import gui.style.StylizedJMenuBar;
 import gui.style.StylizedJMenuItem;
 import resources.ResourcesManager;
-import wrapper.runtime.global.SystemRequests;
 
 public class ProcessingWindow extends JFrame {
 	

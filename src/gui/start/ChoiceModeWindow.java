@@ -1,4 +1,5 @@
 package gui.start;
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -14,6 +15,7 @@ import gui.processing.ProcessingWindow;
 import gui.style.StyleTheme;
 import gui.style.StylizedJButton;
 import gui.style.StylizedJPanel;
+
 /**
  * [ FENETRE CHOIX DU MODE D'UTILISATION DU LOGICIEL. ]
  */
@@ -23,9 +25,9 @@ public final class ChoiceModeWindow extends JFrame {
 	 */
 	public ChoiceModeWindow() {
 		super("Acaja");
-		
+
 		Context.$W = this;
-		
+
 		StylizedJButton convertbutton = new StylizedJButton("Conversion");
 		convertbutton.setPreferredSize(new Dimension(100, 40));
 		convertbutton.addActionListener(new ActionListener() {

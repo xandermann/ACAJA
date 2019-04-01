@@ -1,19 +1,21 @@
 package gui.start;
+
 import java.awt.Dimension;
 import javax.swing.JFrame;
 
 import gui.WindowTools;
 import resources.ResourcesManager;
+
 /**
- * [  FENETRE DE PRESENTATION DU LOGICIEL. ]
+ * [ FENETRE DE PRESENTATION DU LOGICIEL. ]
  */
 public final class LoadingWindow extends JFrame {
 	/**
-	 * [  CONSTRUIT UNE FENETRE DE PRESENTATION DU LOGICIEL. ]
+	 * [ CONSTRUIT UNE FENETRE DE PRESENTATION DU LOGICIEL. ]
 	 */
 	public LoadingWindow() {
 		super("Acaja - un logiciel a la portee de tous");
-		
+
 		ResourcesManager.clearResources();
 
 		setSize(new Dimension(400, 400));
@@ -46,9 +48,9 @@ public final class LoadingWindow extends JFrame {
 			loadingView.setPercentage(100);
 
 			Thread.sleep(500);
-		} catch (InterruptedException e) {}
+		} catch (InterruptedException e) {
+		}
 
-		
 		dispose();
 	}
 }

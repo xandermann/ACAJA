@@ -1,10 +1,4 @@
-/**
- * 
- */
-/**
- * @author alex
- *
- */
+
 module proj_tut {
 	exports wrapper.runtime.details;
 	exports gui.start;

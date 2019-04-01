@@ -1,9 +1,8 @@
 package wrapper.runtime.global;
 
-import java.util.*;
+import java.util.HashMap;
 
 import exceptions.UnfindableResourceException;
-import files.*;
 import files.enumerations.ProcessingType;
 import files.enumerations.SettingType;
 import files.files.ProcessingFile;

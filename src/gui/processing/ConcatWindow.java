@@ -14,17 +14,12 @@ import javax.swing.JPanel;
 
 import exceptions.IncorrectFileException;
 import exceptions.UnfindableResourceException;
-import files.enumerations.OperationType;
 import files.enumerations.ProcessingType;
 import files.files.ProcessingFile;
 import gui.JFileChooserManager;
 import gui.WindowTools;
-import gui.alerts.AlertWindow;
 import gui.style.StylizedJMenuBar;
 import gui.style.StylizedJMenuItem;
-import threads.RuntimeSpaceManager;
-import threads.ThreadForSave;
-import threads.ThreadForWaitWindow;
 
 public class ConcatWindow extends JFrame {
 	

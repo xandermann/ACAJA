@@ -24,7 +24,6 @@ public class DrawChange implements MouseMotionListener,MouseListener{
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		
 	}
 
 	@Override
@@ -45,6 +44,13 @@ public class DrawChange implements MouseMotionListener,MouseListener{
 		}
 		form = model.getListRect().get(indice);
 		im = form.getImageA();
+		
+		if(e.getX() > form.getTab()[0]-3 && e.getX() < form.getTab()[0]+3 && e.getY() > form.getTab()[1] && e.getY() < form.getTab()[0]+form.getTab()[3]) {
+			System.out.println("click");
+		}
+		if(e.getY() > form.getTab()[1]-3 && e.getY() < form.getTab()[1]+3) {//marche pas
+			System.out.println("click");
+		}
 	}
 
 	@Override
@@ -64,6 +70,8 @@ public class DrawChange implements MouseMotionListener,MouseListener{
 		if(e.getX() > form.getTab()[0] && e.getX() < form.getTab()[0]+form.getTab()[2] && e.getY() > form.getTab()[1] && e.getY() < form.getTab()[0]+form.getTab()[3]) {
 			model.addForm(e.getX()-(form.getTab()[2]/2),e.getY()-(form.getTab()[3]/2), form.getTab()[2],form.getTab()[3], 'i', im);
 		}
+		
+		
 	}
 
 	@Override

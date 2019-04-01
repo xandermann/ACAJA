@@ -40,6 +40,7 @@ public class LibraryView extends JPanel {
 		
 		for(File i : model.getImages()) {
 			JPanel j =new JPanel() {
+				
 				@Override
 				public void paintComponent(Graphics g) {
 					super.paintComponents(g);
@@ -49,20 +50,11 @@ public class LibraryView extends JPanel {
 					g.drawImage(image,0,0,this.getWidth(),150,null);
 				}
 			};
-			
 			this.add(j);
 			
-			
-			if(model.getImages().size()<5) {
-				for(int id = 0;id< 5-model.getImages().size();id++) {
-					JPanel jd = new JPanel();
-					this.add(j);
-				}
-			}
-			
-			
 		}
-			this.addMouseListener(new MouseListener() {
+		
+		this.addMouseListener(new MouseListener() {
 				
 				@Override
 				public void mouseReleased(MouseEvent e) {
@@ -74,9 +66,7 @@ public class LibraryView extends JPanel {
 					
 					try {
 						model.addForm(10, 10, 200, 150, 'i',ImageIO.read(model.getImages().get(ind)));
-					} catch (IOException e1) {
-						e1.printStackTrace();
-					}
+					} catch (IOException e1) {}
 					repaint();
 				}
 				
@@ -91,7 +81,7 @@ public class LibraryView extends JPanel {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 				}
-			});
+		});
 			
 		revalidate();
 		setActualiser(false);

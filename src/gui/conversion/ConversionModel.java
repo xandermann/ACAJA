@@ -1,17 +1,32 @@
 package gui.conversion;
 
-import java.io.*;
-import java.util.*;
-import javax.swing.*;
-import exceptions.*;
-import files.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+
+import exceptions.IncorrectFileException;
+import exceptions.UnfindableResourceException;
+import files.FileInformation;
 import files.enumerations.OperationType;
-import files.files.*;
-import gui.alerts.*;
+import files.files.Modifiable;
+import files.files.SelectableFile;
+import files.files.SettingsFile;
+import gui.alerts.Alert;
+import gui.alerts.AlertWindow;
 import gui.general.Context;
 import gui.general.GeneralModel;
-import resources.*;
-import threads.*;
+import resources.ResourcesManager;
+import threads.RuntimeSpaceManager;
+import threads.ThreadForSave;
+import threads.ThreadForWaitWindow;
 
 
 /**

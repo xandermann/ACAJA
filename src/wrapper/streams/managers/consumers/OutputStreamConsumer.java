@@ -1,12 +1,12 @@
 package wrapper.streams.managers.consumers;
 
-import java.io.*;
-
-import javax.swing.JOptionPane;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
 
 import exceptions.UnfindableResourceException;
 import resources.NamesSpaceManager;
-import resources.ResourceConstants;
 import wrapper.streams.iterators.ProcessManager;
 import wrapper.streams.iterators.StreamIterator;
 

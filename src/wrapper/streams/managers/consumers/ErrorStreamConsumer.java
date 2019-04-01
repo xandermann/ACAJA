@@ -1,12 +1,14 @@
 package wrapper.streams.managers.consumers;
 
-import java.io.*;
-
-import javax.swing.JOptionPane;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
 
 import exceptions.UnfindableResourceException;
-import resources.*;
-import wrapper.streams.iterators.*;
+import resources.NamesSpaceManager;
+import wrapper.streams.iterators.ProcessManager;
+import wrapper.streams.iterators.StreamIterator;
 
 /**
  * [ CLASSE POUR LA "CONSOMMATION" DU FLUX STDERR. ]

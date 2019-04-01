@@ -1,10 +1,8 @@
 package gui.general;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import exceptions.IncorrectFileException;
-import exceptions.UnfindableResourceException;
+
 import gui.JFileChooserManager;
 import gui.alerts.ASWindow;
 import gui.alerts.Alert;

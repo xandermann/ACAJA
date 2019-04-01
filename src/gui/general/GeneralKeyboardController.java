@@ -1,13 +1,9 @@
  package gui.general;
 
-import java.awt.event.*;
-import java.io.File;
-import java.util.ArrayList;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
-import gui.JFileChooserManager;
-import gui.alerts.*;
-import gui.conversion.*;
-import resources.ResourcesManager;
+import gui.alerts.AlertSettings;
 /**
  * [ CLASSE POUR REALISER DES RACCOURCIS CLAVIER GENERIQUES. ]
  * 

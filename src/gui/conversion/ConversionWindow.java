@@ -1,27 +1,43 @@
 package gui.conversion;
 
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.File;
-import java.util.ArrayList;
-import javax.swing.*;
-import exceptions.*;
+
+import javax.swing.BoxLayout;
+import javax.swing.ButtonGroup;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+
+import exceptions.UnfindableResourceException;
 import files.FileInformation;
 import files.enumerations.SettingType;
-import files.files.*;
+import files.files.SelectableFile;
+import files.files.SettingsFile;
 import gui.JFileChooserManager;
 import gui.WindowTools;
 import gui.alerts.Alert;
-import gui.alerts.ASWindow;
-import gui.answers.AnswersWindow;
-import gui.conversion.views.*;
+import gui.conversion.views.LibraryView;
+import gui.conversion.views.SummaryView;
+import gui.conversion.views.TabsView;
+import gui.conversion.views.TwoTextsView;
 import gui.general.Actions;
 import gui.general.Context;
 import gui.general.GeneralKeyboardController;
-import gui.processing.ProcessingWindow;
-import gui.style.*;
+import gui.style.StyleTheme;
+import gui.style.StylizedJButton;
+import gui.style.StylizedJFrame;
+import gui.style.StylizedJMenuBar;
+import gui.style.StylizedJMenuItem;
+import gui.style.StylizedJPanel;
 import resources.ResourcesManager;
-import threads.*;
 import wrapper.language.ValueConstants;
 
 //TODO : CODE OPTIMISATION

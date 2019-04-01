@@ -43,7 +43,7 @@ public final class VideoSettingsView extends SettingsView{
 				String[] videoCodecs = Arrays.copyOf(codecs.keySet().toArray(), 
 						codecs.keySet().toArray().length, String[].class);
 				codecsComboBox.removeAllItems();
-				codecsComboBox.setModel(new DefaultComboBoxModel(videoCodecs));
+				codecsComboBox.setModel(new DefaultComboBoxModel<String>(videoCodecs));
 				codecsComboBox.setSelectedIndex(0);
 				((Modifiable) Context.$M.getCurrentFile()).modify(SettingType.VIDEO_CODEC, 
 						codecsComboBox.getSelectedItem().toString());

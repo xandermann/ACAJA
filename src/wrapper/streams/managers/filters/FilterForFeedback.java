@@ -6,14 +6,11 @@ import java.io.FileReader;
 
 import javax.swing.JOptionPane;
 
-import gui.alerts.ATConstants;
-import gui.alerts.Alert;
-
 /**
  * [ CLASSE POUR LE FILTRAGE DES DONNEES EN REPONSE DES COMMANDES DE L'UTILISATEUR. ]
  * 
  * Ce filtre permet d'etudier le resultat d'une commande
- * et de le notifier à l'utilisateur.
+ * et de le notifier a l'utilisateur.
  * 
  * Auteurs du projet : 
  * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.

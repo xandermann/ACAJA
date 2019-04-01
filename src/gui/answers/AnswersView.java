@@ -1,19 +1,26 @@
 package gui.answers;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
-import gui.WindowTools;
 import gui.alerts.Alert;
-
-import java.awt.*;
-import java.awt.event.*;
-import resources.*;
+import resources.ResourceConstants;
+import resources.TimeTools;
 
 /**
  * [ CLASSE VUE DES REPONSES. ]

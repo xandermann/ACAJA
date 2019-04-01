@@ -371,6 +371,35 @@ public final class Request implements FlagConstants, ValueConstants{
 	}
 	
 	/**
+	 * [ PIVOTER DE 180 DEGRES ]
+	 * 
+	 * @return La requete this. 
+	 */
+	public Request rotate180() {
+		askSomethingElse(new String[] {FLAG_ROTATE[0], FLAG_ROTATE[3]});
+		return this;
+	}
+	
+	/**
+	 * [ PIVOTER DE 180 DEGRES ]
+	 * 
+	 * @return La requete this. 
+	 */
+	public Request rotate180Left() {
+		askSomethingElse(new String[] {FLAG_ROTATE[0], FLAG_ROTATE[4]});
+		return this;
+	}
+	
+	/**
+	 * [ PIVOTER DE 180 DEGRES ]
+	 * 
+	 * @return La requete this. 
+	 */
+	public Request rotate180Right() {
+		askSomethingElse(new String[] {FLAG_ROTATE[0], FLAG_ROTATE[5]});
+		return this;
+	}
+	/**
 	 * [ REDIMMENSIONNER. ]
 	 * 
 	 * @param width		La largeur. 

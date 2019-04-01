@@ -30,5 +30,4 @@ module proj_tut {
 	requires java.desktop;
 	requires java.management;
 	requires junit;
-	// requires junit;
 }

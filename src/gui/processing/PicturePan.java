@@ -9,8 +9,6 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
-import gui.general.Context;
-
 import resources.ResourceConstants;
 
 public class PicturePan extends JPanel {

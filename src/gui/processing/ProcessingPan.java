@@ -7,6 +7,7 @@ import java.awt.Graphics;
 
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import gui.style.*;
 
@@ -30,7 +31,10 @@ public class ProcessingPan extends JPanel {
 		processPanSpace.setBackground(Color.GRAY);
 		processPan.add(processPanSpace);
 		processPanButton.setPreferredSize(new Dimension(processPan.getWidth(), processPan.getHeight()/3));
-		processPanButton.add(new StylizedJButton("<html> <head><style> p{ text-align:center }</head><body><p> Démarrer le <br> traitement </p></body></html>"));
+		StylizedJButton buttonProcess = new StylizedJButton("<html> <head><style> p{ text-align:center }</style></head><body><p> Démarrer le <br> traitement </p></body></html>");
+		buttonProcess.setHorizontalAlignment(SwingConstants.CENTER);
+		processPanButton.add(buttonProcess);
+		
 		processPan.add(processPanButton);
 		PicturePan pi = new PicturePan(m);
 		pi.setPreferredSize(new Dimension((int)(getWidth()*(0.6)), (int)(getHeight()*(0.9))));

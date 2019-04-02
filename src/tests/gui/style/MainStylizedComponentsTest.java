@@ -81,6 +81,11 @@ public class MainStylizedComponentsTest {
 		panel.add(new StylizedJButton("Mon super bouton !"));
 		panel.add(new StylizedJButton("Attention danger !", StyleTheme.DANGER));
 		panel.add(new JPanel() {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 8410628226775665462L;
+
 			public void paintComponent(Graphics g) {
 				super.paintComponent(g);
 				

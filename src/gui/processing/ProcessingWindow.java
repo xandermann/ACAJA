@@ -25,6 +25,10 @@ import resources.ResourcesManager;
 
 public class ProcessingWindow extends JFrame {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6495416785122055429L;
 	private ProcessingModel model;
 
 	

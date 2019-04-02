@@ -16,6 +16,11 @@ import java.awt.event.*;
  */
 public final class ASView extends StylizedJPanel {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -484490710262678417L;
+
+	/**
 	 * [ CONSTRUCTEUR VIDE. ]
 	 */
 	public ASView() {

@@ -8,6 +8,11 @@ import javax.swing.border.LineBorder;
  */
 public class StylizedJMenuBar extends javax.swing.JMenuBar implements StylizedComponent {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6610841604281579970L;
+
 	public StylizedJMenuBar() {
 		super();
 		this.stylize();

@@ -14,6 +14,10 @@ import gui.general.Context;
 
 public class ButtonPan extends JPanel {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1294342658122646334L;
 	private JToggleButton flouButton;
 	private JToggleButton rectangle;
 	private JToggleButton rotateL1;

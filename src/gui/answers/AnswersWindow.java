@@ -15,6 +15,11 @@ import gui.general.*;
  */
 public final class AnswersWindow extends GeneralWindow {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2972302797790090255L;
+
+	/**
 	 * [ CONSTRUCTEUR VIDE. ]
 	 */
 	public AnswersWindow() {

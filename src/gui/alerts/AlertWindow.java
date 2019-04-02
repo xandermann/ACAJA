@@ -16,6 +16,11 @@ import gui.style.StylizedJFrame;
 
 public final class AlertWindow extends StylizedJFrame implements ATConstants{
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2688386215518460565L;
+
+	/**
 	 * [ CONSTRUIT UNE FENETRE D'ALERTE. ]
 	 * 
 	 * @param title				Titre / resume de la notification.
@@ -43,6 +48,11 @@ public final class AlertWindow extends StylizedJFrame implements ATConstants{
 		
 		
 		setContentPane(new JPanel() {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = -6325761192059369090L;
+
 			public void paintComponent(Graphics g) {
 				g.setColor(theme);
 				g.drawRect(0, 0, 299, 119); 

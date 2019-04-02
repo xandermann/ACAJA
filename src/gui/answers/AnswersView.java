@@ -38,6 +38,10 @@ import resources.TimeTools;
  */
 public final class AnswersView extends JPanel {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7932719513497907116L;
+	/**
 	 * LISTE DES REPONSES DANS UN JPANEL GRIDLAYOUT. 
 	 */
 	private JPanel main;

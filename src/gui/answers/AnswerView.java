@@ -19,6 +19,13 @@ import wrapper.streams.managers.filters.Errors;
  */
 public final class AnswerView extends JPanel{
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6032123373215002495L;
+
+
+
+	/**
 	 * [ CONSTRUCTEUR VIDE. ]
 	 */
 	public AnswerView(File support) {

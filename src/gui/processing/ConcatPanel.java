@@ -12,6 +12,11 @@ import files.files.ProcessingFile;
 
 public class ConcatPanel extends JPanel{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5509545756632580353L;
+
 	public ConcatPanel() {
 		setBackground(Color.black);
 		this.setSize(450,200);

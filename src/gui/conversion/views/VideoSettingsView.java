@@ -29,6 +29,10 @@ public final class VideoSettingsView extends SettingsView{
 	//=======================================================================================================================
 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 9221574782966376188L;
 	private JTextField bitrateText, fpsText;
 	private JComboBox<String> formatComboBox, codecsComboBox, resolutionsComboBox;
 	private SoundSettingsView ssp;

@@ -7,6 +7,11 @@ package gui.style;
 public class StylizedJFrame extends javax.swing.JFrame implements StylizedComponent {
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4036477885724951882L;
+
+	/**
 	 * Constructeur du JFrame
 	 * 
 	 * @param Le constructeur du JFrame. Il reste très simple car il ne fait

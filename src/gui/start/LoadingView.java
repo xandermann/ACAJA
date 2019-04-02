@@ -11,6 +11,10 @@ import resources.ResourceConstants;
 
 public final class LoadingView extends StylizedJPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2215930640158610324L;
 	private int[] pointsLoadingBar;
 	/**
 	 * Pourcentage total de la barre

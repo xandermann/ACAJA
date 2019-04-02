@@ -11,6 +11,11 @@ import javax.swing.JPanel;
 public class StylizedJPanel extends JPanel implements StylizedComponent {
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2554611420735505267L;
+
+	/**
 	 * Constructeur du JPanel. Ce constructeur est minimal et ne fait que appeler la
 	 * fonction super() puis stylise le composant.
 	 */

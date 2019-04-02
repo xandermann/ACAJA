@@ -17,6 +17,11 @@ import gui.style.*;
 
 public class ProcessingPan extends JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4600169663295346054L;
+
 	public ProcessingPan(ProcessingModel m) {
 		this.setBackground(Color.GRAY);
 		LibraryView pb = new LibraryView(m);

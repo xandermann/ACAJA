@@ -1,7 +1,6 @@
 package gui.processing;
 
 
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridBagLayout;
 import java.awt.Image;
@@ -13,6 +12,11 @@ import resources.ResourceConstants;
 
 public class PicturePan extends JPanel {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2812027917094282289L;
+
 	public PicturePan(ProcessingModel m) {
 		//this.setPreferredSize(new Dimension(600, 550));
 		this.setLayout(new GridBagLayout());
@@ -24,10 +28,10 @@ public class PicturePan extends JPanel {
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		ProcessingTools.drawDeco(g, this.size().height, this.size().width);
+		ProcessingTools.drawDeco(g, getHeight(), getWidth());
 		ImageIcon m = new ImageIcon(ResourceConstants.ACAJA_LOGO_OPACITY_PATH);
 		Image monImage = m.getImage();
-		g.drawImage(monImage, this.size().height / 2 - 130, this.size().width / 2 - 150, this);
+		g.drawImage(monImage, getHeight() / 2 - 130, getWidth() / 2 - 150, this);
 		
 		this.repaint();
 		

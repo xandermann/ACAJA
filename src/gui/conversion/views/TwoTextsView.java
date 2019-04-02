@@ -8,6 +8,10 @@ import javax.swing.JLabel;
  */
 public final class TwoTextsView extends JLabel {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6868328034037112437L;
+	/**
 	 * [ TEXTES INJECTES. ]
 	 */
 	private String first, second;

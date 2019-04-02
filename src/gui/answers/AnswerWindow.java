@@ -12,6 +12,11 @@ import gui.general.GeneralWindow;
  */
 public final class AnswerWindow extends GeneralWindow{
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7588929209700593196L;
+
+	/**
 	 * [ CONSTRUCTEUR AVEC PARAMETRES. ]
 	 */
 	public AnswerWindow(File f){

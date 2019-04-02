@@ -19,6 +19,10 @@ import gui.style.StylizedJPanel;
  */
 public abstract class SettingsView extends StylizedJPanel implements Observer {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4609872273736672152L;
+	/**
 	 * Indique si un changement est en cours. 
 	 */
 	protected boolean isChange;

@@ -16,6 +16,11 @@ import gui.general.Context;
 
 public class PictureVisualView extends JPanel implements Observer{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1662237756804313398L;
+
 	public PictureVisualView(ProcessingModel m) {
 		this.setPreferredSize(new Dimension(500, 350));
 		DrawChange d = new DrawChange(m);
@@ -37,7 +42,7 @@ public class PictureVisualView extends JPanel implements Observer{
 				e.printStackTrace();
 			}
 		}
-		g.drawRect(0, 0, this.size().width - 1, this.size().height - 1);
+		g.drawRect(0, 0, getWidth() - 1, getHeight() - 1);
 		ImageIcon monImage =null;
 		
 		for (int i = 0; i < ((ProcessingModel)Context.$M).getListRect().size(); i++) {

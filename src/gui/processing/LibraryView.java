@@ -1,6 +1,5 @@
 package gui.processing;
 
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -14,6 +13,10 @@ import javax.swing.JPanel;
 
 public class LibraryView extends JPanel {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2415628952891609528L;
 	private ProcessingModel model;
 	private Image image;
 	private static boolean actualiser;
@@ -41,6 +44,11 @@ public class LibraryView extends JPanel {
 		for(File i : model.getImages()) {
 			JPanel j =new JPanel() {
 				
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = 4570923892169107221L;
+
 				@Override
 				public void paintComponent(Graphics g) {
 					super.paintComponents(g);

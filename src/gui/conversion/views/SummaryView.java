@@ -17,6 +17,10 @@ public final class SummaryView extends StylizedJPanel implements Observer {
 	//=======================================================================================================================
 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2692342360947817976L;
 	private TwoTextsView inputFileLabel, videoLabel, soundLabel, durationLabel;
 	private JTextField outputFileText;
 

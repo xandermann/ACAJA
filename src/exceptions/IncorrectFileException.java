@@ -14,6 +14,10 @@ package exceptions;
  */
 public final class IncorrectFileException extends Exception {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1481249129366968765L;
+	/**
 	 * [ CONSTANTES DE CLASSE. ]
 	 * 
 	 * Messages d'erreur possibles.

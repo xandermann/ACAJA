@@ -11,6 +11,11 @@ import javax.swing.JMenuItem;
 public class StylizedJMenuItem extends JMenuItem implements StylizedComponent {
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7454089581736060222L;
+
+	/**
 	 * Constructeur du JMenuItem
 	 * 
 	 * @param title Ajout d'un titre obligatoire pour le JMenuItem. Le constructeur

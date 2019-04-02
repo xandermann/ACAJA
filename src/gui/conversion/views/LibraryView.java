@@ -23,6 +23,13 @@ public final class LibraryView extends StylizedJPanel implements Observer{
 	
 	
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3415076024928133155L;
+
+
+
+	/**
 	 * [ METHODE INTERNE POUR (RE-)DESSINER LA BIBLIOTHEQUE. ]
 	 */
 	private void displayLibrary() {

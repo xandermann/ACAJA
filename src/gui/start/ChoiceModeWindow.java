@@ -21,6 +21,11 @@ import gui.style.StylizedJPanel;
  */
 public final class ChoiceModeWindow extends JFrame {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6014955014572352919L;
+
+	/**
 	 * [ CONSTRUIT UNE FENETRE CHOIX DU MODE D'UTILISATION DU LOGICIEL. ]
 	 */
 	public ChoiceModeWindow() {

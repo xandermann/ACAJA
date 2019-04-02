@@ -17,6 +17,11 @@ import gui.general.GeneralWindow;
  */
 public final class ASWindow extends GeneralWindow{
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5267140675594351287L;
+
+	/**
 	 * [ CONSTRUCTEUR VIDE. ]
 	 */
 	public ASWindow(){

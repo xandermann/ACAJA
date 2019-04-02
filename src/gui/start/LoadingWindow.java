@@ -11,6 +11,11 @@ import resources.ResourcesManager;
  */
 public final class LoadingWindow extends JFrame {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4453235927197901051L;
+
+	/**
 	 * [ CONSTRUIT UNE FENETRE DE PRESENTATION DU LOGICIEL. ]
 	 */
 	public LoadingWindow() {

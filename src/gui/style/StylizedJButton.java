@@ -9,6 +9,10 @@ import java.awt.Color;
 public class StylizedJButton extends javax.swing.JButton implements StylizedComponent {
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2144569208796665234L;
+	/**
 	 * Couleur du bouton
 	 */
 	private Color color;

@@ -18,6 +18,10 @@ import gui.style.StyleTheme;
  */
 public final class RowView extends JPanel{
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2390609841482246872L;
+	/**
 	 * FICHIER CONCERNE.
 	 */
 	private SelectableFile file;

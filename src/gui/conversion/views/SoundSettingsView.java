@@ -29,6 +29,10 @@ public final class SoundSettingsView extends SettingsView{
 
 	
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6781362762264866586L;
 	private JComboBox<String> codecsComboBox;
 	private JTextField bitrateText, samplingRateText, channelsText;
 

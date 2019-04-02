@@ -6,6 +6,11 @@ import javax.swing.JTabbedPane;
 import gui.general.Context;
 
 public final class TabsView extends JTabbedPane{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6644027167257732786L;
+
 	public TabsView() {
 		Context.$C(3, this);
 		

@@ -23,6 +23,10 @@ import gui.style.StylizedJMenuItem;
 
 public class ConcatWindow extends JFrame {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -125816618351479903L;
 	private static ArrayList<ProcessingFile> listOfFile;
 	private ProcessingModel model;
 

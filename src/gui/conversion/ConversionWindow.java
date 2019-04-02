@@ -49,6 +49,10 @@ public final class ConversionWindow extends StylizedJFrame {
 	
 	
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7305498919932410940L;
+	/**
 	 * [ ATTRIBUTS D'INSTANCE. ]
 	 */
 	private JLabel empty;

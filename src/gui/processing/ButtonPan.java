@@ -136,6 +136,7 @@ public class ButtonPan extends JPanel {
 				((ProcessingModel)Context.$M).setRotate180(true);
 			}
 			}else rotate180.setSelected(false);
+		((ProcessingModel)Context.$M).sendChanges();
 	}
 	public void rotateLeft180Activated() {
 		if(((ProcessingModel)Context.$M).getCurrentFile() != null) {
@@ -155,6 +156,7 @@ public class ButtonPan extends JPanel {
 				((ProcessingModel)Context.$M).setRotate180Left(true);
 			}
 			}else rotateInvertedL1.setSelected(false);
+		((ProcessingModel)Context.$M).sendChanges();
 	}
 	
 	public void rotateRight180Activated() {
@@ -175,6 +177,7 @@ public class ButtonPan extends JPanel {
 				((ProcessingModel)Context.$M).setRotate180Right(true);
 			}
 		} else rotateInvertedR1.setSelected(false);
+		((ProcessingModel)Context.$M).sendChanges();
 	}
 	public void rotateLeftActivated() {
 		if(((ProcessingModel)Context.$M).getCurrentFile() != null) {
@@ -194,6 +197,7 @@ public class ButtonPan extends JPanel {
 			((ProcessingModel)Context.$M).setRotateLeft(true);
 		}
 		}else rotateL1.setSelected(false);
+		((ProcessingModel)Context.$M).sendChanges();
 	}
 	
 	public void rotateRightActivated() {
@@ -214,6 +218,7 @@ public class ButtonPan extends JPanel {
 				((ProcessingModel)Context.$M).setRotateRight(true);
 			}
 		} else rotateR1.setSelected(false);
+		((ProcessingModel)Context.$M).sendChanges();
 	}
 	
 	public void cropIsSelected() {

@@ -46,7 +46,7 @@ public class ProcessingPan extends JPanel {
 		buttonProcess.setHorizontalAlignment(SwingConstants.CENTER);
 		processPanButton.add(buttonProcess);
 		processPan.add(processPanButton);
-		PicturePan pi = new PicturePan(m);
+		PicturePan pi = new PicturePan();
 		pi.setPreferredSize(new Dimension((int)(getWidth()*(0.6)), (int)(getHeight()*(0.9))));
 		pi.addMouseListener(new MouseListener(){
 

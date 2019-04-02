@@ -65,18 +65,23 @@ public class DrawChange implements MouseMotionListener,MouseListener{
 		// TODO
 		if(
 				e.getY() > form.getTab()[1]-3 &&
-				e.getY() < form.getTab()[1]+3 
-				
+				e.getY() < form.getTab()[1]+3				
 		) {
 			System.out.println("click haut");
 		}
 		
-		/*
+		
 		// TODO
-		if(e.getX() > form.getTab()[0]) {
+		if(
+				e.getX() > form.getTab()[2]-3 && 
+				e.getX() < form.getTab()[2]+3 && 
+				e.getY() > form.getTab()[3] && 
+				e.getY() < form.getTab()[2]+form.getTab()[0]		
+		) {
 			System.out.println("Click droit");
 		}
 		
+		/*
 		// TODO
 		if(e.getX() > form.getTab()[0]) {
 			System.out.println("Clique bas");

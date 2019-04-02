@@ -39,18 +39,21 @@ public class DrawChange implements MouseMotionListener,MouseListener{
 		
 		int indice = 0;
 		for (int i = 0; i< model.getListRect().size();i++) {
-			if(model.getListRect().get(i).getTypeCommande() == 'i')
+			if(model.getListRect().get(i).getTypeCommande() == 'i') {
 				indice = i;
+				form = model.getListRect().get(indice);
+				im = form.getImageA();
+			}
 		}
-		form = model.getListRect().get(indice);
-		im = form.getImageA();
 		
+		
+		/*
 		if(e.getX() > form.getTab()[0]-3 && e.getX() < form.getTab()[0]+3 && e.getY() > form.getTab()[1] && e.getY() < form.getTab()[0]+form.getTab()[3]) {
 			System.out.println("click");
 		}
 		if(e.getY() > form.getTab()[1]-3 && e.getY() < form.getTab()[1]+3) {//marche pas
 			System.out.println("click");
-		}
+		}*/
 	}
 
 	@Override
@@ -66,10 +69,10 @@ public class DrawChange implements MouseMotionListener,MouseListener{
 				((ProcessingModel)Context.$M).addForm(refx, refy, (e.getX()-refx), (e.getY()-refy),'f',null);
 			}
 		
-		
-		if(e.getX() > form.getTab()[0] && e.getX() < form.getTab()[0]+form.getTab()[2] && e.getY() > form.getTab()[1] && e.getY() < form.getTab()[0]+form.getTab()[3]) {
-			model.addForm(e.getX()-(form.getTab()[2]/2),e.getY()-(form.getTab()[3]/2), form.getTab()[2],form.getTab()[3], 'i', im);
-		}
+		if(form != null)
+			if(e.getX() > form.getTab()[0] && e.getX() < form.getTab()[0]+form.getTab()[2] && e.getY() > form.getTab()[1] && e.getY() < form.getTab()[0]+form.getTab()[3]) {
+				model.addForm(e.getX()-(form.getTab()[2]/2),e.getY()-(form.getTab()[3]/2), form.getTab()[2],form.getTab()[3], 'i', im);
+			}
 		
 		
 	}

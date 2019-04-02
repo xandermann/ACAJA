@@ -372,6 +372,9 @@ public class SelectableFile {
 		return thumbnail;
 	}
 
+	public void setThumbnail(File thumb) {
+		thumbnail = thumb;
+	}
 	
 		
 	//=======================================================================================================================

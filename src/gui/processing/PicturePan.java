@@ -11,20 +11,20 @@ import javax.swing.JPanel;
 import resources.ResourceConstants;
 
 public class PicturePan extends JPanel {
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 2812027917094282289L;
 
+	private static final long serialVersionUID = 2812027917094282289L;
+	private ProcessingModel model;
+	
 	public PicturePan(ProcessingModel m) {
-		//this.setPreferredSize(new Dimension(600, 550));
 		this.setLayout(new GridBagLayout());
-		
 		PictureVisualView pic = new PictureVisualView(m);
+		model = m;
 		this.add(pic);
 	}
 
+	public void replacePictureVisualView() {
+		
+	}
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);

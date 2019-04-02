@@ -60,7 +60,7 @@ public class DrawChange implements MouseMotionListener,MouseListener{
 			System.out.println("click");
 		}
 		
-		if(e.getX())
+		
 		
 		/*
 		if(e.getY() > form.getTab()[1]-3 && e.getY() < form.getTab()[1]+3) {//marche pas

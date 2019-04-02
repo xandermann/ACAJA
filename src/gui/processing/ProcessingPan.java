@@ -11,6 +11,8 @@ import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import exceptions.UnfindableResourceException;
+import gui.JFileChooserManager;
 import gui.style.*;
 
 public class ProcessingPan extends JPanel {
@@ -44,9 +46,20 @@ public class ProcessingPan extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+					try {
+						m.setDestinationFolder(JFileChooserManager.chooseDirectory());
+						m.getCurrentFile().setDestinationPath(m.getDestinationFolder());
+						m.getCurrentFile().setDestinationName("Traitement"+System.currentTimeMillis());
+						m.getCurrentFile().setFileExtension(m.getCurrentFile().getSourceFileExtension());
+						m.save();
+						System.out.println("fait");
+					} catch (UnfindableResourceException ure) {
+						// TODO Auto-generated catch block
+						ure.printStackTrace();
+					}
+				}
 				
-				
-			}
+			
 			
 		});
 		this.add(pb);

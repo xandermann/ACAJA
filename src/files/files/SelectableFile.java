@@ -297,6 +297,19 @@ public class SelectableFile {
 		return sourceFile;
 	}
 
+	 public String getSourceFileExtension() {
+	        String extension = "";
+	        try {
+	            if (sourceFile != null && sourceFile.exists()) {
+	                String name = sourceFile.getName();
+	                extension = name.substring(name.lastIndexOf("."));
+	            }
+	        } catch (Exception e) {
+	            extension = "";
+	        }
+	        return extension;
+	 
+	    }
 	/**
 	 * [ METHODE ACCESSEUR - GETTER. ]
 	 * 

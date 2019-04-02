@@ -84,7 +84,7 @@ public class ProcessingWindow extends JFrame {
 					model.setDestinationFolder(JFileChooserManager.chooseDirectory());
 					model.getCurrentFile().setDestinationPath(model.getDestinationFolder());
 					model.getCurrentFile().setDestinationName("Traitement"+System.currentTimeMillis());
-					model.getCurrentFile().setFileExtension(".mp4");
+					model.getCurrentFile().setFileExtension(model.getCurrentFile().getSourceFileExtension());
 					model.save();
 					System.out.println("fait");
 				} catch (UnfindableResourceException e) {

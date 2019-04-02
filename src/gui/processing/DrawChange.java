@@ -13,7 +13,7 @@ import gui.general.Context;
 
 public class DrawChange implements MouseMotionListener,MouseListener{
 	
-	private int refx,refy,xx,yy;
+	private int refx,refy;
 	private ProcessingModel model;
 	private Form form;
 	private Image im;

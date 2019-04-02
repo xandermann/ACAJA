@@ -10,7 +10,7 @@ public final class JFileChooserManager {
 
 	public static File chooseFile() {
 		StylizedJFileChooser jfc = new StylizedJFileChooser("Parcourir");
-		int chooserStatus = jfc.showOpenDialog(null);
+		jfc.showOpenDialog(null);
 		File importFile = jfc.getSelectedFile();
 		return importFile;
 	}

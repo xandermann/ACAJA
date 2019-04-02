@@ -370,7 +370,7 @@ public final class ConversionWindow extends StylizedJFrame {
 		new JLabel(((ConversionModel) Context.$M).getDestinationFolder().getAbsolutePath(), JLabel.CENTER)
 		: new JLabel("Auncun reperoire de sortie selectionne.", JLabel.CENTER);
 		
-		JPanel folder  = new JPanel(new BorderLayout());
+		
 		output.add(new JLabel("<html><br>REPERTOIRE DE SORTIE : </html>", JLabel.CENTER),BorderLayout.NORTH);
 		output.add(outputFolder,BorderLayout.CENTER);
 		

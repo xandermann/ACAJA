@@ -306,14 +306,13 @@ public class ProcessingModel extends GeneralModel{
 
 	@Override
 	public void add(File file) throws IncorrectFileException, UnfindableResourceException, FileNotFoundException {
-		// TODO Auto-generated method stub
+
 		
 	}
 
 
 	@Override
 	public List<SelectableFile> getFiles() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -336,23 +335,7 @@ public class ProcessingModel extends GeneralModel{
 	public void setRotate180Right(boolean rotate180Right) {
 		this.rotate180Right = rotate180Right;
 	}
-	/*
-	public void updateRotations(String direction) {
-		switch(direction) {
-		case "left":
-			break;
-			
-		case "right":
-			break;
-			
-		case "left180":
-			break;
-			
-		case "right180":
-			break;
-			
-		}
-	}*/
+
 
 
 	public boolean isRotate180() {

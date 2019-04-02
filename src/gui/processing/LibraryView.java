@@ -20,7 +20,7 @@ public class LibraryView extends JPanel {
 
 	public LibraryView(ProcessingModel m) {
 		this.model = m;
-		this.setPreferredSize(new Dimension(250, 550));
+		//this.setPreferredSize(new Dimension(250, 550));
 		this.setLayout(new GridLayout(5,1));
 		actualiser = false;
 		this.repaint();

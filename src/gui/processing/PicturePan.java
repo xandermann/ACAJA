@@ -14,7 +14,7 @@ import resources.ResourceConstants;
 public class PicturePan extends JPanel {
 	
 	public PicturePan(ProcessingModel m) {
-		this.setPreferredSize(new Dimension(600, 550));
+		//this.setPreferredSize(new Dimension(600, 550));
 		this.setLayout(new GridBagLayout());
 		
 		PictureVisualView pic = new PictureVisualView(m);

@@ -12,7 +12,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 public class LibraryView extends JPanel {
-	
+
 	/**
 	 * 
 	 */
@@ -23,8 +23,8 @@ public class LibraryView extends JPanel {
 
 	public LibraryView(ProcessingModel m) {
 		this.model = m;
-		//this.setPreferredSize(new Dimension(250, 550));
-		this.setLayout(new GridLayout(5,1));
+		// this.setPreferredSize(new Dimension(250, 550));
+		this.setLayout(new GridLayout(4, 1));
 		actualiser = false;
 		this.repaint();
 	}
@@ -32,18 +32,18 @@ public class LibraryView extends JPanel {
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		if(actualiser)
+		if (actualiser)
 			createAll();
 		ProcessingTools.drawDeco(g, this.getHeight(), this.getWidth());
-		
+
 	}
-	
+
 	public void createAll() {
 		removeAll();
-		
-		for(File i : model.getImages()) {
-			JPanel j =new JPanel() {
-				
+
+		for (File i : model.getImages()) {
+			JPanel j = new JPanel() {
+
 				/**
 				 * 
 				 */
@@ -52,45 +52,50 @@ public class LibraryView extends JPanel {
 				@Override
 				public void paintComponent(Graphics g) {
 					super.paintComponents(g);
-					
-					try { image = ImageIO.read(i);} catch (IOException e) {e.printStackTrace();}
-				
-					g.drawImage(image,0,0,this.getWidth(),150,null);
+
+					try {
+						image = ImageIO.read(i);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+
+					g.drawImage(image, 12, 12, this.getWidth() - 24, 120, null);
 				}
 			};
 			this.add(j);
-			
+
 		}
-		
+
 		this.addMouseListener(new MouseListener() {
-				
-				@Override
-				public void mouseReleased(MouseEvent e) {
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				int ind = e.getY() / (getHeight() / 5);
+
+				try {
+					model.addForm(10, 10, 200, 150, 'i', ImageIO.read(model.getImages().get(ind)));
+				} catch (IOException e1) {
 				}
-				
-				@Override
-				public void mousePressed(MouseEvent e) {
-					int ind = e.getY()/(getHeight()/5);
-					
-					try {
-						model.addForm(10, 10, 200, 150, 'i',ImageIO.read(model.getImages().get(ind)));
-					} catch (IOException e1) {}
-					repaint();
-				}
-				
-				@Override
-				public void mouseExited(MouseEvent e) {
-				}
-				
-				@Override
-				public void mouseEntered(MouseEvent e) {
-				}
-				
-				@Override
-				public void mouseClicked(MouseEvent e) {
-				}
+				repaint();
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+			}
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
 		});
-			
+
 		revalidate();
 		setActualiser(false);
 	}

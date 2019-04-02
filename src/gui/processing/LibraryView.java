@@ -74,7 +74,7 @@ public class LibraryView extends JPanel {
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				int ind = e.getY() / (getHeight() / 5);
+				int ind = e.getY() / (getHeight() / 4);
 
 				try {
 					model.addForm(10, 10, 200, 150, 'i', ImageIO.read(model.getImages().get(ind)));

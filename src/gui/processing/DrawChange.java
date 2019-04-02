@@ -74,7 +74,6 @@ public class DrawChange implements MouseMotionListener,MouseListener{
 				model.addForm(e.getX()-(form.getTab()[2]/2),e.getY()-(form.getTab()[3]/2), form.getTab()[2],form.getTab()[3], 'i', im);
 			}
 		
-		
 	}
 
 	@Override

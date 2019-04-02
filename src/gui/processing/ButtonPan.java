@@ -36,9 +36,9 @@ public class ButtonPan extends JPanel {
 		flouButton = new JToggleButton(new ImageIcon(resources.ResourceConstants.BLURRED));
 		rotateL1 = new JToggleButton(new ImageIcon(resources.ResourceConstants.LEFT_ARROW));
 		rotateR1 = new JToggleButton(new ImageIcon(resources.ResourceConstants.RIGHT_ARROW));
-		rotateInvertedL1 = new JToggleButton("L180");
-		rotateInvertedR1 = new JToggleButton("D180");
-		rotate180 = new JToggleButton("180");
+		rotateInvertedL1 = new JToggleButton(new ImageIcon("img/fliptournG.png"));
+		rotateInvertedR1 = new JToggleButton(new ImageIcon("img/fliptournD.png"));
+		rotate180 = new JToggleButton(new ImageIcon("img/180.png"));
 	
 		JButton undo = new JButton(new ImageIcon(resources.ResourceConstants.LEFT_ARROW));
 		

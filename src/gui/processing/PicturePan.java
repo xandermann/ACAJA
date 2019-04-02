@@ -22,6 +22,9 @@ public class PicturePan extends JPanel {
 		this.add(pic);
 	}
 
+	public void replacePictureVisualView() {
+		
+	}
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);

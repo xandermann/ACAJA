@@ -54,9 +54,7 @@ public final class FFmpegRuntime {
 		String os = System.getProperty("os.name");
 		String S = File.separator;
 		if(os.contains("Linux")){
-			FFMPEG_PATH = new String[2];
-			FFMPEG_PATH[0] = S+"bin"+S+"bash";
-			FFMPEG_PATH[1] = "ffmpeg";
+			FFMPEG_PATH = new String[]{"ffmpeg"};
 		}else{
 			if(os.contains("Mac")) 
 				FFMPEG_PATH = new String[]{S+"usr"+S+"local"+S+"bin"+S+"ffmpeg"};

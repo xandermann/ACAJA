@@ -151,38 +151,5 @@ public class DrawChange implements MouseMotionListener, MouseListener {
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
-
-		if (form != null) {
-			int[] tab = form.getTab();
-
-			int x = e.getX();
-			int y = e.getY();
-
-			// 0 < X < 0
-			// 1 < 1+3
-			if (tab[0] - MARGE < x && x < tab[0] + MARGE && tab[1] < y && y < tab[0] + tab[2]) {
-				model.addForm(refx - e.getX(), refy, x, y, 'i', im);
-			}
-
-			// 0 < X < 0+2
-			// 1 < Y < 1
-			else if (tab[0] < x && x < tab[0] + tab[2] && tab[1] - MARGE < y && y < tab[1] + MARGE) {
-				model.addForm(refx, refy - e.getY(), x, y, 'i', im);
-			}
-
-			// 0+2 < X < 0+2
-			// 1 < Y < 1+3
-			else if (tab[0] + tab[2] - MARGE < x && x < tab[0] + tab[2] + MARGE && tab[1] < y && y < tab[1] + tab[3]) {
-				System.out.println("Modification droit");
-				model.addForm(refx, refy, e.getX(), y, 'i', im);
-			}
-
-			// 0 < x < 0+2
-			// 1+3 < y < 1+3
-			else if (tab[0] < x && x < tab[0] + tab[2] && tab[1] + tab[3] - MARGE < y && y < tab[1] + tab[3] + MARGE) {
-				System.out.println("Modification bas ");
-				model.addForm(refx, refy, x, e.getY(), 'i', im);
-			}
-		}
 	}
 }

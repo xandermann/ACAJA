@@ -1,6 +1,5 @@
 package gui.processing;
 
-import java.awt.Image;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -13,13 +12,9 @@ import files.enumerations.ProcessingType;
 import files.files.ProcessingFile;
 import files.files.SelectableFile;
 import gui.JFileChooserManager;
-import gui.alerts.AlertWindow;
 import gui.general.Context;
 import gui.general.GeneralModel;
 import resources.NamesSpaceManager;
-import threads.RuntimeSpaceManager;
-import threads.ThreadForSave;
-import threads.ThreadForWaitWindow;
 import wrapper.runtime.details.Request;
 
 public class ProcessingModel extends GeneralModel{
@@ -28,10 +23,8 @@ public class ProcessingModel extends GeneralModel{
 	private ProcessingFile currentFile;
 	private File minia;
 	private String destinationFolder;
-	private boolean rotateLeft, rotateRight, rotate180Left, rotate180Right, rotate180, rotation;
+	private boolean rotateLeft, rotateRight, rotate180Left, rotate180Right, rotate180;
 	private ArrayList<File> images;
-	private String cropOrBlurSetting;
-	private boolean verticalMode;
 	
 	public ArrayList<File> getImages() {
 		return images;
@@ -52,8 +45,6 @@ public class ProcessingModel extends GeneralModel{
 		rotate180Left = false;
 		rotate180Right = false;
 		rotate180 = false;
-		verticalMode = false;
-		cropOrBlurSetting = "";
 		listRect = new ArrayList<>();
 		images = new ArrayList<File>();
 	}
@@ -182,66 +173,60 @@ public class ProcessingModel extends GeneralModel{
 	@Override
 	public void save() throws UnfindableResourceException {
 
-		rotation = false;
-	
+		boolean rotation = false;
+		boolean blur = false;
+		boolean crop = false;
+		boolean image = false;
+		boolean verticalMode = false;
+		boolean invertedVerticalMode = false;
 		
-		if(rotateLeft) {	
-
-			this.modify(ProcessingType.ROTATED, "left");
-			rotation = true;
-			
-		} 
-		if(rotateRight) {
-			this.modify(ProcessingType.ROTATED, "right");
-			rotation = true;
+		if(rotateLeft || rotateRight || rotate180Left || rotate180Right || rotate180) rotation = true;
+		if(rotateLeft) this.modify(ProcessingType.ROTATED, "left");
+		if(rotateRight) this.modify(ProcessingType.ROTATED, "right");
+		if(rotate180Left) this.modify(ProcessingType.ROTATED, "180left");
+		if(rotate180Right) this.modify(ProcessingType.ROTATED, "180right");
+		if(rotate180) this.modify(ProcessingType.ROTATED, "180");
+		if(rotateLeft || rotateRight ) verticalMode = true;
+		if(rotate180Left || rotate180Right) invertedVerticalMode = true;
+		
+		String[] actualResolution = currentFile.getResolution().split("x");
+		double coeffWidth = ((double)Integer.parseInt(actualResolution[0]))/500;
+		double coeffHeight = ((double)Integer.parseInt(actualResolution[1]))/350;
+		if(verticalMode) {
+			coeffWidth = ((double)Integer.parseInt(actualResolution[0]))/350;
+			coeffHeight = ((double)Integer.parseInt(actualResolution[1]))/500;
 		}
-		if(rotate180Left) {
-			this.modify(ProcessingType.ROTATED, "180left");
-			rotation = true;
-		}
-		if(rotate180Right) {
-			this.modify(ProcessingType.ROTATED, "180right");
-			rotation = true;
-		}
-		if(rotate180) {
-			this.modify(ProcessingType.ROTATED, "180");
-			rotation = true;
-		}
+		// TODO invertedVerticalMode
+		// TODO invertedVerticalMode
+		// TODO invertedVerticalMode
 		
 		if(!listRect.isEmpty()) {
-			Form actu = this.listRect.get(this.listRect.size()-1);
-			String[] res = currentFile.getResolution().split("x");
-			
-			double coeffWidth = ((double)Integer.parseInt(res[0]))/500;
-			double coeffHeight = ((double)Integer.parseInt(res[1]))/350;
-			
-			int x = (int) (actu.getTab()[0]*coeffWidth);
-			int y = (int) (actu.getTab()[1]*coeffHeight);
-			
-			int width = (int) (actu.getTab()[2]*coeffWidth);
-			int height = (int) (actu.getTab()[3]*coeffHeight);
-			
-			cropOrBlurSetting = x+" "+y+" "+width+" "+height;
-		
-			
-				switch (actu.getTypeCommande()) {
+			for(Form f : listRect) {
+				int x = (int) (f.getTab()[0]*coeffWidth);
+				int y = (int) (f.getTab()[1]*coeffHeight);	
+				int width = (int) (f.getTab()[2]*coeffWidth);
+				int height = (int) (f.getTab()[3]*coeffHeight);
+				switch (f.getTypeCommande()) {
 				case 'c':
-					this.modify(ProcessingType.CROPED,cropOrBlurSetting);
-					
+					this.modify(ProcessingType.CROPED,x+" "+y+" "+width+" "+height);
+					crop = true;
 					break;
 				case 'f':
-					this.modify(ProcessingType.BLURRED,cropOrBlurSetting);
+					this.modify(ProcessingType.BLURRED,x+" "+y+" "+width+" "+height);
+					blur = true;
 					break;
 				case 'i':
 					String output = NamesSpaceManager._temporary();
-					new Request(actu.getImageA().getAbsolutePath(),output).resize(""+width, ""+height).make();
+					new Request(f.getImageA().getAbsolutePath(),output).resize(""+width, ""+height).make();
 					this.modify(ProcessingType.ADDED_IMAGE, output+" "+x+" "+y);
+					image = true;
 					break;
-		
 				default:
 					System.out.println("Non implemente");
-					break;
+				break;
 				}
+			}
+				
 			}
 		
 			
@@ -251,11 +236,15 @@ public class ProcessingModel extends GeneralModel{
 		currentFile.setDestinationName("MaSuperVideo"+System.currentTimeMillis());
 		currentFile.setFileExtension(currentFile.getSourceFileExtension());
 		if(rotation && modeCrop) {
-			System.out.println("Rotation et crop");
+			System.out.println("Rotation et rogner");
 			ProcessThreadManager.treatMultipleProcesses(currentFile, ProcessingType.CROPED);	
 		} else if (rotation && modeBlur) {
 			System.out.println("Rotation et flou");
 			ProcessThreadManager.treatMultipleProcesses(currentFile, ProcessingType.BLURRED);	
+		} else if (crop && blur) {
+			System.out.println("Rogner et flouter");
+			ProcessThreadManager.treatMultipleProcesses(currentFile,ProcessingType.CROPED);
+			System.out.println("A TESTER");
 		} else {
 			System.out.println("Autre cas.");
 			ProcessThreadManager.treatOneProcess(currentFile);
@@ -359,4 +348,5 @@ public class ProcessingModel extends GeneralModel{
 	public void setRotate180(boolean rotate180) {
 		this.rotate180 = rotate180;
 	}
+
 }

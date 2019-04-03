@@ -15,6 +15,7 @@ import javax.swing.SwingConstants;
 
 import exceptions.UnfindableResourceException;
 import gui.JFileChooserManager;
+import gui.alerts.Alert;
 import gui.general.Context;
 import gui.style.*;
 
@@ -90,8 +91,7 @@ public class ProcessingPan extends JPanel {
 						((ProcessingModel)Context.$M).save();
 						System.out.println("fait");
 					} catch (UnfindableResourceException ure) {
-						// TODO Auto-generated catch block
-						ure.printStackTrace();
+						Alert.longAlert(Alert.FAILURE, "Merci de choisir un repertoire");
 					}
 				}
 				

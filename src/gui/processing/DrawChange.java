@@ -70,21 +70,29 @@ public class DrawChange implements MouseMotionListener, MouseListener {
 		int x = e.getX();
 		int y = e.getY();
 
-		/*
-		 * // 0 < X < 0 // 1 < 1+3 if (tab[0] - MARGE < x && x < tab[0] + MARGE &&
-		 * tab[1] < y && y < tab[1] + tab[3]) { System.out.println("click gauche"); }
-		 * 
-		 * // 0 < X < 0+2 // 1 < Y < 1 if (tab[0] < x && x < tab[0] + tab[2] && tab[1] -
-		 * MARGE < y && y < tab[1] + MARGE) { System.out.println("click haut"); }
-		 * 
-		 * // 0+2 < X < 0+2 // 1 < Y < 1+3 if (tab[0] + tab[2] - MARGE < x && x < tab[0]
-		 * + tab[2] + MARGE && tab[1] < y && y < tab[1] + tab[3]) {
-		 * System.out.println("click droit"); }
-		 * 
-		 * // 0 < x < 0+2 // 1+3 < y < 1+3 if (tab[0] < x && x < tab[0] + tab[2] &&
-		 * tab[1] + tab[3] - MARGE < y && y < tab[1] + tab[3] + MARGE) {
-		 * System.out.println("click bas"); }
-		 */
+		// 0 < X < 0
+		// 1 < 1+3
+		if (tab[0] - MARGE < x && x < tab[0] + MARGE && tab[1] < y && y < tab[1] + tab[3]) {
+			System.out.println("TODO: click gauche");
+		}
+
+		// 0 < X < 0+2
+		// 1 < Y < 1
+		if (tab[0] < x && x < tab[0] + tab[2] && tab[1] - MARGE < y && y < tab[1] + MARGE) {
+			System.out.println("TODO: click haut");
+		}
+
+		// 0+2 < X < 0+2
+		// 1 < Y < 1+3
+		if (tab[0] + tab[2] - MARGE < x && x < tab[0] + tab[2] + MARGE && tab[1] < y && y < tab[1] + tab[3]) {
+			System.out.println("TODO: click droit");
+		}
+
+		// 0 < x < 0+2
+		// 1+3 < y < 1+3
+		if (tab[0] < x && x < tab[0] + tab[2] && tab[1] + tab[3] - MARGE < y && y < tab[1] + tab[3] + MARGE) {
+			System.out.println("TODO: click bas");
+		}
 
 	}
 

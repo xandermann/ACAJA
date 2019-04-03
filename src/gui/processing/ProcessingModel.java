@@ -16,9 +16,11 @@ import gui.JFileChooserManager;
 import gui.alerts.AlertWindow;
 import gui.general.Context;
 import gui.general.GeneralModel;
+import resources.NamesSpaceManager;
 import threads.RuntimeSpaceManager;
 import threads.ThreadForSave;
 import threads.ThreadForWaitWindow;
+import wrapper.runtime.details.Request;
 
 public class ProcessingModel extends GeneralModel{
 	private List<Form> listRect;
@@ -231,7 +233,9 @@ public class ProcessingModel extends GeneralModel{
 					this.modify(ProcessingType.BLURRED,cropOrBlurSetting);
 					break;
 				case 'i':
-					this.modify(ProcessingType.ADDED_IMAGE, actu.getImageA()+" "+x+" "+y);
+					String output = NamesSpaceManager._temporary();
+					new Request(actu.getImageA().getAbsolutePath(),output).resize(""+width, ""+height).make();
+					this.modify(ProcessingType.ADDED_IMAGE, output+" "+x+" "+y);
 					break;
 		
 				default:

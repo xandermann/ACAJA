@@ -12,6 +12,7 @@ import files.enumerations.OperationType;
 import files.enumerations.ProcessingType;
 import files.files.ProcessingFile;
 import files.files.SelectableFile;
+import gui.JFileChooserManager;
 import gui.alerts.AlertWindow;
 import gui.general.Context;
 import gui.general.GeneralModel;
@@ -243,156 +244,110 @@ public class ProcessingModel extends GeneralModel{
 	if(currentFile.isModified()) {
 		if(rotation && cropUp) {
 			System.out.println("Rotation et crop");
-			/******************************************************************************************
-			 ******************************************************************************************
-			 ******************************************************************************************
-			 *******************************************************************************************
-			 ******************************************************************************************
-			 *******************************************************************************************
-			 ******************************************************************************************
-			 */
 			currentFile.cancel(ProcessingType.CROPED);
-			new Thread() {
-				public void run (){
-					/**
-					 * ATTENDRE QU'ON ME RENDE LA MAIN.
-					 */
-					while(RuntimeSpaceManager.hand.took());
-					
-					
-					/**
-					 * DEBUT DU TRAITEMENT :
-					 * 
-					 * Prendre la main sur l'espace d'execution.
-					 * Prendre la main sur ffmpeg.
-					 */
-					RuntimeSpaceManager.hand.take();
-					startSave();
-					/**
-					 * LANCEMENT DU TRAITEMENT DANS UN AUTRE PROCESSUS.
-					 */
-					ThreadForSave.saveInNewThread(currentFile);
-					/**
-					 * LANCEMENT ET GESTION DE LA FENETRE D'ATTENTE DANS UN AUTRE PROCESSUS.
-					 */
-					ThreadForWaitWindow.waitInNewThread(
-							new AlertWindow(
-									AlertWindow.INFO,
-									"Traitement du fichier "+currentFile.getSourceFileName()+"<br>Veuillez patientez..."),
-							currentFile.getSourceFile());
-				}
-			}.start();
-			/******************************************************************************************
-			 ******************************************************************************************
-			 ******************************************************************************************
-			 *******************************************************************************************
-			 ******************************************************************************************
-			 *******************************************************************************************
-			 ******************************************************************************************
-			 */
+			File dest =  JFileChooserManager.chooseDirectory();
+			setDestinationFolder(dest);
+			//getCurrentFile().setDestinationPath(getDestinationFolder());
+			getCurrentFile().setDestinationName("tmp_process_file");
+			getCurrentFile().setFileExtension(getCurrentFile().getSourceFileExtension());
+			String path = getDestinationFolder()+ File.separator + "tmp_process_file" + getCurrentFile().getSourceFileExtension();
+			processFile(getCurrentFile());	
+		/*	
+		 * En cas de probleme avec les threads
+		 * 
+		 * boolean loaded = false;
+			while(!loaded) {
+				try {
+					setCurrentFile(new ProcessingFile(new File(path)));
+					loaded = true;
+				} catch (Exception e) { }
+			} */
+			try {
+				ProcessingFile secondFile = null;
+				boolean loaded = false;
+				while(!loaded) {
+					try {
+						secondFile = new ProcessingFile(new File(path));
+						loaded = true;
+					} catch (Exception e) { }
+				} 
+				secondFile = new ProcessingFile(new File(path));
+				secondFile.modify(ProcessingType.CROPED,cropOrBlurSetting);
+				secondFile.setDestinationPath(getDestinationFolder());
+				secondFile.setDestinationName("new_process_file");
+				secondFile.setFileExtension(getCurrentFile().getSourceFileExtension());
+				processFile(secondFile);
+				File f = new File(path);
+				f.delete();
+			} catch (IncorrectFileException ife) {} catch (Exception e) { }
+			
 		} else if (rotation && fUp) {
 			System.out.println("Rotation et flou");
-			/******************************************************************************************
-			 ******************************************************************************************
-			 ******************************************************************************************
-			 *******************************************************************************************
-			 ******************************************************************************************
-			 *******************************************************************************************
-			 ******************************************************************************************
-			 */
-			new Thread() {
-				public void run (){
-					/**
-					 * ATTENDRE QU'ON ME RENDE LA MAIN.
-					 */
-					while(RuntimeSpaceManager.hand.took());
-					
-					
-					/**
-					 * DEBUT DU TRAITEMENT :
-					 * 
-					 * Prendre la main sur l'espace d'execution.
-					 * Prendre la main sur ffmpeg.
-					 */
-					RuntimeSpaceManager.hand.take();
-					startSave();
-					/**
-					 * LANCEMENT DU TRAITEMENT DANS UN AUTRE PROCESSUS.
-					 */
-					ThreadForSave.saveInNewThread(currentFile);
-					/**
-					 * LANCEMENT ET GESTION DE LA FENETRE D'ATTENTE DANS UN AUTRE PROCESSUS.
-					 */
-					ThreadForWaitWindow.waitInNewThread(
-							new AlertWindow(
-									AlertWindow.INFO,
-									"Traitement du fichier "+currentFile.getSourceFileName()+"<br>Veuillez patientez..."),
-							currentFile.getSourceFile());
-				}
-			}.start();
-			/******************************************************************************************
-			 ******************************************************************************************
-			 ******************************************************************************************
-			 *******************************************************************************************
-			 ******************************************************************************************
-			 *******************************************************************************************
-			 ******************************************************************************************
-			 */
+			
 		} else {
+			setDestinationFolder(JFileChooserManager.chooseDirectory());
+			getCurrentFile().setDestinationPath(getDestinationFolder());
+			getCurrentFile().setDestinationName("Traitement"+System.currentTimeMillis());
+			getCurrentFile().setFileExtension(getCurrentFile().getSourceFileExtension());
+			processFile(getCurrentFile());
 			System.out.println("Autre cas.");
-			/******************************************************************************************
-			 ******************************************************************************************
-			 ******************************************************************************************
-			 *******************************************************************************************
-			 ******************************************************************************************
-			 *******************************************************************************************
-			 ******************************************************************************************
-			 */
-			new Thread() {
-				public void run (){
-					/**
-					 * ATTENDRE QU'ON ME RENDE LA MAIN.
-					 */
-					while(RuntimeSpaceManager.hand.took());
-					
-					
-					/**
-					 * DEBUT DU TRAITEMENT :
-					 * 
-					 * Prendre la main sur l'espace d'execution.
-					 * Prendre la main sur ffmpeg.
-					 */
-					RuntimeSpaceManager.hand.take();
-					startSave();
-					/**
-					 * LANCEMENT DU TRAITEMENT DANS UN AUTRE PROCESSUS.
-					 */
-					ThreadForSave.saveInNewThread(currentFile);
-					/**
-					 * LANCEMENT ET GESTION DE LA FENETRE D'ATTENTE DANS UN AUTRE PROCESSUS.
-					 */
-					ThreadForWaitWindow.waitInNewThread(
-							new AlertWindow(
-									AlertWindow.INFO,
-									"Traitement du fichier "+currentFile.getSourceFileName()+"<br>Veuillez patientez..."),
-							currentFile.getSourceFile());
-				}
-			}.start();
-			/******************************************************************************************
-			 ******************************************************************************************
-			 ******************************************************************************************
-			 *******************************************************************************************
-			 ******************************************************************************************
-			 *******************************************************************************************
-			 ******************************************************************************************
-			 */
+			
 		}
 	}
 			
 		
 	}
 	
-	
+	private void processFile(ProcessingFile f) {
+		/******************************************************************************************
+		 ******************************************************************************************
+		 ******************************************************************************************
+		 *******************************************************************************************
+		 ******************************************************************************************
+		 *******************************************************************************************
+		 ******************************************************************************************
+		 */
+		new Thread() {
+			public void run (){
+				/**
+				 * ATTENDRE QU'ON ME RENDE LA MAIN.
+				 */
+				System.out.println("");
+				
+				while(RuntimeSpaceManager.hand.took());
+				
+				System.out.println("");
+				/**
+				 * DEBUT DU TRAITEMENT :
+				 * 
+				 * Prendre la main sur l'espace d'execution.
+				 * Prendre la main sur ffmpeg.
+				 */
+				RuntimeSpaceManager.hand.take();
+				startSave();
+				/**
+				 * LANCEMENT DU TRAITEMENT DANS UN AUTRE PROCESSUS.
+				 */
+				ThreadForSave.saveInNewThread(f);
+				/**
+				 * LANCEMENT ET GESTION DE LA FENETRE D'ATTENTE DANS UN AUTRE PROCESSUS.
+				 */
+				ThreadForWaitWindow.waitInNewThread(
+						new AlertWindow(
+								AlertWindow.INFO,
+								"Traitement du fichier "+f.getSourceFileName()+"<br>Veuillez patientez..."),
+						f.getSourceFile());
+			}
+		}.start();
+		/******************************************************************************************
+		 ******************************************************************************************
+		 ******************************************************************************************
+		 *******************************************************************************************
+		 ******************************************************************************************
+		 *******************************************************************************************
+		 ******************************************************************************************
+		 */
+	}
 	public void modify(OperationType typeSetting, String setting) {
 		this.currentFile.modify(typeSetting, setting);
 		this.currentFile.deselect();

@@ -57,39 +57,6 @@ public class DrawChange implements MouseMotionListener,MouseListener{
 		}
 		
 		
-		/*
-		// 0 => Marge gauche
-		// 1 => Marge haut
-		// 2 => Largeur
-		// 3 => Longueur
-
-
-		
-		
-
-		
-		// TODO
-		if(
-				e.getX() > form.getTab()[2]-3 && 
-				e.getX() < form.getTab()[2]+3 && 
-				e.getY() > form.getTab()[3] && 
-				e.getY() < form.getTab()[2]+form.getTab()[0]		
-		) {
-			System.out.println("Click droit");
-		}
-		
-		/*
-		// TODO
-		if(e.getX() > form.getTab()[0]) {
-			System.out.println("Clique bas");
-		}
-		*/
-
-		
-		/*
-		if(e.getY() > form.getTab()[1]-3 && e.getY() < form.getTab()[1]+3) {//marche pas
-			System.out.println("click");
-		}*/
 	}
 
 	@Override
@@ -99,10 +66,6 @@ public class DrawChange implements MouseMotionListener,MouseListener{
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		
-			
-		
-		//  x, y , largeur, hauteur
 		if(((ProcessingModel)Context.$M).isfUp() || ((ProcessingModel)Context.$M).iscropUp()) {
 			if(((ProcessingModel)Context.$M).iscropUp() && refx != 0) 
 				((ProcessingModel)Context.$M).addForm(refx, refy, (e.getX()-refx), (e.getY()-refy),'c',null);	
@@ -110,16 +73,14 @@ public class DrawChange implements MouseMotionListener,MouseListener{
 			else if(((ProcessingModel)Context.$M).isfUp() && refx != 0)
 				((ProcessingModel)Context.$M).addForm(refx, refy, (e.getX()-refx), (e.getY()-refy),'f',null);
 			}
-	
-	
 		if(!(((ProcessingModel)Context.$M).isfUp() || ((ProcessingModel)Context.$M).iscropUp())) {
 		if(form != null) {
-			if(im != null) {
-				model.addForm(e.getX()-(form.getTab()[2]/2),e.getY()-(form.getTab()[3]/2), form.getTab()[2],form.getTab()[3], 'i', im);
-			} else {
-				model.addForm(e.getX()-(form.getTab()[2]/2),e.getY()-(form.getTab()[3]/2), form.getTab()[2],form.getTab()[3], form.getTypeCommande(), null);
+				if(im != null) {
+					model.addForm(e.getX()-(form.getTab()[2]/2),e.getY()-(form.getTab()[3]/2), form.getTab()[2],form.getTab()[3], 'i', im);
+				} else {
+					model.addForm(e.getX()-(form.getTab()[2]/2),e.getY()-(form.getTab()[3]/2), form.getTab()[2],form.getTab()[3], form.getTypeCommande(), null);
+				}
 			}
-		}
 		}
 }
 	@Override

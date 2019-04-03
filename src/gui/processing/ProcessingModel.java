@@ -142,8 +142,8 @@ public class ProcessingModel extends GeneralModel{
 				System.out.println(a+"-"+b+"-"+c+"-"+d+"-t:"+type);
 			}
 		}
-				
 		sendChanges();
+		//sendChanges();
 		
 	}
 	

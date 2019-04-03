@@ -40,5 +40,9 @@ public enum ProcessingType implements OperationType {
 	/**
 	 * Parametre pour rotation
 	 */
-	 ROTATED
+	 ROTATED,
+	/**
+  	 * Parametre pour incruster une image.
+	 */
+	ADDED_IMAGE
 }

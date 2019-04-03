@@ -124,15 +124,12 @@ public class ProcessingWindow extends JFrame {
 		importImage.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
-				
 					model.addImage(JFileChooserManager.chooseFile());
 					LibraryView.setActualiser(true);
 					repaint();
 			}
 			
 		});
-		
-		
 		StylizedJMenuItem concat = new StylizedJMenuItem("Concatener des videos  / sons");
 		concat.setToolTipText("Ici vous pouvez concatener des videos ou des sons.");
 		concat.addActionListener(new ActionListener() {
@@ -148,7 +145,7 @@ public class ProcessingWindow extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
 				model.modify(ProcessingType.REMOVED_SOUND, "");
-				Alert.shortAlert(Alert.INFO, "Suppression de la bande son de la video<br>prise en compte.");
+				Alert.shortAlert(Alert.SUCCESS, "Suppression de la bande son de la video<br>prise en compte.");
 			}
 		});
 		StylizedJMenuItem addSound = new StylizedJMenuItem("Ajouter une bande son a la video");
@@ -156,7 +153,8 @@ public class ProcessingWindow extends JFrame {
 		addSound.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
-	
+				model.modify(ProcessingType.ADDED_SOUND, JFileChooserManager.chooseFile().getAbsolutePath());
+				Alert.shortAlert(Alert.SUCCESS, "Ajout de la bande son a la video<br>prise en compte.");
 			}
 		});
 		

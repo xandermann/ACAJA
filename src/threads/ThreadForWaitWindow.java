@@ -53,7 +53,7 @@ public final class ThreadForWaitWindow extends Thread {
 		 * FEEDBACK
 		 */
 		File[] filesErr = ResourceConstants.STDERR_ANSWERS.listFiles();
-		long time = 1000;
+		long time = 0;
 		if (FilterForFeedback.successed(filesErr[filesErr.length - 1], concernedFile)) {
 			Alert.longAlert(Alert.SUCCESS, "L'operation a ete realisee avec succes !");
 			time += Alert.LONG;

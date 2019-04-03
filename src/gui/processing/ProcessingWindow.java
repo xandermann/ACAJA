@@ -82,12 +82,7 @@ public class ProcessingWindow extends JFrame {
 		process.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					model.setDestinationFolder(JFileChooserManager.chooseDirectory());
-					model.getCurrentFile().setDestinationPath(model.getDestinationFolder());
-					model.getCurrentFile().setDestinationName("Traitement"+System.currentTimeMillis());
-					model.getCurrentFile().setFileExtension(model.getCurrentFile().getSourceFileExtension());
 					model.save();
-					System.out.println("fait");
 				} catch (UnfindableResourceException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

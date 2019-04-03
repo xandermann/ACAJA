@@ -87,10 +87,6 @@ public class ProcessingPan extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 					try {
-						((ProcessingModel)Context.$M).setDestinationFolder(JFileChooserManager.chooseDirectory());
-						((ProcessingModel)Context.$M).getCurrentFile().setDestinationPath(((ProcessingModel)Context.$M).getDestinationFolder());
-						((ProcessingModel)Context.$M).getCurrentFile().setDestinationName("Traitement"+System.currentTimeMillis());
-						((ProcessingModel)Context.$M).getCurrentFile().setFileExtension(((ProcessingModel)Context.$M).getCurrentFile().getSourceFileExtension());
 						((ProcessingModel)Context.$M).save();
 						System.out.println("fait");
 					} catch (UnfindableResourceException ure) {

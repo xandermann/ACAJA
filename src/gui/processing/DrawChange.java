@@ -74,15 +74,16 @@ if (((ProcessingModel) Context.$M).getCurrentForm() != null) {
 				&& (e.getY() > originYForm - MARGE && e.getY() < endYForm + MARGE)) {
 
 			if (!(((ProcessingModel) Context.$M).isModeBlur() || ((ProcessingModel) Context.$M).isModeCrop())) {
+	
 				((ProcessingModel) Context.$M).getCurrentForm().setPosition(e.getX() - (formValues[2] / 2), e.getY() - (formValues[3] / 2));
 				((ProcessingModel) Context.$M).sendChanges();
 				}
 			}
 
 		}
-}
+		}
 		
-			}	
+}	
 		
 		
 	

@@ -1,7 +1,12 @@
 package gui.processing;
 
+import java.awt.Image;
 import java.io.File;
+import java.io.IOException;
 import java.util.Observable;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 
 
@@ -18,6 +23,7 @@ public class Form {
 	private int[] formValues;
 	private char formType;
 	private File formImage;
+	private Image formImageGenerated;
 	
 
 
@@ -31,6 +37,16 @@ public class Form {
 		this.formValues = t;
 		this.formType = tyC;
 		this.formImage = i;
+		if(tyC == 'i') {
+			try {
+				formImageGenerated = new ImageIcon(ImageIO.read(i)).getImage();
+			} catch (IOException e) {
+				// TODO REMONTER L'ERREUR
+				e.printStackTrace();
+			}
+		} else {
+				formImageGenerated = new ImageIcon("img/test.png").getImage();
+		}
 		
 	}
 
@@ -67,8 +83,11 @@ public class Form {
 	 * @return L'formImage 
 	 */
 	public File getFormImage() {
-		
 		return formImage;
+	}
+	
+	public Image getGeneratedFormImage() {
+		return formImageGenerated;
 	}
 	
 	public void setSize(int width, int height){

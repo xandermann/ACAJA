@@ -24,7 +24,9 @@ public class PictureVisualView extends JPanel implements Observer{
 	private static final long serialVersionUID = 1662237756804313398L;
 	private Dimension dimHoriz;
 	private Dimension dimVerti;
-	
+	private Image formImage;
+	private Image cropImage;
+	private Image blurImage;
 	
 	public PictureVisualView() {
 		dimHoriz = new Dimension(500,350);
@@ -131,26 +133,26 @@ public class PictureVisualView extends JPanel implements Observer{
 			switch (f.getFormType()) {
 				case 'c':
 					g.setColor(Color.BLUE);
-					monImage =new ImageIcon("img/test.png");
+					
+					g.drawImage(f.getGeneratedFormImage(), tab[0],tab[1],tab[2],tab[3], this);	
 					break;
 				case 'f':
 					g.setColor(Color.GREEN);
-					monImage =new ImageIcon("img/test.png");
+					
+					g.drawImage(f.getGeneratedFormImage(), tab[0],tab[1],tab[2],tab[3], this);	
 					break;
 				case 'i':
-				try {
-					monImage = new ImageIcon(ImageIO.read(f.getFormImage()));
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+
+		
+					g.drawImage(f.getGeneratedFormImage(), tab[0],tab[1],tab[2],tab[3], this);
+				
 				default:
 					break;
 			}
-			
-			//System.out.println("Coordonnees : " + tab[0] + ", " + tab[1] + ", " + tab[2] + ", " + tab[3]);
 			g.drawRect(tab[0],tab[1],tab[2],tab[3]);
 			
-			g.drawImage(monImage.getImage(), tab[0],tab[1],tab[2],tab[3], this);	
+			//System.out.println("Coordonnees : " + tab[0] + ", " + tab[1] + ", " + tab[2] + ", " + tab[3]);
+			
 			
 		}	
 	}

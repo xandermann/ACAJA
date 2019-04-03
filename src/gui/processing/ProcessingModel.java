@@ -144,6 +144,7 @@ public class ProcessingModel extends GeneralModel{
 					f = new Form(tab,type,null);
 				forms.add(f);
 				System.out.println(a+"-"+b+"-"+c+"-"+d+"-t:"+type);
+				
 			}
 		}
 		sendChanges();

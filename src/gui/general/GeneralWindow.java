@@ -83,7 +83,7 @@ public abstract class GeneralWindow extends StylizedJFrame{
 	 * [ METHODE POUR RETABLIR LE FOCUS. ]
 	 */
 	private void renderFocus() {
-		Context.$F.remove(this);
+		Context.$F.poll();
 		new Focus();
 	}
 }

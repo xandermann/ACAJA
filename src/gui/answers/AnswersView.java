@@ -18,8 +18,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import exceptions.UnfindableResourceException;
 import gui.alerts.Alert;
 import resources.ResourceConstants;
+import resources.ResourcesManager;
 import resources.TimeTools;
 
 /**
@@ -53,14 +55,16 @@ public final class AnswersView extends JPanel {
 	
 	/**
 	 * [ CONSTRUCTEUR VIDE. ]
+	 * @throws UnfindableResourceException 
 	 */
-	public AnswersView() {
+	public AnswersView() throws UnfindableResourceException {
 		/**
 		 * HISTORIQUE.
 		 */
 		super(new BorderLayout());
 		setSize(new Dimension(400, 250));
 		main = new JPanel();
+		
 		displayAnswers();
 		
 		
@@ -78,7 +82,9 @@ public final class AnswersView extends JPanel {
 		refresh.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int countOldFiles = files==null ? 0 : files.size();
-		        displayAnswers();
+		        try {
+					displayAnswers();
+				} catch (UnfindableResourceException e1) {}
 		        Alert.shortAlert(Alert.INFO,
 							files.size()-countOldFiles == 0 ? 
 							"Aucun nouveau rapport trouve." : 
@@ -97,14 +103,18 @@ public final class AnswersView extends JPanel {
 	
 	/**
 	 * [ CONSTRUIRE L'HISTORIQUE EN LISTANT LES REPONSES. ]
+	 * @throws UnfindableResourceException 
 	 */
-	private void displayAnswers() {
+	private void displayAnswers() throws UnfindableResourceException {
 		main.removeAll();
 		
 		
 		/**
 		 * REUNION DES FICHIERS.
 		 */
+		ResourcesManager.secureAnswers();
+		ResourcesManager.secureErr();
+		ResourcesManager.secureOut();
 		File[] filesErr = ResourceConstants.STDERR_ANSWERS.listFiles();
 		File[] filesOut = ResourceConstants.STDOUT_ANSWERS.listFiles();
 		files = new ArrayList<File>();

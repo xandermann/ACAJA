@@ -313,7 +313,7 @@ public final class ConversionWindow extends StylizedJFrame {
 		answers.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {		
 				Actions.inspect();
-;			}
+			}
 		});
 		
 													

@@ -165,7 +165,7 @@ public class ProcessingWindow extends JFrame {
 		answers.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {		
 				Actions.inspect();
-;			}
+			}
 		});
 		StylizedJMenuItem procToConv = new StylizedJMenuItem("Passer en mode conversion");
 		procToConv.setToolTipText("Ici vous pouvez choisir de passer en mode conversion (CTRL + C).");

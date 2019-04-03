@@ -141,7 +141,12 @@ public class PictureVisualView extends JPanel implements Observer{
 					monImage =new ImageIcon("img/test.png");
 					break;
 				case 'i':
-					monImage = new ImageIcon(((ProcessingModel)Context.$M).getListRect().get(i).getImageA());
+				try {
+					monImage = new ImageIcon(ImageIO.read(((ProcessingModel)Context.$M).getListRect().get(i).getImageA()));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				default:
 					break;
 			}

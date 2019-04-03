@@ -111,7 +111,7 @@ public class ProcessingModel extends GeneralModel{
 	}
 
 	
-	public void addForm(int a,int b,int c,int d,char type,Image i) {
+	public void addForm(int a,int b,int c,int d,char type,File i) {
 		int[] tab = new int[4];
 		tab[0] = a;
 		tab[1] = b;
@@ -143,7 +143,6 @@ public class ProcessingModel extends GeneralModel{
 			}
 		}
 		sendChanges();
-		//sendChanges();
 		
 	}
 	
@@ -195,6 +194,9 @@ public class ProcessingModel extends GeneralModel{
 				break;
 			case 'f':
 				this.modify(ProcessingType.BLURRED,a1+" "+b1+" "+c1+" "+d1 );
+				break;
+			case 'i':
+				this.modify(ProcessingType.ADDED_IMAGE, actu.getImageA()+" "+a1+" "+b1);
 				break;
 	
 			default:

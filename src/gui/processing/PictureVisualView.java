@@ -106,12 +106,12 @@ public class PictureVisualView extends JPanel implements Observer{
 					setLocation(new Point(125,30));
 				} else if(((ProcessingModel)(Context.$M)).isRotate180Right()) {
 					pic = flipImage(pic);
-					pic = rotateImageByDegrees(pic,90);
+					pic = rotateImageByDegrees(pic,-90);
 					setSize(dimVerti);
 					setLocation(new Point(125,30));
 				} else if(((ProcessingModel)(Context.$M)).isRotate180Left()) {
 					pic = flipImage(pic);
-					pic = rotateImageByDegrees(pic,-90);
+					pic = rotateImageByDegrees(pic,90);
 					setSize(dimVerti);
 					setLocation(new Point(125,30));
 				}else {

@@ -6,8 +6,10 @@ import exceptions.IncorrectFileException;
 import exceptions.UnfindableResourceException;
 import files.enumerations.ProcessingType;
 import files.files.ProcessingFile;
+import gui.alerts.Alert;
 import gui.alerts.AlertWindow;
 import gui.general.Context;
+import resources.NamesSpaceManager;
 import threads.RuntimeSpaceManager;
 import threads.ThreadForSave;
 import threads.ThreadForWaitWindow;
@@ -49,13 +51,9 @@ public class ProcessThreadManager {
 	}
 	
 	public static void treatMultipleProcesses(ProcessingFile f1, ProcessingType secondAction) {
-		// Récuperer les parametres de f1 ; 
-		// Recuperer son fileName output
-		// Changer son fileName output
-		// Recuperer le paramètre de sa cle
-		// Supprimer la cle fournie en parametre (SecondAction)
 		String finalFileName = f1.getDestinationFileName();
 		System.out.println("Nom du fichier final : " + finalFileName);
+		//NamesSpaceManager._temporary()
 		f1.setDestinationName("tmp_"+finalFileName);
 		System.out.println("Nom du fichier temporaire : tmp_"+finalFileName);
 		String secondProcessing = f1.getValue(secondAction);
@@ -69,8 +67,9 @@ public class ProcessThreadManager {
 				while(RuntimeSpaceManager.hand.took());
 				System.out.println("Demarrage du traitement du second fichier");
 				try {
-					System.out.println("Recuperation du premier fichier genere dans " + f1.getDestinationFileFullName());
-					ProcessingFile secondFile = new ProcessingFile(new File(f1.getDestinationFileFullName()));
+					String firstFilePath = f1.getDestinationFileFullName();
+					System.out.println("Recuperation du premier fichier genere dans " + firstFilePath);
+					ProcessingFile secondFile = new ProcessingFile(new File(firstFilePath));
 					System.out.println("Rajout de l'action retiree precedemment");
 					secondFile.modify(secondAction, secondProcessing);
 					String outputPath = ((ProcessingModel)Context.$M).getDestinationFolder() ;
@@ -80,7 +79,11 @@ public class ProcessThreadManager {
 					System.out.println("Nom fichier final  : "+ finalFileName + f1.getSourceFileExtension());
 					secondFile.setFileExtension(f1.getSourceFileExtension());
 					treatOneProcess(secondFile);
-				} catch (IncorrectFileException | UnfindableResourceException e) {}			
+					
+				
+				} catch (IncorrectFileException | UnfindableResourceException e) {
+					Alert.shortAlert(Alert.FAILURE, "Impossible de traiter le fichier");
+				}			
 			}
 		}.start();
 	}

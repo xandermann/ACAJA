@@ -74,11 +74,11 @@ public class DrawChange implements MouseMotionListener, MouseListener {
 		// 1 => Marge haut
 		// 2 => Largeur
 		// 3 => Longueur
-		if (((ProcessingModel) Context.$M).isfUp() || ((ProcessingModel) Context.$M).iscropUp()) {
-			if (((ProcessingModel) Context.$M).iscropUp() && refx != 0) 
+		if (((ProcessingModel) Context.$M).isModeBlur() || ((ProcessingModel) Context.$M).isModeCrop()) {
+			if (((ProcessingModel) Context.$M).isModeCrop() && refx != 0) 
 				((ProcessingModel) Context.$M).addForm(refx, refy, (e.getX() - refx), (e.getY() - refy), 'c', null);
 
-			else if (((ProcessingModel) Context.$M).isfUp() && refx != 0)
+			else if (((ProcessingModel) Context.$M).isModeBlur() && refx != 0)
 				((ProcessingModel) Context.$M).addForm(refx, refy, (e.getX() - refx), (e.getY() - refy), 'f', null);
 		}
 		
@@ -135,7 +135,7 @@ public class DrawChange implements MouseMotionListener, MouseListener {
 			if ((e.getX() > originXForm + MARGE && e.getX() < endXForm - MARGE)
 					&& (e.getY() > originYForm - MARGE && e.getY() < endYForm + MARGE)) {
 
-				if (!(((ProcessingModel) Context.$M).isfUp() || ((ProcessingModel) Context.$M).iscropUp())) {
+				if (!(((ProcessingModel) Context.$M).isModeBlur() || ((ProcessingModel) Context.$M).isModeCrop())) {
 					if (form != null) {
 						if (im != null) {
 							model.addForm(e.getX() - (form.getTab()[2] / 2), e.getY() - (form.getTab()[3] / 2),

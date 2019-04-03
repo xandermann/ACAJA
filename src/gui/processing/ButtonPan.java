@@ -36,16 +36,16 @@ public class ButtonPan extends JPanel {
 		flouButton.setToolTipText("Ici vous pouvez flouter la video.");
 		
 		rotateL1 = new JToggleButton(new ImageIcon(resources.ResourceConstants.LEFT_ARROW));
-		rotateL1.setToolTipText("Ici vous pouvez pivoter de 90° a gauche la video.");
+		rotateL1.setToolTipText("Ici vous pouvez pivoter de 90ï¿½ a gauche la video.");
 		
 		rotateR1 = new JToggleButton(new ImageIcon(resources.ResourceConstants.RIGHT_ARROW));
-		rotateR1.setToolTipText("Ici vous pouvez pivoter de 90° a droite la video.");
+		rotateR1.setToolTipText("Ici vous pouvez pivoter de 90ï¿½ a droite la video.");
 		
 		rotateInvertedL1 = new JToggleButton(new ImageIcon("img/fliptournG.png"));
-		rotateInvertedL1.setToolTipText("Ici vous pouvez retourner la video et la pivoter de 90° a gauche.");
+		rotateInvertedL1.setToolTipText("Ici vous pouvez retourner la video et la pivoter de 90ï¿½ a gauche.");
 		
 		rotateInvertedR1 = new JToggleButton(new ImageIcon("img/fliptournD.png"));
-		rotateInvertedR1.setToolTipText("Ici vous pouvez retourner la video et la pivoter de 90° a droite.");
+		rotateInvertedR1.setToolTipText("Ici vous pouvez retourner la video et la pivoter de 90ï¿½ a droite.");
 		
 		rotate180 = new JToggleButton(new ImageIcon("img/180.png"));
 		rotate180.setToolTipText("Ici vous pouvez retourner la video.");
@@ -233,18 +233,18 @@ public class ButtonPan extends JPanel {
 	
 	public void cropIsSelected() {
 		flouButton.setSelected(false);
-		((ProcessingModel)Context.$M).setfUp(false);
-		((ProcessingModel)Context.$M).setcropUp(false);
+		((ProcessingModel)Context.$M).setModeBlur(false);
+		((ProcessingModel)Context.$M).setModeCrop(false);
 		if(rectangle.isSelected())
-			((ProcessingModel)Context.$M).setcropUp(true);
+			((ProcessingModel)Context.$M).setModeCrop(true);
 	}
 	
 	public void flouIsSelected() {
 		rectangle.setSelected(false);
-		((ProcessingModel)Context.$M).setcropUp(false);
-		((ProcessingModel)Context.$M).setfUp(false);
+		((ProcessingModel)Context.$M).setModeCrop(false);
+		((ProcessingModel)Context.$M).setModeBlur(false);
 		if(flouButton.isSelected())
-			((ProcessingModel)Context.$M).setfUp(true);
+			((ProcessingModel)Context.$M).setModeBlur(true);
 	}
 	
 	

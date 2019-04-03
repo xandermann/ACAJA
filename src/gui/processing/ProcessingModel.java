@@ -24,7 +24,7 @@ import wrapper.runtime.details.Request;
 
 public class ProcessingModel extends GeneralModel{
 	private List<Form> listRect;
-	private boolean fUp,cropUp;
+	private boolean modeBlur,modeCrop;
 	private ProcessingFile currentFile;
 	private File minia;
 	private String destinationFolder;
@@ -45,8 +45,8 @@ public class ProcessingModel extends GeneralModel{
 
 	public ProcessingModel() {
 		Context.$M = this;
-		fUp = false;
-		cropUp = false;
+		modeBlur = false;
+		modeCrop = false;
 		rotateLeft = false;
 		rotateRight = false;
 		rotate180Left = false;
@@ -70,24 +70,24 @@ public class ProcessingModel extends GeneralModel{
 	}
 	
 	
-	public boolean isfUp() {
-		return fUp;
+	public boolean isModeBlur() {
+		return modeBlur;
 	}
 	
 	
-	public void setfUp(boolean fUp) {
-		this.fUp = fUp;
+	public void setModeBlur(boolean modeBlur) {
+		this.modeBlur = modeBlur;
 		sendChanges();
 	}
 	
 	
-	public boolean iscropUp() {
-		return cropUp;
+	public boolean isModeCrop() {
+		return modeCrop;
 	}
 	
 	
-	public void setcropUp(boolean rectUp) {
-		this.cropUp = rectUp;
+	public void setModeCrop(boolean rectUp) {
+		this.modeCrop = rectUp;
 		sendChanges();
 	}
 	
@@ -250,10 +250,10 @@ public class ProcessingModel extends GeneralModel{
 		currentFile.setDestinationPath(getDestinationFolder());
 		currentFile.setDestinationName("MaSuperVideo"+System.currentTimeMillis());
 		currentFile.setFileExtension(currentFile.getSourceFileExtension());
-		if(rotation && cropUp) {
+		if(rotation && modeCrop) {
 			System.out.println("Rotation et crop");
 			ProcessThreadManager.treatMultipleProcesses(currentFile, ProcessingType.CROPED);	
-		} else if (rotation && fUp) {
+		} else if (rotation && modeBlur) {
 			System.out.println("Rotation et flou");
 			ProcessThreadManager.treatMultipleProcesses(currentFile, ProcessingType.BLURRED);	
 		} else {

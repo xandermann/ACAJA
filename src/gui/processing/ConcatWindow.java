@@ -26,16 +26,11 @@ import gui.style.StylizedJMenuBar;
 import gui.style.StylizedJMenuItem;
 
 public class ConcatWindow extends JFrame {
-	
-	/**
-	 * 
-	 */
+		
 	private static final long serialVersionUID = -125816618351479903L;
 	private static ArrayList<ProcessingFile> listOfFile;
-	private ProcessingModel model;
 
-	public ConcatWindow(ProcessingModel m) {
-		model = m;
+	public ConcatWindow() {
 		
 		Context.$F.add(this);
 		/**
@@ -46,7 +41,7 @@ public class ConcatWindow extends JFrame {
 			public void windowClosing(WindowEvent e) {
 				Context.$F.remove(this);
 				new Focus();
-				model.getCurrentFile().cancelAll();
+				((ProcessingModel)Context.$M).getCurrentFile().cancelAll();
 			}
 			public void windowClosed(WindowEvent e) {}
 			public void windowIconified(WindowEvent e) {}
@@ -70,8 +65,8 @@ public class ConcatWindow extends JFrame {
 		ConcatPanel cp = new ConcatPanel();
 		this.add(cp);
 		this.add(createJPanel());
-		if(m.getCurrentFile() != null)
-			listOfFile.add(m.getCurrentFile());
+		if(((ProcessingModel)Context.$M).getCurrentFile() != null)
+			listOfFile.add(((ProcessingModel)Context.$M).getCurrentFile());
 		drawMenu();
 	}
 	
@@ -130,23 +125,23 @@ public class ConcatWindow extends JFrame {
 				if(!listOfFile.isEmpty()) {
 					ProcessingFile f1 = listOfFile.get(0);
 					listOfFile.remove(0);
-					model.setCurrentFile(f1);
+					((ProcessingModel)Context.$M).setCurrentFile(f1);
 					String s = "";
 					for(ProcessingFile f : listOfFile) {
 						s = s +" "+f.getSourceFileFullName();
 					}
-					model.getCurrentFile().modify(ProcessingType.ADDED, s);
+					((ProcessingModel)Context.$M).getCurrentFile().modify(ProcessingType.ADDED, s);
 					
-					model.setDestinationFolder(JFileChooserManager.chooseDirectory());
-					model.getCurrentFile().setDestinationPath(model.getDestinationFolder());
-					model.getCurrentFile().setDestinationName("Concat"+System.currentTimeMillis());
-					model.getCurrentFile().setFileExtension(model.getCurrentFile().getSourceFileExtension());
+					((ProcessingModel)Context.$M).setDestinationFolder(JFileChooserManager.chooseDirectory());
+					((ProcessingModel)Context.$M).getCurrentFile().setDestinationPath(((ProcessingModel)Context.$M).getDestinationFolder());
+					((ProcessingModel)Context.$M).getCurrentFile().setDestinationName("Concat"+System.currentTimeMillis());
+					((ProcessingModel)Context.$M).getCurrentFile().setFileExtension(((ProcessingModel)Context.$M).getCurrentFile().getSourceFileExtension());
 					try {
-						model.save();
+						((ProcessingModel)Context.$M).save();
 					} catch (UnfindableResourceException e1) {
 						e1.printStackTrace();
 					}
-					System.out.println("fait");
+					
 				}
 			}			
 		});

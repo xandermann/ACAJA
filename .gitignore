@@ -7,3 +7,5 @@ answers/stderr/*
 answers/stdout/*
 
 imports/*
+
+temporary_files/

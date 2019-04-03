@@ -40,20 +40,6 @@ public class DrawChange implements MouseMotionListener, MouseListener {
 	public void mousePressed(MouseEvent e) {
 		actualiserCoordonnees(e);
 		selectionnerForme(e);
-		/*int[] tab = ((ProcessingModel) Context.$M).getCurrentForm().getFormValues();
-		if (tab[0] - MARGE < x && x < tab[0] + MARGE && tab[0] < y && y < tab[1] + tab[3]) {
-			System.out.println("GAUCHE");
-		}
-		else if (tab[0] < x && x < tab[0] + tab[2] && tab[1] - MARGE < y && y < tab[1] + MARGE) {
-			System.out.println("haut");
-		}
-		else if (tab[0] + tab[2] - MARGE < x && x < tab[0] + tab[2] + MARGE && tab[1] < y && y < tab[1] + tab[3]) {
-			System.out.println("dr");
-		}
-
-		else if (tab[0] < x && x < tab[0] + tab[2] && tab[1] + tab[3] - MARGE < y && y < tab[1] + tab[3] + MARGE) {
-			System.out.println("bas");
-		}*/
 	}
 
 	@Override
@@ -91,8 +77,8 @@ public class DrawChange implements MouseMotionListener, MouseListener {
 			// 1 < Y < 0+2
 			// Gauche
 			if (formx - MARGE < e.getX() && e.getX() < formx + MARGE && formx < e.getY() && e.getY() < formy + height) {
-				((ProcessingModel)Context.$M).addForm(formx + (e.getX()-formx), formy, width-(e.getX()-formx), height, 'i', im);	
-				redimensionner = true;
+				//((ProcessingModel)Context.$M).addForm(formx + (e.getX()-formx), formy, width-(e.getX()-formx), height, 'i', im);	
+				//redimensionner = true;
 			}
 
 			// 0 < X < 0+2

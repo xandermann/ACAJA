@@ -11,6 +11,7 @@ import javax.swing.JMenu;
 
 import exceptions.IncorrectFileException;
 import exceptions.UnfindableResourceException;
+import files.enumerations.MediaFileType;
 import files.enumerations.ProcessingType;
 import files.files.ProcessingFile;
 import gui.JFileChooserManager;
@@ -104,13 +105,18 @@ public class ProcessingWindow extends JFrame {
 			public void actionPerformed(ActionEvent ae) {
 				try {
 					File f = JFileChooserManager.chooseFile();
-					model.setCurrentFile(new ProcessingFile(f));
+					ProcessingFile pf = new ProcessingFile(f);
+					if(!pf.getTypeFile().equals(MediaFileType.MEDIA_FILE_VIDEO)) {
+						throw new IncorrectFileException("Type de fichier incorrect !");
+					}
+					model.setCurrentFile(pf);
+					
 				} catch (IncorrectFileException e) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
+					Alert.longAlert(Alert.FAILURE, "Type de fichier incorrect !");
 				} catch (UnfindableResourceException e) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
+					Alert.longAlert(Alert.FAILURE, "Fichier introuvable !");
 				}
 			}
 		});
@@ -119,9 +125,24 @@ public class ProcessingWindow extends JFrame {
 		importImage.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
-					model.addImage(JFileChooserManager.chooseFile());
-					LibraryView.setActualiser(true);
-					repaint();
+					File img = JFileChooserManager.chooseFile();
+					String[] imageExtensions = { "png", "jpg", "jpeg", "bmp" };
+					boolean isImage = false;
+					for (String imgExt : imageExtensions) {
+						if (img.getName().endsWith(imgExt)) {
+							isImage = true;
+			
+						}
+					}
+					if(isImage) {
+						model.addImage(img);
+						LibraryView.setActualiser(true);
+						repaint();
+					} else {
+						Alert.shortAlert(Alert.FAILURE, "Le fichier doit être une image");
+					}
+					
+					
 			}
 			
 		});

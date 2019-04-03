@@ -585,12 +585,12 @@ public final class Request implements FlagConstants, ValueConstants{
 	
 	
 	/**
-	 * [ AJOUTER UN IMAGE. ]
+	 * [ INSCRUSTER UNE IMAGE. ]
 	 * 
-	 * @param inputImage		L'image a ajouter.
+	 * @param inputImage		L'image a incruster.
 	 * 
-	 * @param xCorner			Abscisse du coin gauche ou inserer l'image. 
-	 * @param yCorner			Ordonnee du coin gauche ou inserer l'image.
+	 * @param xCorner			Abscisse du coin gauche ou incruster l'image. 
+	 * @param yCorner			Ordonnee du coin gauche ou incruster l'image.
 	 * 
 	 * @return La requete this. 
 	 */
@@ -626,6 +626,7 @@ public final class Request implements FlagConstants, ValueConstants{
 		return FFmpegRuntime.execute(request);
 	}
 	
+	
 	/**
 	 * [ EXECUTER LA REQUETE ET CONSOMMER EN INTERNE TOUS LES FLUX DE SORTIE DE FFMPEG. ]
 	 * 
@@ -637,6 +638,7 @@ public final class Request implements FlagConstants, ValueConstants{
 		WatchedConsumer.consume(result());
 		return this;
 	}
+	
 	
 	
 	//=======================================================================================================================

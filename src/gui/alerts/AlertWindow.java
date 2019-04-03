@@ -11,13 +11,11 @@ import javax.swing.JPanel;
 
 import gui.WindowTools;
 import gui.general.Context;
+import gui.general.Focus;
 import gui.style.StyleTheme;
 import gui.style.StylizedJFrame;
 
 public final class AlertWindow extends StylizedJFrame implements ATConstants{
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 2688386215518460565L;
 
 	/**
@@ -28,7 +26,6 @@ public final class AlertWindow extends StylizedJFrame implements ATConstants{
 	 */
 	public AlertWindow(String title, String content) {
 		super(title);
-		
 		
 		if(!title.equals(INFO) && !title.equals(SUCCESS) && !title.equals(FAILURE))
 			throw new IllegalArgumentException("Type de notification inconnu !");
@@ -48,9 +45,6 @@ public final class AlertWindow extends StylizedJFrame implements ATConstants{
 		
 		
 		setContentPane(new JPanel() {
-			/**
-			 * 
-			 */
 			private static final long serialVersionUID = -6325761192059369090L;
 
 			public void paintComponent(Graphics g) {
@@ -94,12 +88,7 @@ public final class AlertWindow extends StylizedJFrame implements ATConstants{
 					/**
 					 * RENDRE LE FOCUS AU COMPONENT PARENT.
 					 */
-					if(Context.$C(0) != null) 
-						Context.$C(0).requestFocus();
-					else {
-						if(Context.$W != null) 
-							Context.$W.requestFocus();
-					}
+					new Focus();
 				}
 			}
 		});

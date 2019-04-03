@@ -36,9 +36,9 @@ public class ButtonPan extends JPanel {
 		flouButton = new JToggleButton(new ImageIcon(resources.ResourceConstants.BLURRED));
 		rotateL1 = new JToggleButton(new ImageIcon(resources.ResourceConstants.LEFT_ARROW));
 		rotateR1 = new JToggleButton(new ImageIcon(resources.ResourceConstants.RIGHT_ARROW));
-		rotateInvertedL1 = new JToggleButton("L180");
-		rotateInvertedR1 = new JToggleButton("D180");
-		rotate180 = new JToggleButton("180");
+		rotateInvertedL1 = new JToggleButton(new ImageIcon("img/fliptournG.png"));
+		rotateInvertedR1 = new JToggleButton(new ImageIcon("img/fliptournD.png"));
+		rotate180 = new JToggleButton(new ImageIcon("img/180.png"));
 	
 		JButton undo = new JButton(new ImageIcon(resources.ResourceConstants.LEFT_ARROW));
 		
@@ -136,6 +136,7 @@ public class ButtonPan extends JPanel {
 				((ProcessingModel)Context.$M).setRotate180(true);
 			}
 			}else rotate180.setSelected(false);
+		((ProcessingModel)Context.$M).sendChanges();
 	}
 	public void rotateLeft180Activated() {
 		if(((ProcessingModel)Context.$M).getCurrentFile() != null) {
@@ -155,6 +156,7 @@ public class ButtonPan extends JPanel {
 				((ProcessingModel)Context.$M).setRotate180Left(true);
 			}
 			}else rotateInvertedL1.setSelected(false);
+		((ProcessingModel)Context.$M).sendChanges();
 	}
 	
 	public void rotateRight180Activated() {
@@ -175,6 +177,7 @@ public class ButtonPan extends JPanel {
 				((ProcessingModel)Context.$M).setRotate180Right(true);
 			}
 		} else rotateInvertedR1.setSelected(false);
+		((ProcessingModel)Context.$M).sendChanges();
 	}
 	public void rotateLeftActivated() {
 		if(((ProcessingModel)Context.$M).getCurrentFile() != null) {
@@ -194,6 +197,7 @@ public class ButtonPan extends JPanel {
 			((ProcessingModel)Context.$M).setRotateLeft(true);
 		}
 		}else rotateL1.setSelected(false);
+		((ProcessingModel)Context.$M).sendChanges();
 	}
 	
 	public void rotateRightActivated() {
@@ -214,6 +218,7 @@ public class ButtonPan extends JPanel {
 				((ProcessingModel)Context.$M).setRotateRight(true);
 			}
 		} else rotateR1.setSelected(false);
+		((ProcessingModel)Context.$M).sendChanges();
 	}
 	
 	public void cropIsSelected() {

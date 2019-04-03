@@ -15,6 +15,7 @@ import javax.swing.SwingConstants;
 
 import exceptions.UnfindableResourceException;
 import gui.JFileChooserManager;
+import gui.general.Context;
 import gui.style.*;
 
 public class ProcessingPan extends JPanel {
@@ -24,9 +25,9 @@ public class ProcessingPan extends JPanel {
 	 */
 	private static final long serialVersionUID = 4600169663295346054L;
 
-	public ProcessingPan(ProcessingModel m) {
+	public ProcessingPan() {
 		this.setBackground(Color.GRAY);
-		LibraryView pb = new LibraryView(m);
+		LibraryView pb = new LibraryView(((ProcessingModel)Context.$M));
 		this.setSize(1000,625);
 		System.out.println("width "+getWidth() +"height"+getHeight());
 		pb.setPreferredSize(new Dimension((int)(getWidth()*(0.2)), (int)(getHeight()*(0.9))));
@@ -46,7 +47,7 @@ public class ProcessingPan extends JPanel {
 		buttonProcess.setHorizontalAlignment(SwingConstants.CENTER);
 		processPanButton.add(buttonProcess);
 		processPan.add(processPanButton);
-		PicturePan pi = new PicturePan(m);
+		PicturePan pi = new PicturePan();
 		pi.setPreferredSize(new Dimension((int)(getWidth()*(0.6)), (int)(getHeight()*(0.9))));
 		pi.addMouseListener(new MouseListener(){
 
@@ -86,11 +87,11 @@ public class ProcessingPan extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 					try {
-						m.setDestinationFolder(JFileChooserManager.chooseDirectory());
-						m.getCurrentFile().setDestinationPath(m.getDestinationFolder());
-						m.getCurrentFile().setDestinationName("Traitement"+System.currentTimeMillis());
-						m.getCurrentFile().setFileExtension(m.getCurrentFile().getSourceFileExtension());
-						m.save();
+						((ProcessingModel)Context.$M).setDestinationFolder(JFileChooserManager.chooseDirectory());
+						((ProcessingModel)Context.$M).getCurrentFile().setDestinationPath(((ProcessingModel)Context.$M).getDestinationFolder());
+						((ProcessingModel)Context.$M).getCurrentFile().setDestinationName("Traitement"+System.currentTimeMillis());
+						((ProcessingModel)Context.$M).getCurrentFile().setFileExtension(((ProcessingModel)Context.$M).getCurrentFile().getSourceFileExtension());
+						((ProcessingModel)Context.$M).save();
 						System.out.println("fait");
 					} catch (UnfindableResourceException ure) {
 						// TODO Auto-generated catch block

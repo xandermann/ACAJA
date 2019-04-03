@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.File;
 import java.util.ArrayList;
 
@@ -18,20 +20,37 @@ import files.enumerations.ProcessingType;
 import files.files.ProcessingFile;
 import gui.JFileChooserManager;
 import gui.WindowTools;
+import gui.general.Context;
+import gui.general.Focus;
 import gui.style.StylizedJMenuBar;
 import gui.style.StylizedJMenuItem;
 
 public class ConcatWindow extends JFrame {
-	
-	/**
-	 * 
-	 */
+		
 	private static final long serialVersionUID = -125816618351479903L;
 	private static ArrayList<ProcessingFile> listOfFile;
-	private ProcessingModel model;
 
-	public ConcatWindow(ProcessingModel m) {
-		model = m;
+	public ConcatWindow() {
+		
+		Context.$F.add(this);
+		/**
+		 * RENDRE LE FOCUS A L'EVENEMENT PARENT.
+		 */
+		addWindowListener(new WindowListener() {
+			public void windowOpened(WindowEvent e) {}
+			public void windowClosing(WindowEvent e) {
+				Context.$F.remove(this);
+				new Focus();
+				((ProcessingModel)Context.$M).getCurrentFile().cancelAll();
+			}
+			public void windowClosed(WindowEvent e) {}
+			public void windowIconified(WindowEvent e) {}
+			public void windowDeiconified(WindowEvent e) {}
+			public void windowActivated(WindowEvent e) {}
+			public void windowDeactivated(WindowEvent e) {}
+		});
+		
+		
 		listOfFile = new ArrayList<ProcessingFile>();
 		WindowTools.executeWindow(this);
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -46,8 +65,8 @@ public class ConcatWindow extends JFrame {
 		ConcatPanel cp = new ConcatPanel();
 		this.add(cp);
 		this.add(createJPanel());
-		if(m.getCurrentFile() != null)
-			listOfFile.add(m.getCurrentFile());
+		if(((ProcessingModel)Context.$M).getCurrentFile() != null)
+			listOfFile.add(((ProcessingModel)Context.$M).getCurrentFile());
 		drawMenu();
 	}
 	
@@ -106,28 +125,25 @@ public class ConcatWindow extends JFrame {
 				if(!listOfFile.isEmpty()) {
 					ProcessingFile f1 = listOfFile.get(0);
 					listOfFile.remove(0);
-					model.setCurrentFile(f1);
+					((ProcessingModel)Context.$M).setCurrentFile(f1);
 					String s = "";
 					for(ProcessingFile f : listOfFile) {
 						s = s +" "+f.getSourceFileFullName();
 					}
-					model.getCurrentFile().modify(ProcessingType.ADDED, s);
+					((ProcessingModel)Context.$M).getCurrentFile().modify(ProcessingType.ADDED, s);
 					
-					model.setDestinationFolder(JFileChooserManager.chooseDirectory());
-					model.getCurrentFile().setDestinationPath(model.getDestinationFolder());
-					model.getCurrentFile().setDestinationName("Concat"+System.currentTimeMillis());
-					model.getCurrentFile().setFileExtension(".mp4");
+					((ProcessingModel)Context.$M).setDestinationFolder(JFileChooserManager.chooseDirectory());
+					((ProcessingModel)Context.$M).getCurrentFile().setDestinationPath(((ProcessingModel)Context.$M).getDestinationFolder());
+					((ProcessingModel)Context.$M).getCurrentFile().setDestinationName("Concat"+System.currentTimeMillis());
+					((ProcessingModel)Context.$M).getCurrentFile().setFileExtension(((ProcessingModel)Context.$M).getCurrentFile().getSourceFileExtension());
 					try {
-						model.save();
-						model.getCurrentFile().cancelAll();
+						((ProcessingModel)Context.$M).save();
 					} catch (UnfindableResourceException e1) {
 						e1.printStackTrace();
 					}
-					System.out.println("fait");
+					
 				}
-			}
-				
-			
+			}			
 		});
 		j.add(valider);
 		return j;

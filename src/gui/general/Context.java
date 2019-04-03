@@ -1,5 +1,6 @@
 package gui.general;
 import java.awt.*;
+import java.util.*;
 import javax.swing.*;
 /**
  * [ CONTEXTE GRAPHIQUE. ]
@@ -22,6 +23,10 @@ public final class Context{
 	 * M = Model.
 	 */
 	public static GeneralModel $M;
+	/**
+	 * FILE DES JFRAME "FOCUSES".
+	 */
+	public static Queue<JFrame> $F = new ArrayDeque<JFrame>();
 	/**
 	 * TABELAU DE DIVERS COMPOSANTS GRAPHIQUES. 
 	 * C = Context.

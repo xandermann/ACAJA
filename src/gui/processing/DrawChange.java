@@ -47,7 +47,7 @@ public class DrawChange implements MouseMotionListener,MouseListener{
 		}
 		
 		
-		
+		/*
 		// 0 => Marge gauche
 		// 1 => Marge haut
 		// 2 => Largeur
@@ -62,6 +62,7 @@ public class DrawChange implements MouseMotionListener,MouseListener{
 		}
 		
 		
+		/*
 		// TODO
 		if(
 				e.getY() > form.getTab()[1]-3 &&
@@ -87,6 +88,7 @@ public class DrawChange implements MouseMotionListener,MouseListener{
 			System.out.println("Clique bas");
 		}
 		*/
+
 		
 		/*
 		if(e.getY() > form.getTab()[1]-3 && e.getY() < form.getTab()[1]+3) {//marche pas
@@ -111,7 +113,6 @@ public class DrawChange implements MouseMotionListener,MouseListener{
 			if(e.getX() > form.getTab()[0] && e.getX() < form.getTab()[0]+form.getTab()[2] && e.getY() > form.getTab()[1] && e.getY() < form.getTab()[0]+form.getTab()[3]) {
 				model.addForm(e.getX()-(form.getTab()[2]/2),e.getY()-(form.getTab()[3]/2), form.getTab()[2],form.getTab()[3], 'i', im);
 			}
-		
 		
 	}
 

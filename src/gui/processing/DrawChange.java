@@ -74,6 +74,14 @@ public class DrawChange implements MouseMotionListener, MouseListener {
 		// 1 => Marge haut
 		// 2 => Largeur
 		// 3 => Longueur
+		if (((ProcessingModel) Context.$M).isfUp() || ((ProcessingModel) Context.$M).iscropUp()) {
+			if (((ProcessingModel) Context.$M).iscropUp() && refx != 0) 
+				((ProcessingModel) Context.$M).addForm(refx, refy, (e.getX() - refx), (e.getY() - refy), 'c', null);
+
+			else if (((ProcessingModel) Context.$M).isfUp() && refx != 0)
+				((ProcessingModel) Context.$M).addForm(refx, refy, (e.getX() - refx), (e.getY() - refy), 'f', null);
+		}
+		
 		if (form != null) {
 			int[] tab = form.getTab();
 
@@ -121,13 +129,7 @@ public class DrawChange implements MouseMotionListener, MouseListener {
 			int endXForm = originXForm + f.getTab()[2];
 			int endYForm = originYForm + f.getTab()[3];
 
-			if (((ProcessingModel) Context.$M).isfUp() || ((ProcessingModel) Context.$M).iscropUp()) {
-				if (((ProcessingModel) Context.$M).iscropUp() && refx != 0)
-					((ProcessingModel) Context.$M).addForm(refx, refy, (e.getX() - refx), (e.getY() - refy), 'c', null);
-
-				else if (((ProcessingModel) Context.$M).isfUp() && refx != 0)
-					((ProcessingModel) Context.$M).addForm(refx, refy, (e.getX() - refx), (e.getY() - refy), 'f', null);
-			}
+		
 
 			// Condition ajoutée
 			if ((e.getX() > originXForm + MARGE && e.getX() < endXForm - MARGE)

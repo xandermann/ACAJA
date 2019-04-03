@@ -115,6 +115,8 @@ public class ProcessingModel extends GeneralModel{
 	public void resizeForm(Form f, int x, int y, int width, int height) {
 		
 	}
+	
+
 	public void addForm(int a,int b,int c,int d,char type,File i) {
 		int[] tab = new int[4];
 		tab[0] = a;
@@ -128,11 +130,13 @@ public class ProcessingModel extends GeneralModel{
 				if(form.getFormType() == type) {
 					if(i != null) {
 						form.setForm(tab, type,i);
+						currentForm = form;
 					}
 					else
 						form.setForm(tab, type,null);
 					
 					containForm = true;
+					currentForm = form;
 					break;
 				}
 			}	
@@ -143,6 +147,7 @@ public class ProcessingModel extends GeneralModel{
 				else
 					f = new Form(tab,type,null);
 				forms.add(f);
+				currentForm = f;
 				System.out.println(a+"-"+b+"-"+c+"-"+d+"-t:"+type);
 				
 			}

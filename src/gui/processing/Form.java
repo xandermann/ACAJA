@@ -60,6 +60,16 @@ public class Form {
 		formValues = tabValues;
 		formType = tyC;
 		formImage = i;
+		if(tyC == 'i') {
+			try {
+				formImageGenerated = new ImageIcon(ImageIO.read(i)).getImage();
+			} catch (IOException e) {
+				// TODO REMONTER L'ERREUR
+				e.printStackTrace();
+			}
+		} else {
+				formImageGenerated = new ImageIcon("img/test.png").getImage();
+		}
 	}
 
 	/**

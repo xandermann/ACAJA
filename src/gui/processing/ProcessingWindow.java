@@ -131,7 +131,6 @@ public class ProcessingWindow extends JFrame {
 					for (String imgExt : imageExtensions) {
 						if (img.getName().endsWith(imgExt)) {
 							isImage = true;
-			
 						}
 					}
 					if(isImage) {

@@ -141,7 +141,7 @@ public class ProcessingWindow extends JFrame {
 		concat.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
-				new ConcatWindow(model);
+				new ConcatWindow();
 				Alert.longAlert(Alert.INFO, "Ceci est la fenetre pour concatener des videos.");
 			}
 		});

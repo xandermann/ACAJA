@@ -41,6 +41,7 @@ public class ConcatWindow extends JFrame {
 			public void windowClosing(WindowEvent e) {
 				Context.$F.remove(this);
 				new Focus();
+				((ProcessingModel)Context.$M).getCurrentFile().cancelAll();
 			}
 			public void windowClosed(WindowEvent e) {}
 			public void windowIconified(WindowEvent e) {}
@@ -137,15 +138,12 @@ public class ConcatWindow extends JFrame {
 					((ProcessingModel)Context.$M).getCurrentFile().setFileExtension(((ProcessingModel)Context.$M).getCurrentFile().getSourceFileExtension());
 					try {
 						((ProcessingModel)Context.$M).save();
-						((ProcessingModel)Context.$M).getCurrentFile().cancelAll();
 					} catch (UnfindableResourceException e1) {
 						e1.printStackTrace();
 					}
 					
 				}
-			}
-				
-			
+			}			
 		});
 		j.add(valider);
 		return j;

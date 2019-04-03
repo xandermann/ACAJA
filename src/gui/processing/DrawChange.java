@@ -18,7 +18,7 @@ public class DrawChange implements MouseMotionListener, MouseListener {
 	private Form form;
 	private File im;
 
-	private final int MARGE = 5;
+	private final int MARGE = 10;
 
 	public DrawChange(ProcessingModel m) {
 		this.model = m;
@@ -78,20 +78,20 @@ public class DrawChange implements MouseMotionListener, MouseListener {
 
 			// 0 < X < 0+2
 			// 1 < Y < 1
-			if (tab[0] < x && x < tab[0] + tab[2] && tab[1] - MARGE < y && y < tab[1] + MARGE) {
+			else if (tab[0] < x && x < tab[0] + tab[2] && tab[1] - MARGE < y && y < tab[1] + MARGE) {
 				System.out.println("TODO: click haut");
 			}
 
 			// 0+2 < X < 0+2
 			// 1 < Y < 1+3
-			if (tab[0] + tab[2] - MARGE < x && x < tab[0] + tab[2] + MARGE && tab[1] < y && y < tab[1] + tab[3]) {
-				System.out.println("TODO: click droit");
+			else if (tab[0] + tab[2] - MARGE < x && x < tab[0] + tab[2] + MARGE && tab[1] < y && y < tab[1] + tab[3]) {
+				model.addForm(refx, refy, e.getX(), y, 'i', im);
 			}
 
 			// 0 < x < 0+2
 			// 1+3 < y < 1+3
-			if (tab[0] < x && x < tab[0] + tab[2] && tab[1] + tab[3] - MARGE < y && y < tab[1] + tab[3] + MARGE) {
-				System.out.println("TODO: click bas");
+			else if (tab[0] < x && x < tab[0] + tab[2] && tab[1] + tab[3] - MARGE < y && y < tab[1] + tab[3] + MARGE) {
+				model.addForm(refx, refy, x, e.getY(), 'i', im);
 			}
 		}
 
@@ -104,7 +104,7 @@ public class DrawChange implements MouseMotionListener, MouseListener {
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		
+
 		System.out.println("x" + refx + "y" + refy);
 		int indice = 0;
 		for (int i = 0; i < model.getListRect().size(); i++) {
@@ -114,8 +114,6 @@ public class DrawChange implements MouseMotionListener, MouseListener {
 			int originYForm = f.getTab()[1];
 			int endXForm = originXForm + f.getTab()[2];
 			int endYForm = originYForm + f.getTab()[3];
-
-		
 
 			if (((ProcessingModel) Context.$M).isfUp() || ((ProcessingModel) Context.$M).iscropUp()) {
 				if (((ProcessingModel) Context.$M).iscropUp() && refx != 0)

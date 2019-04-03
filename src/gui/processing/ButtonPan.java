@@ -14,9 +14,6 @@ import gui.general.Context;
 
 public class ButtonPan extends JPanel {
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -1294342658122646334L;
 	private JToggleButton flouButton;
 	private JToggleButton rectangle;
@@ -33,12 +30,25 @@ public class ButtonPan extends JPanel {
 	public ButtonPan() {
 		this.setLayout(new GridLayout(4, 2, 1, 1));
 		rectangle = new JToggleButton(new ImageIcon(resources.ResourceConstants.BUTTON_RECT));
+		rectangle.setToolTipText("Ici vous pouvez rogner la video.");
+		
 		flouButton = new JToggleButton(new ImageIcon(resources.ResourceConstants.BLURRED));
+		flouButton.setToolTipText("Ici vous pouvez flouter la video.");
+		
 		rotateL1 = new JToggleButton(new ImageIcon(resources.ResourceConstants.LEFT_ARROW));
+		rotateL1.setToolTipText("Ici vous pouvez pivoter de 90° a gauche la video.");
+		
 		rotateR1 = new JToggleButton(new ImageIcon(resources.ResourceConstants.RIGHT_ARROW));
+		rotateR1.setToolTipText("Ici vous pouvez pivoter de 90° a droite la video.");
+		
 		rotateInvertedL1 = new JToggleButton(new ImageIcon("img/fliptournG.png"));
+		rotateInvertedL1.setToolTipText("Ici vous pouvez retourner la video et la pivoter de 90° a gauche.");
+		
 		rotateInvertedR1 = new JToggleButton(new ImageIcon("img/fliptournD.png"));
+		rotateInvertedR1.setToolTipText("Ici vous pouvez retourner la video et la pivoter de 90° a droite.");
+		
 		rotate180 = new JToggleButton(new ImageIcon("img/180.png"));
+		rotate180.setToolTipText("Ici vous pouvez retourner la video.");
 	
 		JButton undo = new JButton(new ImageIcon(resources.ResourceConstants.LEFT_ARROW));
 		

@@ -25,8 +25,10 @@ public class ProcessingModel extends GeneralModel{
 	private ProcessingFile currentFile;
 	private File minia;
 	private String destinationFolder;
-	private boolean rotateLeft, rotateRight, rotate180Left, rotate180Right, rotate180;
+	private boolean rotateLeft, rotateRight, rotate180Left, rotate180Right, rotate180, rotation;
 	private ArrayList<File> images;
+	private String cropOrBlurSetting;
+	private boolean verticalMode;
 	
 	public ArrayList<File> getImages() {
 		return images;
@@ -44,8 +46,11 @@ public class ProcessingModel extends GeneralModel{
 		cropUp = false;
 		rotateLeft = false;
 		rotateRight = false;
-		setRotate180Left(false);
-		setRotate180Right(false);
+		rotate180Left = false;
+		rotate180Right = false;
+		rotate180 = false;
+		verticalMode = false;
+		cropOrBlurSetting = "";
 		listRect = new ArrayList<>();
 		images = new ArrayList<File>();
 	}
@@ -174,6 +179,31 @@ public class ProcessingModel extends GeneralModel{
 
 	@Override
 	public void save() throws UnfindableResourceException {
+		rotation = false;
+	
+		
+		if(rotateLeft) {	
+			this.modify(ProcessingType.ROTATED, "left");
+			rotation = true;
+			
+		} 
+		if(rotateRight) {
+			this.modify(ProcessingType.ROTATED, "right");
+			rotation = true;
+		}
+		if(rotate180Left) {
+			this.modify(ProcessingType.ROTATED, "180left");
+			rotation = true;
+		}
+		if(rotate180Right) {
+			this.modify(ProcessingType.ROTATED, "180right");
+			rotation = true;
+		}
+		if(rotate180) {
+			this.modify(ProcessingType.ROTATED, "180");
+			rotation = true;
+		}
+		
 		if(!listRect.isEmpty()) {
 			Form actu = this.listRect.get(this.listRect.size()-1);
 			String[] res = currentFile.getResolution().split("x");
@@ -181,53 +211,51 @@ public class ProcessingModel extends GeneralModel{
 			double coeffWidth = ((double)Integer.parseInt(res[0]))/500;
 			double coeffHeight = ((double)Integer.parseInt(res[1]))/350;
 			
-			int a1 = (int) (actu.getTab()[0]*coeffWidth);
-			int b1 = (int) (actu.getTab()[1]*coeffHeight);
+			int x = (int) (actu.getTab()[0]*coeffWidth);
+			int y = (int) (actu.getTab()[1]*coeffHeight);
 			
-			int c1 = (int) (actu.getTab()[2]*coeffWidth);
-			int d1 = (int) (actu.getTab()[3]*coeffHeight);
+			int width = (int) (actu.getTab()[2]*coeffWidth);
+			int height = (int) (actu.getTab()[3]*coeffHeight);
 			
-			System.out.println(a1+"-"+b1+"-"+c1+"-"+d1);
+			cropOrBlurSetting = x+" "+y+" "+width+" "+height;
+		
 			
-			switch (actu.getTypeCommande()) {
-			case 'c':
-				this.modify(ProcessingType.CROPED,a1+" "+b1+" "+c1+" "+d1 );
-				break;
-			case 'f':
-				this.modify(ProcessingType.BLURRED,a1+" "+b1+" "+c1+" "+d1 );
-				break;
-	
-			default:
-				System.out.println("Non implemente");
-				break;
+				switch (actu.getTypeCommande()) {
+				case 'c':
+					this.modify(ProcessingType.CROPED,a1+" "+b1+" "+c1+" "+d1 );
+					
+					break;
+				case 'f':
+					this.modify(ProcessingType.BLURRED,a1+" "+b1+" "+c1+" "+d1 );
+					break;
+		
+				default:
+					System.out.println("Non implemente");
+					break;
+				}
 			}
+		
 			
-		}
-
-		if(rotateLeft) {
-			this.modify(ProcessingType.ROTATED, "left");
-			
-		} 
-		if(rotateRight) {
-			this.modify(ProcessingType.ROTATED, "right");
-			
-		}
-		if(rotate180Left) {
-			this.modify(ProcessingType.ROTATED, "180left");
-		}
-		if(rotate180Right) {
-			this.modify(ProcessingType.ROTATED, "180right");
-		}
-		if(rotate180) {
-			this.modify(ProcessingType.ROTATED, "180");
-		}
-		if(currentFile.isModified()) {
+	if(currentFile.isModified()) {
+		if(rotation && cropUp) {
+			System.out.println("Rotation et crop");
+			/******************************************************************************************
+			 ******************************************************************************************
+			 ******************************************************************************************
+			 *******************************************************************************************
+			 ******************************************************************************************
+			 *******************************************************************************************
+			 ******************************************************************************************
+			 */
+			currentFile.cancel(ProcessingType.CROPED);
 			new Thread() {
 				public void run (){
 					/**
 					 * ATTENDRE QU'ON ME RENDE LA MAIN.
 					 */
 					while(RuntimeSpaceManager.hand.took());
+					
+					
 					/**
 					 * DEBUT DU TRAITEMENT :
 					 * 
@@ -250,7 +278,114 @@ public class ProcessingModel extends GeneralModel{
 							currentFile.getSourceFile());
 				}
 			}.start();
+			/******************************************************************************************
+			 ******************************************************************************************
+			 ******************************************************************************************
+			 *******************************************************************************************
+			 ******************************************************************************************
+			 *******************************************************************************************
+			 ******************************************************************************************
+			 */
+		} else if (rotation && fUp) {
+			System.out.println("Rotation et flou");
+			/******************************************************************************************
+			 ******************************************************************************************
+			 ******************************************************************************************
+			 *******************************************************************************************
+			 ******************************************************************************************
+			 *******************************************************************************************
+			 ******************************************************************************************
+			 */
+			new Thread() {
+				public void run (){
+					/**
+					 * ATTENDRE QU'ON ME RENDE LA MAIN.
+					 */
+					while(RuntimeSpaceManager.hand.took());
+					
+					
+					/**
+					 * DEBUT DU TRAITEMENT :
+					 * 
+					 * Prendre la main sur l'espace d'execution.
+					 * Prendre la main sur ffmpeg.
+					 */
+					RuntimeSpaceManager.hand.take();
+					startSave();
+					/**
+					 * LANCEMENT DU TRAITEMENT DANS UN AUTRE PROCESSUS.
+					 */
+					ThreadForSave.saveInNewThread(currentFile);
+					/**
+					 * LANCEMENT ET GESTION DE LA FENETRE D'ATTENTE DANS UN AUTRE PROCESSUS.
+					 */
+					ThreadForWaitWindow.waitInNewThread(
+							new AlertWindow(
+									AlertWindow.INFO,
+									"Traitement du fichier "+currentFile.getSourceFileName()+"<br>Veuillez patientez..."),
+							currentFile.getSourceFile());
+				}
+			}.start();
+			/******************************************************************************************
+			 ******************************************************************************************
+			 ******************************************************************************************
+			 *******************************************************************************************
+			 ******************************************************************************************
+			 *******************************************************************************************
+			 ******************************************************************************************
+			 */
+		} else {
+			System.out.println("Autre cas.");
+			/******************************************************************************************
+			 ******************************************************************************************
+			 ******************************************************************************************
+			 *******************************************************************************************
+			 ******************************************************************************************
+			 *******************************************************************************************
+			 ******************************************************************************************
+			 */
+			new Thread() {
+				public void run (){
+					/**
+					 * ATTENDRE QU'ON ME RENDE LA MAIN.
+					 */
+					while(RuntimeSpaceManager.hand.took());
+					
+					
+					/**
+					 * DEBUT DU TRAITEMENT :
+					 * 
+					 * Prendre la main sur l'espace d'execution.
+					 * Prendre la main sur ffmpeg.
+					 */
+					RuntimeSpaceManager.hand.take();
+					startSave();
+					/**
+					 * LANCEMENT DU TRAITEMENT DANS UN AUTRE PROCESSUS.
+					 */
+					ThreadForSave.saveInNewThread(currentFile);
+					/**
+					 * LANCEMENT ET GESTION DE LA FENETRE D'ATTENTE DANS UN AUTRE PROCESSUS.
+					 */
+					ThreadForWaitWindow.waitInNewThread(
+							new AlertWindow(
+									AlertWindow.INFO,
+									"Traitement du fichier "+currentFile.getSourceFileName()+"<br>Veuillez patientez..."),
+							currentFile.getSourceFile());
+				}
+			}.start();
+			/******************************************************************************************
+			 ******************************************************************************************
+			 ******************************************************************************************
+			 *******************************************************************************************
+			 ******************************************************************************************
+			 *******************************************************************************************
+			 ******************************************************************************************
+			 */
 		}
+	}
+			
+		
 	}
 	
 	

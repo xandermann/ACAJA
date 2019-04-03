@@ -139,7 +139,7 @@ public class ConcatWindow extends JFrame {
 					model.setDestinationFolder(JFileChooserManager.chooseDirectory());
 					model.getCurrentFile().setDestinationPath(model.getDestinationFolder());
 					model.getCurrentFile().setDestinationName("Concat"+System.currentTimeMillis());
-					m.getCurrentFile().setFileExtension(model.getCurrentFile().getSourceFileExtension());
+					model.getCurrentFile().setFileExtension(model.getCurrentFile().getSourceFileExtension());
 					try {
 						model.save();
 						model.getCurrentFile().cancelAll();

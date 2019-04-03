@@ -24,6 +24,7 @@ public interface FlagConstants {
 	public final static String FLAG_FILTER_VIDEO = FLAG_FILTER+FLAG_SEPARATOR+"v";
 	public final static String FLAG_COPY = "copy";
 	public final static String FLAG_FILTER_ALL_COPY = FLAG_FILTER+FLAG_SEPARATOR+FLAG_COPY;
+	public final static String FLAG_FILTER_COMPLEX = "-filter_complex";
 	
 	public final static String FLAG_SUPPORTED_CODECS = "-codecs";
 	
@@ -46,7 +47,7 @@ public interface FlagConstants {
 	public final static String[] FLAG_CROP = {"-filter:v","crop="};
 	public final static String[] FLAG_PERIOD = {"-ss", "-t"};
 	public final static String[] FLAG_ROTATE = {FLAG_MODIFY, "transpose=1", "transpose=2", "transpose=2,transpose=2","transpose=0", "transpose=3"};
-	public final static String[] FLAG_BLUR = {"-filter_complex", 
+	public final static String[] FLAG_BLUR = {FLAG_FILTER_COMPLEX, 
 											  "[0:v]crop=", ",boxblur=10[fg];[0:v][fg]overlay=", "[v]",
 											  FLAG_MAP, "[v]", FLAG_MAP, "0"+S+"a", 
 										      FLAG_FILTER_VIDEO, "libx264", FLAG_FILTER_AUDIO, FLAG_COPY, 
@@ -58,4 +59,6 @@ public interface FlagConstants {
 	
 	public final static String[] FLAG_REMOVE_SOUND = {FLAG_FILTER, FLAG_COPY, "-an"};
 	public final static String[] FLAG_ADD_SOUND = {FLAG_INPUT, FLAG_FILTER, FLAG_COPY, FLAG_MAP, "0"+S+"0", FLAG_MAP, "0"+S+"1"};
+	
+	public final static String[] FLAG_ADD_IMAGE = {FLAG_INPUT, FLAG_FILTER_COMPLEX, "overlay="};
 }

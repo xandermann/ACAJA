@@ -16,9 +16,6 @@ import gui.general.GeneralWindow;
  * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
  */
 public final class ASWindow extends GeneralWindow{
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -5267140675594351287L;
 
 	/**
@@ -26,10 +23,6 @@ public final class ASWindow extends GeneralWindow{
 	 */
 	public ASWindow(){
 		super("Choix des parametres des notifications.", new ASView());
-		/**
-		 * THIS DETIENT LE FOCUS ET SERA UN COMPONENT PARENT.
-		 */
-		Context.$C(0, this);
 		/**
 		 * SE SOUVENIR DES MODIFICATIONS.
 		 */

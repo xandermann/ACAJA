@@ -3,6 +3,7 @@ import java.awt.event.*;
 import javax.swing.*;
 
 import gui.general.Context;
+import gui.general.Focus;
 /**
  * [ ALERTES ( = NOTIFICATIONS TEMPORAIRES ). ]
  * 
@@ -33,7 +34,7 @@ public final class Alert extends AlertSettings implements ATConstants, AMConstan
 				public void mouseClicked(MouseEvent e) {}
 				public void mousePressed(MouseEvent e) {
 					view.dispose();
-					renderFocus();
+					new Focus();
 				}
 				public void mouseReleased(MouseEvent e) {}
 				public void mouseEntered(MouseEvent e) {}
@@ -42,21 +43,6 @@ public final class Alert extends AlertSettings implements ATConstants, AMConstan
 		}
 	}
 	
-	
-	/**
-	 * [ RENDRE LE FOCUS. ]
-	 */
-	private void renderFocus() {
-		/**
-		 * RENDRE LE FOCUS AU COMPONENT PARENT.
-		 */
-		if(Context.$C(0) != null) 
-			Context.$C(0).requestFocus();
-		else {
-			if(Context.$W != null) 
-				Context.$W.requestFocus();
-		}
-	}
 	
 	
 	/**

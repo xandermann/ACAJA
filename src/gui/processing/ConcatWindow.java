@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.File;
 import java.util.ArrayList;
 
@@ -18,6 +20,8 @@ import files.enumerations.ProcessingType;
 import files.files.ProcessingFile;
 import gui.JFileChooserManager;
 import gui.WindowTools;
+import gui.general.Context;
+import gui.general.Focus;
 import gui.style.StylizedJMenuBar;
 import gui.style.StylizedJMenuItem;
 
@@ -32,6 +36,25 @@ public class ConcatWindow extends JFrame {
 
 	public ConcatWindow(ProcessingModel m) {
 		model = m;
+		
+		Context.$F.add(this);
+		/**
+		 * RENDRE LE FOCUS A L'EVENEMENT PARENT.
+		 */
+		addWindowListener(new WindowListener() {
+			public void windowOpened(WindowEvent e) {}
+			public void windowClosing(WindowEvent e) {
+				Context.$F.remove(this);
+				new Focus();
+			}
+			public void windowClosed(WindowEvent e) {}
+			public void windowIconified(WindowEvent e) {}
+			public void windowDeiconified(WindowEvent e) {}
+			public void windowActivated(WindowEvent e) {}
+			public void windowDeactivated(WindowEvent e) {}
+		});
+		
+		
 		listOfFile = new ArrayList<ProcessingFile>();
 		WindowTools.executeWindow(this);
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

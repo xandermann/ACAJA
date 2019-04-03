@@ -3,9 +3,12 @@ package gui.general;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 import javax.swing.*;
 import gui.WindowTools;
+import gui.alerts.AlertSettings;
 import gui.style.StylizedJFrame;
 
 /**
@@ -18,9 +21,6 @@ import gui.style.StylizedJFrame;
  * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
  */
 public abstract class GeneralWindow extends StylizedJFrame{
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1372173727022340518L;
 
 	/**
@@ -29,6 +29,8 @@ public abstract class GeneralWindow extends StylizedJFrame{
 	public GeneralWindow(String title, JPanel view){
 		super(title);
 		if(view == null) throw new NullPointerException("view null !");
+		
+		Context.$F.add(this);
 		
 		setResizable(false);
 		setContentPane(view);
@@ -46,17 +48,7 @@ public abstract class GeneralWindow extends StylizedJFrame{
 					/**
 					 * RENDRE LE FOCUS A L'EVENEMENT PARENT.
 					 */
-					if(Context.$C(0) != null) {
-						if(Context.$C(0) == GeneralWindow.this) {
-							Context.$C(0, null);
-							if(Context.$W != null) 
-								Context.$W.requestFocus();
-						} else
-							Context.$C(0).requestFocus();
-					} else {
-						if(Context.$W != null) 
-							Context.$W.requestFocus();
-					}
+					renderFocus();
 				}
 			}
 		});
@@ -64,7 +56,34 @@ public abstract class GeneralWindow extends StylizedJFrame{
 		requestFocus();
 		
 		
+		/**
+		 * RENDRE LE FOCUS A L'EVENEMENT PARENT.
+		 */
+		addWindowListener(new WindowListener() {
+			public void windowOpened(WindowEvent e) {}
+			public void windowClosing(WindowEvent e) {
+				/**
+				 * RENDRE LE FOCUS A L'EVENEMENT PARENT.
+				 */
+				renderFocus();
+			}
+			public void windowClosed(WindowEvent e) {}
+			public void windowIconified(WindowEvent e) {}
+			public void windowDeiconified(WindowEvent e) {}
+			public void windowActivated(WindowEvent e) {}
+			public void windowDeactivated(WindowEvent e) {}
+		});
+		
 		WindowTools.showLogo(this);
 		WindowTools.executeWindow(this);
+	}
+	
+	
+	/**
+	 * [ METHODE POUR RETABLIR LE FOCUS. ]
+	 */
+	private void renderFocus() {
+		Context.$F.remove(this);
+		new Focus();
 	}
 }

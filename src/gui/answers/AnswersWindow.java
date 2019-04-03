@@ -24,9 +24,5 @@ public final class AnswersWindow extends GeneralWindow {
 	 */
 	public AnswersWindow() {
 		super("Historique des reponses de FFmpeg.", new AnswersView());
-		/**
-		 * THIS DETIENT LE FOCUS ET SERA UN COMPONENT PARENT.
-		 */
-		Context.$C(0, this);
 	}
 }

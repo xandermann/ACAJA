@@ -36,15 +36,16 @@ public class DrawChange implements MouseMotionListener,MouseListener{
 	public void mousePressed(MouseEvent e) {
 		refx = e.getX();
 		refy = e.getY();
-		
+		System.out.println("x"+refx+"y"+refy);
 		int indice = 0;
 		for (int i = 0; i< model.getListRect().size();i++) {
 			
 			Form f = model.getListRect().get(i);
-			if(e.getX() > f.getTab()[0] 
-				&& e.getX() < f.getTab()[0]+f.getTab()[2] 
-				&& e.getY() > f.getTab()[1] 
-				&& e.getY() < f.getTab()[0]+f.getTab()[3]) {
+			int originXForm = f.getTab()[0];
+			int originYForm = f.getTab()[1];
+			int endXForm = originXForm + f.getTab()[2];
+			int endYForm = originYForm + f.getTab()[3];
+			if((e.getX()> originXForm&&e.getX()<endXForm)&&(e.getY()>originYForm && e.getY()<endYForm)) {
 				form = f;
 				if(form.getTypeCommande() == 'i') {
 					im = form.getImageA();
@@ -98,6 +99,8 @@ public class DrawChange implements MouseMotionListener,MouseListener{
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
+		
+			
 		
 		//  x, y , largeur, hauteur
 		if(((ProcessingModel)Context.$M).isfUp() || ((ProcessingModel)Context.$M).iscropUp()) {

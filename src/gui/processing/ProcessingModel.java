@@ -229,23 +229,29 @@ public class ProcessingModel extends GeneralModel{
 				
 			}
 		
+/*	
+else if (crop && blur) {
 			
+		} else if (crop && blur) {
+			
+		}*/
 	if(currentFile.isModified()) {
 		destinationFolder = JFileChooserManager.chooseDirectory().getAbsolutePath();
 		currentFile.setDestinationPath(getDestinationFolder());
 		currentFile.setDestinationName("MaSuperVideo"+System.currentTimeMillis());
 		currentFile.setFileExtension(currentFile.getSourceFileExtension());
-		if(rotation && modeCrop) {
+		if(rotation && crop) {
 			System.out.println("Rotation et rogner");
-			ProcessThreadManager.treatMultipleProcesses(currentFile, ProcessingType.CROPED);	
-		} else if (rotation && modeBlur) {
+			ProcessThreadManager.treatTwoProcesses(currentFile, ProcessingType.CROPED);	
+		} else if (rotation && blur) {
 			System.out.println("Rotation et flou");
-			ProcessThreadManager.treatMultipleProcesses(currentFile, ProcessingType.BLURRED);	
+			ProcessThreadManager.treatTwoProcesses(currentFile, ProcessingType.BLURRED);	
 		} else if (crop && blur) {
 			System.out.println("Rogner et flouter");
-			ProcessThreadManager.treatMultipleProcesses(currentFile,ProcessingType.CROPED);
+			ProcessThreadManager.treatTwoProcesses(currentFile,ProcessingType.CROPED);
 			System.out.println("A TESTER");
-		} else {
+		}  
+		else {
 			System.out.println("Autre cas.");
 			ProcessThreadManager.treatOneProcess(currentFile);
 		}

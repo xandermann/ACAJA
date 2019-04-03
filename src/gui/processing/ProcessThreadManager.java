@@ -50,7 +50,7 @@ public class ProcessThreadManager {
 		}.start();
 	}
 	
-	public static void treatMultipleProcesses(ProcessingFile f1, ProcessingType secondAction) {
+	public static void treatTwoProcesses(ProcessingFile f1, ProcessingType secondAction) {
 		String finalFileName = f1.getDestinationFileName();
 		System.out.println("Nom du fichier final : " + finalFileName);
 		//NamesSpaceManager._temporary()

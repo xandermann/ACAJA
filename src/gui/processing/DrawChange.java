@@ -71,30 +71,20 @@ public class DrawChange implements MouseMotionListener, MouseListener {
 		int y = e.getY();
 
 		/*
-		// 0 < X < 0
-		// 1 < 1+3
-		if (tab[0] - MARGE < x && x < tab[0] + MARGE && tab[1] < y && y < tab[1] + tab[3]) {
-			System.out.println("click gauche");
-		}
-
-		// 0 < X < 0+2
-		// 1 < Y < 1
-		if (tab[0] < x && x < tab[0] + tab[2] && tab[1] - MARGE < y && y < tab[1] + MARGE) {
-			System.out.println("click haut");
-		}
-
-		// 0+2 < X < 0+2
-		// 1 < Y < 1+3
-		if (tab[0] + tab[2] - MARGE < x && x < tab[0] + tab[2] + MARGE && tab[1] < y && y < tab[1] + tab[3]) {
-			System.out.println("click droit");
-		}
-
-		// 0 < x < 0+2
-		// 1+3 < y < 1+3
-		if (tab[0] < x && x < tab[0] + tab[2] && tab[1] + tab[3] - MARGE < y && y < tab[1] + tab[3] + MARGE) {
-			System.out.println("click bas");
-		}
-		*/
+		 * // 0 < X < 0 // 1 < 1+3 if (tab[0] - MARGE < x && x < tab[0] + MARGE &&
+		 * tab[1] < y && y < tab[1] + tab[3]) { System.out.println("click gauche"); }
+		 * 
+		 * // 0 < X < 0+2 // 1 < Y < 1 if (tab[0] < x && x < tab[0] + tab[2] && tab[1] -
+		 * MARGE < y && y < tab[1] + MARGE) { System.out.println("click haut"); }
+		 * 
+		 * // 0+2 < X < 0+2 // 1 < Y < 1+3 if (tab[0] + tab[2] - MARGE < x && x < tab[0]
+		 * + tab[2] + MARGE && tab[1] < y && y < tab[1] + tab[3]) {
+		 * System.out.println("click droit"); }
+		 * 
+		 * // 0 < x < 0+2 // 1+3 < y < 1+3 if (tab[0] < x && x < tab[0] + tab[2] &&
+		 * tab[1] + tab[3] - MARGE < y && y < tab[1] + tab[3] + MARGE) {
+		 * System.out.println("click bas"); }
+		 */
 
 	}
 
@@ -105,26 +95,42 @@ public class DrawChange implements MouseMotionListener, MouseListener {
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		if (((ProcessingModel) Context.$M).isfUp() || ((ProcessingModel) Context.$M).iscropUp()) {
-			if (((ProcessingModel) Context.$M).iscropUp() && refx != 0)
-				((ProcessingModel) Context.$M).addForm(refx, refy, (e.getX() - refx), (e.getY() - refy), 'c', null);
+		refx = e.getX();
+		refy = e.getY();
+		System.out.println("x" + refx + "y" + refy);
+		int indice = 0;
+		for (int i = 0; i < model.getListRect().size(); i++) {
 
-			else if (((ProcessingModel) Context.$M).isfUp() && refx != 0)
-				((ProcessingModel) Context.$M).addForm(refx, refy, (e.getX() - refx), (e.getY() - refy), 'f', null);
-		}
-		if (!(((ProcessingModel) Context.$M).isfUp() || ((ProcessingModel) Context.$M).iscropUp())) {
-			if (form != null) {
-				if (im != null) {
-					model.addForm(e.getX() - (form.getTab()[2] / 2), e.getY() - (form.getTab()[3] / 2),
-							form.getTab()[2], form.getTab()[3], 'i', im);
-				} else {
-					model.addForm(e.getX() - (form.getTab()[2] / 2), e.getY() - (form.getTab()[3] / 2),
-							form.getTab()[2], form.getTab()[3], form.getTypeCommande(), null);
+			Form f = model.getListRect().get(i);
+			int originXForm = f.getTab()[0];
+			int originYForm = f.getTab()[1];
+			int endXForm = originXForm + f.getTab()[2];
+			int endYForm = originYForm + f.getTab()[3];
+			if ((e.getX() > originXForm && e.getX() < endXForm) && (e.getY() > originYForm && e.getY() < endYForm)) {
+
+				if (((ProcessingModel) Context.$M).isfUp() || ((ProcessingModel) Context.$M).iscropUp()) {
+					if (((ProcessingModel) Context.$M).iscropUp() && refx != 0)
+						((ProcessingModel) Context.$M).addForm(refx, refy, (e.getX() - refx), (e.getY() - refy), 'c',
+								null);
+
+					else if (((ProcessingModel) Context.$M).isfUp() && refx != 0)
+						((ProcessingModel) Context.$M).addForm(refx, refy, (e.getX() - refx), (e.getY() - refy), 'f',
+								null);
 				}
+				if (!(((ProcessingModel) Context.$M).isfUp() || ((ProcessingModel) Context.$M).iscropUp())) {
+					if (form != null) {
+						if (im != null) {
+							model.addForm(e.getX() - (form.getTab()[2] / 2), e.getY() - (form.getTab()[3] / 2),
+									form.getTab()[2], form.getTab()[3], 'i', im);
+						} else {
+							model.addForm(e.getX() - (form.getTab()[2] / 2), e.getY() - (form.getTab()[3] / 2),
+									form.getTab()[2], form.getTab()[3], form.getTypeCommande(), null);
+						}
+					}
+				}
+
 			}
 		}
-
-		System.out.println(e);
 	}
 
 	@Override

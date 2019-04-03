@@ -1,24 +1,23 @@
 package gui.processing;
 
-import java.awt.Image;
 import java.io.File;
-import java.io.IOException;
+import java.util.Observable;
 
-import javax.imageio.ImageIO;
+
 
 public class Form {
 
 	/**
-	 * Tableau
+	 * formValuesleau
 	 * 
 	 * 	// 0 => Marge gauche
 	 *	// 1 => Marge haut
 	 *	// 2 => Largeur
 	 *	// 3 => Longueur
 	 */
-	private int[] tab;
-	private char typeCommande;
-	private File image;
+	private int[] formValues;
+	private char formType;
+	private File formImage;
 	
 
 
@@ -29,9 +28,9 @@ public class Form {
 	 * @param i
 	 */
 	public Form(int[] t, char tyC, File i) {
-		this.tab = t;
-		this.typeCommande = tyC;
-		this.image = i;
+		this.formValues = t;
+		this.formType = tyC;
+		this.formImage = i;
 		
 	}
 
@@ -41,35 +40,45 @@ public class Form {
 	 * @param tyC
 	 * @param i
 	 */
-	public void setForm(int[] t, char tyC, File i) {
-		tab = t;
-		typeCommande = tyC;
-		image = i;
+	public void setForm(int[] tabValues, char tyC, File i) {
+		formValues = tabValues;
+		formType = tyC;
+		formImage = i;
 	}
 
 	/**
-	 * Recupere le tableau
-	 * @return Le tableau
+	 * Recupere le formValuesleau
+	 * @return Le formValuesleau
 	 */
-	public int[] getTab() {
-		return tab;
+	public int[] getFormValues() {
+		return formValues;
 	}
 
 	/**
 	 * Recuperer le type de commande
 	 * @return Le type de commande
 	 */
-	public char getTypeCommande() {
-		return typeCommande;
+	public char getFormType() {
+		return formType;
 	}
 
 	/**
-	 * Recupere l'image A
-	 * @return L'image A
+	 * Recupere l'formImage 
+	 * @return L'formImage 
 	 */
-	public File getImageA() {
+	public File getFormImage() {
 		
-		return image;
+		return formImage;
+	}
+	
+	public void setSize(int width, int height){
+		formValues[2] = width;
+		formValues[3] = height;
+	}
+	
+	public void setPosition(int x, int y) {
+		formValues[0] = x;
+		formValues[1] = y;
 	}
 
 }

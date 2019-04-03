@@ -87,4 +87,16 @@ public class ProcessThreadManager {
 			}
 		}.start();
 	}
+	// TODO
+	public static void treatThreeProcesses(ProcessingFile f1, ProcessingType secondAction, ProcessingType lastAction) {
+		
+		// Fonctionnement avec 2 process :
+		// Recupere un processfile, fait le premier traitement en appelant treatoneprocess, sauvegarde son chemin
+		// Attend et fait le deuxieme traitement sur le chemin du fichier
+		
+		// Fonctionnement avec 3 process :
+		// d'abord faire 1 traitement avec treatone (et renommer chemin)
+		// attendre fin traitement puis faire le traitement final avec treattwo
+		// ne peut etre fait dans l'autre sens : treatwo nomme le fichier final 
+	}
 }

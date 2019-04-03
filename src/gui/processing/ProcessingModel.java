@@ -18,13 +18,14 @@ import resources.NamesSpaceManager;
 import wrapper.runtime.details.Request;
 
 public class ProcessingModel extends GeneralModel{
-	private List<Form> listRect;
+	private List<Form> forms;
 	private boolean modeBlur,modeCrop;
 	private ProcessingFile currentFile;
 	private File minia;
 	private String destinationFolder;
 	private boolean rotateLeft, rotateRight, rotate180Left, rotate180Right, rotate180;
 	private ArrayList<File> images;
+	private Form currentForm;
 	
 	public ArrayList<File> getImages() {
 		return images;
@@ -45,7 +46,7 @@ public class ProcessingModel extends GeneralModel{
 		rotate180Left = false;
 		rotate180Right = false;
 		rotate180 = false;
-		listRect = new ArrayList<>();
+		forms = new ArrayList<>();
 		images = new ArrayList<File>();
 	}
 
@@ -83,18 +84,18 @@ public class ProcessingModel extends GeneralModel{
 	}
 	
 	
-	public List<Form> getListRect() {
-		return listRect;
+	public List<Form> getForms() {
+		return forms;
 	}
 	
 	
 	public char getType(int pos) {
-		return listRect.get(pos).getTypeCommande();
+		return forms.get(pos).getFormType();
 	}
 	
 	
 	public int[] getTabInt(int pos) {
-		return listRect.get(pos).getTab();
+		return forms.get(pos).getFormValues();
 	}
 	
 	
@@ -110,6 +111,10 @@ public class ProcessingModel extends GeneralModel{
 	}
 
 	
+	
+	public void resizeForm(Form f, int x, int y, int width, int height) {
+		
+	}
 	public void addForm(int a,int b,int c,int d,char type,File i) {
 		int[] tab = new int[4];
 		tab[0] = a;
@@ -119,8 +124,8 @@ public class ProcessingModel extends GeneralModel{
 		
 		if(currentFile != null) {
 			boolean containForm = false;
-			for(Form form : listRect) {
-				if(form.getTypeCommande() == type) {
+			for(Form form : forms) {
+				if(form.getFormType() == type) {
 					if(i != null) {
 						form.setForm(tab, type,i);
 					}
@@ -137,7 +142,7 @@ public class ProcessingModel extends GeneralModel{
 					f = new Form(tab,type,i);
 				else
 					f = new Form(tab,type,null);
-				listRect.add(f);
+				forms.add(f);
 				System.out.println(a+"-"+b+"-"+c+"-"+d+"-t:"+type);
 			}
 		}
@@ -148,8 +153,8 @@ public class ProcessingModel extends GeneralModel{
 	
 	
 	public void suppLastForm() {
-		if(!this.listRect.isEmpty()) {
-			this.listRect.clear();;
+		if(!this.forms.isEmpty()) {
+			this.forms.clear();;
 			this.currentFile.cancelAll();
 		}
 		
@@ -200,13 +205,14 @@ public class ProcessingModel extends GeneralModel{
 		// TODO invertedVerticalMode
 		// TODO invertedVerticalMode
 		
-		if(!listRect.isEmpty()) {
-			for(Form f : listRect) {
-				int x = (int) (f.getTab()[0]*coeffWidth);
-				int y = (int) (f.getTab()[1]*coeffHeight);	
-				int width = (int) (f.getTab()[2]*coeffWidth);
-				int height = (int) (f.getTab()[3]*coeffHeight);
-				switch (f.getTypeCommande()) {
+		if(!forms.isEmpty()) {
+			for(Form f : forms) {
+				int[] formValues = f.getFormValues();
+				int x = (int) (formValues[0]*coeffWidth);
+				int y = (int) (formValues[1]*coeffHeight);	
+				int width = (int) (formValues[2]*coeffWidth);
+				int height = (int) (formValues[3]*coeffHeight);
+				switch (f.getFormType()) {
 				case 'c':
 					this.modify(ProcessingType.CROPED,x+" "+y+" "+width+" "+height);
 					crop = true;
@@ -217,7 +223,7 @@ public class ProcessingModel extends GeneralModel{
 					break;
 				case 'i':
 					String output = NamesSpaceManager._temporary();
-					new Request(f.getImageA().getAbsolutePath(),output).resize(""+width, ""+height).make();
+					new Request(f.getFormImage().getAbsolutePath(),output).resize(""+width, ""+height).make();
 					this.modify(ProcessingType.ADDED_IMAGE, output+" "+x+" "+y);
 					image = true;
 					break;
@@ -249,10 +255,9 @@ else if (crop && blur) {
 		} else if (crop && blur) {
 			System.out.println("Rogner et flouter");
 			ProcessThreadManager.treatTwoProcesses(currentFile,ProcessingType.CROPED);
-			System.out.println("A TESTER");
 		}  
 		else {
-			System.out.println("Autre cas.");
+			System.out.println("Une seule action");
 			ProcessThreadManager.treatOneProcess(currentFile);
 		}
 	}
@@ -353,6 +358,16 @@ else if (crop && blur) {
 
 	public void setRotate180(boolean rotate180) {
 		this.rotate180 = rotate180;
+	}
+
+
+	public Form getCurrentForm() {
+		return currentForm;
+	}
+
+
+	public void setCurrentForm(Form currentForm) {
+		this.currentForm = currentForm;
 	}
 
 }

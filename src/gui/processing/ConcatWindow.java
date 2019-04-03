@@ -140,7 +140,7 @@ public class ConcatWindow extends JFrame {
 					model.setDestinationFolder(JFileChooserManager.chooseDirectory());
 					model.getCurrentFile().setDestinationPath(model.getDestinationFolder());
 					model.getCurrentFile().setDestinationName("Concat"+System.currentTimeMillis());
-					model.getCurrentFile().setFileExtension(".mp4");
+					model.getCurrentFile().setFileExtension(model.getCurrentFile().getSourceFileExtension());
 					try {
 						model.save();
 					} catch (UnfindableResourceException e1) {

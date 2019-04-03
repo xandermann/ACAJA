@@ -246,77 +246,24 @@ public class ProcessingModel extends GeneralModel{
 		
 			
 	if(currentFile.isModified()) {
+		destinationFolder = JFileChooserManager.chooseDirectory().getAbsolutePath();
+		currentFile.setDestinationPath(getDestinationFolder());
+		currentFile.setDestinationName("MaSuperVideo"+System.currentTimeMillis());
+		currentFile.setFileExtension(currentFile.getSourceFileExtension());
 		if(rotation && cropUp) {
 			System.out.println("Rotation et crop");
-			
-			currentFile.cancel(ProcessingType.CROPED);
-			destinationFolder = JFileChooserManager.chooseDirectory().getAbsolutePath();
-			currentFile.setDestinationPath(getDestinationFolder());
-			currentFile.setDestinationName("tmp_process_file");
-			currentFile.setFileExtension(currentFile.getSourceFileExtension());
-			processFile(currentFile);	
-			
-			new Thread() {
-				public void run (){
-					while(RuntimeSpaceManager.hand.took());
-					try {
-						ProcessingFile secondFile = new ProcessingFile(
-						new File(destinationFolder + File.separator + "tmp_process_file" + currentFile.getSourceFileExtension()));
-						secondFile.modify(ProcessingType.CROPED,cropOrBlurSetting);
-						secondFile.setDestinationPath(destinationFolder);
-						secondFile.setDestinationName("new_process_file");
-						secondFile.setFileExtension(currentFile.getSourceFileExtension());
-						processFile(secondFile);
-					} catch (IncorrectFileException | UnfindableResourceException e) {}			
-				}
-			}.start();
-			
+			ProcessThreadManager.treatMultipleProcesses(currentFile, ProcessingType.CROPED);	
 		} else if (rotation && fUp) {
 			System.out.println("Rotation et flou");
-			
+			ProcessThreadManager.treatMultipleProcesses(currentFile, ProcessingType.BLURRED);	
 		} else {
-			setDestinationFolder(JFileChooserManager.chooseDirectory());
-			getCurrentFile().setDestinationPath(getDestinationFolder());
-			getCurrentFile().setDestinationName("Traitement"+System.currentTimeMillis());
-			getCurrentFile().setFileExtension(getCurrentFile().getSourceFileExtension());
-			processFile(getCurrentFile());
 			System.out.println("Autre cas.");
+			ProcessThreadManager.treatOneProcess(currentFile);
 		}
 	}
 			
 	}
 	
-	private void processFile(ProcessingFile f) {
-		new Thread() {
-			public void run (){
-				/**
-				 * ATTENDRE QU'ON ME RENDE LA MAIN.
-				 */
-				while(RuntimeSpaceManager.hand.took());
-
-				/**
-				 * DEBUT DU TRAITEMENT :
-				 * 
-				 * Prendre la main sur l'espace d'execution.
-				 * Prendre la main sur ffmpeg.
-				 */
-				RuntimeSpaceManager.hand.take();
-				startSave();
-				/**
-				 * LANCEMENT DU TRAITEMENT DANS UN AUTRE PROCESSUS.
-				 */
-				ThreadForSave.saveInNewThread(f);
-				/**
-				 * LANCEMENT ET GESTION DE LA FENETRE D'ATTENTE DANS UN AUTRE PROCESSUS.
-				 */
-				ThreadForWaitWindow.waitInNewThread(
-						new AlertWindow(
-								AlertWindow.INFO,
-								"Traitement du fichier "+f.getSourceFileName()+"<br>Veuillez patientez..."),
-						f.getSourceFile());
-			}
-		}.start();
-	}
 	
 	
 	

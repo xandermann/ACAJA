@@ -25,9 +25,6 @@ import resources.ResourcesManager;
 
 public class ProcessingWindow extends JFrame {
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -6495416785122055429L;
 	private ProcessingModel model;
 
@@ -56,7 +53,7 @@ public class ProcessingWindow extends JFrame {
 		this.setTitle("Traitement d'une video");
 		this.setSize(1000, 625);
 		this.setLocationRelativeTo(null);
-		ProcessingPan p = new ProcessingPan(model);
+		ProcessingPan p = new ProcessingPan();
 		this.setResizable(false);
 		this.add(p);
 		addKeyListener(new GeneralKeyboardController());

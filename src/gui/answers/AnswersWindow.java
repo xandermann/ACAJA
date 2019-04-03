@@ -1,5 +1,6 @@
 package gui.answers;
 
+import exceptions.UnfindableResourceException;
 import gui.general.*;
 
 /**
@@ -21,8 +22,9 @@ public final class AnswersWindow extends GeneralWindow {
 
 	/**
 	 * [ CONSTRUCTEUR VIDE. ]
+	 * @throws UnfindableResourceException 
 	 */
-	public AnswersWindow() {
+	public AnswersWindow() throws UnfindableResourceException {
 		super("Historique des reponses de FFmpeg.", new AnswersView());
 	}
 }

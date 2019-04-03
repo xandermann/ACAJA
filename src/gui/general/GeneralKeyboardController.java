@@ -3,6 +3,8 @@
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import exceptions.UnfindableResourceException;
+import gui.alerts.Alert;
 import gui.alerts.AlertSettings;
 /**
  * [ CLASSE POUR REALISER DES RACCOURCIS CLAVIER GENERIQUES. ]
@@ -52,8 +54,12 @@ public class GeneralKeyboardController implements KeyListener {
 			
 			//CTRL + I
 			case KeyEvent.VK_I :
-				if((e.getModifiers() & KeyEvent.CTRL_MASK) != 0 ) 
-					Actions.inspect();
+				if((e.getModifiers() & KeyEvent.CTRL_MASK) != 0 )
+					try {
+						Actions.inspect();
+					} catch (UnfindableResourceException e1) {
+						Alert.shortAlert(Alert.FAILURE, "Impossible d'ouvrir l'inspecteur <br> de reponses");
+					}
 			break;
 			
 			

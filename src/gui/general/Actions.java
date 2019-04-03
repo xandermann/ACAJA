@@ -3,6 +3,7 @@ package gui.general;
 import java.io.File;
 import java.util.ArrayList;
 
+import exceptions.UnfindableResourceException;
 import gui.JFileChooserManager;
 import gui.alerts.ASWindow;
 import gui.alerts.Alert;
@@ -90,8 +91,9 @@ public final class Actions {
 
 	/**
 	 * [ INSPECTER LES RE�NSES DE FFMPEG. ]
+	 * @throws UnfindableResourceException 
 	 */
-	public static void inspect() {
+	public static void inspect() throws UnfindableResourceException {
 		new AnswersWindow();
 		Alert.longAlert(Alert.INFO, "Ceci est l'historique des reponses <br>de FFmpeg.");
 	}

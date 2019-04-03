@@ -164,8 +164,12 @@ public class ProcessingWindow extends JFrame {
 		answers.setToolTipText("Ici vous pouvez inspecter les reponses de ffmpeg (CTRL + I).");
 		answers.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {		
-				Actions.inspect();
-;			}
+				try {
+					Actions.inspect();
+				} catch (UnfindableResourceException e1) {
+					Alert.shortAlert(Alert.FAILURE, "Impossible d'ouvrir l'inspecteur <br> de reponses");
+				}
+			}
 		});
 		StylizedJMenuItem procToConv = new StylizedJMenuItem("Passer en mode conversion");
 		procToConv.setToolTipText("Ici vous pouvez choisir de passer en mode conversion (CTRL + C).");

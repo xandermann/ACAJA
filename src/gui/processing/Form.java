@@ -1,6 +1,10 @@
 package gui.processing;
 
 import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 public class Form {
 
@@ -14,7 +18,9 @@ public class Form {
 	 */
 	private int[] tab;
 	private char typeCommande;
-	private Image image;
+	private File image;
+	
+
 
 	/**
 	 * Form
@@ -22,10 +28,11 @@ public class Form {
 	 * @param tyC
 	 * @param i
 	 */
-	public Form(int[] t, char tyC, Image i) {
+	public Form(int[] t, char tyC, File i) {
 		this.tab = t;
 		this.typeCommande = tyC;
 		this.image = i;
+		
 	}
 
 	/**
@@ -34,7 +41,7 @@ public class Form {
 	 * @param tyC
 	 * @param i
 	 */
-	public void setForm(int[] t, char tyC, Image i) {
+	public void setForm(int[] t, char tyC, File i) {
 		tab = t;
 		typeCommande = tyC;
 		image = i;
@@ -60,7 +67,8 @@ public class Form {
 	 * Recupere l'image A
 	 * @return L'image A
 	 */
-	public Image getImageA() {
+	public File getImageA() {
+		
 		return image;
 	}
 

@@ -76,11 +76,8 @@ public class LibraryView extends JPanel {
 			public void mousePressed(MouseEvent e) {
 				int ind = e.getY() / (getHeight() / 4);
 				System.out.println("Passage ajout");
-				try {
-					model.addForm(10, 10, 200, 150, 'i', ImageIO.read(model.getImages().get(ind)));
-					System.out.println("Ajout");
-				} catch (IOException e1) {
-				}
+				model.addForm(10, 10, 200, 150, 'i', model.getImages().get(ind));
+				System.out.println("Ajout");
 				repaint();
 			}
 

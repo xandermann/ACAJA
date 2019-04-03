@@ -4,6 +4,7 @@ import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.io.File;
 
 import gui.general.Context;
 
@@ -16,7 +17,7 @@ public class DrawChange implements MouseMotionListener,MouseListener{
 	private int refx,refy;
 	private ProcessingModel model;
 	private Form form;
-	private Image im;
+	private File im;
 	
 	public DrawChange(ProcessingModel m) {
 		this.model = m;

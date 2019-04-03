@@ -1,6 +1,6 @@
 package gui.processing;
 
-import java.awt.Color;
+import java.awt.*;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,10 +9,7 @@ import java.awt.event.WindowListener;
 import java.io.File;
 import java.util.ArrayList;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 import exceptions.IncorrectFileException;
 import exceptions.UnfindableResourceException;
@@ -21,7 +18,6 @@ import files.files.ProcessingFile;
 import gui.JFileChooserManager;
 import gui.WindowTools;
 import gui.general.Context;
-import gui.general.Focus;
 import gui.style.StylizedJMenuBar;
 import gui.style.StylizedJMenuItem;
 
@@ -31,17 +27,11 @@ public class ConcatWindow extends JFrame {
 	private static ArrayList<ProcessingFile> listOfFile;
 
 	public ConcatWindow() {
-		
-		Context.$F.add(this);
-		/**
-		 * RENDRE LE FOCUS A L'EVENEMENT PARENT.
-		 */
 		addWindowListener(new WindowListener() {
 			public void windowOpened(WindowEvent e) {}
 			public void windowClosing(WindowEvent e) {
-				Context.$F.remove(this);
-				new Focus();
-				((ProcessingModel)Context.$M).getCurrentFile().cancelAll();
+				if(((ProcessingModel)Context.$M).getCurrentFile() != null) 
+					((ProcessingModel)Context.$M).setCurrentFile(null);
 			}
 			public void windowClosed(WindowEvent e) {}
 			public void windowIconified(WindowEvent e) {}
@@ -50,21 +40,19 @@ public class ConcatWindow extends JFrame {
 			public void windowDeactivated(WindowEvent e) {}
 		});
 		
-		
 		listOfFile = new ArrayList<ProcessingFile>();
 		WindowTools.executeWindow(this);
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setBackground(Color.lightGray);
 		WindowTools.showLogo(this);
 		this.setTitle("Assembleur de video");
-		this.setSize(450, 450);
+		this.setSize(450, 300);
 		this.setLocationRelativeTo(null);
 		//this.setResizable(false);
-		this.setLayout(new GridLayout(2,1));
-		
-		ConcatPanel cp = new ConcatPanel();
-		this.add(cp);
-		this.add(createJPanel());
+		this.setLayout(new BorderLayout());
+
+		this.add(new ConcatPanel(), BorderLayout.CENTER);
+		this.add(createJPanel(), BorderLayout.SOUTH);
 		if(((ProcessingModel)Context.$M).getCurrentFile() != null)
 			listOfFile.add(((ProcessingModel)Context.$M).getCurrentFile());
 		drawMenu();

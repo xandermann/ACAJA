@@ -24,10 +24,6 @@ public final class Context{
 	 */
 	public static GeneralModel $M;
 	/**
-	 * FILE DES JFRAME "FOCUSES".
-	 */
-	public static Queue<JFrame> $F = new ArrayDeque<JFrame>();
-	/**
 	 * TABELAU DE DIVERS COMPOSANTS GRAPHIQUES. 
 	 * C = Context.
 	 */

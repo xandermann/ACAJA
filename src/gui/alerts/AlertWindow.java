@@ -11,7 +11,6 @@ import javax.swing.JPanel;
 
 import gui.WindowTools;
 import gui.general.Context;
-import gui.general.Focus;
 import gui.style.StyleTheme;
 import gui.style.StylizedJFrame;
 
@@ -85,10 +84,6 @@ public final class AlertWindow extends StylizedJFrame implements ATConstants{
 				if(e.getKeyCode()==KeyEvent.VK_DELETE || e.getKeyCode()==KeyEvent.VK_ESCAPE 
 				|| e.getKeyCode()==KeyEvent.VK_ENTER) {
 					dispose();
-					/**
-					 * RENDRE LE FOCUS AU COMPONENT PARENT.
-					 */
-					new Focus();
 				}
 			}
 		});

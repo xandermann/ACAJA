@@ -30,7 +30,6 @@ public abstract class GeneralWindow extends StylizedJFrame{
 		super(title);
 		if(view == null) throw new NullPointerException("view null !");
 		
-		Context.$F.add(this);
 		
 		setResizable(false);
 		setContentPane(view);
@@ -45,10 +44,6 @@ public abstract class GeneralWindow extends StylizedJFrame{
 				if(e.getKeyCode()==KeyEvent.VK_DELETE || e.getKeyCode()==KeyEvent.VK_ESCAPE 
 				|| e.getKeyCode()==KeyEvent.VK_ENTER) {
 					dispose();
-					/**
-					 * RENDRE LE FOCUS A L'EVENEMENT PARENT.
-					 */
-					renderFocus();
 				}
 			}
 		});
@@ -56,34 +51,7 @@ public abstract class GeneralWindow extends StylizedJFrame{
 		requestFocus();
 		
 		
-		/**
-		 * RENDRE LE FOCUS A L'EVENEMENT PARENT.
-		 */
-		addWindowListener(new WindowListener() {
-			public void windowOpened(WindowEvent e) {}
-			public void windowClosing(WindowEvent e) {
-				/**
-				 * RENDRE LE FOCUS A L'EVENEMENT PARENT.
-				 */
-				renderFocus();
-			}
-			public void windowClosed(WindowEvent e) {}
-			public void windowIconified(WindowEvent e) {}
-			public void windowDeiconified(WindowEvent e) {}
-			public void windowActivated(WindowEvent e) {}
-			public void windowDeactivated(WindowEvent e) {}
-		});
-		
 		WindowTools.showLogo(this);
 		WindowTools.executeWindow(this);
-	}
-	
-	
-	/**
-	 * [ METHODE POUR RETABLIR LE FOCUS. ]
-	 */
-	private void renderFocus() {
-		Context.$F.poll();
-		new Focus();
 	}
 }

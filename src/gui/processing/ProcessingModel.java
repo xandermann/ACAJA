@@ -244,42 +244,28 @@ public class ProcessingModel extends GeneralModel{
 	if(currentFile.isModified()) {
 		if(rotation && cropUp) {
 			System.out.println("Rotation et crop");
+			
 			currentFile.cancel(ProcessingType.CROPED);
-			File dest =  JFileChooserManager.chooseDirectory();
-			setDestinationFolder(dest);
-			//getCurrentFile().setDestinationPath(getDestinationFolder());
-			getCurrentFile().setDestinationName("tmp_process_file");
-			getCurrentFile().setFileExtension(getCurrentFile().getSourceFileExtension());
-			String path = getDestinationFolder()+ File.separator + "tmp_process_file" + getCurrentFile().getSourceFileExtension();
-			processFile(getCurrentFile());	
-		/*	
-		 * En cas de probleme avec les threads
-		 * 
-		 * boolean loaded = false;
-			while(!loaded) {
-				try {
-					setCurrentFile(new ProcessingFile(new File(path)));
-					loaded = true;
-				} catch (Exception e) { }
-			} */
-			try {
-				ProcessingFile secondFile = null;
-				boolean loaded = false;
-				while(!loaded) {
+			destinationFolder = JFileChooserManager.chooseDirectory().getAbsolutePath();
+			currentFile.setDestinationPath(getDestinationFolder());
+			currentFile.setDestinationName("tmp_process_file");
+			currentFile.setFileExtension(currentFile.getSourceFileExtension());
+			processFile(currentFile);	
+			
+			new Thread() {
+				public void run (){
+					while(RuntimeSpaceManager.hand.took());
 					try {
-						secondFile = new ProcessingFile(new File(path));
-						loaded = true;
-					} catch (Exception e) { }
-				} 
-				secondFile = new ProcessingFile(new File(path));
-				secondFile.modify(ProcessingType.CROPED,cropOrBlurSetting);
-				secondFile.setDestinationPath(getDestinationFolder());
-				secondFile.setDestinationName("new_process_file");
-				secondFile.setFileExtension(getCurrentFile().getSourceFileExtension());
-				processFile(secondFile);
-				File f = new File(path);
-				f.delete();
-			} catch (IncorrectFileException ife) {} catch (Exception e) { }
+						ProcessingFile secondFile = new ProcessingFile(
+						new File(destinationFolder + File.separator + "tmp_process_file" + currentFile.getSourceFileExtension()));
+						secondFile.modify(ProcessingType.CROPED,cropOrBlurSetting);
+						secondFile.setDestinationPath(destinationFolder);
+						secondFile.setDestinationName("new_process_file");
+						secondFile.setFileExtension(currentFile.getSourceFileExtension());
+						processFile(secondFile);
+					} catch (IncorrectFileException | UnfindableResourceException e) {}			
+				}
+			}.start();
 			
 		} else if (rotation && fUp) {
 			System.out.println("Rotation et flou");
@@ -291,32 +277,19 @@ public class ProcessingModel extends GeneralModel{
 			getCurrentFile().setFileExtension(getCurrentFile().getSourceFileExtension());
 			processFile(getCurrentFile());
 			System.out.println("Autre cas.");
-			
 		}
 	}
 			
-		
 	}
 	
 	private void processFile(ProcessingFile f) {
-		/******************************************************************************************
-		 ******************************************************************************************
-		 ******************************************************************************************
-		 *******************************************************************************************
-		 ******************************************************************************************
-		 *******************************************************************************************
-		 ******************************************************************************************
-		 */
 		new Thread() {
 			public void run (){
 				/**
 				 * ATTENDRE QU'ON ME RENDE LA MAIN.
 				 */
-				System.out.println("");
-				
 				while(RuntimeSpaceManager.hand.took());
-				
-				System.out.println("");
+
 				/**
 				 * DEBUT DU TRAITEMENT :
 				 * 
@@ -339,15 +312,10 @@ public class ProcessingModel extends GeneralModel{
 						f.getSourceFile());
 			}
 		}.start();
-		/******************************************************************************************
-		 ******************************************************************************************
-		 ******************************************************************************************
-		 *******************************************************************************************
-		 ******************************************************************************************
-		 *******************************************************************************************
-		 ******************************************************************************************
-		 */
 	}
+	
+	
+	
 	public void modify(OperationType typeSetting, String setting) {
 		this.currentFile.modify(typeSetting, setting);
 		this.currentFile.deselect();

@@ -39,9 +39,6 @@ import resources.TimeTools;
  * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
  */
 public final class AnswersView extends JPanel {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -7932719513497907116L;
 	/**
 	 * LISTE DES REPONSES DANS UN JPANEL GRIDLAYOUT. 
@@ -103,7 +100,8 @@ public final class AnswersView extends JPanel {
 	
 	/**
 	 * [ CONSTRUIRE L'HISTORIQUE EN LISTANT LES REPONSES. ]
-	 * @throws UnfindableResourceException 
+	 * 
+	 * @throws UnfindableResourceException 		Exceptions sur les fichiers introuvables. 
 	 */
 	private void displayAnswers() throws UnfindableResourceException {
 		main.removeAll();

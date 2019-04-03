@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import exceptions.UnfindableResourceException;
+import resources.NamesSpaceManager;
 import resources.ResourceConstants;
 import wrapper.language.FlagConstants;
 import wrapper.language.ValueConstants;
@@ -580,6 +581,37 @@ public final class Request implements FlagConstants, ValueConstants{
 	
 	
 	//=======================================================================================================================
+	
+	
+	
+	/**
+	 * [ AJOUTER UN IMAGE. ]
+	 * 
+	 * @param inputImage		L'image a ajouter.
+	 * 
+	 * @param xCorner			Abscisse du coin gauche ou inserer l'image. 
+	 * @param yCorner			Ordonnee du coin gauche ou inserer l'image.
+	 * 
+	 * @return La requete this. 
+	 */
+	public Request addImage(String inputImage, String xCorner, String yCorner) {
+		if(inputImage==null) throw new NullPointerException("inputImage est null !");
+		if(!new File(inputImage).exists()) throw new IllegalArgumentException("inputImage est inexistant !");
+		
+		if(xCorner==null) throw new NullPointerException("xCorner null !");
+		if(yCorner==null) throw new NullPointerException("yCorner null !");
+		
+		if(Integer.parseInt(xCorner)<0) throw new IllegalArgumentException("xCorner negatif !");
+		if(Integer.parseInt(yCorner)<0) throw new IllegalArgumentException("yCorner negatif !");
+		
+		askSomethingElse(new String[]{FLAG_ADD_IMAGE[0], inputImage, FLAG_ADD_IMAGE[1], FLAG_ADD_IMAGE[2]+xCorner+S+yCorner});
+		return this;
+	}
+	
+	
+	
+	//=======================================================================================================================
+	
 	
 	
 	/**

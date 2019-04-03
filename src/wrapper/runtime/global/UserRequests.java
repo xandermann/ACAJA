@@ -146,6 +146,11 @@ public final class UserRequests{
 					if(newValue.equals("180")) request.rotate180();
 			
 				break;
+				
+				case ADDED_IMAGE :
+					String[] tab4 = newValue.split(" ");
+					request.addImage(tab4[0], tab4[1], tab4[2]);
+					break;
 			}
 		}
 		

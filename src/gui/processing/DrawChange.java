@@ -65,6 +65,10 @@ public class DrawChange implements MouseMotionListener, MouseListener {
 				((ProcessingModel) Context.$M).addForm(x, y, (e.getX() - x), (e.getY() - y), 'f', null);
 		}
 		
+		
+			
+		/* 
+		Code  (tu as le reste en bas)
 		if (((ProcessingModel) Context.$M) != null) {
 			Form f = ((ProcessingModel) Context.$M).getCurrentForm();
 			int[] tab = f.getFormValues();
@@ -80,7 +84,6 @@ public class DrawChange implements MouseMotionListener, MouseListener {
 				//((ProcessingModel)Context.$M).addForm(formx + (e.getX()-formx), formy, width-(e.getX()-formx), height, 'i', im);	
 				//redimensionner = true;
 			}
-
 			// 0 < X < 0+2
 			// 1 < Y < 1
 			// Haut
@@ -88,24 +91,23 @@ public class DrawChange implements MouseMotionListener, MouseListener {
 				//((ProcessingModel)Context.$M).addForm(x, y - e.getY(), x, y, 'i', im);
 				
 			}
-
 			// 0+2 < X < 0+2
 			// 1 < Y < 1+3
 			else if (tab[0] + tab[2] - MARGE < x && x < tab[0] + tab[2] + MARGE && tab[1] < y && y < tab[1] + tab[3]) {
 				//System.out.println("Modification droit");
 				//((ProcessingModel)Context.$M).addForm(x, y, e.getX(), y, 'i', im);
 			}
-
 			// 0 < x < 0+2
 			// 1+3 < y < 1+3
 			else if (tab[0] < x && x < tab[0] + tab[2] && tab[1] + tab[3] - MARGE < y && y < tab[1] + tab[3] + MARGE) {
 				//System.out.println("Modification bas ");
 				//((ProcessingModel)Context.$M).addForm(x, y, x, e.getY(), 'i', im);
 			}
-		}
+		} 
+		*/
 if (((ProcessingModel) Context.$M).getCurrentForm() != null) {
 	
-	if(!redimensionner) {
+	//if(!redimensionner) {
 		int[] formValues = ((ProcessingModel) Context.$M).getCurrentForm().getFormValues();
 		int originXForm = formValues[0];
 		int originYForm = formValues[1];
@@ -123,7 +125,7 @@ if (((ProcessingModel) Context.$M).getCurrentForm() != null) {
 			}
 
 		}
-		}
+		//}
 	endX = e.getX();
 	endY = e.getY();
 }	

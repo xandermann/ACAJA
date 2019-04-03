@@ -124,36 +124,24 @@ public class PictureVisualView extends JPanel implements Observer{
 			}
 		g.drawRect(0, 0, getWidth() - 1, getHeight() - 1);
 		
-		ImageIcon monImage =null;
 		
 		for (Form f : ((ProcessingModel) Context.$M).getForms()) {
 			int[] tab = f.getFormValues();
-			
-				
 			switch (f.getFormType()) {
 				case 'c':
 					g.setColor(Color.BLUE);
-					
 					g.drawImage(f.getGeneratedFormImage(), tab[0],tab[1],tab[2],tab[3], this);	
 					break;
 				case 'f':
 					g.setColor(Color.GREEN);
-					
 					g.drawImage(f.getGeneratedFormImage(), tab[0],tab[1],tab[2],tab[3], this);	
 					break;
 				case 'i':
-
-		
-					g.drawImage(f.getGeneratedFormImage(), tab[0],tab[1],tab[2],tab[3], this);
-				
+					g.drawImage(f.getGeneratedFormImage(), tab[0],tab[1],tab[2],tab[3], this);		
 				default:
-					break;
+				break;
 			}
-			g.drawRect(tab[0],tab[1],tab[2],tab[3]);
-			
-			//System.out.println("Coordonnees : " + tab[0] + ", " + tab[1] + ", " + tab[2] + ", " + tab[3]);
-			
-			
+			g.drawRect(tab[0],tab[1],tab[2],tab[3]);			
 		}	
 	}
 	

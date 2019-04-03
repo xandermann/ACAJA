@@ -55,11 +55,7 @@ public class GeneralKeyboardController implements KeyListener {
 			//CTRL + I
 			case KeyEvent.VK_I :
 				if((e.getModifiers() & KeyEvent.CTRL_MASK) != 0 )
-					try {
-						Actions.inspect();
-					} catch (UnfindableResourceException e1) {
-						Alert.shortAlert(Alert.FAILURE, "Impossible d'ouvrir l'inspecteur <br> de reponses");
-					}
+					Actions.inspect();
 			break;
 			
 			

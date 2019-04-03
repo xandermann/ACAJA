@@ -312,12 +312,8 @@ public final class ConversionWindow extends StylizedJFrame {
 		answers.setToolTipText("Ici vous pouvez inspecter les reponses de ffmpeg (CTRL + I).");
 		answers.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {		
-				try {
-					Actions.inspect();
-				}catch (UnfindableResourceException e1) {
-					Alert.shortAlert(Alert.FAILURE, "Impossible d'ouvrir l'inspecteur <br> de reponses");
-				}
-;			}
+				Actions.inspect();
+			}
 		});
 		
 													

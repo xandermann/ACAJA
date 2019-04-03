@@ -112,8 +112,6 @@ public final class AnswersView extends JPanel {
 		/**
 		 * REUNION DES FICHIERS.
 		 */
-		
-		
 		ResourcesManager.secureAnswers();
 		ResourcesManager.secureErr();
 		ResourcesManager.secureOut();

@@ -91,11 +91,14 @@ public final class Actions {
 
 	/**
 	 * [ INSPECTER LES RE�NSES DE FFMPEG. ]
-	 * @throws UnfindableResourceException 
 	 */
-	public static void inspect() throws UnfindableResourceException {
-		new AnswersWindow();
-		Alert.longAlert(Alert.INFO, "Ceci est l'historique des reponses <br>de FFmpeg.");
+	public static void inspect() {
+		try {
+			new AnswersWindow();
+			Alert.longAlert(Alert.INFO, "Ceci est l'historique des reponses <br>de FFmpeg.");
+		} catch (UnfindableResourceException e1) {
+			Alert.shortAlert(Alert.FAILURE, "Impossible d'ouvrir l'historique<br>des reponses de ffmpeg.");
+		}
 	}
 
 	/**

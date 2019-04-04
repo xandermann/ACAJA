@@ -426,6 +426,13 @@ public final class ConversionModel extends GeneralModel{
 	public File getDestinationFolder() {
 		return destinationFolder;
 	}
+
+
+
+	@Override
+	public String getValue(OperationType typeChange) {
+		return ((SettingsFile)currentFile).getValue(typeChange);
+	}
 	
 	
 	

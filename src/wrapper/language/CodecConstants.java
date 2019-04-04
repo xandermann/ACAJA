@@ -18,9 +18,9 @@ import java.util.Map;
  */
 public final class CodecConstants {
 	public final static String[] ALL_EXTENSIONS = {".3g2",".3gp",".asf",".avi",".flv",".m4v",".mov",".mkv",".mp2",".mp4",".mpeg",".mpg",".ogg",".webm",".wmv"};
-	public final static String[] ALL_SUPPORTED_VIDEO_CODECS =  { "av1","dirac" ,"flv1", "h264","mjpeg", "mpeg1video", "mpeg2video", "mpeg4", "theora", "vp8", "vp9", "wmv1", "wmv2", "wmv3", "wmv3image"};
+	public final static String[] ALL_SUPPORTED_VIDEO_CODECS =  { "dirac" ,"flv1", "h264","mjpeg", "mpeg1video", "mpeg2video", "mpeg4", "theora", "vp8", "vp9", "wmv1", "wmv2" };
 	//"h263",
-	public final static String[] ALL_SUPPORTED_AUDIO_CODECS = { "aac", "ac3", "alac","amr_nb","amr_wb","evrc", "flac", "mp1", "mp2", "mp3", "opus", "smv","vorbis", "wavpack", "wmalossless", "wmapro", "wmav1", "wmav2"};
+	public final static String[] ALL_SUPPORTED_AUDIO_CODECS = { "aac", "ac3", "alac", "flac", "mp1", "mp2", "mp3", "opus", "vorbis", "wavpack", "wmalossless", "wmapro", "wmav1", "wmav2"};
 	public final static Map<String, Map<String,List<String>>> CORRESPONDING_EXTENSION;
 	static {
 		Map<String, Map<String,List<String>>> initialize_extensions = new HashMap<String,Map<String,List<String>>>();
@@ -31,28 +31,20 @@ public final class CodecConstants {
 			case ".3g2":
 				//audio
 				audioCodecList.add("aac");
-				audioCodecList.add("amr_nb");
-				audioCodecList.add("amr_wb");
-				audioCodecList.add("evrc");
-				audioCodecList.add("smv");
 				
 				//mpeg4 
 				compatible_codecs.put("mpeg4",audioCodecList);
-				//h263
-			//	compatible_codecs.put("h263", audioCodecList);
+
 				//h264
 				compatible_codecs.put("h264", audioCodecList);
 				break;
 			case ".3gp":
 				//audio
 				audioCodecList.add("aac");
-				audioCodecList.add("amr_nb");
-				audioCodecList.add("amr_wb");
-				
+
 				//mpeg4 
 				compatible_codecs.put("mpeg4",audioCodecList);
-				//h263
-		//		compatible_codecs.put("h263", audioCodecList);
+
 				//h264
 				compatible_codecs.put("h264", audioCodecList);
 				break;
@@ -60,6 +52,7 @@ public final class CodecConstants {
 			case ".asf":
 				//multi
 				audioCodecList.addAll(Arrays.asList(ALL_SUPPORTED_AUDIO_CODECS));
+				audioCodecList.remove("wmv3");
 				for(String videoCodec : ALL_SUPPORTED_VIDEO_CODECS)
 						compatible_codecs.put(videoCodec, audioCodecList);
 				break;

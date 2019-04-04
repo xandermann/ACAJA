@@ -113,8 +113,6 @@ public final class Request implements FlagConstants, ValueConstants{
 	public Request from(String input) {
 		if(input == null) 
 			throw new NullPointerException("Input null !");
-		if(!new File(input).exists()) 
-			throw new IllegalArgumentException("Input est inexistant !");
 		
 		if(this.input != null) 
 			request.set(1, this.input = input);
@@ -511,7 +509,7 @@ public final class Request implements FlagConstants, ValueConstants{
 			if(inputsFile.exists()) inputsFile.delete();
 			
 			Writer writer = new BufferedWriter(new FileWriter(inputsFile));
-			if(input != null) writer.write("file '"+input+"'\n");
+			if(input != null) writer.write("file "+input+"\n");
 			for(String tmp : inputs) {
 				if(tmp==null) 
 					throw new NullPointerException("Un des inputs est null !");
@@ -519,7 +517,7 @@ public final class Request implements FlagConstants, ValueConstants{
 				if(!new File(tmp).exists())
 					throw new IllegalArgumentException("Un des inputs est inexistant !");
 				
-				writer.write("file '"+tmp+"'\n");
+				writer.write("file "+tmp+"\n");
 			}
 			writer.close();
 			
@@ -627,11 +625,9 @@ public final class Request implements FlagConstants, ValueConstants{
 	public ProcessManager result() {
 		if(output!=null) askSomethingElse(new String[]{output});
 		System.out.println();
-		System.out.println("debut requete");
 		for(String r : request) {
 			System.out.print(r+" ");
 		}
-		System.out.println("fin requete");
 		return FFmpegRuntime.execute(request);
 	}
 	

@@ -18,7 +18,7 @@ public class DrawChange implements MouseMotionListener, MouseListener {
 	private File im;
 	private static boolean redimensionner;
 	private static int MARGE = 5;
-	private int xresize, yresize;
+	private boolean resize;
 	private Form f;
 	private PictureVisualView pvv;
 
@@ -73,24 +73,13 @@ public class DrawChange implements MouseMotionListener, MouseListener {
 			int height = tab[3];
 			
 			if (formx - MARGE < e.getX()  && e.getX() < formx + MARGE && formx - MARGE < e.getY() && e.getY() < formy + MARGE + height) {
-				xresize = formx;
-				yresize = 0;
+				resize = true;
 				System.out.println("A");
 			}
-			if (formx - MARGE < e.getX() && e.getX() < formx + MARGE + width && formy - MARGE < e.getY() && e.getY() < formy + MARGE) {
-				System.out.println("B");
-				xresize = 0;
-				yresize = formy;
-			}
-			if (formx + width - MARGE < e.getX() && e.getX() < formx + width + MARGE && formy - MARGE< e.getY() && e.getY() < formy + height + MARGE) {
-				System.out.println("C");
-				xresize = formx;
-				yresize = 0;
-			}
+			
 			if (formx - MARGE < e.getX() && e.getX() < formx + width + MARGE && formy - MARGE + height < e.getY() && e.getY() < formy + height + MARGE) {
 				System.out.println("D");
-				xresize = 0;
-				yresize = formy;
+				resize = false;
 			}
 		}
 	}
@@ -102,35 +91,56 @@ public class DrawChange implements MouseMotionListener, MouseListener {
 		if(!redimensionner)
 			bougerForm(e);
 		else {
-			if (((ProcessingModel) Context.$M) != null) {
-				f = ((ProcessingModel) Context.$M).getCurrentForm();
-				int[] tab = f.getFormValues();
-				int formx = tab[0];
-				int formy = tab[1];
-				int width = tab[2];
-				int height = tab[3];
-				//if (formx - MARGE < e.getX()  && e.getX() < formx + MARGE && formx - MARGE < e.getY() && e.getY() < formy + MARGE + height) {
+				if (((ProcessingModel) Context.$M) != null) {
+					f = ((ProcessingModel) Context.$M).getCurrentForm();
+					int[] tab = f.getFormValues();
+					int formx = tab[0];
+					int formy = tab[1];
+					int width = tab[2];
+					int height = tab[3];
+					if(resize) {
+					
 					if(formy < e.getY() && e.getY() < formy + height) {
 						int deplacementX = e.getX() - x;
 						System.out.println("DEPLACEMENT X :" + deplacementX);
 						if(deplacementX > 0) { // La souris va a droite
 							//System.out.println("DEPLACEMENT DROITE");
-							if(e.getX() < (formx+width+100) && e.getX() > (formx+width-100) && (tab[2]+deplacementX) > 15) {
-								
+							if(e.getX() < (formx+width+100) && e.getX() > (formx+width-50) && (tab[2]+deplacementX) > 15) {	
 								((ProcessingModel) Context.$M).addForm(tab[0], tab[1],e.getX(), tab[3], f.getFormType(), f.getFormImage());
 							} 
-							
-							
+								
+								
 						} else if (deplacementX < 0 ) { // La souris va a gauche
-							//System.out.println("DEPLACEMENT GAUCHE");
+								//System.out.println("DEPLACEMENT GAUCHE");
 							if( (tab[2]+deplacementX) > 15) {
-								//tab[2]+deplacementX
+									//tab[2]+deplacementX
 								((ProcessingModel) Context.$M).addForm(tab[0], tab[1],e.getX(), tab[3], f.getFormType(), f.getFormImage());
 							} 
 						}
+					}	
+					}else {
+					
+					if(formx < e.getX() && e.getX() < formx + width) {
+						int deplacementY = e.getY() - y;
+						System.out.println("DEPLACEMENT Y :" + deplacementY);
+						if(deplacementY > 0) { // La souris va a droite
+							//System.out.println("DEPLACEMENT DROITE");
+							if(e.getY() < (formy+height+100) && e.getY() > (formy+height-50) && (tab[3]+deplacementY) > 15) {	
+								((ProcessingModel) Context.$M).addForm(tab[0], tab[1],tab[2], e.getY(), f.getFormType(), f.getFormImage());
+							} 
+								
+								
+						} else if (deplacementY < 0 ) { // La souris va a gauche
+								//System.out.println("DEPLACEMENT GAUCHE");
+							if( (tab[3]+deplacementY) > 15) {
+									//tab[2]+deplacementX
+								((ProcessingModel) Context.$M).addForm(tab[0], tab[1],tab[2], e.getY(), f.getFormType(), f.getFormImage());
+							} 
+						}
 					}
-				}	
-			//}
+				
+			}
+		}
 		}
 		
 	}

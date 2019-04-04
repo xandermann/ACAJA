@@ -3,6 +3,8 @@
 .project
 /bin1/
 
+ignore.md
+
 answers/stderr/*
 answers/stdout/*
 
@@ -10,3 +12,4 @@ imports/*
 
 temporary_files/
 imports/conversion/
+settings/notification_settings.ini

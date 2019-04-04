@@ -259,8 +259,16 @@ else if (crop && blur) {
 		} else if (crop && blur) {
 			System.out.println("Rogner et flouter");
 			ProcessThreadManager.treatTwoProcesses(currentFile,ProcessingType.CROPED);
-		}  
-		else {
+		} else if (image && rotation) {
+			System.out.println("Image et rotation");
+			ProcessThreadManager.treatTwoProcesses(currentFile,ProcessingType.ROTATED);
+		} else if (image && crop) {
+			System.out.println("Image et crop");
+			ProcessThreadManager.treatTwoProcesses(currentFile,ProcessingType.CROPED);
+		} else if (image && blur) {
+			System.out.println("Image et flou");
+			ProcessThreadManager.treatTwoProcesses(currentFile,ProcessingType.BLURRED);
+		} else {
 			System.out.println("Une seule action");
 			ProcessThreadManager.treatOneProcess(currentFile);
 		}

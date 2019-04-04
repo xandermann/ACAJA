@@ -168,10 +168,12 @@ public class ProcessingWindow extends JFrame {
 		removeSound.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
+
 				if(((ProcessingModel) Context.$M).getCurrentFile() != null) {
 					Context.$M.modify(ProcessingType.REMOVED_SOUND, "");
 					Alert.shortAlert(Alert.SUCCESS, "Suppression de la bande son de la video<br>prise en compte.");
 				}
+
 			}
 		});
 		StylizedJMenuItem addSound = new StylizedJMenuItem("Ajouter une bande son a la video");
@@ -179,6 +181,7 @@ public class ProcessingWindow extends JFrame {
 		addSound.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
+
 				try {
 					if(((ProcessingModel) Context.$M).getCurrentFile() != null) {
 						Context.$M.modify(ProcessingType.ADDED_SOUND, JFileChooserManager.chooseFile().getAbsolutePath());
@@ -186,7 +189,9 @@ public class ProcessingWindow extends JFrame {
 					}
 				}catch(Exception e) {
 					Alert.shortAlert(Alert.FAILURE, "Echec de l'import.");
+
 				}
+
 			}
 		});
 		StylizedJMenuItem cancelRemoveSound = new StylizedJMenuItem("Annuler la suppression de la bande son de la video.");

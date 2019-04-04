@@ -71,6 +71,7 @@ public class ProcessingPan extends JPanel {
 									System.out.println("fait");
 				    } catch (UnfindableResourceException ure) {
 						Alert.longAlert(Alert.FAILURE, "Aucun repertoire de sortie selectione !");
+
 					}
 				}
 			}

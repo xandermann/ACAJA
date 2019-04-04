@@ -23,7 +23,7 @@ import gui.style.*;
 public class ProcessingPan extends JPanel {
 	private static final long serialVersionUID = 4600169663295346054L;
 
-	public ProcessingPan() {
+	public ProcessingPan(JTextField processPanSpace) {
 		this.setBackground(Color.GRAY);
 		LibraryView pb = new LibraryView();
 		Context.$M.addObserver(pb);
@@ -38,7 +38,7 @@ public class ProcessingPan extends JPanel {
 		StylizedJPanel processPanButton = new StylizedJPanel(new BorderLayout());
 		processPan.setPreferredSize(new Dimension((int)(getWidth()*(0.1)), (int)(getHeight()*(0.4))));
 		//StylizedJPanel processPanSpace = new StylizedJPanel();
-		JTextField processPanSpace = new JTextField("Traitement");
+		
 		processPanSpace.setPreferredSize(new Dimension((int)(getWidth()*(0.1)), (int)(getHeight()*(0.01))));
 		//processPanSpace.setBackground(Color.GRAY);
 		processPan.add(processPanSpace);

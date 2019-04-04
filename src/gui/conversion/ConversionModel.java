@@ -324,7 +324,7 @@ public final class ConversionModel extends GeneralModel{
 						/**
 						 * ATTENDRE QU'ON ME RENDE LA MAIN.
 						 */
-						while(RuntimeSpaceManager.hand.took());
+						while(RuntimeSpaceManager.hand.took())Thread.yield();
 						/**
 						 * DEBUT DE LA CONVERSION :
 						 * 

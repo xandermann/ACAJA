@@ -77,7 +77,7 @@ public class LibraryView extends JPanel {
 				int ind = e.getY() / (getHeight() / 4);
 				System.out.println("Passage ajout");
 				model.addForm(10, 10, 200, 150, 'i', model.getImages().get(ind));
-				System.out.println("Ajout");
+				System.out.println("Ajout" + ind);
 				repaint();
 			}
 

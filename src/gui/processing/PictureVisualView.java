@@ -24,24 +24,27 @@ public class PictureVisualView extends JPanel implements Observer{
 	private static final long serialVersionUID = 1662237756804313398L;
 	private Dimension dimHoriz;
 	private Dimension dimVerti;
-	
+	private Image formImage;
+	private Image cropImage;
+	private Image blurImage;
 	
 	public PictureVisualView() {
 		dimHoriz = new Dimension(500,350);
 		dimVerti = new Dimension(350,500);
 		this.setSize(dimHoriz);
-		DrawChange d = new DrawChange((ProcessingModel)Context.$M);
+		DrawChange d = new DrawChange();
 		this.addMouseListener(d);
 		this.addMouseMotionListener(d);
 		this.setOpaque(false);
 		((ProcessingModel)Context.$M).addObserver(this);
+		
 		this.repaint();
 	}
 
 
 	
 
-	public BufferedImage flipImage(BufferedImage img) {
+	private BufferedImage flipImage(BufferedImage img) {
 		
 	    BufferedImage mirrored = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_ARGB);
 
@@ -54,7 +57,7 @@ public class PictureVisualView extends JPanel implements Observer{
 
 	    return mirrored;
 	}
-	public BufferedImage rotateImageByDegrees(BufferedImage img, double angle) {
+	private BufferedImage rotateImageByDegrees(BufferedImage img, double angle) {
 
         double rads = Math.toRadians(angle);
         double sin = Math.abs(Math.sin(rads)), cos = Math.abs(Math.cos(rads));
@@ -87,17 +90,13 @@ public class PictureVisualView extends JPanel implements Observer{
 	
 		if(Context.$M.getCurrentFile() != null) {
 			try {
-				//this.remove(pictureView);
 				BufferedImage pic = ImageIO.read(((ProcessingModel)Context.$M).getMinia());
 				if(((ProcessingModel)(Context.$M)).isRotate180()) {
 					pic = rotateImageByDegrees(pic,180);
-					//pictureView = new PictureVisualView(dimHoriz,pic);
 					setSize(dimHoriz);
 					setLocation(new Point(50,110));
 				} else if(((ProcessingModel)(Context.$M)).isRotateLeft()) {
 					pic = rotateImageByDegrees(pic,-90);
-					//pictureView = new PictureVisualView(dimVerti,pic);
-					//pictureView.setLocation(new Point(125,30));
 					setSize(dimVerti);
 					setLocation(new Point(125,30));
 				} else if(((ProcessingModel)(Context.$M)).isRotateRight()) {
@@ -106,12 +105,12 @@ public class PictureVisualView extends JPanel implements Observer{
 					setLocation(new Point(125,30));
 				} else if(((ProcessingModel)(Context.$M)).isRotate180Right()) {
 					pic = flipImage(pic);
-					pic = rotateImageByDegrees(pic,90);
+					pic = rotateImageByDegrees(pic,-90);
 					setSize(dimVerti);
 					setLocation(new Point(125,30));
 				} else if(((ProcessingModel)(Context.$M)).isRotate180Left()) {
 					pic = flipImage(pic);
-					pic = rotateImageByDegrees(pic,-90);
+					pic = rotateImageByDegrees(pic,90);
 					setSize(dimVerti);
 					setLocation(new Point(125,30));
 				}else {
@@ -125,37 +124,24 @@ public class PictureVisualView extends JPanel implements Observer{
 			}
 		g.drawRect(0, 0, getWidth() - 1, getHeight() - 1);
 		
-		ImageIcon monImage =null;
 		
-		for (int i = 0; i < ((ProcessingModel)Context.$M).getListRect().size(); i++) {
-			int[] tab = ((ProcessingModel)Context.$M).getTabInt(i);
-			
-				
-			switch (((ProcessingModel)Context.$M).getType(i)) {
+		for (Form f : ((ProcessingModel) Context.$M).getForms()) {
+			int[] tab = f.getFormValues();
+			switch (f.getFormType()) {
 				case 'c':
 					g.setColor(Color.BLUE);
-					monImage =new ImageIcon("img/test.png");
+					g.drawImage(f.getGeneratedFormImage(), tab[0],tab[1],tab[2],tab[3], this);	
 					break;
 				case 'f':
 					g.setColor(Color.GREEN);
-					monImage =new ImageIcon("img/test.png");
+					g.drawImage(f.getGeneratedFormImage(), tab[0],tab[1],tab[2],tab[3], this);	
 					break;
 				case 'i':
-				try {
-					monImage = new ImageIcon(ImageIO.read(((ProcessingModel)Context.$M).getListRect().get(i).getImageA()));
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+					g.drawImage(f.getGeneratedFormImage(), tab[0],tab[1],tab[2],tab[3], this);		
 				default:
-					break;
+				break;
 			}
-			
-			//System.out.println("Coordonnees : " + tab[0] + ", " + tab[1] + ", " + tab[2] + ", " + tab[3]);
-			g.drawRect(tab[0],tab[1],tab[2],tab[3]);
-			//System.out.println("Image :" + monImage.getImage().toString());
-			g.drawImage(monImage.getImage(), tab[0],tab[1],tab[2],tab[3], this);	
-			
+			g.drawRect(tab[0],tab[1],tab[2],tab[3]);			
 		}	
 	}
 	

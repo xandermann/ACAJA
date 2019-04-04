@@ -4,7 +4,6 @@ import javax.swing.JFrame;
 
 import org.junit.Test;
 
-import gui.processing.ProcessingWindow;
 import gui.start.ChoiceModeWindow;
 
 public class TestConversionGUI extends JFrame {

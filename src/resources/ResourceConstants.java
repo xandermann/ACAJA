@@ -24,7 +24,9 @@ public interface ResourceConstants {
 	 * IMAGES UTILES.
 	 */
 	public final static String BUTTON_RECT = "img" + File.separator + "formeButton.png";
+	public final static String BUTTON_RECT_SELECTED = "img" + File.separator + "formeButtonSelected.png";
 	public final static String BLURRED = "img" + File.separator + "flou.png";
+	public final static String BUTTON_BLUR_SELECTED = "img" + File.separator + "flouSelected.png";
 	public final static String RIGHT_ARROW = "img" + File.separator + "flecheDroite.png";
 	public final static String LEFT_ARROW = "img" + File.separator + "flecheGauche.png";
 	public final static String REFRESH_PATH = "img" + File.separator + "refresh.jpg";

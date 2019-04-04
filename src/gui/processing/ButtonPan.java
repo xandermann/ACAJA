@@ -1,5 +1,6 @@
 package gui.processing;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -9,6 +10,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
+import javax.swing.UIManager;
+import javax.swing.plaf.ColorUIResource;
 
 import gui.general.Context;
 
@@ -29,12 +32,11 @@ public class ButtonPan extends JPanel {
 	 */
 	public ButtonPan() {
 		this.setLayout(new GridLayout(4, 2, 1, 1));
+		
 		rectangle = new JToggleButton(new ImageIcon(resources.ResourceConstants.BUTTON_RECT));
 		rectangle.setToolTipText("Ici vous pouvez rogner la video.");
-		
 		flouButton = new JToggleButton(new ImageIcon(resources.ResourceConstants.BLURRED));
 		flouButton.setToolTipText("Ici vous pouvez flouter la video.");
-		
 		rotateL1 = new JToggleButton(new ImageIcon(resources.ResourceConstants.LEFT_ARROW));
 		rotateL1.setToolTipText("Ici vous pouvez pivoter de 90� a gauche la video.");
 		
@@ -116,6 +118,8 @@ public class ButtonPan extends JPanel {
 		rotateInvertedR1.setPreferredSize(new Dimension(35,35));
 		rotate180.setPreferredSize(new Dimension(35,35));
 		undo.setPreferredSize(new Dimension(35, 35));
+		
+		
 
 		this.add(rectangle);
 		this.add(flouButton);
@@ -235,16 +239,32 @@ public class ButtonPan extends JPanel {
 		flouButton.setSelected(false);
 		((ProcessingModel)Context.$M).setModeBlur(false);
 		((ProcessingModel)Context.$M).setModeCrop(false);
-		if(rectangle.isSelected())
+		
+		if(rectangle.isSelected()) 
 			((ProcessingModel)Context.$M).setModeCrop(true);
+			
+		updateIcons();
 	}
 	
+	private void updateIcons() {
+		if(((ProcessingModel)Context.$M).isModeCrop())
+			rectangle.setIcon(new ImageIcon(resources.ResourceConstants.BUTTON_RECT_SELECTED));
+		else
+			rectangle.setIcon(new ImageIcon(resources.ResourceConstants.BUTTON_RECT));
+		if(((ProcessingModel)Context.$M).isModeBlur()) 
+			flouButton.setIcon(new ImageIcon(resources.ResourceConstants.BUTTON_BLUR_SELECTED));
+		 else 
+			flouButton.setIcon(new ImageIcon(resources.ResourceConstants.BLURRED));
+		
+	}
 	public void flouIsSelected() {
 		rectangle.setSelected(false);
 		((ProcessingModel)Context.$M).setModeCrop(false);
 		((ProcessingModel)Context.$M).setModeBlur(false);
 		if(flouButton.isSelected())
 			((ProcessingModel)Context.$M).setModeBlur(true);
+			
+		updateIcons();
 	}
 	
 	

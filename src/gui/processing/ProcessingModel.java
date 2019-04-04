@@ -187,7 +187,6 @@ public class ProcessingModel extends GeneralModel{
 
 	@Override
 	public void save() throws UnfindableResourceException {
-
 		boolean rotation = false;
 		boolean blur = false;
 		boolean crop = false;
@@ -211,39 +210,33 @@ public class ProcessingModel extends GeneralModel{
 			coeffWidth = ((double)Integer.parseInt(actualResolution[0]))/350;
 			coeffHeight = ((double)Integer.parseInt(actualResolution[1]))/500;
 		}
-		// TODO invertedVerticalMode
-		// TODO invertedVerticalMode
-		// TODO invertedVerticalMode
-		
+
 		if(!forms.isEmpty()) {
 			for(Form f : forms) {
 				int[] formValues = f.getFormValues();
+				String S = "|";
 				int x = (int) (formValues[0]*coeffWidth);
 				int y = (int) (formValues[1]*coeffHeight);	
 				int width = (int) (formValues[2]*coeffWidth);
 				int height = (int) (formValues[3]*coeffHeight);
 				switch (f.getFormType()) {
 				case 'c':
-					this.modify(ProcessingType.CROPED,x+" "+y+" "+width+" "+height);
+					this.modify(ProcessingType.CROPED,x+S+y+S+width+S+height);
 					crop = true;
 					break;
 				case 'f':
-					this.modify(ProcessingType.BLURRED,x+" "+y+" "+width+" "+height);
+					this.modify(ProcessingType.BLURRED,x+S+y+S+width+S+height);
 					blur = true;
 					break;
 				case 'i':
 					String output = NamesSpaceManager._temporary();
 					new Request(f.getFormImage().getAbsolutePath(),output).resize(""+width, ""+height).make();
-					this.modify(ProcessingType.ADDED_IMAGE, output+" "+x+" "+y);
+					this.modify(ProcessingType.ADDED_IMAGE, output+S+x+S+y);
 					image = true;
 					break;
-				default:
-					System.out.println("Non implemente");
-				break;
 				}
 			}
-				
-			}
+		}
 		
 /*	
 else if (crop && blur) {
@@ -254,7 +247,6 @@ else if (crop && blur) {
 	if(currentFile.isModified()) {
 		destinationFolder = JFileChooserManager.chooseDirectory().getAbsolutePath();
 		currentFile.setDestinationPath(getDestinationFolder());
-		currentFile.setDestinationName("MaSuperVideo"+System.currentTimeMillis());
 		currentFile.setFileExtension(currentFile.getSourceFileExtension());
 		if(rotation && crop) {
 			System.out.println("Rotation et rogner");
@@ -266,8 +258,16 @@ else if (crop && blur) {
 		} else if (crop && blur) {
 			System.out.println("Rogner et flouter");
 			ProcessThreadManager.treatTwoProcesses(currentFile,ProcessingType.CROPED);
-		}  
-		else {
+		} else if (image && rotation) {
+			System.out.println("Image et rotation");
+			ProcessThreadManager.treatTwoProcesses(currentFile,ProcessingType.ROTATED);
+		} else if (image && crop) {
+			System.out.println("Image et crop");
+			ProcessThreadManager.treatTwoProcesses(currentFile,ProcessingType.CROPED);
+		} else if (image && blur) {
+			System.out.println("Image et flou");
+			ProcessThreadManager.treatTwoProcesses(currentFile,ProcessingType.BLURRED);
+		} else {
 			System.out.println("Une seule action");
 			ProcessThreadManager.treatOneProcess(currentFile);
 		}

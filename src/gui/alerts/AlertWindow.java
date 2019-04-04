@@ -88,7 +88,6 @@ public final class AlertWindow extends StylizedJFrame implements ATConstants{
 			}
 		});
 		setFocusable(true);
-		requestFocus();
 		
 		
 		WindowTools.showLogo(this);

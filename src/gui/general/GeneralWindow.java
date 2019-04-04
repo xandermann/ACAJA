@@ -48,7 +48,6 @@ public abstract class GeneralWindow extends StylizedJFrame{
 			}
 		});
 		setFocusable(true);
-		requestFocus();
 		
 		
 		WindowTools.showLogo(this);

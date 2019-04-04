@@ -31,7 +31,7 @@ public class ProcessingPan extends JPanel {
 		processPan.setBackground(Color.GRAY);
 		processPan.add(pm);
 		StylizedJPanel processPanButton = new StylizedJPanel(new BorderLayout());
-		processPan.setPreferredSize(new Dimension((int)(getWidth()*(0.1)), (int)(getHeight()*(0.4))));
+		processPan.setPreferredSize(new Dimension((int)(getWidth()*(0.1)), (int)(getHeight()*(0.5))));
 		//StylizedJPanel processPanSpace = new StylizedJPanel();
 		
 		processPanSpace.setPreferredSize(new Dimension((int)(getWidth()*(0.1)), (int)(getHeight()*(0.01))));

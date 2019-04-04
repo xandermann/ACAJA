@@ -141,6 +141,7 @@ public class ButtonPan extends JPanel {
 		this.add(rotateInvertedR1);
 		this.add(rotate180);
 		this.add(resize);
+		this.add(undo);
 		this.repaint();
 	}
 	

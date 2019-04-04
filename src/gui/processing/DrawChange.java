@@ -18,8 +18,7 @@ public class DrawChange implements MouseMotionListener, MouseListener {
 	private File im;
 	private static boolean redimensionner;
 	private static boolean redimensionnerProportions;
-	private static int MARGE = 5;
-	private boolean resize;
+	//private boolean resize;
 	private Form f;
 	private PictureVisualView pvv;
 
@@ -53,37 +52,14 @@ public class DrawChange implements MouseMotionListener, MouseListener {
 	public void mousePressed(MouseEvent e) {
 		actualiserCoordonnees(e);
 		selectionnerForme(e);
-		
-		if(redimensionner)
-			resizeFormclick(e);
 	}
 
 	@Override
-	public void mouseReleased(MouseEvent e) {
-		
+	public void mouseReleased(MouseEvent e) {	
 		((ProcessingModel) Context.$M).sendChanges();
 	}
 	
-	public void resizeFormclick(MouseEvent e) {
-		if (((ProcessingModel) Context.$M) != null) {
-			f = ((ProcessingModel) Context.$M).getCurrentForm();
-			int[] tab = f.getFormValues();
-			int formx = tab[0];
-			int formy = tab[1];
-			int width = tab[2];
-			int height = tab[3];
-			
-			if (formx - MARGE < e.getX()  && e.getX() < formx + MARGE && formx - MARGE < e.getY() && e.getY() < formy + MARGE + height) {
-				resize = true;
-				System.out.println("A");
-			}
-			
-			if (formx - MARGE < e.getX() && e.getX() < formx + width + MARGE && formy - MARGE + height < e.getY() && e.getY() < formy + height + MARGE) {
-				System.out.println("D");
-				resize = false;
-			}
-		}
-	}
+	
 	
 	
 
@@ -112,14 +88,14 @@ public class DrawChange implements MouseMotionListener, MouseListener {
 					
 					if(zoneDeplacementHorizontal) { // Si zone pour deplacement horizontal
 						if( deplacementX > 0)  // La souris va a droite
-								((ProcessingModel) Context.$M).addForm(tab[0], tab[1], e.getX(), tab[3], f.getFormType(), f.getFormImage());		
+								((ProcessingModel) Context.$M).addForm(tab[0], tab[1], width + (e.getX()-width), tab[3], f.getFormType(), f.getFormImage());		
 						else if ( deplacementX < 0 )  // La souris va a gauche
-								((ProcessingModel) Context.$M).addForm(tab[0], tab[1], e.getX(), tab[3], f.getFormType(), f.getFormImage());		
+								((ProcessingModel) Context.$M).addForm(tab[0], tab[1], width - (width-e.getX()) , tab[3], f.getFormType(), f.getFormImage());		
 					} else if (zoneDeplacementVertical) { // Si zone pour deplacement vertical
 						if(deplacementY > 0) // La souris descend	
-								((ProcessingModel) Context.$M).addForm(tab[0], tab[1],tab[2], e.getY(), f.getFormType(), f.getFormImage());		
+								((ProcessingModel) Context.$M).addForm(tab[0], tab[1],tab[2], height + (e.getY()-height), f.getFormType(), f.getFormImage());		
 						 else if (deplacementY < 0 ) // La souris monte
-								((ProcessingModel) Context.$M).addForm(tab[0], tab[1],tab[2], e.getY(), f.getFormType(), f.getFormImage());
+								((ProcessingModel) Context.$M).addForm(tab[0], tab[1],tab[2], height - (height-e.getY()), f.getFormType(), f.getFormImage());
 					}
 					
 				}
@@ -296,4 +272,33 @@ if(resize) {
 				
 				
 			}
+*/
+/*
+Ancienne methode
+public void resizeFormclick(MouseEvent e) {
+if (((ProcessingModel) Context.$M) != null) {
+	f = ((ProcessingModel) Context.$M).getCurrentForm();
+	int[] tab = f.getFormValues();
+	int formx = tab[0];
+	int formy = tab[1];
+	int width = tab[2];
+	int height = tab[3];
+	
+	if (formx - MARGE < e.getX()  && e.getX() < formx + MARGE && formx - MARGE < e.getY() && e.getY() < formy + MARGE + height) {
+		resize = true;
+		System.out.println("A");
+	}
+	
+	if (formx - MARGE < e.getX() && e.getX() < formx + width + MARGE && formy - MARGE + height < e.getY() && e.getY() < formy + height + MARGE) {
+		System.out.println("D");
+		resize = false;
+	}
+}
+}
+
+anciennement dans mousepressed :
+		
+		if(redimensionner)
+			resizeFormclick(e);
+			
 */

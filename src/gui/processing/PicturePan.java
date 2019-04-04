@@ -13,7 +13,6 @@ import gui.general.Context;
 import resources.ResourceConstants;
 
 public class PicturePan extends JPanel implements Observer{
-
 	private static final long serialVersionUID = 2812027917094282289L;
 	private PictureVisualView pictureView;
 

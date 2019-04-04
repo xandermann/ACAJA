@@ -63,7 +63,6 @@ public class ProcessingPan extends JPanel {
 								text = "Traitement"+System.currentTimeMillis();
 						((ProcessingModel)Context.$M).getCurrentFile().setDestinationName(text);
 						((ProcessingModel)Context.$M).save();
-									System.out.println("fait");
 				    } catch (Exception ure) {
 						Alert.longAlert(Alert.FAILURE, "Aucun repertoire de sortie selectione !");
 

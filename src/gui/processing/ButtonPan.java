@@ -54,8 +54,13 @@ public class ButtonPan extends JPanel {
 		rotate180.setToolTipText("Ici vous pouvez retourner la video.");
 		
 		resize = new JToggleButton(new ImageIcon(resources.ResourceConstants.RESIZE));
+		resize.setToolTipText("Ici vous pouvez redimmensionner l'image inscrustee sur la video.");
+		
 		resizeDim = new JToggleButton(new ImageIcon(resources.ResourceConstants.RESIZE_PROPER));
+		resizeDim.setToolTipText("Ici vous pouvez redimmensionner l'image inscrustee sur la video.");
+		
 		JButton undo = new JButton(new ImageIcon(resources.ResourceConstants.REMOVE_ICON));
+		undo.setToolTipText("Ici vous pouvez annuler tous les traitements.");
 		
 		rectangle.addActionListener(new ActionListener() {
 			@Override

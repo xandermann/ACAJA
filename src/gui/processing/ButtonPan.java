@@ -52,7 +52,7 @@ public class ButtonPan extends JPanel {
 		rotate180 = new JToggleButton(new ImageIcon("img/180.png"));
 		rotate180.setToolTipText("Ici vous pouvez retourner la video.");
 		
-		resize = new JToggleButton();
+		resize = new JToggleButton(new ImageIcon("img/move.png"));
 	
 		JButton undo = new JButton(new ImageIcon(resources.ResourceConstants.LEFT_ARROW));
 		

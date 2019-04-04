@@ -32,7 +32,7 @@ public class PictureVisualView extends JPanel implements Observer{
 		dimHoriz = new Dimension(500,350);
 		dimVerti = new Dimension(350,500);
 		this.setSize(dimHoriz);
-		DrawChange d = new DrawChange();
+		DrawChange d = new DrawChange(this);
 		this.addMouseListener(d);
 		this.addMouseMotionListener(d);
 		this.setOpaque(false);

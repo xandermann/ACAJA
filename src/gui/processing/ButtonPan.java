@@ -17,6 +17,7 @@ import gui.general.Context;
 
 public class ButtonPan extends JPanel {
 	
+	
 	private static final long serialVersionUID = -1294342658122646334L;
 	private JToggleButton flouButton;
 	private JToggleButton rectangle;
@@ -25,6 +26,8 @@ public class ButtonPan extends JPanel {
 	private JToggleButton rotateInvertedL1;
 	private JToggleButton rotateInvertedR1;
 	private JToggleButton rotate180;
+	private JToggleButton resize;
+	
 	
 	
 	/**
@@ -51,6 +54,8 @@ public class ButtonPan extends JPanel {
 		
 		rotate180 = new JToggleButton(new ImageIcon("img/180.png"));
 		rotate180.setToolTipText("Ici vous pouvez retourner la video.");
+		
+		resize = new JToggleButton();
 	
 		JButton undo = new JButton(new ImageIcon(resources.ResourceConstants.LEFT_ARROW));
 		
@@ -103,6 +108,15 @@ public class ButtonPan extends JPanel {
 			}
 			
 		});
+		
+		resize.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				DrawChange.setRedimensionner(!DrawChange.isRedimensionner());
+			}
+		});
+		
 		undo.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -117,6 +131,7 @@ public class ButtonPan extends JPanel {
 		rotateInvertedL1.setPreferredSize(new Dimension(35,35));
 		rotateInvertedR1.setPreferredSize(new Dimension(35,35));
 		rotate180.setPreferredSize(new Dimension(35,35));
+		resize.setPreferredSize(new Dimension(35,35));
 		undo.setPreferredSize(new Dimension(35, 35));
 		
 		
@@ -128,9 +143,10 @@ public class ButtonPan extends JPanel {
 		this.add(rotateInvertedL1);
 		this.add(rotateInvertedR1);
 		this.add(rotate180);
-		this.add(undo);
+		this.add(resize);
 		this.repaint();
 	}
+	
 	
 	public void rotate180Activated() {
 		if(((ProcessingModel)Context.$M).getCurrentFile() != null) {

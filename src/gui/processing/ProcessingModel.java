@@ -247,7 +247,6 @@ else if (crop && blur) {
 	if(currentFile.isModified()) {
 		destinationFolder = JFileChooserManager.chooseDirectory().getAbsolutePath();
 		currentFile.setDestinationPath(getDestinationFolder());
-		currentFile.setDestinationName("MaSuperVideo"+System.currentTimeMillis());
 		currentFile.setFileExtension(currentFile.getSourceFileExtension());
 		if(rotation && crop) {
 			System.out.println("Rotation et rogner");

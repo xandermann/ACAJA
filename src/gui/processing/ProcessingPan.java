@@ -66,10 +66,11 @@ public class ProcessingPan extends JPanel {
 						String text = processPanSpace.getText();
 						if(processPanSpace.getText().isEmpty()) 
 							text = "Traitement"+System.currentTimeMillis();
+						if(((ProcessingModel)Context.$M).getCurrentFile() != null) {
+							((ProcessingModel)Context.$M).getCurrentFile().setDestinationName(text);
+							((ProcessingModel)Context.$M).save();
+						}
 						
-						((ProcessingModel)Context.$M).getCurrentFile().setDestinationName(text);
-						((ProcessingModel)Context.$M).save();
-						System.out.println("fait");
 					} catch (UnfindableResourceException ure) {
 						Alert.longAlert(Alert.FAILURE, "Merci de choisir un repertoire");
 					}

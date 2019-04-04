@@ -6,16 +6,11 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-
-import exceptions.UnfindableResourceException;
-import gui.JFileChooserManager;
 import gui.alerts.Alert;
 import gui.general.Context;
 import gui.style.*;
@@ -23,7 +18,7 @@ import gui.style.*;
 public class ProcessingPan extends JPanel {
 	private static final long serialVersionUID = 4600169663295346054L;
 
-	public ProcessingPan() {
+	public ProcessingPan(JTextField processPanSpace) {
 		this.setBackground(Color.GRAY);
 		LibraryView pb = new LibraryView();
 		Context.$M.addObserver(pb);
@@ -38,7 +33,7 @@ public class ProcessingPan extends JPanel {
 		StylizedJPanel processPanButton = new StylizedJPanel(new BorderLayout());
 		processPan.setPreferredSize(new Dimension((int)(getWidth()*(0.1)), (int)(getHeight()*(0.4))));
 		//StylizedJPanel processPanSpace = new StylizedJPanel();
-		JTextField processPanSpace = new JTextField("Traitement");
+		
 		processPanSpace.setPreferredSize(new Dimension((int)(getWidth()*(0.1)), (int)(getHeight()*(0.01))));
 		//processPanSpace.setBackground(Color.GRAY);
 		processPan.add(processPanSpace);
@@ -69,7 +64,7 @@ public class ProcessingPan extends JPanel {
 						((ProcessingModel)Context.$M).getCurrentFile().setDestinationName(text);
 						((ProcessingModel)Context.$M).save();
 									System.out.println("fait");
-				    } catch (UnfindableResourceException ure) {
+				    } catch (Exception ure) {
 						Alert.longAlert(Alert.FAILURE, "Aucun repertoire de sortie selectione !");
 
 					}

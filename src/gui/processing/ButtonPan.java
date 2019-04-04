@@ -1,17 +1,14 @@
 package gui.processing;
 
-import java.awt.Color;
+
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
-import javax.swing.UIManager;
-import javax.swing.plaf.ColorUIResource;
 
 import gui.general.Context;
 

@@ -2,7 +2,6 @@ package gui.alerts;
 import java.awt.event.*;
 import javax.swing.*;
 
-import gui.general.Context;
 /**
  * [ ALERTES ( = NOTIFICATIONS TEMPORAIRES ). ]
  * 

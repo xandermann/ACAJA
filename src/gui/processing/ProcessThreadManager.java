@@ -9,7 +9,6 @@ import files.files.ProcessingFile;
 import gui.alerts.Alert;
 import gui.alerts.AlertWindow;
 import gui.general.Context;
-import resources.NamesSpaceManager;
 import threads.RuntimeSpaceManager;
 import threads.ThreadForSave;
 import threads.ThreadForWaitWindow;

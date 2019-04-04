@@ -1,12 +1,9 @@
 package tests.gui;
 
-import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.Graphics;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 /**
  * Pour ne pas à avoir à relancer l'application à chaque fois, nous créons ici

@@ -51,13 +51,9 @@ public class DrawChange implements MouseMotionListener, MouseListener {
 	public void mousePressed(MouseEvent e) {
 		actualiserCoordonnees(e);
 		selectionnerForme(e);
-<<<<<<< HEAD
 		
 		if(redimensionner)
 			resizeFormclick(e);
-=======
-		//faireResizeMousePressed(e);
->>>>>>> 23fac799f52fd02b8f207e36969970ec0d70f13b
 	}
 
 	@Override

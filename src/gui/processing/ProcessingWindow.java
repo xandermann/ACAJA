@@ -24,16 +24,13 @@ import gui.style.StylizedJMenuBar;
 import gui.style.StylizedJMenuItem;
 import resources.ResourcesManager;
 
-public class ProcessingWindow extends JFrame {
-	
+public class ProcessingWindow extends JFrame {	
 	private static final long serialVersionUID = -6495416785122055429L;
-	private ProcessingModel model;
 
-	
 	public ProcessingWindow() {
 		Context.$0();
 		Context.$W = this;
-		this.model = new ProcessingModel();
+		new ProcessingModel();
 		
 		this.addWindowListener(new WindowListener() {
 			public void windowOpened(WindowEvent e) {}
@@ -72,9 +69,8 @@ public class ProcessingWindow extends JFrame {
 		jm.add(processingMenu);
 		JMenu optionsMenu = new JMenu("Options");
 		jm.add(optionsMenu);
-		/*
-		JMenu videoMenu = new JMenu("Video");
-		jm.add(videoMenu);*/
+		
+		
 		
 		
 		
@@ -83,20 +79,22 @@ public class ProcessingWindow extends JFrame {
 		process.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					model.save();
-				} catch (UnfindableResourceException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					((ProcessingModel) Context.$M).save();
+				} catch (UnfindableResourceException ure) {
+					Alert.longAlert(Alert.FAILURE, "Echec de l'export !");
 				}
 			}
 		});
 		StylizedJMenuItem quit = new StylizedJMenuItem("Quitter");
-		quit.setToolTipText("Ici vous pouvez quitter le logiciel (ECHAP / CTRL + Q).");
+		quit.setToolTipText("Ici vous pouvez quitter le logiciel.");
 		quit.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent ae) {
 				Actions.quit();
 			}
 		});
+
+		
+		
 		
 		
 		StylizedJMenuItem importVideo = new StylizedJMenuItem("Importer une video");
@@ -109,14 +107,13 @@ public class ProcessingWindow extends JFrame {
 					if(!pf.getTypeFile().equals(MediaFileType.MEDIA_FILE_VIDEO)) {
 						throw new IncorrectFileException("Type de fichier incorrect !");
 					}
-					model.setCurrentFile(pf);
-					
-				} catch (IncorrectFileException e) {
-					// TODO Auto-generated catch block
+					((ProcessingModel) Context.$M).setCurrentFile(pf);
+				} catch (IncorrectFileException ife) {
 					Alert.longAlert(Alert.FAILURE, "Type de fichier incorrect !");
-				} catch (UnfindableResourceException e) {
-					// TODO Auto-generated catch block
+				} catch (UnfindableResourceException ure) {
 					Alert.longAlert(Alert.FAILURE, "Fichier introuvable !");
+				} catch (Exception e) {
+					Alert.shortAlert(Alert.FAILURE, "Echec de l'import !");
 				}
 			}
 		});
@@ -125,6 +122,7 @@ public class ProcessingWindow extends JFrame {
 		importImage.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
+				try {
 					File img = JFileChooserManager.chooseFile();
 					String[] imageExtensions = { "png", "jpg", "jpeg", "bmp" };
 					boolean isImage = false;
@@ -134,17 +132,28 @@ public class ProcessingWindow extends JFrame {
 						}
 					}
 					if(isImage) {
-						model.addImage(img);
-						LibraryView.setActualiser(true);
-						repaint();
+						((ProcessingModel) Context.$M).addImage(img);
 					} else {
-						Alert.shortAlert(Alert.FAILURE, "Le fichier doit être une image");
+						Alert.shortAlert(Alert.FAILURE, "Le fichier doit etre une image");
 					}
-					
-					
+				} catch (Exception e) {
+					Alert.shortAlert(Alert.FAILURE, "Echec de l'import !");
+				}
 			}
-			
 		});
+		StylizedJMenuItem clearImage = new StylizedJMenuItem("Vider la bibliotehque d'image");
+		clearImage.setToolTipText("Ici la vous pouvez vider la bibliotheque d'images.");
+		clearImage.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent ae) {
+				((ProcessingModel) Context.$M).clear();
+			}
+		});
+		
+		
+		
+		
+		
 		StylizedJMenuItem concat = new StylizedJMenuItem("Concatener des videos  / sons");
 		concat.setToolTipText("Ici vous pouvez concatener des videos ou des sons.");
 		concat.addActionListener(new ActionListener() {
@@ -159,11 +168,13 @@ public class ProcessingWindow extends JFrame {
 		removeSound.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
-				if(model.getCurrentFile() != null) {
-					model.modify(ProcessingType.REMOVED_SOUND, "");
+
+				if(((ProcessingModel) Context.$M).getCurrentFile() != null) {
+					((ProcessingModel) Context.$M).modify(ProcessingType.REMOVED_SOUND, "");
 					Alert.shortAlert(Alert.SUCCESS, "Suppression de la bande son de la video<br>prise en compte.");
 			
 				}
+
 			}
 		});
 		StylizedJMenuItem addSound = new StylizedJMenuItem("Ajouter une bande son a la video");
@@ -171,33 +182,64 @@ public class ProcessingWindow extends JFrame {
 		addSound.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
-				if(model.getCurrentFile() != null) {
-					model.modify(ProcessingType.ADDED_SOUND, JFileChooserManager.chooseFile().getAbsolutePath());
+
+				try {
+					((ProcessingModel) Context.$M).modify(ProcessingType.ADDED_SOUND, 
+							JFileChooserManager.chooseFile().getAbsolutePath());
 					Alert.shortAlert(Alert.SUCCESS, "Ajout de la bande son a la video<br>prise en compte.");
+				}catch(Exception e) {
+					Alert.shortAlert(Alert.FAILURE, "Echec de l'import.");
 				}
-				
 			}
 		});
+		StylizedJMenuItem cancelRemoveSound = new StylizedJMenuItem("Annuler la suppression de la bande son de la video.");
+		cancelRemoveSound.setToolTipText("Ici vous pouvez annuler la suppression de la bande son de la video.");
+		cancelRemoveSound.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent ae) {
+				((ProcessingModel) Context.$M).getCurrentFile().cancel(ProcessingType.REMOVED_SOUND);
+				Alert.shortAlert(Alert.SUCCESS, "Annulation prise en compte.");
+			}
+		});
+		StylizedJMenuItem cancelAddSound = new StylizedJMenuItem("Annuler l'ajout d'une bande son.");
+		cancelAddSound.setToolTipText("Ici vous pouvez annuler l'ajout d'une bande son.");
+		cancelAddSound.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent ae) {
+				((ProcessingModel) Context.$M).getCurrentFile().cancel(ProcessingType.ADDED_SOUND);
+				Alert.shortAlert(Alert.SUCCESS, "Annulation de l'ajout prise en compte.");
+			}
+		});
+		StylizedJMenuItem cancelAll = new StylizedJMenuItem("Annuler tous les traitements.");
+		cancelAll.setToolTipText("Ici vous pouvez annuler tous les traitements.");
+		cancelAll.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent ae) {
+				((ProcessingModel) Context.$M).clearForms();
+				Alert.shortAlert(Alert.SUCCESS, "Annulation de tous les traitements<br>prise en compte.");
+			}
+		});
+
 		
 		
 		
 		StylizedJMenuItem answers = new StylizedJMenuItem("Inspecter les reponses de ffmpeg");
-		answers.setToolTipText("Ici vous pouvez inspecter les reponses de ffmpeg (CTRL + I).");
+		answers.setToolTipText("Ici vous pouvez inspecter les reponses de ffmpeg.");
 		answers.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {		
 				Actions.inspect();
 			}
 		});
 		StylizedJMenuItem procToConv = new StylizedJMenuItem("Passer en mode conversion");
-		procToConv.setToolTipText("Ici vous pouvez choisir de passer en mode conversion (CTRL + C).");
+		procToConv.setToolTipText("Ici vous pouvez choisir de passer en mode conversion.");
 		procToConv.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent ae) {
 				Actions.switchMode();
 			}
 		});
 		StylizedJMenuItem settings = new StylizedJMenuItem("Gerer les parametres des notifications");
-		settings.setToolTipText("Ici vous pouvez gerer les parametres des notifications (CTRL + P).");
+		settings.setToolTipText("Ici vous pouvez gerer les parametres des notifications.");
 		settings.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {		
 				Actions.set();
@@ -205,16 +247,23 @@ public class ProcessingWindow extends JFrame {
 		});
 		
 
+		
+		
+		
 		fileMenu.add(process);
 		fileMenu.add(quit);	
 	
 		libraryMenu.add(importVideo);
 		libraryMenu.add(importImage);
+		libraryMenu.add(clearImage);
 		
 		processingMenu.add(concat);
 		processingMenu.add(addSound);
 		processingMenu.add(removeSound);
-		
+		processingMenu.add(cancelAddSound);
+		processingMenu.add(cancelRemoveSound);
+		processingMenu.add(cancelAll);
+
 		optionsMenu.add(answers);
 		optionsMenu.add(procToConv);
 		optionsMenu.add(settings);

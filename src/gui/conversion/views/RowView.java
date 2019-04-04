@@ -48,6 +48,8 @@ public final class RowView extends JPanel{
 	
 	@Override
 	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		
 		int w = 270;
 		int h = 140;
 				

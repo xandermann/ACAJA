@@ -47,7 +47,11 @@ public class ProcessingPan extends JPanel {
 		processPan.add(processPanSpace);
 		processPanButton.setPreferredSize(new Dimension(processPan.getWidth(), processPan.getHeight()/3));
 		
-		StylizedJButton buttonProcess = new StylizedJButton("<html> <head><style> p{ text-align:center }</style></head><body><p> Démarrer le <br> traitement </p></body></html>");
+		StylizedJButton buttonProcess = 
+				new StylizedJButton("<html> "
+						            + "<head><style> p{ text-align:center }</style></head>"
+									+ "<body><p> Demarrer le <br> traitement </p></body>"
+									+ "</html>");
 		buttonProcess.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		processPanButton.add(buttonProcess);
@@ -57,26 +61,22 @@ public class ProcessingPan extends JPanel {
 		
 		PicturePan pi = new PicturePan();
 		pi.setPreferredSize(new Dimension((int)(getWidth()*(0.6)), (int)(getHeight()*(0.9))));
-		
 		buttonProcess.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				if(((ProcessingModel)Context.$M).getCurrentFile() != null){
 					try {
 						String text = processPanSpace.getText();
 						if(processPanSpace.getText().isEmpty()) 
-							text = "Traitement"+System.currentTimeMillis();
-						
+								text = "Traitement"+System.currentTimeMillis();
 						((ProcessingModel)Context.$M).getCurrentFile().setDestinationName(text);
 						((ProcessingModel)Context.$M).save();
-						System.out.println("fait");
-					} catch (UnfindableResourceException ure) {
-						Alert.longAlert(Alert.FAILURE, "Merci de choisir un repertoire");
+									System.out.println("fait");
+				    } catch (UnfindableResourceException ure) {
+						Alert.longAlert(Alert.FAILURE, "Aucun repertoire de sortie selectione !");
 					}
 				}
-				
-			
-			
+			}
 		});
 		this.add(pb);
 		this.add(processPan);

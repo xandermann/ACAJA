@@ -24,6 +24,7 @@ public class ButtonPan extends JPanel {
 	private JToggleButton rotateInvertedR1;
 	private JToggleButton rotate180;
 	private JToggleButton resize;
+	private JToggleButton resizeDim;
 	
 	
 	
@@ -31,7 +32,7 @@ public class ButtonPan extends JPanel {
 	 * constructeur du panel de bouton central
 	 */
 	public ButtonPan() {
-		this.setLayout(new GridLayout(4, 2, 1, 1));
+		this.setLayout(new GridLayout(5, 2, 1, 1));
 		
 		rectangle = new JToggleButton(new ImageIcon(resources.ResourceConstants.BUTTON_RECT));
 		rectangle.setToolTipText("Ici vous pouvez rogner la video.");
@@ -52,9 +53,9 @@ public class ButtonPan extends JPanel {
 		rotate180 = new JToggleButton(new ImageIcon("img/180.png"));
 		rotate180.setToolTipText("Ici vous pouvez retourner la video.");
 		
-		resize = new JToggleButton();
-	
-		JButton undo = new JButton(new ImageIcon(resources.ResourceConstants.LEFT_ARROW));
+		resize = new JToggleButton(new ImageIcon(resources.ResourceConstants.RESIZE));
+		resizeDim = new JToggleButton(new ImageIcon(resources.ResourceConstants.RESIZE_PROPER));
+		JButton undo = new JButton(new ImageIcon(resources.ResourceConstants.REMOVE_ICON));
 		
 		rectangle.addActionListener(new ActionListener() {
 			@Override
@@ -129,6 +130,7 @@ public class ButtonPan extends JPanel {
 		rotateInvertedR1.setPreferredSize(new Dimension(35,35));
 		rotate180.setPreferredSize(new Dimension(35,35));
 		resize.setPreferredSize(new Dimension(35,35));
+		resizeDim.setPreferredSize(new Dimension(35,35));
 		undo.setPreferredSize(new Dimension(35, 35));
 		
 		
@@ -141,6 +143,7 @@ public class ButtonPan extends JPanel {
 		this.add(rotateInvertedR1);
 		this.add(rotate180);
 		this.add(resize);
+		this.add(resizeDim);
 		this.add(undo);
 		this.repaint();
 	}

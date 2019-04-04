@@ -1,8 +1,6 @@
 package gui.alerts;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-
-import gui.general.Context;
 import gui.general.GeneralWindow;
 /**
  * [ CLASSE FENETRE DE LA VUE DE CHOIX DES PARAMETRES DES ALERTES. ]

@@ -8,6 +8,7 @@ import java.awt.event.WindowListener;
 import java.io.File;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
+import javax.swing.JTextField;
 
 import exceptions.IncorrectFileException;
 import exceptions.UnfindableResourceException;
@@ -26,7 +27,7 @@ import resources.ResourcesManager;
 
 public class ProcessingWindow extends JFrame {	
 	private static final long serialVersionUID = -6495416785122055429L;
-
+	private JTextField jtext;
 	public ProcessingWindow() {
 		Context.$0();
 		Context.$W = this;
@@ -43,7 +44,7 @@ public class ProcessingWindow extends JFrame {
 			public void windowActivated(WindowEvent e) {}
 			public void windowDeactivated(WindowEvent e) {}
 		});
-		
+		jtext = new JTextField("Traitement");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.createJMenu();
 		this.setBackground(Color.lightGray);
@@ -51,9 +52,9 @@ public class ProcessingWindow extends JFrame {
 		this.setTitle("Traitement d'une video");
 		this.setSize(1000, 625);
 		this.setLocationRelativeTo(null);
-		ProcessingPan p = new ProcessingPan();
+		ProcessingPan pp = new ProcessingPan(jtext);
 		this.setResizable(false);
-		this.add(p);
+		this.add(pp);
 		addKeyListener(new GeneralKeyboardController());
 		WindowTools.executeWindow(this);
 	}
@@ -79,8 +80,13 @@ public class ProcessingWindow extends JFrame {
 		process.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
+					
+					String text = jtext.getText();
+					if(jtext.getText().isEmpty()) 
+							text = "Traitement"+System.currentTimeMillis();
+					((ProcessingModel)Context.$M).getCurrentFile().setDestinationName(text);
 					((ProcessingModel) Context.$M).save();
-				} catch (UnfindableResourceException ure) {
+				} catch (Exception ure) {
 					Alert.longAlert(Alert.FAILURE, "Echec de l'export !");
 				}
 			}

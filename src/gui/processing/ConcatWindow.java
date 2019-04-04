@@ -17,12 +17,12 @@ import files.enumerations.ProcessingType;
 import files.files.ProcessingFile;
 import gui.JFileChooserManager;
 import gui.WindowTools;
+import gui.alerts.Alert;
 import gui.general.Context;
 import gui.style.StylizedJMenuBar;
 import gui.style.StylizedJMenuItem;
 
 public class ConcatWindow extends JFrame {
-		
 	private static final long serialVersionUID = -125816618351479903L;
 	private static ArrayList<ProcessingFile> listOfFile;
 
@@ -48,7 +48,7 @@ public class ConcatWindow extends JFrame {
 		this.setTitle("Assembleur de video");
 		this.setSize(450, 300);
 		this.setLocationRelativeTo(null);
-		//this.setResizable(false);
+		this.setResizable(false);
 		this.setLayout(new BorderLayout());
 
 		this.add(new ConcatPanel(), BorderLayout.CENTER);
@@ -66,15 +66,13 @@ public class ConcatWindow extends JFrame {
 		StylizedJMenuItem importfile = new StylizedJMenuItem("Importer une video");
 		fileMenu.add(importfile);
 		importfile.addActionListener(new ActionListener() {
-			
-			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				ProcessingFile p = null;
 				try {
-					p = new ProcessingFile(JFileChooserManager.chooseFile());
-				} catch (IncorrectFileException | UnfindableResourceException e) {e.printStackTrace();}
-				listOfFile.add(p);
-				repaint();
+					listOfFile.add(new ProcessingFile(JFileChooserManager.chooseFile()));
+					repaint();
+				} catch (Exception e) {
+					Alert.shortAlert(Alert.FAILURE, "Echec de l'import.");
+				}
 			}
 		});
 		
@@ -85,12 +83,12 @@ public class ConcatWindow extends JFrame {
 			public void actionPerformed(ActionEvent ae) {
 				ArrayList<File> f = JFileChooserManager.chooseDirectoryAndListSonFiles();
 				for(File i : f) {
-					ProcessingFile p = null;
 					try {
-						p = new ProcessingFile(i);
-					} catch (IncorrectFileException | UnfindableResourceException e) {e.printStackTrace();}
-					listOfFile.add(p);
-					repaint();
+						listOfFile.add(new ProcessingFile(i));
+						repaint();
+					} catch (Exception e) {
+						Alert.shortAlert(Alert.FAILURE, "Echec de l'import.");
+					}
 				}
 			}
 		});
@@ -107,19 +105,14 @@ public class ConcatWindow extends JFrame {
 		JButton valider = new JButton("Assembler les videos");
 		valider.setSize(100, 50);
 		valider.addActionListener(new ActionListener() {
-			
-			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(!listOfFile.isEmpty()) {
+				if(!listOfFile.isEmpty() && listOfFile.size()>=2) {
 					ProcessingFile f1 = listOfFile.get(0);
 					listOfFile.remove(0);
 					((ProcessingModel)Context.$M).setCurrentFile(f1);
 					String s = "";
-					for(ProcessingFile f : listOfFile) {
-						s = s +" "+f.getSourceFileFullName();
-					}
+					for(ProcessingFile f : listOfFile) s = s + "|" + f.getSourceFileFullName();
 					((ProcessingModel)Context.$M).getCurrentFile().modify(ProcessingType.ADDED, s);
-					
 					((ProcessingModel)Context.$M).setDestinationFolder(JFileChooserManager.chooseDirectory());
 					((ProcessingModel)Context.$M).getCurrentFile().setDestinationPath(((ProcessingModel)Context.$M).getDestinationFolder());
 					((ProcessingModel)Context.$M).getCurrentFile().setDestinationName("Concat"+System.currentTimeMillis());
@@ -127,10 +120,10 @@ public class ConcatWindow extends JFrame {
 					try {
 						((ProcessingModel)Context.$M).save();
 					} catch (UnfindableResourceException e1) {
-						e1.printStackTrace();
+						Alert.shortAlert(Alert.FAILURE, "La concatenation a echouee !");
 					}
-					
-				}
+				}else
+					Alert.shortAlert(Alert.INFO, "Le nombre de videos est insuffisant.");
 			}			
 		});
 		j.add(valider);

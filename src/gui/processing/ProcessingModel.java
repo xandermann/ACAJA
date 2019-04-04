@@ -112,13 +112,15 @@ public class ProcessingModel extends GeneralModel{
 		this.currentFile = (ProcessingFile) currentFile;
 		this.setMinia(this.currentFile.getThumbnail());
 		sendChanges();
+		if(this.currentFile == null)
+			Alert.shortAlert(Alert.SUCCESS, "Suppression de la video realisee avec succes.");
+		else
+			Alert.shortAlert(Alert.FAILURE, "La video a ete importee avec succes.");
 	}
 
 	
 	
-	public void resizeForm(Form f, int x, int y, int width, int height) {
-		
-	}
+	public void resizeForm(Form f, int x, int y, int width, int height) {}
 	
 
 	public void addForm(int a,int b,int c,int d,char type,File i) {
@@ -312,7 +314,6 @@ public class ProcessingModel extends GeneralModel{
 	
 	public void modify(OperationType typeSetting, String setting) {
 		this.currentFile.modify(typeSetting, setting);
-		this.currentFile.deselect();
 		sendChanges();
 	}
 
@@ -368,6 +369,7 @@ public class ProcessingModel extends GeneralModel{
 		if(image != null) {
 			this.images.add(image);
 			sendChanges();
+			Alert.shortAlert(Alert.SUCCESS, "Image importee avec succes.");
 		}
 	}
 

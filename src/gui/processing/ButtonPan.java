@@ -13,8 +13,6 @@ import javax.swing.JToggleButton;
 import gui.general.Context;
 
 public class ButtonPan extends JPanel {
-	
-	
 	private static final long serialVersionUID = -1294342658122646334L;
 	private JToggleButton flouButton;
 	private JToggleButton rectangle;
@@ -25,7 +23,6 @@ public class ButtonPan extends JPanel {
 	private JToggleButton rotate180;
 	private JToggleButton resize;
 	private JToggleButton resizeDim;
-	
 	
 	
 	/**
@@ -111,7 +108,6 @@ public class ButtonPan extends JPanel {
 			}
 			
 		});
-		
 		resize.addActionListener(new ActionListener() {
 			
 			@Override
@@ -119,7 +115,6 @@ public class ButtonPan extends JPanel {
 				DrawChange.setRedimensionner(!DrawChange.isRedimensionner());
 			}
 		});
-		
 		undo.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -288,6 +283,4 @@ public class ButtonPan extends JPanel {
 			
 		updateIcons();
 	}
-	
-	
 }

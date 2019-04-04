@@ -106,7 +106,7 @@ public class ButtonPan extends JPanel {
 		undo.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				((ProcessingModel)Context.$M).suppLastForm();
+				((ProcessingModel)Context.$M).clearForms();
 			}
 		});
 

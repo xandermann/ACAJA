@@ -86,7 +86,7 @@ public class ProcessingWindow extends JFrame {
 			}
 		});
 		StylizedJMenuItem quit = new StylizedJMenuItem("Quitter");
-		quit.setToolTipText("Ici vous pouvez quitter le logiciel (ECHAP / CTRL + Q).");
+		quit.setToolTipText("Ici vous pouvez quitter le logiciel.");
 		quit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				Actions.quit();
@@ -112,6 +112,8 @@ public class ProcessingWindow extends JFrame {
 					Alert.longAlert(Alert.FAILURE, "Type de fichier incorrect !");
 				} catch (UnfindableResourceException ure) {
 					Alert.longAlert(Alert.FAILURE, "Fichier introuvable !");
+				} catch (Exception e) {
+					Alert.shortAlert(Alert.FAILURE, "Echec de l'import !");
 				}
 			}
 		});
@@ -120,6 +122,7 @@ public class ProcessingWindow extends JFrame {
 		importImage.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
+				try {
 					File img = JFileChooserManager.chooseFile();
 					String[] imageExtensions = { "png", "jpg", "jpeg", "bmp" };
 					boolean isImage = false;
@@ -130,13 +133,27 @@ public class ProcessingWindow extends JFrame {
 					}
 					if(isImage) {
 						((ProcessingModel) Context.$M).addImage(img);
-						LibraryView.setActualiser(true);
-						repaint();
 					} else {
-						Alert.shortAlert(Alert.FAILURE, "Le fichier doit être une image");
+						Alert.shortAlert(Alert.FAILURE, "Le fichier doit etre une image");
 					}
+				} catch (Exception e) {
+					Alert.shortAlert(Alert.FAILURE, "Echec de l'import !");
+				}
 			}
 		});
+		StylizedJMenuItem clearImage = new StylizedJMenuItem("Vider la bibliotehque d'image");
+		clearImage.setToolTipText("Ici la vous pouvez vider la bibliotheque d'images.");
+		clearImage.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent ae) {
+				((ProcessingModel) Context.$M).clear();
+			}
+		});
+		
+		
+		
+		
+		
 		StylizedJMenuItem concat = new StylizedJMenuItem("Concatener des videos  / sons");
 		concat.setToolTipText("Ici vous pouvez concatener des videos ou des sons.");
 		concat.addActionListener(new ActionListener() {
@@ -192,43 +209,23 @@ public class ProcessingWindow extends JFrame {
 		cancelAll.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
-				((ProcessingModel) Context.$M).getCurrentFile().cancelAll();
-				System.out.println("passe");
+				((ProcessingModel) Context.$M).clearForms();
 				Alert.shortAlert(Alert.SUCCESS, "Annulation de tous les traitements<br>prise en compte.");
 			}
 		});
-		StylizedJMenuItem cancelCrop = new StylizedJMenuItem("Annuler le decoupage de la video.");
-		cancelCrop.setToolTipText("Ici vous pouvez annuler le decoupage de la video.");
-		cancelCrop.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent ae) {
-				((ProcessingModel) Context.$M).getCurrentFile().cancel(ProcessingType.CROPED);
-				Alert.shortAlert(Alert.SUCCESS, "Annulation du decoupage prise en compte.");
-			}
-		});
-		StylizedJMenuItem cancelBlur = new StylizedJMenuItem("Annuler le floutage de la video.");
-		cancelBlur.setToolTipText("Ici vous pouvez annuler le floutage de la video.");
-		cancelBlur.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent ae) {
-				((ProcessingModel) Context.$M).getCurrentFile().cancel(ProcessingType.BLURRED);
-				Alert.shortAlert(Alert.SUCCESS, "Annulation du floutage prise en compte.");
-			}
-		});
-		
-		
+
 		
 		
 		
 		StylizedJMenuItem answers = new StylizedJMenuItem("Inspecter les reponses de ffmpeg");
-		answers.setToolTipText("Ici vous pouvez inspecter les reponses de ffmpeg (CTRL + I).");
+		answers.setToolTipText("Ici vous pouvez inspecter les reponses de ffmpeg.");
 		answers.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {		
 				Actions.inspect();
 			}
 		});
 		StylizedJMenuItem procToConv = new StylizedJMenuItem("Passer en mode conversion");
-		procToConv.setToolTipText("Ici vous pouvez choisir de passer en mode conversion (CTRL + C).");
+		procToConv.setToolTipText("Ici vous pouvez choisir de passer en mode conversion.");
 		procToConv.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
@@ -236,7 +233,7 @@ public class ProcessingWindow extends JFrame {
 			}
 		});
 		StylizedJMenuItem settings = new StylizedJMenuItem("Gerer les parametres des notifications");
-		settings.setToolTipText("Ici vous pouvez gerer les parametres des notifications (CTRL + P).");
+		settings.setToolTipText("Ici vous pouvez gerer les parametres des notifications.");
 		settings.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {		
 				Actions.set();
@@ -252,6 +249,7 @@ public class ProcessingWindow extends JFrame {
 	
 		libraryMenu.add(importVideo);
 		libraryMenu.add(importImage);
+		libraryMenu.add(clearImage);
 		
 		processingMenu.add(concat);
 		processingMenu.add(addSound);
@@ -259,9 +257,7 @@ public class ProcessingWindow extends JFrame {
 		processingMenu.add(cancelAddSound);
 		processingMenu.add(cancelRemoveSound);
 		processingMenu.add(cancelAll);
-		processingMenu.add(cancelCrop);
-		processingMenu.add(cancelBlur);
-		
+
 		optionsMenu.add(answers);
 		optionsMenu.add(procToConv);
 		optionsMenu.add(settings);

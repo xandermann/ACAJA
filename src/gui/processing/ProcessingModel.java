@@ -12,6 +12,7 @@ import files.enumerations.ProcessingType;
 import files.files.ProcessingFile;
 import files.files.SelectableFile;
 import gui.JFileChooserManager;
+import gui.alerts.Alert;
 import gui.alerts.AlertWindow;
 import gui.general.Context;
 import gui.general.GeneralModel;
@@ -23,11 +24,10 @@ import wrapper.runtime.details.Request;
 
 public class ProcessingModel extends GeneralModel{
 	private List<Form> forms;
-	private boolean modeBlur,modeCrop;
 	private ProcessingFile currentFile;
 	private File minia;
 	private String destinationFolder;
-	private boolean rotateLeft, rotateRight, rotate180Left, rotate180Right, rotate180;
+	private boolean modeBlur,modeCrop, rotateLeft, rotateRight, rotate180Left, rotate180Right, rotate180;
 	private ArrayList<File> images;
 	private Form currentForm;
 	
@@ -160,15 +160,14 @@ public class ProcessingModel extends GeneralModel{
 		
 	}
 	
+
 	
-	
-	public void suppLastForm() {
+	public void clearForms() {
 		if(!this.forms.isEmpty()) {
-			this.forms.clear();;
+			this.forms.clear();
 			this.currentFile.cancelAll();
+			sendChanges();
 		}
-		
-		sendChanges();
 	}
 	
 	
@@ -271,8 +270,8 @@ else if (crop && blur) {
 			System.out.println("Une seule action");
 			ProcessThreadManager.treatOneProcess(currentFile);
 		}
-	}
-			
+	}else
+		Alert.shortAlert(Alert.FAILURE, "La video n'a subit aucun traitement,<br>l'exporter n'aurait aucuns sens.");
 	}
 	
 	private void processFile(ProcessingFile f) {
@@ -323,16 +322,26 @@ else if (crop && blur) {
 	
 	@Override
 	public void remove(SelectableFile file) {
-		images.remove(file);
+		if(file != null) {
+			images.remove(file);
+			sendChanges();
+			Alert.shortAlert(Alert.SUCCESS, "L'image a ete supprime avec succes.");
+		}else
+			Alert.shortAlert(Alert.INFO, "Aucun fichier a supprimer.");
 	}
 
 	
 	@Override
 	public void clear() {
-		images.clear();		
+		if(!images.isEmpty()) {
+			images.clear();		
+			sendChanges();
+			Alert.shortAlert(Alert.SUCCESS, "Bibliotheque videe avec succes.");
+		}else
+			Alert.shortAlert(Alert.INFO, "La bibliotheque est deja vide.");
 	}
 
-
+	
 	public boolean isRotateLeft() {
 		return rotateLeft;
 	}
@@ -352,17 +361,16 @@ else if (crop && blur) {
 		this.rotateRight = rotateRight;
 	}
 	
-	public void addImage(File e) {
-		this.images.add(e);
-		sendChanges();
+	public void addImage(File image) {
+		if(image != null) {
+			this.images.add(image);
+			sendChanges();
+		}
 	}
 
 
 	@Override
-	public void add(File file) throws IncorrectFileException, UnfindableResourceException, FileNotFoundException {
-
-		
-	}
+	public void add(File file) throws IncorrectFileException, UnfindableResourceException, FileNotFoundException {}
 
 
 	@Override

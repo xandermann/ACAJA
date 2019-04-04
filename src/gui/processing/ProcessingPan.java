@@ -21,15 +21,12 @@ import gui.general.Context;
 import gui.style.*;
 
 public class ProcessingPan extends JPanel {
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 4600169663295346054L;
 
 	public ProcessingPan() {
 		this.setBackground(Color.GRAY);
-		LibraryView pb = new LibraryView(((ProcessingModel)Context.$M));
+		LibraryView pb = new LibraryView();
+		Context.$M.addObserver(pb);
 		this.setSize(1000,625);
 		System.out.println("width "+getWidth() +"height"+getHeight());
 		pb.setPreferredSize(new Dimension((int)(getWidth()*(0.2)), (int)(getHeight()*(0.9))));

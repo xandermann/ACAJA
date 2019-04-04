@@ -59,27 +59,27 @@ public class ButtonPan extends JPanel {
 		JButton undo = new JButton(new ImageIcon(resources.ResourceConstants.REMOVE_ICON));
 		undo.setToolTipText("Ici vous pouvez annuler tous les traitements.");
 		
+		
+		
+		
 		rectangle.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				cropIsSelected();
 			}
 		});
-		
 		flouButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				flouIsSelected();
 			}
 		});
-		
 		rotateL1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				rotateLeftActivated();
 			}
 		});
-		
 		rotateR1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -122,6 +122,9 @@ public class ButtonPan extends JPanel {
 			}
 		});
 
+		
+		
+		
 		rectangle.setPreferredSize(new Dimension(35, 35));
 		flouButton.setPreferredSize(new Dimension(35, 35));
 		rotateR1.setPreferredSize(new Dimension(35, 35));
@@ -135,6 +138,7 @@ public class ButtonPan extends JPanel {
 		
 		
 
+		
 		this.add(rectangle);
 		this.add(flouButton);
 		this.add(rotateL1);

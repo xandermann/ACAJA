@@ -11,6 +11,7 @@ import java.awt.event.MouseListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import exceptions.UnfindableResourceException;
@@ -38,15 +39,21 @@ public class ProcessingPan extends JPanel {
 		processPan.add(pm);
 		StylizedJPanel processPanButton = new StylizedJPanel(new BorderLayout());
 		processPan.setPreferredSize(new Dimension((int)(getWidth()*(0.1)), (int)(getHeight()*(0.4))));
-		StylizedJPanel processPanSpace = new StylizedJPanel();
-		processPanSpace.setPreferredSize(new Dimension((int)(getWidth()*(0.1)), (int)(getHeight()*(0.05))));
-		processPanSpace.setBackground(Color.GRAY);
+		//StylizedJPanel processPanSpace = new StylizedJPanel();
+		JTextField processPanSpace = new JTextField("Traitement");
+		processPanSpace.setPreferredSize(new Dimension((int)(getWidth()*(0.1)), (int)(getHeight()*(0.01))));
+		//processPanSpace.setBackground(Color.GRAY);
 		processPan.add(processPanSpace);
 		processPanButton.setPreferredSize(new Dimension(processPan.getWidth(), processPan.getHeight()/3));
+		
 		StylizedJButton buttonProcess = new StylizedJButton("<html> <head><style> p{ text-align:center }</style></head><body><p> Démarrer le <br> traitement </p></body></html>");
 		buttonProcess.setHorizontalAlignment(SwingConstants.CENTER);
+		
 		processPanButton.add(buttonProcess);
 		processPan.add(processPanButton);
+		
+		
+		
 		PicturePan pi = new PicturePan();
 		pi.setPreferredSize(new Dimension((int)(getWidth()*(0.6)), (int)(getHeight()*(0.9))));
 		pi.addMouseListener(new MouseListener(){
@@ -87,6 +94,11 @@ public class ProcessingPan extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 					try {
+						String text = processPanSpace.getText();
+						if(processPanSpace.getText().isEmpty()) 
+							text = "Traitement"+System.currentTimeMillis();
+						
+						((ProcessingModel)Context.$M).getCurrentFile().setDestinationName(text);
 						((ProcessingModel)Context.$M).save();
 						System.out.println("fait");
 					} catch (UnfindableResourceException ure) {

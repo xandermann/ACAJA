@@ -277,7 +277,6 @@ public class ProcessingModel extends GeneralModel{
 		} else {
 			setDestinationFolder(JFileChooserManager.chooseDirectory());
 			getCurrentFile().setDestinationPath(getDestinationFolder());
-			getCurrentFile().setDestinationName("Traitement"+System.currentTimeMillis());
 			getCurrentFile().setFileExtension(getCurrentFile().getSourceFileExtension());
 			processFile(getCurrentFile());
 			System.out.println("Autre cas.");
@@ -292,8 +291,7 @@ public class ProcessingModel extends GeneralModel{
 				/**
 				 * ATTENDRE QU'ON ME RENDE LA MAIN.
 				 */
-				while(RuntimeSpaceManager.hand.took());
-
+				while(RuntimeSpaceManager.hand.took()) Thread.yield();
 				/**
 				 * DEBUT DU TRAITEMENT :
 				 * 

@@ -4,7 +4,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import exceptions.UnfindableResourceException;
-import gui.alerts.Alert;
 import gui.alerts.AlertSettings;
 /**
  * [ CLASSE POUR REALISER DES RACCOURCIS CLAVIER GENERIQUES. ]

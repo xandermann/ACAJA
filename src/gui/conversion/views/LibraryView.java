@@ -51,7 +51,7 @@ public final class LibraryView extends StylizedJPanel implements Observer{
 		JPanel all = new JPanel(new BorderLayout());
 		width = files.size() >= 4 ? 290 : 270;
 		int height = files.size()*140;
-		all.setPreferredSize(new Dimension(width, files.size()*150<=540 ? 540 : height));
+		all.setPreferredSize(new Dimension(width, ((files.size()*140)<=540) ? 540 : height));
 		
 		
 		JPanel content = new JPanel(new GridLayout(files.size(), 1));

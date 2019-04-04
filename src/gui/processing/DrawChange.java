@@ -17,8 +17,9 @@ public class DrawChange implements MouseMotionListener, MouseListener {
 	private File im;
 	private boolean redimensionner;
 	private int endX, endY;
+	
+	private static int MARGE = 5;
 
-	private final int MARGE = 50;
 
 	public DrawChange() {
 		redimensionner = false;
@@ -40,21 +41,62 @@ public class DrawChange implements MouseMotionListener, MouseListener {
 	public void mousePressed(MouseEvent e) {
 		actualiserCoordonnees(e);
 		selectionnerForme(e);
+		faireResizeMousePressed(e);
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		((ProcessingModel) Context.$M).sendChanges();
-		System.out.println("Mouse released !");
+		//System.out.println("Mouse released !");
 		redimensionner = false;
 		endX = e.getX();
 		endY = e.getY();
+	}
+	
+	public void faireResizeMousePressed(MouseEvent e) {
+		if (((ProcessingModel) Context.$M) != null) {
+			Form f = ((ProcessingModel) Context.$M).getCurrentForm();
+			int[] tab = f.getFormValues();
+			int formx = tab[0];
+			int formy = tab[1];
+			int width = tab[2];
+			int height = tab[3];
+			
+			if (formx - MARGE < e.getX()  && e.getX() < formx + MARGE && formx - MARGE < e.getY() && e.getY() < formy + MARGE + height) {
+				System.out.println("A");
+				// ((ProcessingModel)Context.$M).addForm(formx + (e.getX()-formx), formy,
+				// width-(e.getX()-formx), height, 'i', im);
+				// redimensionner = true;
+			}
+			// 0 < X < 0+2
+			// 1 < Y < 1
+			// Haut
+			if (formx - MARGE < e.getX() && e.getX() < formx + MARGE + width && formy - MARGE < e.getY() && e.getY() < formy + MARGE) {
+				System.out.println("B");
+				// ((ProcessingModel)Context.$M).addForm(x, y - e.getY(), x, y, 'i', im);
+			}
+			// 0+2 < X < 0+2
+			// 1 < Y < 1+3
+			if (formx + width - MARGE < e.getX() && e.getX() < formx + width + MARGE && formy - MARGE< e.getY() && e.getY() < formy + height + MARGE) {
+				System.out.println("C");
+				// System.out.println("Modification droit");
+				// ((ProcessingModel)Context.$M).addForm(x, y, e.getX(), y, 'i', im);
+			}
+			// 0 < x < 0+2
+			// 1+3 < y < 1+3
+			else if (formx - MARGE < e.getX() && e.getX() < formx + width + MARGE && formy - MARGE + height < e.getY() && e.getY() < formy + height + MARGE) {
+				System.out.println("D");
+				// System.out.println("Modification bas ");
+				// ((ProcessingModel)Context.$M).addForm(x, y, x, e.getY(), 'i', im);
+			}
+		}
 	}
 
 	/**
 	 * Used nowhere
 	 * @param e
 	 */
+	/*
 	public void faireResizeMousePressed(MouseEvent e) {
 		if (((ProcessingModel) Context.$M) != null) {
 			Form f = ((ProcessingModel) Context.$M).getCurrentForm();
@@ -92,7 +134,7 @@ public class DrawChange implements MouseMotionListener, MouseListener {
 				// ((ProcessingModel)Context.$M).addForm(x, y, x, e.getY(), 'i', im);
 			}
 		}
-	}
+	}*/
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
@@ -120,8 +162,8 @@ public class DrawChange implements MouseMotionListener, MouseListener {
 			int endXForm = originXForm + formValues[2];
 			int endYForm = originYForm + formValues[3];
 			// Condition ajoutée
-			if ((e.getX() > originXForm + MARGE && e.getX() < endXForm - MARGE)
-					&& (e.getY() > originYForm - MARGE && e.getY() < endYForm + MARGE)) {
+			if ((e.getX() > originXForm && e.getX() < endXForm)
+					&& (e.getY() > originYForm && e.getY() < endYForm )) {
 
 				if (!(((ProcessingModel) Context.$M).isModeBlur() || ((ProcessingModel) Context.$M).isModeCrop())) {
 
@@ -140,7 +182,7 @@ public class DrawChange implements MouseMotionListener, MouseListener {
 	private void actualiserCoordonnees(MouseEvent e) {
 		x = e.getX();
 		y = e.getY();
-		System.out.println("Coordonnees actualisees : x=" + x + ", y=" + y);
+		//System.out.println("Coordonnees actualisees : x=" + x + ", y=" + y);
 	}
 
 	private void selectionnerForme(MouseEvent e) {
@@ -171,6 +213,7 @@ public class DrawChange implements MouseMotionListener, MouseListener {
 	 * Used nowhere
 	 * @param e
 	 */
+	/*
 	public void faireResizeMouseDragged(MouseEvent e) {
 		if (((ProcessingModel) Context.$M).getCurrentForm() != null) {
 			int[] values = ((ProcessingModel) Context.$M).getCurrentForm().getFormValues();
@@ -241,5 +284,5 @@ public class DrawChange implements MouseMotionListener, MouseListener {
 			}
 			
 		}
-	}
+	}*/
 }

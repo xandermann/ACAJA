@@ -51,7 +51,11 @@ public class DrawChange implements MouseMotionListener, MouseListener {
 		endY = e.getY();
 	}
 
-	public void faireResize(MouseEvent e) {
+	/**
+	 * Used nowhere
+	 * @param e
+	 */
+	public void faireResizeMousePressed(MouseEvent e) {
 		if (((ProcessingModel) Context.$M) != null) {
 			Form f = ((ProcessingModel) Context.$M).getCurrentForm();
 			int[] tab = f.getFormValues();
@@ -163,7 +167,11 @@ public class DrawChange implements MouseMotionListener, MouseListener {
 
 	}
 
-	public void faireResize2(MouseEvent e) {
+	/**
+	 * Used nowhere
+	 * @param e
+	 */
+	public void faireResizeMouseDragged(MouseEvent e) {
 		if (((ProcessingModel) Context.$M).getCurrentForm() != null) {
 			int[] values = ((ProcessingModel) Context.$M).getCurrentForm().getFormValues();
 

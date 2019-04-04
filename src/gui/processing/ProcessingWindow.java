@@ -168,16 +168,10 @@ public class ProcessingWindow extends JFrame {
 		removeSound.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
-<<<<<<< HEAD
-				((ProcessingModel) Context.$M).modify(ProcessingType.REMOVED_SOUND, "");
-				Alert.shortAlert(Alert.SUCCESS, "Suppression de la bande son de la video<br>prise en compte.");
-=======
-				if(model.getCurrentFile() != null) {
-					model.modify(ProcessingType.REMOVED_SOUND, "");
+				if(((ProcessingModel) Context.$M).getCurrentFile() != null) {
+					Context.$M.modify(ProcessingType.REMOVED_SOUND, "");
 					Alert.shortAlert(Alert.SUCCESS, "Suppression de la bande son de la video<br>prise en compte.");
-			
 				}
->>>>>>> branch 'code' of git@bitbucket.org:depinfoens/s3b_s22_chevrier_dasilvacarmo_hublau_palmieri.git
 			}
 		});
 		StylizedJMenuItem addSound = new StylizedJMenuItem("Ajouter une bande son a la video");
@@ -185,21 +179,14 @@ public class ProcessingWindow extends JFrame {
 		addSound.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
-<<<<<<< HEAD
 				try {
-					((ProcessingModel) Context.$M).modify(ProcessingType.ADDED_SOUND, 
-							JFileChooserManager.chooseFile().getAbsolutePath());
-					Alert.shortAlert(Alert.SUCCESS, "Ajout de la bande son a la video<br>prise en compte.");
+					if(((ProcessingModel) Context.$M).getCurrentFile() != null) {
+						Context.$M.modify(ProcessingType.ADDED_SOUND, JFileChooserManager.chooseFile().getAbsolutePath());
+						Alert.shortAlert(Alert.SUCCESS, "Ajout de la bande son a la video<br>prise en compte.");
+					}
 				}catch(Exception e) {
 					Alert.shortAlert(Alert.FAILURE, "Echec de l'import.");
 				}
-=======
-				if(model.getCurrentFile() != null) {
-					model.modify(ProcessingType.ADDED_SOUND, JFileChooserManager.chooseFile().getAbsolutePath());
-					Alert.shortAlert(Alert.SUCCESS, "Ajout de la bande son a la video<br>prise en compte.");
-				}
-				
->>>>>>> branch 'code' of git@bitbucket.org:depinfoens/s3b_s22_chevrier_dasilvacarmo_hublau_palmieri.git
 			}
 		});
 		StylizedJMenuItem cancelRemoveSound = new StylizedJMenuItem("Annuler la suppression de la bande son de la video.");

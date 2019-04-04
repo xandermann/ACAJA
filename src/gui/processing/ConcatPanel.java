@@ -1,6 +1,7 @@
 package gui.processing;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.io.IOException;
@@ -10,6 +11,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import files.files.ProcessingFile;
+import gui.style.StyleTheme;
 
 public class ConcatPanel extends JPanel{
 	private static final long serialVersionUID = -5509545756632580353L;
@@ -40,9 +42,9 @@ public class ConcatPanel extends JPanel{
 				}
 				try {
 					Image pic = ImageIO.read(f.getThumbnail());
-					g.drawImage(pic, 150*b,100*a,150,100, this);	} catch (IOException e) {}
+					g.drawImage(pic, 150*b,100*a,150,100, this);	
+				} catch (IOException e) {}
 				b++;
-					
 			}
 			this.repaint();
 		}

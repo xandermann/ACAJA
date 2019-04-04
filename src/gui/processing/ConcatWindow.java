@@ -98,20 +98,15 @@ public class ConcatWindow extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if(!listOfFile.isEmpty() && listOfFile.size()>=2) {
 					ProcessingModel pm = new ProcessingModel();
+
 					pm.setCurrentFile(listOfFile.get(0));
 					String s = "";
 					for(int i=1; i<listOfFile.size(); i++) 
 						s = s + "|" + listOfFile.get(i).getSourceFileFullName();
 					
 					pm.getCurrentFile().modify(ProcessingType.ADDED, s);
-					System.out.println("pgosbmonmsobsnmbknvkn");
-					pm.setDestinationFolder(JFileChooserManager.chooseDirectory());
-					pm.getCurrentFile().setDestinationPath(
-							((ProcessingModel)Context.$M).getDestinationFolder());
 					pm.getCurrentFile().setDestinationName("video_concatenee_"+System.currentTimeMillis());
-					pm.getCurrentFile().setFileExtension(
-							((ProcessingModel)Context.$M).getCurrentFile().getSourceFileExtension());
-					
+	
 					try {
 						((ProcessingModel)Context.$M).save();
 					} catch (UnfindableResourceException e1) {
@@ -125,5 +120,4 @@ public class ConcatWindow extends JFrame {
 		j.add(valider);
 		return j;
 	}
-
 }

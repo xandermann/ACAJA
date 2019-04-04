@@ -88,8 +88,6 @@ public final class ProcessingFile extends SelectableFile implements Modifiable {
 	public void modify(OperationType typeProcess, String process) {
 		if(typeProcess==null)
 			throw new NullPointerException("Cle null !");
-		if(process==null)
-			throw new NullPointerException("Valeur null !");
 		performedProcessings.put((ProcessingType) typeProcess, process);
 		
 	}

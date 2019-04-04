@@ -187,7 +187,6 @@ public class ProcessingModel extends GeneralModel{
 
 	@Override
 	public void save() throws UnfindableResourceException {
-
 		boolean rotation = false;
 		boolean blur = false;
 		boolean crop = false;
@@ -211,39 +210,33 @@ public class ProcessingModel extends GeneralModel{
 			coeffWidth = ((double)Integer.parseInt(actualResolution[0]))/350;
 			coeffHeight = ((double)Integer.parseInt(actualResolution[1]))/500;
 		}
-		// TODO invertedVerticalMode
-		// TODO invertedVerticalMode
-		// TODO invertedVerticalMode
-		
+
 		if(!forms.isEmpty()) {
 			for(Form f : forms) {
 				int[] formValues = f.getFormValues();
+				String S = "|";
 				int x = (int) (formValues[0]*coeffWidth);
 				int y = (int) (formValues[1]*coeffHeight);	
 				int width = (int) (formValues[2]*coeffWidth);
 				int height = (int) (formValues[3]*coeffHeight);
 				switch (f.getFormType()) {
 				case 'c':
-					this.modify(ProcessingType.CROPED,x+" "+y+" "+width+" "+height);
+					this.modify(ProcessingType.CROPED,x+S+y+S+width+S+height);
 					crop = true;
 					break;
 				case 'f':
-					this.modify(ProcessingType.BLURRED,x+" "+y+" "+width+" "+height);
+					this.modify(ProcessingType.BLURRED,x+S+y+S+width+S+height);
 					blur = true;
 					break;
 				case 'i':
 					String output = NamesSpaceManager._temporary();
 					new Request(f.getFormImage().getAbsolutePath(),output).resize(""+width, ""+height).make();
-					this.modify(ProcessingType.ADDED_IMAGE, output+" "+x+" "+y);
+					this.modify(ProcessingType.ADDED_IMAGE, output+S+x+S+y);
 					image = true;
 					break;
-				default:
-					System.out.println("Non implemente");
-				break;
 				}
 			}
-				
-			}
+		}
 		
 /*	
 else if (crop && blur) {

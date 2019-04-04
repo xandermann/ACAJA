@@ -108,8 +108,7 @@ public final class UserRequests{
 					break;
 				
 				case CROPED :
-					String[] tab = newValue.split(" ");
-					System.out.println(tab[0]+ " "+ tab[1]);
+					String[] tab = newValue.split("|");
 					request.crop(tab[0],tab[1],tab[2],tab[3]);
 					break;
 				
@@ -118,12 +117,12 @@ public final class UserRequests{
 					break;
 				
 				case BLURRED :
-					String[] tab2 = newValue.split(" ");
+					String[] tab2 = newValue.split("|");
 					request.blur(tab2[0],tab2[1],tab2[2],tab2[3]);
 					break;
 				
 				case ADDED :
-					String[] tab3 = newValue.split(" ");
+					String[] tab3 = newValue.split("|");
 					String[] tabres = new String[tab3.length-1];
 					for(int i = 1;i<tab3.length;i++)
 						tabres[i-1] = tab3[i];
@@ -147,7 +146,7 @@ public final class UserRequests{
 				break;
 				
 				case ADDED_IMAGE :
-					String[] tab4 = newValue.split(" ");
+					String[] tab4 = newValue.split("|");
 					request.addImage(tab4[0], tab4[1], tab4[2]);
 				break;
 			}

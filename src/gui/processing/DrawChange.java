@@ -195,21 +195,24 @@ public class DrawChange implements MouseMotionListener, MouseListener {
 		
 		if (((ProcessingModel) Context.$M) != null) {
 			f = ((ProcessingModel) Context.$M).getCurrentForm();
-			int[] tab = f.getFormValues();
-			int formx = tab[0];
-			int formy = tab[1];
-			int width = tab[2];
-			int height = tab[3];
-		
-						if(formy < e.getY() && e.getY() < formy + height && e.getX() < (formx+width+100) && e.getX() > (formx+width-100)) {
-							if(pvv != null)
-								pvv.setCursor(new Cursor(Cursor.NE_RESIZE_CURSOR));
-						}  else {
-							pvv.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-						}
+			if(f != null) {
+				int[] tab = f.getFormValues();
+				int formx = tab[0];
+				int formy = tab[1];
+				int width = tab[2];
+				int height = tab[3];
+			
+							if(formy < e.getY() && e.getY() < formy + height && e.getX() < (formx+width+100) && e.getX() > (formx+width-100)) {
+								if(pvv != null)
+									pvv.setCursor(new Cursor(Cursor.NE_RESIZE_CURSOR));
+							}  else {
+								pvv.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+							}
+							
 						
-					
-				}
+					}
+			}
+			
 			
 
 	}

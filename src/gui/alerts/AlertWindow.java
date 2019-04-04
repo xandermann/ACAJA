@@ -77,19 +77,6 @@ public final class AlertWindow extends StylizedJFrame implements ATConstants{
 		add(notification, BorderLayout.CENTER);
 		
 		
-		addKeyListener(new KeyListener() {
-			public void keyTyped(KeyEvent e) {}
-			public void keyPressed(KeyEvent e) {}
-			public void keyReleased(KeyEvent e) {
-				if(e.getKeyCode()==KeyEvent.VK_DELETE || e.getKeyCode()==KeyEvent.VK_ESCAPE 
-				|| e.getKeyCode()==KeyEvent.VK_ENTER) {
-					dispose();
-				}
-			}
-		});
-		setFocusable(true);
-		
-		
 		WindowTools.showLogo(this);
 	}
 }

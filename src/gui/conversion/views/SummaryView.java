@@ -74,14 +74,10 @@ public final class SummaryView extends StylizedJPanel implements Observer {
 		StylizedJButton convertButton = new StylizedJButton("Convertir");
 		outputFilePanel.add(convertButton,BorderLayout.SOUTH);
 		convertButton.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				Actions.save();
-				
 			}
-			
 		});
 		outputFileText.addKeyListener(new KeyListener() {
 			public void keyPressed(KeyEvent e) {}
@@ -119,9 +115,11 @@ public final class SummaryView extends StylizedJPanel implements Observer {
 			videoLabel.$(((SettingsFile) Context.$M.getCurrentFile()).getSettings().get(SettingType.VIDEO_CODEC));
 			soundLabel.$(((SettingsFile) Context.$M.getCurrentFile()).getSettings().get(SettingType.AUDIO_CODEC));
 			durationLabel.$(Context.$M.getCurrentFile().getDuration());
-			if(Context.$M.getCurrentFile().getDestinationFileName() == "")
-				outputFileText.setText(Context.$M.getCurrentFile().getSourceFileNameWithoutExtension());
-			else
+			if(Context.$M.getCurrentFile().getDestinationFileName() == "") {
+				String destination = Context.$M.getCurrentFile().getSourceFileNameWithoutExtension();
+				Context.$M.getCurrentFile().setDestinationName(destination);
+				outputFileText.setText(destination);
+			}else
 				outputFileText.setText(Context.$M.getCurrentFile().getDestinationFileName());
 		} else {
 			inputFileLabel.setText("NA");

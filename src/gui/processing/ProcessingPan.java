@@ -16,6 +16,7 @@ import javax.swing.SwingConstants;
 
 import exceptions.UnfindableResourceException;
 import gui.JFileChooserManager;
+import gui.alerts.Alert;
 import gui.general.Context;
 import gui.style.*;
 
@@ -56,39 +57,7 @@ public class ProcessingPan extends JPanel {
 		
 		PicturePan pi = new PicturePan();
 		pi.setPreferredSize(new Dimension((int)(getWidth()*(0.6)), (int)(getHeight()*(0.9))));
-		pi.addMouseListener(new MouseListener(){
-
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				System.out.println("COORD : X"+e.getX() + "     Y"+e.getY());
-			}
-
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-		});
+		
 		buttonProcess.addActionListener(new ActionListener() {
 
 			@Override
@@ -102,8 +71,7 @@ public class ProcessingPan extends JPanel {
 						((ProcessingModel)Context.$M).save();
 						System.out.println("fait");
 					} catch (UnfindableResourceException ure) {
-						// TODO Auto-generated catch block
-						ure.printStackTrace();
+						Alert.longAlert(Alert.FAILURE, "Merci de choisir un repertoire");
 					}
 				}
 				

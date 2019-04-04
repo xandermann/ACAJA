@@ -509,7 +509,7 @@ public final class Request implements FlagConstants, ValueConstants{
 			if(inputsFile.exists()) inputsFile.delete();
 			
 			Writer writer = new BufferedWriter(new FileWriter(inputsFile));
-			if(input != null) writer.write("file "+input+"\n");
+			if(input != null) writer.write("file '"+input+"'\n");
 			for(String tmp : inputs) {
 				if(tmp==null) 
 					throw new NullPointerException("Un des inputs est null !");
@@ -517,7 +517,7 @@ public final class Request implements FlagConstants, ValueConstants{
 				if(!new File(tmp).exists())
 					throw new IllegalArgumentException("Un des inputs est inexistant !");
 				
-				writer.write("file "+tmp+"\n");
+				writer.write("file '"+tmp+"'\n");
 			}
 			writer.close();
 			

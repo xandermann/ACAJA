@@ -21,7 +21,7 @@ public final class LibraryView extends StylizedJPanel implements Observer{
 	//=======================================================================================================================
 	//=======================================================================================================================
 	private static final long serialVersionUID = 3415076024928133155L;
-
+	private int nbFiles;
 
 
 	/**
@@ -51,19 +51,8 @@ public final class LibraryView extends StylizedJPanel implements Observer{
 		
 		JPanel content = new JPanel(new GridLayout(files.size(), 1));
 		content.setPreferredSize(new Dimension(width, height));
-		for(SelectableFile file : files) {
-			RowView row = new RowView((SettingsFile) file, file==Context.$M.getCurrentFile());
-			row.addMouseListener(new MouseListener() {
-				public void mouseClicked(MouseEvent e) {}
-				public void mousePressed(MouseEvent e) {
-					 Context.$M.setCurrentFile(file);
-				}
-				public void mouseReleased(MouseEvent e) {}
-				public void mouseEntered(MouseEvent e) {}
-				public void mouseExited(MouseEvent e) {}
-			});
-			content.add(row);
-		}
+		for(SelectableFile file : files) 
+			content.add(new RowView((SettingsFile) file));
 		all.add(content, BorderLayout.CENTER);
 		
 		
@@ -98,6 +87,7 @@ public final class LibraryView extends StylizedJPanel implements Observer{
 	 */
 	public LibraryView() {
 		super(new BorderLayout());
+		nbFiles = 0;
 		displayLibrary();
 	}
 	
@@ -110,7 +100,10 @@ public final class LibraryView extends StylizedJPanel implements Observer{
 	
 	@Override
 	public void update(Observable o, Object arg) {
-		displayLibrary();
+		if(nbFiles != Context.$M.getFiles().size()) {
+			nbFiles = Context.$M.getFiles().size();
+			displayLibrary();
+		}
 	}
 	
 	

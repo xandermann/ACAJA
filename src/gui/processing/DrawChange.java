@@ -51,7 +51,11 @@ public class DrawChange implements MouseMotionListener, MouseListener {
 		endY = e.getY();
 	}
 
-	public void faireResize(MouseEvent e) {
+	/**
+	 * Used nowhere
+	 * @param e
+	 */
+	public void faireResizeMousePressed(MouseEvent e) {
 		if (((ProcessingModel) Context.$M) != null) {
 			Form f = ((ProcessingModel) Context.$M).getCurrentForm();
 			int[] tab = f.getFormValues();
@@ -162,76 +166,80 @@ public class DrawChange implements MouseMotionListener, MouseListener {
 		selectionnerForme(e);
 
 	}
+
+	/**
+	 * Used nowhere
+	 * @param e
+	 */
+	public void faireResizeMouseDragged(MouseEvent e) {
+		if (((ProcessingModel) Context.$M).getCurrentForm() != null) {
+			int[] values = ((ProcessingModel) Context.$M).getCurrentForm().getFormValues();
+
+			// Gauche
+			if (values[0] - MARGE < x && x < values[0] + MARGE && values[0] < y && y < values[1] + values[3]) {
+				System.out.println("Zone gauche");
+			}
+			// Haut
+			else if (values[0] < x && x < values[0] + values[2] && values[1] - MARGE < y && y < values[1] + MARGE) {
+				System.out.println("Zone haute");
+			}
+			// Droit
+			else if (values[0] + values[2] - MARGE < x && x < values[0] + values[2] + MARGE && values[1] < y
+					&& y < values[1] + values[3]) {
+				System.out.println("Zone droite");
+			}
+			// Bas
+			else if (values[0] < x && x < values[0] + values[2] && values[1] + values[3] - MARGE < y
+					&& y < values[1] + values[3] + MARGE) {
+				System.out.println("Zone basse");
+			}
+		}
+		int dragX = e.getX();
+		int dragY = e.getY();
+
+		Form form = ((ProcessingModel) Context.$M).getCurrentForm();
+		if (form != null) {
+			int[] tab = form.getFormValues();
+			int formx = tab[0];
+			int formy = tab[1];
+			int width = tab[2];
+			int height = tab[3];
+
+			int decalageBaseX = x - dragX;
+			int decalageBaseY = Math.abs(y - dragY);
+
+			if (dragX < formx + MARGE && dragX > formx && dragY < formy + height && dragY > formy) {
+				// ((ProcessingModel)Context.$M).addForm(formx + (dragX-formx), formy,
+				// width+decalageBaseX, height, 'i', im);
+				// System.out.println("OK");
+				redimensionner = true;
+			}
+			if (tab[0] - MARGE < x && x < tab[0] + MARGE && tab[0] < y && y < tab[1] + tab[3]) {
+				((ProcessingModel) Context.$M).addForm(tab[0] - x, y, tab[3] + x, y, 'i', im);
+			}
+		}
+		
+		
+		int[] tab = form.getFormValues();
+		if (form == null) {
+			if (tab[0] < x && x < tab[0] + tab[2] && tab[1] - MARGE < y && y < tab[1] + MARGE) {
+				((ProcessingModel) Context.$M).addForm(x, y - e.getY(), x, y, 'i', im);
+			}
+
+			// 0+2 < X < 0+2
+			// 1 < Y < 1+3
+			else if (tab[0] + tab[2] - MARGE < x && x < tab[0] + tab[2] + MARGE && tab[1] < y && y < tab[1] + tab[3]) {
+				System.out.println("Modification droit");
+				((ProcessingModel) Context.$M).addForm(x, y, e.getX(), y, 'i', im);
+			}
+
+			// 0 < x < 0+2
+			// 1+3 < y < 1+3
+			else if (tab[0] < x && x < tab[0] + tab[2] && tab[1] + tab[3] - MARGE < y && y < tab[1] + tab[3] + MARGE) {
+				System.out.println("Modification bas ");
+				((ProcessingModel) Context.$M).addForm(x, y, x, e.getY(), 'i', im);
+			}
+			
+		}
+	}
 }
-
-/*
-if (((ProcessingModel) Context.$M).getCurrentForm() != null) {
-	int[] values = ((ProcessingModel) Context.$M).getCurrentForm().getFormValues();
-	// Gauche
-	if (values[0] - MARGE < x && x < values[0] + MARGE && values[0] < y && y < values[1] + values[3]) {
-		System.out.println("Zone gauche");
-	}
-	// Haut
-	else if (values[0] < x && x < values[0] + values[2] && values[1] - MARGE < y && y < values[1] + MARGE) {
-		System.out.println("Zone haute");
-	}
-	// Droit
-	else if (values[0] + values[2] - MARGE < x && x < values[0] + values[2] + MARGE && values[1] < y && y < values[1] + values[3]) {
-		System.out.println("Zone droite");
-	}
-	// Bas
-	else if (values[0] < x && x < values[0] + values[2] && values[1] + values[3] - MARGE < y && y < values[1] + values[3] + MARGE) {
-		System.out.println("Zone basse");
-	}
-}*/
-/*	int dragX = e.getX();
-int dragY = e.getY();
-
-if (form != null) {
-	int[] tab = form.getFormValues();
-	int formx = tab[0];
-	int formy = tab[1];
-	int width = tab[2];
-	int height = tab[3];
-	
-	int decalageBaseX = x - dragX;
-	int decalageBaseY = Math.abs(y - dragY);
-	
-	if(dragX < formx + MARGE && dragX > formx && dragY < formy+height && dragY > formy) {
-		//((ProcessingModel)Context.$M).addForm(formx + (dragX-formx), formy, width+decalageBaseX, height, 'i', im);
-		//System.out.println("OK");
-		redimensionner = true;
-	}
-/*if (tab[0] - MARGE < x && x < tab[0] + MARGE && tab[0] < y && y < tab[1] + tab[3]) {
-	((ProcessingModel)Context.$M).addForm(tab[0]-x, y, tab[3]+x, y, 'i', im);
-}
-}*/
-/*if (form != null) {
-	int[] tab = form.getTab();
-	// 0 < X < 0
-	// 1 < Y < 0+2
-	// Gauche
-	
-
-	// 0 < X < 0+2
-	// 1 < Y < 1
-	// Haut
-	else if (tab[0] < x && x < tab[0] + tab[2] && tab[1] - MARGE < y && y < tab[1] + MARGE) {
-		((ProcessingModel)Context.$M).addForm(x, y - e.getY(), x, y, 'i', im);
-	}
-
-	// 0+2 < X < 0+2
-	// 1 < Y < 1+3
-	else if (tab[0] + tab[2] - MARGE < x && x < tab[0] + tab[2] + MARGE && tab[1] < y && y < tab[1] + tab[3]) {
-		System.out.println("Modification droit");
-		((ProcessingModel)Context.$M).addForm(x, y, e.getX(), y, 'i', im);
-	}
-
-	// 0 < x < 0+2
-	// 1+3 < y < 1+3
-	else if (tab[0] < x && x < tab[0] + tab[2] && tab[1] + tab[3] - MARGE < y && y < tab[1] + tab[3] + MARGE) {
-		System.out.println("Modification bas ");
-		((ProcessingModel)Context.$M).addForm(x, y, x, e.getY(), 'i', im);
-	}
-}
-*/

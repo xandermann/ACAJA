@@ -111,13 +111,18 @@ public final class Request implements FlagConstants, ValueConstants{
 	 * @return La requete this. 
 	 */
 	public Request from(String input) {
-		if(input == null) throw new NullPointerException("Input null !");
+		if(input == null) 
+			throw new NullPointerException("Input null !");
+		if(!new File(input).exists()) 
+			throw new IllegalArgumentException("Input est inexistant !");
+		
 		if(this.input != null) 
 			request.set(1, this.input = input);
 		else{
 			request.add(0, FLAG_INPUT);
 			request.add(1, this.input = input);
 		}
+		
 		return this;
 	}
 	
@@ -129,7 +134,10 @@ public final class Request implements FlagConstants, ValueConstants{
 	 * @return La requete this. 
 	 */
 	public Request to(String output) {
-		if((this.output = output) == null) throw new NullPointerException("Output null !");
+		if((this.output = output) == null) 
+			throw new NullPointerException("Output null !");
+		if(!new File(output).exists()) 
+			throw new IllegalArgumentException("Output est inexistant !");
 		return this;
 	}
 	

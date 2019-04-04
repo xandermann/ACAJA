@@ -18,11 +18,13 @@ import gui.general.Context;
 public class LibraryView extends JPanel implements Observer{
 	private static final long serialVersionUID = -2415628952891609528L;
 	private Image image;
+	private int nbImages;
 
 	public LibraryView() {
 		this.setLayout(new GridLayout(4, 1));
 		this.repaint();
 		createAll();
+		nbImages = 0;
 	}
 
 	
@@ -71,6 +73,9 @@ public class LibraryView extends JPanel implements Observer{
 	
 	@Override
 	public void update(Observable o, Object arg) {
-		createAll();
+		if(((ProcessingModel)Context.$M).getImages().size() != nbImages) {
+			nbImages = ((ProcessingModel)Context.$M).getImages().size();
+			createAll();
+		}
 	}
 }

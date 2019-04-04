@@ -168,6 +168,7 @@ public class ProcessingWindow extends JFrame {
 		removeSound.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
+<<<<<<< HEAD
 
 				if(((ProcessingModel) Context.$M).getCurrentFile() != null) {
 					((ProcessingModel) Context.$M).modify(ProcessingType.REMOVED_SOUND, "");
@@ -175,21 +176,36 @@ public class ProcessingWindow extends JFrame {
 			
 				}
 
+=======
+				if(((ProcessingModel) Context.$M).getCurrentFile() != null) {
+					Context.$M.modify(ProcessingType.REMOVED_SOUND, "");
+					Alert.shortAlert(Alert.SUCCESS, "Suppression de la bande son de la video<br>prise en compte.");
+				}
+>>>>>>> dc543037b67bb6f4af748b3c16e1b5fd6d0a79fe
 			}
 		});
 		StylizedJMenuItem addSound = new StylizedJMenuItem("Ajouter une bande son a la video");
 		addSound.setToolTipText("Ici vous pouvez ajouter un son a la video en cours de traitement.");
 		addSound.addActionListener(new ActionListener() {
 			@Override
+<<<<<<< HEAD
 			public void actionPerformed(ActionEvent ae) {
 
+=======
+			public void actionPerformed(ActionEvent ae) {
+>>>>>>> dc543037b67bb6f4af748b3c16e1b5fd6d0a79fe
 				try {
-					((ProcessingModel) Context.$M).modify(ProcessingType.ADDED_SOUND, 
-							JFileChooserManager.chooseFile().getAbsolutePath());
-					Alert.shortAlert(Alert.SUCCESS, "Ajout de la bande son a la video<br>prise en compte.");
+					if(((ProcessingModel) Context.$M).getCurrentFile() != null) {
+						Context.$M.modify(ProcessingType.ADDED_SOUND, JFileChooserManager.chooseFile().getAbsolutePath());
+						Alert.shortAlert(Alert.SUCCESS, "Ajout de la bande son a la video<br>prise en compte.");
+					}
 				}catch(Exception e) {
 					Alert.shortAlert(Alert.FAILURE, "Echec de l'import.");
+<<<<<<< HEAD
 				}
+=======
+				}
+>>>>>>> dc543037b67bb6f4af748b3c16e1b5fd6d0a79fe
 			}
 		});
 		StylizedJMenuItem cancelRemoveSound = new StylizedJMenuItem("Annuler la suppression de la bande son de la video.");

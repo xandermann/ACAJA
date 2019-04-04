@@ -8,7 +8,6 @@ import java.awt.event.WindowListener;
 
 import javax.swing.*;
 import gui.WindowTools;
-import gui.alerts.AlertSettings;
 import gui.style.StylizedJFrame;
 
 /**

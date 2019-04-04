@@ -136,8 +136,6 @@ public final class Request implements FlagConstants, ValueConstants{
 	public Request to(String output) {
 		if((this.output = output) == null) 
 			throw new NullPointerException("Output null !");
-		if(!new File(output).exists()) 
-			throw new IllegalArgumentException("Output est inexistant !");
 		return this;
 	}
 	
@@ -557,7 +555,7 @@ public final class Request implements FlagConstants, ValueConstants{
 	
 	
 	/**
-	 * [ SUPPRIMER UN SON.]
+	 * [ SUPPRIMER UN SON. ]
 	 * 
 	 * @return La requete this. 
 	 */
@@ -568,7 +566,7 @@ public final class Request implements FlagConstants, ValueConstants{
 	
 	
 	/**
-	 * [ AJOUTER UN SON.]
+	 * [ AJOUTER UN SON. ]
 	 * 
 	 * @param inputSound		Le son a ajouter.
 	 * 

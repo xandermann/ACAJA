@@ -579,8 +579,7 @@ public final class Request implements FlagConstants, ValueConstants{
 		if(!new File(inputSound).exists())
 			throw new IllegalArgumentException("inputSound est inexistant !");
 		
-		askSomethingElse(new String[]{FLAG_ADD_SOUND[0], inputSound, FLAG_ADD_SOUND[1], FLAG_ADD_SOUND[2], 
-						FLAG_ADD_SOUND[3], FLAG_ADD_SOUND[4], FLAG_ADD_SOUND[5], FLAG_ADD_SOUND[6]});
+		askSomethingElse(new String[]{FLAG_INPUT, inputSound});
 		return this;
 	}
 	
@@ -628,7 +627,11 @@ public final class Request implements FlagConstants, ValueConstants{
 	public ProcessManager result() {
 		if(output!=null) askSomethingElse(new String[]{output});
 		System.out.println();
-		for(String r : request) System.out.print(r+" ");
+		System.out.println("debut requete");
+		for(String r : request) {
+			System.out.print(r+" ");
+		}
+		System.out.println("fin requete");
 		return FFmpegRuntime.execute(request);
 	}
 	

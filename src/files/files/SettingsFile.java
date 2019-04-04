@@ -86,6 +86,8 @@ public final class SettingsFile extends SelectableFile implements Modifiable {
 	public void modify(OperationType typeSetting, String setting) {
 		requests.put((SettingType) typeSetting, setting);
 	}
+	
+	
 
 	@Override
 	public boolean isModified() {
@@ -126,6 +128,13 @@ public final class SettingsFile extends SelectableFile implements Modifiable {
 	 */
 	public HashMap<SettingType, String> getRequests() {
 		return requests;
+	}
+
+
+
+	@Override
+	public String getValue(OperationType typeChange) {
+		return requests.get(typeChange);
 	}
 
 	

@@ -105,8 +105,8 @@ public final class ProcessingFile extends SelectableFile implements Modifiable {
 	/**
 	 * [ METHODE POUR RECUPERER LA VALEUR D'UNE CLE ]
 	 */
-
-	public String getValue(ProcessingType typeProcess) {
+	@Override
+	public String getValue(OperationType typeProcess) {
 		return performedProcessings.get(typeProcess);
 	}
 	//=======================================================================================================================

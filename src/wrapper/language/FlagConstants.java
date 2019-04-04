@@ -58,7 +58,6 @@ public interface FlagConstants {
 												"-f", "concat", FLAG_INPUT, FLAG_FILTER, FLAG_COPY};
 	
 	public final static String[] FLAG_REMOVE_SOUND = {FLAG_FILTER, FLAG_COPY, "-an"};
-	public final static String[] FLAG_ADD_SOUND = {FLAG_INPUT, FLAG_FILTER, FLAG_COPY, FLAG_MAP, "0"+S+"0", FLAG_MAP, "0"+S+"1"};
-	
+
 	public final static String[] FLAG_ADD_IMAGE = {FLAG_INPUT, FLAG_FILTER_COMPLEX, "overlay="};
 }

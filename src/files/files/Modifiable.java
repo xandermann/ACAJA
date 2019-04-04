@@ -48,4 +48,6 @@ public interface Modifiable {
 	 * @return booleen Vaut true si this a ete modifie.
 	 */
 	public boolean isModified();
+	
+	public String getValue(OperationType typeChange);
 }

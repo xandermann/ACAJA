@@ -18,6 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import files.enumerations.SettingType;
+import files.files.Modifiable;
 import files.files.SettingsFile;
 import gui.general.Context;
 import gui.style.StylizedJPanel;
@@ -50,11 +51,16 @@ public final class SoundSettingsView extends SettingsView{
 				Map<String,List<String>> codecs = CodecConstants.CORRESPONDING_EXTENSION.get(videoFormat);
 				List<String> codecsAudio = new ArrayList<String>();
 				codecsAudio = codecs.get(codecFormat);
+				
 				if(codecsAudio != null) {
 					String[] codecsArray = Arrays.copyOf(codecsAudio.toArray(), codecsAudio.size(), String[].class);
 					codecsComboBox.removeAllItems();
 					codecsComboBox.setModel(new DefaultComboBoxModel<String>(codecsArray));
-					codecsComboBox.setSelectedIndex(0);
+					if(((Modifiable) Context.$M.getCurrentFile()).getValue(SettingType.AUDIO_CODEC) != null) {
+						codecsComboBox.setSelectedItem(((Modifiable) Context.$M.getCurrentFile()).getValue(SettingType.AUDIO_CODEC));
+					} else {
+						codecsComboBox.setSelectedIndex(0);
+					}
 				}
 			}
 		}

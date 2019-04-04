@@ -187,91 +187,94 @@ public class ProcessingModel extends GeneralModel{
 
 	@Override
 	public void save() throws UnfindableResourceException {
-		boolean rotation = false;
-		boolean blur = false;
-		boolean crop = false;
-		boolean image = false;
-		boolean verticalMode = false;
-		boolean invertedVerticalMode = false;
-		
-		if(rotateLeft || rotateRight || rotate180Left || rotate180Right || rotate180) rotation = true;
-		if(rotateLeft) this.modify(ProcessingType.ROTATED, "left");
-		if(rotateRight) this.modify(ProcessingType.ROTATED, "right");
-		if(rotate180Left) this.modify(ProcessingType.ROTATED, "180left");
-		if(rotate180Right) this.modify(ProcessingType.ROTATED, "180right");
-		if(rotate180) this.modify(ProcessingType.ROTATED, "180");
-		if(rotateLeft || rotateRight ) verticalMode = true;
-		if(rotate180Left || rotate180Right) invertedVerticalMode = true;
-		
-		String[] actualResolution = currentFile.getResolution().split("x");
-		double coeffWidth = ((double)Integer.parseInt(actualResolution[0]))/500;
-		double coeffHeight = ((double)Integer.parseInt(actualResolution[1]))/350;
-		if(verticalMode) {
-			coeffWidth = ((double)Integer.parseInt(actualResolution[0]))/350;
-			coeffHeight = ((double)Integer.parseInt(actualResolution[1]))/500;
-		}
+		if(currentFile != null) {
+			boolean rotation = false;
+			boolean blur = false;
+			boolean crop = false;
+			boolean image = false;
+			boolean verticalMode = false;
+			boolean invertedVerticalMode = false;
+			
+			if(rotateLeft || rotateRight || rotate180Left || rotate180Right || rotate180) rotation = true;
+			if(rotateLeft) this.modify(ProcessingType.ROTATED, "left");
+			if(rotateRight) this.modify(ProcessingType.ROTATED, "right");
+			if(rotate180Left) this.modify(ProcessingType.ROTATED, "180left");
+			if(rotate180Right) this.modify(ProcessingType.ROTATED, "180right");
+			if(rotate180) this.modify(ProcessingType.ROTATED, "180");
+			if(rotateLeft || rotateRight ) verticalMode = true;
+			if(rotate180Left || rotate180Right) invertedVerticalMode = true;
+			
+			String[] actualResolution = currentFile.getResolution().split("x");
+			double coeffWidth = ((double)Integer.parseInt(actualResolution[0]))/500;
+			double coeffHeight = ((double)Integer.parseInt(actualResolution[1]))/350;
+			if(verticalMode) {
+				coeffWidth = ((double)Integer.parseInt(actualResolution[0]))/350;
+				coeffHeight = ((double)Integer.parseInt(actualResolution[1]))/500;
+			}
 
-		if(!forms.isEmpty()) {
-			for(Form f : forms) {
-				int[] formValues = f.getFormValues();
-				String S = "|";
-				int x = (int) (formValues[0]*coeffWidth);
-				int y = (int) (formValues[1]*coeffHeight);	
-				int width = (int) (formValues[2]*coeffWidth);
-				int height = (int) (formValues[3]*coeffHeight);
-				switch (f.getFormType()) {
-				case 'c':
-					this.modify(ProcessingType.CROPED,x+S+y+S+width+S+height);
-					crop = true;
-					break;
-				case 'f':
-					this.modify(ProcessingType.BLURRED,x+S+y+S+width+S+height);
-					blur = true;
-					break;
-				case 'i':
-					String output = NamesSpaceManager._temporary();
-					new Request(f.getFormImage().getAbsolutePath(),output).resize(""+width, ""+height).make();
-					this.modify(ProcessingType.ADDED_IMAGE, output+S+x+S+y);
-					image = true;
-					break;
+			if(!forms.isEmpty()) {
+				for(Form f : forms) {
+					int[] formValues = f.getFormValues();
+					String S = "|";
+					int x = (int) (formValues[0]*coeffWidth);
+					int y = (int) (formValues[1]*coeffHeight);	
+					int width = (int) (formValues[2]*coeffWidth);
+					int height = (int) (formValues[3]*coeffHeight);
+					switch (f.getFormType()) {
+					case 'c':
+						this.modify(ProcessingType.CROPED,x+S+y+S+width+S+height);
+						crop = true;
+						break;
+					case 'f':
+						this.modify(ProcessingType.BLURRED,x+S+y+S+width+S+height);
+						blur = true;
+						break;
+					case 'i':
+						String output = NamesSpaceManager._temporary();
+						new Request(f.getFormImage().getAbsolutePath(),output).resize(""+width, ""+height).make();
+						this.modify(ProcessingType.ADDED_IMAGE, output+S+x+S+y);
+						image = true;
+						break;
+					}
 				}
 			}
+			
+	/*	
+	else if (crop && blur) {
+				
+			} else if (crop && blur) {
+				
+			}*/
+		if(currentFile.isModified()) {
+			destinationFolder = JFileChooserManager.chooseDirectory().getAbsolutePath();
+			currentFile.setDestinationPath(getDestinationFolder());
+			currentFile.setFileExtension(currentFile.getSourceFileExtension());
+			if(rotation && crop) {
+				System.out.println("Rotation et rogner");
+				ProcessThreadManager.treatTwoProcesses(currentFile, ProcessingType.CROPED);	
+			} else if (rotation && blur) {
+				System.out.println("Rotation et flou");
+
+				ProcessThreadManager.treatTwoProcesses(currentFile, ProcessingType.BLURRED);	
+			} else if (crop && blur) {
+				System.out.println("Rogner et flouter");
+				ProcessThreadManager.treatTwoProcesses(currentFile,ProcessingType.CROPED);
+			} else if (image && rotation) {
+				System.out.println("Image et rotation");
+				ProcessThreadManager.treatTwoProcesses(currentFile,ProcessingType.ROTATED);
+			} else if (image && crop) {
+				System.out.println("Image et crop");
+				ProcessThreadManager.treatTwoProcesses(currentFile,ProcessingType.CROPED);
+			} else if (image && blur) {
+				System.out.println("Image et flou");
+				ProcessThreadManager.treatTwoProcesses(currentFile,ProcessingType.BLURRED);
+			} else {
+				System.out.println("Une seule action");
+				ProcessThreadManager.treatOneProcess(currentFile);
+			}
+		}
 		}
 		
-/*	
-else if (crop && blur) {
-			
-		} else if (crop && blur) {
-			
-		}*/
-	if(currentFile.isModified()) {
-		destinationFolder = JFileChooserManager.chooseDirectory().getAbsolutePath();
-		currentFile.setDestinationPath(getDestinationFolder());
-		currentFile.setFileExtension(currentFile.getSourceFileExtension());
-		if(rotation && crop) {
-			System.out.println("Rotation et rogner");
-			ProcessThreadManager.treatTwoProcesses(currentFile, ProcessingType.CROPED);	
-		} else if (rotation && blur) {
-			System.out.println("Rotation et flou");
-
-			ProcessThreadManager.treatTwoProcesses(currentFile, ProcessingType.BLURRED);	
-		} else if (crop && blur) {
-			System.out.println("Rogner et flouter");
-			ProcessThreadManager.treatTwoProcesses(currentFile,ProcessingType.CROPED);
-		} else if (image && rotation) {
-			System.out.println("Image et rotation");
-			ProcessThreadManager.treatTwoProcesses(currentFile,ProcessingType.ROTATED);
-		} else if (image && crop) {
-			System.out.println("Image et crop");
-			ProcessThreadManager.treatTwoProcesses(currentFile,ProcessingType.CROPED);
-		} else if (image && blur) {
-			System.out.println("Image et flou");
-			ProcessThreadManager.treatTwoProcesses(currentFile,ProcessingType.BLURRED);
-		} else {
-			System.out.println("Une seule action");
-			ProcessThreadManager.treatOneProcess(currentFile);
-		}
-	}
 			
 	}
 	

@@ -1,8 +1,6 @@
 package gui.general;
 
 import java.awt.*;
-import java.awt.event.KeyEvent;
-
 import javax.swing.*;
 import gui.WindowTools;
 import gui.style.StylizedJFrame;

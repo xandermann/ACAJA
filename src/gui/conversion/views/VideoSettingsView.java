@@ -54,13 +54,15 @@ public final class VideoSettingsView extends SettingsView{
 				
 			if(Context.$M.getCurrentFile() != null) {
 				String videoFormat = formatComboBox.getSelectedItem().toString();
+				
 				((Modifiable) Context.$M.getCurrentFile()).modify(SettingType.VIDEO_FORMAT, videoFormat);
 				Map<String,List<String>> codecs = CodecConstants.CORRESPONDING_EXTENSION.get(videoFormat);
 				String[] videoCodecs = Arrays.copyOf(codecs.keySet().toArray(), 
 						codecs.keySet().toArray().length, String[].class);
 				codecsComboBox.removeAllItems();
 				codecsComboBox.setModel(new DefaultComboBoxModel<String>(videoCodecs));
-				codecsComboBox.setSelectedIndex(0);
+				//codecsComboBox.setSelectedIndex(0);
+				((Modifiable) Context.$M.getCurrentFile()).
 				((Modifiable) Context.$M.getCurrentFile()).modify(SettingType.VIDEO_CODEC, 
 						codecsComboBox.getSelectedItem().toString());
 				ssp.updateAudioCodecs();
@@ -190,6 +192,7 @@ public final class VideoSettingsView extends SettingsView{
 		     resolutionsComboBox.setSelectedItem(settings.recent(SettingType.RESOLUTION));
 			 bitrateText.setText(settings.recent(SettingType.VIDEO_BITRATE)); 
 			 fpsText.setText(settings.recent(SettingType.FRAMERATE));
+			 updateVideoCodecs();
 		}else{		 
 			 formatComboBox.setSelectedIndex(0);
 			 codecsComboBox.setSelectedIndex(0);
@@ -198,7 +201,7 @@ public final class VideoSettingsView extends SettingsView{
 			 fpsText.setText("");
 		}
 		isChange = true;
-		updateVideoCodecs();
+		
 	}
 	
 

@@ -411,4 +411,10 @@ else if (crop && blur) {
 		this.currentForm = currentForm;
 	}
 
+
+	@Override
+	public String getValue(OperationType typeChange) {
+		return currentFile.getValue(typeChange);
+	}
+
 }

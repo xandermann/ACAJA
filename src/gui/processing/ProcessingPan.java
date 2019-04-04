@@ -69,7 +69,7 @@ public class ProcessingPan extends JPanel {
 						((ProcessingModel)Context.$M).getCurrentFile().setDestinationName(text);
 						((ProcessingModel)Context.$M).save();
 									System.out.println("fait");
-				    } catch (UnfindableResourceException ure) {
+				    } catch (Exception ure) {
 						Alert.longAlert(Alert.FAILURE, "Aucun repertoire de sortie selectione !");
 
 					}

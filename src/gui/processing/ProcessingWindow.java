@@ -86,7 +86,7 @@ public class ProcessingWindow extends JFrame {
 							text = "Traitement"+System.currentTimeMillis();
 					((ProcessingModel)Context.$M).getCurrentFile().setDestinationName(text);
 					((ProcessingModel) Context.$M).save();
-				} catch (UnfindableResourceException ure) {
+				} catch (Exception ure) {
 					Alert.longAlert(Alert.FAILURE, "Echec de l'export !");
 				}
 			}

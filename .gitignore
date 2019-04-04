@@ -9,3 +9,4 @@ answers/stdout/*
 imports/*
 
 temporary_files/
+imports/conversion/

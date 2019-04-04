@@ -108,6 +108,7 @@ public class ProcessingWindow extends JFrame {
 						throw new IncorrectFileException("Type de fichier incorrect !");
 					}
 					((ProcessingModel) Context.$M).setCurrentFile(pf);
+					((ProcessingModel) Context.$M).clearProcessings();
 				} catch (Exception e) {
 					Alert.shortAlert(Alert.FAILURE, "Echec de l'import.");
 				}
@@ -217,7 +218,7 @@ public class ProcessingWindow extends JFrame {
 		cancelAll.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
-				((ProcessingModel) Context.$M).clearForms();
+				((ProcessingModel) Context.$M).clearProcessings();
 				Alert.shortAlert(Alert.SUCCESS, "Annulation de tous les traitements<br>prise en compte.");
 			}
 		});

@@ -113,8 +113,6 @@ public final class Request implements FlagConstants, ValueConstants{
 	public Request from(String input) {
 		if(input == null) 
 			throw new NullPointerException("Input null !");
-		if(!new File(input).exists()) 
-			throw new IllegalArgumentException("Input est inexistant !");
 		
 		if(this.input != null) 
 			request.set(1, this.input = input);

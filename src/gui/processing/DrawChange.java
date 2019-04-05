@@ -76,10 +76,10 @@ public class DrawChange implements MouseMotionListener, MouseListener {
 					int formy = tab[1];
 					int width = tab[2];
 					int height = tab[3];
-					int deplacementX = (e.getX() - x) / 3 ;
-					int deplacementY = (e.getY() - y) / 3 ;
+					int deplacementX = (e.getX() - x) ;
+					int deplacementY = (e.getY() - y) ;
 					width = tab[2] + deplacementX;
-					height = tab[3] + deplacementY;
+					height = tab[3]   + deplacementY;
 					((ProcessingModel) Context.$M).addForm(formx, formy, width, height, f.getFormType(), f.getFormImage());	;
 					
 					/*
@@ -117,14 +117,15 @@ public class DrawChange implements MouseMotionListener, MouseListener {
 				int height = tab[3];
 				int moyenneGet = (e.getX() + e.getY())/2;
 				int moyenneSrc = (x + y ) / 2;
-				int deplacement = (moyenneGet - moyenneSrc) / 3 ;
+				int deplacement = (moyenneGet - moyenneSrc) ;
 				
 				width = tab[2] + deplacement;
 				height = tab[3] + deplacement;
 				((ProcessingModel) Context.$M).addForm(formx, formy, width, height, f.getFormType(), f.getFormImage());	;
 			}
 		}
-		
+		x = e.getX();
+		y = e.getY();
 	}
 
 	private void actualiserCoordonnees(MouseEvent e) {

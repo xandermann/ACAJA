@@ -15,6 +15,7 @@ import gui.general.Context;
 public class DrawChange implements MouseMotionListener, MouseListener {
 
 	private int x, y;
+	private int pressX, pressY;
 	private File im;
 	private static boolean redimensionner;
 	private static boolean redimensionnerProportions;
@@ -131,6 +132,8 @@ public class DrawChange implements MouseMotionListener, MouseListener {
 	private void actualiserCoordonnees(MouseEvent e) {
 		x = e.getX();
 		y = e.getY();
+		pressX = e.getX();
+		pressY = e.getX();
 		System.out.println("Coordonnees : x:"+x+" y:"+y);
 	}
 
@@ -192,10 +195,10 @@ public class DrawChange implements MouseMotionListener, MouseListener {
 				// 2 => Largeur
 				// 3 => Longueur
 				if (((ProcessingModel) Context.$M).isModeBlur() || ((ProcessingModel) Context.$M).isModeCrop()) {
-					if (((ProcessingModel) Context.$M).isModeCrop() && x != 0)
-						((ProcessingModel) Context.$M).addForm(x, y, (e.getX() - x), (e.getY() - y), 'c', null);
-					else if (((ProcessingModel) Context.$M).isModeBlur() && x != 0)
-						((ProcessingModel) Context.$M).addForm(x, y, (e.getX() - x), (e.getY() - y), 'f', null);
+					if (((ProcessingModel) Context.$M).isModeCrop() && pressX != 0)
+						((ProcessingModel) Context.$M).addForm(pressX, pressY, (e.getX() - pressX), (e.getY() - pressY), 'c', null);
+					else if (((ProcessingModel) Context.$M).isModeBlur() && pressX != 0)
+						((ProcessingModel) Context.$M).addForm(pressX, pressY, (e.getX() - pressX), (e.getY() - pressY), 'f', null);
 				}
 
 				if (((ProcessingModel) Context.$M).getCurrentForm() != null) {

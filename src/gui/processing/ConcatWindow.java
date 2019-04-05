@@ -60,6 +60,7 @@ public class ConcatWindow extends JFrame {
 				try {
 					listOfFile.add(new ProcessingFile(JFileChooserManager.chooseFile()));
 					view.repaint();
+					Alert.shortAlert(Alert.SUCCESS, "Import realise avec succes.");
 				} catch (Exception e) {
 					Alert.shortAlert(Alert.FAILURE, "Echec de l'import.");
 				}
@@ -71,16 +72,21 @@ public class ConcatWindow extends JFrame {
 		importFolder.setToolTipText("Ici vous pouvez ajouter plusieurs fichiers dans la bibliotheque.");
 		importFolder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
-				ArrayList<File> f = JFileChooserManager.chooseDirectoryAndListSonFiles();
-				for(File i : f) {
+				
 					try {
+						ArrayList<File> f = JFileChooserManager.chooseDirectoryAndListSonFiles();
+						for(File i : f) {
+							System.out.println(i.getAbsolutePath());
 						listOfFile.add(new ProcessingFile(i));
 						view.repaint();
+						}
+						Alert.shortAlert(Alert.SUCCESS, "Import realise avec succes.");
 					} catch (Exception e) {
 						Alert.shortAlert(Alert.FAILURE, "Echec de l'import.");
+						System.out.println(e.getMessage());
 					}
 				}
-			}
+			
 		});
 		
 		this.setJMenuBar(jm);

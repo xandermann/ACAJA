@@ -50,6 +50,7 @@ public class ButtonPan extends JPanel {
 		rotate180 = new JToggleButton(new ImageIcon("img/180.png"));
 		rotate180.setToolTipText("Ici vous pouvez retourner la video.");
 		
+
 		resize = new JToggleButton(new ImageIcon(resources.ResourceConstants.RESIZE));
 		resize.setToolTipText("Ici vous pouvez redimmensionner l'image inscrustee sur la video.");
 		
@@ -58,8 +59,6 @@ public class ButtonPan extends JPanel {
 		
 		JButton undo = new JButton(new ImageIcon(resources.ResourceConstants.REMOVE_ICON));
 		undo.setToolTipText("Ici vous pouvez annuler tous les traitements.");
-		
-		
 		
 		
 		rectangle.addActionListener(new ActionListener() {
@@ -112,8 +111,22 @@ public class ButtonPan extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				resizeDim.setSelected(false);
+				DrawChange.setRedimensionnerProportions(false);
 				DrawChange.setRedimensionner(!DrawChange.isRedimensionner());
+				((ProcessingModel)Context.$M).sendChanges();
 			}
+		});
+		resizeDim.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				resize.setSelected(false);
+				DrawChange.setRedimensionner(false);
+				DrawChange.setRedimensionnerProportions(!DrawChange.isRedimensionnerProportions());
+				((ProcessingModel)Context.$M).sendChanges();
+			}
+			
 		});
 		undo.addActionListener(new ActionListener() {
 			@Override

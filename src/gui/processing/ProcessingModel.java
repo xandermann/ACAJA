@@ -114,13 +114,17 @@ public class ProcessingModel extends GeneralModel{
 	
 	
 	public void setCurrentFile(SelectableFile currentFile) {
-		this.currentFile = (ProcessingFile) currentFile;
-		this.setMinia(this.currentFile.getThumbnail());
-		sendChanges();
-		if(this.currentFile == null)
-			Alert.shortAlert(Alert.FAILURE, "Suppression de la video realisee avec succes.");
-		else
-			Alert.shortAlert(Alert.SUCCESS, "La video a ete importee avec succes.");
+		if(currentFile != null) {
+			this.currentFile = (ProcessingFile) currentFile;
+			this.setMinia(this.currentFile.getThumbnail());
+			sendChanges();
+			if(this.currentFile == null)
+				Alert.shortAlert(Alert.FAILURE, "Suppression de la video realisee avec succes.");
+			else
+				Alert.shortAlert(Alert.SUCCESS, "La video a ete importee avec succes.");
+		} else {
+			Alert.shortAlert(Alert.FAILURE, "Action impossible.");
+		}
 	}
 
 	
@@ -262,28 +266,29 @@ public class ProcessingModel extends GeneralModel{
 			destinationFolder = JFileChooserManager.chooseDirectory().getAbsolutePath();
 			currentFile.setDestinationPath(getDestinationFolder());
 			currentFile.setFileExtension(currentFile.getSourceFileExtension());
-			if(rotation && crop) {
+			if(rotation && crop &&  !image && !blur) {
 				System.out.println("Rotation et rogner");
 				ProcessThreadManager.treatTwoProcesses(currentFile, ProcessingType.CROPED);	
-			} else if (rotation && blur) {
+			} else if (rotation && blur && !crop && !image) {
 				System.out.println("Rotation et flou");
-
 				ProcessThreadManager.treatTwoProcesses(currentFile, ProcessingType.BLURRED);	
-			} else if (crop && blur) {
+			} else if (crop && blur && !rotation && !image) {
 				System.out.println("Rogner et flouter");
 				ProcessThreadManager.treatTwoProcesses(currentFile,ProcessingType.CROPED);
-			} else if (image && rotation) {
+			} else if (image && rotation && !crop && !blur) {
 				System.out.println("Image et rotation");
 				ProcessThreadManager.treatTwoProcesses(currentFile,ProcessingType.ROTATED);
-			} else if (image && crop) {
+			} else if (image && crop && !blur && !rotation) {
 				System.out.println("Image et crop");
 				ProcessThreadManager.treatTwoProcesses(currentFile,ProcessingType.CROPED);
-			} else if (image && blur) {
+			} else if (image && blur && !rotation && !crop) {
 				System.out.println("Image et flou");
 				ProcessThreadManager.treatTwoProcesses(currentFile,ProcessingType.BLURRED);
-			} else {
+			} else if ( (image && !crop && !blur && !rotation) || (!image && crop && !blur && !rotation) || (!image && !crop && blur && !rotation) || (!image && !crop && !blur && rotation)) {
 				System.out.println("Une seule action");
 				ProcessThreadManager.treatOneProcess(currentFile);
+			}else {
+				Alert.shortAlert(Alert.FAILURE, "La video ne peut subir plus de trois traitements a la fois");
 			}
 		}else 
 			Alert.shortAlert(Alert.FAILURE, "La video n'a subit aucun traitement,<br>l'exporter n'aurait aucuns sens.");

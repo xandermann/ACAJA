@@ -1,10 +1,16 @@
 package gui.conversion.views;
 
 import java.io.*;
+import java.util.Observable;
+import java.util.Observer;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import files.files.*;
+import gui.general.Context;
 import gui.style.StyleTheme;
 
 /**
@@ -16,32 +22,33 @@ import gui.style.StyleTheme;
  * Auteurs du projet : 
  * @author HUBLAU Alexandre, PAMIERI Adrien, DA SILVA CARMO Alexandre, et CHEVRIER Jean-christophe.
  */
-public final class RowView extends JPanel{
-	/**
-	 * 
-	 */
+public final class RowView extends JPanel  implements Observer{
 	private static final long serialVersionUID = -2390609841482246872L;
 	/**
 	 * FICHIER CONCERNE.
 	 */
-	private SelectableFile file;
-	/**
-	 * EST-CE LE FICHIER COURANT ?
-	 */
-	private boolean isCurrentFile;
-
+	private SettingsFile file;
+	
 	
 	
 	/** 
 	 * [ CONSTRUCTEUR D'UNE LIGNE DANS LA BIBLIOTHEQUE. ]
 	 */
-	public RowView(SettingsFile file, boolean isCurrentFile) {
+	public RowView(SettingsFile file) {
 		super(new BorderLayout());
-		
-		if((this.file=file) == null) throw new NullPointerException("Le text recu en parametre est null !");
-		this.isCurrentFile=isCurrentFile;
-		
+		if((this.file=file) == null) 
+			throw new NullPointerException("Le text recu en parametre est null !");
 		setPreferredSize(new Dimension(270, 140));
+		addMouseListener(new MouseListener() {
+			public void mouseClicked(MouseEvent e) {}
+			public void mousePressed(MouseEvent e) {
+				 Context.$M.setCurrentFile(file);
+			}
+			public void mouseReleased(MouseEvent e) {}
+			public void mouseEntered(MouseEvent e) {}
+			public void mouseExited(MouseEvent e) {}
+		});
+		 Context.$M.addObserver(this);
 	}
 	
 	
@@ -53,7 +60,7 @@ public final class RowView extends JPanel{
 		int w = 270;
 		int h = 140;
 				
-		g.setColor(isCurrentFile ? StyleTheme.BACKGROUND_COLOR_SECONDARY : Color.WHITE);
+		g.setColor((file==Context.$M.getCurrentFile()) ? StyleTheme.BACKGROUND_COLOR_SECONDARY : Color.WHITE);
 		g.fillRect(0, 0, w, h);
 		
 		g.setColor(Color.BLACK);
@@ -69,5 +76,12 @@ public final class RowView extends JPanel{
 		g.drawRect(40, 40, w-80, h-50); 
 		g.drawRect(41, 41, w-82, h-52);
 		g.drawRect(42, 42, w-84, h-54);
+	}
+
+
+
+	@Override
+	public void update(Observable o, Object arg) {
+		repaint();
 	}
 }

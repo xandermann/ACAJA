@@ -55,7 +55,6 @@ public class ProcessingWindow extends JFrame {
 		ProcessingPan pp = new ProcessingPan(jtext);
 		this.setResizable(false);
 		this.add(pp);
-		addKeyListener(new GeneralKeyboardController());
 		WindowTools.executeWindow(this);
 	}
 
@@ -163,8 +162,8 @@ public class ProcessingWindow extends JFrame {
 		
 		
 		
-		StylizedJMenuItem concat = new StylizedJMenuItem("Concatener des videos  / sons");
-		concat.setToolTipText("Ici vous pouvez concatener des videos ou des sons.");
+		StylizedJMenuItem concat = new StylizedJMenuItem("Concatener des videos");
+		concat.setToolTipText("Ici vous pouvez concatener des videos.");
 		concat.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {

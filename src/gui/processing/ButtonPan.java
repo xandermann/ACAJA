@@ -13,8 +13,6 @@ import javax.swing.JToggleButton;
 import gui.general.Context;
 
 public class ButtonPan extends JPanel {
-	
-	
 	private static final long serialVersionUID = -1294342658122646334L;
 	private JToggleButton flouButton;
 	private JToggleButton rectangle;
@@ -24,14 +22,14 @@ public class ButtonPan extends JPanel {
 	private JToggleButton rotateInvertedR1;
 	private JToggleButton rotate180;
 	private JToggleButton resize;
-	
+	private JToggleButton resizeDim;
 	
 	
 	/**
 	 * constructeur du panel de bouton central
 	 */
 	public ButtonPan() {
-		this.setLayout(new GridLayout(4, 2, 1, 1));
+		this.setLayout(new GridLayout(5, 2, 1, 1));
 		
 		rectangle = new JToggleButton(new ImageIcon(resources.ResourceConstants.BUTTON_RECT));
 		rectangle.setToolTipText("Ici vous pouvez rogner la video.");
@@ -52,9 +50,16 @@ public class ButtonPan extends JPanel {
 		rotate180 = new JToggleButton(new ImageIcon("img/180.png"));
 		rotate180.setToolTipText("Ici vous pouvez retourner la video.");
 		
-		resize = new JToggleButton(new ImageIcon("img/move.png"));
-	
-		JButton undo = new JButton(new ImageIcon(resources.ResourceConstants.LEFT_ARROW));
+
+		resize = new JToggleButton(new ImageIcon(resources.ResourceConstants.RESIZE));
+		resize.setToolTipText("Ici vous pouvez redimmensionner l'image inscrustee sur la video.");
+		
+		resizeDim = new JToggleButton(new ImageIcon(resources.ResourceConstants.RESIZE_PROPER));
+		resizeDim.setToolTipText("Ici vous pouvez redimmensionner l'image inscrustee sur la video.");
+		
+		JButton undo = new JButton(new ImageIcon(resources.ResourceConstants.REMOVE_ICON));
+		undo.setToolTipText("Ici vous pouvez annuler tous les traitements.");
+		
 		
 		rectangle.addActionListener(new ActionListener() {
 			@Override
@@ -62,21 +67,18 @@ public class ButtonPan extends JPanel {
 				cropIsSelected();
 			}
 		});
-		
 		flouButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				flouIsSelected();
 			}
 		});
-		
 		rotateL1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				rotateLeftActivated();
 			}
 		});
-		
 		rotateR1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -105,7 +107,6 @@ public class ButtonPan extends JPanel {
 			}
 			
 		});
-		
 		resize.addActionListener(new ActionListener() {
 			
 			@Override
@@ -113,7 +114,6 @@ public class ButtonPan extends JPanel {
 				DrawChange.setRedimensionner(!DrawChange.isRedimensionner());
 			}
 		});
-		
 		undo.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -121,6 +121,9 @@ public class ButtonPan extends JPanel {
 			}
 		});
 
+		
+		
+		
 		rectangle.setPreferredSize(new Dimension(35, 35));
 		flouButton.setPreferredSize(new Dimension(35, 35));
 		rotateR1.setPreferredSize(new Dimension(35, 35));
@@ -129,10 +132,12 @@ public class ButtonPan extends JPanel {
 		rotateInvertedR1.setPreferredSize(new Dimension(35,35));
 		rotate180.setPreferredSize(new Dimension(35,35));
 		resize.setPreferredSize(new Dimension(35,35));
+		resizeDim.setPreferredSize(new Dimension(35,35));
 		undo.setPreferredSize(new Dimension(35, 35));
 		
 		
 
+		
 		this.add(rectangle);
 		this.add(flouButton);
 		this.add(rotateL1);
@@ -141,6 +146,8 @@ public class ButtonPan extends JPanel {
 		this.add(rotateInvertedR1);
 		this.add(rotate180);
 		this.add(resize);
+		this.add(resizeDim);
+		this.add(undo);
 		this.repaint();
 	}
 	
@@ -279,6 +286,4 @@ public class ButtonPan extends JPanel {
 			
 		updateIcons();
 	}
-	
-	
 }

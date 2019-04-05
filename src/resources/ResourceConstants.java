@@ -31,8 +31,10 @@ public interface ResourceConstants {
 	public final static String LEFT_ARROW = "img" + File.separator + "flecheGauche.png";
 	public final static String REFRESH_PATH = "img" + File.separator + "refresh.jpg";
 	public final static File REFRESH = new File(REFRESH_PATH);
+	public final static String REMOVE_ICON = "img" + File.separator + "remove.png";
+	public final static String  RESIZE_PROPER = "img" + File.separator + "resize_proper.png";
+	public final static String RESIZE = "img" + File.separator + "resizetest.png";
 
-	
 	/**
 	 * FICHIERS TEMPORAIRES.
 	 */

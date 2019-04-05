@@ -23,39 +23,30 @@ import gui.style.StylizedJMenuItem;
 
 public class ConcatWindow extends JFrame {
 	private static final long serialVersionUID = -125816618351479903L;
-	private static ArrayList<ProcessingFile> listOfFile;
-
+	private ArrayList<ProcessingFile> listOfFile;
+	private JPanel view;
+	
+	
+	
+	
 	public ConcatWindow() {
-		addWindowListener(new WindowListener() {
-			public void windowOpened(WindowEvent e) {}
-			public void windowClosing(WindowEvent e) {
-				if(((ProcessingModel)Context.$M).getCurrentFile() != null) 
-					((ProcessingModel)Context.$M).setCurrentFile(null);
-			}
-			public void windowClosed(WindowEvent e) {}
-			public void windowIconified(WindowEvent e) {}
-			public void windowDeiconified(WindowEvent e) {}
-			public void windowActivated(WindowEvent e) {}
-			public void windowDeactivated(WindowEvent e) {}
-		});
-		
 		listOfFile = new ArrayList<ProcessingFile>();
-		WindowTools.executeWindow(this);
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setBackground(Color.lightGray);
-		WindowTools.showLogo(this);
 		this.setTitle("Assembleur de video");
 		this.setSize(450, 300);
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
 		this.setLayout(new BorderLayout());
-
-		this.add(new ConcatPanel(), BorderLayout.CENTER);
+		this.add(view=(new ConcatPanel(listOfFile)), BorderLayout.CENTER);
 		this.add(createJPanel(), BorderLayout.SOUTH);
-		if(((ProcessingModel)Context.$M).getCurrentFile() != null)
-			listOfFile.add(((ProcessingModel)Context.$M).getCurrentFile());
 		drawMenu();
+		WindowTools.showLogo(this);
+		WindowTools.executeWindow(this);
 	}
+	
+	
+	
 	
 	public void drawMenu() {
 		StylizedJMenuBar jm = new StylizedJMenuBar();
@@ -68,7 +59,7 @@ public class ConcatWindow extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					listOfFile.add(new ProcessingFile(JFileChooserManager.chooseFile()));
-					repaint();
+					view.repaint();
 				} catch (Exception e) {
 					Alert.shortAlert(Alert.FAILURE, "Echec de l'import.");
 				}
@@ -84,7 +75,7 @@ public class ConcatWindow extends JFrame {
 				for(File i : f) {
 					try {
 						listOfFile.add(new ProcessingFile(i));
-						repaint();
+						view.repaint();
 					} catch (Exception e) {
 						Alert.shortAlert(Alert.FAILURE, "Echec de l'import.");
 					}
@@ -95,9 +86,9 @@ public class ConcatWindow extends JFrame {
 		this.setJMenuBar(jm);
 	}
 
-	public static ArrayList<ProcessingFile> getListOfFile() {
-		return listOfFile;
-	}
+	
+	
+	
 	
 	public JPanel createJPanel() {
 		JPanel j = new JPanel();
@@ -106,21 +97,22 @@ public class ConcatWindow extends JFrame {
 		valider.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(!listOfFile.isEmpty() && listOfFile.size()>=2) {
-					ProcessingFile f1 = listOfFile.get(0);
-					listOfFile.remove(0);
-					((ProcessingModel)Context.$M).setCurrentFile(f1);
+					ProcessingModel pm = new ProcessingModel();
+
+					pm.setCurrentFile(listOfFile.get(0));
 					String s = "";
-					for(ProcessingFile f : listOfFile) s = s + "|" + f.getSourceFileFullName();
-					((ProcessingModel)Context.$M).getCurrentFile().modify(ProcessingType.ADDED, s);
-					((ProcessingModel)Context.$M).setDestinationFolder(JFileChooserManager.chooseDirectory());
-					((ProcessingModel)Context.$M).getCurrentFile().setDestinationPath(((ProcessingModel)Context.$M).getDestinationFolder());
-					((ProcessingModel)Context.$M).getCurrentFile().setDestinationName("Concat"+System.currentTimeMillis());
-					((ProcessingModel)Context.$M).getCurrentFile().setFileExtension(((ProcessingModel)Context.$M).getCurrentFile().getSourceFileExtension());
+					for(int i=1; i<listOfFile.size(); i++) 
+						s = s + "|" + listOfFile.get(i).getSourceFileFullName();
+					
+					pm.getCurrentFile().modify(ProcessingType.ADDED, s);
+					pm.getCurrentFile().setDestinationName("video_concatenee_"+System.currentTimeMillis());
+	
 					try {
 						((ProcessingModel)Context.$M).save();
 					} catch (UnfindableResourceException e1) {
 						Alert.shortAlert(Alert.FAILURE, "La concatenation a echouee !");
 					}
+					
 				}else
 					Alert.shortAlert(Alert.INFO, "Le nombre de videos est insuffisant.");
 			}			
@@ -128,5 +120,4 @@ public class ConcatWindow extends JFrame {
 		j.add(valider);
 		return j;
 	}
-
 }

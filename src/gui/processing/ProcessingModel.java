@@ -214,14 +214,18 @@ public class ProcessingModel extends GeneralModel{
 			if(rotate180Left || rotate180Right) invertedVerticalMode = true;
 			
 			String[] actualResolution = currentFile.getResolution().split("x");
-			double actualWidth = Double.parseDouble(actualResolution[0]),
-			actualHeight = Double.parseDouble(actualResolution[1]), 
-			virtualWidth = (new PictureVisualView()).getWidth(),
-			virtualHeight = (new PictureVisualView()).getHeight();
+			double actualWidth = Double.parseDouble(actualResolution[0]);
+			double actualHeight = Double.parseDouble(actualResolution[1]);
+			double virtualWidth = (new PictureVisualView()).getWidth();
+			double virtualHeight = (new PictureVisualView()).getHeight();
 			
 			double coeffWidth = 0;
 			double coeffHeight = 0;
 			if(verticalMode) {
+				actualWidth = Double.parseDouble(actualResolution[1]);
+				actualHeight = Double.parseDouble(actualResolution[0]);
+				virtualWidth = (new PictureVisualView()).getHeight();
+				virtualHeight = (new PictureVisualView()).getWidth();
 				coeffWidth = actualWidth/virtualWidth;
 				coeffHeight = actualHeight/virtualHeight;
 			} else {
@@ -256,12 +260,7 @@ public class ProcessingModel extends GeneralModel{
 				}
 			}
 			
-	/*	
-	else if (crop && blur) {
-				
-			} else if (crop && blur) {
-				
-			}*/
+
 		if(currentFile.isModified()) {
 			destinationFolder = JFileChooserManager.chooseDirectory().getAbsolutePath();
 			currentFile.setDestinationPath(getDestinationFolder());

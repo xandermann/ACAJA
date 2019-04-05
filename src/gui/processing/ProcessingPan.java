@@ -23,7 +23,7 @@ public class ProcessingPan extends JPanel {
 		LibraryView pb = new LibraryView();
 		Context.$M.addObserver(pb);
 		this.setSize(1000,625);
-		System.out.println("width "+getWidth() +"height"+getHeight());
+		//System.out.println("width "+getWidth() +"height"+getHeight());
 		pb.setPreferredSize(new Dimension((int)(getWidth()*(0.2)), (int)(getHeight()*(0.9))));
 		ButtonPan pm = new ButtonPan();
 		StylizedJPanel processPan = new StylizedJPanel();

@@ -57,8 +57,10 @@ public class LibraryView extends JPanel implements Observer{
 		this.addMouseListener(new MouseListener() {
 			public void mouseReleased(MouseEvent e) {}
 			public void mousePressed(MouseEvent e) {
-				int ind = e.getY() / (getHeight() / 4);
-				((ProcessingModel)Context.$M).addForm(10, 10, 200, 150, 'i', ((ProcessingModel)Context.$M).getImages().get(ind));
+				if(!((ProcessingModel)Context.$M).getImages().isEmpty()) {
+					int ind = e.getY() / (getHeight() / 4);
+					((ProcessingModel)Context.$M).addForm(10, 10, 200, 150, 'i', ((ProcessingModel)Context.$M).getImages().get(ind));
+				}
 			}
 			public void mouseExited(MouseEvent e) {}
 			public void mouseEntered(MouseEvent e) {}

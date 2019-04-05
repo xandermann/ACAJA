@@ -1,7 +1,6 @@
 package gui.processing;
 
 import java.awt.*;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
@@ -17,46 +16,37 @@ import files.enumerations.ProcessingType;
 import files.files.ProcessingFile;
 import gui.JFileChooserManager;
 import gui.WindowTools;
+import gui.alerts.Alert;
 import gui.general.Context;
 import gui.style.StylizedJMenuBar;
 import gui.style.StylizedJMenuItem;
 
 public class ConcatWindow extends JFrame {
-		
 	private static final long serialVersionUID = -125816618351479903L;
-	private static ArrayList<ProcessingFile> listOfFile;
-
+	private ArrayList<ProcessingFile> listOfFile;
+	private JPanel view;
+	
+	
+	
+	
 	public ConcatWindow() {
-		addWindowListener(new WindowListener() {
-			public void windowOpened(WindowEvent e) {}
-			public void windowClosing(WindowEvent e) {
-				if(((ProcessingModel)Context.$M).getCurrentFile() != null) 
-					((ProcessingModel)Context.$M).setCurrentFile(null);
-			}
-			public void windowClosed(WindowEvent e) {}
-			public void windowIconified(WindowEvent e) {}
-			public void windowDeiconified(WindowEvent e) {}
-			public void windowActivated(WindowEvent e) {}
-			public void windowDeactivated(WindowEvent e) {}
-		});
-		
 		listOfFile = new ArrayList<ProcessingFile>();
-		WindowTools.executeWindow(this);
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setBackground(Color.lightGray);
-		WindowTools.showLogo(this);
 		this.setTitle("Assembleur de video");
 		this.setSize(450, 300);
 		this.setLocationRelativeTo(null);
-		//this.setResizable(false);
+		this.setResizable(false);
 		this.setLayout(new BorderLayout());
-
-		this.add(new ConcatPanel(), BorderLayout.CENTER);
+		this.add(view=(new ConcatPanel(listOfFile)), BorderLayout.CENTER);
 		this.add(createJPanel(), BorderLayout.SOUTH);
-		if(((ProcessingModel)Context.$M).getCurrentFile() != null)
-			listOfFile.add(((ProcessingModel)Context.$M).getCurrentFile());
 		drawMenu();
+		WindowTools.showLogo(this);
+		WindowTools.executeWindow(this);
 	}
+	
+	
+	
 	
 	public void drawMenu() {
 		StylizedJMenuBar jm = new StylizedJMenuBar();
@@ -66,15 +56,14 @@ public class ConcatWindow extends JFrame {
 		StylizedJMenuItem importfile = new StylizedJMenuItem("Importer une video");
 		fileMenu.add(importfile);
 		importfile.addActionListener(new ActionListener() {
-			
-			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				ProcessingFile p = null;
 				try {
-					p = new ProcessingFile(JFileChooserManager.chooseFile());
-				} catch (IncorrectFileException | UnfindableResourceException e) {e.printStackTrace();}
-				listOfFile.add(p);
-				repaint();
+					listOfFile.add(new ProcessingFile(JFileChooserManager.chooseFile()));
+					view.repaint();
+					Alert.shortAlert(Alert.SUCCESS, "Import realise avec succes.");
+				} catch (Exception e) {
+					Alert.shortAlert(Alert.FAILURE, "Echec de l'import.");
+				}
 			}
 		});
 		
@@ -83,58 +72,58 @@ public class ConcatWindow extends JFrame {
 		importFolder.setToolTipText("Ici vous pouvez ajouter plusieurs fichiers dans la bibliotheque.");
 		importFolder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
-				ArrayList<File> f = JFileChooserManager.chooseDirectoryAndListSonFiles();
-				for(File i : f) {
-					ProcessingFile p = null;
+				
 					try {
-						p = new ProcessingFile(i);
-					} catch (IncorrectFileException | UnfindableResourceException e) {e.printStackTrace();}
-					listOfFile.add(p);
-					repaint();
+						ArrayList<File> f = JFileChooserManager.chooseDirectoryAndListSonFiles();
+						for(File i : f) {
+							System.out.println(i.getAbsolutePath());
+						listOfFile.add(new ProcessingFile(i));
+						view.repaint();
+						}
+						Alert.shortAlert(Alert.SUCCESS, "Import realise avec succes.");
+					} catch (Exception e) {
+						Alert.shortAlert(Alert.FAILURE, "Echec de l'import.");
+						System.out.println(e.getMessage());
+					}
 				}
-			}
+			
 		});
 		
 		this.setJMenuBar(jm);
 	}
 
-	public static ArrayList<ProcessingFile> getListOfFile() {
-		return listOfFile;
-	}
+	
+	
+	
 	
 	public JPanel createJPanel() {
 		JPanel j = new JPanel();
 		JButton valider = new JButton("Assembler les videos");
 		valider.setSize(100, 50);
 		valider.addActionListener(new ActionListener() {
-			
-			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(!listOfFile.isEmpty()) {
-					ProcessingFile f1 = listOfFile.get(0);
-					listOfFile.remove(0);
-					((ProcessingModel)Context.$M).setCurrentFile(f1);
+				if(!listOfFile.isEmpty() && listOfFile.size()>=2) {
+					ProcessingModel pm = new ProcessingModel();
+
+					pm.setCurrentFile(listOfFile.get(0));
 					String s = "";
-					for(ProcessingFile f : listOfFile) {
-						s = s +" "+f.getSourceFileFullName();
-					}
-					((ProcessingModel)Context.$M).getCurrentFile().modify(ProcessingType.ADDED, s);
+					for(int i=1; i<listOfFile.size(); i++) 
+						s = s + "|" + listOfFile.get(i).getSourceFileFullName();
 					
-					((ProcessingModel)Context.$M).setDestinationFolder(JFileChooserManager.chooseDirectory());
-					((ProcessingModel)Context.$M).getCurrentFile().setDestinationPath(((ProcessingModel)Context.$M).getDestinationFolder());
-					((ProcessingModel)Context.$M).getCurrentFile().setDestinationName("Concat"+System.currentTimeMillis());
-					((ProcessingModel)Context.$M).getCurrentFile().setFileExtension(((ProcessingModel)Context.$M).getCurrentFile().getSourceFileExtension());
+					pm.getCurrentFile().modify(ProcessingType.ADDED, s);
+					pm.getCurrentFile().setDestinationName("video_concatenee_"+System.currentTimeMillis());
+	
 					try {
 						((ProcessingModel)Context.$M).save();
 					} catch (UnfindableResourceException e1) {
-						e1.printStackTrace();
+						Alert.shortAlert(Alert.FAILURE, "La concatenation a echouee !");
 					}
 					
-				}
+				}else
+					Alert.shortAlert(Alert.INFO, "Le nombre de videos est insuffisant.");
 			}			
 		});
 		j.add(valider);
 		return j;
 	}
-
 }

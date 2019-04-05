@@ -7,14 +7,12 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.geom.AffineTransform;
-import java.awt.image.AffineTransformOp;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
-
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 import gui.general.Context;
@@ -27,7 +25,8 @@ public class PictureVisualView extends JPanel implements Observer{
 	private Image formImage;
 	private Image cropImage;
 	private Image blurImage;
-	
+	//int SIZE = 8;
+	//private Rectangle2D[] points = { new Rectangle2D.Double(50, 50,SIZE, SIZE), new Rectangle2D.Double(150, 100,SIZE, SIZE) };
 	public PictureVisualView() {
 		dimHoriz = new Dimension(500,350);
 		dimVerti = new Dimension(350,500);
@@ -141,7 +140,11 @@ public class PictureVisualView extends JPanel implements Observer{
 				default:
 				break;
 			}
-			g.drawRect(tab[0],tab[1],tab[2],tab[3]);			
+			g.drawRect(tab[0],tab[1],tab[2],tab[3]);
+			if(DrawChange.isRedimensionner() || DrawChange.isRedimensionnerProportions()) {
+				g.setColor(Color.BLACK);
+			    g.fillRect(tab[0]+tab[2], tab[1]+tab[3], 10, 10);
+			}
 		}	
 	}
 	

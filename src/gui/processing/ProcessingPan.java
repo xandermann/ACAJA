@@ -6,16 +6,11 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-
-import exceptions.UnfindableResourceException;
-import gui.JFileChooserManager;
 import gui.alerts.Alert;
 import gui.general.Context;
 import gui.style.*;
@@ -28,7 +23,7 @@ public class ProcessingPan extends JPanel {
 		LibraryView pb = new LibraryView();
 		Context.$M.addObserver(pb);
 		this.setSize(1000,625);
-		System.out.println("width "+getWidth() +"height"+getHeight());
+		//System.out.println("width "+getWidth() +"height"+getHeight());
 		pb.setPreferredSize(new Dimension((int)(getWidth()*(0.2)), (int)(getHeight()*(0.9))));
 		ButtonPan pm = new ButtonPan();
 		StylizedJPanel processPan = new StylizedJPanel();
@@ -36,7 +31,7 @@ public class ProcessingPan extends JPanel {
 		processPan.setBackground(Color.GRAY);
 		processPan.add(pm);
 		StylizedJPanel processPanButton = new StylizedJPanel(new BorderLayout());
-		processPan.setPreferredSize(new Dimension((int)(getWidth()*(0.1)), (int)(getHeight()*(0.4))));
+		processPan.setPreferredSize(new Dimension((int)(getWidth()*(0.1)), (int)(getHeight()*(0.5))));
 		//StylizedJPanel processPanSpace = new StylizedJPanel();
 		
 		processPanSpace.setPreferredSize(new Dimension((int)(getWidth()*(0.1)), (int)(getHeight()*(0.01))));
@@ -68,8 +63,7 @@ public class ProcessingPan extends JPanel {
 								text = "Traitement"+System.currentTimeMillis();
 						((ProcessingModel)Context.$M).getCurrentFile().setDestinationName(text);
 						((ProcessingModel)Context.$M).save();
-									System.out.println("fait");
-				    } catch (UnfindableResourceException ure) {
+				    } catch (Exception ure) {
 						Alert.longAlert(Alert.FAILURE, "Aucun repertoire de sortie selectione !");
 
 					}

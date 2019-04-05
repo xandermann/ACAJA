@@ -55,7 +55,6 @@ public class ProcessingWindow extends JFrame {
 		ProcessingPan pp = new ProcessingPan(jtext);
 		this.setResizable(false);
 		this.add(pp);
-		addKeyListener(new GeneralKeyboardController());
 		WindowTools.executeWindow(this);
 	}
 
@@ -86,7 +85,7 @@ public class ProcessingWindow extends JFrame {
 							text = "Traitement"+System.currentTimeMillis();
 					((ProcessingModel)Context.$M).getCurrentFile().setDestinationName(text);
 					((ProcessingModel) Context.$M).save();
-				} catch (UnfindableResourceException ure) {
+				} catch (Exception ure) {
 					Alert.longAlert(Alert.FAILURE, "Echec de l'export !");
 				}
 			}
@@ -114,12 +113,9 @@ public class ProcessingWindow extends JFrame {
 						throw new IncorrectFileException("Type de fichier incorrect !");
 					}
 					((ProcessingModel) Context.$M).setCurrentFile(pf);
-				} catch (IncorrectFileException ife) {
-					Alert.longAlert(Alert.FAILURE, "Type de fichier incorrect !");
-				} catch (UnfindableResourceException ure) {
-					Alert.longAlert(Alert.FAILURE, "Fichier introuvable !");
+					((ProcessingModel) Context.$M).clearProcessings();
 				} catch (Exception e) {
-					Alert.shortAlert(Alert.FAILURE, "Echec de l'import !");
+					Alert.shortAlert(Alert.FAILURE, "Echec de l'import.");
 				}
 			}
 		});
@@ -137,13 +133,12 @@ public class ProcessingWindow extends JFrame {
 							isImage = true;
 						}
 					}
-					if(isImage) {
+					if(isImage)
 						((ProcessingModel) Context.$M).addImage(img);
-					} else {
-						Alert.shortAlert(Alert.FAILURE, "Le fichier doit etre une image");
-					}
+					else 
+						Alert.shortAlert(Alert.FAILURE, "Echec de l'import.");
 				} catch (Exception e) {
-					Alert.shortAlert(Alert.FAILURE, "Echec de l'import !");
+					Alert.shortAlert(Alert.FAILURE, "Echec de l'import.");
 				}
 			}
 		});
@@ -155,13 +150,20 @@ public class ProcessingWindow extends JFrame {
 				((ProcessingModel) Context.$M).clear();
 			}
 		});
+		StylizedJMenuItem  removeVideo = new StylizedJMenuItem("Supprimer la video.");
+		removeVideo.setToolTipText("Ici la vous pouvez supprimer la video.");
+		removeVideo.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent ae) {
+				((ProcessingModel) Context.$M).setCurrentFile(null);
+			}
+		});
 		
 		
 		
 		
-		
-		StylizedJMenuItem concat = new StylizedJMenuItem("Concatener des videos  / sons");
-		concat.setToolTipText("Ici vous pouvez concatener des videos ou des sons.");
+		StylizedJMenuItem concat = new StylizedJMenuItem("Concatener des videos");
+		concat.setToolTipText("Ici vous pouvez concatener des videos.");
 		concat.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
@@ -174,7 +176,6 @@ public class ProcessingWindow extends JFrame {
 		removeSound.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
-
 				if(((ProcessingModel) Context.$M).getCurrentFile() != null) {
 					Context.$M.modify(ProcessingType.REMOVED_SOUND, "");
 					Alert.shortAlert(Alert.SUCCESS, "Suppression de la bande son de la video<br>prise en compte.");
@@ -187,7 +188,6 @@ public class ProcessingWindow extends JFrame {
 		addSound.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
-
 				try {
 					if(((ProcessingModel) Context.$M).getCurrentFile() != null) {
 						Context.$M.modify(ProcessingType.ADDED_SOUND, JFileChooserManager.chooseFile().getAbsolutePath());
@@ -223,7 +223,7 @@ public class ProcessingWindow extends JFrame {
 		cancelAll.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
-				((ProcessingModel) Context.$M).clearForms();
+				((ProcessingModel) Context.$M).clearProcessings();
 				Alert.shortAlert(Alert.SUCCESS, "Annulation de tous les traitements<br>prise en compte.");
 			}
 		});
@@ -263,6 +263,7 @@ public class ProcessingWindow extends JFrame {
 	
 		libraryMenu.add(importVideo);
 		libraryMenu.add(importImage);
+		libraryMenu.add(removeVideo);
 		libraryMenu.add(clearImage);
 		
 		processingMenu.add(concat);

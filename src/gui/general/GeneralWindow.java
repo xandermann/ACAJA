@@ -16,13 +16,13 @@ import gui.style.StylizedJFrame;
  */
 public abstract class GeneralWindow extends StylizedJFrame{
 	private static final long serialVersionUID = 1372173727022340518L;
-
 	/**
 	 * [ CONSTRUCTEUR AVEC PARAMETRES. ]
 	 */
 	public GeneralWindow(String title, JPanel view){
 		super(title);
-		if(view == null) throw new NullPointerException("view null !");
+		if(view == null) 
+			throw new NullPointerException("view null !");
 		
 		
 		setResizable(false);

@@ -1,7 +1,6 @@
 package tests.conversion;
 
 import javax.swing.JFrame;
-
 import org.junit.Test;
 
 import gui.start.ChoiceModeWindow;

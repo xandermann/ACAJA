@@ -221,7 +221,7 @@ public class ProcessingModel extends GeneralModel{
 			
 			double coeffWidth = 0;
 			double coeffHeight = 0;
-			if(verticalMode) {
+			if(verticalMode || invertedVerticalMode) {
 				actualWidth = Double.parseDouble(actualResolution[1]);
 				actualHeight = Double.parseDouble(actualResolution[0]);
 				virtualWidth = (new PictureVisualView()).getHeight();

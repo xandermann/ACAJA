@@ -9,12 +9,14 @@ import files.files.ProcessingFile;
 import gui.alerts.Alert;
 import gui.alerts.AlertWindow;
 import gui.general.Context;
+import resources.ResourceConstants;
 import threads.RuntimeSpaceManager;
 import threads.ThreadForSave;
 import threads.ThreadForWaitWindow;
 import wrapper.streams.managers.consumers.WatchedConsumer;
 
 public class ProcessThreadManager {
+
 
 	
 	public static void treatOneProcess(ProcessingFile f) {
@@ -45,21 +47,20 @@ public class ProcessThreadManager {
 								AlertWindow.INFO,
 								"Traitement du fichier "+f.getSourceFileName()+"<br>Veuillez patientez..."),
 						f.getSourceFile());
+				
 			}
 		}.start();
 	}
 	
 	public static void treatTwoProcesses(ProcessingFile f1, ProcessingType secondAction) {
 		String finalFileName = f1.getDestinationFileName();
+		String finalPath = f1.getDestinationPath();
+		String temp = ResourceConstants.TEMPORARY_FILES_PATH;
 		System.out.println("Nom du fichier final : " + finalFileName);
 		//NamesSpaceManager._temporary()
-		f1.setDestinationName("tmp_"+finalFileName);
-		System.out.println("Nom du fichier temporaire : tmp_"+finalFileName);
+		f1.setDestinationPath(temp);
 		String secondProcessing = f1.getValue(secondAction);
-		System.out.println("Traitement qui sera effectué en deuxième : " + secondAction.toString() + " (valeurs : " + secondProcessing + ")");
 		f1.cancel(secondAction);
-		System.out.println("Seconde action retiree du premier fichier traite");
-		System.out.println("Demarrage du traitement du premier fichier");
 		treatOneProcess(f1);
 		new Thread() {
 			public void run (){
@@ -67,15 +68,16 @@ public class ProcessThreadManager {
 				System.out.println("Demarrage du traitement du second fichier");
 				try {
 					String firstFilePath = f1.getDestinationFileFullName();
-					System.out.println("Recuperation du premier fichier genere dans " + firstFilePath);
+					//System.out.println("Recuperation du premier fichier genere dans " + firstFilePath);
 					ProcessingFile secondFile = new ProcessingFile(new File(firstFilePath));
-					System.out.println("Rajout de l'action retiree precedemment");
+					secondFile.setDestinationPath(finalPath);
+					//System.out.println("Rajout de l'action retiree precedemment");
 					secondFile.modify(secondAction, secondProcessing);
 					String outputPath = ((ProcessingModel)Context.$M).getDestinationFolder() ;
-					System.out.println("Chemin du dossier final :" + outputPath);
+					//System.out.println("Chemin du dossier final :" + outputPath);
 					secondFile.setDestinationPath(outputPath);
 					secondFile.setDestinationName(finalFileName);
-					System.out.println("Nom fichier final  : "+ finalFileName + f1.getSourceFileExtension());
+					//System.out.println("Nom fichier final  : "+ finalFileName + f1.getSourceFileExtension());
 					secondFile.setFileExtension(f1.getSourceFileExtension());
 					treatOneProcess(secondFile);
 					

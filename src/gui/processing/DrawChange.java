@@ -82,31 +82,9 @@ public class DrawChange implements MouseMotionListener, MouseListener {
 					width = tab[2] + deplacementX;
 					height = tab[3]   + deplacementY;
 					((ProcessingModel) Context.$M).addForm(formx, formy, width, height, f.getFormType(), f.getFormImage());	;
-					
-					/*
-					boolean zoneDeplacementVertical = (e.getX() > formx + (int)(formy+width)*0.3 && e.getX() < (formx + width) - (int)(formy+width)*0.3 && e.getY() > (formy+height) - (int)(formy+height)*0.3 && e.getY() < (formy+height)+(int)(formy+height)*0.3);
-					boolean zoneDeplacementHorizontal = (e.getY() > formy + (int)(formy+height)*0.3 && e.getY() < (formy + height) - (int)(formy+height)*0.3 && e.getX() > (formx+width) - (int)(formx+width)*0.3 && e.getX() < (formx+width)+(int)(formx+width)*0.3);
-					int deplacementX = e.getX() - x;
-					int deplacementY = e.getY() - y;
-					
-					if(zoneDeplacementVertical && zoneDeplacementHorizontal) { // Forcer le deplacement horizontal si les points se chevauchent
-						zoneDeplacementVertical = false;
-						pvv.setCursor(new Cursor(Cursor.S_RESIZE_CURSOR));
-					}
-					
-					if(zoneDeplacementHorizontal) { // Si zone pour deplacement horizontal
-						if( deplacementX > 0)  // La souris va a droite
-								((ProcessingModel) Context.$M).addForm(tab[0], tab[1], width + (e.getX()-width), tab[3], f.getFormType(), f.getFormImage());		
-						else if ( deplacementX < 0 )  // La souris va a gauche
-								((ProcessingModel) Context.$M).addForm(tab[0], tab[1], width - (width-e.getX()) , tab[3], f.getFormType(), f.getFormImage());		
-					} else if (zoneDeplacementVertical) { // Si zone pour deplacement vertical
-						if(deplacementY > 0) // La souris descend	
-								((ProcessingModel) Context.$M).addForm(tab[0], tab[1],tab[2], height + (e.getY()-height), f.getFormType(), f.getFormImage());		
-						 else if (deplacementY < 0 ) // La souris monte
-								((ProcessingModel) Context.$M).addForm(tab[0], tab[1],tab[2], height - (height-e.getY()), f.getFormType(), f.getFormImage());
-					}
-					*/
 				}
+				x = e.getX();
+				y = e.getY();
 		} else if (redimensionnerProportions) {
 			System.out.println("redim proper");
 			if (((ProcessingModel) Context.$M) != null) {
@@ -124,9 +102,10 @@ public class DrawChange implements MouseMotionListener, MouseListener {
 				height = tab[3] + deplacement;
 				((ProcessingModel) Context.$M).addForm(formx, formy, width, height, f.getFormType(), f.getFormImage());	;
 			}
+			x = e.getX();
+			y = e.getY();
 		}
-		x = e.getX();
-		y = e.getY();
+		
 	}
 
 	private void actualiserCoordonnees(MouseEvent e) {
@@ -195,10 +174,10 @@ public class DrawChange implements MouseMotionListener, MouseListener {
 				// 2 => Largeur
 				// 3 => Longueur
 				if (((ProcessingModel) Context.$M).isModeBlur() || ((ProcessingModel) Context.$M).isModeCrop()) {
-					if (((ProcessingModel) Context.$M).isModeCrop() && pressX != 0)
-						((ProcessingModel) Context.$M).addForm(pressX, pressY, (e.getX() - pressX), (e.getY() - pressY), 'c', null);
-					else if (((ProcessingModel) Context.$M).isModeBlur() && pressX != 0)
-						((ProcessingModel) Context.$M).addForm(pressX, pressY, (e.getX() - pressX), (e.getY() - pressY), 'f', null);
+					if (((ProcessingModel) Context.$M).isModeCrop() && x != 0)
+						((ProcessingModel) Context.$M).addForm(x, y, (e.getX() - x), (e.getY() - y), 'c', null);
+					else if (((ProcessingModel) Context.$M).isModeBlur() && x != 0)
+						((ProcessingModel) Context.$M).addForm(x, y, (e.getX() - x), (e.getY() - y), 'f', null);
 				}
 
 				if (((ProcessingModel) Context.$M).getCurrentForm() != null) {

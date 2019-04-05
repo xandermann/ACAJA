@@ -287,7 +287,7 @@ public class ProcessingModel extends GeneralModel{
 				System.out.println("Une seule action");
 				ProcessThreadManager.treatOneProcess(currentFile);
 			}else {
-				Alert.shortAlert(Alert.FAILURE, "La video ne peut subir plus<br> de trois traitements a la fois");
+				Alert.shortAlert(Alert.FAILURE, "La video ne peut subir plus<br> de deux traitements a la fois");
 			}
 		}else 
 			Alert.shortAlert(Alert.FAILURE, "La video n'a subit aucun traitement,<br>l'exporter n'aurait aucuns sens.");

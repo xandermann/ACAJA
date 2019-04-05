@@ -114,13 +114,15 @@ public class ProcessingModel extends GeneralModel{
 	
 	
 	public void setCurrentFile(SelectableFile currentFile) {
-		this.currentFile = (ProcessingFile) currentFile;
-		this.setMinia(this.currentFile.getThumbnail());
-		sendChanges();
-		if(this.currentFile == null)
-			Alert.shortAlert(Alert.FAILURE, "Suppression de la video realisee avec succes.");
-		else
-			Alert.shortAlert(Alert.SUCCESS, "La video a ete importee avec succes.");
+		if(currentFile != null) {
+			this.currentFile = (ProcessingFile) currentFile;
+			this.setMinia(this.currentFile.getThumbnail());
+			sendChanges();
+			if(this.currentFile == null)
+				Alert.shortAlert(Alert.FAILURE, "Suppression de la video realisee avec succes.");
+			else
+				Alert.shortAlert(Alert.SUCCESS, "La video a ete importee avec succes.");
+		}
 	}
 
 	

@@ -111,8 +111,22 @@ public class ButtonPan extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				resizeDim.setSelected(false);
+				DrawChange.setRedimensionnerProportions(false);
 				DrawChange.setRedimensionner(!DrawChange.isRedimensionner());
+				((ProcessingModel)Context.$M).sendChanges();
 			}
+		});
+		resizeDim.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				resize.setSelected(false);
+				DrawChange.setRedimensionner(false);
+				DrawChange.setRedimensionnerProportions(!DrawChange.isRedimensionnerProportions());
+				((ProcessingModel)Context.$M).sendChanges();
+			}
+			
 		});
 		undo.addActionListener(new ActionListener() {
 			@Override

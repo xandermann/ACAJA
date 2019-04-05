@@ -122,6 +122,8 @@ public class ProcessingModel extends GeneralModel{
 				Alert.shortAlert(Alert.FAILURE, "Suppression de la video realisee avec succes.");
 			else
 				Alert.shortAlert(Alert.SUCCESS, "La video a ete importee avec succes.");
+		} else {
+			Alert.shortAlert(Alert.FAILURE, "Action impossible.");
 		}
 	}
 
